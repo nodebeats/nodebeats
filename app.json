@@ -1,0 +1,7 @@
+{
+  "name": "Nodebeats",
+  "description": "A content management system built using MEAN Framework",
+  "repository": "https://github.com/nodebeats/nodebeats/tree/master",
+  "logo": "http://res.cloudinary.com/nodebeats/image/upload/v1471427680/homepage_m0guov.png",
+  "keywords": ["node", "express", "cms", "express"]
+}
