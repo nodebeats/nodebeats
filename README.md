@@ -135,6 +135,7 @@ Nodebeats is relatively new that is only 4 months old from the start of project 
 As We all know [Wordpress](https://wordpress.com/), one of the most popular Content Management System currently in use and [Ghost](https://ghost.org/), a blogging platform that is probably the best in the technology world related to creating blogs, Mainly these two projects inspire us to start this product. People around the world use wordpress to create thousands of websites everyday. When someone talks about Content Management System for PHP programming language, then most of the time we hear about Wordpress. We also want to make this product like wordpress which people will use to create their websites in the future. Right now, it may seem very hard to acheive the goal but it is not impossible. We will continue to improve this product continually.
 
 
+
 ## Note
 
 We will be upgrading the entire codebase from Angular v2.0.0-rc.4 to Angular v2.0.0-rc.6 in the next version. In the next release, we will write unit tests for much of the code functionality. So, if you want to create your project using Angular v2.0.0-rc.4, then you can use it for your production site, else we will notfiy you of new version upgrade as soon as possible.
