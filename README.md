@@ -57,19 +57,19 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
 
    * npm run start
 
-   To start the application
+        To start the application
 
    * npm run build:client:prod
 
-   To generate deployment package of client frontend
+        To generate deployment package of client frontend
 
    * npm run build:admin:prod
 
-   To generate deployment package of admin frontend
+        To generate deployment package of admin frontend
 
    * npm run clean:uploads
 
-    To clear uploaded documents and images
+        To clear uploaded documents and images
 
 
 
