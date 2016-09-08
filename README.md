@@ -53,6 +53,25 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
     * NODE_ENV=production webpack --config webpack-client.config.js
     * gulp service-worker
 
+    Or, You can run following npm scripts directly as well:
+
+   * npm run start
+
+   To start the application
+
+   * npm run build:client:prod
+
+   To generate deployment package of client frontend
+
+   * npm run build:admin:prod
+
+   To generate deployment package of admin frontend
+
+   * npm run clean:uploads
+
+    To clear uploaded documents and images
+
+
 
 * Edit the database configuration file in **/lib/configs/database.config.js** and enter the appropriate MongoDB credentials.
 
