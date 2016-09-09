@@ -24,7 +24,7 @@ When reporting a bug, Follow the following guidelines:
 *   Please  use a clear and descriptive title for the issue
 *   Describe the exact steps which reproduce the issue in as many details as possible.
 *   Describe the behavior you observed after following the steps and point out what exactly is the problem with that behavior.
-*   Include screencasts
+*   Include screencasts 
 *   If any, include error logs.
 
 
