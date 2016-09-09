@@ -4,4 +4,4 @@ We aim to make this product one of most secured Content Management Systems aroun
 
 This will allow us to quickly access the risk and  fix the issue.
 
- Thanks everyone for making this product secured.
+Thanks everyone for making this product secured.
