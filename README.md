@@ -85,6 +85,16 @@ production: {
 },
 ```
 
+
+* Edit the redis configuration file in **/lib/configs/redis.config.js** and enter the appropriate REDIS credentials.
+
+```
+production : {
+    host: '',
+    port: '',
+    pass: ''
+}
+```
 Once this is done, you are ready to start the application.
 
 * Run the server
