@@ -103,6 +103,15 @@ Once this is done, you are ready to start the application.
 
 * Browse [**http://localhost:3000**](http://localhost:3000/) if you are in local machine.
 
+* To login, navigate to [**http://localhost:3000/login**](http://localhost:3000/login/) and use following application default credentials to access dashboard menu.
+
+```
+    username: superadmin
+
+    passwor: superadmin@123
+```
+
+
 ## Community
 "**Knowledge is power, Community is strength and positive attitude is everything**" by **Lance Armstrong**.
 
