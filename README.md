@@ -111,6 +111,67 @@ Once this is done, you are ready to start the application.
     passwor: superadmin@123
 ```
 
+## Test
+
+We have written integration test for much of the functionality for this application. We haven't written any unit tests for this release, but we are planning to write unit tests for much of the functionality for the next release phase. Your contribution in writing unit tests for this application will be hugely appreciated and welcomed.
+
+So, to run test, first we will have to modify couple of things to make test successfull. So, let's get started:
+
+*   First of all, we need to change the database configuration file. Navigate to **lib/configs** directory from your project root directory. Edit database.config.js file and in the test section, place the appropriate MongoDB credentials:
+```
+    test: {
+        username: 'testuser',
+        password: 'testuser',
+        host: 'localhost',
+        port: '27017',
+        dbName: 'prj_nodebeats_testdb'
+    }
+```
+*   If you have enabled **authentication**  for MongoDB server instance on your machine, then first you need to create a database and authenticated user on the newly created database. You must do this step if you have enabled authentication in your MongoDB coniguration file.
+
+    You also need to modify the **database.helper.js** file from **lib/helpers/** directory and add the username and password to the existing database connection url.
+
+    ```
+        dbUrl = "mongodb://"  + databaseConfig.test.username + ":" + databaseConfig.test.password + "@" +  databaseConfig.test.host + ":" + databaseConfig.test.port + "/" + databaseConfig.test.dbName;
+    ```
+
+    You also need to modify the database connection url in  **index.js** inside of **test/** directory.
+
+*   Now, that we have modified database configuration file, now we need to change some inputs in the test index file. So, navigate to **test** folder from the root of your project and then modify the **index.js** file.
+
+*   You need to change the contents of **imagePathUrl** and **documentPathUrl** variable with the appropriate data. You must change these values, otherwise test will fail.
+
+*   Once you have changed the variable contents, you also need to modify **cloudinary.setting.integration.test.js**  file inside of **test/integrationtests/** and replace the existing coudinary config with the valid data.
+
+     ```
+        cloudinarySettingConfig = {
+            cloudinaryCloudName: "nodebeats",
+            cloudinaryApiKey: "124895ewew177286781",
+            cloudinaryApiSecret: "HKRL0Ovd467iRoxBxAq194niAZBvM"
+        };
+    ```
+* The last thing you need to do is modify **email.service.configure.integration.test.js**  file inside of **test/integrationtests/** and replace the existing mail service configuration data with valid data.
+
+```
+     emailServiceConfigInfo = {
+        serviceProviderType: "mailgun",
+        api_Key: "key-ff32b449ddad2dsds5d9b5dd1ff33005c79b",
+        api_Secret: "api-Keyjlki98dssew342jklfnlrwhoiukhdsj",
+        domain: "sandbox73ad601fcdd74461bdsds1c46820a59b2374.mailgun.org.np"
+    };
+```
+
+
+Well, that's it. Now you can run test. To run the test,
+
+*   Open two terminal windows
+
+*   First step is to run **npm run test** command. This command will start the server and listen for client requests.
+
+*   Then, run **gulp test** to run our test files.
+
+
+
 
 ## Community
 "**Knowledge is power, Community is strength and positive attitude is everything**" by **Lance Armstrong**.
