@@ -1,0 +1,75 @@
+<div class="login-page">
+    <div *ngIf="!isValidLogin" fadeInDirective class="row">
+        <div class="col-lg-4 col-lg-offset-4" fadeInDirective *ngIf="!tfaEnabled">
+            <img [src]="formImage" width="150px" class="user-avatar"/>
+            <h1 class="login-title">Nodebeats Login</h1>
+            <div @slideMsg="slide" class="alert alert-danger auth-message"
+                 role="alert">{{objResponse.message}}
+            </div>
+            <form  role="form" novalidate [formGroup]="loginForm"
+                  (ngSubmit)=" onSubmit()">
+
+                <div class="form-group">
+                    <label class="sr-only">Username</label>
+                    <input autocomplete="off"  type="text" placeholder="Username..."
+                           class="form-username form-control input-underline input-lg"
+                           [formControl]="username">
+                    <span class="error-msg" *ngIf="!username.valid && username.dirty">
+                        *
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only">Password</label>
+                    <input autocomplete="off" type="password"
+                           placeholder="Password..." class="form-password form-control input-underline input-lg"
+                           [formControl]="password">
+                    <span class="error-msg" *ngIf="!password.valid && (password.dirty||isSubmitted)">
+                        *
+                    </span>
+                </div>
+                <button role="button" processing type="submit" class="btn rounded-btn login-btn">Sign in!</button>
+
+            </form>
+            <br/>
+            <a [routerLink]="['/forgot-password']">Forgot Password ?</a>
+
+        </div>
+    </div>
+    <div class="col-lg-4 col-lg-offset-4" fadeInDirective *ngIf="tfaEnabled">
+        <img [src]="formImage" fadeInDirective width="150px" alt="Google Authenticator App logo"
+             title="Google Authenticator App logo" class="user-avatar"/>
+        <h1 class="login-title">Nodebeats 2FA Login</h1>
+        <div @slideMsg="slide" [class]="'alert alert-danger auth-message'"
+             role="alert">{{objResponse.message}}
+        </div>
+        <form role="form" novalidate [formGroup]="tfaForm"
+              (ngSubmit)="onVerifyTfa()">
+            <div class="form-group">
+                <label class="">Enter the token from your authenticator app</label>
+                <input type="text" placeholder="Token ..."
+                       class="form-username form-control input-underline input-lg"
+                       [formControl]="token">
+                <span class="error-msg" *ngIf="!token.valid &&( token.dirty ||isSubmitted)">
+                    *
+                </span>
+            </div>
+            <button role="button" processing type="submit" class="btn rounded-btn verify-btn">Verify</button>
+
+        </form>
+    </div>
+
+    <div *ngIf="isValidLogin" fadeInDirective class="row ">
+        <div class="col-sm-6 col-sm-offset-3 form-box ">
+            <div class="form-top logged-in-wrapper">
+                <h4>You are already logged In</h4>
+                <p>Please Go to <a href="/">Home</a></p>
+                <div>OR</div>
+                <p>Please Go to <a [routerLink]="[adminRoute]">Dashboard</a></p>
+                <button role="button" type="button" (click)="logout()" class="btn btn-primary">
+                    <i class="fa fa-sign-out">Log out</i>
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>

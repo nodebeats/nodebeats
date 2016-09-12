@@ -1,0 +1,16 @@
+{
+  "short_name": "Nodebeats",
+  "name": "Nodebeats",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "img/nodebeats_logo.png",
+      "sizes": "229x269",
+      "type": "image/png"
+    }
+  ],
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#3E4EB8",
+  "theme_color": "#2E3AA1"
+}

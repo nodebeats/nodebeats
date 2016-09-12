@@ -1,0 +1,51 @@
+<div class="row form-outer" fadeInDirective>
+    <div class="col-lg-12 form-wrapper">
+        <form role="form" novalidate [formGroup]="partnerForm" (ngSubmit)="savePartner()">
+            <div class="form-group">
+                <label>Partner Name</label>
+                <input type="text" class="form-control" [(ngModel)]="objPartner.partnerName"
+                       placeholder="Enter Image Title"
+                       [formControl]="partnerForm.controls['partnerName']">
+                <control-messages  [isSubmitted]="isSubmitted"
+                                  [control]="partnerForm.controls['partnerName']"></control-messages>
+            </div>
+            <div class="form-group">
+                <label>Image Alt Text</label>
+                <input type="text" class="form-control" [(ngModel)]="objPartner.imageAltText"
+                       placeholder="Enter alternate text"
+                       [formControl]="partnerForm.controls['imageAltText']">
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="partnerForm.controls['imageAltText']"></control-messages>
+            </div>
+            <div class="form-group">
+                <label>Partner Hyperlink</label>
+                <input type="text" class="form-control" [(ngModel)]="objPartner.linkURL"
+                       placeholder="Enter hyperlink"
+                       [formControl]="partnerForm.controls['linkURL']">
+                <control-messages  [isSubmitted]="isSubmitted"
+                                  [control]="partnerForm.controls['linkURL']"></control-messages>
+            </div>
+            <div class="form-group">
+                <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize"
+                                [imageFormControl]="imageFormControl"
+                                (deleteImageEvent)="deleteImage($event)"
+                                [imageName]="objPartner.imageName" [drawImagePath]="drawImagePath"
+                                (fileSelectedEvent)="changeFile($event)"></image-uploader>
+
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input class="" type="checkbox" [(ngModel)]="objPartner.active"
+                               formControlName="active">
+                        Active
+                    </label>
+                </div>
+
+            </div>
+            <button type="submit" class="btn btn-primary" processing>Save</button>
+            <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger">Cancel</button>
+        </form>
+    </div>
+</div>
+

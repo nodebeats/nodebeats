@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-sm-3">
+            <h4 class="push-top">Our Most Trusted Supporting partners</h4>
+        </div>
+        <div class="col-md-9 col-sm-9">
+            <div class="carousel-wrapper">
+                <div class="row">
+                    <ul class="owl-carousel carousel-fw" id="partners-slider" data-columns="5" data-autoplay="5000"
+                        data-pagination="no" data-arrows="no" data-single-item="no" data-items-desktop="4"
+                        data-items-desktop-small="3" data-items-tablet="3" data-items-mobile="2">
+
+                        {{#checkAndBindList partners}}
+                            <li class="item">
+                                <a href="{{linkURL}}" target="_blank">
+                                    <img src="{{cloudinaryUrl imageName option='{"crop":"limit","quality":"60","width":"146","height":"65"}'}}"
+                                         alt="{{imageAltText}}" title="{{partnerName}}">
+                                </a>
+                            </li>
+                        {{else}}
+                            {{>no-data-found}}
+                        {{/checkAndBindList}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,48 @@
+<div class="row form-outer" fadeInDirective>
+    <div class="col-lg-12 form-wrapper">
+        <form role="form" novalidate [formGroup]="blogMetaForm" (ngSubmit)="saveBlogMetaTag()">
+            <div class="form-group">
+                <label>Meta Keyword</label>
+                <tag-input
+                        [(ngModel)]="objBlogMeta.metaKeyword"
+                        placeholder="Enter Meta Keyworkd"
+                        formControlName="metaKeyword"
+                        [autoCompleteData]="autoCompleteData"
+                        delimiterCode="188">
+                </tag-input>
+
+            </div>
+            <div class="form-group">
+                <label>Title Tag</label>
+                <input class="form-control" type="text" [(ngModel)]="objBlogMeta.titleTag"
+                       formControlName="titleTag"
+                       placeholder="Enter Meta Title ">
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="blogMetaForm.controls['titleTag']"></control-messages>
+            </div>
+            <div class="form-group">
+                <label>Meta Description</label>
+                <input class="form-control" type="text" [(ngModel)]="objBlogMeta.metaDescription"
+                       formControlName="metaDescription"
+                       placeholder="Enter Meta Description">
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="blogMetaForm.controls.metaDescription"></control-messages>
+            </div>
+            <div class="form-group">
+                <label>Meta Author</label>
+                <input type="text" class="form-control" [(ngModel)]="objBlogMeta.metaAuthor"
+                       placeholder="Enter Meta Author"
+                       formControlName="metaAuthor">
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="blogMetaForm.controls.metaAuthor"></control-messages>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary" processing >Save</button>
+            <!--<div class="col-lg-6">-->
+            <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger">Cancel</button>
+
+        </form>
+    </div>
+</div>
+

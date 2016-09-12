@@ -1,0 +1,58 @@
+<!-- SPEAKERS SECTION -->
+<section id="team">
+    <div class="col-lg-12 text-center">
+        <h2 class="section-heading">Meet the Team </h2>
+        <hr class="light">
+    </div>
+
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <!-- Section Description -->
+            {{{teamHtml}}}
+        </div>
+
+        <!-- First Row of Speakers -->
+        <div class="row1">
+            {{#if team}}
+                {{#each team}}
+                    <div class="col-md-3">
+                        <a href="javascript:void(null);" class="member-profile">
+                            <div class="unhover_img member-img">
+                                <img src="{{cloudinaryUrl imageName  option='{"height":"240","width":"240","crop":"thumb", "gravity":"face", "radius":"max"}'}}"
+                                     title="teamMemberName" alt="{{teamMemberName}}"/>
+                            </div>
+                            <span class="designation">{{designation}}</span>
+                            <h4><span>{{beforeSpace teamMemberName}}</span>{{afterSpace teamMemberName}}</h4>
+                        </a>
+                        <ul class="social-link">
+                            {{#if facebookURL}}
+                                <li class=""><a href="{{facebookURL}}" target="_blank"><i
+                                        class="fa fb-blue fa-facebook"></i></a></li>
+                            {{/if}}
+                            {{#if twitterURL}}
+                                <li class=""><a href="{{twitterURL}}" target="_blank"><i
+                                        class="fa twitter-blue fa-twitter"></i></a></li>
+                            {{/if}}
+                            {{#if googlePlusURL}}
+                                <li class=""><a href="{{googlePlusURL}}" target="_blank"><i
+                                        class="fa google-red fa-google-plus"></i></a></li>
+                            {{/if}}
+                            {{#if linkedInURL}}
+                                <li class=""><a href="{{linkedInURL}}" target="_blank"><i
+                                        class="fa linkedin-blue fa-linkedin"></i></a></li>
+                            {{/if}}
+                        </ul>
+                    </div>
+                {{/each}}
+
+            {{else}}
+                <div>No Data Found !!!</div>
+            {{/if}}
+
+        </div> <!-- End First Row -->
+        <div class="clear"></div>
+
+
+    </div>
+</section>
+<!-- //SPEAKERS SECTION -->

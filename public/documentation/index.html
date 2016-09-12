@@ -1,0 +1,2532 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Nodebeats Documentation</title>
+	<link rel="stylesheet" href="documentation/src/bootstrap.min.css">
+	<link href="documentation/src/easy-responsive-tabs.css" rel="stylesheet" type="text/css">
+	<link href="documentation/src/main.css" rel="stylesheet" type="text/css">
+	
+	<link rel="stylesheet" href="documentation/src/styles/default.css">
+	<script src="documentation/src/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+</head>
+
+<body>
+	<div class="container documentation-container">
+		<h1 class="main_title">Nodebeats Documentation</h1>
+		
+		<div class="documentation-intro">
+			<p class="intro-section">
+				<b>Nodebeats</b> is an Open Source Content Management System built using MEAN Framework that allows you to create web-applications with ease. It is built on top of a RESTful JSON api. You can easily create custom modules on top of this Content Management System and quickly launch your web application.
+			</p>
+			<p>
+				This guide will walk you through everything from installing the software to deploying it on various cloud platforms. So, let's get started.
+			</p>
+		</div>
+
+		<div id="ChildVerticalTab_1">
+			<ul class="resp-tabs-list ver_1">
+				<li>Download and Install</li>
+				<li>Creating MongoDB database and Users</li>
+				<li>Configure database connection</li>
+				<li>Run the application</li>
+				<li>Login to the application</li>
+				<li>Manage User</li>
+				<li>Two factor authentication set up</li>
+				<li>Configure Email Service Setting</li>
+				<li>Configure Cloudinary Setting</li>
+				<li>Disqus Comment Setting</li>
+				<li>Google Analytics Setting</li>
+				<li>Email Template Setting</li>
+				<li>Application Deployment setup</li>
+				<li>Deploy project to Openshift Cloud</li>
+				<li>Configuring Nginx on Openshift</li>
+				<li>Deploy project to Heroku</li>
+				<li>Configuring Nginx on Heroku</li>
+				<li>Future Enhancements</li>
+				<li>Acknowledgements</li>
+				<li>Few Words - Support</li>
+				<li>Resources</li>
+			</ul>
+			<div class="resp-tabs-container ver_1">
+				<div class="docpanel doc_start_download">
+					<p>
+						You can get a copy of the software from <a href="https://github.com/nodebeats/nodebeats">github.com</a>. You can either clone it or directly download it from github. Below is the link to the application code:
+						<br>
+						<a class="focus_main btn btn-primary" href ="https://github.com/nodebeats/nodebeats">Download Nodebeats
+						</a>
+					</p>
+					<p>
+						After you have a copy of this software on your local disk, As always, the first step is to install all the dependencies that this application requires.
+					</p>
+					<p>
+						From the root of your project directory, run the command:
+						<br>
+
+						<b class="focus_main command_npm">npm install</b>
+					</p>
+					<p>
+						This will install all the dependencies that are required by the project. Before running it, you have to create database for the application and some users for database authentication purpose.
+					</p>
+
+				</div>
+				<div class="docpanel doc_start_database">
+					<p>
+						You have two choices in terms of MongoDB database. Either, You can use local instance of MongoDB database  or choose one of the  Database-as-a-Service providers for MongoDB. <b><a href="https://mlab.com/" target="_blank">mlab</a></b> is one of the most popular Database-as-a-Service provider for MongoDB.
+					</p>
+					<p>
+						So, let's get started with MongoDB database for the application.
+					</p>
+
+
+					<div class="doc_start_mongodb_local">
+						<h2>Local Instance of MongoDB</h2>
+						<p>
+							Obviously,the first thing you might want to do is create and configure the MongoDB database on your local machine. That is exactly what you are going to do now.
+						</p>
+						<div>
+							<p>
+								Follow the following step-by-step guidelines to create and configure MongoDB in local machine.
+							</p>
+
+
+							<ol type="1">
+								<li>
+									<p>
+										The first thing, you would want to do is enable access control in MongoDB database because of security risks. Before enabling role based access control, you should first consider the users of the system. So, create a  user with userAdminAnyDatabase role access in admin database, which you will use later to login and create users for any database and then enable authentication.
+									</p>
+									<p>
+										To create a user for admin database, open the terminal and run <b>mongo</b> command.
+										<br>
+										<b class="focus_main command_mongo"> mongo</b>
+									</p>
+									<p>
+										Run the following command to create user administrator for your mongodb database instance with userAdminAnyDatabase role access with your own unique and strong password:
+										<br>
+										<b class="focus_main command_mongo">use admin</b>
+										<br>
+
+										<pre>
+											<code class="hljs bash">
+		db.createUser({
+			"user":"superadmin",
+			"pwd":"superadmin#123",
+			"roles":[{
+				"role":"userAdminAnyDatabase",
+				"db":"admin"
+			}]
+		})
+									</code>
+								</pre>
+
+									</p>
+									<p>
+										This will successfully create user administrator for the mongodb database instance.
+									</p>
+
+								</li>
+								<li>
+									<p>
+										After creating user administrator, enable the access control feature in mongodb database server.  To enable it, run the following command with sudo access in ubuntu.
+									</p>
+									<br>
+
+										<p><b class="focus_main command_terminal">
+											sudo nano /etc/mongod.conf</b>
+
+										</p>
+
+
+									<br>
+									<p>
+										You will be prompted for administrative password. Enter your password and press enter. Navigate to security section and uncomment both lines.
+									</p>
+									<br>
+							<pre>
+								<code class="hljs bash">
+			security:
+			authorization: enabled
+								</code>
+							</pre>
+									<p>And finally save it before you exit the terminal.</p>
+								</li>
+								<li>
+									<p>
+										Restart the mongodb server instance
+									</p>
+									<br>
+
+										<p>
+											<b class="focus_main command_mongo">
+											sudo service mongod restart</b>
+										</p>
+								</li>
+								<li>
+									<p>
+										Now run the mongodb instance with newly created user
+									</p>
+									<br>
+									<p>
+
+										<b class="focus_main command_mongo">
+											mongo --host localhost --port 27017 -u "superadmin" -p "superadmin#123" --authenticationDatabase "admin"
+										</b>
+									</p>
+								</li>
+								<li>
+									<p>Now create a database. To create database, enter following command</p>
+									<br>
+									<p>
+
+										<b class="focus_main command_mongo"> use dbName</b>
+									</p>
+									<br>
+									<p>
+										This will create database with specified name. Now it's time to add users to it.
+									</p>
+								</li>
+								<li>
+									<p>
+										Create two users for the database. One will be database admin user and other will be user with readWrite access only.
+									</p>
+									<p>
+										You will use this  user for accessing the database from terminal. So, Create user with dbAdmin role:
+										<br>
+
+								<pre>
+									<code class="hljs bash">
+			use dbName
+
+
+			db.createUser({
+					"user":"nodebeatssuperadmin",
+					"pwd":"nodebeatssuperadmin#123",
+					"roles":[{
+					"role":"dbAdmin",
+					"db":"prj_nodebeats"
+				},{
+					"role":"userAdmin",
+					"db":"prj_nodebeats"
+				},{
+					"role":"dbOwner",
+					"db":"prj_nodebeats"
+				}]
+			})
+					</code>
+				</pre>
+									</p>
+									<p>
+										Following is the user which you will use to connect to the database from web application.
+
+				<pre>
+					<code class="hljs bash">
+				use dbName
+
+
+				db.createUser({
+					"user":"nodebeatsadmin",
+					"pwd":"nodebeatsadmin#123",
+					"roles":[{
+						"role":"readWrite",
+						"db":"prj_nodebeats"
+					}]
+				})
+			</code>
+		</pre>
+									</p>
+								</li>
+							</ol>
+						</div>
+						<p>
+							So, You now have a database with some users on it. Copy the username, password and database name. you will need that later when running the application.
+						</p>
+
+						<div>
+							<p>
+
+								<b class="note-alert">Reference:</b>
+								<br>
+								<a href="https://docs.mongodb.com/v2.6/tutorial/enable-authentication-without-bypass/" target="_blank">https://docs.mongodb.com/v2.6/tutorial/enable-authentication-without-bypass/</a>
+
+							</p>
+						</div>
+
+						<div>
+							<p>
+
+								<b class="note-alert">Reference:</b>
+								<br>
+								<a href="https://docs.mongodb.com/v2.6/tutorial/enable-authentication-without-bypass/" target="_blank">https://docs.mongodb.com/v2.6/tutorial/enable-authentication-without-bypass/</a>
+
+							</p>
+						</div>
+
+					</div>
+					<div class="doc_start_mongodb_mlab">
+						<h2>Database-as-a-service for MongoDB - mlab </h2>
+						<p>
+							You can also use <b><a href="https://mlab.com/">mlab</a></b> to host the database in the cloud. Create an account on mlab.  Click on the verification email sent to your email and then after account is verified successfully, create a new database in <b>mlab</b> with some users on it.
+						</p>
+						<p>
+							Here is format of the mlab mongodb connection url:
+							<br>
+							<b class="focus_secondary url_mongo"> mongodb://dbuser:dbpassword@ds031845.mlab.com:31845/prj_nodebeats</b>
+						</p>
+						<br>
+						<p>
+							You can find detailed instructions <a href="https://docs.mlab.com/">here</a>  to get started with mlab.
+						</p>
+					</div>
+				</div>
+				<div class="docpanel doc_start_configure_db">
+					<p>
+						So, you now have database with users on it. It's time to edit the database configuration file before running the application. To edit the database configuration file, follow the following steps:
+					</p>
+					<ol type="1">
+						<li>
+							<p>
+								Go to the <b>root</b> of your project directory and then navigate to <b>lib</b> folder from there. 	There, you will find <b>configs</b> directory where configuration file for mongodb database 	connection resides. The file name is <b> database.config.js</b></p>
+						</li>
+						<li>
+							<p>Open the file in any editor and change the connection url properties with previously created 	user credentials. You need <b>username of the user</b> , <b>password</b>, <b>database name</b>, <b>host name</b> and then <b>port number</b> of the host server.</p>
+						</li>
+					</ol>
+					<p>
+						After you have changed the connection url properties of the database config file, Now, it's time to run your web application.
+					</p>
+				</div>
+				<div class="docpanel doc_start_run_application">
+					<p>To run your node.js application, navigate to the project root directory from the terminal and then run the following command:
+						<br>
+						<b class="focus_main command_node"> node server.js</b>
+						<br>
+						or
+						<br>
+						<b class="focus_main command_node"> gulp </b>
+					</p>
+					<p>
+						The first run will take some time as it restores the database backup from the <b>mongodump folder</b>  with some collections on it. The collections restored are <b>User</b>, <b>DefaultUserStatus </b> and <b>EmailTemplate</b>  collections.
+					</p>
+					<p>
+						During this process, it will change the <b>mongo.restore.config.json</b>  file which you can locate in <b> mongodump folder</b> inside of <b>lib directory </b> and modify the value of <b>restored to true</b>. If you want <b>to  run the web application from scratch again </b> due to some reason, you need to <b>modify the value of restored to false</b>. This way, it will run the web application from scratch and restores the database.
+					</p>
+					<p>
+						This will come in handy when you will be deploying your web application to the production server. You just need to replace the archive file from the mongodump directory with your own database backup archive file but the filename must be same as the previous one.
+
+						<br>
+						To generate database backup  archive file:
+
+			<pre>
+				<code class="hljs bash">
+	mongodump --host hostname --port porttNumber --username userName --password passwordEntry --db dbName --gzip –archive=filePath
+				</code>
+			</pre>
+
+					<p>
+
+						example command:
+					</p>
+
+			<pre>
+				<code class="hljs bash">
+	mongodump --host localhost --port 27017 --username nodebitsadmin --password nodebitsadmin#123 --db prj_nodebeats --gzip --archive="/home/lakhe/Music/production test files/prj_nodebeats.archive"
+				</code>
+			</pre>
+					</p>
+					<div>
+						<p>Now that you have your server up and running, open the browser and browse <b> http://localhost:3000</b>. If everything is ok, then you will see the homepage.</p>
+
+
+						<br>
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1471427680/homepage_m0guov.png">
+						<p>
+							So, the first step is complete. Now to make the website fully functional, you still need to configure various setttings of  application. For that, you need to login to the application and enter data for various settings configurations from the dashboard menu.
+						</p>
+						<br>
+
+
+					</div>
+				</div>
+				<div class="docpanel doc_start_login_application">
+					<p>
+						To login, navigate to
+						<br>
+						<b>http://localhost:3000/login</b>
+					</p>
+					<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/login_fjtj61.png">
+					<div>
+						<p>When you first run the application, it will restore the database backup archive file having Users collection  with a default user with username = superadmin and password  = superadmin@123.</p>
+
+
+						<br>
+						<p>
+							username : <b>superadmin</b>
+						</p>
+						<p>
+							password :  <b>superadmin@123 </b>
+						</p>
+					</div>
+					<p>
+						Use above credentials to login to the application and we highly recommend you to change the default password as soon as you login to your application successfully as it will create security mishaps if you keep as it is, since everyone will know the default password.
+					</p>
+					<p>
+						If login is successfull, you will be redirected to the dashboard page.
+					</p>
+					<br>
+					<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/dashboard_shg3tz.png">
+
+				</div>
+				<div class="docpanel doc_start_user_mgmt">
+					<p>
+						As part of the user management, you can do various things like registering new users, changing user password, enabling two factor authentication and changing security answers.
+					</p>
+					<p class="critical_warning">
+						If you are running the application for the first time, We strongly recommend you to change the default password immediately the first time you login.
+					</p>
+					<p>
+						To change the password, click on the dropdown menu from the <b>Welcome superadmin</b>  section <b>at the top</b>  and then click on <b>Profile navigation menu</b>. Or, you can also click on the User Navigation menu from the left side bar.
+						<br>
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/user-profile_tbh4on.png">
+					</p>
+					<p>
+						Click on password tab.
+						<br>
+						You must enter very <b>strong password with the combination of uppercase letters, lowercase letters, numbers and symbols</b> . We recommend you to enter <b>password of length greater than 8 characters</b>.
+						<br>
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/password-change_q1c2cr.png">
+					</p>
+					<p>
+						After you have changed password successfully, we also recommend you to <b>enable two-factor authentication</b>  as it will give you extra layer of security. To enable two factor authentication or multi-factor authentication, click on the Settings tab from the user profile page.
+						<br>
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/multi-factor-authentication-setting_ceu5hh.png">
+					</p>
+					<p>
+						<b> Slide the toggle button</b> to enable two-factor authentication. This will take you to two-factor authentication setup section. When two-factor authentication is enabled, then you must initially provide username and password and on  successfully authenticating the user with those credentials will take you to the <b>time based one time password verification</b>  page. Only if you provide the correct token, you will be redirected to the dashboard page.
+
+						<br>
+						So, slide the toggle button .
+						<br>
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/two-factor-auth-set-up_ko9jcr.png">
+					</p>
+					<p>
+						To enable two-factor authentication for your web application, you need to scan the QR code section which will respond back with Time based one time password i.e. TOTP token
+					</p>
+					<p>
+						To get that TOTP token, you need app that can verify 2-step verification codes.  Next, you are going to set-up two-factor authentication and install required app.
+					</p>
+				</div>
+				<div class="docpanel doc_start_2fa_setup">
+					<p>
+						We need some kind of applications that can scan QR code, generate TOTP token and verify it at the same time. There are many alternatives but the most popular one is <b>Google Authenticator</b>  and there is another one which is also popular <b>Authy</b>. So, go to the <b>Google play store </b> if you are in android and download    either one of those app and install in your phone.
+					</p>
+					<p>
+						If you choose to  use Google authenticator, then you can follow below link for detailed guidance.
+						<br>
+						<a href="https://support.google.com/accounts/answer/1066447?hl=en">https://support.google.com/accounts/answer/1066447?hl=en</a>
+						<br>
+						Go through the set-up process. Here are the some of the snapshots of the application.
+						<br>
+						<img class="width_half_img" src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/google-authenticator-app-set-up_c8ismf.png">
+						<img class="width_half_img" src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/google-authenticator-auth-next-step_mwufql.png">
+					</p>
+					<p>
+						After successfull setup,
+						<br>
+						<img class="width_half_img" src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/google-authenticator-main-section_pk9pfk.png">
+						<img class="width_half_img" src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/google-authenticator-scan-code_uh5atr.png">
+					</p>
+					<p>
+						If you choose to use <b>Authy</b> application, then you can follow below links for the guidance
+						<br>
+						<a href="https://www.authy.com/tutorials/">https://www.authy.com/tutorials/</a>
+					</p>
+					<p>
+						Now, you have authenticator app installed in your mobile device, scan the QR code with your authenticator app and then enter the TOTP token into the textbox and click on verify button. If everything works fine, then two-factor authentication is successfully enabled for your user account.
+					</p>
+					<div>
+						<b>Note:</b>
+						<br>
+						<p>
+							If, somehow token is not verified, this may be due to the reason that the time on your Google authenticator app is not synced correctly with the server.</p>
+						<br>
+						To fix this:
+						<ol type="1">
+							<li><p>Go to the main menu on the Google Authenticator app</p> </li>
+							<li><p>Click Settings </p></li>
+							<li><p>Click Time correction for codes</p></li>
+							<li><p>Click Sync now</p></li>
+						</ol>
+						<br>
+						<p>
+							This should probably fix the issue. If you have other issues, follow the following link:
+						<br>
+						<a href="https://support.google.com/accounts/answer/185834?hl=en">https://support.google.com/accounts/answer/185834?hl=en</a>
+						</p>
+					</div>
+					<p>
+						So, you have two-factor authentication feature enabled in your web application, <b> time to do data-entry in Settings section</b>.
+					</p>
+				</div>
+				<div class="docpanel doc_start_email_service_setting">
+					<p>
+						Start with the Email-Service setting so that you can send automated emails from the web application. You can choose from a host of email-service providers like Mailgun, Postmark, Mandrill, SendGrid and Google Smtp provider.
+					</p>
+					<br>
+					<div class="doc_start_email_service_mailgun">
+						<h2>Mailgun Transactional Email Service Provider:</h2>
+						<div>
+							<p>
+
+								Using mailgun as email service provider is very easy and for testing purpose, you can use sandbox domain and it's api key. For production purpose, add your domain and verify it.
+
+							</p>
+							<ol type="1">
+								<li>
+									<p>Go to <a href="http://www.mailgun.com/">http://www.mailgun.com/</a> and sign-up for new user account.</p>
+								</li>
+								<li>
+									<p>After successfull account sign-up, Activate your account via the confirmation link sent to your email followed by the sms activation.</p>
+								</li>
+								<li>
+									<p>Login with correct credentials to access mailgun dashboard page.</p>
+								</li>
+								<li>
+									<p>Add your custom domain and verify it.</p>
+									<p>
+										Do note that, sandbox domain is only for testing purpose. So, to use mailgun for production purpose, add your new domain and verify it. It may take some time for DNS records to propagate.
+										<br>
+										Also note that Sandbox domain is restricted to authorized recipients only. So, even for development environment, you have to add the email address and authorize it to receive email address from sandbox domain via the confirmation link.
+									</p>
+								</li>
+								<li>
+									<p>That's it, you are done. For detailed guidance and for production uses,
+										<br>
+										<a href="https://documentation.mailgun.com/quickstart.html">https://documentation.mailgun.com/quickstart.html</a>
+										<br>
+										<a href="https://documentation.mailgun.com/user_manual.html#introduction">https://documentation.mailgun.com/user_manual.html#introduction</a>
+									</p>
+								</li>
+								<li>
+									<p>
+										Choose <b>mailgun</b> from service provider type in the email-service form and then copy the mailgun <b>domain name</b> field and <b>api key</b> and enter those two values in their respective textboxes and save. That's it, Now you can now send automated  emails via your web application.
+									</p>
+								</li>
+							</ol>
+							<br>
+							<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/mailgun-dashboard_ssjgha.png">
+							<p>
+								Below is the form for saving email service providers configuration setting.
+							</p>
+							<br>
+							<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/email-service-setting-from_hswtud.png">
+						</div>
+					</div>
+					<br>
+					<div class="doc_start_email_service_sendgrid">
+						<h2>SendGrid Transactional Email Service Provider:</h2>
+						<p>
+							SendGrid is also very popular transactional email service provider, that you can use to send emails. It may take some time before you can send emails via SendGrid since your account will be provisioned to ensure validity of all the new customers.
+						</p>
+						<ol type="1">
+							<li>
+								<p>Go to <a href="https://sendgrid.com/">https://sendgrid.com/</a> and sign-up for new user account.</p>
+
+							</li>
+							<li>
+								<p>
+									After successfull account sign-up, Activate your account via the confirmation link sent to your email.</p>
+							</li>
+							<li>
+								<p>
+									After clicking on the confirmation link, it will ask for some more personal details and then redirect you to the main dashboard page.</p>
+							</li>
+							<li>
+								<p>
+									Once your account is provisioned, then you can send emails.</p>
+							</li>
+							<li>
+								<p>
+									Go to the Settings navigation menu and then from the drop-down menu choose Api Keys menu and create Api key. Copy the api key before you navigate to other pages.
+								</p>
+							</li>
+							<li>
+								<p>
+									That's it, you are done. For detailed guidance and for production uses,
+									<br>
+									<a href="https://sendgrid.com/docs">https://sendgrid.com/docs</a>
+								</p>
+							</li>
+							<li>
+								<p>
+									Choose <b>sendgrid</b> from service provider type in the email-service form and then enter or paste the <b>api key</b> in the Api key textbox. Save the settings. That's it, You are ready to go.
+								</p>
+							</li>
+						</ol>
+						<br>
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/sendgrid-main-dashboard_itwlfk.png">
+					</div>
+					<br>
+					<div class="doc_start_email_service_postmark">
+						<h2>Postmark Transactional Email Service Provider:</h2>
+						<p>
+							Postmark is another popular one you can use to send  emails.
+						</p>
+						<ol type="1">
+							<li>
+								<p>
+									Go to <a href="https://postmarkapp.com/">https://postmarkapp.com/</a> and sign-up for new user account.</p>
+							</li>
+							<li>
+								<p>
+									After successfull account sign-up, You will be sent  a registration confirmation email.</p>
+							</li>
+							<li>
+								<p>
+									Login with correct credentials to access postmark dashboard page.
+								</p>
+							</li>
+							<li>
+								<p>
+									Create your server by providing name for your server
+								</p>
+							</li>
+							<li>
+								<p>
+									Click on your server and then click on Credentials sub-menu. Copy the server api token i.e. api key
+								</p>
+							</li>
+							<li>
+								<p>
+									Click on Sender Signatures menu and Add a new sender signature.
+									<br>
+									Until you confirm  the sender signature via the confirmation link to your email address, you cannot send any emails. And <b>do note that email from field must be the email address that you use to register the sender signature</b>.
+								</p>
+							</li>
+							<li>
+								<p>
+									Once sender signature is activated, you are all set to go.
+								</p>
+
+							</li>
+							<li>
+								<p>
+									That's it, you are done. For detailed guidance and for production uses,
+									<br>
+									<a href="http://developer.postmarkapp.com/">http://developer.postmarkapp.com/</a>
+									<br>
+									<a href="https://postmarkapp.com/guides">https://postmarkapp.com/guides</a>
+								</p>
+							</li>
+							<li>
+								<p>
+									Choose postmark from service provider type in the email-service form and then enter or paste the <b>api key</b> in the Api key textbox and the  <b>email address that you use to activate the Sender Signature</b> in the <b>Api User</b> section. Save the settings. That's it, You are ready to go.
+								</p>
+							</li>
+						</ol>
+						<br>
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/postmark-dashboard_tobne3.png">
+					</div>
+					<br>
+					<div class="doc_start_email_service_mandrill">
+						<h2>MailChimp / Mandrill Transactional Email Service Provider:</h2>
+						<p>
+							Mandrill is another popular transactional email service provider. As of April 27, 2016, Mandrill became a paid MailChimp add-on. So, Mandrill is a transactional email API for MailChimp users. You will be given free 2000 trial emails and after that, you must upgrade to monthly transactional plan.
+						</p>
+						<ol type="1">
+							<li>
+								<p>
+									Go to <a href="https://www.mandrill.com/">https://www.mandrill.com/</a> and sign-up for new user account. This will take you to the Mailchimp signup page. Click on Sign up for mailchimp button and register your user account.
+								</p>
+							</li>
+							<li>
+								<p>
+									After successfull account sign-up, You will be sent  a registration confirmation email. Activate your account.
+								</p>
+							</li>
+							<li>
+								<p>
+									Login with correct credentials and after successfull login, you will be prompted for account verification as an extra layer of security. Do as you wish.
+								</p>
+							</li>
+							<li>
+								<p>
+									Verify your domain by clicking on Verify a domain button. Enter your email address and verify it.
+								</p>
+							</li>
+							<li>
+								<p>
+									Click on View Verified domains link and then on transactional menu.
+								</p>
+							</li>
+							<li>
+								<p>
+									Launch Mandrill and set up your sending domain and verify the ownership of it.
+								</p>
+							</li>
+							<li>
+								<p>
+									Once verified, you will be able to send emails.
+								</p>
+							</li>
+							<li>
+								<p>
+									Now, click on SMTP & API info navigation menu and add API Key.
+								</p>
+							</li>
+							<li>
+								<p>
+									So, you now have api key, host, port and smtp username for mandrill. We only need api key.
+								</p>
+							</li>
+							<li>
+								<p>
+									That's it, you are done. For detailed guidance and for production uses,
+									<br>
+									<a href="https://mandrillapp.com/api/docs/">https://mandrillapp.com/api/docs/</a>
+									<br>
+									<a href="http://developer.mailchimp.com/documentation/mailchimp/">http://developer.mailchimp.com/documentation/mailchimp/</a>
+								</p>
+							</li>
+							<li>
+								<p>
+									Choose mandrill from service provider type in the email-service form and paste  api key in Api Key textbox field and save.
+								</p>
+							</li>
+						</ol>
+						<br>
+						<div>
+							<b>
+								Note:
+							</b>
+							<p>
+								If you are using mandrill for transactional email service provider, then you  must update all the email template data so that the <b>email from text field must be the domain verified email address</b>. <b>Otherwise mandrill will reject the outgoing email</b>.
+							</p>
+						</div>
+						<br>
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/mailchimp-dashboard_am7bpq.png">
+						<br>
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/mandrill-domain-verification_kxppjo.png">
+					</div>
+					<br>
+					<div class="doc_start_email_service_gmail">
+						<h2>Google's SMTP Server Email Service Provider:</h2>
+						<p>
+							As we all know that Google provides a widely popular webmail, Gmail, but it also provides us with a smtp server which can be used to deliver emails.
+							<br>
+							Google's SMTP server requires authentication, so here's how to set it up:
+						</p>
+						<ol type="1">
+							<li>
+								<p>
+									SMTP server (i.e., outgoing mail): smtp.gmail.com
+								</p>
+							</li>
+							<li>
+								<p>
+									SMTP username: Your full Gmail or Google Apps email address (e.g. example@gmail.com or example@yourdomain.com)
+								</p>
+							</li>
+							<li>
+								<p>
+									SMTP password: Your Gmail or Google Apps email password
+								</p>
+							</li>
+							<li>
+								<p>
+									SMTP port: 465
+								</p>
+							</li>
+							<li>
+								<p>
+									SMTP TLS/SSL required: yes
+								</p>
+							</li>
+						</ol>
+						<p>
+							If you want to store a copy of outgoing emails in your sent folder of  gmail account:
+						</p>
+						<ol type="1">
+							<li>
+								<p>
+									Login to your gmail account with valid credentials
+								</p>
+							</li>
+							<li>
+								<p>
+									Click on the Settings icon and from dropdown, click on Settings menu
+								</p>
+							</li>
+							<li>
+								<p>
+									Then Click on Forwarding and POP/IMAP tab  and scroll down to the IMAP Access section.
+								</p>
+							</li>
+							<li>
+								<p>
+									Check the Enable IMAP radio button.
+								</p>
+							</li>
+						</ol>
+						<br>
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/gmail-imap-setting_juiimx.png">
+						<br>
+						<p>
+							Google will block sign in attempts at the domain or Organizational Unit level from some apps or devices that do not use modern security standards. So, <b>to be able to send emails using Gmail as email service provider</b>, you must <b>turn on Access for less secure apps feature</b>. Only after turning that   feature, you will be able to send emails using Google Smtp server.
+						</p>
+						<p>
+							This will make your account more vulnerable. So, we recommend you to use either of the above transactional email service providers rather than google smtp server for sending emails.
+						</p>
+						<p>
+							To turn on Allow less secure apps feature:
+							<br>
+							<a href="https://www.google.com/settings/security/lesssecureapps">https://www.google.com/settings/security/lesssecureapps</a>
+						</p>
+						<p>
+							Follow the following links for more detailed guidelines:
+							<br>
+							<a href="https://support.google.com/a/answer/6260879?hl=en">https://support.google.com/a/answer/6260879?hl=en</a>
+						</p>
+					</div>
+					<br>
+					<p>
+						<b>Note:</b>
+						<br>
+						For all transactional email service providers, it would be best to supply domain verified email address in the sender field of all the email template data. So you must update the email templates records so that all of the records will have domain verified email address in their sender or from text  field.
+					</p>
+				</div>
+				<div class="docpanel doc_start_image_service_setting">
+					<h2>Image Cloud Service Provider - Cloudinary</h2>
+					<p>
+						We have used <b>Cloudinary</b> for image management. Cloudinary is hugely popular <b>cloud-based image management solution</b>. So, all of your uploaded images will be first uploaded to the server and then to the cloudinary. We haven't implemented direct uploads.
+					</p>
+					<p>
+						So to use cloudinary as  image management service provider:
+					</p>
+					<ol type="1">
+						<li>
+							<p>
+								Go to <a href="http://cloudinary.com/">http://cloudinary.com/</a> and then register your account.
+							</p>
+						</li>
+						<li>
+							<p>
+								Verify your registration via the confirmation link sent to your email
+							</p>
+						</li>
+						<li>
+							<p>
+								Login with correct credentials.
+							</p>
+						</li>
+						<li>
+							<p>
+								Copy cloud name , api key and and api secret to start uploading images from the website.
+							</p>
+						</li>
+						<li>
+							<p>
+								Click on Settings menu on the left side and from the drop-down menu, choose cloudinary setting.
+							</p>
+						</li>
+						<li>
+							<p>
+								Enter the values in the respective  textboxes and save it. That's it, you are ready  for image uploading.
+							</p>
+						</li>
+						<li>
+							<p>
+								For detailed guidance,
+								<br>
+								<a href="http://cloudinary.com/documentation">http://cloudinary.com/documentation</a>
+							</p>
+						</li>
+					</ol>
+					<br>
+					<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/cloudinary-form_twjl4r.png">
+				</div>
+				<div class="docpanel doc_start_disqus_configuration">
+					<p>
+						We have integrated <b>DISQUS comment plugin</b>  for all the commenting in our website. It can be  integrated with any websites in minutes. Disqus makes commenting easier and more interactive.
+					</p>
+					<ol type="1">
+						<li>
+							<p>
+								Go to <a href="https://disqus.com/">https://disqus.com/</a> and sign up for new account.
+							</p>
+						</li>
+						<li>
+							<p>
+								Verify your registration by clicking on the confirmation link sent to your email.
+							</p>
+						</li>
+						<li>
+							<p>
+								Login to your account and from the Disqus dashboard, click on the settings icon on the top right corner and from the drop-down menu select Add Disqus to Site.
+							</p>
+						</li>
+						<li>
+							<p>
+								It will take you to the features page and at the bottom of the page, there is ready to install section. Click on Get started button .
+							</p>
+							<br>
+							<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/disqus-install_zo1ebv.png">
+							<br>
+						</li>
+						<li>
+							<p>
+								Create site by filling the site name, Disqus URL and select a category.
+							</p>
+						</li>
+						<li>
+							<p>
+								Choose hosting platform. For your website, Choose Universal Code option.
+							</p>
+						</li>
+						<li>
+							<p>
+								This will take you to the set-up instructions page.
+							</p>
+						</li>
+						<li>
+							<p>
+								Scroll down to the <b>How to display comment count</b> section and you can see the disqus url in the src attribute of the script tag. Copy only the url i.e. value upto disqus.com
+								<br>
+								Here in my case, the Disqus url is <b>nodebeats-cms.disqus.com</b>
+							</p>
+							<br>
+							<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/disqus-url_neqy9w.png">
+						</li>
+						<li>
+							<p>
+								For now you only need the disqus url. Copy the value.  Click on Settings menu on the left side and from the drop-down menu, choose comment setting. Paste the disqus url value in the Disqus URL textbox and save it.
+							</p>
+						</li>
+						<li>
+							<p>
+								That's it. You are ready to use disqus comment plugin in your website.
+							</p>
+						</li>
+						<li>
+							<p>
+								For detailed guidance,
+								<br>
+								<a href="https://help.disqus.com/customer/portal/articles/1243156-developer-documentation">https://help.disqus.com/customer/portal/articles/1243156-developer-documentation</a>
+							</p>
+						</li>
+					</ol>
+					<br>
+					<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/disqus-form_jj7gjz.png">
+					<br>
+					<p>
+						<b>Note:</b>
+						<br>
+						You need disqus api key if you want to directly interact with the disqus web api. The API enables developers to communicate with Disqus data from within their own web applications. Right now, we are not directly interacting with disqus api. So, leave as it is.
+					</p>
+				</div>
+				<div class="docpanel doc_start_google_analytics_setting">
+					<h2>Google Analytics Configuration Setting:</h2>
+					<p>
+						Google analytics will be used to track and report website traffic so that those analytics data will be shown in dashboard using charts. Google Analytics is the most widely used web analytics service on the Internet. So, you need to save the configuration settings before the dashboard shows any website analytics data. Below is form for saving Google analytics configuration setting.
+					</p>
+					<br>
+					<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1472395645/google-analytics_sv0orx.png">
+					<br>
+					<ol type="1">
+						<li>
+							<p>
+								Go to https://analytics.google.com/ and click on Sign up button
+							</p>
+						</li>
+						<li>
+							<p>
+								Fill-up the necessary form fields and click on Get tracking ID
+							</p>
+						</li>
+						<li>
+							<p>
+								You will be redirected to the Google Analytics dashboard page.
+							</p>
+							<br>
+							<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/google-analytics-dashboard_adizzw.png">
+						</li>
+						<li>
+							<p>
+								Click on the Admin  menu at top of the dashboard
+							</p>
+							<br>
+							<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/google-analytics-admin-setting_zhmbr3.png">
+						</li>
+						<li>
+							<p>
+								Then, click on View Settings from the view section  and copy the View ID and paste the value in the View ID text field.
+							</p>
+						</li>
+						<li>
+							<p>
+								Now that you have View ID, you still need Google Analytics tracking ID. So go to the main admin section and click on Tracking Info and from the drop-down menus, click on Tracking Code link.
+							</p>
+						</li>
+						<li>
+							<p>
+								Copy the tracking ID and paste it into the Tracking ID text-field.
+							</p>
+						</li>
+						<li>
+							<p>
+								As for the polling interval, enter the value as you wish in seconds. After each passing of the polling interval value, the server will be polled for new Google analytics data to show real time analytics data in dashboard. <b>Google Analytics allows you to have 50000 api requests per project per day</b>. So, Do not enter too less value, Default polling value is 1 minutes (60000 milliseconds) and the minimum value that you can enter is 30 seconds (30000 milliseconds)
+							</p>
+						</li>
+						<li>
+							<p>
+								Last, You need service account JSON file. Follow the following procedures to get service account JSON file:
+							</p>
+							<ul>
+								<li>
+									<p>
+										Login to your gmail account with correct credentials.
+									</p>
+								</li>
+								<li>
+									<p>
+										Go to <a href="https://console.developers.google.com/">https://console.developers.google.com/</a> to access Google Api Manager dashboard
+									</p>
+									<br>
+									<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/google-develoers-console_lsk0kg.png">
+								</li>
+								<li>
+									<p>
+										First of all, you need to create a project. For that click on Credentials menu on the left side. This will prompt you to create a  project.
+									</p>
+								</li>
+								<li>
+									<p>
+										Click on Create   a project button and fill the necessary fields and then save it.
+									</p>
+								</li>
+								<li>
+									<p>
+										After the successfull creation of project, Click on Library menu and under the Other popular APIs section,<b> select Analytics API and then enable it</b>.
+									</p>
+								</li>
+								<li>
+									<p>
+										The analytics api cannot be used until we create credentials. So, Go to Credentials menu and click on Create credentials button.
+									</p>
+									<br>
+
+									<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/google-developer-console-credentials_b1zlih.png">
+								</li>
+								<li>
+									<p>
+										A popup will appear and from that select Service account key
+									</p>
+									<br>
+									<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/service-account-key-setting_jwwhw2.png">
+								</li>
+								<li>
+									<p>
+										From the Service account select field, choose New service account and give the service account name.
+									</p>
+								</li>
+								<li>
+									<p>
+										Choose key type JSON and create it.
+									</p>
+								</li>
+							</ul>
+						</li>
+
+					</ol>
+					<p>
+						Now upload the Service account JSON file and then save the analytics setting configuration data. Once saved successfully, you will see the website analytics data on the dashboard.
+					</p>
+					<br>
+					<p>
+						<b>Note:</b>
+						<br>
+						Keep the generated Service account JSON file somewhere safe because once the file is lost, it cannot be recovered.
+					</p>
+					<p>
+						For detailed guidelines:
+						<br>
+						<a href="https://support.google.com/googleapi/answer/6158849?hl=en#serviceaccounts">https://support.google.com/googleapi/answer/6158849?hl=en#serviceaccounts</a>
+						<a href="https://moz.com/blog/absolute-beginners-guide-to-google-analytics">https://moz.com/blog/absolute-beginners-guide-to-google-analytics</a>
+						<a href="https://support.google.com/analytics/?hl=en#topic=3544906">https://support.google.com/analytics/?hl=en#topic=3544906</a>
+					</p>
+					<br>
+					<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/dashboard-analytics-data_ewwrdg.png">
+				</div>
+				<div class="docpanel doc_start_email_template_setting">
+					<h2>Email Template Settings:</h2>
+					<p>
+						After saving email service configuration settings, edit all the records of the email template list <b>by changing From or Sender text field</b> of the template record <b>to verified domain email address</b>. Most of the transactional email service providers may <b>reject the outgoing emails if the sender field is not verified</b>.
+						<br>
+						<b class="critical_warning">So, we highly recommend you to change the sender field to domain verified email address.  This will also increase authenticity of your automated emails.</b>
+
+					</p>
+					<br>
+					<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/email-template_xe40s5.png">
+					<br>
+					<br>
+					<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/email-template-form_kkwfpf.png">
+				</div>
+				<div class="docpanel doc_start_deployment_setup">
+					<h2>Deploying to the cloud:</h2>
+					<p>
+						Before, deploying project to the cloud, you have to do certain things like creating backup of the database so that while deploying and running the deployed application, database backup will be restored automatically. Likewise, it's good idea to generate shrinkwrap.json file before deploying.
+					</p>
+					<br>
+					<div class="db_backup_generate">
+						<p>
+							<b>Creating a backup archive file of MongoDB database:</b>
+							<br>
+							Before  deploying the project to the cloud, create a backup of your mongodb database in archive extension format.
+						</p>
+						<ol type="1">
+							<li>
+								<p>
+									To create backup of MongoDB database in archive extension format, run the following command:
+									<br>
+								<pre>
+									<code class="hljs bash">
+	mongodump --host hostname --port porttNumber --username userName --password 	passwordEntry --db dbName --gzip –archive=filePath
+									</code>
+								</pre>
+								<p>
+
+									Give the appropriate file path.
+									<br>
+									ex:
+									<br>
+								</p>
+								<pre>
+									<code class="hljs bash">
+	mongodump --host localhost --port 27017 --username nodebitsadmin --password 	nodebitsadmin#123 --db prj_nodebeats --gzip --archive="/home/lakhe/Music/production test 	files/prj_nodebeats.archive"
+									</code>
+								</pre>
+								</p>
+							</li>
+							<li>
+								<p>
+									Now you have archive file, go to the root directory of your project file and from there navigate to lib folder and then mongodump folder. <b>Replace the existing .archive file with your new backup file</b>.
+								</p>
+							</li>
+						</ol>
+						<p>
+							<b>Note:</b>
+							<br>
+							Do note that <b>file name must be exactly same as the existing file</b>. You can change the database name while 	restoring by placing the database name in the database.config.js file.
+							<br>
+							That's it, Now when you deploy the project in the cloud and run it for the first time, it will automatically restore the backup file as specified in the database configuration file.
+						</p>
+					</div>
+					<div class="npm_shrinkwrap">
+						<p>
+							<b>Creating npm-shrinkwrap.json file:</b>
+							<br>
+							Next, if you have changed or updated the npm packages, you need to recreate the npm-shrinkwrap.json file. The <b>npm shrinkwrap</b> command lets you lock down the versions of a package's dependencies so that you can control exactly which versions of each dependency will be used when your package is installed. This is important because when installing the packages using <b>npm install</b> command, there is no guarantee that same exact package version will be installed and this may bring bugs to the application. In production environment, It may create unwanted problems and risks.
+						</p>
+						<p>
+							So, recreate the npm-shrinkwrap.json file if you have updated or installed the new packages.
+						</p>
+					</div>
+				</div>
+				<div class="docpanel deploy_project_openshift">
+					<h2>Deploying the project to OpenShift:</h2>
+					<p>
+						So, we are deploying our application to the  RedHat Openshift cloud. Openshift stands out among all the other free Node.js hosts by offering a no-trial, truly free Node.js hosting platform. So, let’s get started.
+					</p>
+					<ol type="1">
+						<li>
+							<p>
+								Go to <a href="https://www.openshift.com/">https://www.openshift.com/</a> and sign-up for new account.
+							</p>
+						</li>
+						<li>
+							<p>
+								Complete the registration process by clicking on the confirmation link sent to your email.
+							</p>
+						</li>
+						<li>
+							<p>
+								Login with correct credentials. After that, you will be redirected to the Openshift welcome page. That’s it for now in Openshift web interface. We will be doing everything from the terminal using rhc client tools provided by Openshift.
+							</p>
+						</li>
+					</ol>
+					<br>
+					<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/openshift-welcome_fttpos.png">
+					<p>
+						Openshift provides you with web interface as well as command line tools to deploy your application. For this deployment, we won't be using web interface. Rather, we will create and deploy our application project on openshift using client tools i.e. rhc. So, first of all you need to install rhc client tools.
+					</p>
+
+					<div class="openshift_code_changes">
+						<p>
+							Before deploying your code to the openshift,  you still need to make some changes to the code, specifically server.js file. So, edit server.js file with the below guidelines.
+						</p>
+						<div class="guidelines">
+							<ul>
+								<li>
+									<p>
+										Add following line of code at the variable declaration section along side port number variable declaration. Remove existing port variable declaration and paste the below content.
+									</p>
+									<p>
+							<pre>
+									<code>
+ipAddress = process.env.OPENSHIFT_NODEJS_IP,
+port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+									</code>
+											</pre>
+									</p>
+								</li>
+								<li>
+									<p>
+										Then add these lines of code inside of <b>setupVariables</b>  method
+									</p>
+							<pre>
+								<code>
+
+self.ipaddress = ipAddress;
+self.port      = port;
+
+if (typeof self.ipaddress === "undefined") {
+	//  allows us to run/test the app locally.
+		self.ipaddress = "127.0.0.1";
+};
+								</code>
+							</pre>
+								</li>
+								<li>
+									<p>
+										Modify the server listening section of the code
+									</p>
+							<pre>
+								<code>
+server.listen(self.port, function() {
+	console.log('Node server started on' + self.port + ' at ' + Date(new Date()));
+        });
+								</code>
+							</pre>
+
+									<br>
+									<b>to</b>
+									<br>
+							<pre>
+								<code>
+server.listen(self.port, self.ipaddress, function() {
+	console.log('%s: Node server started on %s:%d ...',
+    Date(Date.now() ), self.ipaddress, self.port);
+});
+								</code>
+							</pre>
+									<br>
+									<p>
+										That’s it, You are now ready to deploy your code  to the Openshift cloud platform.
+									</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="openshift_setup_process">
+						<p>
+							So, let's get started with our deployment process.
+						</p>
+						<p>
+							If you  haven’t already installed Ruby in your machine, then follow the following blog article.
+							<br>
+							<a href="https://gorails.com/setup/ubuntu/16.04">https://gorails.com/setup/ubuntu/16.04</a>
+							<br>
+							After installing Ruby on your machine, follow the following link to install rhc client tools.
+							<ul>
+								<li>
+						<p>
+							Click <a href="https://developers.openshift.com/managing-your-applications/client-tools.html">here</a> to get started.
+						</p>
+						</li>
+						<li>
+							<p>
+								Choose your machine and follow the guidelines. That will get you started.
+							</p>
+						</li>
+						</ul>
+						</p>
+						<div>
+							<p>
+								Now that openshift <b>client tool rhc</b>  is installed on your machine, it's time to setting up your machine. Below are the steps to deploy your application to Openshift:</p>
+							<ol type="1">
+								<li>
+									<p>
+										Open the terminal and run below command to set up your machine so that you do not have to enter username and password every time you want to login as well as to upload ssh key to the openshift.
+										<br>
+										<b class="command_terminal">rhc setup</b>
+										<br>
+										<ul>
+											<li>
+									<p>
+										Just hit enter if you are prompted to specify your own Openshift server.
+									</p>
+								</li>
+								<li>
+									<p>
+										You will be asked to enter your email address, type your email address and press enter. Provide your openshift account password and then press enter
+									</p>
+								</li>
+								<li>
+									<p>
+										Type yes to generate token so that we do not have to provide username and password every-time we try to access openshift server via terminal.
+									</p>
+								</li>
+								<li>
+									<p>
+										You will be prompted to upload SSH key to the Openshift server. Type yes and press enter. This must be done so that we can access code from git. So, if everything is fine, it’s time to create our application in openshift.
+									</p>
+								</li>
+								</ul>
+								<br>
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/c_fill,w_700,h_360/v1470738860/rhc-setup_oixuun.png">
+								</p>
+								</li>
+								<li>
+									<p>
+										Create the application in Openshift server by running the following command:
+										<br>
+									<pre>
+										<code class="hljs bash">
+rhc create-app --app appName  nodejs-0.10 mongodb-2.4 "http://cartreflect-claytondev.rhcloud.com/reflect?github=smarterclayton/openshift-redis-cart"
+										</code>
+									</pre>
+									<br>
+									Or
+									<br>
+									<pre>
+										<code class="hljs bash">
+rhc app  create -a appName -t nodejs-0.10 --env NPM_CONFIG_PRODUCTION=”true”
+										</code>
+									</pre>
+									<br>
+									<p>Either one of them will create application in Openshift</p>
+									</p>
+									<ul>
+										<li>
+											<p>
+												What this will do is that it creates the application named appName and add cartridges Node.js, MongoDB and redis to it.
+											</p>
+										</li>
+										<li>
+											<p>
+												Replace appName with your custom application name.
+											</p>
+										</li>
+										<li>
+											<p>
+												During the application creation process, you may be prompted to verify the authenticity of the host. If so, then just type yes and enter.
+											</p>
+										</li>
+										<li>
+											<p>
+												Your application will also be cloned to your machine. If somehow, application cloning is failed on your machine, then what we can do is copy the value of Git remote value and then run the following command:
+												<br>
+												<b class="command_git">git clone clone_url</b>
+												<br>
+												ex:
+												<br>
+											<pre>
+												<code class="hljs bash">
+git clone ssh://57a1a4bd89f5cf56530000d8@nodebeats-nodebeats.rhcloud.com/~/git/nodebeats.git/
+												</code>
+											</pre>
+											</p>
+											<br>
+											<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/rhc-create-app_g0hbqa.png">
+										</li>
+										<li>
+											<p>
+												To show a list of cartridges
+												<br>
+												<b class="command_terminal">
+													rhc cartridge-list
+												</b>
+											</p>
+										</li>
+										<li>
+											<p>
+												To get the detailed information about your newly created application:
+												<br>
+												<b class="command_terminal">rhc show-app appName</b>
+											</p>
+											<br>
+											<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/rhc-show-app_vhb5sj.png">
+										</li>
+									</ul>
+								</li>
+								<li>
+									<p>
+										If you want to add Web-based MongoDB administration tool, there is RockMongo cartridge. For this to be installed in our server, it requires MongoDB cartridge to be installed already. To install rockmongo cartridge,
+										<br>
+										<b class="command_terminal">rhc cartridge add rockmongo-1.1 -a appName</b>
+									</p>
+								</li>
+								<li>
+									<p>
+										Openshift allows you to remotely access your's application's gears in order to perform various tasks such as troubleshooting working with log files and managing environment variables. If you want to access your remote server, then run the following command:
+										<br>
+										<b class="command_terminal">rhc ssh appName</b>
+									</p>
+									<p>
+										Be extremely careful while using shell access. Shell access is quite powerful and it is 	possible for you to accidentally damage your application.
+									</p>
+									<br>
+									<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/rhc-ssh-access_fyndw4.png">
+								</li>
+								<li>
+									<p>
+										Next thing, that you may want in your application is continuous integration. Openshift provides Continuous integration with Jenkins. Jenkins is a full featured continuous integration (CI) server that can run builds, tests, and other scheduled tasks and integrate with your  Openshift applications. So, before enabling continuous integration with jenkins, you have to setup Jenkins server.
+
+										<br>
+										For detailed guidelines:
+										<br>
+										<a href="https://developers.openshift.com/managing-your-applications/continuous-integration.html">https://developers.openshift.com/managing-your-applications/continuous-integration.html</a>
+									</p>
+								</li>
+								<li>
+									<p>
+										To enable Jenkins server
+										<br>
+										<b class="teminal_command">
+											rhc app create jenkins jenkins-1
+										</b>
+										<br>
+										where <b>jenkins</b>  is the  name of the jenkins server and <b>jenkins-1</b> is the cartridge.
+									</p>
+									<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/rhc-jenkins_urudaf.png">
+									<p>
+										<b>Note:</b>
+										<br>
+										While setting up Jenkins server, if warning shows, just ignore it. But note the administrator username and password that is created and returned from rhc. This will be needed to administer jenkins.
+									</p>
+								</li>
+								<li>
+									<p>
+										Since, we have our application already created, we have to enable continuous integration with jenkins. For that add jenkins cartridge to our application by running the following command:
+										<br>
+										<b class="termial_command">
+											rhc cartridge add jenkins-client-1 -a appName
+										</b>
+										<br>
+										<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/rhc-jenkins-enable-ci_tdwe0s.png">
+									</p>
+								</li>
+								<li>
+									<p>
+										Now, that we have enabled continuous integration with jenkins, now  Go to the directory where you have clone the openshift application and delete existing files and place your project files in the project root directory.
+									</p>
+								</li>
+								<li>
+									<p>
+										Before committing files to the git repository, we have to change some of the code to make application work in openshift.
+									</p>
+									<ul>
+										<li>
+											<p>
+												Now, we have our server ready, still we  have to change the <b>database config     (database.config.js)</b> to make our application run. So, in the <b>database.config.js</b> file <b>located at /lib/configs path</b> from the root of the application, change the following in the production section.
+											</p>
+										<pre>
+											<code>
+production : {
+    username: 'username',
+	password: 'password',
+	host: $OPENSHIFT_MONGODB_DB_HOST,
+	port: $OPENSHIFT_MONGODB_DB_PORT,
+	dbName: 'dbname'
+},
+											</code>
+										</pre>
+											<br>
+											<p>Open the ssh terminal access to your Openshift application and then run the following environment variables to get the MongoDB credentials and replace the ouput value in the production section of database config file.
+
+											</p><pre>
+											<code>
+echo $OPENSHIFT_MONGODB_DB_HOST
+echo $OPENSHIFT_MONGODB_DB_PORT
+echo $OPENSHIFT_MONGODB_DB_USERNAME
+echo $OPENSHIFT_MONGODB_DB_PASSWORD
+echo $OPENSHIFT_MONGODB_DB_URL
+											</code>
+										</pre>
+											<br>
+
+											Or,
+											<br>
+											<p>
+												Run <br>
+												<b class="command_terminal">rhc show-app appName</b>
+												<br>
+												to get the detailed information about application where you can find username, password and database name for mongodb configuration. Replace the username, password and dbName with those values.
+											</p>
+										</li>
+										<li>
+											<p>
+												Last, we also need to change the configuration file for <b>redis.config.js</b> located at <b>/lib/configs</b> from the root of the application.
+											</p>
+										<pre>
+											<code>
+production : {
+	host: '$OPENSHIFT_REDIS_HOST',
+	port: '$OPENSHIFT_REDIS_PORT',
+	pass: '$REDIS_PASSWORD'
+}
+											</code>
+										</pre>
+											<br>
+											<p>
+												Similarly, Run the following commands in the ssh terminal and replace the output in the redis config file
+											</p>
+											</p><pre>
+											<code>
+echo $OPENSHIFT_REDIS_HOST
+echo $OPENSHIFT_REDIS_PORT
+echo $REDIS_PASSWORD
+echo $REDIS_CLI
+											</code>
+										</pre>
+										</li>
+										<li>
+											<p>
+												To see redis deployed in openshift, login to the openshift server using shell command.
+												<br>
+												<b class="command_terminal">rhc ssh appName</b>
+											</p>
+										</li>
+										<li>
+											<p>
+												After you have shell access, run the following command to get the information about Redis instance.
+												<br>
+												<b class="command_terminal">env | grep REDIS</b>
+												<br>
+											<p>
+												After you have run this command, you will see all the needed the information about 	the redis instance. <b>Copy the host, port and   password in the redis.config.js file </b>
+											</p>
+											</p>
+										</li>
+										<li>
+											<p>
+												If you want to connect to the redis, run the following command:
+												<br>
+												<b class="command_terminal">
+													redis-cli $REDIS_CLI
+												</b>
+											</p>
+										</li>
+										<li>
+											<p>
+												For detailed guidance:
+												<br>
+												<a href="https://blog.openshift.com/enabling-redis-for-your-app/">https://blog.openshift.com/enabling-redis-for-your-app/</a>
+											</p>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<p>
+										So, all the configurations of your application are set. Please do not place the node_modules directory in the git cloned directory. If, exists, delete the node_modules directory. While deployment, it will be automatically downloaded and built.
+									</p>
+								</li>
+								<li>
+									<p>
+										Now, Add all the files to the repository except node_modules folder if exists. They will be automatically downloaded once we push our files to the repository.
+										<br>
+										<b class="command_git">git add --all</b>
+									</p>
+								</li>
+								<li>
+									<p>
+										Commit the files to the git repository.
+										<br>
+										<b class="command_git">git commit -m "entire application files committed for the first time"</b>
+									</p>
+								</li>
+								<li>
+									<p>
+										Push the files to the git repository
+										<br>
+										<b class="command_git">
+											git push origin master
+										</b>
+									</p>
+								</li>
+								<li>
+									<p>
+										It will start building the application and at the same time, download all the required packages.
+									</p>
+								</li>
+								<li>
+									<p>
+										If you want to see the logs related to the application,
+										<br>
+										<b class="command_terminal">
+											rhc tail appName
+										</b>
+									</p>
+								</li>
+
+							</ol>
+							<p>
+								If everything goes smoothly without any errors in deployment, your site will be live. Here is how the successfull deployment looks like:
+								<br>
+
+							</p>
+							<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/rhc-openshift-deployment-success_kyftds.png">
+							<br>
+							<p>
+								<b>Note:</b>
+								<br>
+								Do replace <b>appName</b> with your own application name.
+							</p>
+						</div>
+					</div>
+					<div class="openshift_tmp_remove">
+						<h2>Warning:</h2>
+						<br>
+						<p>If you are using  free account provided by Openshift, then I would like to warn you that deployment may not be smooth. It may result in failure.  Openshift provides 1GB of storage space which sounds like a lot before deployment but it’s actually not. </p>
+						<p>
+							After deploying application to the Openshift cloud, login to the Openshift terminal using following ssh command:
+							<br>
+							<b class="command_node">rhc ssh -a appName</b>
+							<br>
+							After login to the openshift server, <b> first thing you should do is delete everything from /tmp folder. Files in the temp folder are cleared automatically on next server restart. So, if server space is not full, then you can skip this step.</b>
+							<ul>
+								<li>
+									<p>
+										Navigate to the /tmp directory
+										<br>
+										<b class="command_terminal">cd /tmp</b>
+									</p>
+						</li>
+						<li>
+							<p>
+								Once you are inside tmp directory, remove everything from the folder. This will free up a lot of free space.
+								<br>
+								<b class="command_terminal">rm -rf *</b>
+								<br>
+								Or
+								<br>
+								<b class="command_terminal">rm -rf fileName</b>
+							</p>
+						</li>
+						</ul>
+						</p>
+					</div>
+				</div>
+				<div class="docpanel doc_start_nginx_openshift_setup">
+					<h2><b>Nginx setup in Openshift</b></h2>
+
+					<div class="setup">
+						<p>
+							Now that you have created and deployed your web application successfully, it's time to set-up Nginx as our proxy server that will serve all the static contents.
+						</p>
+						<p>
+
+							You have to know that we cannot setup Nginx alongside our Node.js web application because Openshift doesn't allow it.
+							So, we have to create seperate application and then proxy the client request back to our Node.js application.
+							Nginx allows us to create upto three small basic gears with the free account. So, let's get started:
+						</p>
+						<p>
+							<b>Note:</b>
+							<br>
+							Application name must contain only alphanumeric characters (a-z, A-Z, or 0-9).
+						</p>
+						<p>
+							We will be using Openshift Open-Source Nginx cartridge which you can find using following link:
+							<br>
+							<a href="https://github.com/gsterjov/openshift-nginx-cartridge">https://github.com/gsterjov/openshift-nginx-cartridge</a>
+						</p>
+						<p>
+							This Nginx cartridge installs Nginx v1.4.4 which is ofcourse outdated but that's not a problem because once this cartridge is installed and we have our Nginx on Openshift up and running, we can update the Nginx using our own custom configurations by compiling Nginx from source and then installing it.
+							So, Go to the github repository page and read the instructions there.
+						</p>
+						<p>
+							So, Follow the following guidelines to create Nginx application on Openshift:
+						</p>
+						<div>
+							<ul type="1">
+								<li>
+									<p>
+										To create application, run the following command:
+										<br>
+										<b>
+											rhc create-app myapp http://cartreflect-claytondev.rhcloud.com/reflect?github=gsterjov/openshift-nginx-cartridge
+										</b>
+										<br>
+										This will create Nginx web server application on Openshift. Here <b>myapp is your custom application name</b>.
+									</p>
+								</li>
+								<li>
+									<p>
+										Now that your Nginx web server is up and running, it's time to update it.
+										<br>
+										SSH into your application server and Navigate to data directory of app-root folder.
+										<br>
+										<b>cd app-root/data</b>
+									</p>
+									<p>
+										We will compile and build our Nginx server application in this directory. <b>In Openshift server, Only data directory is the persistent one.</b> So, If you need some data to be persistent across deployments, then, use this directory.
+									</p>
+								</li>
+								<li>
+									<p>
+										So, Follow the following guidelines to <b>upgrade Nginx versions</b>:
+									</p>
+									<ul>
+										<li>
+											<p>
+												Create a shell script. Name it anything you want. I will name it as <b> compile_nginx.sh</b>
+											</p>
+										</li>
+										<li>
+											<p>
+												Go to <a href="https://gist.github.com/ShrawanLakhe/77c8d125dc4f18dbff54f72cfeb71e21"><b>https://gist.github.com/ShrawanLakhe/77c8d125dc4f18dbff54f72cfeb71e21</b></a> and copy the contents of the gist.
+											</p>
+										</li>
+										<li>
+											<p>
+												Clone your Nginx web application repository somewhere in the disk and place the shell script and commit the file to the repository. Push the changes to the git.
+											</p>
+											<p>
+												<b>git add compile_nginx.sh</b>
+												<br>
+												<b>git commit -am "shell script committed"</b>
+												<br>
+
+												<b>git push origin master</b>
+												<br>
+											</p>
+										</li>
+										<li>
+											<p>
+												SSH into your application, and move the shell script from repo directory to the data directory of app-root folder.
+												<br>
+												<b>
+													cd app-root
+												</b>
+												<br>
+												<b>
+													mv repo/compile_nginx.sh data/
+												</b>
+											</p>
+										</li>
+										<li>
+											<p>
+												Now check your data directory, you will find the shell script. Now run the shell script
+												<br>
+												<b>
+													cd data
+												</b>
+											</p>
+										</li>
+										<li>
+											<p>
+												Make the shell script executable by running the following command:
+												<br>
+												<b>
+													chmod 755 compile_nginx.sh
+												</b>
+											</p>
+										</li>
+										<li>
+											<p>
+												To compile and install latest Nginx, run the following command
+												<br>
+												<b>
+													./compile_nginx.sh
+												</b>
+											</p>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<p>
+										The compilation process will take some time. Once done, check the nginx version
+										<br>
+										<b>
+											cd nginx/usr/versions/1.11.3/bin/
+										</b>
+										<br/>
+										<b>
+											./nginx -v
+										</b>
+
+									</p>
+									<p>
+										You will see the output with latest Nginx version.
+									</p>
+								</li>
+								<li>
+									<p>
+										Now stop and then again start the nginx server
+									</p>
+									<p>
+										<b>
+											./nginx -s stop
+										</b>
+										<br />
+										<b>
+											./nginx
+										</b>
+									</p>
+								</li>
+								<li>
+									<p>
+										To reload nginx configurations:
+										<br />
+										<b>
+											./nginx -s reload
+										</b>
+									</p>
+								</li>
+								<li>
+									<p>
+										Well, that's it, You have successfully installed Nginx with latest version on Openshift.
+									</p>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+				<div class="docpanel doc_start_heroku_deploy">
+					<h2>Deploying the project to Heroku</h2>
+					<p>
+						Heroku is another hugely popular cloud service provider. It’s extremely easy to deploy applications on heroku and also you can try free account. The deployment process is painless and quick. Heroku is a part of Salesforce App cloud.
+					</p>
+					<p>
+						If you want to setup Nginx as Proxy server infront of your Node.js application, then skip this tab and go to the next.
+						<br>
+						So, let’s get started, Follow the following steps:
+					</p>
+					<ol type="1">
+						<li>
+							<p>
+								Go to https://www.heroku.com/ and sign-up for new user account.
+							</p>
+						</li>
+						<li>
+							<p>
+								Confirm your user account via the registration link sent to your email.
+							</p>
+						</li>
+						<li>
+							<p>
+								Set your password and you are ready to go.
+							</p>
+						</li>
+						<li>
+							<p>
+								Access the heroku dashboard.
+							</p>
+							<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/heroku-dashboard_b8n03y.png">
+						</li>
+					</ol>
+					<br>
+					<p>
+						We will be doing everything using heroku toolbelt. So, you need to first install heroku toolbelt, so that you can use heroku commands from terminal. To install heroku toolbelt, Go to <a href="https://toolbelt.heroku.com/">https://toolbelt.heroku.com/</a> and download the appropriate package for  your machine. Choose Your Operating system and run the specified command.
+						<br>
+						If you are in Ubuntu, run the following command:
+						<br>
+						<b class="command_terminal">
+							wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+						</b>
+					</p>
+					<p>
+						Once installed, you'll have access to the heroku command from your command shell. To check heroku version:
+						<br>
+						<b class="command_terminal">
+							heroku –version
+						</b>
+					</p>
+					<p>
+						Login in using email address and password you used when creating your Heroku account. You will be asked to enter your  Heroku credentials the first time you run a command. Your ssh public key will be uploaded at this step. It's generally a good idea to login and add your public key immediately after installing the Heroku cli so that you can use git to push or clone Heroku app repositories. so, run the command:
+						<br>
+						<b class="command_terminal">
+							heroku login
+						</b>
+						<br>
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/heroku-login_gezbrg.png">
+					</p>
+					<p>
+						If logged in successfull, then you are ready to create your first heroku application.
+						<br>
+						If you wish to add other ssh keys manually, then run the following command:
+						<br>
+						<b class="command_terminal">
+							heroku keys:add
+						</b>
+					</p>
+					<p>
+						Follow the following heroku documentation link to create and  deploy app on heroku. The documentation is very helpful.
+						<br>
+						<a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction">https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction</a>
+					</p>
+					<div>
+						<b>Note:</b>
+						<br>
+						<p>Heroku will create application with random name if you didn't pass a parameter to specify your own app name. </p>
+						<br>
+						<ul>
+							<li>
+								<p>If you want to give your application custom name, then when creating your application, run the following command:
+									<br>
+									<b class="command_terminal">
+										heroku create appname
+									</b>
+								</p>
+							</li>
+							<li>
+								<p>
+									To change the application name, run the following command to change your app name.
+									<br>
+									<b class="command_terminal">
+										heroku apps:rename --app oldname newname
+									</b>
+								</p>
+							</li>
+							<li>
+								<p>
+									To have bash or shell access to heroku
+									<br>
+									<b class="command_terminal">
+										heroku run bash
+									</b>
+								</p>
+							</li>
+							<li>
+								<p>
+
+									To restart heroku server
+									<br>
+									<b class="command_terminal">
+										heroku restart -a app_name
+									</b>
+								</p>
+							</li>
+						</ul>
+
+					</div>
+					<p>
+						Below is the snapshot of the successfull deployment to heroku.
+						<br>
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/heroku-success-deployment_hujjao.png">
+					</p>
+				</div>
+				<div class=" docpanel doc_heroku_nginx_setup">
+					<h2>Configuring Nginx as proxy server in Heroku</h2>
+					<p>
+						We are going to setup Nginx as a proxy server which will serve all the static resources and
+						then  redirects other requests to Node.js server in Heroku. Setting Nginx with heroku sounds tough,
+						but actually it is very easy.
+						We just have to understand the concept of multiple buildpacks in Heroku and how that works.
+						There may be cases when a single buildpack is not sufficient for our application needs.
+						Even in our case, if we want to set nginx as a proxy server, then without multiple buildpacks, we just cannot do it.
+						So, if you want to learn more about multiple buildpacks, then follow the following links:
+						<br>
+						<a href="https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app">https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app</a>
+					</p>
+					<br>
+					<p>
+						So, let’s get to the main task of setting Nginx as a proxy server.  We will do it from scratch. So, follow the following step-by-step guidelines:
+					</p>
+					<div>
+						<ol type="1">
+							<li>
+								<p>
+									First you need to create application. So create a directory and from inside the folder, run the following command which will create heroku app. Place all of your project files except node_modules folder in the root of this directory.
+									<br>
+									<strong>heroku create</strong>
+									<br>
+									If you are not logged in with heroku credentials, then first login with heroku credentials and create the application.
+									<br>
+									<strong>heroku login</strong>
+								</p>
+							</li>
+							<li>
+								<p>
+									Initialize the git repository in the directory
+									<br>
+									<strong>git init</strong>
+								</p>
+							</li>
+							<li>
+								<div>
+									<p>Set git remote origin. To see your git remote origin,</p>
+									<br>
+									<ul>
+										<li>
+											<p>Login with correct credentials to access  dashboard section</p>
+										</li>
+										<li>
+											<p>From the dashboard page,  click your app.</p>
+										</li>
+										<li>
+											<p>Click on Deploy tab and you will find your git remote origin there.</p>
+										</li>
+									</ul>
+									<br>
+									<p>
+										ex:<br>
+										<strong>heroku git:remote -a young-citadel-30643</strong></p>
+								</div>
+							</li>
+							<li>
+								<div>
+									<p>
+										So, it’s time to work with multiple buildpacks – first one is Node.js buildpack and another one is Nginx buildpack.
+										There are two ways in which you can implement multiple buildpacks.
+									</p>
+									<p>
+										One method involves setting buildpacks using terminal command and another one involves creating <b> .buildpacks </b> file inside the project root directory.
+									</p>
+									<p>
+										So, you need two buildpacks. To know more about those buildpacks, Click following git repository link of heroku and search for Node.js and Nginx buildpack repository.
+										<br>
+										<a href="https://github.com/heroku">https://github.com/heroku</a>
+									</p>
+									<div>
+										<p>Or, you can follow the below links directly.</p>
+										<ul>
+											<li>
+												<p>
+													<a href="https://github.com/heroku/heroku-buildpack-nodejs">https://github.com/heroku/heroku-buildpack-nodejs</a>
+												</p>
+											</li>
+											<li>
+												<p>
+													<a href="https://github.com/heroku/heroku-buildpack-nginx">https://github.com/heroku/heroku-buildpack-nginx</a>
+												</p>
+											</li>
+										</ul>
+										<br>
+										<p>
+											So, let’s look at both.
+
+										</p>
+										<br>
+
+										<div class="buildpack_terminal">
+											<h3>Setting multiple buildpacks using terminal</h3>
+											<br>
+											<ul>
+												<li>
+													<p>
+														First method involves setting buildpacks using terminal commands. So, run the following command from the project root directory.
+													</p>
+													<br>
+													<ul>
+														<li>
+															<p>
+																<b>
+																	heroku buildpacks:set https://github.com/heroku/heroku-buildpack-nodejs.git
+																</b>
+															</p>
+														</li>
+														<li>
+															<p>
+																<b>
+																	heroku buildpacks:add https://github.com/heroku/heroku-buildpack-nginx
+																</b>
+															</p>
+														</li>
+													</ul>
+												</li>
+												<li>
+													<p>
+														That’s it, Now, you need to change some code to make your application run with nginx as proxy server.
+													</p>
+												</li>
+												<li>
+													<p>
+														If you want to check what buildpacks will be used with your application, then run the following command:
+														<br>
+														<b>heroku buildpacks</b>
+													</p>
+												</li>
+											</ul>
+										</div>
+										<div class="buildpack-file">
+											<h3>
+												Setting multiple buildpacks using .buildpacks file
+											</h3>
+											<ul>
+												<li>
+													<p>
+														The first step is to set multi-buildpack. So run the following command:
+														<br>
+														<b>heroku buildpacks:set https://github.com/heroku/heroku-buildpack-multi.git</b>
+													</p>
+												</li>
+												<li>
+													<div>
+														<p>This method involves creating a .buildpacks file in the project root directory.
+															That file 	should  contain buildpacks in separate lines. That’s all there is to do.</p>
+														<br>
+														<ul>
+															<li>
+																<p>
+																	<b>touch .buildpacks</b>
+																</p>
+															</li>
+															<li>
+																<p>
+																	<b>
+																		echo 'https://github.com/heroku/heroku-buildpack-nodejs.git' >> .buildpacks
+																	</b>
+																</p>
+															</li>
+															<li>
+																<p>
+																	<b>
+																		echo 'https://github.com/heroku/heroku-buildpack-nginx' >> .buildpacks
+																	</b>
+																</p>
+															</li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+										</div>
+
+									</div>
+
+								</div>
+							</li>
+							<li>
+								<p>
+									If you want to configure Nginx’s worker_processes directive via the NGINX_WORKERS environment variable,
+									then run the following command to set your NGINX_WORKERS to 8 on a PX dyno:
+									<br>
+									<b>
+										heroku config:set NGINX_WORKERS=8
+									</b>
+								</p>
+							</li>
+							<li>
+								<div>
+									<p>
+										Now you are going to change some code from project files so that it will  run without errors when deployed.
+
+									</p>
+									<br>
+									<ul>
+										<li>
+											<p>
+												If you have file named Procfile in the root directory, then change the content of file to following:
+												<br>
+												<b>
+													web: scripts/build_nginx.sh
+												</b>
+											</p>
+											<p>
+												If you haven’t got that file, then create one. It’s a must have file if you want to deploy your application on heroku.
+											</p>
+											<ul>
+												<li>
+													<p>
+														touch Procfile
+													</p>
+												</li>
+												<li>
+													<p>
+														echo 'web: scripts/build_nginx.sh' >> Procfile
+													</p>
+												</li>
+											</ul>
+											<p class="note">
+												Do remember that, the content of Procfile must be changed after the application is deployed 	successfully in order to run the app successfully.
+											</p>
+										</li>
+										<li>
+											<p>
+												Following are the requirements if you want to run your application using nginx as proxy server without any errors:
+											</p>
+											<ul>
+												<li>
+													<p>
+														Your <b>webserver</b> listens to the socket at <b>/tmp/nginx.socket</b> .
+													</p>
+												</li>
+												<li>
+													<p>
+														You touch <b>/tmp/app-initialized</b> when you are ready for traffic.
+													</p>
+												</li>
+												<li>
+													<p>
+														You can start your web server with a shell command.
+													</p>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<p>
+												So, let’s change our code in server.js file to meet the requirements.
+												<br>
+												You have to first require fs module.
+											</p>
+										<pre>
+											<code class="hljs bash">
+ var fs = require('fs');
+											</code>
+										</pre>
+											<p>
+												Replace following piece of code
+
+											</p>
+
+										<pre>
+											<code class="hljs bash">
+	self.start = function() {
+        //  Start the app on the specific interface (and port).
+        server.listen(self.port, function() {
+            console.log('Node server started on' + self.port + ' at ' + Date(new Date()));
+        });
+    };
+												</code>
+											</pre>
+											<br>
+											<p>with</p>
+
+										<pre>
+											<code class="hljs bash">
+	self.start = function() {
+        //  Start the app on the specific interface (and port).
+        server.listen('/tmp/nginx.socket', function() {
+        	if (process.env.DYNO) {
+			 	console.log('This is on Heroku..!!');
+				fs.openSync('/tmp/app-initialized', 'w');
+			}
+        	console.log('Node server started on' + self.port + ' at ' + Date(new Date()));
+        			});
+    };
+												</code>
+											</pre>
+										</li>
+										<li>
+											<p>
+												Add files to the git repository
+												<br>
+												<b>
+													git add --all
+												</b>
+											</p>
+										</li>
+										<li>
+											<p>
+												Commit the files
+												<br>
+												<b>
+													git commit -am "content committed"
+												</b>
+											</p>
+										</li>
+										<li>
+											<p>
+												Push the file to the git
+												<br>
+												<b>
+													git push heroku master
+												</b>
+											</p>
+										</li>
+										<li>
+											<p>
+												So, if your application is deployed successfully, then again edit the content of Procfile and replace existing content with the following code:
+												<br>
+												<b>
+													web: bin/start-nginx node server.js
+												</b>
+											</p>
+										</li>
+										<li>
+											<div>
+												<p>
+													By default, when the app is deployed, it will create <b>config</b> directory and some files inside it.
+													Nginx will use those files to server your application. The created files inside of <b>config directory</b> are as follows:
+												</p>
+												<br>
+												<ul>
+													<li>
+														<p>
+															<strong>mime.types</strong>
+														</p>
+													</li>
+													<li>
+														<p>
+															<strong>nginx.conf.erb</strong>
+														</p>
+													</li>
+												</ul>
+												<p>
+													Nginx will use this file as it’s configuration file in Heroku.
+
+												</p>
+												<div>
+													<p>
+
+														If you want your own custom nginx configuration files that will override default 	nginx configurations, then create config directory in your project root directory. So to create 	your own nginx config file, follow the following steps:
+
+													</p>
+													<ul>
+														<li>
+															<p>
+																<strong>
+																	mkdir config
+																</strong>
+															</p>
+														</li>
+														<li>
+															<p>
+																<strong>
+																	cd config
+																</strong>
+															</p>
+														</li>
+														<li>
+															<p>
+																<strong>
+																	touch mime.types
+																</strong>
+																<br>
+																mime.types file will be automatically created. So, if you do not want to modify this file, then it’s perfectly ok. If you do change however,  then replace the content of <b> mime.types</b> file with the content content from this
+																<a href="https://gist.github.com/ShrawanLakhe/d2f99300748acec87ea861664287cb2d">gist</a>:
+															</p>
+														</li>
+														<li>
+															<p>
+																<strong>
+																	touch nginx.conf.erb
+																</strong>
+																<br>
+																<b>nginx.conf.erb </b>is the file that we need to configure. So, Go to
+																<a href="https://gist.github.com/ShrawanLakhe/a00f176496b63c798f6799350e59de89"> this gist </a> and replace the contents of the file with the content of the gist.
+																<br>
+																You can edit the values of <b>worker_connections</b> and <b> types_hash_max_size</b> according to your needs.
+															</p>
+														</li>
+													</ul>
+												</div>
+
+											</div>
+										</li>
+									</ul>
+								</div>
+								<br>
+
+								<div class="reference_links">
+									<p>
+										If you want to learn more about Nginx configurations, then read the following articles:
+									</p>
+									<ul>
+										<li>
+											<p>
+												<a href="http://nginx.org/en/docs/beginners_guide.html">http://nginx.org/en/docs/beginners_guide.html</a>
+											</p>
+										</li>
+										<li>
+											<p>
+												<a href="https://www.linode.com/docs/websites/nginx/how-to-configure-nginx">https://www.linode.com/docs/websites/nginx/how-to-configure-nginx</a>
+											</p>
+										</li>
+										<li>
+											<p>
+												<a href="https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts">https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts</a>
+											</p>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<p>
+									If everything runs without any errors, then open the  project url in the browser. You can do it by running the following command from the root of the project directory.
+									<br>
+									<b>
+										heroku open
+									</b>
+								</p>
+							</li>
+							<li>
+								<p>
+									If you want to check out logs, then run the following command  from the root of the project directory.
+									<br>
+									<b>
+										heroku logs --tail
+									</b>
+								</p>
+							</li>
+							<li>
+								<p>
+									If you want to heroku ssh terminal,then run the following  command  from the root of the project directory.
+								</p>
+								<br>
+								<p>
+
+									<b>
+										heroku run bash
+									</b>
+								</p>
+							</li>
+						</ol>
+
+
+					</div>
+				</div>
+				<div class="docpanel doc_start_future_enchancements">
+					<p>
+						This is only the beginning. We will be adding several new features in the upcoming versions as well as continue to improve existing codebase.
+						We will make this content management system even more optimized and secure.
+						The primary focus will be on how to make this product robust and stable and much more difficult to hack.
+						Some of the planned new features for the upcoming version will  include following:
+					</p>
+					<ul>
+						<li>
+							<p>
+								Implementing <b>Role-based access control </b> to the system so that users can do only things which they are allowed to do.
+							</p>
+						</li>
+						<li>
+							<p>
+								Implementing installation set-up page so that users do not have to modify files in order to run the application.
+							</p>
+						</li>
+						<li>
+							<p>
+								Menu Management so that you can create navigation menus without any hassle.
+							</p>
+						</li>
+						<li>
+							<p>
+								Implement dynamic templating
+							</p>
+						</li>
+						<li>
+							<p>
+								Create command line interface tools to download and install the project files
+							</p>
+						</li>
+					</ul>
+				</div>
+				<div class="docpanel doc_start_acknowledgements">
+					<p>
+						This project wouldn’t have been successfull without the help of many tutors from whom we have learnt a lot.
+						We have gone through  many blog articles and we would like to sincerely thanks all those blog article writers for sharing their knowledge with the world.
+						We would like to specially thanks tutors from following blogs from which we have gained invaluable knowledge. They are as follows:
+					</p>
+					<ul>
+						<li>
+							<p>
+								<a href="https://scotch.io/">https://scotch.io/</a>
+							</p>
+						</li>
+						<li>
+							<p>
+								<a href="http://webapplog.com/">http://webapplog.com/</a>
+							</p>
+						</li>
+						<li>
+							<p>
+								<a href="https://www.sitepoint.com">https://www.sitepoint.com</a>
+							</p>
+						</li>
+						<li>
+							<p>
+								<a href="http://coenraets.org/">http://coenraets.org/</a>
+							</p>
+						</li>
+						<li>
+							<p>
+								<a href="http://adrianmejia.com/">http://adrianmejia.com/</a>
+							</p>
+						</li>
+						<li>
+							<p>
+								<a href="https://medium.com/">https://medium.com/</a>
+							</p>
+						</li>
+						<li>
+							<p>
+								<a href="http://blog.thoughtram.io/">http://blog.thoughtram.io/</a>
+							</p>
+						</li>
+						<li>
+							<p>
+								<a href="https://angularclass.com/blog/ ">https://angularclass.com/blog/ </a>
+							</p>
+						</li>
+					</ul>
+					<p>
+						We would like to thanks the author of <a href="https://pragprog.com/book/kdnodesec/secure-your-node-js-web-application"> Secure Your Node.js Web Application book</a>, <strong>Karl Dunna</strong> from whom we have learnt   a lot about web application security. We would also like to thank friends, families and well-wishers who supported us throughout the project.
+					</p>
+					<p>
+						At last, We would also like to thank <b>Nawang Sherpa</b> of <a href="http://www.oneglobenepal.com/">One Globe Travels</a> for his invaluable support.
+					</p>
+				</div>
+				<div class="docpanel doc_start_appeal">
+					<p>
+						This is me, <a href="https://np.linkedin.com/in/shrawanlakhe">Shrawan Lakhe</a> and my other colleague, <a href="https://np.linkedin.com/in/sandeepranjit"> Sandeep Ranjitkar</a>, core developers and project maintainers. We would like to thank you for using this Content Management System.
+						We will continue to work in this product in the future as well, so that you can have regularly updated and secured CMS .
+						New features will be added as according to  planned schedule. We aim to make this product well known among tech community.
+						During the time duration of this project, We have learned a lot and we will only get better in the future as well and We aim to be better than before.
+						For this, if you think that we have done something wrong or something can be done better with this product, Please do write to us.
+						We will always appreciate your feedback.
+					</p>
+					<p>
+						We want to contribute something to the open-source community because throughout our career, we have used numerous open-source projects which had helped us immensely.
+						We do not want to be somebody who only takes from the open-source community. This is our small effort to contribute something back to the open-source community.
+
+					</p>
+					<p>
+						We need your support to make this product reliable, performant and secured.
+						So, Please do support our effort by either by giving some donation or providing us with invaluable feedbacks.
+
+					</p>
+					<p>
+
+						Please If you have anything to say regarding this product, then please contact us at <b><a
+							href="mailto:help@nodebeats.com">help@nodebeats.com</a></b>
+					</p>
+				</div>
+				<div class="docpanel doc_start_resource_credits">
+					<p>
+						We have used some of the open-source design templates to create this project. To create admin UI dashboard, we have used
+						<a href="https://github.com/start-angular/SB-Admin-BS4-Angular-2">SB-Admin-BS4-Angular-2</a> github repository project and for the front-end design, we have used
+						<a href="https://github.com/BlackrockDigital/startbootstrap-creative">startbootstrap-creative</a> github repository project. We would like to thank the authors of those templates.
+
+					</p>
+					<p>
+						We have used numerous npm packages in order to create this project. So, We would also like to express our sincere gratitude towards the author of all those npm packages without which we wouldn't be able to create this product.
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<script src="documentation/src/jquery-1.11.3.min.js"></script>
+	<script src="documentation/src/jquery.easyResponsiveTabs.js"></script>
+	<script src="documentation/src/main.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#ChildVerticalTab_1').easyResponsiveTabs({
+				type: 'vertical',
+				width: 'auto',
+				fit: true,
+				tabidentify: 'ver_1', // The tab groups identifier
+				activetab_bg: '#fff', // background color for active tabs in this group
+				inactive_bg: '#F5F5F5', // background color for inactive tabs in this group
+				active_border_color: '#c1c1c1', // border color for active tabs heads in this group
+				active_content_border_color: '#5AB1D0' // border color for active tabs contect in this group so that it matches the tab head border
+			});
+		});
+	</script>
+</body>
+</html>

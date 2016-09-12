@@ -1,0 +1,95 @@
+<!-- Page Heading -->
+
+<div class="grid-wrapper" fadeInDirective *ngIf="!(showForm ||isEdit|| showInfo ||showManage)">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                User Management
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i> <a href="/admin">Dashboard</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-user"></i> UserManagement
+                </li>
+            </ol>
+        </div>
+    </div><!-- /.row -->
+    <div class="row ">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <nav class="jumbotron filter-wrapper">
+                    <div class="container">
+                        <a class="navbar-brand fa fa-plus-circle btn btn-primary" title="Add User" (click)="addUser()"
+                           href="javascript:void(0)"> Add User</a>
+                    </div>
+                </nav>
+                <table class="tablesorter table table-bordered table-hover table-striped">
+                    <thead class="thead-inverse">
+                    <tr #colCount>
+                        <th>SN</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>UserName</th>
+                        <th>2FA Enabled</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody *ngIf="objResponse?.dataList?.length>0">
+                    <tr *ngFor="let user of objResponse.dataList let i=index">
+                        <td>{{preIndex+(i+1)}}</td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.lastName}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.username}}</td>
+                        <td [ngSwitch]="user.twoFactorAuthEnabled">
+                            <i *ngSwitchCase="true" class="fa green fa-check" aria-hidden="true"></i>
+                            <i *ngSwitchCase="false" class="fa red fa-times" aria-hidden="true"></i>
+                        </td>
+                        <td>{{user.userRole}}</td>
+                        <td class="action">
+                            <a class="fa fa-eye" (click)="showUserDetail(user._id)" title="View"
+                               href="javascript:void(0)"></a>
+                            <a class="fa fa-pencil-square-o" title="Edit" (click)="editUser(user._id)"
+                               href="javascript:void(0)"></a>
+                            <a class="fa fa-sliders" title="Manage" (click)="manage(i)"
+                               href="javascript:void(0)"></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody *ngIf="objResponse?.dataList?.length==0">
+                    <tr>
+                        <td [attr.colspan]="colCount.children.length">No Record Found</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="list-pagination" *ngIf="objResponse?.dataList?.length>0">
+
+                    <p-paginator [rows]="perPage" [totalRecords]="objResponse.totalItems"
+                                 [rowsPerPageOptions]="[5,10,20,50,100]"
+                                 (onPageChange)="pageChanged($event)"></p-paginator>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<user-form *ngIf="showForm&&!isEdit" (userSuccessEvent)="handleSaveSuccess($event)"
+           (showListEvent)="handleList($event)"></user-form>
+<user-edit *ngIf="isEdit&&!showForm" [userId]="userId" (editSuccessEvent)="handleSaveSuccess($event)"
+           (showListEvent)="handleList($event)"></user-edit>
+<user-view *ngIf="showInfo" [userId]="userId" (userEditEvent)="handleEdit($event)"
+           (showListEvent)="handleList($event)"></user-view>
+<user-management *ngIf="showManage" [userId]="userId" [userInfo]="objUser"
+                 (showListEvent)="handleList($event)"></user-management>
+<!--<user-password *ngIf="changePassword" [userId]="userId"-->
+<!--(passwordCancelEvent)="handleCancel($event)"></user-password>-->
+
+

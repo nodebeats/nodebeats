@@ -1,0 +1,107 @@
+<div class="row form-outer" fadeInDirective>
+    <div class="col-lg-12 form-wrapper">
+        <h1 class="page-header">
+            Blog Editor
+        </h1>
+        <form role="form" novalidate [formGroup]="blogForm" (ngSubmit)="saveBlog()">
+            <div class="form-group">
+                <label>Category</label>
+                <select [(ngModel)]="objBlog.categoryId" class="form-control"
+                        [formControl]="blogForm.controls['blogCategory']">
+                    <option value="">Select Category</option>
+                    <option *ngFor="let obj of objCatList.dataList" [value]="obj._id">{{obj.categoryName}}</option>
+                </select>
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="blogForm.controls['blogCategory']"></control-messages>
+            </div>
+            <div class="form-group">
+                <label>Blog</label>
+                <input class="form-control" [(ngModel)]="objBlog.blogTitle" name="newsTitle"
+                       placeholder="Enter Blog Title" [formControl]="blogForm.controls['blogTitle']">
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="blogForm.controls['blogTitle']"></control-messages>
+            </div>
+            <div class="form-group">
+                <label>Blog Summary</label>
+                <textarea class="form-control" [(ngModel)]="objBlog.blogSummary"
+                          [formControl]="blogForm.controls['blogSummary']"
+                          name="blogSummary"
+                          placeholder="Enter Blog Summary"></textarea>
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="blogForm.controls['blogSummary']"></control-messages>
+            </div>
+            <div class="form-group">
+                <label>Blog Description</label>
+                <tiny-editor module="blog" [isSubmitted]="isSubmitted" [value]="objBlog.blogDescription"
+                             [editorFormControl]="editorFormControl"
+                             (valueChange)="editorValueChange($event)"></tiny-editor>
+            </div>
+            <div class="form-group">
+                <label>Tags </label>
+                <tag-input
+                        [(ngModel)]="objBlog.tags"
+                        placeholder="Add An tag"
+                        [formControl]="blogForm.controls['tags']"
+                        delimiterCode="188"
+                        [autoCompleteData]="autoCompleteData">
+                </tag-input>
+                <control-messages [isSubmitted]="isSubmitted" [control]="blogForm.controls['tags']"></control-messages>
+            </div>
+            <div class="form-group">
+                <label>Author</label>
+                <input class="form-control" [(ngModel)]="objBlog.author"
+                       [formControl]="blogForm.controls['blogAuthor']"
+                       placeholder="Enter Blog Author">
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="blogForm.controls['blogAuthor']"></control-messages>
+            </div>
+            <div class="form-group ">
+                <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize"
+                                [imageFormControl]="imageFormControl"
+                                (deleteImageEvent)="deleteImage($event)"
+                                [imageName]="objBlog.bannerImage" [drawImagePath]="drawImagePath"
+                                [isSubmitted]="isSubmitted"
+                                (fileSelectedEvent)="changeFile($event)">
+                </image-uploader>
+            </div>
+            <div class="form-group">
+                <label>Image Title</label>
+                <input class="form-control" [(ngModel)]="objBlog.bannerImageTitle"
+                       [formControl]="blogForm.controls['bannerImageTitle']"
+                       placeholder="Enter Banner Title">
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="blogForm.controls['bannerImageTitle']"></control-messages>
+            </div>
+            <div class="form-group">
+                <label>Image Alt Text</label>
+                <input class="form-control" [(ngModel)]="objBlog.bannerImageAltText"
+                       [formControl]="blogForm.controls['bannerImageAltText']"
+                       placeholder="Enter Banner Alt Text">
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="blogForm.controls['bannerImageAltText']"></control-messages>
+            </div>
+          
+            <div class="form-group">
+                <label>Status</label>
+                <select [(ngModel)]="objBlog.status" class="form-control" formControlName="status">
+                    <option value="active">Active</option>
+                    <option value="outdated">OutDated</option>
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input class="" type="checkbox" [(ngModel)]="objBlog.active"
+                               formControlName="active">
+                        Active
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" processing >Save</button>
+            <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger">Cancel</button>
+        </form>
+    </div>
+</div>
+

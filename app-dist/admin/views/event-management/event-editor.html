@@ -1,0 +1,107 @@
+<div class="row form-outer" fadeInDirective>
+    <div class="col-lg-12 form-wrapper">
+        <form role="form" novalidate [formGroup]="eventForm" (ngSubmit)="saveEvent()">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label>Event Title</label>
+                    <input tabindex="1" type="text" class="form-control" [(ngModel)]="objEvent.eventTitle"
+                           name="eventTitle"
+                           placeholder="Enter Event Title"
+                           [formControl]="eventForm.controls['eventTitle']">
+                    <control-messages [form]="eventForm" [isSubmitted]="isSubmitted"
+                                      control="eventTitle"></control-messages>
+
+                </div>
+                <div class="form-group">
+                    <label>Event Description</label>
+                <textarea tabindex="2" class="form-control" [(ngModel)]="objEvent.eventDescription"
+                          name="eventTitle"
+                          placeholder="Enter Event Description"
+                          rows="5"
+                          [formControl]="eventForm.controls['description']"></textarea>
+                    <control-messages [form]="eventForm" [isSubmitted]="isSubmitted"
+                                      control="description"></control-messages>
+
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Venue</label>
+                    <input tabindex="3" type="text" class="form-control" [(ngModel)]="objEvent.venue"
+                           placeholder="Enter Venue"
+                           [formControl]="eventForm.controls['venue']">
+                    <control-messages [isSubmitted]="isSubmitted" [control]="eventForm.controls['venue']"></control-messages>
+
+                </div>
+                <div class="form-group">
+                    <label>Start Date/Time (yyyy/mm/dd)</label>
+                    <p-calendar tabindex="5" [(ngModel)]="objEvent.startDate" [formControl]="eventForm.controls['startDate']"
+                                [showIcon]="true" minDate="0" [maxDate]="objEvent.endDate"
+                                timeFormat="HH:mm"
+                                inputStyleClass="form-control, inline-cal" [readonlyInput]="true"
+                                dateFormat="yy-mm-dd"></p-calendar>
+                    <control-messages  [isSubmitted]="isSubmitted"
+                                      [control]="eventForm.controls['startDate']"></control-messages>
+                </div>
+                <div class="form-group">
+                    <label>End Date/Time  (yyyy/mm/dd)</label>
+                    <p-calendar tabindex="6" [(ngModel)]="objEvent.endDate" [readonlyInput]="true" [showIcon]="true"
+                                [minDate]="objEvent.startDate?objEvent.startDate:0" timeFormat="HH:mm"
+                                inputStyleClass="form-control, inline-cal"
+                                [formControl]="eventForm.controls['endDate']"
+                                dateFormat="yy-mm-dd"></p-calendar>
+                    <control-messages [isSubmitted]="isSubmitted"
+                                      [control]="eventForm.controls['endDate']"></control-messages>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-6">
+                <label>Venue Address</label>
+                <textarea  tabindex="4" class="form-control" [(ngModel)]="objEvent.venueAddress"
+                          name="venueAddress"
+                          placeholder="Enter Venue Address"
+                          rows="5"
+                          [formControl]="eventForm.controls['venueAddress']"></textarea>
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="eventForm.controls['venueAddress']"></control-messages>
+            </div>
+
+
+            <!--<div class="col-lg-6">-->
+            <!--<div class="form-group ">-->
+            <!--<label>Start Time</label>-->
+            <!--<p-calendar [(ngModel)]="objEvent.eventStartTime"-->
+            <!--[inputStyleClass]="form-control" [timeOnly]="true"-->
+            <!--[formControl]="eventForm.controls['startTime']"></p-calendar>-->
+            <!--<control-messages control="startTime"></control-messages>-->
+            <!--</div>-->
+            <!--<div class="form-group ">-->
+            <!--<label>End Time</label>-->
+            <!--<p-calendar [(ngModel)]="objEvent.eventEndTime" [inputStyleClass]="form-control"-->
+            <!--[timeOnly]="true"></p-calendar>-->
+            <!--</div>-->
+            <!--</div>-->
+            <div class="col-lg-12">
+                <div class="form-group" #uploader>
+                    <image-uploader tabindex="7" [canvasSize]="canvasSize" [imageFormControl]="imageFormControl"
+                                    (deleteImageEvent)="deleteImage($event)"
+                                    [imageName]="objEvent.imageName" [drawImagePath]="drawImagePath"
+                                    [isSubmitted]="isSubmitted"
+                                    (fileSelectedEvent)="changeFile($event)"></image-uploader>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input tabindex="8" type="checkbox" [(ngModel)]="objEvent.active"
+                                   formControlName="active">
+                            Active
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" processing >Save</button>
+                <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+

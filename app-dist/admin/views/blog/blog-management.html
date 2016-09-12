@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Blog Management
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i> <a href="/admin">Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-newspaper-o"></i> Blog Managment
+            </li>
+        </ol>
+    </div>
+</div>
+
+<p-tabView (onChange)="tabSwitch($event)">
+    <p-tabPanel header="Blog Category" >
+        <blog-category-list [hidden]="!isCatList" [showList]="isCatList"></blog-category-list>
+
+    </p-tabPanel>
+    <p-tabPanel header="Blog"  >
+        <blog-list [hidden]="!isBlogList" [showList]="isBlogList"
+                   (showMetaFormEvent)="showMetaForm($event)"
+                   (showDocListEvent)="showDocList($event)"
+                   [isCanceled]="isCanceled"></blog-list>
+        <blog-doc-list *ngIf="isDocList" [blogId]="id" (showBlogListEvent)="showBlogList($event)"></blog-doc-list>
+        <blog-metatag-editor *ngIf="isMetaForm" [blogId]="id"
+                             (showBlogListEvent)="showBlogList($event)"></blog-metatag-editor>
+
+    </p-tabPanel>
+</p-tabView>
+<!--
+<tabset>
+    <tab heading="Blog Category" (select)="tabSwitch($event)">
+        <blog-category-list [hidden]="!isCatList" [showList]="isCatList"></blog-category-list>
+    </tab>
+
+    <tab heading="Blog" (select)="tabSwitch($event)">
+        <blog-list [hidden]="!isBlogList" [showList]="isBlogList"
+                   (showMetaFormEvent)="showMetaForm($event)"
+                   (showDocListEvent)="showDocList($event)"
+                   [isCanceled]="isCanceled"></blog-list>
+        <blog-doc-list *ngIf="isDocList" [blogId]="id" (showBlogListEvent)="showBlogList($event)"></blog-doc-list>
+        <blog-metatag-editor *ngIf="isMetaForm" [blogId]="id"
+                             (showBlogListEvent)="showBlogList($event)"></blog-metatag-editor>
+    </tab>
+</tabset>-->
