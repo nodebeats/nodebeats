@@ -127,7 +127,7 @@ So, to run test, first we will have to modify couple of things to make test succ
         dbName: 'prj_nodebeats_testdb'
     }
 ```
-*   If you have enabled **authentication**  for MongoDB server instance on your machine, then first you need to create a database and authenticated user on the newly created database. You must do this step if you have enabled authentication in your MongoDB coniguration file.
+*   If you have enabled **authentication**  for MongoDB server instance on your machine, then you need to create a database and an authenticated user on the newly created database. You must do this step if you have enabled authentication in your MongoDB configuration file.
 
     You also need to modify the **database.helper.js** file from **lib/helpers/** directory and add the username and password to the existing database connection url.
 
@@ -166,9 +166,9 @@ Well, that's it. Now you can run test. To run the test,
 
 *   Open two terminal windows
 
-*   First step is to run **npm run test** command. This command will start the server and listen for client requests.
+*   First step is to run **npm run test** command in one terminal window. This command will start the server and listen for client requests.
 
-*   Then, run **gulp test** to run our test files.
+*   Then, run **gulp test** in another terminal window to run our test files.
 
 
 
