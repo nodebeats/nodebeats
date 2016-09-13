@@ -215,10 +215,6 @@ No sponsors yet! Will you be the first?
 
 You can host your website built using Nodebeats in any of the available hosting providers. Some of the most popular cloud computing platforms are [**Redhat Openshift**](https://www.openshift.com/), [**Heroku**](https://www.heroku.com/), [**DigitalOcean**](https://www.digitalocean.com/) and [**Modulus.io**](https://modulus.io/)
 
-Or, you can use the following button to directly deploy the application to the Heroku.
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ShrawanLakhe/heroku_deploy_button_test/tree/master)
-
 ## Staying Up to Date
 
 We will be adding new features regularly and also keep the project's npm dependencies upto date so that there will not be any security vulnerabilities due to the npm packages. We will update the entire project to Angular 2.0.0-rc.6 in the upcoming version very soon. We will release the next version as soon as the planned features are completed. We aim to make this software as secured as possible and announce the new version releases on our twitter account. So, to get the information about the latest releases, follow us on Twitter [**@Nodebeats**](https://twitter.com/nodebeats). You can also contact us at **help@nodebeats.com** regarding anything about the software.
