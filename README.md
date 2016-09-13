@@ -120,11 +120,11 @@ So, to run test, first we will have to modify couple of things to make test succ
 *   First of all, we need to change the database configuration file. Navigate to **lib/configs** directory from your project root directory. Edit database.config.js file and in the test section, place the appropriate MongoDB credentials:
 ```
     test: {
-        username: 'testuser',
-        password: 'testuser',
-        host: 'localhost',
-        port: '27017',
-        dbName: 'prj_nodebeats_testdb'
+        username: '',
+        password: '',
+        host: '',
+        port: '',
+        dbName: ''
     }
 ```
 *   If you have enabled **authentication**  for MongoDB server instance on your machine, then you need to create a database and an authenticated user on the newly created database. You must do this step if you have enabled authentication in your MongoDB configuration file.
@@ -146,8 +146,8 @@ So, to run test, first we will have to modify couple of things to make test succ
      ```
         cloudinarySettingConfig = {
             cloudinaryCloudName: "nodebeats",
-            cloudinaryApiKey: "124895ewew177286781",
-            cloudinaryApiSecret: "HKRL0Ovd467iRoxBxAq194niAZBvM"
+            cloudinaryApiKey: "124895ewewd177286781",
+            cloudinaryApiSecret: "HKRL0Ovd46r7iRoxBxAq194niAZBvM"
         };
     ```
 * The last thing you need to do is modify **email.service.configure.integration.test.js**  file inside of **test/integrationtests/** and replace the existing mail service configuration data with valid data.
@@ -155,9 +155,9 @@ So, to run test, first we will have to modify couple of things to make test succ
 ```
      emailServiceConfigInfo = {
         serviceProviderType: "mailgun",
-        api_Key: "key-ff32b449ddad2dsds5d9b5dd1ff33005c79b",
-        api_Secret: "api-Keyjlki98dssew342jklfnlrwhoiukhdsj",
-        domain: "sandbox73ad601fcdd74461bdsds1c46820a59b2374.mailgun.org.np"
+        api_Key: "key-ff32b449ddad2dsds5rd9b5dd1ff33005c79b",
+        api_Secret: "api-Keyjlki98dssew34r2jklfnlrwhoiukhdsj",
+        domain: "sandbox73ad601fcdd74461bdsdsr1c46820a59b2374.mailgun.org.np"
     };
 ```
 
