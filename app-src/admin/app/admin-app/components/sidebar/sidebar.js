@@ -39,6 +39,8 @@ var SidebarCmp = (function () {
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/news", "News", "fa-newspaper-o"));
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/partner", "Partners", "fa-link"));
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/team", "Team Management", "fa-users"));
+        menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/testimonial", "Testimonial", "fa-comment-o"));
+        menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/team", "Team Management", "fa-users"));
         this.sidebarRoute.push(new sidebar_model_1.SidebarParentMenuModel(menuItem, null, "", ""));
         menuItem = [];
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/cloudinary", "Cloudinary", "fa-cloud"));
