@@ -1,3 +1,4 @@
+'use strict';
 $(function () {
     var validate = $("#passwordForm").validate({
         rules: {
@@ -35,12 +36,12 @@ $(function () {
             submit();
     });
     function submit() {
-        var userId = ($("#userId").val()).trim();
+        var accessToken = ($("#accessToken").val()).trim();
         var password = ($("#password1").val()).trim();
         var submitButtonText = $('#btnSubmit').text();
         $.ajax({
             type: 'PATCH',
-            url: '/api/change-password/confirm/' + userId,
+            url: '/api/change-password/confirm/' + accessToken,
             contentType: "application/json",
             data: JSON.stringify({password: password}),
             beforeSend: function () {
@@ -54,7 +55,7 @@ $(function () {
             error: function (err, data, msg) {
                 // failed request; give feedback to user
                 $('#btnSubmit').text(submitButtonText).prop("disabled", false);
-                $('#message').html('<label>' + msg + '</label>').css("visibility","visible").fadeIn();
+                $('#message').html('<label>' + msg + '</label>').css("visibility", "visible").fadeIn();
             }
         });
     }
