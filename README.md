@@ -29,8 +29,8 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
 * Install Node.js and MongoDB if not already installed
 
     * Recommended Node version: >= v5.10.1
-    * Recommended MongoDB version: >= v3.2
-    * Minimum requirement for MongoDB is v3.2 to enable restoration of backup archive file
+    * Recommended MongoDB version: >= v3.0
+
 
 * Clone the project repository
 
@@ -217,7 +217,7 @@ You can host your website built using Nodebeats in any of the available hosting 
 
 ## Staying Up to Date
 
-We will be adding new features regularly and also keep the project's npm dependencies upto date so that there will not be any security vulnerabilities due to the npm packages. We will update the entire project to Angular 2.0.0-rc.6 in the upcoming version very soon. We will release the next version as soon as the planned features are completed. We aim to make this software as secured as possible and announce the new version releases on our twitter account. So, to get the information about the latest releases, follow us on Twitter [**@Nodebeats**](https://twitter.com/nodebeats). You can also contact us at **help@nodebeats.com** regarding anything about the software.
+We will be adding new features regularly and also keep the project's npm dependencies upto date so that there will not be any security vulnerabilities due to the npm packages. We will update the entire project to latest Angular 2 release in the upcoming version very soon. We will release the next version as soon as the planned features are completed. We aim to make this software as secured as possible and announce the new version releases on our twitter account. So, to get the information about the latest releases, follow us on Twitter [**@Nodebeats**](https://twitter.com/nodebeats). You can also contact us at **help@nodebeats.com** regarding anything about the software.
 
 
 ## Project Maturity
@@ -233,7 +233,7 @@ As We all know [Wordpress](https://wordpress.com/), one of the most popular Cont
 
 ## Note
 
-We will be upgrading the entire codebase from Angular v2.0.0-rc.4 to Angular v2.0.0-rc.6 in the next version. In the next release, we will write unit tests for much of the code functionality. So, if you want to create your project using Angular v2.0.0-rc.4, then you can use it for your production site, else we will notfiy you of new version upgrade as soon as possible.
+We will be upgrading the entire codebase from Angular v2.0.0-rc.4 to latest Angular 2 release in the next version. In the next release, we will write unit tests for much of the code functionality. So, if you want to create your project using Angular v2.0.0-rc.4, then you can use it for your production site, else we will notfiy you of new version upgrade as soon as possible.
 
 
 ## License
