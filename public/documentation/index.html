@@ -33,6 +33,7 @@
 				<li>Download and Install</li>
 				<li>Creating MongoDB database and Users</li>
 				<li>Configure database connection</li>
+				<li>Configure redis connection</li>
 				<li>Run the application</li>
 				<li>Login to the application</li>
 				<li>Manage User</li>
@@ -297,6 +298,53 @@
 					</ol>
 					<p>
 						After you have changed the connection url properties of the database config file, Now, it's time to run your web application.
+					</p>
+				</div>
+				<div class="docpanel doc_start_configure_redis">
+					<p>
+
+						We have used redis for managing session data. One of the most apparent use cases for Redis is using it as a session cache. We have choosen redis over other similar technologies because it is exceptionally fast, supports a large number of data types, redis operations are atomic and most of all it offers persistence. Redis is built from the ground up for high performance. In addition to being the only pure in-memory NoSQL database, it supports connection pooling for the majority of it's clients and it's based on a single-threaded lock-free architecture.
+
+					</p>
+					<br>
+					<p>
+						So, it's time to install redis server on your machine if it's not already installed. Follow the below links to install redis server in Ubuntu:
+
+						<br/>
+						<ul>
+							<li>
+							<p>
+								If you are on Ubuntu 14.04, then follow <a href="https://www.digitalocean.com/community/tutorials/how-to-secure-your-redis-installation-on-ubuntu-14-04"> this guide </a> to install redis on your machine
+							</p>
+							</li>
+					<li>
+						<p>
+							If you are on Ubuntu 16.04, then follow <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04"> this guide </a> to install redis server on your machine.
+						</p>
+					</li>
+					<li>
+
+						<p>
+							Security is the major concern for everybody nowadays, so to secure redis server, follow <a
+								href="https://www.digitalocean.com/community/tutorials/how-to-secure-your-redis-installation-on-ubuntu-14-04"> this guide </a> to secure redis server.
+						</p>
+					</li>
+					<li>
+						<p>
+							If you want to learn more about redis, then follow this <a href="http://redis.io/topics/quickstart">official guide</a>
+						</p>
+					</li>
+						</ul>
+
+					</p>
+					<br/>
+					<p>
+						If you want to use Redis as a service cloud service provider, then you can try <a href="https://redislabs.com/">redislabs</a> cloud service provider.
+					</p>
+					<p>
+						<b>Note:</b>
+						<br />
+							It is highly recommended to use redis to maintain session cache in the production server, but if you are in development environment and do not want to use redis for now, then edit the <b>app.js </b> file located at the root of your project directory and go to <b>line number  171 </b> and comment the line. You are ready to go now but it will throw warnings if you try to deploy to the production server without redis configuration.
 					</p>
 				</div>
 				<div class="docpanel doc_start_run_application">
