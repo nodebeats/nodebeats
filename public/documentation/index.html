@@ -309,34 +309,12 @@
 						<b class="focus_main command_node"> gulp </b>
 					</p>
 					<p>
-						The first run will take some time as it restores the database backup from the <b>mongodump folder</b>  with some collections on it. The collections restored are <b>User</b>, <b>DefaultUserStatus </b> and <b>EmailTemplate</b>  collections.
+						The first run will take some time as it creates a default application user with username  = <b>superadmin</b> and password = <b>superadmin@123</b>  and also creates EmailTemplate collection. The collections created are <b>User</b>, <b>DefaultUserStatus </b> and <b>EmailTemplate</b>  collections.
 					</p>
 					<p>
 						During this process, it will change the <b>mongo.restore.config.json</b>  file which you can locate in <b> mongodump folder</b> inside of <b>lib directory </b> and modify the value of <b>restored to true</b>. If you want <b>to  run the web application from scratch again </b> due to some reason, you need to <b>modify the value of restored to false</b>. This way, it will run the web application from scratch and restores the database.
 					</p>
-					<p>
-						This will come in handy when you will be deploying your web application to the production server. You just need to replace the archive file from the mongodump directory with your own database backup archive file but the filename must be same as the previous one.
 
-						<br>
-						To generate database backup  archive file:
-
-			<pre>
-				<code class="hljs bash">
-	mongodump --host hostname --port porttNumber --username userName --password passwordEntry --db dbName --gzip –archive=filePath
-				</code>
-			</pre>
-
-					<p>
-
-						example command:
-					</p>
-
-			<pre>
-				<code class="hljs bash">
-	mongodump --host localhost --port 27017 --username nodebitsadmin --password nodebitsadmin#123 --db prj_nodebeats --gzip --archive="/home/lakhe/Music/production test files/prj_nodebeats.archive"
-				</code>
-			</pre>
-					</p>
 					<div>
 						<p>Now that you have your server up and running, open the browser and browse <b> http://localhost:3000</b>. If everything is ok, then you will see the homepage.</p>
 
@@ -1077,14 +1055,14 @@
 				<div class="docpanel doc_start_deployment_setup">
 					<h2>Deploying to the cloud:</h2>
 					<p>
-						Before, deploying project to the cloud, you have to do certain things like creating backup of the database so that while deploying and running the deployed application, database backup will be restored automatically. Likewise, it's good idea to generate shrinkwrap.json file before deploying.
+						Before, deploying project to the cloud, you have to do certain things like creating backup of the database so that you can restore the database archive file directly to the prouction MongoDB server. Likewise, it's good idea to generate shrinkwrap.json file before deploying.
 					</p>
 					<br>
 					<div class="db_backup_generate">
 						<p>
 							<b>Creating a backup archive file of MongoDB database:</b>
 							<br>
-							Before  deploying the project to the cloud, create a backup of your mongodb database in archive extension format.
+							Before  deploying the project to the cloud, create a backup of your mongodb database in archive extension format. This backup file in archive format will restore only on MongoBD version greater than v3.2
 						</p>
 						<ol type="1">
 							<li>
@@ -1112,16 +1090,19 @@
 							</li>
 							<li>
 								<p>
-									Now you have archive file, go to the root directory of your project file and from there navigate to lib folder and then mongodump folder. <b>Replace the existing .archive file with your new backup file</b>.
+									Now you have archive file, Open the another terminal and run the following command to restore the database file in the production MongoDB server.
 								</p>
+								<pre>
+									<code class="hljs bash">
+	mongorestore --host hostname --port portNumber --username userName --password passwordEntry  --gzip --archive=filePath --db dbName
+									</code>
+								</pre>
 							</li>
 						</ol>
 						<p>
 							<b>Note:</b>
 							<br>
-							Do note that <b>file name must be exactly same as the existing file</b>. You can change the database name while 	restoring by placing the database name in the database.config.js file.
-							<br>
-							That's it, Now when you deploy the project in the cloud and run it for the first time, it will automatically restore the backup file as specified in the database configuration file.
+							That's it, Now when you are ready to  deploy the project in the cloud you can restore the database directly in the production server.
 						</p>
 					</div>
 					<div class="npm_shrinkwrap">
