@@ -9,10 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var blog_model_1 = require("./blog.model");
 var blog_service_1 = require("./blog.service");
-var doc_uploader_component_1 = require("../../../shared/components/doc-uploader.component");
 var forms_1 = require("@angular/forms");
 var BlogDocEditorComponent = (function () {
     /* End File Upload handle */
@@ -49,7 +47,7 @@ var BlogDocEditorComponent = (function () {
     BlogDocEditorComponent.prototype.saveBlogDoc = function () {
         var _this = this;
         this.isSubmitted = true;
-        this.docFormControl.updateValue(this.fileName);
+        this.docFormControl.patchValue(this.fileName);
         if (this.blogDocForm.valid) {
             if (!this.docId) {
                 this._objService.saveDocument(this.blogId, this.objBlogDoc, this.file)
@@ -128,8 +126,7 @@ var BlogDocEditorComponent = (function () {
     BlogDocEditorComponent = __decorate([
         core_1.Component({
             selector: 'blog-doc-editor',
-            templateUrl: 'admin-templates/blog/blog-doc-editor.html',
-            directives: [control_valdation_message_component_1.FormControlMessages, doc_uploader_component_1.DocumentUploader, forms_1.REACTIVE_FORM_DIRECTIVES],
+            templateUrl: 'admin-templates/blog/blog-doc-editor.html'
         }), 
         __metadata('design:paramtypes', [blog_service_1.BlogService, forms_1.FormBuilder])
     ], BlogDocEditorComponent);

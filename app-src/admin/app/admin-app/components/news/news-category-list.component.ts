@@ -6,8 +6,7 @@ import {NewsCategoryEditorComponent} from  "./news-category-editor.component";
 
 @Component({
     selector: 'news-category-list',
-    templateUrl: 'admin-templates/news/news-category-list.html',
-    directives: [NewsCategoryEditorComponent]
+    templateUrl: 'admin-templates/news/news-category-list.html'
 })
 
 export class NewsCategoryListComponent implements OnInit,OnChanges {

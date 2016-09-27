@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var contact_model_1 = require("./contact.model");
 var contact_service_1 = require("./contact.service");
-var fadeInDirective_1 = require('../../../shared/directives/fadeInDirective');
 var ContactViewComponent = (function () {
     function ContactViewComponent(_objService) {
         this._objService = _objService;
@@ -45,8 +44,7 @@ var ContactViewComponent = (function () {
     ContactViewComponent = __decorate([
         core_1.Component({
             selector: 'contact-view',
-            templateUrl: 'admin-templates/contact/contact-view.html',
-            directives: [fadeInDirective_1.FadeInDirective]
+            templateUrl: 'admin-templates/contact/contact-view.html'
         }), 
         __metadata('design:paramtypes', [contact_service_1.ContactService])
     ], ContactViewComponent);

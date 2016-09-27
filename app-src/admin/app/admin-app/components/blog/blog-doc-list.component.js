@@ -10,8 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var blog_service_1 = require("./blog.service");
-// import {Pagination} from 'fuel-ui/fuel-ui';
-var blog_doc_editor_component_1 = require("./blog-doc-editor.component");
 var BlogDocListComponent = (function () {
     /* Pagination */
     // perPage:number = 10;
@@ -106,8 +104,7 @@ var BlogDocListComponent = (function () {
     BlogDocListComponent = __decorate([
         core_1.Component({
             selector: 'blog-doc-list',
-            templateUrl: 'admin-templates/blog/blog-doc-list.html',
-            directives: [blog_doc_editor_component_1.BlogDocEditorComponent]
+            templateUrl: 'admin-templates/blog/blog-doc-list.html'
         }), 
         __metadata('design:paramtypes', [blog_service_1.BlogService])
     ], BlogDocListComponent);

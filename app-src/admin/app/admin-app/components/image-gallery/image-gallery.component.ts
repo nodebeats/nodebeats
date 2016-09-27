@@ -4,8 +4,7 @@ import{ImageListComponent} from "./image-gallery-image-list.component";
 
 @Component({
     selector: 'image-gallery',
-    templateUrl: 'admin-templates/image-gallery/image-gallery.html',
-    directives: [ImageAlbumListComponent, ImageListComponent]
+    templateUrl: 'admin-templates/image-gallery/image-gallery.html'
 })
 export class ImageGalleryComponent {
     isImageList:boolean = false;

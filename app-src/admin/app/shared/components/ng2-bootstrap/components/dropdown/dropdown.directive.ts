@@ -1,10 +1,13 @@
 import {
-  Directive, OnInit, OnDestroy, Input, Output, HostBinding, EventEmitter,
-  ElementRef, ChangeDetectorRef
+  ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output
 } from '@angular/core';
-import {dropdownService, NONINPUT} from './dropdown.service';
 
-@Directive({selector: '[dropdown]'})
+import { dropdownService, NONINPUT } from './dropdown.service';
+
+@Directive({
+  selector: '[dropdown]',
+  exportAs: 'bs-dropdown'
+})
 export class DropdownDirective implements OnInit, OnDestroy {
   @HostBinding('class.open')
   @Input()
@@ -17,8 +20,8 @@ export class DropdownDirective implements OnInit, OnDestroy {
   // enum string: ['always', 'outsideClick', 'disabled']
   @Input() public appendToBody:boolean;
 
-  @Output() public onToggle:EventEmitter<any> = new EventEmitter(false);
-  @Output() public isOpenChange:EventEmitter<any> = new EventEmitter(false);
+  @Output() public onToggle:EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  @Output() public isOpenChange:EventEmitter<boolean> = new EventEmitter<boolean>(false);
   @HostBinding('class.dropdown') public addClass:boolean = true;
 
   // index of selected element
@@ -30,7 +33,7 @@ export class DropdownDirective implements OnInit, OnDestroy {
   public el:ElementRef;
   private _isOpen:boolean;
 
-  private _changeDetector: ChangeDetectorRef;
+  private _changeDetector:ChangeDetectorRef;
 
   public constructor(el:ElementRef, ref:ChangeDetectorRef) {
     // @Query('dropdownMenu', {descendants: false})

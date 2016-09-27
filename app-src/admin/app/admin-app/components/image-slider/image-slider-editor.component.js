@@ -9,12 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var image_slider_model_1 = require("./image-slider.model");
 var image_slider_service_1 = require("./image-slider.service");
 var general_config_1 = require("../../../shared/configs/general.config");
 var enum_config_1 = require("../../../shared/configs/enum.config");
-var image_uploader_component_1 = require("../../../shared/components/image-uploader.component");
 var forms_1 = require("@angular/forms");
 //declare var require;
 //const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
@@ -57,7 +55,7 @@ var ImageSliderEditorComponent = (function () {
     ImageSliderEditorComponent.prototype.bindDetail = function (objRes) {
         this.objSlider = objRes;
         this.fileName = this.objSlider.imageName;
-        this.imageSliderForm.controls['imageFormControl'].updateValue(this.fileName);
+        this.imageSliderForm.controls['imageFormControl'].patchValue(this.fileName);
         var path = "";
         if (this.objSlider.imageName) {
             var cl = general_config_1.Config.Cloudinary;
@@ -70,7 +68,7 @@ var ImageSliderEditorComponent = (function () {
     ImageSliderEditorComponent.prototype.saveImageSlider = function () {
         var _this = this;
         this.isSubmitted = true;
-        this.imageSliderForm.controls['imageFormControl'].updateValue(this.fileName);
+        this.imageSliderForm.controls['imageFormControl'].patchValue(this.fileName);
         if (this.imageSliderForm.valid) {
             if (!this.sliderId) {
                 this._objService.saveImageSlider(this.objSlider, this.file)
@@ -149,8 +147,7 @@ var ImageSliderEditorComponent = (function () {
     ImageSliderEditorComponent = __decorate([
         core_1.Component({
             selector: 'image-slider-editor',
-            templateUrl: 'admin-templates/image-slider/image-slider-editor.html',
-            directives: [control_valdation_message_component_1.FormControlMessages, image_uploader_component_1.ImageUploader],
+            templateUrl: 'admin-templates/image-slider/image-slider-editor.html'
         }), 
         __metadata('design:paramtypes', [image_slider_service_1.ImageSliderService, forms_1.FormBuilder])
     ], ImageSliderEditorComponent);

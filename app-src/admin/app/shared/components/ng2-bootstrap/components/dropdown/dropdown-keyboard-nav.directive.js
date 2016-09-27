@@ -45,7 +45,8 @@ var KeyboardNavDirective = (function () {
                 }
                 this.dd.selectedOption--;
                 break;
-            default: break;
+            default:
+                break;
         }
         elems[this.dd.selectedOption].nativeElement.focus();
     };

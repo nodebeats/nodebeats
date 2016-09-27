@@ -1,6 +1,10 @@
 (function (global) {
 
     // map tells the System loader where to look for things
+    var paths = {
+        // paths serve as alias
+        'npm:': 'scripts/'
+    };
     var map = {
         'app': 'app-src',
         // 'admin-app': 'admin-app', // 'dist',
@@ -8,12 +12,13 @@
         'angular2-in-memory-web-api': 'scripts/angular2-in-memory-web-api',
         '@angular': 'scripts/@angular',
         'moment': 'scripts/moment/moment.js',
-        'cloudinary': 'scripts/cloudinary-jquery/cloudinary-jquery.js',
+        // 'cloudinary': 'lib/cloudinary/js/jquery.cloudinary.js',
         'jquery': 'scripts/jquery/dist/jquery.min.js',
-        'primeng': 'shared/components/primeng',
+        'primeng': 'scripts/primeng',
         'chart': 'plugins/Chart.bundle.min.js',
         'ng2-bootstrap': 'shared/components/ng2-bootstrap',
         '@angular2-material': 'scripts/@angular2-material',
+        'symbol-observable': 'scripts/symbol-observable',
         'public': ''
         // 'fuel-ui': 'plugins/fuel-ui/bundles/ng2-bootstrap.js'
 
@@ -26,6 +31,9 @@
         'rxjs': {defaultExtension: 'js'},
         'angular2-in-memory-web-api': {defaultExtension: 'js'},
         'admin-app': {
+            defaultExtension: 'js'
+        },
+        '@angular': {
             defaultExtension: 'js'
         },
         'admin-app/components': {
@@ -44,54 +52,52 @@
             defaultExtension: 'js'
         },
         'primeng': {
-            defaultExtension: 'js',
+            defaultExtension: 'js'
         },
         'ng2-bootstrap': {
             defaultExtension: 'js'
         },
-        '@vaadin/angular2-polymer': {
-            main: 'index.js',
-            defaultExtension: 'js'
-        },
-        '@angular2-material': {
-            defaultExtension: 'js'
-
-        },
         'public': {
             defaultExtension: 'js'
+        },
+        '@angular2-material/core': {
+            format: 'cjs',
+            main: 'core.umd.js'
         }
-
-        // 'fuel-ui/fuel-ui': {
-        //     main: 'fuel-ui.min.js',
-        //     defaultExtension: 'js'
-        //
-        //  }
-
-
-        //  'moment':{main:'moment.js',defaultExtension: 'js'},
-
     };
 
+    //
     var packageNames = [
-        '@angular/common',
-        '@angular/compiler',
-        '@angular/core',
-        '@angular/http',
-        '@angular/platform-browser',
-        '@angular/platform-browser-dynamic',
-        '@angular/router',
-        '@angular/router-deprecated',
-        '@angular/testing',
-        '@angular/upgrade',
-        '@angular/forms'
+        'common',
+        'compiler',
+        'core',
+        'http',
+        'platform-browser',
+        'platform-browser-dynamic',
+        'router',
+        'forms'
     ];
+    //
+    // // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
+    function packUmd(pkgName) {
+        packages['@angular/' + pkgName] = {main: '/bundles/' + pkgName + '.umd.min.js', defaultExtension: 'js'}
+    }
 
-    // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
-    packageNames.forEach(function (pkgName) {
-        packages[pkgName] = {main: 'index.js', defaultExtension: 'js'};
-    });
+    mdPackagesName =
+        [
+            'all',
+            'slide-toggle'
+        ];
+    function mdPackUmd(pkgName) {
+        packages['@angular2-material/' + pkgName] = {main: '/' + pkgName + '.umd.js', defaultExtension: 'js'}
 
+    }
+
+
+    packageNames.forEach(packUmd);
+    mdPackagesName.forEach(mdPackUmd);
     var config = {
+        paths: paths,
         map: map,
         packages: packages
     };

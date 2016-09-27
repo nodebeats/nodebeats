@@ -13,8 +13,7 @@ import{QUESTION_LIST} from '../../../shared/configs/security-question.config'
 declare var jQuery:any;
 @Component({
     selector: 'user-form',
-    templateUrl: 'admin-templates/user-management/user-form.html',
-    directives: [ Password, FormControlMessages, ImageUploader]
+    templateUrl: 'admin-templates/user-management/user-form.html'
 })
 
 export class UserRegistrationComponent {

@@ -11,8 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var contact_service_1 = require("./contact.service");
 var contact_model_1 = require("./contact.model");
-var primeng_1 = require('primeng/primeng');
-var contact_view_component_1 = require("./contact-view.component");
 var ContactListCompoent = (function () {
     function ContactListCompoent(_objService) {
         this._objService = _objService;
@@ -106,9 +104,7 @@ var ContactListCompoent = (function () {
     ContactListCompoent = __decorate([
         core_1.Component({
             selector: 'contact-list',
-            templateUrl: 'admin-templates/contact/contact-list.html',
-            providers: [contact_service_1.ContactService],
-            directives: [primeng_1.Paginator, contact_view_component_1.ContactViewComponent]
+            templateUrl: 'admin-templates/contact/contact-list.html'
         }), 
         __metadata('design:paramtypes', [contact_service_1.ContactService])
     ], ContactListCompoent);

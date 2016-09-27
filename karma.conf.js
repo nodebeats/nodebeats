@@ -25,6 +25,8 @@ module.exports = function (config) {
             'node_modules/systemjs/dist/system-polyfills.js',
             // Zone.js dependencies
             'node_modules/zone.js/dist/zone.js',
+            'node_modules/zone.js/dist/proxy.js',
+            'node_modules/zone.js/dist/sync-test.js',
             'node_modules/zone.js/dist/jasmine-patch.js',
             'node_modules/zone.js/dist/async-test.js',
             'node_modules/zone.js/dist/fake-async-test.js',
@@ -35,10 +37,12 @@ module.exports = function (config) {
             //third party dependencies
             {pattern: 'node_modules/moment/**/*.js', included: false, watched: false},
             {pattern: 'node_modules/primeui/primeui-ng-all.min.js',included: true, watched: false},
+            {pattern: 'node_modules/primeng/**/*.js',included: false, watched: false},
             {pattern: 'node_modules/cloudinary-jquery/cloudinary-jquery.js', included: true, watched: false},
-            {pattern: 'public/plugins/Chart.bundle.min.js', included: true, watched: false},
+            {pattern: 'public/plugins/Chart.bundle.js', included: true, watched: false},
+            {pattern: 'public/plugins/table-sorter.js', included: true, watched: false},
             {pattern: 'karma-test-shim.js', included: true, watched: true},
-            {pattern: 'app-src/shared/test-helper/matchers.js', included: true, watched: true},
+            {pattern: 'app-src/admin/app/shared/test-helper/matchers.js', included: true, watched: true},
             // paths loaded via module imports
 
             // Angular itself
@@ -50,33 +54,32 @@ module.exports = function (config) {
 
 
             // {pattern: 'app-src/main.js', included: false, watched: true},
-            {pattern: 'app-src/main.route.js', included: false, watched: true},
-            {pattern: 'app-src/app-config/platform/**/*.js', included: false, watched: true},
-            {pattern: 'app-src/app/login-app/**/*.js', included: false, watched: true},
-            {pattern: 'app-src/app/admin-app/**/*.js', included: false, watched: true},
-            {pattern: 'app-src/app/shared/**/*.js', included: false, watched: true},
+            {pattern: 'app-src/admin/app/app.route.js', included: false, watched: true},
+            {pattern: 'app-src/admin/app/login-app/**/*.js', included: false, watched: true},
+            {pattern: 'app-src/admin/app/admin-app/**/*.js', included: false, watched: true},
+            {pattern: 'app-src/admin/app/shared/**/*.js', included: false, watched: true},
 
             // paths loaded via Angular's component compiler
             // (these paths need to be rewritten, see proxies section)
-            {pattern: 'app-src/app/login-app/**/*.html', included: false, watched: true},
-            {pattern: 'app-src/app/admin-app/**/*.html', included: false, watched: true},
-            {pattern: 'app-src/app/admin-app/**/*.css', included: false, watched: true},
+            {pattern: 'app-src/admin/app/login-app/**/*.html', included: false, watched: true},
+            {pattern: 'app-src/admin/app/admin-app/**/*.html', included: false, watched: true},
+            {pattern: 'app-src/admin/app/admin-app/**/*.css', included: false, watched: true},
 
             // paths to support debugging with source maps in dev tools
-            {pattern: 'app-src/app/shared/**/*.ts', included: false, watched: true},
-            {pattern: 'app-src/app/shared/**/*.js.map', included: false, watched: true},
-            {pattern: 'app-src/app/admin-app/**/*.ts', included: false, watched: false},
-            {pattern: 'app-src/app/admin-app/**/*.js.map', included: false, watched: false},
-            {pattern: 'app-src/app/login-app/**/*.ts', included: false, watched: false},
-            {pattern: 'app-src/app/login-app/**/*.js.map', included: false, watched: false}
+            {pattern: 'app-src/admin/app/shared/**/*.ts', included: false, watched: true},
+            {pattern: 'app-src/admin/app/shared/**/*.js.map', included: false, watched: true},
+            {pattern: 'app-src/admin/app/admin-app/**/*.ts', included: false, watched: false},
+            {pattern: 'app-src/admin/app/admin-app/**/*.js.map', included: false, watched: false},
+            {pattern: 'app-src/admin/app/login-app/**/*.ts', included: false, watched: false},
+            {pattern: 'app-src/admin/app/login-app/**/*.js.map', included: false, watched: false}
         ],
 
         // proxied base paths
         proxies: {
             // required for component assests fetched by Angular's compiler
-            "/app-src/": "/base/app-src/",
-            "/login-templates/": "/base/app-src/app/login-app/views",
-            "/admin-templates/": "/base/app-src/app/admin-app/views"
+            "/app-src/": "/base/app-src/admin/",
+            "/login-templates/": "/base/app-src/admin/app/login-app/views",
+            "/admin-templates/": "/base/app-src/admin/app/admin-app/views"
         },
 
 
@@ -94,7 +97,7 @@ module.exports = function (config) {
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
         // reporters: ['progress', 'kjhtml', 'coverage'],
-        reporters: ['mocha', 'kjhtml', 'coverage'],
+        reporters: ['dots','mocha', 'kjhtml', 'coverage'],
 
         // coverageReporter: {
         //     type: 'html',
@@ -104,7 +107,7 @@ module.exports = function (config) {
         coverageReporter: {
             reporters: [
                 {
-                    type: 'html',
+                    type: 'lcov',
                     dir: 'app-src/test-coverage/'
                 },
                 {type: 'json', dir: 'app-src/test-coverage/', file: 'coverage-js.json'}

@@ -1,0 +1,58 @@
+import {NgModule}      from '@angular/core';
+import {ApplicationLogModule} from './components/application-log/application-log.module';
+import{BlogModule} from './components/blog/blog.module';
+import{CloudinaryModule} from './components/cloudinary/cloudinary.module';
+import{CommentSettingModule} from './components/comment-setting/comment-setting.module';
+import{ContactModule} from './components/contact/contact.module';
+import{DashboardModule} from './components/dashboard/dashboard.module';
+import{EmailServiceModule} from './components/email-service/email-service.module';
+import{EmailTemplateModule} from './components/email-template/email-template.module';
+import{EventManagementModule} from './components/event-management/event-managment.module';
+import{GoogleAnalyticsModuless} from './components/google-analytics/google-analytics.module';
+import {GoogleMapModule} from './components/google-map/google-map.module';
+import{HtmlContentModule} from './components/html-content/html-content.mdule';
+import{ImageGalleryModule} from './components/image-gallery/image-gallery.module';
+import{ImageSlideModule} from './components/image-slider/image-slider.module';
+import{NewsModule}from'./components/news/news.module';
+import{OrganizationInformationModule} from './components/organization-information/organization-information.module';
+import{TeamManagementModule} from './components/team-management/team-management.module';
+import{TestimonialModule} from './components/testimonial/testimonial.module';
+import{UserManagementModule} from './components/user-management/user-managment.module';
+import{UserProfileModule} from './components/user-profile/user-profile.module';
+import{AdminAppComponent} from './admin-app.component';
+import{adminAppRouting} from './admin-app.route';
+import {SpinnerComponent} from '../shared/components/spinner/spinner.component';
+import {SidebarCmp} from './components/sidebar/sidebar'
+import {TopNavCmp}from './components/topnav/topnav';
+import {AuthGuardService} from "../login-app/auth.guard.service";
+import {SharedModule} from "../shared/shared.module";
+@NgModule({
+    imports: [
+        adminAppRouting,
+        ApplicationLogModule,
+        BlogModule,
+        CloudinaryModule,
+        CommentSettingModule,
+        ContactModule,
+        DashboardModule,
+        EmailServiceModule,
+        EmailTemplateModule,
+        EventManagementModule,
+        GoogleAnalyticsModuless,
+        GoogleMapModule,
+        HtmlContentModule,
+        ImageGalleryModule,
+        ImageSlideModule,
+        NewsModule,
+        OrganizationInformationModule,
+        TeamManagementModule,
+        TestimonialModule,
+        UserManagementModule,
+        UserProfileModule,
+        SharedModule
+    ],
+    declarations: [AdminAppComponent, SpinnerComponent, SidebarCmp, TopNavCmp]
+})
+
+export class AdminAppModule {
+}

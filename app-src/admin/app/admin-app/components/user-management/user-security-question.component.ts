@@ -6,8 +6,7 @@ import {Validators, FormBuilder, FormGroup} from "@angular/forms";
 import{QUESTION_LIST} from '../../../shared/configs/security-question.config'
 @Component({
     selector: 'user-security',
-    templateUrl: 'admin-templates/user-management/user-security-update.html',
-    directives: [FormControlMessages]
+    templateUrl: 'admin-templates/user-management/user-security-update.html'
 })
 
 export class UserSecurityUpdateComponent {

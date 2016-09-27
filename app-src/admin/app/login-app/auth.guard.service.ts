@@ -1,16 +1,13 @@
 import {Injectable, OnInit} from "@angular/core";
-import {CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot} from "@angular/router";
+import {CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot, CanActivateChild} from "@angular/router";
 import {LoginService} from "./components/login/login.service";
 import {Config} from "../shared/configs/general.config";
 @Injectable()
-export class AuthGuardService implements CanActivate,OnInit {
-    constructor(private router:Router, private _loginService:LoginService) {
-
-    }
-
-    ngOnInit() {
+export class AuthGuardService implements CanActivate, CanActivateChild {
+    constructor(private _loginService:LoginService, private router:Router) {
         this._loginService.isValidLogin();
     }
+
 
     canActivate(route:ActivatedRouteSnapshot, state:RouterStateSnapshot) {
 
@@ -18,26 +15,20 @@ export class AuthGuardService implements CanActivate,OnInit {
             Config.removeAdminRouteToken();
             return true;
         }
+
         /* To navigate to the current route when authenticate logged In / Valid Login */
-        Config.setAdminRouteToken(state.url);
+        /*
+         Store the attempted URL for redirecting
+         */
+        this._loginService.redirectUrl = state.url;
+        // Config.setAdminRouteToken(state.url);
         this.router.navigate(['/login']);
         return false;
     }
 
-    //     this._loginService.isValidLoginPromise()
-    //         .then((res)=>{
-    //             if(res)
-    //                 return true;
-    //             else{
-    //                 this.router.navigate(['/admin']);
-    //                 return false;
-    //             }
-    //         })
-    //         .catch(err=>{
-    //             console.log(err);
-    //             this.router.navigate(['/admin']);
-    //             return false;
-    //         });
-    // }
+    canActivateChild(route:ActivatedRouteSnapshot, state:RouterStateSnapshot):boolean {
+        return this.canActivate(route, state);
+    }
+
 
 }

@@ -1,20 +1,17 @@
 /**
  * Created by sanedev on 4/8/16.
  */
-import {Component, AfterViewInit, OnInit, Input, OnChanges} from '@angular/core';
-import {CORE_DIRECTIVES} from "@angular/common";
-import {UIChart, Growl, Message}from 'primeng/primeng';
+import {Component, AfterViewInit, OnInit, Input, OnChanges, OnDestroy} from '@angular/core';
+import {Message}from 'primeng/primeng';
 import 'plugins/Chart.bundle.js';
 import * as moment from 'moment';
 import {DashboardResponseModel} from './dashboard.model';
 import {DashboardService} from './dashboard.service';
-import {AnimateCounterComponent} from '../../../shared/components/animate-counter.component'
 
 declare var gapi:any;
 @Component({
     selector: 'browser-chart',
-    template: '<p-chart type="pie" [data]="data"></p-chart>',
-    directives: [UIChart]
+    template: '<p-chart type="pie" [data]="data"></p-chart>'
 })
 export class BrowserAnalysisChart implements OnChanges {
     @Input() viewId:string;
@@ -75,8 +72,7 @@ export class BrowserAnalysisChart implements OnChanges {
 
 @Component({
     selector: 'country-chart',
-    template: '<p-chart type="doughnut" [data]="data"></p-chart>',
-    directives: [UIChart]
+    template: '<p-chart type="doughnut" [data]="data"></p-chart>'
 })
 export class CountryWiseChart implements OnChanges {
     @Input() viewId:string;
@@ -182,8 +178,7 @@ export class CountryWiseChart implements OnChanges {
                     </a>
                 </div>
             </div>
-        </div>`,
-    directives: [AnimateCounterComponent]
+        </div>`
 })
 export class UserCount implements OnChanges {
     activeUserCount:number = 0;
@@ -210,7 +205,7 @@ export class UserCount implements OnChanges {
             "end-date": moment().format('YYYY-MM-DD')
         })
             .then((res:any)=> {
-                if (res.rows.length > 0) {
+                if (res.rows && res.rows.length > 0) {
                     this.newUserCount = res.rows[0][1];
                     this.returningUserCount = res.rows[1][1];
                 }
@@ -250,9 +245,7 @@ export class UserCount implements OnChanges {
                     </a>
                 </div>
             </div>
-        </div>`,
-    directives: [AnimateCounterComponent]
-
+        </div>`
 
 })
 export class PageViewComponent implements OnChanges {
@@ -288,9 +281,7 @@ export class PageViewComponent implements OnChanges {
 
 @Component({
     selector: 'week-chart',
-    template: `<p-growl [value]="msgs"></p-growl>  
-                <p-chart type="line" [data]="data"></p-chart>`,
-    directives: [UIChart, Growl]
+    template: `<p-chart type="line" [data]="data"></p-chart>`
 })
 export class LastWeekVsThisWeekAnalysisChart implements OnChanges {
 
@@ -376,28 +367,18 @@ export class LastWeekVsThisWeekAnalysisChart implements OnChanges {
 
 
 @Component({
-    selector: 'notifications',
-    templateUrl: 'admin-templates/dashboard/notifications.html',
-    styleUrls: ['admin-templates/dashboard/css/home.css'],
-    directives: [CORE_DIRECTIVES]
-})
-class NotificationCmp {
-}
-
-@Component({
     selector: 'home',
     templateUrl: 'admin-templates/dashboard/dashboard.html',
-    styleUrls: ['admin-templates/dashboard/css/home.css'],
-    providers: [DashboardService],
-    directives: [UserCount, PageViewComponent, CountryWiseChart, BrowserAnalysisChart, LastWeekVsThisWeekAnalysisChart]
+    styleUrls: ['admin-templates/dashboard/css/home.css']
 })
 
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit,OnDestroy {
 
     viewId:string;
     activeUserCount:number = 0;
     private prevCount:number = 0;
     activeClass:string;
+    pollRealTimeData:any;
 
     constructor(private objService:DashboardService) {
     }
@@ -431,7 +412,7 @@ export class DashboardComponent implements OnInit {
         });
         if (res.analyticsData.pollingInterval)
             pollingInterval = res.analyticsData.pollingInterval;
-        setInterval(()=> {
+        this.pollRealTimeData = setInterval(()=> {
             this.getActiveUser(res.token.access_token);
         }, pollingInterval);
     }
@@ -444,7 +425,7 @@ export class DashboardComponent implements OnInit {
         queryParam += "&access_token=" + accessToken;
         this.objService.queryGoogleRealtimeApi(queryParam)
             .subscribe(res => {
-                    if (res.rows.length > 0) {
+                    if (res.rows && res.rows.length > 0) {
                         this.activeUserCount = res.rows[0][0];
                         if (this.activeUserCount == this.prevCount)
                             this.activeClass = "";
@@ -465,4 +446,8 @@ export class DashboardComponent implements OnInit {
             );
     }
 
+    ngOnDestroy() {
+        if (this.pollRealTimeData)
+            clearInterval(this.pollRealTimeData);
+    }
 }

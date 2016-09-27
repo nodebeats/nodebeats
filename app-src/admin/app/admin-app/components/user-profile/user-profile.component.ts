@@ -5,8 +5,7 @@ import {Config} from "../../../shared/configs/general.config";
 import {UserEditComponent} from '../user-management/user-edit.component';
 @Component({
     selector: 'user-profile',
-    templateUrl: 'admin-templates/user-profile/user-profile.html',
-    directives: [UserEditComponent],
+    templateUrl: 'admin-templates/user-profile/user-profile.html'
 
 })
 

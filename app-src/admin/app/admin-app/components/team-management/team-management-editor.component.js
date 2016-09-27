@@ -9,13 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var team_managment_model_1 = require("./team-managment.model");
 var team_managment_service_1 = require("./team-managment.service");
 var general_config_1 = require("../../../shared/configs/general.config");
 var enum_config_1 = require("../../../shared/configs/enum.config");
 var validation_service_1 = require("../../../shared/services/validation.service");
-var image_uploader_component_1 = require("../../../shared/components/image-uploader.component");
 var forms_1 = require("@angular/forms");
 var TeamManagementEditorComponent = (function () {
     /* End Image Upload handle */
@@ -151,8 +149,7 @@ var TeamManagementEditorComponent = (function () {
     TeamManagementEditorComponent = __decorate([
         core_1.Component({
             selector: 'team-management-editor',
-            templateUrl: 'admin-templates/team-management/team-management-editor.html',
-            directives: [control_valdation_message_component_1.FormControlMessages, image_uploader_component_1.ImageUploader],
+            templateUrl: 'admin-templates/team-management/team-management-editor.html'
         }), 
         __metadata('design:paramtypes', [team_managment_service_1.TeamManagementService, forms_1.FormBuilder])
     ], TeamManagementEditorComponent);

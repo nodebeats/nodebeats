@@ -11,9 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var email_template_service_1 = require("./email-template.service");
 var email_template_model_1 = require("./email-template.model");
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var validation_service_1 = require("../../../shared/services/validation.service");
-var tinymce_component_1 = require("../../../shared/components/tinymce.component");
 var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var EmailTemplateEditorComponent = (function () {
@@ -52,7 +50,7 @@ var EmailTemplateEditorComponent = (function () {
     EmailTemplateEditorComponent.prototype.saveTemplate = function () {
         var _this = this;
         this.isSubmitted = true;
-        this.templateForm.controls["editorFormControl"].updateValue(this.objEmailTemp.templateBody ? this.objEmailTemp.templateBody : "");
+        this.templateForm.controls["editorFormControl"].patchValue(this.objEmailTemp.templateBody ? this.objEmailTemp.templateBody : "");
         if (this.templateForm.valid) {
             if (!this.id) {
                 this._objService.saveEmailTemplate(this.objEmailTemp)
@@ -89,9 +87,7 @@ var EmailTemplateEditorComponent = (function () {
     EmailTemplateEditorComponent = __decorate([
         core_1.Component({
             selector: 'email-template-editor',
-            templateUrl: 'admin-templates/email-template/email-template-editor.html',
-            providers: [email_template_service_1.EmailTemplateService],
-            directives: [control_valdation_message_component_1.FormControlMessages, tinymce_component_1.TinyEditor]
+            templateUrl: 'admin-templates/email-template/email-template-editor.html'
         }), 
         __metadata('design:paramtypes', [email_template_service_1.EmailTemplateService, forms_1.FormBuilder, router_1.Router, router_1.ActivatedRoute])
     ], EmailTemplateEditorComponent);

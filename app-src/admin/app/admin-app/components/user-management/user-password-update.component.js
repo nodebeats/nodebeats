@@ -11,10 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var user_service_1 = require("./user.service");
 var user_model_1 = require("./user.model");
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var validation_service_1 = require("../../../shared/services/validation.service");
 var forms_1 = require("@angular/forms");
-var primeng_1 = require('primeng/primeng');
 var router_1 = require("@angular/router");
 var login_service_1 = require("../../../login-app/components/login/login.service");
 var UserPasswordUpdateComponent = (function () {
@@ -84,8 +82,7 @@ var UserPasswordUpdateComponent = (function () {
     UserPasswordUpdateComponent = __decorate([
         core_1.Component({
             selector: 'user-password',
-            templateUrl: 'admin-templates/user-management/user-password-update.html',
-            directives: [primeng_1.Password, control_valdation_message_component_1.FormControlMessages]
+            templateUrl: 'admin-templates/user-management/user-password-update.html'
         }), 
         __metadata('design:paramtypes', [user_service_1.UserService, router_1.Router, forms_1.FormBuilder, router_1.ActivatedRoute, login_service_1.LoginService])
     ], UserPasswordUpdateComponent);

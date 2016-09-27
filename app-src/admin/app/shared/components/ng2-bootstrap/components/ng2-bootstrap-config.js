@@ -1,5 +1,5 @@
 "use strict";
-var lang_1 = require('@angular/core/src/facade/lang');
+var browser_1 = require('./utils/facade/browser');
 (function (Ng2BootstrapTheme) {
     Ng2BootstrapTheme[Ng2BootstrapTheme["BS3"] = 1] = "BS3";
     Ng2BootstrapTheme[Ng2BootstrapTheme["BS4"] = 2] = "BS4";
@@ -11,7 +11,7 @@ var Ng2BootstrapConfig = (function () {
     Object.defineProperty(Ng2BootstrapConfig, "theme", {
         get: function () {
             // hack as for now
-            if (lang_1.global && lang_1.global.__theme === 'bs4') {
+            if (browser_1.window.__theme === 'bs4') {
                 return Ng2BootstrapTheme.BS4;
             }
             return (this._theme || Ng2BootstrapTheme.BS3);

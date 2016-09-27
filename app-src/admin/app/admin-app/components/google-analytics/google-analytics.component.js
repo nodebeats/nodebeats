@@ -11,12 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var google_analytics_service_1 = require("./google-analytics.service");
 var google_analytics_model_1 = require("./google-analytics.model");
-var alert_1 = require("../../../shared/components/alert/alert");
 var alert_model_1 = require("../../../shared/models/alert.model");
 var validation_service_1 = require("../../../shared/services/validation.service");
 var forms_1 = require("@angular/forms");
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
-var doc_uploader_component_1 = require("../../../shared/components/doc-uploader.component");
 var GoogleAnalyticsComponent = (function () {
     /* End File Upload handle */
     function GoogleAnalyticsComponent(_objService, _formBuilder) {
@@ -130,9 +127,7 @@ var GoogleAnalyticsComponent = (function () {
     GoogleAnalyticsComponent = __decorate([
         core_1.Component({
             selector: 'google-analytics',
-            templateUrl: 'admin-templates/google-analytics/google-analytics.html',
-            providers: [google_analytics_service_1.GoogleAnalyticsService],
-            directives: [control_valdation_message_component_1.FormControlMessages, alert_1.Alert, doc_uploader_component_1.DocumentUploader]
+            templateUrl: 'admin-templates/google-analytics/google-analytics.html'
         }), 
         __metadata('design:paramtypes', [google_analytics_service_1.GoogleAnalyticsService, forms_1.FormBuilder])
     ], GoogleAnalyticsComponent);

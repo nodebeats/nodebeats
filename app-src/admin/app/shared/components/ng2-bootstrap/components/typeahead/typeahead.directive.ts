@@ -1,11 +1,14 @@
 import {
-  Directive, Input, Output, HostListener, EventEmitter, OnInit, ElementRef,
-  Renderer, DynamicComponentLoader, ComponentRef, ReflectiveInjector, provide, ViewContainerRef
+  ComponentRef, Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output,
+  ReflectiveInjector, Renderer, TemplateRef, ViewContainerRef
 } from '@angular/core';
-import {NgModel} from '@angular/common';
-import {TypeaheadUtils} from './typeahead-utils';
-import {TypeaheadContainerComponent} from './typeahead-container.component';
-import {TypeaheadOptions} from './typeahead-options.class';
+import { FormControl, NgControl } from '@angular/forms';
+
+import { TypeaheadContainerComponent } from './typeahead-container.component';
+import { TypeaheadOptions } from './typeahead-options.class';
+import { TypeaheadUtils } from './typeahead-utils';
+
+import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/debounceTime';
@@ -13,25 +16,18 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/toArray';
-import {Observable} from 'rxjs/Observable';
 
-import {global} from '@angular/core/src/facade/lang';
-/* tslint:disable */
-const KeyboardEvent = (global as any).KeyboardEvent as KeyboardEvent;
-/* tslint:enable */
-
-// https://github.com/angular/angular/blob/master/modules/@angular/src/core/forms/directives/shared.ts
-function setProperty(renderer:Renderer, elementRef:ElementRef, propName:string, propValue:any):void {
-  renderer.setElementProperty(elementRef.nativeElement, propName, propValue);
-}
+import { ComponentsHelper } from '../utils/components-helper.service';
 
 @Directive({
-  selector: '[typeahead][ngModel]'
+  /* tslint:disable */
+  selector: '[typeahead][ngModel],[typeahead][formControlName]'
+  /* tslint:enable */
 })
 export class TypeaheadDirective implements OnInit {
-  @Output() public typeaheadLoading:EventEmitter<any> = new EventEmitter();
-  @Output() public typeaheadNoResults:EventEmitter<any> = new EventEmitter();
-  @Output() public typeaheadOnSelect:EventEmitter<any> = new EventEmitter();
+  @Output() public typeaheadLoading:EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  @Output() public typeaheadNoResults:EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  @Output() public typeaheadOnSelect:EventEmitter<{item:any}> = new EventEmitter<{item:any}>(false);
 
   @Input() public typeahead:any;
   @Input() public typeaheadMinLength:number = void 0;
@@ -43,6 +39,7 @@ export class TypeaheadDirective implements OnInit {
   @Input() public typeaheadSingleWords:boolean = true;
   @Input() public typeaheadWordDelimiters:string = ' ';
   @Input() public typeaheadPhraseDelimiters:string = '\'"';
+  @Input() public typeaheadItemTemplate:TemplateRef<any>;
 
   // not yet implemented
   // @Input() private typeaheadAppendToBody:boolean;
@@ -59,13 +56,13 @@ export class TypeaheadDirective implements OnInit {
   private keyUpEventEmitter:EventEmitter<any> = new EventEmitter();
   private _matches:Array<string>;
   private placement:string = 'bottom-left';
-  private popup:Promise<ComponentRef<any>>;
+  private popup:ComponentRef<TypeaheadContainerComponent>;
 
-  private cd:NgModel;
+  private ngControl:NgControl;
   private viewContainerRef:ViewContainerRef;
   private element:ElementRef;
   private renderer:Renderer;
-  private loader:DynamicComponentLoader;
+  private componentsHelper:ComponentsHelper;
 
   @HostListener('keyup', ['$event'])
   protected onChange(e:any):void {
@@ -89,13 +86,13 @@ export class TypeaheadDirective implements OnInit {
       }
 
       // enter
-      // if (e.keyCode === 13) {
-      //   this.container.selectActiveMatch();
-      //   return;
-      // }
+      if (e.keyCode === 13) {
+        this.container.selectActiveMatch();
+        return;
+      }
     }
 
-    if(e.target.value.trim().length >= this.typeaheadMinLength) {
+    if (e.target.value.trim().length >= this.typeaheadMinLength) {
       this.typeaheadLoading.emit(true);
       this.keyUpEventEmitter.emit(e.target.value);
     } else {
@@ -108,7 +105,6 @@ export class TypeaheadDirective implements OnInit {
   @HostListener('focus', ['$event.target'])
   protected onFocus():void {
     if (this.typeaheadMinLength === 0) {
-      console.log('focus');
       this.typeaheadLoading.emit(true);
       this.keyUpEventEmitter.emit('');
     }
@@ -134,26 +130,20 @@ export class TypeaheadDirective implements OnInit {
       return;
     }
 
-    // if shift + tab, close items list
-    if (e.shiftKey && e.keyCode === 9) {
+    // if tab default browser behavior will select next input field, and therefore we should close the items list
+    if (e.keyCode === 9) {
       this.hide();
-      return;
-    }
-
-    // if tab select current item
-    if (!e.shiftKey && e.keyCode === 9) {
-      this.container.selectActiveMatch();
       return;
     }
   }
 
-  public constructor(cd:NgModel, viewContainerRef:ViewContainerRef, element:ElementRef,
-                     renderer:Renderer, loader:DynamicComponentLoader) {
+  public constructor(control:NgControl, viewContainerRef:ViewContainerRef, element:ElementRef,
+                     renderer:Renderer, componentsHelper:ComponentsHelper) {
     this.element = element;
-    this.cd = cd;
+    this.ngControl = control;
     this.viewContainerRef = viewContainerRef;
     this.renderer = renderer;
-    this.loader = loader;
+    this.componentsHelper = componentsHelper;
   }
 
   public ngOnInit():void {
@@ -178,11 +168,10 @@ export class TypeaheadDirective implements OnInit {
   }
 
   public changeModel(value:any):void {
-    let valueStr:string = ((typeof value === 'object' && this.typeaheadOptionField)
-      ? value[this.typeaheadOptionField]
-      : value).toString();
-    this.cd.viewToModelUpdate(valueStr);
-    setProperty(this.renderer, this.element, 'value', valueStr);
+    let valueStr:string = TypeaheadUtils.getValueFromObject(value, this.typeaheadOptionField);
+    this.ngControl.viewToModelUpdate(valueStr);
+    (this.ngControl.control as FormControl).setValue(valueStr);
+    this.hide();
   }
 
   public get matches():Array<any> {
@@ -197,37 +186,32 @@ export class TypeaheadDirective implements OnInit {
     });
 
     let binding = ReflectiveInjector.resolve([
-      provide(TypeaheadOptions, {useValue: options})
+      {provide: TypeaheadOptions, useValue: options}
     ]);
 
-    this.popup = this.loader
-      .loadNextToLocation(TypeaheadContainerComponent, this.viewContainerRef, binding)
-      .then((componentRef:ComponentRef<any>) => {
-        componentRef.instance.position(this.viewContainerRef.element);
-        this.container = componentRef.instance;
-        this.container.parent = this;
-        // This improves the speedas it won't have to be done for each list item
-        let normalizedQuery = (this.typeaheadLatinize
-          ? TypeaheadUtils.latinize(this.cd.model)
-          : this.cd.model).toString()
-          .toLowerCase();
-        this.container.query = this.typeaheadSingleWords
-          ? TypeaheadUtils.tokenize(normalizedQuery, this.typeaheadWordDelimiters, this.typeaheadPhraseDelimiters)
-          : normalizedQuery;
-        this.container.matches = matches;
-        this.container.field = this.typeaheadOptionField;
-        this.element.nativeElement.focus();
-        return componentRef;
-      });
+    this.popup = this.componentsHelper
+      .appendNextToLocation(TypeaheadContainerComponent, this.viewContainerRef, binding);
+
+    this.popup.instance.position(this.viewContainerRef.element);
+    this.container = this.popup.instance;
+    this.container.parent = this;
+    // This improves the speedas it won't have to be done for each list item
+    let normalizedQuery = (this.typeaheadLatinize
+      ? TypeaheadUtils.latinize(this.ngControl.control.value)
+      : this.ngControl.control.value).toString()
+      .toLowerCase();
+    this.container.query = this.typeaheadSingleWords
+      ? TypeaheadUtils.tokenize(normalizedQuery, this.typeaheadWordDelimiters, this.typeaheadPhraseDelimiters)
+      : normalizedQuery;
+    this.container.matches = matches;
+    this.container.field = this.typeaheadOptionField;
+    this.element.nativeElement.focus();
   }
 
   public hide():void {
     if (this.container) {
-      this.popup.then((componentRef:ComponentRef<any>) => {
-        componentRef.destroy();
-        this.container = void 0;
-        return componentRef;
-      });
+      this.popup.destroy();
+      this.container = void 0;
     }
   }
 
@@ -236,14 +220,14 @@ export class TypeaheadDirective implements OnInit {
       .debounceTime(this.typeaheadWaitMs)
       .mergeMap(() => this.typeahead)
       .subscribe(
-      (matches:string[]) => {
-        this._matches = matches.slice(0, this.typeaheadOptionsLimit);
-        this.finalizeAsyncCall();
-      },
-      (err:any) => {
-        console.error(err);
-      }
-    );
+        (matches:string[]) => {
+          this._matches = matches.slice(0, this.typeaheadOptionsLimit);
+          this.finalizeAsyncCall();
+        },
+        (err:any) => {
+          console.error(err);
+        }
+      );
   }
 
   private syncActions():void {
@@ -266,26 +250,12 @@ export class TypeaheadDirective implements OnInit {
         (err:any) => {
           console.error(err);
         }
-    );
+      );
   }
 
   private prepareOption(option:any):any {
-    let match:any;
-
-    if (typeof option === 'object' &&
-      option[this.typeaheadOptionField]) {
-      match = this.typeaheadLatinize ?
-        TypeaheadUtils.latinize(option[this.typeaheadOptionField].toString()) :
-        option[this.typeaheadOptionField].toString();
-    }
-
-    if (typeof option === 'string') {
-      match = this.typeaheadLatinize ?
-        TypeaheadUtils.latinize(option.toString()) :
-        option.toString();
-    }
-
-    return match;
+    let match:string = TypeaheadUtils.getValueFromObject(option, this.typeaheadOptionField);
+    return this.typeaheadLatinize ? TypeaheadUtils.latinize(match) : match;
   }
 
   private normalizeQuery(value:string):any {
@@ -329,8 +299,8 @@ export class TypeaheadDirective implements OnInit {
     if (this.container && this._matches.length > 0) {
       // This improves the speedas it won't have to be done for each list item
       let normalizedQuery = (this.typeaheadLatinize
-        ? TypeaheadUtils.latinize(this.cd.model)
-        : this.cd.model).toString()
+        ? TypeaheadUtils.latinize(this.ngControl.control.value)
+        : this.ngControl.control.value).toString()
         .toLowerCase();
       this.container.query = this.typeaheadSingleWords
         ? TypeaheadUtils.tokenize(normalizedQuery, this.typeaheadWordDelimiters, this.typeaheadPhraseDelimiters)

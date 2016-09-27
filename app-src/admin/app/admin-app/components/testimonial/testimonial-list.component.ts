@@ -7,9 +7,7 @@ import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 
 @Component({
     selector: 'testimonial-list',
-    templateUrl: 'admin-templates/testimonial/testimonial-list.html',
-    providers: [TestimonialService],
-    directives: [FadeInDirective, Paginator, TestimonialEditorComponent]
+    templateUrl: 'admin-templates/testimonial/testimonial-list.html'
 })
 
 export class TestimonialComponent implements OnInit {

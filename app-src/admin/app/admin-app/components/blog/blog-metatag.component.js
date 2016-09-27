@@ -9,11 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var blog_model_1 = require("./blog.model");
 var blog_service_1 = require("./blog.service");
 var forms_1 = require("@angular/forms");
-var tag_input_component_1 = require('../../../shared/components/tag-input/tag-input.component');
 var BlogMetaTagEditorComponent = (function () {
     function BlogMetaTagEditorComponent(_objService, _formBuilder) {
         this._objService = _objService;
@@ -94,8 +92,7 @@ var BlogMetaTagEditorComponent = (function () {
     BlogMetaTagEditorComponent = __decorate([
         core_1.Component({
             selector: 'blog-metatag-editor',
-            templateUrl: 'admin-templates/blog/blog-metatag.html',
-            directives: [control_valdation_message_component_1.FormControlMessages, tag_input_component_1.TagInputComponent]
+            templateUrl: 'admin-templates/blog/blog-metatag.html'
         }), 
         __metadata('design:paramtypes', [blog_service_1.BlogService, forms_1.FormBuilder])
     ], BlogMetaTagEditorComponent);

@@ -158,7 +158,10 @@ var DropdownDirective = (function () {
         __metadata('design:type', Boolean)
     ], DropdownDirective.prototype, "addClass", void 0);
     DropdownDirective = __decorate([
-        core_1.Directive({ selector: '[dropdown]' }), 
+        core_1.Directive({
+            selector: '[dropdown]',
+            exportAs: 'bs-dropdown'
+        }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef])
     ], DropdownDirective);
     return DropdownDirective;

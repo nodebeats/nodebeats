@@ -10,7 +10,7 @@ import {
 
 } from "@angular/core";
 import {ValidationService} from "../services/validation.service";
-import {FormControl, REACTIVE_FORM_DIRECTIVES} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 import {FormControlMessages} from "./control-valdation-message.component";
 
 @Component({
@@ -23,8 +23,7 @@ import {FormControlMessages} from "./control-valdation-message.component";
                     <label for="file"><i class="fa fa-upload" aria-hidden="true"> {{fileName?fileName:"Choose a File..."}}</i></label>
                      <div class="error-msg" *ngIf="!isValidFile ">*Supported Extension : {{allowedExtMessage}} and max size : {{allowedSize}} MB</div>
                     <control-messages [isSubmitted]="isSubmitted"
-                     [control]="docFormControl"></control-messages>`,
-    directives: [REACTIVE_FORM_DIRECTIVES, FormControlMessages]
+                     [control]="docFormControl"></control-messages>`
 
 })
 export class DocumentUploader implements OnInit,OnChanges {
@@ -54,14 +53,14 @@ export class DocumentUploader implements OnInit,OnChanges {
         let allowedSize:number = this.allowedSize;
         this.isValidFile = ValidationService.documentValidation(this.file, allowedExt, allowedSize);
         if (this.isValidFile) {
-            this.docFormControl.updateValue(this.file.name);
+            this.docFormControl.patchValue(this.file.name);
             if (!this.fileName)
                 this.isFresh = true;
             this.fileName = this.file.name;
             this.fileSelectedEvent.emit(this.file);
         }
         else {
-            this.docFormControl.updateValue("");
+            this.docFormControl.patchValue("");
             this.inputFile.nativeElement.value = "";
         }
     }
@@ -77,13 +76,13 @@ export class DocumentUploader implements OnInit,OnChanges {
     clearValue() {
         this.file = null;
         this.fileName = "";
-        this.docFormControl.updateValue("");
+        this.docFormControl.patchValue("");
         this.inputFile.nativeElement.value = "";
     }
 
     ngOnChanges() {
         if (this.fileName) {
-            this.docFormControl.updateValue(this.fileName);
+            this.docFormControl.patchValue(this.fileName);
         }
     }
 

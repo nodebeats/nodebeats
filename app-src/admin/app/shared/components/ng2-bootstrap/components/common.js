@@ -8,12 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var core_1 = require('@angular/core');
 var NgTranscludeDirective = (function () {
     function NgTranscludeDirective(_viewRef) {
+        this._viewRef = _viewRef;
         this.viewRef = _viewRef;
     }
     Object.defineProperty(NgTranscludeDirective.prototype, "ngTransclude", {
@@ -29,12 +27,15 @@ var NgTranscludeDirective = (function () {
         enumerable: true,
         configurable: true
     });
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', core_1.TemplateRef), 
+        __metadata('design:paramtypes', [core_1.TemplateRef])
+    ], NgTranscludeDirective.prototype, "ngTransclude", null);
     NgTranscludeDirective = __decorate([
         core_1.Directive({
-            selector: '[ngTransclude]',
-            properties: ['ngTransclude']
-        }),
-        __param(0, core_1.Inject(core_1.ViewContainerRef)), 
+            selector: '[ngTransclude]'
+        }), 
         __metadata('design:paramtypes', [core_1.ViewContainerRef])
     ], NgTranscludeDirective);
     return NgTranscludeDirective;

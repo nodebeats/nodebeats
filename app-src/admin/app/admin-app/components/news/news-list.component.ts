@@ -6,8 +6,7 @@ import{NewsEditorComponent} from"./news-editor.component";
 
 @Component({
     selector: 'news-list',
-    templateUrl: 'admin-templates/news/news-list.html',
-    directives: [Paginator, NewsEditorComponent]
+    templateUrl: 'admin-templates/news/news-list.html'
 })
 
 export class NewsListComponent implements OnInit,OnChanges {

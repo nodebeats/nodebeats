@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
 //import {EmailTemplateEditorComponent} from "./email-template-editor.component";
 var NewsComponent = (function () {
     function NewsComponent() {
@@ -17,8 +16,7 @@ var NewsComponent = (function () {
     NewsComponent = __decorate([
         core_1.Component({
             selector: 'news',
-            template: '<router-outlet></router-outlet>',
-            directives: [router_1.ROUTER_DIRECTIVES]
+            template: '<router-outlet></router-outlet>'
         }), 
         __metadata('design:paramtypes', [])
     ], NewsComponent);

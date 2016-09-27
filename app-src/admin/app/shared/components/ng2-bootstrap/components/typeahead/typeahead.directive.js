@@ -9,30 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
-var typeahead_utils_1 = require('./typeahead-utils');
+var forms_1 = require('@angular/forms');
 var typeahead_container_component_1 = require('./typeahead-container.component');
 var typeahead_options_class_1 = require('./typeahead-options.class');
+var typeahead_utils_1 = require('./typeahead-utils');
+var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/observable/from');
 require('rxjs/add/operator/debounceTime');
 require('rxjs/add/operator/filter');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/mergeMap');
 require('rxjs/add/operator/toArray');
-var Observable_1 = require('rxjs/Observable');
-var lang_1 = require('@angular/core/src/facade/lang');
-/* tslint:disable */
-var KeyboardEvent = lang_1.global.KeyboardEvent;
-/* tslint:enable */
-// https://github.com/angular/angular/blob/master/modules/@angular/src/core/forms/directives/shared.ts
-function setProperty(renderer, elementRef, propName, propValue) {
-    renderer.setElementProperty(elementRef.nativeElement, propName, propValue);
-}
+var components_helper_service_1 = require('../utils/components-helper.service');
 var TypeaheadDirective = (function () {
-    function TypeaheadDirective(cd, viewContainerRef, element, renderer, loader) {
-        this.typeaheadLoading = new core_1.EventEmitter();
-        this.typeaheadNoResults = new core_1.EventEmitter();
-        this.typeaheadOnSelect = new core_1.EventEmitter();
+    function TypeaheadDirective(control, viewContainerRef, element, renderer, componentsHelper) {
+        this.typeaheadLoading = new core_1.EventEmitter(false);
+        this.typeaheadNoResults = new core_1.EventEmitter(false);
+        this.typeaheadOnSelect = new core_1.EventEmitter(false);
         this.typeaheadMinLength = void 0;
         this.typeaheadAsync = void 0;
         this.typeaheadLatinize = true;
@@ -43,10 +36,10 @@ var TypeaheadDirective = (function () {
         this.keyUpEventEmitter = new core_1.EventEmitter();
         this.placement = 'bottom-left';
         this.element = element;
-        this.cd = cd;
+        this.ngControl = control;
         this.viewContainerRef = viewContainerRef;
         this.renderer = renderer;
-        this.loader = loader;
+        this.componentsHelper = componentsHelper;
     }
     TypeaheadDirective.prototype.onChange = function (e) {
         if (this.container) {
@@ -65,6 +58,11 @@ var TypeaheadDirective = (function () {
                 this.container.nextActiveMatch();
                 return;
             }
+            // enter
+            if (e.keyCode === 13) {
+                this.container.selectActiveMatch();
+                return;
+            }
         }
         if (e.target.value.trim().length >= this.typeaheadMinLength) {
             this.typeaheadLoading.emit(true);
@@ -78,7 +76,6 @@ var TypeaheadDirective = (function () {
     };
     TypeaheadDirective.prototype.onFocus = function () {
         if (this.typeaheadMinLength === 0) {
-            console.log('focus');
             this.typeaheadLoading.emit(true);
             this.keyUpEventEmitter.emit('');
         }
@@ -98,14 +95,9 @@ var TypeaheadDirective = (function () {
             e.preventDefault();
             return;
         }
-        // if shift + tab, close items list
-        if (e.shiftKey && e.keyCode === 9) {
+        // if tab default browser behavior will select next input field, and therefore we should close the items list
+        if (e.keyCode === 9) {
             this.hide();
-            return;
-        }
-        // if tab select current item
-        if (!e.shiftKey && e.keyCode === 9) {
-            this.container.selectActiveMatch();
             return;
         }
     };
@@ -128,11 +120,10 @@ var TypeaheadDirective = (function () {
         }
     };
     TypeaheadDirective.prototype.changeModel = function (value) {
-        var valueStr = ((typeof value === 'object' && this.typeaheadOptionField)
-            ? value[this.typeaheadOptionField]
-            : value).toString();
-        this.cd.viewToModelUpdate(valueStr);
-        setProperty(this.renderer, this.element, 'value', valueStr);
+        var valueStr = typeahead_utils_1.TypeaheadUtils.getValueFromObject(value, this.typeaheadOptionField);
+        this.ngControl.viewToModelUpdate(valueStr);
+        this.ngControl.control.setValue(valueStr);
+        this.hide();
     };
     Object.defineProperty(TypeaheadDirective.prototype, "matches", {
         get: function () {
@@ -142,43 +133,35 @@ var TypeaheadDirective = (function () {
         configurable: true
     });
     TypeaheadDirective.prototype.show = function (matches) {
-        var _this = this;
         var options = new typeahead_options_class_1.TypeaheadOptions({
             typeaheadRef: this,
             placement: this.placement,
             animation: false
         });
         var binding = core_1.ReflectiveInjector.resolve([
-            core_1.provide(typeahead_options_class_1.TypeaheadOptions, { useValue: options })
+            { provide: typeahead_options_class_1.TypeaheadOptions, useValue: options }
         ]);
-        this.popup = this.loader
-            .loadNextToLocation(typeahead_container_component_1.TypeaheadContainerComponent, this.viewContainerRef, binding)
-            .then(function (componentRef) {
-            componentRef.instance.position(_this.viewContainerRef.element);
-            _this.container = componentRef.instance;
-            _this.container.parent = _this;
-            // This improves the speedas it won't have to be done for each list item
-            var normalizedQuery = (_this.typeaheadLatinize
-                ? typeahead_utils_1.TypeaheadUtils.latinize(_this.cd.model)
-                : _this.cd.model).toString()
-                .toLowerCase();
-            _this.container.query = _this.typeaheadSingleWords
-                ? typeahead_utils_1.TypeaheadUtils.tokenize(normalizedQuery, _this.typeaheadWordDelimiters, _this.typeaheadPhraseDelimiters)
-                : normalizedQuery;
-            _this.container.matches = matches;
-            _this.container.field = _this.typeaheadOptionField;
-            _this.element.nativeElement.focus();
-            return componentRef;
-        });
+        this.popup = this.componentsHelper
+            .appendNextToLocation(typeahead_container_component_1.TypeaheadContainerComponent, this.viewContainerRef, binding);
+        this.popup.instance.position(this.viewContainerRef.element);
+        this.container = this.popup.instance;
+        this.container.parent = this;
+        // This improves the speedas it won't have to be done for each list item
+        var normalizedQuery = (this.typeaheadLatinize
+            ? typeahead_utils_1.TypeaheadUtils.latinize(this.ngControl.control.value)
+            : this.ngControl.control.value).toString()
+            .toLowerCase();
+        this.container.query = this.typeaheadSingleWords
+            ? typeahead_utils_1.TypeaheadUtils.tokenize(normalizedQuery, this.typeaheadWordDelimiters, this.typeaheadPhraseDelimiters)
+            : normalizedQuery;
+        this.container.matches = matches;
+        this.container.field = this.typeaheadOptionField;
+        this.element.nativeElement.focus();
     };
     TypeaheadDirective.prototype.hide = function () {
-        var _this = this;
         if (this.container) {
-            this.popup.then(function (componentRef) {
-                componentRef.destroy();
-                _this.container = void 0;
-                return componentRef;
-            });
+            this.popup.destroy();
+            this.container = void 0;
         }
     };
     TypeaheadDirective.prototype.asyncActions = function () {
@@ -213,19 +196,8 @@ var TypeaheadDirective = (function () {
         });
     };
     TypeaheadDirective.prototype.prepareOption = function (option) {
-        var match;
-        if (typeof option === 'object' &&
-            option[this.typeaheadOptionField]) {
-            match = this.typeaheadLatinize ?
-                typeahead_utils_1.TypeaheadUtils.latinize(option[this.typeaheadOptionField].toString()) :
-                option[this.typeaheadOptionField].toString();
-        }
-        if (typeof option === 'string') {
-            match = this.typeaheadLatinize ?
-                typeahead_utils_1.TypeaheadUtils.latinize(option.toString()) :
-                option.toString();
-        }
-        return match;
+        var match = typeahead_utils_1.TypeaheadUtils.getValueFromObject(option, this.typeaheadOptionField);
+        return this.typeaheadLatinize ? typeahead_utils_1.TypeaheadUtils.latinize(match) : match;
     };
     TypeaheadDirective.prototype.normalizeQuery = function (value) {
         // If singleWords, break model here to not be doing extra work on each iteration
@@ -262,8 +234,8 @@ var TypeaheadDirective = (function () {
         if (this.container && this._matches.length > 0) {
             // This improves the speedas it won't have to be done for each list item
             var normalizedQuery = (this.typeaheadLatinize
-                ? typeahead_utils_1.TypeaheadUtils.latinize(this.cd.model)
-                : this.cd.model).toString()
+                ? typeahead_utils_1.TypeaheadUtils.latinize(this.ngControl.control.value)
+                : this.ngControl.control.value).toString()
                 .toLowerCase();
             this.container.query = this.typeaheadSingleWords
                 ? typeahead_utils_1.TypeaheadUtils.tokenize(normalizedQuery, this.typeaheadWordDelimiters, this.typeaheadPhraseDelimiters)
@@ -327,6 +299,10 @@ var TypeaheadDirective = (function () {
         __metadata('design:type', String)
     ], TypeaheadDirective.prototype, "typeaheadPhraseDelimiters", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', core_1.TemplateRef)
+    ], TypeaheadDirective.prototype, "typeaheadItemTemplate", void 0);
+    __decorate([
         core_1.HostListener('keyup', ['$event']), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', [Object]), 
@@ -347,14 +323,15 @@ var TypeaheadDirective = (function () {
     __decorate([
         core_1.HostListener('keydown', ['$event']), 
         __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
+        __metadata('design:paramtypes', [KeyboardEvent]), 
         __metadata('design:returntype', void 0)
     ], TypeaheadDirective.prototype, "onKeydown", null);
     TypeaheadDirective = __decorate([
         core_1.Directive({
-            selector: '[typeahead][ngModel]'
+            /* tslint:disable */
+            selector: '[typeahead][ngModel],[typeahead][formControlName]'
         }), 
-        __metadata('design:paramtypes', [common_1.NgModel, core_1.ViewContainerRef, core_1.ElementRef, core_1.Renderer, core_1.DynamicComponentLoader])
+        __metadata('design:paramtypes', [forms_1.NgControl, core_1.ViewContainerRef, core_1.ElementRef, core_1.Renderer, components_helper_service_1.ComponentsHelper])
     ], TypeaheadDirective);
     return TypeaheadDirective;
 }());

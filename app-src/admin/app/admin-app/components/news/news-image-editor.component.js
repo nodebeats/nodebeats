@@ -9,11 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var news_model_1 = require("./news.model");
 var news_service_1 = require("./news.service");
 var general_config_1 = require("../../../shared/configs/general.config");
-var image_uploader_component_1 = require("../../../shared/components/image-uploader.component");
 var forms_1 = require("@angular/forms");
 var NewsImageEditorComponent = (function () {
     /* End Image Upload handle */
@@ -144,8 +142,7 @@ var NewsImageEditorComponent = (function () {
     NewsImageEditorComponent = __decorate([
         core_1.Component({
             selector: 'news-image-editor',
-            templateUrl: 'admin-templates/news/news-image-editor.html',
-            directives: [control_valdation_message_component_1.FormControlMessages, image_uploader_component_1.ImageUploader],
+            templateUrl: 'admin-templates/news/news-image-editor.html'
         }), 
         __metadata('design:paramtypes', [news_service_1.NewsService, forms_1.FormBuilder])
     ], NewsImageEditorComponent);

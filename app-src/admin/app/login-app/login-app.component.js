@@ -9,19 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var login_component_1 = require('./components/login/login.component');
 var LoginAppComponent = (function () {
-    function LoginAppComponent(viewContainerRef) {
-        this.viewContainerRef = viewContainerRef;
+    function LoginAppComponent() {
         this.containerSlide = false;
-        // modal.defaultViewContainer = viewContainerRef;
-        // Read the RouteConfig annotation so we can pass it to the breadcrumb component
-        // let annotations = Reflect.getOwnMetadata('annotations', AppComponent);
-        // for (let i = 0; i < annotations.length; i += 1) {
-        //     if (annotations[i].constructor.name === 'RouteConfig') {
-        //         this.routeConfig = annotations[i].configs;
-        //     }
-        // }
     }
     LoginAppComponent.prototype.toggleContainer = function (args) {
         this.containerSlide = args;
@@ -29,10 +19,9 @@ var LoginAppComponent = (function () {
     LoginAppComponent = __decorate([
         core_1.Component({
             selector: 'login-app',
-            templateUrl: 'login-app/login-index.html',
-            precompile: [login_component_1.LoginComponent]
+            templateUrl: 'login-app/login-index.html'
         }), 
-        __metadata('design:paramtypes', [core_1.ViewContainerRef])
+        __metadata('design:paramtypes', [])
     ], LoginAppComponent);
     return LoginAppComponent;
 }());

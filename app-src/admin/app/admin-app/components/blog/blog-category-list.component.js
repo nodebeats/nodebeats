@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var blog_service_1 = require("./blog.service");
 var blog_model_1 = require("./blog.model");
-var blog_category_editor_component_1 = require("./blog-category-editor.component");
 var BlogCategoryListComponent = (function () {
     function BlogCategoryListComponent(_objService) {
         this._objService = _objService;
@@ -129,8 +128,7 @@ var BlogCategoryListComponent = (function () {
     BlogCategoryListComponent = __decorate([
         core_1.Component({
             selector: 'blog-category-list',
-            templateUrl: 'admin-templates/blog/blog-category-list.html',
-            directives: [blog_category_editor_component_1.BlogCategoryEditorComponent]
+            templateUrl: 'admin-templates/blog/blog-category-list.html'
         }), 
         __metadata('design:paramtypes', [blog_service_1.BlogService])
     ], BlogCategoryListComponent);

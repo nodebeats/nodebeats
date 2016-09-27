@@ -6,10 +6,7 @@ import {Router} from "@angular/router";
 
 @Component({
     selector: 'email-template-list',
-    templateUrl: 'admin-templates/email-template/email-template-list.html',
-    providers: [EmailTemplateService],
-    directives: [Paginator]
-    //   pipes: [PaginatePipe]
+    templateUrl: 'admin-templates/email-template/email-template-list.html'
 })
 
 export class EmailTemplateListComponent implements OnInit {

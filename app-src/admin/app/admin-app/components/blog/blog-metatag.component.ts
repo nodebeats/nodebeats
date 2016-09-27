@@ -7,8 +7,7 @@ import {TagInputComponent} from '../../../shared/components/tag-input/tag-input.
 
 @Component({
     selector: 'blog-metatag-editor',
-    templateUrl: 'admin-templates/blog/blog-metatag.html',
-    directives: [FormControlMessages, TagInputComponent]
+    templateUrl: 'admin-templates/blog/blog-metatag.html'
 })
 
 export class BlogMetaTagEditorComponent implements OnInit {

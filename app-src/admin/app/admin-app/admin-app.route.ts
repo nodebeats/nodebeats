@@ -1,4 +1,4 @@
-import {RouterConfig} from '@angular/router';
+import {Routes, RouterModule} from '@angular/router';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {UserListComponent} from "./components/user-management/user-list.component";
 import{NewsManagementComponent}from "./components/news/news-management.component";
@@ -16,33 +16,51 @@ import{TestimonialComponent} from "./components/testimonial/testimonial-list.com
 import{TeamManagementComponent} from "./components/team-management/team-managment-list.component";
 import{HtmlContentComponent} from "./components/html-content/html-content-list.component";
 import{EventComponent} from "./components/event-management/event-list.component";
-import {EmailTemplateRoutes} from './components/email-template/email-template.route';
 import {CommentSettingComponent}from './components/comment-setting/comment-setting.component';
 import {UserProfileManagementComponent} from './components/user-profile/user-management.component';
-import {PartnerComponent} from './components/partner/partner-list.component';
-export const AdminAppRoute:RouterConfig = [
-    {path: '', redirectTo: 'dashboard', pathMatch: "full"},
-    {path: 'dashboard', component: DashboardComponent},
-    {path: 'user-management', component: UserListComponent},
-    {path: 'contact', component: ContactListCompoent},
-    {path: 'email-service', component: EmailServiceComponent},
-    {path: 'cloudinary', component: CloudinarySettingComponent},
-    {path: 'blog', component: BlogManagementComponent},
-    {path: 'analytics', component: GoogleAnalyticsComponent},
-    {path: 'organization', component: OrganizationInfoComponent},
-    ...EmailTemplateRoutes,
-    {path: 'news', component: NewsManagementComponent},
-    {path: 'imageslider', component: ImageSliderComponent},
-    {path: 'googlemap', component: GoogleMapComponent},
-    {path: 'testimonial', component: TestimonialComponent},
-    {path: 'imagegallery', component: ImageGalleryComponent},
-    {path: 'team', component: TeamManagementComponent},
-    {path: 'event', component: EventComponent},
-    {path: 'html', component: HtmlContentComponent},
-    {path: 'errorlog', component: ApplicationLogComponent},
-    {path: 'errorlog', component: ApplicationLogComponent},
-    {path: 'comment', component: CommentSettingComponent},
-    {path: 'profile', component: UserProfileManagementComponent},
-    {path: 'partner', component:PartnerComponent}
-];
+import{AdminAppComponent} from  './admin-app.component';
+import {AuthGuardService} from "../login-app/auth.guard.service";
+import {EmailTemplateRoutes} from "./components/email-template/email-template.route";
 
+
+export const adminAppRoute:Routes = [
+        {
+            path: 'admin',
+            component: AdminAppComponent,
+            canActivate: [AuthGuardService],
+            children: [
+                {
+                    path: '',
+                    canActivateChild: [AuthGuardService],
+                    children: [
+
+                        {path: 'dashboard', component: DashboardComponent},
+                        {path: 'user-management', component: UserListComponent},
+                        {path: 'contact', component: ContactListCompoent},
+                        {path: 'email-service', component: EmailServiceComponent},
+                        {path: 'cloudinary', component: CloudinarySettingComponent},
+                        {path: 'blog', component: BlogManagementComponent},
+                        ...EmailTemplateRoutes,
+                        {path: 'analytics', component: GoogleAnalyticsComponent},
+                        {path: 'organization', component: OrganizationInfoComponent},
+                        {path: 'news', component: NewsManagementComponent},
+                        {path: 'imageslider', component: ImageSliderComponent},
+                        {path: 'googlemap', component: GoogleMapComponent},
+                        {path: 'testimonial', component: TestimonialComponent},
+                        {path: 'imagegallery', component: ImageGalleryComponent},
+                        {path: 'team', component: TeamManagementComponent},
+                        {path: 'event', component: EventComponent},
+                        {path: 'html', component: HtmlContentComponent},
+                        {path: 'errorlog', component: ApplicationLogComponent},
+                        {path: 'errorlog', component: ApplicationLogComponent},
+                        {path: 'comment', component: CommentSettingComponent},
+                        {path: 'profile', component: UserProfileManagementComponent},
+                        {path: '', redirectTo: 'dashboard', pathMatch: "full"}
+                    ]
+                }
+            ]
+        }
+
+    ]
+    ;
+export const adminAppRouting = RouterModule.forChild(adminAppRoute);

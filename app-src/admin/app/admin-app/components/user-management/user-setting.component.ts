@@ -6,8 +6,7 @@ import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import {MdSlideToggle} from '@angular2-material/slide-toggle/slide-toggle';
 @Component({
     selector: 'user-setting',
-    templateUrl: 'admin-templates/user-management/user-setting.html',
-    directives: [MdSlideToggle, FormControlMessages]
+    templateUrl: 'admin-templates/user-management/user-setting.html'
 })
 
 export class UserSettingComponent implements OnInit {
@@ -116,7 +115,7 @@ export class UserSettingComponent implements OnInit {
     }
 
     clearTextField() {
-        (<FormControl>this.userSettingForm.controls['token']).updateValue("");
+        (<FormControl>this.userSettingForm.controls['token']).patchValue("");
     }
 
 

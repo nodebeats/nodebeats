@@ -11,8 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var image_gallery_service_1 = require("./image-gallery.service");
 var image_gallery_model_1 = require("./image-gallery.model");
-var image_gallery_album_editor_component_1 = require("./image-gallery-album-editor.component");
-var primeng_1 = require('primeng/primeng');
 var ImageAlbumListComponent = (function () {
     function ImageAlbumListComponent(_objService) {
         this._objService = _objService;
@@ -122,9 +120,7 @@ var ImageAlbumListComponent = (function () {
     ImageAlbumListComponent = __decorate([
         core_1.Component({
             selector: 'image-gallery-album-list',
-            templateUrl: 'admin-templates/image-gallery/image-gallery-album-list.html',
-            providers: [image_gallery_service_1.ImageGalleryService],
-            directives: [image_gallery_album_editor_component_1.ImageAlbumEditorComponent, primeng_1.Paginator]
+            templateUrl: 'admin-templates/image-gallery/image-gallery-album-list.html'
         }), 
         __metadata('design:paramtypes', [image_gallery_service_1.ImageGalleryService])
     ], ImageAlbumListComponent);

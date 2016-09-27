@@ -13,13 +13,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var core_1 = require('@angular/core');
 var dropdown_directive_1 = require('./dropdown.directive');
-var lang_1 = require('@angular/core/src/facade/lang');
-/* tslint:disable */
-var MouseEvent = lang_1.global.MouseEvent;
-/* tslint:enable */
 var DropdownToggleDirective = (function () {
     function DropdownToggleDirective(dropdown, el) {
         this.isDisabled = false;
+        this.addToggleClass = true;
         this.addClass = true;
         this.dropdown = dropdown;
         this.el = el;
@@ -48,6 +45,10 @@ var DropdownToggleDirective = (function () {
     ], DropdownToggleDirective.prototype, "isDisabled", void 0);
     __decorate([
         core_1.HostBinding('class.dropdown-toggle'),
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], DropdownToggleDirective.prototype, "addToggleClass", void 0);
+    __decorate([
         core_1.HostBinding('attr.aria-haspopup'), 
         __metadata('design:type', Boolean)
     ], DropdownToggleDirective.prototype, "addClass", void 0);
@@ -58,11 +59,14 @@ var DropdownToggleDirective = (function () {
     __decorate([
         core_1.HostListener('click', ['$event']), 
         __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
+        __metadata('design:paramtypes', [MouseEvent]), 
         __metadata('design:returntype', Boolean)
     ], DropdownToggleDirective.prototype, "toggleDropdown", null);
     DropdownToggleDirective = __decorate([
-        core_1.Directive({ selector: '[dropdownToggle]' }),
+        core_1.Directive({
+            selector: '[dropdownToggle]',
+            exportAs: 'bs-dropdown-toggle'
+        }),
         __param(0, core_1.Host()), 
         __metadata('design:paramtypes', [dropdown_directive_1.DropdownDirective, core_1.ElementRef])
     ], DropdownToggleDirective);

@@ -11,13 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var orginfo_service_1 = require("./orginfo.service");
 var orginfo_model_1 = require("./orginfo.model");
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
-var alert_1 = require("../../../shared/components/alert/alert");
 var alert_model_1 = require("../../../shared/models/alert.model");
 var validation_service_1 = require("../../../shared/services/validation.service");
 var countrylist_service_1 = require("../../../shared/services/countrylist.service");
 var general_config_1 = require("../../../shared/configs/general.config");
-var image_uploader_component_1 = require("../../../shared/components/image-uploader.component");
 var forms_1 = require("@angular/forms");
 var enum_config_1 = require("../../../shared/configs/enum.config");
 var OrganizationInfoComponent = (function () {
@@ -169,9 +166,7 @@ var OrganizationInfoComponent = (function () {
     OrganizationInfoComponent = __decorate([
         core_1.Component({
             selector: 'google-analytics',
-            templateUrl: 'admin-templates/organization-information/orginfo.html',
-            providers: [orginfo_service_1.OrganizationInfoService, countrylist_service_1.CountryListService],
-            directives: [control_valdation_message_component_1.FormControlMessages, alert_1.Alert, image_uploader_component_1.ImageUploader]
+            templateUrl: 'admin-templates/organization-information/orginfo.html'
         }), 
         __metadata('design:paramtypes', [orginfo_service_1.OrganizationInfoService, forms_1.FormBuilder, countrylist_service_1.CountryListService])
     ], OrganizationInfoComponent);

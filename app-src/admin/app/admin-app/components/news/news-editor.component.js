@@ -9,14 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var news_model_1 = require("./news.model");
 var news_service_1 = require("./news.service");
-var tinymce_component_1 = require('../../../shared/components/tinymce.component');
 var general_config_1 = require("../../../shared/configs/general.config");
 var enum_config_1 = require("../../../shared/configs/enum.config");
-var primeng_1 = require("primeng/primeng");
-var image_uploader_component_1 = require("../../../shared/components/image-uploader.component");
 var forms_1 = require("@angular/forms");
 var NewsEditorComponent = (function () {
     /* End Image Upload handle */
@@ -68,8 +64,8 @@ var NewsEditorComponent = (function () {
     NewsEditorComponent.prototype.bindDetail = function (objRes) {
         this.objNews = objRes;
         this.objNews.newsDate = new Date(this.objNews.newsDate).toLocaleDateString();
-        this.editorFormControl.updateValue(objRes.newsDescription);
-        this.imageFormControl.updateValue(objRes.image[0].imageName);
+        this.editorFormControl.patchValue(objRes.newsDescription);
+        this.imageFormControl.patchValue(objRes.image[0].imageName);
         this.fileName = objRes.image[0].imageName;
         var path = "";
         if (this.objNews.image[0]) {
@@ -83,7 +79,7 @@ var NewsEditorComponent = (function () {
     NewsEditorComponent.prototype.saveNews = function () {
         var _this = this;
         this.isSubmitted = true;
-        this.newsForm.controls["editorFormControl"].updateValue(this.objNews.newsDescription ? this.objNews.newsDescription : "");
+        this.newsForm.controls["editorFormControl"].patchValue(this.objNews.newsDescription ? this.objNews.newsDescription : "");
         if (this.newsForm.valid) {
             if (!this.newsId) {
                 this._objService.saveNews(this.objNews, this.file)
@@ -138,8 +134,7 @@ var NewsEditorComponent = (function () {
     NewsEditorComponent = __decorate([
         core_1.Component({
             selector: 'news-editor',
-            templateUrl: 'admin-templates/news/news-editor.html',
-            directives: [control_valdation_message_component_1.FormControlMessages, primeng_1.Calendar, tinymce_component_1.TinyEditor, image_uploader_component_1.ImageUploader],
+            templateUrl: 'admin-templates/news/news-editor.html'
         }), 
         __metadata('design:paramtypes', [news_service_1.NewsService, forms_1.FormBuilder])
     ], NewsEditorComponent);

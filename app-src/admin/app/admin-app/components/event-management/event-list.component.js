@@ -11,10 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var event_service_1 = require("./event.service");
 var event_model_1 = require("./event.model");
-var event_editor_component_1 = require("./event-editor.component");
-var fadeInDirective_1 = require('../../../shared/directives/fadeInDirective');
-// import {Pagination} from 'fuel-ui/fuel-ui';
-var primeng_1 = require('primeng/primeng');
 var EventComponent = (function () {
     function EventComponent(_objService) {
         this._objService = _objService;
@@ -126,9 +122,7 @@ var EventComponent = (function () {
     EventComponent = __decorate([
         core_1.Component({
             selector: 'event-list',
-            templateUrl: 'admin-templates/event-management/event-list.html',
-            providers: [event_service_1.EventService],
-            directives: [fadeInDirective_1.FadeInDirective, primeng_1.Paginator, event_editor_component_1.EventEditorComponent]
+            templateUrl: 'admin-templates/event-management/event-list.html'
         }), 
         __metadata('design:paramtypes', [event_service_1.EventService])
     ], EventComponent);

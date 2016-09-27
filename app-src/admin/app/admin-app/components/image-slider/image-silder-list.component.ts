@@ -5,9 +5,7 @@ import {ImageSliderEditorComponent}from "./image-slider-editor.component";
 
 @Component({
     selector: 'image-slider-list',
-    templateUrl: 'admin-templates/image-slider/image-slider-list.html',
-    providers: [ImageSliderService],
-    directives: [/*Pagination,*/ ImageSliderEditorComponent]
+    templateUrl: 'admin-templates/image-slider/image-slider-list.html'
 })
 
 export class ImageSliderComponent implements OnInit {

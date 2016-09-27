@@ -11,9 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var html_content_service_1 = require("./html-content.service");
 var html_content_model_1 = require("./html-content.model");
-var primeng_1 = require('primeng/primeng');
-var html_content_editor_component_1 = require("./html-content-editor.component");
-var fadeInDirective_1 = require('../../../shared/directives/fadeInDirective');
 var HtmlContentComponent = (function () {
     function HtmlContentComponent(_objService) {
         this._objService = _objService;
@@ -113,9 +110,7 @@ var HtmlContentComponent = (function () {
     HtmlContentComponent = __decorate([
         core_1.Component({
             selector: 'html-content-list',
-            templateUrl: 'admin-templates/html-content/html-content-list.html',
-            providers: [html_content_service_1.HtmlContentService],
-            directives: [fadeInDirective_1.FadeInDirective, primeng_1.Paginator, html_content_editor_component_1.HtmlContentEditorComponent]
+            templateUrl: 'admin-templates/html-content/html-content-list.html'
         }), 
         __metadata('design:paramtypes', [html_content_service_1.HtmlContentService])
     ], HtmlContentComponent);

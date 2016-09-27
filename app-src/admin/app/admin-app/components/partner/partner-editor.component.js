@@ -9,12 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var partner_model_1 = require("./partner.model");
 var partner_service_1 = require("./partner.service");
 var general_config_1 = require("../../../shared/configs/general.config");
 var enum_config_1 = require("../../../shared/configs/enum.config");
-var image_uploader_component_1 = require("../../../shared/components/image-uploader.component");
 var forms_1 = require("@angular/forms");
 var validation_service_1 = require("../../../shared/services/validation.service");
 //declare var require;
@@ -57,7 +55,7 @@ var PartnerEditorComponent = (function () {
     PartnerEditorComponent.prototype.bindDetail = function (objRes) {
         this.objPartner = objRes;
         this.fileName = this.objPartner.imageName;
-        this.partnerForm.controls['imageFormControl'].updateValue(this.fileName);
+        this.partnerForm.controls['imageFormControl'].patchValue(this.fileName);
         var path = "";
         if (this.objPartner.imageName) {
             var cl = general_config_1.Config.Cloudinary;
@@ -70,7 +68,7 @@ var PartnerEditorComponent = (function () {
     PartnerEditorComponent.prototype.savePartner = function () {
         var _this = this;
         this.isSubmitted = true;
-        this.partnerForm.controls['imageFormControl'].updateValue(this.fileName);
+        this.partnerForm.controls['imageFormControl'].patchValue(this.fileName);
         if (this.partnerForm.valid) {
             if (!this.partnerId) {
                 this._objService.savePartner(this.objPartner, this.file)
@@ -149,8 +147,7 @@ var PartnerEditorComponent = (function () {
     PartnerEditorComponent = __decorate([
         core_1.Component({
             selector: 'partner-editor',
-            templateUrl: 'admin-templates/partner/partner-editor.html',
-            directives: [control_valdation_message_component_1.FormControlMessages, image_uploader_component_1.ImageUploader],
+            templateUrl: 'admin-templates/partner/partner-editor.html'
         }), 
         __metadata('design:paramtypes', [partner_service_1.PartnerService, forms_1.FormBuilder])
     ], PartnerEditorComponent);

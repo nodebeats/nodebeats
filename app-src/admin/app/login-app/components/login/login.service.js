@@ -18,9 +18,6 @@ require('rxjs/add/operator/do');
 var env_config_1 = require('../../../shared/configs/env.config');
 var general_config_1 = require('../../../shared/configs/general.config');
 var LoginService = (function () {
-    // getEmailTemplate(){
-    //     return  EmailTemp
-    // }
     function LoginService(http) {
         var _this = this;
         this.http = http;

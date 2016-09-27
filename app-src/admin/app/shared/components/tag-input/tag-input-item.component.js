@@ -32,14 +32,15 @@ var TagInputItemComponent = (function () {
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], TagInputItemComponent.prototype, "tagRemoved", void 0);
+    __decorate([
+        core_1.HostBinding('class.ng2-tag-input-item-selected'), 
+        __metadata('design:type', Object)
+    ], TagInputItemComponent.prototype, 'selected === true', void 0);
     TagInputItemComponent = __decorate([
         core_1.Component({
-            selector: 'tag-input-item',
+            selector: 'rl-tag-input-item',
             template: "{{text}}\n  <span\n  class=\"ng2-tag-input-remove\"\n  (click)=\"removeTag()\">&times;</span>",
-            styles: ["\n    :host {\n      display: inline-block;\n      background: #ccc;\n      padding: 7px;\n      border-radius: 90px;\n      margin-right: 10px;\n    }\n\n    :host.ng2-tag-input-item-selected {\n      color: white;\n      background: #0d8bff;\n    }\n\n    .ng2-tag-input-remove {\n      cursor: pointer;\n      display: inline-block;\n      padding: 0 3px;\n    }\n  "],
-            host: {
-                '[class.ng2-tag-input-item-selected]': 'selected'
-            }
+            styles: ["\n    :host {\n      display: inline-block;\n      background: #ccc;\n      padding: 7px;\n      border-radius: 90px;\n      margin-right: 10px;\n    }\n\n    :host.ng2-tag-input-item-selected {\n      color: white;\n      background: #0d8bff;\n    }\n\n    .ng2-tag-input-remove {\n      cursor: pointer;\n      display: inline-block;\n      padding: 0 3px;\n    }\n  "]
         }), 
         __metadata('design:paramtypes', [])
     ], TagInputItemComponent);

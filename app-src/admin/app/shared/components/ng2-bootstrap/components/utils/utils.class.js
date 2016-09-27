@@ -1,5 +1,5 @@
 "use strict";
-var lang_1 = require('@angular/core/src/facade/lang');
+var browser_1 = require('./facade/browser');
 var Utils = (function () {
     function Utils() {
     }
@@ -13,7 +13,7 @@ var Utils = (function () {
         // FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
         var view = elem.ownerDocument.defaultView;
         if (!view || !view.opener) {
-            view = lang_1.global;
+            view = browser_1.window;
         }
         return view.getComputedStyle(elem);
     };

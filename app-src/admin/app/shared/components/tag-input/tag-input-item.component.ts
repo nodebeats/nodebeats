@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'tag-input-item',
+  selector: 'rl-tag-input-item',
   template:
   `{{text}}
   <span
@@ -27,20 +27,18 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       display: inline-block;
       padding: 0 3px;
     }
-  `],
-  host: {
-    '[class.ng2-tag-input-item-selected]': 'selected'
-  }
+  `]
 })
 export class TagInputItemComponent {
   @Input() selected: boolean;
   @Input() text: string;
   @Input() index: number;
   @Output() tagRemoved: EventEmitter<number> = new EventEmitter<number>();
+  @HostBinding('class.ng2-tag-input-item-selected') 'selected === true';
 
   constructor() { }
 
-  removeTag() {
+  removeTag(): void {
     this.tagRemoved.emit(this.index);
   }
 }

@@ -13,9 +13,7 @@ import {UserProfileComponent} from "./user-profile.component";
 import {Config} from "../../../shared/configs/general.config";
 @Component({
     selector: 'user-management',
-    templateUrl: 'admin-templates/user-profile/user-management.html',
-    providers: [UserService],
-    directives: [TabView, TabPanel, UserProfileComponent, UserSettingComponent, UserSecurityUpdateComponent, UserPasswordUpdateComponent]
+    templateUrl: 'admin-templates/user-profile/user-management.html'
 })
 export class UserProfileManagementComponent implements OnInit {
     @Output() showListEvent:EventEmitter<any> = new EventEmitter();

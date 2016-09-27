@@ -12,7 +12,6 @@ import {UserModel} from "../../../admin-app/components/user-management/user.mode
     {
         selector: 'login-comp',
         templateUrl: 'login-templates/login-form.html',
-        directives: [FormControlMessages],
         animations: [trigger(
             'slideMsg',
             [
@@ -64,7 +63,8 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 isValid => {
                     this.isValidLogin = isValid;
-                    let redirectRoute = Config.getAdminRoute();
+                    // let redirectRoute = Config.getAdminRoute();
+                    let redirectRoute = this._loginService.redirectUrl;
                     this.adminRoute = redirectRoute ? redirectRoute : "/admin";
                 },
                 error => this.handleError(error)

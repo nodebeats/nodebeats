@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var news_service_1 = require("./news.service");
 var news_model_1 = require("./news.model");
-var news_category_editor_component_1 = require("./news-category-editor.component");
 var NewsCategoryListComponent = (function () {
     function NewsCategoryListComponent(_objService) {
         this._objService = _objService;
@@ -125,8 +124,7 @@ var NewsCategoryListComponent = (function () {
     NewsCategoryListComponent = __decorate([
         core_1.Component({
             selector: 'news-category-list',
-            templateUrl: 'admin-templates/news/news-category-list.html',
-            directives: [news_category_editor_component_1.NewsCategoryEditorComponent]
+            templateUrl: 'admin-templates/news/news-category-list.html'
         }), 
         __metadata('design:paramtypes', [news_service_1.NewsService])
     ], NewsCategoryListComponent);

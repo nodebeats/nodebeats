@@ -11,9 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var testimonial_service_1 = require("./testimonial.service");
 var testimonial_model_1 = require("./testimonial.model");
-var testimonial_editor_component_1 = require("./testimonial-editor.component");
-var primeng_1 = require('primeng/primeng');
-var fadeInDirective_1 = require('../../../shared/directives/fadeInDirective');
 var TestimonialComponent = (function () {
     function TestimonialComponent(_objService) {
         this._objService = _objService;
@@ -109,9 +106,7 @@ var TestimonialComponent = (function () {
     TestimonialComponent = __decorate([
         core_1.Component({
             selector: 'testimonial-list',
-            templateUrl: 'admin-templates/testimonial/testimonial-list.html',
-            providers: [testimonial_service_1.TestimonialService],
-            directives: [fadeInDirective_1.FadeInDirective, primeng_1.Paginator, testimonial_editor_component_1.TestimonialEditorComponent]
+            templateUrl: 'admin-templates/testimonial/testimonial-list.html'
         }), 
         __metadata('design:paramtypes', [testimonial_service_1.TestimonialService])
     ], TestimonialComponent);

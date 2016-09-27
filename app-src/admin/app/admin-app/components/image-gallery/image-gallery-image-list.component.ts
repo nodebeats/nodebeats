@@ -8,8 +8,7 @@ import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 @Component({
     selector: 'image-gallery-image-list',
     templateUrl: 'admin-templates/image-gallery/image-gallery-image-list.html',
-    providers: [ImageGalleryService],
-    directives: [FadeInDirective, Paginator, ImageGalleryImageEditorComponent]
+    providers: [ImageGalleryService]
 })
 
 export class ImageListComponent implements OnInit {

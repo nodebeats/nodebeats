@@ -3,8 +3,7 @@ import {ACCORDION_PROVIDERS} from '../../../shared/components/accordion/accordio
 import {SidebarParentMenuModel, SidebarMenuModel} from './sidebar.model';
 @Component({
     selector: 'sidebar',
-    templateUrl: 'admin-templates/shared/sidebar.html',
-    directives: [ACCORDION_PROVIDERS]
+    templateUrl: 'admin-templates/shared/sidebar.html'
 })
 
 export class SidebarCmp {
@@ -23,7 +22,6 @@ export class SidebarCmp {
 
     constructor() {
         let menuItem:SidebarMenuModel[] = [];
-        menuItem.push(new SidebarMenuModel("/admin/dashboard", "Dashboard", "fa-dashboard"));
         menuItem.push(new SidebarMenuModel("/admin/user-management", "User", "fa-user"));
         menuItem.push(new SidebarMenuModel("/admin/blog", "Blog", "fa-newspaper-o"));
         menuItem.push(new SidebarMenuModel("/admin/contact", "Contact List", "fa-list"));
@@ -36,7 +34,6 @@ export class SidebarCmp {
         menuItem.push(new SidebarMenuModel("/admin/news", "News", "fa-newspaper-o"));
         menuItem.push(new SidebarMenuModel("/admin/partner", "Partners", "fa-link"));
         menuItem.push(new SidebarMenuModel("/admin/team", "Team Management", "fa-users"));
-   	menuItem.push(new SidebarMenuModel("/admin/testimonial", "Testimonial", "fa-comment-o"));
         this.sidebarRoute.push(new SidebarParentMenuModel(menuItem, null, "", ""));
         menuItem = [];
         menuItem.push(new SidebarMenuModel("/admin/cloudinary", "Cloudinary", "fa-cloud"));

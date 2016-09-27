@@ -8,13 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-// import {TAB_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-var primeng_1 = require('primeng/primeng');
 var core_1 = require('@angular/core');
-var news_category_list_component_1 = require("./news-category-list.component");
-var news_list_component_1 = require("./news-list.component");
-var news_image_list_component_1 = require("./news-image-list.component");
-var news_service_1 = require("./news.service");
 var NewsManagementComponent = (function () {
     function NewsManagementComponent() {
         this.isCatList = true;
@@ -56,9 +50,7 @@ var NewsManagementComponent = (function () {
     NewsManagementComponent = __decorate([
         core_1.Component({
             selector: 'news-management',
-            templateUrl: 'admin-templates/news/news-management.html',
-            providers: [news_service_1.NewsService],
-            directives: [primeng_1.TabView, primeng_1.TabPanel, news_category_list_component_1.NewsCategoryListComponent, news_list_component_1.NewsListComponent, news_image_list_component_1.NewsImageListComponent]
+            templateUrl: 'admin-templates/news/news-management.html'
         }), 
         __metadata('design:paramtypes', [])
     ], NewsManagementComponent);

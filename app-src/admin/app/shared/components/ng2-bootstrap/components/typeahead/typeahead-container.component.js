@@ -9,14 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
-var typeahead_utils_1 = require('./typeahead-utils');
-var typeahead_options_class_1 = require('./typeahead-options.class');
-var position_1 = require('../position');
 var ng2_bootstrap_config_1 = require('../ng2-bootstrap-config');
+var position_1 = require('../position');
+var typeahead_options_class_1 = require('./typeahead-options.class');
+var typeahead_utils_1 = require('./typeahead-utils');
 var TEMPLATE = (_a = {},
-    _a[ng2_bootstrap_config_1.Ng2BootstrapTheme.BS4] = "\n  <div class=\"dropdown-menu\"\n       style=\"display: block\"\n      [ngStyle]=\"{top: top, left: left, display: display}\"\n      (mouseleave)=\"focusLost()\">\n      <a href=\"#\"\n         *ngFor=\"let match of matches\"\n         class=\"dropdown-item\"\n         (click)=\"selectMatch(match, $event)\"\n         (mouseenter)=\"selectActive(match)\"\n         [class.active]=\"isActive(match)\"\n         [innerHtml]=\"hightlight(match, query)\"></a>\n  </div>\n  ",
-    _a[ng2_bootstrap_config_1.Ng2BootstrapTheme.BS3] = "\n  <ul class=\"dropdown-menu\"\n      style=\"display: block\"\n      [ngStyle]=\"{top: top, left: left, display: display}\"\n      (mouseleave)=\"focusLost()\">\n    <li *ngFor=\"let match of matches\"\n        [class.active]=\"isActive(match)\"\n        (mouseenter)=\"selectActive(match)\">\n        <a href=\"#\" (click)=\"selectMatch(match, $event)\" tabindex=\"-1\" [innerHtml]=\"hightlight(match, query)\"></a>\n    </li>\n  </ul>",
+    _a[ng2_bootstrap_config_1.Ng2BootstrapTheme.BS4] = "\n  <div class=\"dropdown-menu\"\n       style=\"display: block\"\n       [ngStyle]=\"{top: top, left: left, display: display}\"\n       (mouseleave)=\"focusLost()\">\n       <div *ngIf=\"!itemTemplate\">\n          <a href=\"#\"\n            *ngFor=\"let match of matches\"\n            class=\"dropdown-item\"\n            (click)=\"selectMatch(match, $event)\"\n            (mouseenter)=\"selectActive(match)\"\n            [class.active]=\"isActive(match)\"\n            [innerHtml]=\"hightlight(match, query)\"></a>\n      </div>\n      <div *ngIf=\"itemTemplate\">\n        <a href=\"#\"\n         *ngFor=\"let match of matches; let i = index\"\n         class=\"dropdown-item\"\n         (click)=\"selectMatch(match, $event)\"\n         (mouseenter)=\"selectActive(match)\"\n         [class.active]=\"isActive(match)\">\n          <template [ngTemplateOutlet]=\"itemTemplate\"\n                    [ngOutletContext]=\"{item: match, index: i}\">\n          </template>\n         </a>\n      </div>\n  </div>\n  ",
+    _a[ng2_bootstrap_config_1.Ng2BootstrapTheme.BS3] = "\n  <ul class=\"dropdown-menu\"\n      style=\"display: block\"\n      [ngStyle]=\"{top: top, left: left, display: display}\"\n      (mouseleave)=\"focusLost()\">\n    <li *ngFor=\"let match of matches; let i = index\"\n        [class.active]=\"isActive(match)\"\n        (mouseenter)=\"selectActive(match)\">\n        <a href=\"#\" \n           *ngIf=\"!itemTemplate\" \n           (click)=\"selectMatch(match, $event)\" \n           tabindex=\"-1\" \n           [innerHtml]=\"hightlight(match, query)\"></a>\n        <a href=\"#\" \n           *ngIf=\"itemTemplate\" \n           (click)=\"selectMatch(match, $event)\" \n           tabindex=\"-1\">\n            <template [ngTemplateOutlet]=\"itemTemplate\"\n                      [ngOutletContext]=\"{item: match, index: i}\">\n            </template>\n        </a>\n    </li>\n  </ul>\n  ",
     _a
 );
 var TypeaheadContainerComponent = (function () {
@@ -35,6 +34,13 @@ var TypeaheadContainerComponent = (function () {
             if (this._matches.length > 0) {
                 this._active = this._matches[0];
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TypeaheadContainerComponent.prototype, "itemTemplate", {
+        get: function () {
+            return this.parent ? this.parent.typeaheadItemTemplate : undefined;
         },
         enumerable: true,
         configurable: true
@@ -79,9 +85,7 @@ var TypeaheadContainerComponent = (function () {
         this._active = value;
     };
     TypeaheadContainerComponent.prototype.hightlight = function (item, query) {
-        var itemStr = (typeof item === 'object' && this._field
-            ? item[this._field]
-            : item).toString();
+        var itemStr = typeahead_utils_1.TypeaheadUtils.getValueFromObject(item, this._field);
         var itemStrHelper = (this.parent.typeaheadLatinize
             ? typeahead_utils_1.TypeaheadUtils.latinize(itemStr)
             : itemStr).toLowerCase();
@@ -124,7 +128,6 @@ var TypeaheadContainerComponent = (function () {
             e.preventDefault();
         }
         this.parent.changeModel(value);
-        this.parent.hide();
         setTimeout(function () {
             return _this.parent.typeaheadOnSelect.emit({
                 item: value
@@ -135,10 +138,8 @@ var TypeaheadContainerComponent = (function () {
     TypeaheadContainerComponent = __decorate([
         core_1.Component({
             selector: 'typeahead-container',
-            directives: [common_1.CORE_DIRECTIVES],
             template: TEMPLATE[ng2_bootstrap_config_1.Ng2BootstrapConfig.theme],
-            encapsulation: core_1.ViewEncapsulation.None,
-            styles: [".dropdown-menu li.active {\n            background-color:#0275d8}\n                li.active a {color:#fff}"]
+            encapsulation: core_1.ViewEncapsulation.None
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, typeahead_options_class_1.TypeaheadOptions])
     ], TypeaheadContainerComponent);

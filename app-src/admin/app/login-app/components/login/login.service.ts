@@ -14,9 +14,9 @@ export class LoginService {
     private _checkLoginUrl:string = API_URL + "authenticate"; // URL to web api
     private _tfaVerificationApi:string = API_URL + "two-factor-auth-validate";
     loggedIn:boolean = false;
-    // getEmailTemplate(){
-    //     return  EmailTemp
-    // }
+    // store the URL so we can redirect after logging in
+    redirectUrl: string;
+
     constructor(private http:Http) {
         this.loggedIn = false;
     }

@@ -9,13 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var testimonial_model_1 = require("./testimonial.model");
 var testimonial_service_1 = require("./testimonial.service");
 var general_config_1 = require("../../../shared/configs/general.config");
 var enum_config_1 = require("../../../shared/configs/enum.config");
 var validation_service_1 = require("../../../shared/services/validation.service");
-var image_uploader_component_1 = require("../../../shared/components/image-uploader.component");
 var forms_1 = require("@angular/forms");
 var TestimonialEditorComponent = (function () {
     /* End Image Upload handle */
@@ -152,8 +150,7 @@ var TestimonialEditorComponent = (function () {
     TestimonialEditorComponent = __decorate([
         core_1.Component({
             selector: 'testimonial-editor',
-            templateUrl: 'admin-templates/testimonial/testimonial-editor.html',
-            directives: [control_valdation_message_component_1.FormControlMessages, image_uploader_component_1.ImageUploader],
+            templateUrl: 'admin-templates/testimonial/testimonial-editor.html'
         }), 
         __metadata('design:paramtypes', [testimonial_service_1.TestimonialService, forms_1.FormBuilder])
     ], TestimonialEditorComponent);

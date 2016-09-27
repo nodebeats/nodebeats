@@ -1,7 +1,8 @@
 import {
-  ApplicationRef, ViewContainerRef, ComponentRef, ComponentResolver, Type, ComponentFactory,
-  Injectable, ReflectiveInjector, Provider, Injector
+  ApplicationRef, ComponentFactoryResolver, ComponentRef, Injectable, Injector, ReflectiveInjector, ViewContainerRef,
+  ResolvedReflectiveProvider, Type
 } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 
 /**
  * Components helper class to easily work with
@@ -10,15 +11,13 @@ import {
  */
 @Injectable()
 export class ComponentsHelper {
+  public constructor(private applicationRef:ApplicationRef,
+                     private componentFactoryResolver:ComponentFactoryResolver,
+                     private injector:Injector) {
+  }
 
-  private applicationRef:ApplicationRef;
-  private componentResolver:ComponentResolver;
-  private injector: Injector;
-
-  public constructor(applicationRef:ApplicationRef, componentResolver:ComponentResolver, injector: Injector) {
-    this.applicationRef = applicationRef;
-    this.componentResolver = componentResolver;
-    this.injector = injector;
+  public getDocument():any {
+    return this.injector.get(DOCUMENT);
   }
 
   /**
@@ -39,14 +38,40 @@ export class ComponentsHelper {
    * ```
    * @returns {ViewContainerRef} - application root view component ref
    */
-  public getRootViewContainerRef():ViewContainerRef {
+  public getRootViewContainerRef(injector:Injector):ViewContainerRef {
     // The only way for now (by @mhevery)
     // https://github.com/angular/angular/issues/6446#issuecomment-173459525
     // this is a class of application bootstrap component (like my-app)
     const classOfRootComponent = this.applicationRef.componentTypes[0];
     // this is an instance of application bootstrap component
-    const appInstance = this.injector.get(classOfRootComponent);
+    const appInstance = injector.get(classOfRootComponent);
     return appInstance.viewContainerRef;
+  }
+
+  /**
+   * Creates an instance of a Component and attaches it to the View Container found at the
+   * `location` specified as {@link ViewContainerRef}.
+   *
+   * You can optionally provide `providers` to configure the {@link Injector} provisioned for this
+   * Component Instance.
+   *
+   * Returns {@link ComponentRef} representing the newly created Component.
+   * @param ComponentClass - @Component class
+   * @param location - reference to the location
+   * @param providers - optional array of providers
+   * @returns {ComponentRef<T>} - returns ComponentRef<T>
+   */
+  public appendNextToLocation<T>(ComponentClass:Type<T>,
+                                 location:ViewContainerRef,
+                                 providers?:ResolvedReflectiveProvider[]):ComponentRef<T> {
+    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(ComponentClass);
+    let parentInjector = location.parentInjector;
+    let childInjector: Injector = parentInjector;
+    if (providers && providers.length > 0) {
+      childInjector = ReflectiveInjector.fromResolvedProviders(providers, parentInjector);
+    }
+
+    return location.createComponent(componentFactory, location.length, childInjector);
   }
 
   /**
@@ -56,22 +81,17 @@ export class ComponentsHelper {
    * @param ComponentClass - @Component class
    * @param ComponentOptionsClass - options class
    * @param options - instance of options
-   * @param _viewContainerRef - optional instance of ViewContainerRef
-   * @returns {Promise<ComponentRef<T>>} - returns a promise with ComponentRef<T>
+   * @param contextInjector - injector to resolve root view container (any injector except root injector will fit)
+   * @returns {ComponentRef<T>} - returns ComponentRef<T>
    */
-  public appendNextToRoot<T extends Type,N>(ComponentClass:T, ComponentOptionsClass:N, options:any, _viewContainerRef?:ViewContainerRef):Promise<ComponentRef<any>> {
-    return this.componentResolver
-      .resolveComponent(ComponentClass)
-      .then((componentFactory:ComponentFactory<T>) => {
-        const viewContainerRef = _viewContainerRef || this.getRootViewContainerRef();
-        let bindings = ReflectiveInjector.resolve([
-          new Provider(ComponentOptionsClass, {useValue: options})
-        ]);
-        const ctxInjector = viewContainerRef.parentInjector;
-
-        const childInjector = Array.isArray(bindings) && bindings.length > 0 ?
-          ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
-        return viewContainerRef.createComponent(componentFactory, viewContainerRef.length, childInjector);
-      });
+  public appendNextToRoot<T>(ComponentClass:Type<T>,
+                             ComponentOptionsClass:any,
+                             options:any,
+                             contextInjector:Injector):ComponentRef<T> {
+    let location = this.getRootViewContainerRef(contextInjector);
+    let providers = ReflectiveInjector.resolve([
+      {provide: ComponentOptionsClass, useValue: options}
+    ]);
+    return this.appendNextToLocation(ComponentClass, location, providers);
   }
 }

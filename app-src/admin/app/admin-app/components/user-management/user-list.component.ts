@@ -8,9 +8,7 @@ import {UserEditComponent} from "./user-edit.component";
 import {Paginator} from 'primeng/primeng';
 @Component({
     selector: 'admin-user',
-    templateUrl: 'admin-templates/user-management/user-list.html',
-    providers: [UserService],
-    directives: [Paginator, UserRegistrationComponent, UserViewComponent, UserEditComponent, UserManagementComponent],
+    templateUrl: 'admin-templates/user-management/user-list.html'
 })
 
 export class UserListComponent implements OnInit {

@@ -87,7 +87,7 @@
            (showListEvent)="handleList($event)"></user-edit>
 <user-view *ngIf="showInfo" [userId]="userId" (userEditEvent)="handleEdit($event)"
            (showListEvent)="handleList($event)"></user-view>
-<user-management *ngIf="showManage" [userId]="userId" [userInfo]="objUser"
+<user-management *ngIf="showManage" [userInfo]="objUser"
                  (showListEvent)="handleList($event)"></user-management>
 <!--<user-password *ngIf="changePassword" [userId]="userId"-->
 <!--(passwordCancelEvent)="handleCancel($event)"></user-password>-->

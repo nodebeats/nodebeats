@@ -57,7 +57,6 @@ module.exports = {
      * See: http://webpack.github.io/docs/configuration.html#entry
      */
     entry: {
-
         'polyfills': appRootPath + '/app-config/polyfills.browser',
         'vendor': appRootPath + '/app-config/vendor.browser',
         'main': appRootPath + '/main',
@@ -77,14 +76,12 @@ module.exports = {
          * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
          */
         extensions: ['', '.js', '.json', '.css'],
-
         // Make sure root is src
         root: appRootPath,
-
         // remove other default values
-        //  modulesDirectories: ['node_modules'],
+        modulesDirectories: ['node_modules'],
         alias: {
-            'primeng': appRootPath + '/app/shared/components/primeng',
+            //'primeng': appRootPath + 'node_modules/primeng',
             'chart': appRootPath + '/plugins/Chart.bundle.min.js',
             'ng2-bootstrap': appRootPath + '/app/shared/components/ng2-bootstrap',
             'plugins': helpers.root('public/plugins'),

@@ -5,9 +5,7 @@ import {PartnerEditorComponent}from "./partner-editor.component";
 
 @Component({
     selector: 'partner-list',
-    templateUrl: 'admin-templates/partner/partner-list.html',
-    providers: [PartnerService],
-    directives: [/*Pagination,*/ PartnerEditorComponent]
+    templateUrl: 'admin-templates/partner/partner-list.html'
 })
 
 export class PartnerComponent implements OnInit {

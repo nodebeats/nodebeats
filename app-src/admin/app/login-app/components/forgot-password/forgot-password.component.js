@@ -9,17 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var forget_password_model_1 = require('./forget-password.model');
+var forgot_password_model_1 = require('./forgot-password.model');
 var forgot_password_service_1 = require("./forgot-password.service");
 var forms_1 = require("@angular/forms");
-var control_valdation_message_component_1 = require('../../../shared/components/control-valdation-message.component');
 var security_question_config_1 = require('../../../shared/configs/security-question.config');
 var validation_service_1 = require("../../../shared/services/validation.service");
 var ForgotPasswordComponent = (function () {
     function ForgotPasswordComponent(form, _passwordService) {
         this.form = form;
         this._passwordService = _passwordService;
-        this.objForgotPassword = new forget_password_model_1.ForgotPasswordModel();
+        this.objForgotPassword = new forgot_password_model_1.ForgotPasswordModel();
         this.slide = "collapse";
         this.questionlist = security_question_config_1.QUESTION_LIST;
         this.alertClass = "alert-danger";
@@ -56,7 +55,6 @@ var ForgotPasswordComponent = (function () {
         core_1.Component({
             selector: 'forgot-password',
             templateUrl: 'login-templates/forgot-password.html',
-            directives: [control_valdation_message_component_1.FormControlMessages],
             animations: [core_1.trigger('slideMsg', [
                     core_1.state('collapse, void', core_1.style({ opacity: 0 })),
                     core_1.state('expand', core_1.style({ opacity: 1 })),

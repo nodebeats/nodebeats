@@ -12,12 +12,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Created by sanedev on 4/8/16.
  */
 var core_1 = require('@angular/core');
-var common_1 = require("@angular/common");
-var primeng_1 = require('primeng/primeng');
 require('plugins/Chart.bundle.js');
 var moment = require('moment');
 var dashboard_service_1 = require('./dashboard.service');
-var animate_counter_component_1 = require('../../../shared/components/animate-counter.component');
 var BrowserAnalysisChart = (function () {
     function BrowserAnalysisChart(objService) {
         this.objService = objService;
@@ -78,8 +75,7 @@ var BrowserAnalysisChart = (function () {
     BrowserAnalysisChart = __decorate([
         core_1.Component({
             selector: 'browser-chart',
-            template: '<p-chart type="pie" [data]="data"></p-chart>',
-            directives: [primeng_1.UIChart]
+            template: '<p-chart type="pie" [data]="data"></p-chart>'
         }), 
         __metadata('design:paramtypes', [dashboard_service_1.DashboardService])
     ], BrowserAnalysisChart);
@@ -146,8 +142,7 @@ var CountryWiseChart = (function () {
     CountryWiseChart = __decorate([
         core_1.Component({
             selector: 'country-chart',
-            template: '<p-chart type="doughnut" [data]="data"></p-chart>',
-            directives: [primeng_1.UIChart]
+            template: '<p-chart type="doughnut" [data]="data"></p-chart>'
         }), 
         __metadata('design:paramtypes', [dashboard_service_1.DashboardService])
     ], CountryWiseChart);
@@ -176,7 +171,7 @@ var UserCount = (function () {
             "end-date": moment().format('YYYY-MM-DD')
         })
             .then(function (res) {
-            if (res.rows.length > 0) {
+            if (res.rows && res.rows.length > 0) {
                 _this.newUserCount = res.rows[0][1];
                 _this.returningUserCount = res.rows[1][1];
             }
@@ -197,8 +192,7 @@ var UserCount = (function () {
     UserCount = __decorate([
         core_1.Component({
             selector: 'user-count',
-            template: " \n        <div class=\"col-xl-3 col-lg-6\">\n            <div class=\"card card-green card-inverse\">\n                <div class=\"card-header card-green\">\n                    <div class=\"row\">\n                        <div class=\"col-xs-3\">\n                            <i class=\"fa fa-user-plus fa-5x\"></i>\n                        </div>\n                        <div class=\"col-xs-9 text-xs-right\">\n                        <animate-counter [valueToCount]=\"newUserCount\"></animate-counter>\n                          \n                        </div>\n                    </div>\n                </div>\n                <div class=\"card-footer \">\n                    <a class=\"text-green\"  target=\"_blank\" href=\"https://analytics.google.com\">\n                        <span class=\"pull-xs-left\">New Users</span>\n                        <span class=\"pull-xs-right\"><i class=\"fa fa-arrow-circle-right\"></i></span>\n                        <div class=\"clearfix\"></div>\n                    </a>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-xl-3 col-lg-6\">\n            <div class=\"card card-purple card-inverse\">\n                <div class=\"card-header card-purple\">\n                    <div class=\"row\">\n                        <div class=\"col-xs-3\">\n                            <i class=\"fa fa-user fa-5x\"></i>\n                        </div>\n                        <div class=\"col-xs-9 text-xs-right\">\n                              <animate-counter [valueToCount]=\"returningUserCount\"></animate-counter>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"card-footer \">\n                    <a class=\"text-purple\" target=\"_blank\" href=\"https://analytics.google.com\">\n                        <span class=\"pull-xs-left\">Returning Users</span>\n                        <span class=\"pull-xs-right\"><i class=\"fa fa-arrow-circle-right\"></i></span>\n                        <div class=\"clearfix\"></div>\n                    </a>\n                </div>\n            </div>\n        </div>",
-            directives: [animate_counter_component_1.AnimateCounterComponent]
+            template: " \n        <div class=\"col-xl-3 col-lg-6\">\n            <div class=\"card card-green card-inverse\">\n                <div class=\"card-header card-green\">\n                    <div class=\"row\">\n                        <div class=\"col-xs-3\">\n                            <i class=\"fa fa-user-plus fa-5x\"></i>\n                        </div>\n                        <div class=\"col-xs-9 text-xs-right\">\n                        <animate-counter [valueToCount]=\"newUserCount\"></animate-counter>\n                          \n                        </div>\n                    </div>\n                </div>\n                <div class=\"card-footer \">\n                    <a class=\"text-green\"  target=\"_blank\" href=\"https://analytics.google.com\">\n                        <span class=\"pull-xs-left\">New Users</span>\n                        <span class=\"pull-xs-right\"><i class=\"fa fa-arrow-circle-right\"></i></span>\n                        <div class=\"clearfix\"></div>\n                    </a>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-xl-3 col-lg-6\">\n            <div class=\"card card-purple card-inverse\">\n                <div class=\"card-header card-purple\">\n                    <div class=\"row\">\n                        <div class=\"col-xs-3\">\n                            <i class=\"fa fa-user fa-5x\"></i>\n                        </div>\n                        <div class=\"col-xs-9 text-xs-right\">\n                              <animate-counter [valueToCount]=\"returningUserCount\"></animate-counter>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"card-footer \">\n                    <a class=\"text-purple\" target=\"_blank\" href=\"https://analytics.google.com\">\n                        <span class=\"pull-xs-left\">Returning Users</span>\n                        <span class=\"pull-xs-right\"><i class=\"fa fa-arrow-circle-right\"></i></span>\n                        <div class=\"clearfix\"></div>\n                    </a>\n                </div>\n            </div>\n        </div>"
         }), 
         __metadata('design:paramtypes', [dashboard_service_1.DashboardService])
     ], UserCount);
@@ -237,8 +231,7 @@ var PageViewComponent = (function () {
     PageViewComponent = __decorate([
         core_1.Component({
             selector: 'page-view',
-            template: " <div class=\"col-xl-3 col-lg-6\">\n            <div class=\"card card-orange card-inverse\">\n                <div class=\"card-header card-orange\">\n                    <div class=\"row\">\n                        <div class=\"col-xs-3\">\n                            <i class=\"fa fa-eye fa-5x\"></i>\n                        </div>\n                        <div class=\"col-xs-9 text-xs-right\">\n                               <animate-counter [valueToCount]=\"pageView\"></animate-counter>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"card-footer \">\n                    <a class=\"text-orange\"  target=\"_blank\" href=\"https://analytics.google.com;\">\n                        <span class=\"pull-xs-left\">Page Views</span>\n                        <span class=\"pull-xs-right\"><i class=\"fa fa-arrow-circle-right\"></i></span>\n                        <div class=\"clearfix\"></div>\n                    </a>\n                </div>\n            </div>\n        </div>",
-            directives: [animate_counter_component_1.AnimateCounterComponent]
+            template: " <div class=\"col-xl-3 col-lg-6\">\n            <div class=\"card card-orange card-inverse\">\n                <div class=\"card-header card-orange\">\n                    <div class=\"row\">\n                        <div class=\"col-xs-3\">\n                            <i class=\"fa fa-eye fa-5x\"></i>\n                        </div>\n                        <div class=\"col-xs-9 text-xs-right\">\n                               <animate-counter [valueToCount]=\"pageView\"></animate-counter>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"card-footer \">\n                    <a class=\"text-orange\"  target=\"_blank\" href=\"https://analytics.google.com;\">\n                        <span class=\"pull-xs-left\">Page Views</span>\n                        <span class=\"pull-xs-right\"><i class=\"fa fa-arrow-circle-right\"></i></span>\n                        <div class=\"clearfix\"></div>\n                    </a>\n                </div>\n            </div>\n        </div>"
         }), 
         __metadata('design:paramtypes', [dashboard_service_1.DashboardService])
     ], PageViewComponent);
@@ -324,28 +317,13 @@ var LastWeekVsThisWeekAnalysisChart = (function () {
     LastWeekVsThisWeekAnalysisChart = __decorate([
         core_1.Component({
             selector: 'week-chart',
-            template: "<p-growl [value]=\"msgs\"></p-growl>  \n                <p-chart type=\"line\" [data]=\"data\"></p-chart>",
-            directives: [primeng_1.UIChart, primeng_1.Growl]
+            template: "<p-chart type=\"line\" [data]=\"data\"></p-chart>"
         }), 
         __metadata('design:paramtypes', [dashboard_service_1.DashboardService])
     ], LastWeekVsThisWeekAnalysisChart);
     return LastWeekVsThisWeekAnalysisChart;
 }());
 exports.LastWeekVsThisWeekAnalysisChart = LastWeekVsThisWeekAnalysisChart;
-var NotificationCmp = (function () {
-    function NotificationCmp() {
-    }
-    NotificationCmp = __decorate([
-        core_1.Component({
-            selector: 'notifications',
-            templateUrl: 'admin-templates/dashboard/notifications.html',
-            styleUrls: ['admin-templates/dashboard/css/home.css'],
-            directives: [common_1.CORE_DIRECTIVES]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], NotificationCmp);
-    return NotificationCmp;
-}());
 var DashboardComponent = (function () {
     function DashboardComponent(objService) {
         this.objService = objService;
@@ -379,7 +357,7 @@ var DashboardComponent = (function () {
         });
         if (res.analyticsData.pollingInterval)
             pollingInterval = res.analyticsData.pollingInterval;
-        setInterval(function () {
+        this.pollRealTimeData = setInterval(function () {
             _this.getActiveUser(res.token.access_token);
         }, pollingInterval);
     };
@@ -391,7 +369,7 @@ var DashboardComponent = (function () {
         queryParam += "&access_token=" + accessToken;
         this.objService.queryGoogleRealtimeApi(queryParam)
             .subscribe(function (res) {
-            if (res.rows.length > 0) {
+            if (res.rows && res.rows.length > 0) {
                 _this.activeUserCount = res.rows[0][0];
                 if (_this.activeUserCount == _this.prevCount)
                     _this.activeClass = "";
@@ -407,13 +385,15 @@ var DashboardComponent = (function () {
             console.log(err.error.message);
         });
     };
+    DashboardComponent.prototype.ngOnDestroy = function () {
+        if (this.pollRealTimeData)
+            clearInterval(this.pollRealTimeData);
+    };
     DashboardComponent = __decorate([
         core_1.Component({
             selector: 'home',
             templateUrl: 'admin-templates/dashboard/dashboard.html',
-            styleUrls: ['admin-templates/dashboard/css/home.css'],
-            providers: [dashboard_service_1.DashboardService],
-            directives: [UserCount, PageViewComponent, CountryWiseChart, BrowserAnalysisChart, LastWeekVsThisWeekAnalysisChart]
+            styleUrls: ['admin-templates/dashboard/css/home.css']
         }), 
         __metadata('design:paramtypes', [dashboard_service_1.DashboardService])
     ], DashboardComponent);

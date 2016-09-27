@@ -9,8 +9,7 @@ import { FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 
 @Component({
     selector: 'news-image-editor',
-    templateUrl: 'admin-templates/news/news-image-editor.html',
-    directives: [FormControlMessages, ImageUploader],
+    templateUrl: 'admin-templates/news/news-image-editor.html'
     // styles: [style]
 })
 export class NewsImageEditorComponent implements OnInit,AfterViewInit {

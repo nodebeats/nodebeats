@@ -12,7 +12,6 @@ var core_1 = require('@angular/core');
 var user_model_1 = require("../user-management/user.model");
 var user_service_1 = require("../user-management/user.service");
 var general_config_1 = require("../../../shared/configs/general.config");
-var user_edit_component_1 = require('../user-management/user-edit.component');
 var UserProfileComponent = (function () {
     function UserProfileComponent(_objUserService) {
         this._objUserService = _objUserService;
@@ -67,8 +66,7 @@ var UserProfileComponent = (function () {
     UserProfileComponent = __decorate([
         core_1.Component({
             selector: 'user-profile',
-            templateUrl: 'admin-templates/user-profile/user-profile.html',
-            directives: [user_edit_component_1.UserEditComponent],
+            templateUrl: 'admin-templates/user-profile/user-profile.html'
         }), 
         __metadata('design:paramtypes', [user_service_1.UserService])
     ], UserProfileComponent);

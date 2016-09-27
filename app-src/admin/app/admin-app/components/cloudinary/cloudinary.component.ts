@@ -1,16 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {CloudinaryService} from "./cloudinary.service";
 import {CloudinaryModel, CloudinaryResponse} from "./cloudinary.model";
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {AlertModel} from "../../../shared/models/alert.model";
-import {Alert} from "../../../shared/components/alert/alert";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Config} from "../../../shared/configs/general.config";
 @Component({
     selector: 'cloudinary-settings',
-    templateUrl: 'admin-templates/cloudinary/cloudinary.html',
-    providers: [CloudinaryService],
-    directives: [FormControlMessages, Alert]
+    templateUrl: 'admin-templates/cloudinary/cloudinary.html'
 })
 export class CloudinarySettingComponent implements OnInit {
     objCloudinary:CloudinaryModel = new CloudinaryModel();

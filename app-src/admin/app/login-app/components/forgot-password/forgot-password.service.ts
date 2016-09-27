@@ -2,7 +2,7 @@
  * Created by sanedev on 4/8/16.
  */
 import {Injectable} from '@angular/core';
-import {ForgotPasswordModel} from './forget-password.model';
+import {ForgotPasswordModel} from './forgot-password.model';
 import{Http} from '@angular/http';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/do';

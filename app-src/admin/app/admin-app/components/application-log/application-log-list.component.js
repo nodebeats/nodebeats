@@ -11,9 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var application_log_service_1 = require("./application-log.service");
 var application_log_model_1 = require("./application-log.model");
-var primeng_1 = require('primeng/primeng');
 var moment = require('moment');
-var primeng_2 = require("primeng/primeng");
 var forms_1 = require("@angular/forms");
 var ApplicationLogComponent = (function () {
     function ApplicationLogComponent(_objService, ele) {
@@ -164,8 +162,6 @@ var ApplicationLogComponent = (function () {
         core_1.Component({
             selector: 'application-log-list',
             templateUrl: 'admin-templates/application-log/application-log.html',
-            providers: [application_log_service_1.ApplicationLogService],
-            directives: [primeng_1.Paginator, primeng_1.Dialog, primeng_2.Calendar]
         }), 
         __metadata('design:paramtypes', [application_log_service_1.ApplicationLogService, core_1.ElementRef])
     ], ApplicationLogComponent);

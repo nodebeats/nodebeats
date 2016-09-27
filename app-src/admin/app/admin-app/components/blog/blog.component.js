@@ -8,17 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-/**
- * Created by sanedev on 6/27/16.
- */
-// import {TAB_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-var primeng_1 = require('primeng/primeng');
 var core_1 = require('@angular/core');
-var blog_service_1 = require("./blog.service");
-var blog_category_list_component_1 = require('./blog-category-list.component');
-var blog_list_component_1 = require('./blog-list.component');
-var blog_doc_list_component_1 = require('./blog-doc-list.component');
-var blog_metatag_component_1 = require('./blog-metatag.component');
 var BlogManagementComponent = (function () {
     function BlogManagementComponent() {
         this.isCatList = true;
@@ -62,9 +52,7 @@ var BlogManagementComponent = (function () {
     BlogManagementComponent = __decorate([
         core_1.Component({
             selector: 'blog-management',
-            templateUrl: 'admin-templates/blog/blog-management.html',
-            providers: [blog_service_1.BlogService],
-            directives: [primeng_1.TabView, primeng_1.TabPanel, blog_category_list_component_1.BlogCategoryListComponent, blog_list_component_1.BlogListComponent, blog_metatag_component_1.BlogMetaTagEditorComponent, blog_doc_list_component_1.BlogDocListComponent]
+            templateUrl: 'admin-templates/blog/blog-management.html'
         }), 
         __metadata('design:paramtypes', [])
     ], BlogManagementComponent);

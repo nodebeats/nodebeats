@@ -35,7 +35,7 @@ var TinyEditor = (function () {
                     editor.getBody().style.fontSize = '15px';
                     if (typeof that.value != "undefined") {
                         editor.setContent(that.value);
-                        that.editorFormControl.updateValue(that.value);
+                        that.editorFormControl.patchValue(that.value);
                     }
                 });
                 editor.on('keyup', function (e, l) {
@@ -85,7 +85,7 @@ var TinyEditor = (function () {
     TinyEditor.prototype.ngOnChanges = function (changes) {
         if (tinymce.activeEditor && typeof this.value != "undefined") {
             tinymce.activeEditor.setContent(this.value);
-            this.editorFormControl.updateValue(this.value);
+            this.editorFormControl.patchValue(this.value);
         }
     };
     __decorate([
@@ -111,8 +111,7 @@ var TinyEditor = (function () {
     TinyEditor = __decorate([
         core_1.Component({
             selector: 'tiny-editor',
-            template: "<textarea class=\"tinyMCE\" [formControl]=\"editorFormControl\" #editor=\"ngForm\" style=\"height:300px\"></textarea>\n                <div class=\"error-msg\" *ngIf=\"editor.control.hasError('required') && (isChanged ||isSubmitted)\">Required</div>",
-            directives: [forms_1.REACTIVE_FORM_DIRECTIVES]
+            template: "<textarea class=\"tinyMCE\" [formControl]=\"editorFormControl\" #editor=\"ngForm\" style=\"height:300px\"></textarea>\n                <div class=\"error-msg\" *ngIf=\"editor.control.hasError('required') && (isChanged ||isSubmitted)\">Required</div>"
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], TinyEditor);

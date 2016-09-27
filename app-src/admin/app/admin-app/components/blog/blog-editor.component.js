@@ -9,16 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var blog_model_1 = require("./blog.model");
 var blog_service_1 = require("./blog.service");
-var tinymce_component_1 = require('../../../shared/components/tinymce.component');
 var general_config_1 = require("../../../shared/configs/general.config");
 var enum_config_1 = require("../../../shared/configs/enum.config");
-var primeng_1 = require("primeng/primeng");
-var image_uploader_component_1 = require("../../../shared/components/image-uploader.component");
 var forms_1 = require("@angular/forms");
-var tag_input_component_1 = require('../../../shared/components/tag-input/tag-input.component');
 var BlogEditorComponent = (function () {
     /* End Image Upload handle */
     function BlogEditorComponent(_objService, _formBuilder) {
@@ -91,7 +86,7 @@ var BlogEditorComponent = (function () {
         });
         objRes.tags = tags;
         this.objBlog = objRes;
-        this.editorFormControl.updateValue(objRes.blogDescription);
+        this.editorFormControl.patchValue(objRes.blogDescription);
         var path = "";
         if (this.objBlog.bannerImage) {
             var cl = general_config_1.Config.Cloudinary;
@@ -104,7 +99,7 @@ var BlogEditorComponent = (function () {
     BlogEditorComponent.prototype.saveBlog = function () {
         var _this = this;
         this.isSubmitted = true;
-        this.editorFormControl.updateValue(this.objBlog.blogDescription);
+        this.editorFormControl.patchValue(this.objBlog.blogDescription);
         if (this.blogForm.valid) {
             if (!this.blogId) {
                 this._objService.saveBlog(this.objBlog, this.file)
@@ -187,8 +182,7 @@ var BlogEditorComponent = (function () {
     BlogEditorComponent = __decorate([
         core_1.Component({
             selector: 'blog-editor',
-            templateUrl: 'admin-templates/blog/blog-editor.html',
-            directives: [control_valdation_message_component_1.FormControlMessages, tag_input_component_1.TagInputComponent, primeng_1.Calendar, tinymce_component_1.TinyEditor, image_uploader_component_1.ImageUploader],
+            templateUrl: 'admin-templates/blog/blog-editor.html'
         }), 
         __metadata('design:paramtypes', [blog_service_1.BlogService, forms_1.FormBuilder])
     ], BlogEditorComponent);

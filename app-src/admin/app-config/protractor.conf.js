@@ -15,8 +15,8 @@ exports.config = {
     //seleniumAddress: (process.env.SELENIUM_URL || 'http://localhost:4444/wd/hub'),
     // use `npm run e2e`
     specs: [
-        helpers.root('app-src/app/**/**.e2e.ts'),
-        helpers.root('app-src/app/**/*.e2e.ts')
+        helpers.root('app-src/admin/app/**/**.e2e.ts'),
+        helpers.root('app-src/admin/app/**/*.e2e.ts')
     ],
   //  exclude: [],
 

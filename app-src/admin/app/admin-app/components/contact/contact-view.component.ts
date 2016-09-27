@@ -5,8 +5,7 @@ import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 
 @Component({
     selector: 'contact-view',
-    templateUrl: 'admin-templates/contact/contact-view.html',
-    directives:[FadeInDirective]
+    templateUrl: 'admin-templates/contact/contact-view.html'
     //providers: [UserService],
 
 })

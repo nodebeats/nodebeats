@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var validation_service_1 = require("../services/validation.service");
 var forms_1 = require("@angular/forms");
-var control_valdation_message_component_1 = require("./control-valdation-message.component");
 var DocumentUploader = (function () {
     function DocumentUploader() {
         this.fileSelectedEvent = new core_1.EventEmitter();
@@ -28,14 +27,14 @@ var DocumentUploader = (function () {
         var allowedSize = this.allowedSize;
         this.isValidFile = validation_service_1.ValidationService.documentValidation(this.file, allowedExt, allowedSize);
         if (this.isValidFile) {
-            this.docFormControl.updateValue(this.file.name);
+            this.docFormControl.patchValue(this.file.name);
             if (!this.fileName)
                 this.isFresh = true;
             this.fileName = this.file.name;
             this.fileSelectedEvent.emit(this.file);
         }
         else {
-            this.docFormControl.updateValue("");
+            this.docFormControl.patchValue("");
             this.inputFile.nativeElement.value = "";
         }
     };
@@ -48,12 +47,12 @@ var DocumentUploader = (function () {
     DocumentUploader.prototype.clearValue = function () {
         this.file = null;
         this.fileName = "";
-        this.docFormControl.updateValue("");
+        this.docFormControl.patchValue("");
         this.inputFile.nativeElement.value = "";
     };
     DocumentUploader.prototype.ngOnChanges = function () {
         if (this.fileName) {
-            this.docFormControl.updateValue(this.fileName);
+            this.docFormControl.patchValue(this.fileName);
         }
     };
     __decorate([
@@ -91,8 +90,7 @@ var DocumentUploader = (function () {
     DocumentUploader = __decorate([
         core_1.Component({
             selector: 'doc-uploader',
-            template: " <label class=\"lbl-file-name\" *ngIf=\"fileName\">{{fileName}}</label>\n                    <a *ngIf=\"fileName && isValidFile\" href=\"javascript:void(0)\" (click)=\"onDeleteFile()\">\n                    <i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\n                    <div class=\"clearfix\"></div>\n                    <input type=\"file\" class=\"inputfile\" id=\"file\" #inputFile (change)=\"onFileSelect($event)\">\n                    <label for=\"file\"><i class=\"fa fa-upload\" aria-hidden=\"true\"> {{fileName?fileName:\"Choose a File...\"}}</i></label>\n                     <div class=\"error-msg\" *ngIf=\"!isValidFile \">*Supported Extension : {{allowedExtMessage}} and max size : {{allowedSize}} MB</div>\n                    <control-messages [isSubmitted]=\"isSubmitted\"\n                     [control]=\"docFormControl\"></control-messages>",
-            directives: [forms_1.REACTIVE_FORM_DIRECTIVES, control_valdation_message_component_1.FormControlMessages]
+            template: " <label class=\"lbl-file-name\" *ngIf=\"fileName\">{{fileName}}</label>\n                    <a *ngIf=\"fileName && isValidFile\" href=\"javascript:void(0)\" (click)=\"onDeleteFile()\">\n                    <i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\n                    <div class=\"clearfix\"></div>\n                    <input type=\"file\" class=\"inputfile\" id=\"file\" #inputFile (change)=\"onFileSelect($event)\">\n                    <label for=\"file\"><i class=\"fa fa-upload\" aria-hidden=\"true\"> {{fileName?fileName:\"Choose a File...\"}}</i></label>\n                     <div class=\"error-msg\" *ngIf=\"!isValidFile \">*Supported Extension : {{allowedExtMessage}} and max size : {{allowedSize}} MB</div>\n                    <control-messages [isSubmitted]=\"isSubmitted\"\n                     [control]=\"docFormControl\"></control-messages>"
         }), 
         __metadata('design:paramtypes', [])
     ], DocumentUploader);

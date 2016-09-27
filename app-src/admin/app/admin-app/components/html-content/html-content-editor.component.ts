@@ -7,8 +7,7 @@ import { FormGroup, Validators, FormBuilder, FormControl} from "@angular/forms";
 
 @Component({
     selector: 'html-content-editor',
-    templateUrl: 'admin-templates/html-content/html-content-editor.html',
-    directives: [ FormControlMessages, TinyEditor]
+    templateUrl: 'admin-templates/html-content/html-content-editor.html'
 })
 export class HtmlContentEditorComponent implements OnInit {
     objHtml:HtmlContentModel = new HtmlContentModel();
@@ -40,7 +39,7 @@ export class HtmlContentEditorComponent implements OnInit {
 
     bindDetail(objRes:HtmlContentModel) {
         this.objHtml = objRes;
-        (<FormControl>this.htmlForm.controls["editorFormControl"]).updateValue(objRes.htmlModuleContent);
+        (<FormControl>this.htmlForm.controls["editorFormControl"]).patchValue(objRes.htmlModuleContent);
     }
 
     saveHtmlEditor() {

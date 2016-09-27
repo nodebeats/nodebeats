@@ -5,16 +5,14 @@ import {ImageGalleryService} from "./image-gallery.service";
 import{Config} from "../../../shared/configs/general.config";
 import{ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
 import {ImageUploader} from "../../../shared/components/image-uploader.component";
-import {FormGroup, FormControl, FormBuilder, Validators, REACTIVE_FORM_DIRECTIVES} from "@angular/forms";
+import {FormGroup, FormControl, FormBuilder, Validators} from "@angular/forms";
 import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 
 //declare var require;
 //const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
 @Component({
     selector: 'image-gallery-image-editor',
-    templateUrl: 'admin-templates/image-gallery/image-gallery-image-editor.html',
-    directives: [FadeInDirective, REACTIVE_FORM_DIRECTIVES, FormControlMessages, ImageUploader],
-    // styles: [style]
+    templateUrl: 'admin-templates/image-gallery/image-gallery-image-editor.html'
 })
 export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
     objImage:ImageGalleryModel = new ImageGalleryModel();
@@ -62,7 +60,7 @@ export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
         let path:string = "";
         if (this.objImage.imageName) {
             this.fileName = this.objImage.imageName;
-            (<FormControl>this.imageForm.controls['imageFormControl']).updateValue(this.fileName);
+            (<FormControl>this.imageForm.controls['imageFormControl']).patchValue(this.fileName);
             var cl = Config.Cloudinary;
             path = cl.url(this.objImage.imageName);
         }
@@ -74,7 +72,7 @@ export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
 
     saveImage() {
         this.isSubmitted = true;
-        (<FormControl>this.imageForm.controls['imageFormControl']).updateValue(this.fileName);
+        (<FormControl>this.imageForm.controls['imageFormControl']).patchValue(this.fileName);
         if (this.imageForm.valid) {
             if (!this.imageId) {
                 this._objService.saveImage(this.albumId, this.objImage, this.file)

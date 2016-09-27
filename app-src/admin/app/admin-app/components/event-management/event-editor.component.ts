@@ -15,9 +15,7 @@ import {FormControl, FormGroup, Validators, FormBuilder} from "@angular/forms";
 //const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
 @Component({
     selector: 'event-editor',
-    templateUrl: 'admin-templates/event-management/event-editor.html',
-    directives: [FormControlMessages, Calendar, ImageUploader]
-// styles: [style]
+    templateUrl: 'admin-templates/event-management/event-editor.html'
 })
 export class EventEditorComponent implements OnInit,AfterViewInit {
     objEvent:EventModel = new EventModel();
@@ -82,7 +80,7 @@ export class EventEditorComponent implements OnInit,AfterViewInit {
 
     saveEvent() {
         this.isSubmitted = true;
-        (<FormControl>this.eventForm.controls['imageFormControl']).updateValue(this.fileName);
+        (<FormControl>this.eventForm.controls['imageFormControl']).patchValue(this.fileName);
         if (this.eventForm.valid) {
             if (!this.eventId) {
                 this._objService.saveEvent(this.objEvent, this.file)

@@ -10,8 +10,7 @@ import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 
 @Component({
     selector: 'team-management-editor',
-    templateUrl: 'admin-templates/team-management/team-management-editor.html',
-    directives: [FormControlMessages, ImageUploader],
+    templateUrl: 'admin-templates/team-management/team-management-editor.html'
     // styles: [style]
 })
 export class TeamManagementEditorComponent implements OnInit,AfterViewInit {

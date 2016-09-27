@@ -12,8 +12,6 @@ require('@angular/forms');
 require('@angular/http');
 require('@angular/router');
 // RxJS
-require('rxjs/add/operator/map');
-require('rxjs/add/operator/mergeMap');
 if ('production' === ENV) {
 }
 else {

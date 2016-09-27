@@ -6,8 +6,7 @@ import {NewsImageModel, NewsImageResponse} from "./news.model";
 import{NewsImageEditorComponent} from "./news-image-editor.component";
 @Component({
     selector: 'news-image-list',
-    templateUrl: 'admin-templates/news/news-image-list.html',
-    directives: [/*Pagination,*/ NewsImageEditorComponent]
+    templateUrl: 'admin-templates/news/news-image-list.html'
 })
 
 export class NewsImageListComponent implements OnInit {

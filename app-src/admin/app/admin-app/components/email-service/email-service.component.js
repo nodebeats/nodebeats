@@ -12,8 +12,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var email_service_service_1 = require("./email-service.service");
 var email_service_model_1 = require("./email-service.model");
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
-var alert_1 = require("../../../shared/components/alert/alert");
 var alert_model_1 = require("../../../shared/models/alert.model");
 var forms_1 = require("@angular/forms");
 var validation_service_1 = require("../../../shared/services/validation.service");
@@ -93,9 +91,7 @@ var EmailServiceComponent = (function () {
     EmailServiceComponent = __decorate([
         core_1.Component({
             selector: 'email-service',
-            templateUrl: 'admin-templates/email-service/email-service.html',
-            providers: [email_service_service_1.EmailServiceService],
-            directives: [control_valdation_message_component_1.FormControlMessages, control_valdation_message_component_1.FormControlMessages, alert_1.Alert]
+            templateUrl: 'admin-templates/email-service/email-service.html'
         }), 
         __metadata('design:paramtypes', [email_service_service_1.EmailServiceService, forms_1.FormBuilder])
     ], EmailServiceComponent);

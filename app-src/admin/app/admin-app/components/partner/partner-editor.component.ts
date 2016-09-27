@@ -12,9 +12,7 @@ import {ValidationService} from "../../../shared/services/validation.service";
 //const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
 @Component({
     selector: 'partner-editor',
-    templateUrl: 'admin-templates/partner/partner-editor.html',
-    directives: [FormControlMessages, ImageUploader],
-    // styles: [style]
+    templateUrl: 'admin-templates/partner/partner-editor.html'
 })
 export class PartnerEditorComponent implements OnInit,AfterViewInit {
     objPartner:PartnerModel = new PartnerModel();
@@ -37,7 +35,7 @@ export class PartnerEditorComponent implements OnInit,AfterViewInit {
         this.partnerForm = _formBuilder.group({
             "partnerName": ['', Validators.required],
             "imageAltText": ['', Validators.required],
-            "linkURL": ['', Validators.compose([Validators.required,ValidationService.urlValidator])],
+            "linkURL": ['', Validators.compose([Validators.required, ValidationService.urlValidator])],
             "active": [''],
             "imageFormControl": this.imageFormControl
         });
@@ -62,7 +60,7 @@ export class PartnerEditorComponent implements OnInit,AfterViewInit {
     bindDetail(objRes:PartnerModel) {
         this.objPartner = objRes;
         this.fileName = this.objPartner.imageName;
-        (<FormControl>this.partnerForm.controls['imageFormControl']).updateValue(this.fileName);
+        (<FormControl>this.partnerForm.controls['imageFormControl']).patchValue(this.fileName);
         let path:string = "";
         if (this.objPartner.imageName) {
             var cl = Config.Cloudinary;
@@ -76,7 +74,7 @@ export class PartnerEditorComponent implements OnInit,AfterViewInit {
 
     savePartner() {
         this.isSubmitted = true;
-        (<FormControl>this.partnerForm.controls['imageFormControl']).updateValue(this.fileName);
+        (<FormControl>this.partnerForm.controls['imageFormControl']).patchValue(this.fileName);
 
         if (this.partnerForm.valid) {
             if (!this.partnerId) {

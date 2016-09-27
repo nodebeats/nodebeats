@@ -7,13 +7,12 @@ import {
     Output,
     EventEmitter
 } from "@angular/core";
-import {FormControl, REACTIVE_FORM_DIRECTIVES} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 
 @Component({
     selector: 'tiny-editor',
     template: `<textarea class="tinyMCE" [formControl]="editorFormControl" #editor="ngForm" style="height:300px"></textarea>
-                <div class="error-msg" *ngIf="editor.control.hasError('required') && (isChanged ||isSubmitted)">Required</div>`,
-    directives: [REACTIVE_FORM_DIRECTIVES]
+                <div class="error-msg" *ngIf="editor.control.hasError('required') && (isChanged ||isSubmitted)">Required</div>`
 
 })
 export class TinyEditor implements AfterViewInit {
@@ -48,7 +47,7 @@ export class TinyEditor implements AfterViewInit {
                         editor.getBody().style.fontSize = '15px';
                         if (typeof that.value != "undefined") {
                             editor.setContent(that.value);
-                            that.editorFormControl.updateValue(that.value);
+                            that.editorFormControl.patchValue(that.value);
                         }
                     });
                     editor.on('keyup', (e, l) => {
@@ -104,7 +103,7 @@ export class TinyEditor implements AfterViewInit {
     ngOnChanges(changes) {
         if (tinymce.activeEditor && typeof this.value != "undefined") {
             tinymce.activeEditor.setContent(this.value);
-            this.editorFormControl.updateValue(this.value);
+            this.editorFormControl.patchValue(this.value);
         }
     }
 

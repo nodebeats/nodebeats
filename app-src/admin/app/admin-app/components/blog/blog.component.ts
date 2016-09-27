@@ -1,7 +1,6 @@
 /**
  * Created by sanedev on 6/27/16.
  */
-// import {TAB_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {TabView, TabPanel} from 'primeng/primeng';
 import{Component}from'@angular/core';
 import {BlogService} from "./blog.service";
@@ -12,9 +11,7 @@ import {BlogMetaTagEditorComponent} from './blog-metatag.component';
 
 @Component({
     selector: 'blog-management',
-    templateUrl: 'admin-templates/blog/blog-management.html',
-    providers: [BlogService],
-    directives: [TabView, TabPanel, BlogCategoryListComponent, BlogListComponent, BlogMetaTagEditorComponent, BlogDocListComponent]
+    templateUrl: 'admin-templates/blog/blog-management.html'
 })
 export class BlogManagementComponent {
     isCatList:boolean = true;

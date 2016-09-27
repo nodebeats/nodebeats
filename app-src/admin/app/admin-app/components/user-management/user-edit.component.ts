@@ -13,8 +13,7 @@ import {QUESTION_LIST} from "../../../shared/configs/security-question.config";
 
 @Component({
     selector: 'user-edit',
-    templateUrl: 'admin-templates/user-management/user-form.html',
-    directives: [Password, FormControlMessages, ImageUploader/*, FILE_UPLOAD_DIRECTIVES, NgClass, NgStyle, CORE_DIRECTIVES, TinyEditor*/]
+    templateUrl: 'admin-templates/user-management/user-form.html'
 })
 export class UserEditComponent implements OnInit {
     @Input() userId:string;

@@ -13,8 +13,6 @@ import {UserModel} from './user.model';
 @Component({
     selector: 'user-management',
     templateUrl: 'admin-templates/user-management/user-management.html',
-    providers: [UserService],
-    directives: [TabView, TabPanel, UserSettingComponent, UserSecurityUpdateComponent, UserPasswordUpdateComponent]
 })
 export class UserManagementComponent implements OnInit {
     @Output() showListEvent:EventEmitter<any> = new EventEmitter();

@@ -12,7 +12,6 @@ var core_1 = require('@angular/core');
 var login_model_1 = require('./login.model');
 var login_service_1 = require("./login.service");
 var forms_1 = require("@angular/forms");
-var control_valdation_message_component_1 = require('../../../shared/components/control-valdation-message.component');
 var general_config_1 = require("../../../shared/configs/general.config");
 var router_1 = require("@angular/router");
 var LoginComponent = (function () {
@@ -49,7 +48,8 @@ var LoginComponent = (function () {
         this._loginService.isValidLogin()
             .subscribe(function (isValid) {
             _this.isValidLogin = isValid;
-            var redirectRoute = general_config_1.Config.getAdminRoute();
+            // let redirectRoute = Config.getAdminRoute();
+            var redirectRoute = _this._loginService.redirectUrl;
             _this.adminRoute = redirectRoute ? redirectRoute : "/admin";
         }, function (error) { return _this.handleError(error); });
     };
@@ -123,7 +123,6 @@ var LoginComponent = (function () {
         core_1.Component({
             selector: 'login-comp',
             templateUrl: 'login-templates/login-form.html',
-            directives: [control_valdation_message_component_1.FormControlMessages],
             animations: [core_1.trigger('slideMsg', [
                     core_1.state('collapse, void', core_1.style({ opacity: 0 })),
                     core_1.state('expand', core_1.style({ opacity: 1 })),

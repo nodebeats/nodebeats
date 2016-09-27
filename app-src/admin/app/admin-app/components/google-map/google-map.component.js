@@ -11,8 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var google_map_service_1 = require("./google-map.service");
 var google_map_model_1 = require("./google-map.model");
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
-var alert_1 = require("../../../shared/components/alert/alert");
 var alert_model_1 = require("../../../shared/models/alert.model");
 var forms_1 = require("@angular/forms");
 var validation_service_1 = require("../../../shared/services/validation.service");
@@ -114,9 +112,7 @@ var GoogleMapComponent = (function () {
     GoogleMapComponent = __decorate([
         core_1.Component({
             selector: 'google-map',
-            templateUrl: 'admin-templates/google-map/google-map.html',
-            providers: [google_map_service_1.GoogleMapService],
-            directives: [control_valdation_message_component_1.FormControlMessages, alert_1.Alert]
+            templateUrl: 'admin-templates/google-map/google-map.html'
         }), 
         __metadata('design:paramtypes', [google_map_service_1.GoogleMapService, forms_1.FormBuilder])
     ], GoogleMapComponent);

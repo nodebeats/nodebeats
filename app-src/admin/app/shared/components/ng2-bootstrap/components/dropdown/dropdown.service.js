@@ -34,7 +34,7 @@ var DropdownService = (function () {
             return;
         }
         if (event && this.openScope.toggleEl &&
-            this.openScope.toggleEl.nativeElement === event.target) {
+            this.openScope.toggleEl.nativeElement.contains(event.target)) {
             return;
         }
         if (event && this.openScope.autoClose === exports.NONINPUT &&

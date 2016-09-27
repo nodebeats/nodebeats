@@ -1,0 +1,143 @@
+import {Component, EventEmitter, Output, Input, ViewChild, OnInit} from '@angular/core';
+import {GoogleAnalyticsService} from "./google-analytics.service";
+import {GoogleAnalyticsModel} from "./google-analytics.model";
+import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
+import {Alert} from "../../../shared/components/alert/alert";
+import {AlertModel} from "../../../shared/models/alert.model";
+import {ValidationService}from "../../../shared/services/validation.service";
+import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
+import {DocumentUploader} from '../../../shared/components/doc-uploader.component';
+
+@Component({
+    selector: 'google-analytics',
+    templateUrl: 'admin-templates/google-analytics/google-analytics.html',
+    providers: [GoogleAnalyticsService],
+    directives: [FormControlMessages, Alert, DocumentUploader]
+})
+export class GoogleAnalyticsComponent implements OnInit {
+    objAnalytics:GoogleAnalyticsModel = new GoogleAnalyticsModel();
+    error:any;
+    objAlert:AlertModel = new AlertModel();
+    analyticsForm:FormGroup;
+    isPost:boolean;
+    isSubmitted:boolean = false;
+
+    /* file upload */
+    allowedExt:string[] = ['json'];
+    allowedSize:number = 1; //MB
+    fileDeleted:boolean = false;
+    file:File;
+    fileName:string = "";
+    docFormControl:FormControl = new FormControl('', Validators.required);
+    /* End File Upload handle */
+
+
+    constructor(private _objService:GoogleAnalyticsService, private _formBuilder:FormBuilder) {
+        this.analyticsForm = this._formBuilder.group({
+            trackingId: ['', Validators.required],
+            viewId: ['', Validators.required],
+            docFormControl: this.docFormControl,
+            pollingInterval: ['', Validators.compose([ValidationService.minValueValidator(30), Validators.required])]
+        });
+    }
+
+    ngOnInit() {
+        this.getGoogleAnalytics();
+    }
+
+    getGoogleAnalytics() {
+        this._objService.getAnalyticsDetail()
+            .subscribe(res =>this.detailView(res),
+                error => this.errorMessage(error));
+    }
+
+    detailView(objRes:GoogleAnalyticsModel) {
+        objRes.pollingInterval = objRes.pollingInterval / 1000;
+        this.objAnalytics = objRes;
+        this.fileName = this.objAnalytics.serviceAccountKeyFileName;
+        // this.isFresh = false;
+    }
+
+    saveAnalytics() {
+        this.isSubmitted = true;
+        //this.fileControl.updateValue(this.fileName);
+        if (this.analyticsForm.valid) {
+   this.objAnalytics.pollingInterval = this.analyticsForm.controls['pollingInterval'].value * 1000;
+            if (!this.objAnalytics._id) {
+             
+                this.isPost = true;
+                this._objService.saveGoogleAnalytics(this.objAnalytics, this.file)
+                    .subscribe(res => this.resStatusMessage(res),
+                        error => this.errorMessage(error));
+            }
+            else {
+                this.isPost = false;
+                this._objService.updateGoogleAnalytics(this.objAnalytics, this.file)
+                    .subscribe(res => this.resStatusMessage(res),
+                        error => this.errorMessage(error));
+            }
+        }
+    }
+
+    // validateForm() {
+    //     if ((this.objAnalytics.api_Key != "" && typeof this.objAnalytics.api_Key != "undefined") || (this.objAnalytics.host != "" && typeof this.objAnalytics.host != "undefined"))
+    //         return true;
+    //     else {
+    //         this.objAlert.showAlert("danger", "Alert !!", "Please Enter Either Host or API Key");
+    //
+    //     }
+    // }
+
+    resStatusMessage(objAnalytics:any) {
+        this.objAlert.hideAlert();
+        if (this.isPost)
+            this.getGoogleAnalytics();
+        jQuery.jAlert({
+            'title': 'Success',
+            'content': objAnalytics.message,
+            'theme': 'green'
+        });
+    }
+
+    errorMessage(res:any) {
+        this.objAlert.showAlert("danger", "Alert !!", res.message, true);
+    }
+
+    /*
+     File Handle
+     */
+    onFileSelect(args) {
+        this.file = args;
+        if (this.file)
+            this.fileName = this.file.name;
+    }
+
+    onDeleteFile(imageId:string) {
+        jQuery.jAlert({
+            'type': 'confirm',
+            'title': 'Alert',
+            'confirmQuestion': 'Are you sure to delete the File ?',
+            'theme': 'red',
+            'onConfirm': (e, btn)=> {
+                e.preventDefault();
+                this._objService.deleteFile(this.objAnalytics.serviceAccountKeyFileName, this.objAnalytics.docProperties.docPath)
+                    .subscribe(res=> {
+                            jQuery.jAlert({
+                                'title': 'Success',
+                                'content': res.message,
+                                'theme': 'green'
+                            });
+                        },
+                        error=> {
+                            jQuery.jAlert({
+                                'title': 'Alert',
+                                'content': error.message,
+                                'theme': 'red'
+                            });
+                        });
+            }
+        });
+    }
+
+}
+

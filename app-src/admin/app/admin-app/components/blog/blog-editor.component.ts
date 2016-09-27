@@ -8,12 +8,10 @@ import {ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
 import  {Calendar} from "primeng/primeng";
 import {ImageUploader} from "../../../shared/components/image-uploader.component";
 import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
-import {TagInputComponent} from '../../../shared/components/tag-input/tag-input.component';
 
 @Component({
     selector: 'blog-editor',
-    templateUrl: 'admin-templates/blog/blog-editor.html',
-    directives: [FormControlMessages, TagInputComponent, Calendar, TinyEditor, ImageUploader],
+    templateUrl: 'admin-templates/blog/blog-editor.html'
 
     // styles: [style]
 })
@@ -103,7 +101,7 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
         });
         objRes.tags = tags;
         this.objBlog = objRes;
-        this.editorFormControl.updateValue(objRes.blogDescription);
+        this.editorFormControl.patchValue(objRes.blogDescription);
         let path:string = "";
         if (this.objBlog.bannerImage) {
             var cl = Config.Cloudinary;
@@ -117,7 +115,7 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
 
     saveBlog() {
         this.isSubmitted = true;
-        this.editorFormControl.updateValue(this.objBlog.blogDescription);
+        this.editorFormControl.patchValue(this.objBlog.blogDescription);
         if (this.blogForm.valid) {
             if (!this.blogId) {
                 this._objService.saveBlog(this.objBlog, this.file)

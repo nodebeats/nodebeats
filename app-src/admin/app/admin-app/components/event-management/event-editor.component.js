@@ -9,14 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var event_model_1 = require("./event.model");
 var event_service_1 = require("./event.service");
 var general_config_1 = require("../../../shared/configs/general.config");
 var enum_config_1 = require("../../../shared/configs/enum.config");
-var primeng_1 = require('primeng/primeng');
 var moment = require('moment');
-var image_uploader_component_1 = require("../../../shared/components/image-uploader.component");
 var forms_1 = require("@angular/forms");
 //declare var require;
 //const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
@@ -75,7 +72,7 @@ var EventEditorComponent = (function () {
     EventEditorComponent.prototype.saveEvent = function () {
         var _this = this;
         this.isSubmitted = true;
-        this.eventForm.controls['imageFormControl'].updateValue(this.fileName);
+        this.eventForm.controls['imageFormControl'].patchValue(this.fileName);
         if (this.eventForm.valid) {
             if (!this.eventId) {
                 this._objService.saveEvent(this.objEvent, this.file)
@@ -157,8 +154,7 @@ var EventEditorComponent = (function () {
     EventEditorComponent = __decorate([
         core_1.Component({
             selector: 'event-editor',
-            templateUrl: 'admin-templates/event-management/event-editor.html',
-            directives: [control_valdation_message_component_1.FormControlMessages, primeng_1.Calendar, image_uploader_component_1.ImageUploader]
+            templateUrl: 'admin-templates/event-management/event-editor.html'
         }), 
         __metadata('design:paramtypes', [event_service_1.EventService, forms_1.FormBuilder])
     ], EventEditorComponent);

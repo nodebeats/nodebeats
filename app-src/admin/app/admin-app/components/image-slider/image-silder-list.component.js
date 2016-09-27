@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var image_slider_service_1 = require("./image-slider.service");
 var image_slider_model_1 = require("./image-slider.model");
-var image_slider_editor_component_1 = require("./image-slider-editor.component");
 var ImageSliderComponent = (function () {
     function ImageSliderComponent(_objService) {
         this._objService = _objService;
@@ -91,9 +90,7 @@ var ImageSliderComponent = (function () {
     ImageSliderComponent = __decorate([
         core_1.Component({
             selector: 'image-slider-list',
-            templateUrl: 'admin-templates/image-slider/image-slider-list.html',
-            providers: [image_slider_service_1.ImageSliderService],
-            directives: [image_slider_editor_component_1.ImageSliderEditorComponent]
+            templateUrl: 'admin-templates/image-slider/image-slider-list.html'
         }), 
         __metadata('design:paramtypes', [image_slider_service_1.ImageSliderService])
     ], ImageSliderComponent);

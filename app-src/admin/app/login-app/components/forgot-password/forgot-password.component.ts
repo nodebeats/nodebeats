@@ -1,5 +1,5 @@
 import {Component, OnInit, trigger, style, state, transition, animate} from '@angular/core';
-import {ForgotPasswordModel} from './forget-password.model';
+import {ForgotPasswordModel} from './forgot-password.model';
 import {ForgotPasswordService} from "./forgot-password.service";
 import {FormBuilder, Validators, FormControl, FormGroup} from "@angular/forms";
 import {FormControlMessages} from '../../../shared/components/control-valdation-message.component';
@@ -10,7 +10,6 @@ import {ValidationService} from "../../../shared/services/validation.service";
     {
         selector: 'forgot-password',
         templateUrl: 'login-templates/forgot-password.html',
-        directives: [FormControlMessages],
         animations: [trigger(
             'slideMsg',
             [

@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
 // import {Collapse} from '../../directives/collapse/collapse';
 var accordion_1 = require('./accordion');
 var AccordionItem = (function () {
@@ -73,7 +72,6 @@ var AccordionItem = (function () {
     AccordionItem = __decorate([
         core_1.Component({
             selector: 'accordion-item, [accordion-item]',
-            directives: [common_1.NgClass],
             template: "<div (click)=\"toggleOpen($event)\">\n                 <span *ngIf=\"heading\" class=\"fuel-ui-clickable\" [ngClass]=\"{'text-muted': disabled}\">{{heading}}</span>\n                      <ng-content select=\"accordion-heading\"></ng-content>\n                         <ng-content select=\"[accordion-heading]\"></ng-content>\n                </div>\n                    <div class=\"fuel-ui-collapse\"  [style.height]='divHeight'>\n                        <ng-content></ng-content>\n                    </div>",
             styles: ["\n    \t\t\t\t\t.fuel-ui-collapse {\n              \toverflow-y: hidden;\n              \ttransition: height 1s ease;\n              }\n    \t\t\t\t"]
         }), 

@@ -8,8 +8,6 @@ import {Accordion} from './accordion';
 
 @Component({
     selector: 'accordion-item, [accordion-item]',
-    directives: [NgClass],
-
     template: `<div (click)="toggleOpen($event)">
                  <span *ngIf="heading" class="fuel-ui-clickable" [ngClass]="{'text-muted': disabled}">{{heading}}</span>
                       <ng-content select="accordion-heading"></ng-content>

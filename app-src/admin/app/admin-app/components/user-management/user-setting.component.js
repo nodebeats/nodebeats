@@ -11,9 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var user_service_1 = require("./user.service");
 var user_model_1 = require("./user.model");
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var forms_1 = require("@angular/forms");
-var slide_toggle_1 = require('@angular2-material/slide-toggle/slide-toggle');
 var UserSettingComponent = (function () {
     function UserSettingComponent(_objUserService, _formBuilder) {
         this._objUserService = _objUserService;
@@ -107,7 +105,7 @@ var UserSettingComponent = (function () {
         }
     };
     UserSettingComponent.prototype.clearTextField = function () {
-        this.userSettingForm.controls['token'].updateValue("");
+        this.userSettingForm.controls['token'].patchValue("");
     };
     __decorate([
         core_1.Input(), 
@@ -128,8 +126,7 @@ var UserSettingComponent = (function () {
     UserSettingComponent = __decorate([
         core_1.Component({
             selector: 'user-setting',
-            templateUrl: 'admin-templates/user-management/user-setting.html',
-            directives: [slide_toggle_1.MdSlideToggle, control_valdation_message_component_1.FormControlMessages]
+            templateUrl: 'admin-templates/user-management/user-setting.html'
         }), 
         __metadata('design:paramtypes', [user_service_1.UserService, forms_1.FormBuilder])
     ], UserSettingComponent);

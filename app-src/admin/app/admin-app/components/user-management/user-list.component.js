@@ -11,11 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var user_service_1 = require("./user.service");
 var user_model_1 = require("./user.model");
-var user_registration_component_1 = require("./user-registration.component");
-var user_management_component_1 = require('./user-management.component');
-var user_view_component_1 = require("./user-view.component");
-var user_edit_component_1 = require("./user-edit.component");
-var primeng_1 = require('primeng/primeng');
 var UserListComponent = (function () {
     function UserListComponent(_objUserService) {
         this._objUserService = _objUserService;
@@ -138,9 +133,7 @@ var UserListComponent = (function () {
     UserListComponent = __decorate([
         core_1.Component({
             selector: 'admin-user',
-            templateUrl: 'admin-templates/user-management/user-list.html',
-            providers: [user_service_1.UserService],
-            directives: [primeng_1.Paginator, user_registration_component_1.UserRegistrationComponent, user_view_component_1.UserViewComponent, user_edit_component_1.UserEditComponent, user_management_component_1.UserManagementComponent],
+            templateUrl: 'admin-templates/user-management/user-list.html'
         }), 
         __metadata('design:paramtypes', [user_service_1.UserService])
     ], UserListComponent);

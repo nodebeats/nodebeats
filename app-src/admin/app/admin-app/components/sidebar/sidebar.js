@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var accordionItem_1 = require('../../../shared/components/accordion/accordionItem');
 var sidebar_model_1 = require('./sidebar.model');
 var SidebarCmp = (function () {
     function SidebarCmp() {
@@ -26,7 +25,6 @@ var SidebarCmp = (function () {
         };
         this.sidebarRoute = [];
         var menuItem = [];
-        menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/dashboard", "Dashboard", "fa-dashboard"));
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/user-management", "User", "fa-user"));
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/blog", "Blog", "fa-newspaper-o"));
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/contact", "Contact List", "fa-list"));
@@ -39,7 +37,6 @@ var SidebarCmp = (function () {
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/news", "News", "fa-newspaper-o"));
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/partner", "Partners", "fa-link"));
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/team", "Team Management", "fa-users"));
-        menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/testimonial", "Testimonial", "fa-comment-o"));
         this.sidebarRoute.push(new sidebar_model_1.SidebarParentMenuModel(menuItem, null, "", ""));
         menuItem = [];
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/cloudinary", "Cloudinary", "fa-cloud"));
@@ -64,8 +61,7 @@ var SidebarCmp = (function () {
     SidebarCmp = __decorate([
         core_1.Component({
             selector: 'sidebar',
-            templateUrl: 'admin-templates/shared/sidebar.html',
-            directives: [accordionItem_1.ACCORDION_PROVIDERS]
+            templateUrl: 'admin-templates/shared/sidebar.html'
         }), 
         __metadata('design:paramtypes', [])
     ], SidebarCmp);

@@ -4,6 +4,9 @@ var TypeaheadUtils = (function () {
     function TypeaheadUtils() {
     }
     TypeaheadUtils.latinize = function (str) {
+        if (!str) {
+            return '';
+        }
         return str.replace(/[^A-Za-z0-9\[\] ]/g, function (a) {
             return TypeaheadUtils.latinMap[a] || a;
         });
@@ -32,6 +35,25 @@ var TypeaheadUtils = (function () {
             }
         }
         return result;
+    };
+    TypeaheadUtils.getValueFromObject = function (object, option) {
+        if (!option || typeof object !== 'object') {
+            return object.toString();
+        }
+        if (option.endsWith('()')) {
+            var functionName = option.slice(0, option.length - 2);
+            return object[functionName]().toString();
+        }
+        var properties = option.replace(/\[(\w+)\]/g, '.$1')
+            .replace(/^\./, '');
+        var propertiesArray = properties.split('.');
+        for (var _i = 0, propertiesArray_1 = propertiesArray; _i < propertiesArray_1.length; _i++) {
+            var property = propertiesArray_1[_i];
+            if (property in object) {
+                object = object[property];
+            }
+        }
+        return object.toString();
     };
     TypeaheadUtils.latinMap = latin_map_1.latinMap;
     return TypeaheadUtils;

@@ -11,8 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var news_service_1 = require("./news.service");
 var news_model_1 = require("./news.model");
-var primeng_1 = require('primeng/primeng');
-var news_editor_component_1 = require("./news-editor.component");
 var NewsListComponent = (function () {
     function NewsListComponent(_objService) {
         this._objService = _objService;
@@ -149,8 +147,7 @@ var NewsListComponent = (function () {
     NewsListComponent = __decorate([
         core_1.Component({
             selector: 'news-list',
-            templateUrl: 'admin-templates/news/news-list.html',
-            directives: [primeng_1.Paginator, news_editor_component_1.NewsEditorComponent]
+            templateUrl: 'admin-templates/news/news-list.html'
         }), 
         __metadata('design:paramtypes', [news_service_1.NewsService])
     ], NewsListComponent);

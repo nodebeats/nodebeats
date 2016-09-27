@@ -12,9 +12,7 @@ import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import {ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
 @Component({
     selector: 'google-analytics',
-    templateUrl: 'admin-templates/organization-information/orginfo.html',
-    providers: [OrganizationInfoService, CountryListService],
-    directives: [FormControlMessages, Alert, ImageUploader]
+    templateUrl: 'admin-templates/organization-information/orginfo.html'
 })
 export class OrganizationInfoComponent implements OnInit, AfterViewInit {
     objOrg:OrganizationModel = new OrganizationModel();

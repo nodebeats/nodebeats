@@ -6,10 +6,7 @@ import{ContactViewComponent} from "./contact-view.component";
 
 @Component({
     selector: 'contact-list',
-    templateUrl: 'admin-templates/contact/contact-list.html',
-    providers: [ContactService],
-    directives: [Paginator, ContactViewComponent]
-    //   pipes: [PaginatePipe]
+    templateUrl: 'admin-templates/contact/contact-list.html'
 })
 
 export class ContactListCompoent implements OnInit {

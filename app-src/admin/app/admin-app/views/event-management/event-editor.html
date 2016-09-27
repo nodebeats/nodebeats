@@ -8,8 +8,8 @@
                            name="eventTitle"
                            placeholder="Enter Event Title"
                            [formControl]="eventForm.controls['eventTitle']">
-                    <control-messages [form]="eventForm" [isSubmitted]="isSubmitted"
-                                      control="eventTitle"></control-messages>
+                    <control-messages  [isSubmitted]="isSubmitted"
+                                      [control]="eventForm.controls['eventTitle']"></control-messages>
 
                 </div>
                 <div class="form-group">
@@ -19,8 +19,8 @@
                           placeholder="Enter Event Description"
                           rows="5"
                           [formControl]="eventForm.controls['description']"></textarea>
-                    <control-messages [form]="eventForm" [isSubmitted]="isSubmitted"
-                                      control="description"></control-messages>
+                    <control-messages  [isSubmitted]="isSubmitted"
+                                      [control]="eventForm.controls['eventTitle']"></control-messages>
 
                 </div>
             </div>

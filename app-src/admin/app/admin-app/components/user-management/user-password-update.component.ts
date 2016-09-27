@@ -10,8 +10,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {LoginService} from "../../../login-app/components/login/login.service";
 @Component({
     selector: 'user-password',
-    templateUrl: 'admin-templates/user-management/user-password-update.html',
-    directives: [Password, FormControlMessages]
+    templateUrl: 'admin-templates/user-management/user-password-update.html'
 })
 
 export class UserPasswordUpdateComponent {

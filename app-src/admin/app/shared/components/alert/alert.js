@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
 var Alert = (function () {
     function Alert(el) {
         this.displayed = false;
@@ -44,8 +43,7 @@ var Alert = (function () {
     Alert = __decorate([
         core_1.Component({
             selector: 'alert',
-            template: "<div *ngIf=\"displayed\" role=\"alert\"  class=\"alert fuel-ui-alert-fade-in\" [ngClass]=\"{'alert-success': type === 'success', 'alert-info': type === 'info', 'alert-warning': type === 'warning', 'alert-danger': type === 'danger' }\" >\n                <button *ngIf=\"closeButton\" (click)=\"close()\" type=\"button\" class=\"close\" aria-label=\"Close\">\n                   <span aria-hidden=\"true\">&#215;</span>\n                    <span class=\"sr-only\">Close</span>\n                 </button>\n                  <ng-content></ng-content>\n                </div>",
-            directives: [common_1.CORE_DIRECTIVES]
+            template: "<div *ngIf=\"displayed\" role=\"alert\"  class=\"alert fuel-ui-alert-fade-in\" [ngClass]=\"{'alert-success': type === 'success', 'alert-info': type === 'info', 'alert-warning': type === 'warning', 'alert-danger': type === 'danger' }\" >\n                <button *ngIf=\"closeButton\" (click)=\"close()\" type=\"button\" class=\"close\" aria-label=\"Close\">\n                   <span aria-hidden=\"true\">&#215;</span>\n                    <span class=\"sr-only\">Close</span>\n                 </button>\n                  <ng-content></ng-content>\n                </div>"
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], Alert);

@@ -10,9 +10,7 @@ import {ValidationService} from "../../../shared/services/validation.service";
 
 @Component({
     selector: 'email-service',
-    templateUrl: 'admin-templates/email-service/email-service.html',
-    providers: [EmailServiceService],
-    directives: [FormControlMessages, FormControlMessages, Alert]
+    templateUrl: 'admin-templates/email-service/email-service.html'
 })
 export class EmailServiceComponent implements OnInit {
     objEmailService:EmailServiceModel = new EmailServiceModel();

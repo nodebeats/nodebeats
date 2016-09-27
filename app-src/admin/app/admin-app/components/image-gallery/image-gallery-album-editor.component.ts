@@ -6,8 +6,7 @@ import {Validators, FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'image-gallery-album-editor',
-    templateUrl: 'admin-templates/image-gallery/image-gallery-album-editor.html',
-    directives: [ FormControlMessages]
+    templateUrl: 'admin-templates/image-gallery/image-gallery-album-editor.html'
 })
 
 export class ImageAlbumEditorComponent implements OnInit {

@@ -11,8 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var news_service_1 = require("./news.service");
 var news_model_1 = require("./news.model");
-// import {Pagination} from 'fuel-ui/fuel-ui';
-var news_image_editor_component_1 = require("./news-image-editor.component");
 var NewsImageListComponent = (function () {
     /* Pagination */
     // perPage:number = 10;
@@ -156,8 +154,7 @@ var NewsImageListComponent = (function () {
     NewsImageListComponent = __decorate([
         core_1.Component({
             selector: 'news-image-list',
-            templateUrl: 'admin-templates/news/news-image-list.html',
-            directives: [news_image_editor_component_1.NewsImageEditorComponent]
+            templateUrl: 'admin-templates/news/news-image-list.html'
         }), 
         __metadata('design:paramtypes', [news_service_1.NewsService, core_1.ElementRef])
     ], NewsImageListComponent);

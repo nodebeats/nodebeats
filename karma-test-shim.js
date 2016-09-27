@@ -11,7 +11,7 @@ function isJsFile(path) {
 }
 
 function isSpecFile(path) {
-    return path.slice(-8) == '-spec.js';
+    return path.slice(-8) == '.test.js';
 }
 
 function isBuiltFile(path) {
@@ -29,14 +29,36 @@ System.config({
 });
 
 System.config(
-    {
+    { paths: {
+        // paths serve as alias
+        'npm:': 'node_modules/'
+    },
         map: {
             'rxjs': 'node_modules/rxjs',
-            '@angular': 'node_modules/@angular',
+            '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
+            '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
+            '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
+            '@angular/router/testing': 'npm:@angular/router/bundles/router-testing.umd.js',
+            '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
+
+            '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
+            '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
+            '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
+            '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+            '@angular2-material/slide-toggle': 'npm:@angular2-material/slide-toggle/slide-toggle.umd.js',
+            '@angular2-material/core': 'npm:@angular2-material/core/core.umd.js',
+
+            // angular testing umd bundles
+            '@angular/core/testing': 'npm:@angular/core/bundles/core-testing.umd.js',
+            '@angular/common/testing': 'npm:@angular/common/bundles/common-testing.umd.js',
+            '@angular/compiler/testing': 'npm:@angular/compiler/bundles/compiler-testing.umd.js',
+            '@angular/platform-browser/testing': 'npm:@angular/platform-browser/bundles/platform-browser-testing.umd.js',
+            '@angular/platform-browser-dynamic/testing': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+
             'app-src': 'app-src',
             'cloudinary': 'public/cloudinary/js/jquery.cloudinary.js',
-            'primeng': 'app-src/app/shared/components/primeng',
-            'ng2-bootstrap': 'app-src/app/shared/components/ng2-bootstrap',
+            'primeng': 'npm:primeng',
+            'ng2-bootstrap': 'app-src/admin/app/shared/components/ng2-bootstrap',
             '@angular2-material': 'node_modules/@angular2-material',
             'moment': 'node_modules/moment/moment.js',
             'plugins': 'public/plugins',
@@ -47,38 +69,7 @@ System.config(
                 main: 'main.js',
                 defaultExtension: 'js'
             },
-            '@angular/core': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
-            '@angular/compiler': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
-            '@angular/common': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
-            '@angular/http': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
-            '@angular/platform-browser': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
-            '@angular/platform-browser-dynamic': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
-            '@angular/forms': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
-            '@angular/router': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
+
             'rxjs': {
                 defaultExtension: 'js'
             },
@@ -98,6 +89,7 @@ System.config(
                 defaultExtension: 'js'
             },
             'primeng': {
+                main:"primeng.js",
                 defaultExtension: 'js'
             },
             'ng2-bootstrap': {
@@ -120,10 +112,10 @@ Promise.all([
     var testing = providers[0];
     var testingBrowser = providers[1];
 
-    testing.setBaseTestProviders(testingBrowser.TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
-        testingBrowser.TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
+    testing.TestBed.initTestEnvironment(testingBrowser.BrowserDynamicTestingModule,
+        testingBrowser.platformBrowserDynamicTesting());
 
-}).then(function () {
+}).then(function() {
     // Finally, load all spec files.
     // This will run the tests directly.
     return Promise.all(
@@ -132,113 +124,3 @@ Promise.all([
         }));
 }).then(__karma__.start, __karma__.error);
 
-
-// /* global System */
-// /* global __karma__ */
-// /* global System */
-// /* global __karma__ */
-//
-// // Cancel Karma's synchronous start,
-// // we will call `__karma__.start()` later, once all the specs are loaded.
-// __karma__.loaded = function () {
-// };
-//
-// // Set the base url of our scripts
-// System.baseURL = "/base";
-//
-// // Here we set all the preffixes so that we'll
-// // be able for example to import 'test/test_name'
-// // instead of 'scripts/build/test_name'
-// System.paths = {
-//     // 'app/*': 'app/admin-app/**/*.js',
-//     'app/admin-app/component/*': '/base/app/admin-app/**/*.js',
-//     'angular2/*': 'angular2/*',
-//     'rx': 'rx'
-// };
-//
-// // paths that include spec and ends with .js
-// function onlySpecFiles(path) {
-//     return /spec\.js$/.test(path);
-// }
-//
-// // takes paths and normalize them to module names
-// // by removing a base url preffix and .js suffix
-// function karmaFileToModule(fileName) {
-//     return fileName.replace(System.baseURL, '')
-//         .replace('.js', '');
-// }
-// Promise.all(
-//     Object.keys(window.__karma__.files) // Takes all files that served by karma
-//         .filter(onlySpecFiles)  // choose only test files
-//         .map(karmaFileToModule) // normalize them to module names
-//         .map(function (moduleName) {
-//             return System.import(moduleName) // import each module
-//                 .then(function (module) {
-//                     if (module.hasOwnProperty('main')) {
-//                         console.log(module)
-//                         module.main(); //expose the tests
-//                     } else {
-//                         throw new Error('Module ' + moduleName + ' does not implement main() method.');
-//                     }
-//                 });
-//         })).then(function () {
-//     __karma__.start(); // after all tests were exposed
-// }, function (error) {
-//     console.error(error.stack || error);
-//     __karma__.start();
-// });
-
-
-// Tun on full stack traces in errors to help debugging
-// Error.stackTraceLimit = Infinity;
-//
-// jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
-//
-// // // Cancel Karma's synchronous start,
-// // // we will call `__karma__.start()` later, once all the specs are loaded.
-// __karma__.loaded = function() {};
-//
-// System.config({
-//     packages: {
-//         'base/app/admin-app': {
-//             defaultExtension: 'js',
-//             map: Object.keys(window.__karma__.files).filter(onlyAppFiles).reduce(createPathRecords, {})
-//         }
-//     }
-// });
-//
-// System.import('angular2/src/platform/browser/browser_adapter')
-//     .then(function(browser_adapter) { browser_adapter.BrowserDomAdapter.makeCurrent(); })
-//     .then(function() { return Promise.all(resolveTestFiles()); })
-//     .then(function() { __karma__.start(); },
-//         function(error) { console.log(error) });
-//
-// function createPathRecords(pathsMapping, appPath) {
-//     // creates local module name mapping to global path with karma's fingerprint in path, e.g.:
-//     // './vg-player/vg-player':
-//     // '/base/dist/vg-player/vg-player.js?f4523daf879cfb7310ef6242682ccf10b2041b3e'
-//     var pathParts = appPath.split('/');
-//     var moduleName = './' + pathParts.slice(Math.max(pathParts.length - 2, 1)).join('/');
-//     moduleName = moduleName.replace(/\.js$/, '');
-//     pathsMapping[moduleName] = appPath + '?' + window.__karma__.files[appPath];
-//     return pathsMapping;
-// }
-//
-// function onlyAppFiles(filePath) {
-//     return /\/base\/app\/admin-app\/\/(?!.*\spec\.js$).*\.js$/.test(filePath);
-//
-// }
-//
-// function onlySpecFiles(path) {
-//     return /\-spec\.js$/.test(path);
-// }
-//
-// function resolveTestFiles() {
-//     return Object.keys(window.__karma__.files)  // All files served by Karma.
-//         .filter(onlySpecFiles)
-//         .map(function(moduleName) {
-//             // loads all spec files via their global module names (e.g.
-//             // 'base/dist/vg-player/vg-player.spec')
-//             return System.import(moduleName);
-//         });
-// }

@@ -1,16 +1,12 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {ApplicationLogService} from "./application-log.service";
 import {ApplicationLogModel, ApplicationLogResponse} from "./application-log.model";
-import {Paginator, Dialog} from 'primeng/primeng';
 import * as moment from 'moment'
-import  {Calendar} from "primeng/primeng";
 import {FormControl} from "@angular/forms";
 
 @Component({
     selector: 'application-log-list',
     templateUrl: 'admin-templates/application-log/application-log.html',
-    providers: [ApplicationLogService],
-    directives: [Paginator, Dialog, Calendar]
 })
 
 export class ApplicationLogComponent implements OnInit {

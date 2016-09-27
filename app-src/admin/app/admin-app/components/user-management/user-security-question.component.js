@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var user_service_1 = require("./user.service");
 var user_model_1 = require("./user.model");
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var forms_1 = require("@angular/forms");
 var security_question_config_1 = require('../../../shared/configs/security-question.config');
 var UserSecurityUpdateComponent = (function () {
@@ -70,8 +69,7 @@ var UserSecurityUpdateComponent = (function () {
     UserSecurityUpdateComponent = __decorate([
         core_1.Component({
             selector: 'user-security',
-            templateUrl: 'admin-templates/user-management/user-security-update.html',
-            directives: [control_valdation_message_component_1.FormControlMessages]
+            templateUrl: 'admin-templates/user-management/user-security-update.html'
         }), 
         __metadata('design:paramtypes', [user_service_1.UserService, forms_1.FormBuilder])
     ], UserSecurityUpdateComponent);

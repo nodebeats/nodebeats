@@ -6,8 +6,7 @@ import {BlogCategoryEditorComponent} from  "./blog-category-editor.component";
 
 @Component({
     selector: 'blog-category-list',
-    templateUrl: 'admin-templates/blog/blog-category-list.html',
-    directives: [BlogCategoryEditorComponent]
+    templateUrl: 'admin-templates/blog/blog-category-list.html'
 })
 
 export class BlogCategoryListComponent implements OnInit,OnChanges {

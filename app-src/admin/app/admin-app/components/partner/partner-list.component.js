@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var partner_service_1 = require("./partner.service");
 var partner_model_1 = require("./partner.model");
-var partner_editor_component_1 = require("./partner-editor.component");
 var PartnerComponent = (function () {
     function PartnerComponent(_objService) {
         this._objService = _objService;
@@ -104,9 +103,7 @@ var PartnerComponent = (function () {
     PartnerComponent = __decorate([
         core_1.Component({
             selector: 'partner-list',
-            templateUrl: 'admin-templates/partner/partner-list.html',
-            providers: [partner_service_1.PartnerService],
-            directives: [partner_editor_component_1.PartnerEditorComponent]
+            templateUrl: 'admin-templates/partner/partner-list.html'
         }), 
         __metadata('design:paramtypes', [partner_service_1.PartnerService])
     ], PartnerComponent);

@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var email_template_service_1 = require("./email-template.service");
 var email_template_model_1 = require("./email-template.model");
-var primeng_1 = require('primeng/primeng');
 var router_1 = require("@angular/router");
 var EmailTemplateListComponent = (function () {
     function EmailTemplateListComponent(_objService, router) {
@@ -105,9 +104,7 @@ var EmailTemplateListComponent = (function () {
     EmailTemplateListComponent = __decorate([
         core_1.Component({
             selector: 'email-template-list',
-            templateUrl: 'admin-templates/email-template/email-template-list.html',
-            providers: [email_template_service_1.EmailTemplateService],
-            directives: [primeng_1.Paginator]
+            templateUrl: 'admin-templates/email-template/email-template-list.html'
         }), 
         __metadata('design:paramtypes', [email_template_service_1.EmailTemplateService, router_1.Router])
     ], EmailTemplateListComponent);

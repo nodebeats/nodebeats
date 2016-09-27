@@ -11,9 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var image_gallery_service_1 = require("./image-gallery.service");
 var image_gallery_model_1 = require("./image-gallery.model");
-var image_gallery_image_editor_component_1 = require("./image-gallery-image-editor.component");
-var primeng_1 = require('primeng/primeng');
-var fadeInDirective_1 = require('../../../shared/directives/fadeInDirective');
 var ImageListComponent = (function () {
     // /* End Pagination */
     function ImageListComponent(_objService, eleRef) {
@@ -169,8 +166,7 @@ var ImageListComponent = (function () {
         core_1.Component({
             selector: 'image-gallery-image-list',
             templateUrl: 'admin-templates/image-gallery/image-gallery-image-list.html',
-            providers: [image_gallery_service_1.ImageGalleryService],
-            directives: [fadeInDirective_1.FadeInDirective, primeng_1.Paginator, image_gallery_image_editor_component_1.ImageGalleryImageEditorComponent]
+            providers: [image_gallery_service_1.ImageGalleryService]
         }), 
         __metadata('design:paramtypes', [image_gallery_service_1.ImageGalleryService, core_1.ElementRef])
     ], ImageListComponent);

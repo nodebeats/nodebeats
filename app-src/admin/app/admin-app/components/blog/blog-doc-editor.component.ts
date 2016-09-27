@@ -4,13 +4,12 @@ import {BlogDocumentModel} from "./blog.model";
 import {BlogService} from "./blog.service";
 import {Config} from "../../../shared/configs/general.config";
 import {DocumentUploader} from "../../../shared/components/doc-uploader.component";
-import {REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
+import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 
 
 @Component({
     selector: 'blog-doc-editor',
-    templateUrl: 'admin-templates/blog/blog-doc-editor.html',
-    directives: [FormControlMessages, DocumentUploader, REACTIVE_FORM_DIRECTIVES],
+    templateUrl: 'admin-templates/blog/blog-doc-editor.html'
     // styles: [style]
 })
 export class BlogDocEditorComponent implements OnInit {
@@ -56,7 +55,7 @@ export class BlogDocEditorComponent implements OnInit {
 
     saveBlogDoc() {
         this.isSubmitted = true;
-        this.docFormControl.updateValue(this.fileName);
+        this.docFormControl.patchValue(this.fileName);
         if (this.blogDocForm.valid) {
             if (!this.docId) {
                 this._objService.saveDocument(this.blogId, this.objBlogDoc, this.file)

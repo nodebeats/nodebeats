@@ -9,8 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var image_gallery_album_list_component_1 = require("./image-gallery-album-list.component");
-var image_gallery_image_list_component_1 = require("./image-gallery-image-list.component");
 var ImageGalleryComponent = (function () {
     function ImageGalleryComponent() {
         this.isImageList = false;
@@ -26,8 +24,7 @@ var ImageGalleryComponent = (function () {
     ImageGalleryComponent = __decorate([
         core_1.Component({
             selector: 'image-gallery',
-            templateUrl: 'admin-templates/image-gallery/image-gallery.html',
-            directives: [image_gallery_album_list_component_1.ImageAlbumListComponent, image_gallery_image_list_component_1.ImageListComponent]
+            templateUrl: 'admin-templates/image-gallery/image-gallery.html'
         }), 
         __metadata('design:paramtypes', [])
     ], ImageGalleryComponent);

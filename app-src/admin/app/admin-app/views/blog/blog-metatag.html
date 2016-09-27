@@ -3,13 +3,13 @@
         <form role="form" novalidate [formGroup]="blogMetaForm" (ngSubmit)="saveBlogMetaTag()">
             <div class="form-group">
                 <label>Meta Keyword</label>
-                <tag-input
+                <rl-tag-input
                         [(ngModel)]="objBlogMeta.metaKeyword"
                         placeholder="Enter Meta Keyworkd"
                         formControlName="metaKeyword"
                         [autoCompleteData]="autoCompleteData"
                         delimiterCode="188">
-                </tag-input>
+                </rl-tag-input>
 
             </div>
             <div class="form-group">

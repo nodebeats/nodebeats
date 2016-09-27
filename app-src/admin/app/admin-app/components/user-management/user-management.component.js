@@ -8,16 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-/**
- * Created by sanedev on 6/27/16.
- */
-// import {TAB_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-var primeng_1 = require('primeng/primeng');
 var core_1 = require('@angular/core');
-var user_service_1 = require("./user.service");
-var user_security_question_component_1 = require('./user-security-question.component');
-var user_password_update_component_1 = require('./user-password-update.component');
-var user_setting_component_1 = require('./user-setting.component');
 var user_model_1 = require('./user.model');
 var UserManagementComponent = (function () {
     function UserManagementComponent() {
@@ -46,8 +37,6 @@ var UserManagementComponent = (function () {
         core_1.Component({
             selector: 'user-management',
             templateUrl: 'admin-templates/user-management/user-management.html',
-            providers: [user_service_1.UserService],
-            directives: [primeng_1.TabView, primeng_1.TabPanel, user_setting_component_1.UserSettingComponent, user_security_question_component_1.UserSecurityUpdateComponent, user_password_update_component_1.UserPasswordUpdateComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], UserManagementComponent);

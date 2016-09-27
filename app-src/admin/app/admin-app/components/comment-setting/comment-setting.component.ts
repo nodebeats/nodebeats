@@ -1,15 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {CommentSettingService} from "./comment.service";
 import {CommentSettingModel} from "./comment.model";
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {AlertModel} from "../../../shared/models/alert.model";
-import {Alert} from "../../../shared/components/alert/alert";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 @Component({
     selector: 'comment-setting',
-    templateUrl: 'admin-templates/comment-setting/comment-setting.html',
-    providers: [CommentSettingService],
-    directives: [FormControlMessages, Alert]
+    templateUrl: 'admin-templates/comment-setting/comment-setting.html'
 })
 export class CommentSettingComponent implements OnInit {
     objComment:CommentSettingModel = new CommentSettingModel();

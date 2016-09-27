@@ -11,7 +11,7 @@ import {
 import {ValidationService} from "../services/validation.service";
 import {ImageCanvasSizeEnum} from "../configs/enum.config";
 import {Config} from "../configs/general.config";
-import {FormControl, REACTIVE_FORM_DIRECTIVES} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 import {FormControlMessages} from "./control-valdation-message.component";
 @Component({
     selector: 'image-uploader',
@@ -24,8 +24,7 @@ import {FormControlMessages} from "./control-valdation-message.component";
                     <label for="file"><i class="fa fa-upload" aria-hidden="true"> {{imageName?imageName:"Choose an Image..."}}</i></label>
                     <div class="error-msg" *ngIf="!isValidImage">*Supported Extensions : {{allowedExtMessage}} and max size : {{allowedSize}} MB</div>               
                   <control-messages [isSubmitted]="isSubmitted"
-                         [control]="imageFormControl"></control-messages>`,
-    directives: [REACTIVE_FORM_DIRECTIVES, FormControlMessages]
+                         [control]="imageFormControl"></control-messages>`
 
 })
 export class ImageUploader implements AfterViewInit,OnChanges {
@@ -103,7 +102,7 @@ export class ImageUploader implements AfterViewInit,OnChanges {
         var ctx = this.context;
         var reader = new FileReader();
         if (this.isValidImage) {
-            this.imageFormControl.updateValue(this.file.name);
+            this.imageFormControl.patchValue(this.file.name);
             if (!this.imageName)
                 this.isFresh = true;
             this.imageName = this.file.name;
@@ -125,7 +124,7 @@ export class ImageUploader implements AfterViewInit,OnChanges {
             this.fileSelectedEvent.emit(this.file);
         }
         else {
-            this.imageFormControl.updateValue("");
+            this.imageFormControl.patchValue("");
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             this.drawImageToCanvas(Config.InvalidImage);
         }
@@ -134,7 +133,7 @@ export class ImageUploader implements AfterViewInit,OnChanges {
     onDeleteFile(imageId:string) {
         this.file = null;
         this.imageName = "";
-        this.imageFormControl.updateValue("");
+        this.imageFormControl.patchValue("");
         this.inputFile.nativeElement.value = "";
         this.drawImageToCanvas(this.drawImagePath);
         if (!this.isFresh)
@@ -144,7 +143,7 @@ export class ImageUploader implements AfterViewInit,OnChanges {
 
     ngOnChanges() {
         if (this.imageName)
-            this.imageFormControl.updateValue(this.imageName);
+            this.imageFormControl.patchValue(this.imageName);
         if (this.previewCanvas && !this.isSubmitted)
             this.drawImageToCanvas(this.drawImagePath);
     }

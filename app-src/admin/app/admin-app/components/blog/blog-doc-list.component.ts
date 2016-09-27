@@ -6,8 +6,7 @@ import{BlogDocEditorComponent} from "./blog-doc-editor.component";
 
 @Component({
     selector: 'blog-doc-list',
-    templateUrl: 'admin-templates/blog/blog-doc-list.html',
-    directives: [/*Pagination,*/BlogDocEditorComponent]
+    templateUrl: 'admin-templates/blog/blog-doc-list.html'
 })
 
 export class BlogDocListComponent implements OnInit {

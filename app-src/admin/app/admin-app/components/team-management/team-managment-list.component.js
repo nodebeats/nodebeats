@@ -11,8 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var team_managment_service_1 = require("./team-managment.service");
 var team_managment_model_1 = require("./team-managment.model");
-var team_management_editor_component_1 = require("./team-management-editor.component");
-var primeng_1 = require('primeng/primeng');
 var TeamManagementComponent = (function () {
     function TeamManagementComponent(_objService) {
         this._objService = _objService;
@@ -124,9 +122,7 @@ var TeamManagementComponent = (function () {
     TeamManagementComponent = __decorate([
         core_1.Component({
             selector: 'team-management-list',
-            templateUrl: 'admin-templates/team-management/team-management-list.html',
-            providers: [team_managment_service_1.TeamManagementService],
-            directives: [primeng_1.Paginator, team_management_editor_component_1.TeamManagementEditorComponent]
+            templateUrl: 'admin-templates/team-management/team-management-list.html'
         }), 
         __metadata('design:paramtypes', [team_managment_service_1.TeamManagementService])
     ], TeamManagementComponent);

@@ -5,7 +5,7 @@
                 <label>Title</label>
                 <input class="form-control" [(ngModel)]="objHtml.htmlContentTitle" name="title"
                        placeholder="Enter Title" [formControl]="htmlForm.controls['title']">
-                <control-messages [form]="htmlForm" [isSubmitted]="isSubmitted" control="title"></control-messages>
+                <control-messages  [isSubmitted]="isSubmitted" [control]="htmlForm.controls['title']"></control-messages>
             </div>
 
             <div class="form-group">

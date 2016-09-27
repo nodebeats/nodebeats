@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<title><%= webpackConfig.metadata.title %></title>-->
+    <title>Nodebeat</title>
+    <meta name="description" content="<%= webpackConfig.metadata.title %>">
+    <!-- Base CSS -->
+    <link rel="stylesheet" type="text/css" href="scripts/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="scripts/primeui/themes/omega/theme.css"/>
+    <link rel="stylesheet" type="text/css" href="scripts/primeui/primeui-ng-all.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <!--Bundled Css From Webpack-->
+    <link rel="stylesheet" type="text/css" href="dist/style.css">
+    <!--End Bundled Css From Webpack-->
+    <!--End of Base css-->
+    <!--Base JS -->
+    <script type="text/javascript" src="scripts/primeui/primeui-ng-all.min.js"></script>
+    <script type="text/javascript" src="scripts/tether/dist/js/tether.min.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/cloudinary-jquery/cloudinary-jquery.js"></script>
+    <script type="text/javascript" src="plugins/tinymce/tinymce.js" async></script>
+       <!--End of Base Css-->
+
+    <!-- base url -->
+    <!--<base href="<%= webpackConfig.metadata.baseUrl %>">-->
+
+</head>
+
+<body>
+
+<app>
+    <!-- Preloader -->
+    <div class="loader">
+    </div>
+    <!-- End Preloader -->
+</app>
+<script type="text/javascript" src="dist/polyfills.bundle.js"></script>
+<script type="text/javascript" src="dist/vendor.bundle.js"></script>
+<script type="text/javascript" src="dist/main.bundle.js"></script>
+</body>
+<script type="text/javascript">
+    /* Scripts for Google Api */
+    (function (w, d, s, g, js, fs) {
+        g = w.gapi || (w.gapi = {});
+        g.analytics = {
+            q: [], ready: function (f) {
+                this.q.push(f);
+            }
+        };
+        js = d.createElement(s);
+        fs = d.getElementsByTagName(s)[0];
+        js.src = 'https://apis.google.com/js/platform.js';
+        fs.parentNode.insertBefore(js, fs);
+        js.onload = function () {
+            g.load('analytics');
+        };
+    }(window, document, 'script'));
+</script>
+<!--Verifying Authentication before loading the main bundle-->
+<script type="text/javascript">
+
+</script>
+</html>

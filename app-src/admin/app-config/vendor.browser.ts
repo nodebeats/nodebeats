@@ -12,8 +12,7 @@ import '@angular/forms';
 import '@angular/http';
 import '@angular/router';
 // RxJS
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
+
 
 if ('production' === ENV) {
     // Production
@@ -21,6 +20,6 @@ if ('production' === ENV) {
 
 } else {
     // Development
-   // require('angular2-hmr');
+    // require('angular2-hmr');
 
 }

@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var blog_model_1 = require("./blog.model");
 var blog_service_1 = require("./blog.service");
 var forms_1 = require("@angular/forms");
@@ -79,8 +78,7 @@ var BlogCategoryEditorComponent = (function () {
     BlogCategoryEditorComponent = __decorate([
         core_1.Component({
             selector: 'blog-category-editor',
-            templateUrl: 'admin-templates/blog/blog-category-editor.html',
-            directives: [control_valdation_message_component_1.FormControlMessages,]
+            templateUrl: 'admin-templates/blog/blog-category-editor.html'
         }), 
         __metadata('design:paramtypes', [blog_service_1.BlogService, forms_1.FormBuilder])
     ], BlogCategoryEditorComponent);

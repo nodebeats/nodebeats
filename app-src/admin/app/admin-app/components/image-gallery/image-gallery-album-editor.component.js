@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var image_gallery_model_1 = require("./image-gallery.model");
 var image_gallery_service_1 = require("./image-gallery.service");
 var forms_1 = require("@angular/forms");
@@ -81,8 +80,7 @@ var ImageAlbumEditorComponent = (function () {
     ImageAlbumEditorComponent = __decorate([
         core_1.Component({
             selector: 'image-gallery-album-editor',
-            templateUrl: 'admin-templates/image-gallery/image-gallery-album-editor.html',
-            directives: [control_valdation_message_component_1.FormControlMessages]
+            templateUrl: 'admin-templates/image-gallery/image-gallery-album-editor.html'
         }), 
         __metadata('design:paramtypes', [image_gallery_service_1.ImageGalleryService, forms_1.FormBuilder])
     ], ImageAlbumEditorComponent);

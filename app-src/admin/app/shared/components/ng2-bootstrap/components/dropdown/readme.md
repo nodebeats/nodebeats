@@ -1,14 +1,14 @@
 ### Usage
 ```typescript
-import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+import { DropdownModule } from 'ng2-bootstrap/ng2-bootstrap';
 // or
-import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/components/dropdown';
+import { DropdownModule } from 'ng2-bootstrap/components/dropdown';
 ```
 
 ```html
 <!-- dropdown directive marks a dropdown root element -->
 <div dropdown>
-  <!-- click on dropdown-toggle toogles dropdown state, optional -->
+  <!-- click on dropdown-toggle toggles dropdown state, optional -->
   <div dropdownToggle></div>
   <!-- dropdown-menu holds content which will be shown -->
   <div dropdownMenu>
@@ -20,7 +20,10 @@ import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/components/dropdown';
 ### Annotations
 ```typescript
 // directive Dropdown
-@Directive({ selector: '[dropdown]' })
+@Directive({
+  selector: '[dropdown]',
+  exportAs: 'bs-dropdown'
+})
 export class Dropdown implements OnInit, OnDestroy {
   @HostBinding('class.open')
   @Input() public get isOpen():boolean {}
@@ -32,18 +35,22 @@ export class Dropdown implements OnInit, OnDestroy {
 }
 
 // directive DropdownToggle
-@Directive({ selector: '[dropdownToggle]' })
+@Directive({ 
+  selector: '[dropdownToggle]',
+  exportAs: 'bs-dropdown-toggle'
+})
 export class DropdownToggle implements OnInit {
   @HostBinding('class.disabled')
   @Input() public isDisabled:boolean = false;
+
+  @HostBinding('class.dropdown-toggle')
+  @Input() public addToggleClass:boolean = false;
 
   @HostBinding('attr.aria-expanded')
   public get isOpen() {}
   @HostListener('click', ['$event'])
   public toggleDropdown(event:MouseEvent) {}
 }
-
-export const DROPDOWN_DIRECTIVES: Array<any> = [Dropdown, DropdownMenu, DropdownToggle];
 ```
 
 ### Dropdown properties
@@ -61,3 +68,4 @@ export const DROPDOWN_DIRECTIVES: Array<any> = [Dropdown, DropdownMenu, Dropdown
 
 ### Dropdown toggle properties
 - `isDisabled` (`?boolean=false`) - if `true` dropdown toggle will be disabled
+- `addToggleClass` (`?boolean=false`) - if `true` the `dropdown-toggle` class will be added to the element

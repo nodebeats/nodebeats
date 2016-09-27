@@ -4,14 +4,12 @@ import {EmailTemplateModel, EmailTempalteResponse} from "./email-template.model"
 import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {ValidationService} from "../../../shared/services/validation.service";
 import {TinyEditor} from "../../../shared/components/tinymce.component";
-import {Router, UrlPathWithParams, ActivatedRoute} from "@angular/router";
-import { FormBuilder, Validators, FormControl, FormGroup} from "@angular/forms";
+import {Router, ActivatedRoute} from "@angular/router";
+import {FormBuilder, Validators, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'email-template-editor',
-    templateUrl: 'admin-templates/email-template/email-template-editor.html',
-    providers: [EmailTemplateService],
-    directives: [ FormControlMessages, TinyEditor]
+    templateUrl: 'admin-templates/email-template/email-template-editor.html'
 })
 export class EmailTemplateEditorComponent implements OnInit {
     objEmailTemp:EmailTemplateModel = new EmailTemplateModel();
@@ -49,7 +47,7 @@ export class EmailTemplateEditorComponent implements OnInit {
 
     saveTemplate() {
         this.isSubmitted = true;
-        (<FormControl>this.templateForm.controls["editorFormControl"]).updateValue(this.objEmailTemp.templateBody ? this.objEmailTemp.templateBody : "");
+        (<FormControl>this.templateForm.controls["editorFormControl"]).patchValue(this.objEmailTemp.templateBody ? this.objEmailTemp.templateBody : "");
         if (this.templateForm.valid) {
             if (!this.id) {
                 this._objService.saveEmailTemplate(this.objEmailTemp)

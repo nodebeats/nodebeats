@@ -11,9 +11,7 @@ import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 //const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
 @Component({
     selector: 'image-slider-editor',
-    templateUrl: 'admin-templates/image-slider/image-slider-editor.html',
-    directives: [FormControlMessages, ImageUploader],
-    // styles: [style]
+    templateUrl: 'admin-templates/image-slider/image-slider-editor.html'
 })
 export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
     objSlider:ImageSliderModel = new ImageSliderModel();
@@ -63,7 +61,7 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
     bindDetail(objRes:ImageSliderModel) {
         this.objSlider = objRes;
         this.fileName = this.objSlider.imageName;
-        (<FormControl>this.imageSliderForm.controls['imageFormControl']).updateValue(this.fileName);
+        (<FormControl>this.imageSliderForm.controls['imageFormControl']).patchValue(this.fileName);
         let path:string = "";
         if (this.objSlider.imageName) {
             var cl = Config.Cloudinary;
@@ -77,7 +75,7 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
 
     saveImageSlider() {
         this.isSubmitted = true;
-        (<FormControl>this.imageSliderForm.controls['imageFormControl']).updateValue(this.fileName);
+        (<FormControl>this.imageSliderForm.controls['imageFormControl']).patchValue(this.fileName);
 
         if (this.imageSliderForm.valid) {
             if (!this.sliderId) {

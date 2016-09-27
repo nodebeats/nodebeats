@@ -13,7 +13,6 @@ var validation_service_1 = require("../services/validation.service");
 var enum_config_1 = require("../configs/enum.config");
 var general_config_1 = require("../configs/general.config");
 var forms_1 = require("@angular/forms");
-var control_valdation_message_component_1 = require("./control-valdation-message.component");
 var ImageUploader = (function () {
     function ImageUploader() {
         this.fileSelectedEvent = new core_1.EventEmitter();
@@ -71,7 +70,7 @@ var ImageUploader = (function () {
         var ctx = this.context;
         var reader = new FileReader();
         if (this.isValidImage) {
-            this.imageFormControl.updateValue(this.file.name);
+            this.imageFormControl.patchValue(this.file.name);
             if (!this.imageName)
                 this.isFresh = true;
             this.imageName = this.file.name;
@@ -92,7 +91,7 @@ var ImageUploader = (function () {
             this.fileSelectedEvent.emit(this.file);
         }
         else {
-            this.imageFormControl.updateValue("");
+            this.imageFormControl.patchValue("");
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             this.drawImageToCanvas(general_config_1.Config.InvalidImage);
         }
@@ -100,7 +99,7 @@ var ImageUploader = (function () {
     ImageUploader.prototype.onDeleteFile = function (imageId) {
         this.file = null;
         this.imageName = "";
-        this.imageFormControl.updateValue("");
+        this.imageFormControl.patchValue("");
         this.inputFile.nativeElement.value = "";
         this.drawImageToCanvas(this.drawImagePath);
         if (!this.isFresh)
@@ -108,7 +107,7 @@ var ImageUploader = (function () {
     };
     ImageUploader.prototype.ngOnChanges = function () {
         if (this.imageName)
-            this.imageFormControl.updateValue(this.imageName);
+            this.imageFormControl.patchValue(this.imageName);
         if (this.previewCanvas && !this.isSubmitted)
             this.drawImageToCanvas(this.drawImagePath);
     };
@@ -151,8 +150,7 @@ var ImageUploader = (function () {
     ImageUploader = __decorate([
         core_1.Component({
             selector: 'image-uploader',
-            template: "<canvas #previewCanvas></canvas>\n                    <a *ngIf=\"imageName && isValidImage\" href=\"javascript:void(0)\" (click)=\"onDeleteFile()\"><i\n                            class=\"fa fa-trash\"\n                            aria-hidden=\"true\"></i></a>\n                    <div class=\"clearfix\"></div>\n                    <input type=\"file\" class=\"inputfile\" id=\"file\" #inputFile (change)=\"onFileSelect($event)\">\n                    <label for=\"file\"><i class=\"fa fa-upload\" aria-hidden=\"true\"> {{imageName?imageName:\"Choose an Image...\"}}</i></label>\n                    <div class=\"error-msg\" *ngIf=\"!isValidImage\">*Supported Extensions : {{allowedExtMessage}} and max size : {{allowedSize}} MB</div>               \n                  <control-messages [isSubmitted]=\"isSubmitted\"\n                         [control]=\"imageFormControl\"></control-messages>",
-            directives: [forms_1.REACTIVE_FORM_DIRECTIVES, control_valdation_message_component_1.FormControlMessages]
+            template: "<canvas #previewCanvas></canvas>\n                    <a *ngIf=\"imageName && isValidImage\" href=\"javascript:void(0)\" (click)=\"onDeleteFile()\"><i\n                            class=\"fa fa-trash\"\n                            aria-hidden=\"true\"></i></a>\n                    <div class=\"clearfix\"></div>\n                    <input type=\"file\" class=\"inputfile\" id=\"file\" #inputFile (change)=\"onFileSelect($event)\">\n                    <label for=\"file\"><i class=\"fa fa-upload\" aria-hidden=\"true\"> {{imageName?imageName:\"Choose an Image...\"}}</i></label>\n                    <div class=\"error-msg\" *ngIf=\"!isValidImage\">*Supported Extensions : {{allowedExtMessage}} and max size : {{allowedSize}} MB</div>               \n                  <control-messages [isSubmitted]=\"isSubmitted\"\n                         [control]=\"imageFormControl\"></control-messages>"
         }), 
         __metadata('design:paramtypes', [])
     ], ImageUploader);

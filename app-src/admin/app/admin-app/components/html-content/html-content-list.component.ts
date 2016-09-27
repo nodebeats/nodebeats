@@ -7,10 +7,7 @@ import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 
 @Component({
     selector: 'html-content-list',
-    templateUrl: 'admin-templates/html-content/html-content-list.html',
-    providers: [HtmlContentService],
-    directives: [FadeInDirective, Paginator, HtmlContentEditorComponent]
-    //   pipes: [PaginatePipe]
+    templateUrl: 'admin-templates/html-content/html-content-list.html'
 })
 
 export class HtmlContentComponent implements OnInit {

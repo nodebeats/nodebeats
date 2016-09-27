@@ -11,9 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var comment_service_1 = require("./comment.service");
 var comment_model_1 = require("./comment.model");
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var alert_model_1 = require("../../../shared/models/alert.model");
-var alert_1 = require("../../../shared/components/alert/alert");
 var forms_1 = require("@angular/forms");
 var CommentSettingComponent = (function () {
     function CommentSettingComponent(_objService, _formBuilder) {
@@ -77,9 +75,7 @@ var CommentSettingComponent = (function () {
     CommentSettingComponent = __decorate([
         core_1.Component({
             selector: 'comment-setting',
-            templateUrl: 'admin-templates/comment-setting/comment-setting.html',
-            providers: [comment_service_1.CommentSettingService],
-            directives: [control_valdation_message_component_1.FormControlMessages, alert_1.Alert]
+            templateUrl: 'admin-templates/comment-setting/comment-setting.html'
         }), 
         __metadata('design:paramtypes', [comment_service_1.CommentSettingService, forms_1.FormBuilder])
     ], CommentSettingComponent);

@@ -1,37 +1,37 @@
-import {Component, HostBinding, Input, forwardRef, Provider} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {isBlank} from '@angular/common/src/facade/lang';
-import {TagInputItemComponent} from './tag-input-item.component';
-import {TYPEAHEAD_DIRECTIVES} from"ng2-bootstrap/ng2-bootstrap";
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgModel} from '@angular/common';
-const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR:Provider = new Provider(
-    NG_VALUE_ACCESSOR, {
-        useExisting: forwardRef(() => TagInputComponent),
-        multi: true
-    });
+import {Component, HostBinding, Input, forwardRef, OnInit, ViewChild, OnChanges} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm} from '@angular/forms';
+// import {isBlank} from '@angular/common/src/facade/lang';
+
+const KEYS = {
+    backspace: 8,
+    comma: 188,
+    enter: 13,
+    space: 32
+};
 
 @Component({
-    selector: 'tag-input',
-    providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR, NgModel],
-    template: `<tag-input-item
+    selector: 'rl-tag-input',
+    template: `<rl-tag-input-item
     [text]="tag"
     [index]="index"
     [selected]="selectedTag === index"
     (tagRemoved)="_removeTag($event)"
     *ngFor="let tag of tagsList; let index = index">
-  </tag-input-item>
+  </rl-tag-input-item>
+  <form #tagInputForm="ngForm" class="ng2-tag-input-form">
   <input
     class="ng2-tag-input-field"
     type="text"
-    [placeholder]="placeholder"
     [(ngModel)]="inputValue"
+    name="tagInputField"
+    [placeholder]="placeholder"
     (paste)="inputPaste($event)"
     (keydown)="inputChanged($event)"
     (blur)="inputBlurred($event)"
-    (focus)="inputFocused()"  
-     [typeahead]="autoCompleteData"
-       (typeaheadOnSelect)="typeaheadOnSelect($event)"
-       #tagInputRef>`,
+    (focus)="inputFocused()"
+    [typeahead]="autoCompleteData"
+     >
+  </form>`,
 
     styles: [`
     :host {
@@ -43,6 +43,10 @@ const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR:Provider = new Provider(
     :host.ng2-tag-input-focus {
       box-shadow: 0 2px #0d8bff;
     }
+    
+    .ng2-tag-input-form {
+      display: inline;
+    }
 
     .ng2-tag-input-field {
       display: inline-block;
@@ -51,31 +55,38 @@ const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR:Provider = new Provider(
       border: 0;
     }
   `],
-    directives: [TagInputItemComponent, CORE_DIRECTIVES, FORM_DIRECTIVES, TYPEAHEAD_DIRECTIVES]
+    providers: [
+        {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => TagInputComponent), multi: true},
+    ]
 })
-export class TagInputComponent implements ControlValueAccessor {
-    @Input() placeholder:string = 'Add a tag';
-    @Input() ngModel:string[];
-    @Input() delimiterCode:string = '188';
+export class TagInputComponent implements ControlValueAccessor, OnInit, OnChanges {
     @Input() addOnBlur:boolean = true;
+    @Input() addOnComma:boolean = true;
     @Input() addOnEnter:boolean = true;
     @Input() addOnPaste:boolean = true;
+    @Input() addOnSpace:boolean = false;
     @Input() autoCompleteData:string[];
     @Input() allowedTagsPattern:RegExp = /.+/;
-    @HostBinding('class.ng2-tag-input-focus') isFocussed;
+    @Input() ngModel:string[];
+    @Input() pasteSplitPattern:string = ',';
+    @Input() placeholder:string = 'Add a tag';
+    @HostBinding('class.ng2-tag-input-focus') isFocused;
+    @ViewChild('tagInputForm') tagInputForm:NgForm;
 
     public tagsList:string[] = [];
     public inputValue:string = '';
-    public delimiter:number;
     public selectedTag:number;
+    private splitRegExp:RegExp;
 
     constructor() {
     }
 
     ngOnInit() {
-        if (this.ngModel) this.tagsList = this.ngModel;
+        if (this.ngModel) {
+            this.tagsList = this.ngModel;
+        }
         this.onChange(this.tagsList);
-        this.delimiter = parseInt(this.delimiterCode);
+        this.splitRegExp = new RegExp(this.pasteSplitPattern);
     }
 
     ngOnChanges() {
@@ -83,94 +94,113 @@ export class TagInputComponent implements ControlValueAccessor {
             this.tagsList = this.ngModel;
     }
 
-    public typeaheadOnSelect(e:any):void {
-        console.log(`Selected value: ${e.item}`);
-    }
-
-    inputChanged(event) {
+    inputChanged(event:KeyboardEvent):void {
+        console.log(this.tagInputForm.controls);
         let key = event.keyCode;
         switch (key) {
-            case 8: // Backspace
+            case KEYS.backspace:
+
                 this._handleBackspace();
                 break;
-            case 13: //Enter
-                this.addOnEnter && this._addTags([this.inputValue.toLowerCase()]);
-                event.preventDefault();
+
+            case KEYS.enter:
+                if (this.addOnEnter) {
+                    this._addTags([this.inputValue.toLowerCase()]);
+                    /*Custom for Nodebeats*/
+                    // this._addTags([this.inputValue]);
+                    event.preventDefault();
+                }
                 break;
 
-            case this.delimiter:
-                this._addTags([this.inputValue.toLowerCase()]);
-                event.preventDefault();
+            case KEYS.comma:
+                if (this.addOnComma) {
+                    this._addTags([this.inputValue.toLowerCase()]);
+                    /*Custom for Nodebeats*/
+                    event.preventDefault();
+                }
+                break;
+
+            case KEYS.space:
+                if (this.addOnSpace) {
+                    this._addTags([this.inputValue.toLowerCase()]);
+                    /*Custom for Nodebeats*/
+                    event.preventDefault();
+                }
                 break;
 
             default:
-                this._resetSelected();
                 break;
         }
     }
 
-    inputBlurred(event) {
-        this.addOnBlur && this._addTags([this.inputValue.toLowerCase()]);
-        this.isFocussed = false;
+    inputBlurred(event):void {
+        if (this.addOnBlur) {
+            this._addTags([this.inputValue.toLowerCase()]);
+            /*Custom for Nodebeats*/
+            // this._addTags([this.inputValue]);
+        }
+        this.isFocused = false;
     }
 
-    inputFocused(event) {
-        this.isFocussed = true;
+    inputFocused(event):void {
+        this.isFocused = true;
     }
 
-    inputPaste(event) {
+    inputPaste(event):void {
         let clipboardData = event.clipboardData || (event.originalEvent && event.originalEvent.clipboardData);
         let pastedString = clipboardData.getData('text/plain');
         let tags = this._splitString(pastedString);
         let tagsToAdd = tags.filter((tag) => this._isTagValid(tag));
         this._addTags(tagsToAdd);
-        setTimeout(() => this.inputValue = '', 3000);
+        setTimeout(() => this._resetInput());
     }
 
-    private _splitString(tagString:string) {
+
+    private _splitString(tagString:string):string[] {
         tagString = tagString.trim();
-        let tags = tagString.split(String.fromCharCode(this.delimiter));
+        let tags = tagString.split(this.splitRegExp);
         return tags.filter((tag) => !!tag);
     }
 
-    private _isTagValid(tagString:string) {
+    private _isTagValid(tagString:string):boolean {
+        /*Custom for Nodebeats*/
         if (this.tagsList.indexOf(tagString.toLowerCase()) == -1)
             return this.allowedTagsPattern.test(tagString.toLowerCase());
         else
             return false;
+        // return this.allowedTagsPattern.test(tagString);
     }
 
-    private _addTags(tags:string[]) {
+    private _addTags(tags:string[]):void {
         let validTags = tags.filter((tag) => this._isTagValid(tag));
-        this.tagsList = this.tagsList.concat(validTags);
+        this.tagsList = this.tagsList.concat(validTags.map(tag => tag.trim()));
         this._resetSelected();
         this._resetInput();
         this.onChange(this.tagsList);
     }
 
-    private _removeTag(tagIndexToRemove) {
+    private _removeTag(tagIndexToRemove:number):void {
         this.tagsList.splice(tagIndexToRemove, 1);
         this._resetSelected();
         this.onChange(this.tagsList);
     }
 
-    private _handleBackspace() {
+    private _handleBackspace():void {
         if (!this.inputValue.length && this.tagsList.length) {
-            if (!isBlank(this.selectedTag)) {
+            if (this.selectedTag) {
                 this._removeTag(this.selectedTag);
-            }
-            else {
+            } else {
                 this.selectedTag = this.tagsList.length - 1;
             }
         }
     }
 
-    private _resetSelected() {
+    private _resetSelected():void {
         this.selectedTag = null;
     }
 
-    private _resetInput() {
-        this.inputValue = '';
+    private _resetInput():void {
+        this.tagInputForm.controls['tagInputField'].setValue('');
     }
 
     /** Implemented as part of ControlValueAccessor. */

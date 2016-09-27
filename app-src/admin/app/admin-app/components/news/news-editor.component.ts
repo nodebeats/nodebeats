@@ -13,8 +13,7 @@ import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 
 @Component({
     selector: 'news-editor',
-    templateUrl: 'admin-templates/news/news-editor.html',
-    directives: [FormControlMessages, Calendar, TinyEditor, ImageUploader],
+    templateUrl: 'admin-templates/news/news-editor.html'
     // styles: [style]
 })
 export class NewsEditorComponent implements AfterViewInit,OnInit {
@@ -80,8 +79,8 @@ export class NewsEditorComponent implements AfterViewInit,OnInit {
     bindDetail(objRes:NewsModel) {
         this.objNews = objRes;
         this.objNews.newsDate = new Date(this.objNews.newsDate).toLocaleDateString();
-        this.editorFormControl.updateValue(objRes.newsDescription);
-        this.imageFormControl.updateValue(objRes.image[0].imageName);
+        this.editorFormControl.patchValue(objRes.newsDescription);
+        this.imageFormControl.patchValue(objRes.image[0].imageName);
         this.fileName = objRes.image[0].imageName;
         let path:string = "";
         if (this.objNews.image[0]) {
@@ -96,7 +95,7 @@ export class NewsEditorComponent implements AfterViewInit,OnInit {
 
     saveNews() {
         this.isSubmitted = true;
-        (<FormControl>this.newsForm.controls["editorFormControl"]).updateValue(this.objNews.newsDescription ? this.objNews.newsDescription : "");
+        (<FormControl>this.newsForm.controls["editorFormControl"]).patchValue(this.objNews.newsDescription ? this.objNews.newsDescription : "");
         if (this.newsForm.valid) {
             if (!this.newsId) {
                 this._objService.saveNews(this.objNews, this.file)

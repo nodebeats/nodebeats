@@ -6,9 +6,7 @@ import {Paginator} from 'primeng/primeng';
 
 @Component({
     selector: 'team-management-list',
-    templateUrl: 'admin-templates/team-management/team-management-list.html',
-    providers: [TeamManagementService],
-    directives: [Paginator, TeamManagementEditorComponent]
+    templateUrl: 'admin-templates/team-management/team-management-list.html'
 })
 
 export class TeamManagementComponent implements OnInit {

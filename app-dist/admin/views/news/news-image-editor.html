@@ -8,7 +8,7 @@
                            name="imageTitle"
                            placeholder="Enter Image Title"
                            [formControl]="newsImageForm.controls['imageTitle']">
-                    <control-messages [form]="newsImageForm" [isSubmitted]="isSubmitted"
+                    <control-messages  [isSubmitted]="isSubmitted"
                                       [control]="newsImageForm.controls['imageTitle']"></control-messages>
 
                 </div>
@@ -18,7 +18,7 @@
                            name="imageAltText"
                            placeholder="Enter alternet text"
                            [formControl]="newsImageForm.controls['imageAltText']">
-                    <control-messages [form]="newsImageForm"
+                    <control-messages
                                       [control]="newsImageForm.controls['imageAltText']"></control-messages>
 
                 </div>

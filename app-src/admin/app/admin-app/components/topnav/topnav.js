@@ -9,8 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
-var ng2_bootstrap_2 = require('ng2-bootstrap/ng2-bootstrap');
 var router_1 = require('@angular/router');
 var login_service_1 = require('../../../login-app/components/login/login.service');
 var general_config_1 = require("../../../shared/configs/general.config");
@@ -38,9 +36,7 @@ var TopNavCmp = (function () {
     TopNavCmp = __decorate([
         core_1.Component({
             selector: 'topnav',
-            templateUrl: 'admin-templates/shared/topnav.html',
-            directives: [ng2_bootstrap_1.DropdownDirective, ng2_bootstrap_1.DropdownToggleDirective],
-            viewProviders: [ng2_bootstrap_1.DropdownToggleDirective, ng2_bootstrap_2.DROPDOWN_DIRECTIVES]
+            templateUrl: 'admin-templates/shared/topnav.html'
         }), 
         __metadata('design:paramtypes', [router_1.Router, login_service_1.LoginService])
     ], TopNavCmp);

@@ -38,13 +38,13 @@
             </div>
             <div class="form-group">
                 <label>Tags </label>
-                <tag-input
+                <rl-tag-input
                         [(ngModel)]="objBlog.tags"
                         placeholder="Add An tag"
                         [formControl]="blogForm.controls['tags']"
                         delimiterCode="188"
                         [autoCompleteData]="autoCompleteData">
-                </tag-input>
+                </rl-tag-input>
                 <control-messages [isSubmitted]="isSubmitted" [control]="blogForm.controls['tags']"></control-messages>
             </div>
             <div class="form-group">

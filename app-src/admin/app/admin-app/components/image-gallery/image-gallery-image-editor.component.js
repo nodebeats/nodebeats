@@ -9,14 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var image_gallery_model_1 = require("./image-gallery.model");
 var image_gallery_service_1 = require("./image-gallery.service");
 var general_config_1 = require("../../../shared/configs/general.config");
 var enum_config_1 = require("../../../shared/configs/enum.config");
-var image_uploader_component_1 = require("../../../shared/components/image-uploader.component");
 var forms_1 = require("@angular/forms");
-var fadeInDirective_1 = require('../../../shared/directives/fadeInDirective');
 //declare var require;
 //const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
 var ImageGalleryImageEditorComponent = (function () {
@@ -58,7 +55,7 @@ var ImageGalleryImageEditorComponent = (function () {
         var path = "";
         if (this.objImage.imageName) {
             this.fileName = this.objImage.imageName;
-            this.imageForm.controls['imageFormControl'].updateValue(this.fileName);
+            this.imageForm.controls['imageFormControl'].patchValue(this.fileName);
             var cl = general_config_1.Config.Cloudinary;
             path = cl.url(this.objImage.imageName);
         }
@@ -69,7 +66,7 @@ var ImageGalleryImageEditorComponent = (function () {
     ImageGalleryImageEditorComponent.prototype.saveImage = function () {
         var _this = this;
         this.isSubmitted = true;
-        this.imageForm.controls['imageFormControl'].updateValue(this.fileName);
+        this.imageForm.controls['imageFormControl'].patchValue(this.fileName);
         if (this.imageForm.valid) {
             if (!this.imageId) {
                 this._objService.saveImage(this.albumId, this.objImage, this.file)
@@ -152,8 +149,7 @@ var ImageGalleryImageEditorComponent = (function () {
     ImageGalleryImageEditorComponent = __decorate([
         core_1.Component({
             selector: 'image-gallery-image-editor',
-            templateUrl: 'admin-templates/image-gallery/image-gallery-image-editor.html',
-            directives: [fadeInDirective_1.FadeInDirective, forms_1.REACTIVE_FORM_DIRECTIVES, control_valdation_message_component_1.FormControlMessages, image_uploader_component_1.ImageUploader],
+            templateUrl: 'admin-templates/image-gallery/image-gallery-image-editor.html'
         }), 
         __metadata('design:paramtypes', [image_gallery_service_1.ImageGalleryService, forms_1.FormBuilder])
     ], ImageGalleryImageEditorComponent);

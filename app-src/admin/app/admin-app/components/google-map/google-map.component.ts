@@ -9,9 +9,7 @@ import {ValidationService} from "../../../shared/services/validation.service";
 
 @Component({
     selector: 'google-map',
-    templateUrl: 'admin-templates/google-map/google-map.html',
-    providers: [GoogleMapService],
-    directives: [FormControlMessages, Alert]
+    templateUrl: 'admin-templates/google-map/google-map.html'
 })
 export class GoogleMapComponent implements OnInit {
     objMap:GoogleMapModel = new GoogleMapModel();

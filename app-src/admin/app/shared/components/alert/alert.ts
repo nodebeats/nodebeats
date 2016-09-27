@@ -1,5 +1,4 @@
 import {Component, ElementRef, Input, Output, EventEmitter} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
 
 @Component({
     selector: 'alert',
@@ -9,8 +8,7 @@ import {CORE_DIRECTIVES} from '@angular/common';
                     <span class="sr-only">Close</span>
                  </button>
                   <ng-content></ng-content>
-                </div>`,
-    directives: [CORE_DIRECTIVES]
+                </div>`
 })
 export class Alert {
     private _el:HTMLElement;

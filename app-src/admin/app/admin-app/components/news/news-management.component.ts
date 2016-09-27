@@ -8,9 +8,7 @@ import {NewsService} from "./news.service";
 
 @Component({
     selector: 'news-management',
-    templateUrl: 'admin-templates/news/news-management.html',
-    providers: [NewsService],
-    directives: [TabView, TabPanel, NewsCategoryListComponent, NewsListComponent, NewsImageListComponent]
+    templateUrl: 'admin-templates/news/news-management.html'
 })
 export class NewsManagementComponent {
     isCatList:boolean = true;

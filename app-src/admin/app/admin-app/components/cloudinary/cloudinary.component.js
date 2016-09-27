@@ -11,9 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var cloudinary_service_1 = require("./cloudinary.service");
 var cloudinary_model_1 = require("./cloudinary.model");
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var alert_model_1 = require("../../../shared/models/alert.model");
-var alert_1 = require("../../../shared/components/alert/alert");
 var forms_1 = require("@angular/forms");
 var general_config_1 = require("../../../shared/configs/general.config");
 var CloudinarySettingComponent = (function () {
@@ -83,9 +81,7 @@ var CloudinarySettingComponent = (function () {
     CloudinarySettingComponent = __decorate([
         core_1.Component({
             selector: 'cloudinary-settings',
-            templateUrl: 'admin-templates/cloudinary/cloudinary.html',
-            providers: [cloudinary_service_1.CloudinaryService],
-            directives: [control_valdation_message_component_1.FormControlMessages, alert_1.Alert]
+            templateUrl: 'admin-templates/cloudinary/cloudinary.html'
         }), 
         __metadata('design:paramtypes', [cloudinary_service_1.CloudinaryService, forms_1.FormBuilder])
     ], CloudinarySettingComponent);

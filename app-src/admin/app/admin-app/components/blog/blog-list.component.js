@@ -11,8 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var blog_service_1 = require("./blog.service");
 var blog_model_1 = require("./blog.model");
-var primeng_1 = require('primeng/primeng');
-var blog_editor_component_1 = require("./blog-editor.component");
 var BlogListComponent = (function () {
     function BlogListComponent(_objService) {
         this._objService = _objService;
@@ -162,8 +160,7 @@ var BlogListComponent = (function () {
     BlogListComponent = __decorate([
         core_1.Component({
             selector: 'blog-list',
-            templateUrl: 'admin-templates/blog/blog-list.html',
-            directives: [primeng_1.Paginator, blog_editor_component_1.BlogEditorComponent]
+            templateUrl: 'admin-templates/blog/blog-list.html'
         }), 
         __metadata('design:paramtypes', [blog_service_1.BlogService])
     ], BlogListComponent);

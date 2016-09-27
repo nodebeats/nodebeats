@@ -13,26 +13,31 @@ var router_1 = require("@angular/router");
 var login_service_1 = require("./components/login/login.service");
 var general_config_1 = require("../shared/configs/general.config");
 var AuthGuardService = (function () {
-    function AuthGuardService(router, _loginService) {
-        this.router = router;
+    function AuthGuardService(_loginService, router) {
         this._loginService = _loginService;
-    }
-    AuthGuardService.prototype.ngOnInit = function () {
+        this.router = router;
         this._loginService.isValidLogin();
-    };
+    }
     AuthGuardService.prototype.canActivate = function (route, state) {
         if (this._loginService.loggedIn) {
             general_config_1.Config.removeAdminRouteToken();
             return true;
         }
         /* To navigate to the current route when authenticate logged In / Valid Login */
-        general_config_1.Config.setAdminRouteToken(state.url);
+        /*
+         Store the attempted URL for redirecting
+         */
+        this._loginService.redirectUrl = state.url;
+        // Config.setAdminRouteToken(state.url);
         this.router.navigate(['/login']);
         return false;
     };
+    AuthGuardService.prototype.canActivateChild = function (route, state) {
+        return this.canActivate(route, state);
+    };
     AuthGuardService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [router_1.Router, login_service_1.LoginService])
+        __metadata('design:paramtypes', [login_service_1.LoginService, router_1.Router])
     ], AuthGuardService);
     return AuthGuardService;
 }());

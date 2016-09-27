@@ -11,13 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var user_service_1 = require("./user.service");
 var user_model_1 = require("./user.model");
-var control_valdation_message_component_1 = require("../../../shared/components/control-valdation-message.component");
 var validation_service_1 = require("../../../shared/services/validation.service");
 var general_config_1 = require("../../../shared/configs/general.config");
 var enum_config_1 = require("../../../shared/configs/enum.config");
-var image_uploader_component_1 = require("../../../shared/components/image-uploader.component");
 var forms_1 = require("@angular/forms");
-var primeng_1 = require('primeng/primeng');
 var security_question_config_1 = require('../../../shared/configs/security-question.config');
 var UserRegistrationComponent = (function () {
     function UserRegistrationComponent(_objUserService, _formBuilder) {
@@ -96,8 +93,7 @@ var UserRegistrationComponent = (function () {
     UserRegistrationComponent = __decorate([
         core_1.Component({
             selector: 'user-form',
-            templateUrl: 'admin-templates/user-management/user-form.html',
-            directives: [primeng_1.Password, control_valdation_message_component_1.FormControlMessages, image_uploader_component_1.ImageUploader]
+            templateUrl: 'admin-templates/user-management/user-form.html'
         }), 
         __metadata('design:paramtypes', [user_service_1.UserService, forms_1.FormBuilder])
     ], UserRegistrationComponent);
