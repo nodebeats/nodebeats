@@ -83,6 +83,14 @@ control-messages div, .error-msg {
     color: rgb(221, 75, 57);
 
 }
+.fa-youtube-play.color {
+    color: rgb(187, 0, 0);
+
+}
+.fa-instagram.color {
+    color: rgb(18, 86, 136);
+
+}
 
 /* End Color for Social Network icon */
 /* alert  */
