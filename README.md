@@ -11,6 +11,7 @@ Check out the [**Nodebeats Getting Started Guide**](http://www.nodebeats.com/get
 **Nodebeats** provides following features:
 * Two factor authentication
 * Token based authentication
+* Role based authorization
 * Real time Google Analytics data
 * Host of options for email service providers like [**Mailgun**](https://www.mailgun.com/), [**Postmark**](https://postmarkapp.com/), [**Sendgrid**](https://sendgrid.com/), [**Mandrill**](https://www.mandrill.com/), [**Google SMTP**](https://mail.google.com) etc.
 * Integration with [**Cloudinary**](http://cloudinary.com/) for Image management
@@ -217,12 +218,12 @@ You can host your website built using Nodebeats in any of the available hosting 
 
 ## Staying Up to Date
 
-We will be adding new features regularly and also keep the project's npm dependencies upto date so that there will not be any security vulnerabilities due to the npm packages. We have updated the entire client app code from Angular v2.0.0-rc.4 to latest Angular release 2.0.1. We will release the next version as soon as the planned features are completed. We aim to make this software as secured as possible and announce the new version releases on our twitter account. So, to get the information about the latest releases, follow us on Twitter [**@Nodebeats**](https://twitter.com/nodebeats). You can also contact us at **help@nodebeats.com** regarding anything about the software.
+We will be adding new features regularly and also keep the project's npm dependencies upto date so that there will not be any security vulnerabilities due to the npm packages. This release version is powered by Angular 2 latest version and an added feature in **Role based authorization**. All the **npm** packages are upgraded to their latest version. We will release the next version as soon as the planned features are completed. We aim to make this software as secured as possible and announce the new version releases on our twitter account. So, to get the information about the latest releases, follow us on Twitter [**@Nodebeats**](https://twitter.com/nodebeats). You can also contact us at **help@nodebeats.com** regarding anything about the software.
 
 
 ## Project Maturity
 
-Nodebeats is relatively new that is only 5 months old from the start of project inception date. The product is generally stable. Although the project is relatively new, we have tried our best to make it usable for production purposes.
+Nodebeats is relatively new that is only 6 months old from the start of project inception date. Even though the project is relatively new, the product is stable and you can use it to create web applications.
 
 
 ## Inspiration
@@ -233,7 +234,7 @@ As We all know [Wordpress](https://wordpress.com/), one of the most popular Cont
 
 ## Note
 
-We have upgraded the entire client codebase from Angular v2.0.0-rc.4 to latest Angular 2.0.1  release in this version. In the next release, we will add some more features like Role based authorization.
+We have added a Role based authorization feature and updated all the npm packages to their latest versions  in this release in this version. In the next release, we will add some more features and implementation of Javascript Best Practices in all of the code.
 
 
 ## License
