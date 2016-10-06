@@ -234,7 +234,7 @@ As We all know [Wordpress](https://wordpress.com/), one of the most popular Cont
 
 ## Note
 
-We have added a Role based authorization feature and updated all the npm packages to their latest versions  in this release in this version. In the next release, we will add some more features and implementation of Javascript Best Practices in all of the code.
+We have added a Role based authorization feature and updated all the npm packages to their latest versions  in this release version. In the next release, we will add some more features and implementation of Javascript Best Practices in all of the code.
 
 
 ## License
