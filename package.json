@@ -1,6 +1,6 @@
 {
   "name": "nodebeats",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "description": "node content management framework developed by BitsBeat IT Solution",
   "apidoc": {
@@ -180,3 +180,4 @@
     "zone.js": "0.6.25"
   }
 }
+
