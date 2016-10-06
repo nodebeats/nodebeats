@@ -138,6 +138,7 @@ export class TeamManagementEditorComponent implements OnInit,AfterViewInit {
                 this._objService.deleteImage(this.objTeam.imageName, this.objTeam.imageProperties.imageExtension, this.objTeam.imageProperties.imagePath)
                     .subscribe(res=> {
                             this.imageDeleted = true;
+                        this.objTeam.imageName="";
                             this.drawImageToCanvas(Config.DefaultAvatar);
                             jQuery.jAlert({
                                 'title': 'Success',

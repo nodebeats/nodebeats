@@ -84,8 +84,12 @@ var UserService = (function () {
             xhr.send(formData);
         });
     };
-    UserService.prototype.getUserList = function (perPage, currentPage) {
-        return this._http.get(env_config_1.API_URL + this.apiRoute + "?perpage=" + perPage + "&page=" + currentPage)
+    UserService.prototype.getUserList = function (perPage, currentPage, roleName) {
+        var queryString = "";
+        queryString += perPage ? "?perpage=" + perPage : "";
+        queryString += currentPage ? "&page=" + currentPage : "";
+        queryString += roleName ? "&role=" + roleName : "";
+        return this._http.get(env_config_1.API_URL + this.apiRoute + queryString)
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
     };

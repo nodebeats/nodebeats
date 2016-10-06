@@ -115,8 +115,10 @@
                 </div>
                 <div class="form-group">
                     <label>User Role</label>
-                    <select role="listbox" title="select question" class="form-control" formControlName="userRole" [(ngModel)]="objUser.userRole">
-                        <option value="admin">admin</option>
+                    <select role="listbox" title="select question" class="form-control" formControlName="userRole"
+                            [(ngModel)]="objUser.userRole">
+                        <option value="">Select Role</option>
+                        <option *ngFor="let obj of objRoleList" [value]="obj.roleName">{{obj.roleName}}</option>
                     </select>
 
                 </div>
@@ -133,8 +135,10 @@
             </div>
             <div class="clearfix"></div>
             <div class="col-lg-12">
-                <button type="submit" class="btn btn-primary" processing>Save</button>
-                <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger">Cancel</button>
+                <button type="submit" class="btn btn-primary" processing><i class="fa fa-floppy-o"></i> Save</button>
+                <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger"><i class="fa fa-times"></i>
+                    Cancel
+                </button>
             </div>
         </form>
     </div>

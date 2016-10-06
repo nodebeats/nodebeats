@@ -23,6 +23,8 @@ export class SidebarCmp {
     constructor() {
         let menuItem:SidebarMenuModel[] = [];
         menuItem.push(new SidebarMenuModel("/admin/user-management", "User", "fa-user"));
+        menuItem.push(new SidebarMenuModel("/admin/role", "Role", "fa-shield"));
+        menuItem.push(new SidebarMenuModel("/admin/access", "Api Access", "fa-shield"));
         menuItem.push(new SidebarMenuModel("/admin/blog", "Blog", "fa-newspaper-o"));
         menuItem.push(new SidebarMenuModel("/admin/contact", "Contact List", "fa-list"));
         menuItem.push(new SidebarMenuModel("/admin/email-template", "Email Template", "fa-envelope"));
@@ -34,6 +36,7 @@ export class SidebarCmp {
         menuItem.push(new SidebarMenuModel("/admin/news", "News", "fa-newspaper-o"));
         menuItem.push(new SidebarMenuModel("/admin/partner", "Partners", "fa-link"));
         menuItem.push(new SidebarMenuModel("/admin/team", "Team Management", "fa-users"));
+        menuItem.push(new SidebarMenuModel("/admin/testimonial", "Testimonial", "fa-comment-o"));
         this.sidebarRoute.push(new SidebarParentMenuModel(menuItem, null, "", ""));
         menuItem = [];
         menuItem.push(new SidebarMenuModel("/admin/cloudinary", "Cloudinary", "fa-cloud"));

@@ -10,7 +10,7 @@
         Promise = require("bluebird"),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, accessToken) {
+    module.exports = function(expect, request, accessToken) {
         describe('Contact Information  Integration test', function(){
 
             this.timeout(6000);
@@ -243,7 +243,7 @@
 
                             describe('patchContactInfo() to delete contact information data  for ID ' + _contactId, function () {
                                 it('should return a successfull delete message ', function(){
-                                    request
+                                    return request
                                         .patch(apiUrl + _contactId)
                                         .set('Accept', 'application/x-www-form-urlencoded')
                                         .set('x-access-token', accessToken)

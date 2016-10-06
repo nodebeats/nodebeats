@@ -31,7 +31,7 @@
                 <input class="form-control" [formControl]="templateForm.controls['emailSubject']"
                        [(ngModel)]="objEmailTemp.emailSubject"
                        placeholder="Enter Email Subject">
-                <control-messages  [isSubmitted]="isSubmitted"
+                <control-messages [isSubmitted]="isSubmitted"
                                   [control]="templateForm.controls['emailSubject']"></control-messages>
 
             </div>
@@ -54,27 +54,28 @@
 
             </div>
             <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input class="" type="checkbox" [(ngModel)]="objEmailTemp.active"
-                               formControlName="active">
+                <label>
+                    <md-checkbox [checked]="objEmailTemp.active" formControlName="active"
+                                 [(ngModel)]="objEmailTemp.active">
                         Active
-                    </label>
-                </div>
-
+                    </md-checkbox>
+                </label>
             </div>
+
             <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input class="" type="checkbox" [(ngModel)]="objEmailTemp.attachmentAvailabilityStatus"
-                               formControlName="attachment">
+                <label>
+                    <md-checkbox [checked]="objEmailTemp.attachmentAvailabilityStatus" formControlName="attachment"
+                                 [(ngModel)]="objEmailTemp.attachmentAvailabilityStatus">
                         Allow Attachement
-                    </label>
-                </div>
-
+                    </md-checkbox>
+                </label>
             </div>
-            <button type="submit" class="btn btn-primary" processing >Save</button>
-            <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger">Cancel</button>
+            <button type="submit" class="btn btn-primary" processing><i class="fa fa-floppy-o"></i>
+                Save
+            </button>
+            <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger"><i
+                    class="fa fa-times"></i> Cancel
+            </button>
         </form>
     </div>
 </div>

@@ -9,8 +9,9 @@ import {UserPasswordUpdateComponent} from"./user-password-update.component";
 import {UserService} from"./user.service";
 import {SharedModule} from '../../../shared/shared.module';
 import {UserViewComponent} from "./user-view.component";
+import {RoleModule} from "../role-management/role.module";
 @NgModule({
-    imports: [SharedModule],
+    imports: [SharedModule, RoleModule],
     declarations: [UserEditComponent, UserListComponent,
         UserManagementComponent, UserRegistrationComponent, UserViewComponent,
         UserSecurityUpdateComponent, UserSettingComponent, UserPasswordUpdateComponent],

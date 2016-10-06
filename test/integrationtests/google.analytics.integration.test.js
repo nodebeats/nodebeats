@@ -9,7 +9,7 @@
         Promise = require("bluebird"),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, docPathUrl, apiFileDeleteUrl, accessToken) {
+    module.exports = function(expect, request, docPathUrl, apiFileDeleteUrl, accessToken) {
 
         describe('Google Analytics Setting Configuration Integration test', function(){
 
@@ -165,7 +165,7 @@
 
             describe('getGoogleAnalyticsConfig() to retreive google analytics configuration list with access token ', function () {
                 it('should return a single google analytics setting in object', function(){
-                    request
+                    return request
                         .get(apiUrl)
                         .set('Accept', 'application/json')
                         .set('x-access-token', accessToken)

@@ -26,7 +26,7 @@ var NodeBeats = function() {
     self.start = function() {
         //  Start the app on the specific interface (and port).
         server.listen(self.port, function() {
-            console.log('Node server started on  ' + self.port + ' at ' + Date(new Date()));
+            console.log('Nodebeats server started on  ' + self.port + ' at ' + Date(new Date()));
         });
     };
 };  

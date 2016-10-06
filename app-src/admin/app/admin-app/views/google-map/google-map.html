@@ -77,8 +77,7 @@
                     <label>Map Type</label>
                     <select [(ngModel)]="objMap.mapType" class="form-control"
                             formControlName="mapType">
-                        <option *ngFor="let type of mapTypes"
-                                [value]="type">
+                        <option *ngFor="let type of mapTypes" [value]="type">
                             {{type}}
                         </option>
                     </select>
@@ -93,20 +92,21 @@
                            formControlName="markerTitle"
                            placeholder="Enter Marker Title">
                 </div>
+
                 <div class="checkbox">
-                    <label class="checkbox-inline">
-                        <input class="" type="checkbox"
-                               [(ngModel)]="objMap.scrollWheel"
-                               formControlName="secure">
-                        Scroll Wheel
+                    <label>
+                        <md-checkbox [checked]="objMap.scrollWheel" formControlName="scrollWheel"
+                                     [(ngModel)]="objMap.scrollWheel">
+                            Scroll Wheel
+                        </md-checkbox>
                     </label>
                 </div>
                 <div class="checkbox">
-                    <label class="checkbox-inline">
-                        <input class="" type="checkbox"
-                               [(ngModel)]="objMap.showMarker"
-                               formControlName="showMarker">
-                        Show Marker
+                    <label>
+                        <md-checkbox [checked]="objMap.showMarker" formControlName="showMarker"
+                                     [(ngModel)]="objMap.showMarker">
+                            Show Marker
+                        </md-checkbox>
                     </label>
                 </div>
             </div>
@@ -135,7 +135,9 @@
 
             <div class="clearfix"></div>
             <div class="col-lg-12">
-                <button type="submit" class="btn btn-primary" processing>Save</button>
+                <button type="submit" class="btn btn-primary" processing><i class="fa fa-floppy-o"></i>
+                    Save
+                </button>
             </div>
         </form>
     </div>

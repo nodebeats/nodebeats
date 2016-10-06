@@ -5,7 +5,6 @@
             <div class="form-group">
                 <label>Person Name</label>
                 <input type="text" class="form-control" [(ngModel)]="objTestimonial.personName"
-
                        placeholder="Enter Person Name"
                        [formControl]="testimonialForm.controls['personName']">
                 <control-messages [isSubmitted]="isSubmitted"
@@ -14,23 +13,23 @@
             <div class="form-group">
                 <label>Organization</label>
                 <input type="text" class="form-control" [(ngModel)]="objTestimonial.organization"
-
                        placeholder="Enter Organization"
                        [formControl]="testimonialForm.controls['organization']">
-                <control-messages  [isSubmitted]="isSubmitted"
+                <control-messages [isSubmitted]="isSubmitted"
                                   [control]="testimonialForm.controls['organization']"></control-messages>
             </div>
             <div class="form-group">
                 <label>Designation</label>
                 <input type="text" class="form-control" [(ngModel)]="objTestimonial.designation"
-                       name="designation"
+                       formControlName="designation"
                        placeholder="Enter Designation">
             </div>
             <div class="form-group">
                 <label>Email</label>
                 <input type="text" class="form-control" [(ngModel)]="objTestimonial.email"
                        placeholder="Enter Email" [formControl]="testimonialForm.controls['email']">
-                <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['email']"></control-messages>
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="testimonialForm.controls['email']"></control-messages>
             </div>
             <div class="form-group">
                 <label>Testimonial Content</label>
@@ -39,45 +38,44 @@
                           placeholder="Enter Testimonial Content"
                           [formControl]="testimonialForm.controls['testimonialContent']">
                 </textarea>
-                <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['testimonialContent']"></control-messages>
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="testimonialForm.controls['testimonialContent']"></control-messages>
             </div>
             <div class="form-group">
                 <label>Facebook Page URL <i class="fa fa-facebook color" aria-hidden="true"></i></label>
                 <input class="form-control" formControlName="fbUrl" type="text" [(ngModel)]="objTestimonial.facebookURL"
                        placeholder="Enter Facebook Page URL">
-                <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['fbUrl']"></control-messages>
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="testimonialForm.controls['fbUrl']"></control-messages>
 
             </div>
             <div class="form-group">
                 <label>Twitter URL <i class="fa fa-twitter color" aria-hidden="true"></i></label>
-                <input class="form-control" formControlName="twitterUrl" type="text" [(ngModel)]="objTestimonial.twitterURL"
-                       placeholder="Enter Twitter URL" >
-                <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['twitterUrl']"></control-messages>
+                <input class="form-control" formControlName="twitterUrl" type="text"
+                       [(ngModel)]="objTestimonial.twitterURL"
+                       placeholder="Enter Twitter URL">
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="testimonialForm.controls['twitterUrl']"></control-messages>
 
             </div>
             <div class="form-group">
                 <label>Google Plus URL <i class="fa fa-google-plus color" aria-hidden="true"></i></label>
-                <input class="form-control" formControlName="gplusUrl" type="text" [(ngModel)]="objTestimonial.googlePlusURL"
+                <input class="form-control" formControlName="gplusUrl" type="text"
+                       [(ngModel)]="objTestimonial.googlePlusURL"
                        placeholder="Enter Google Plus URL">
-                <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['gplusUrl']"></control-messages>
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="testimonialForm.controls['gplusUrl']"></control-messages>
 
             </div>
             <div class="form-group">
                 <label>LinkedIn Page URL <i class="fa fa-linkedin color" aria-hidden="true"></i></label>
-                <input class="form-control" formControlName="linkendinUrl" type="text" [(ngModel)]="objTestimonial.linkedInURL"
+                <input class="form-control" formControlName="linkendinUrl" type="text"
+                       [(ngModel)]="objTestimonial.linkedInURL"
                        placeholder="Enter LinkedIn Page URL">
-                <control-messages [isSubmitted]="isSubmitted"[control]="testimonialForm.controls['linkendinUrl']"></control-messages>
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="testimonialForm.controls['linkendinUrl']"></control-messages>
 
             </div>
-            <!--<div class="form-group">-->
-            <!--<label>Date</label>-->
-            <!--<date-picker minDate="{{objTestimonial.testimonialDate}}">-->
-            <!--<div class="date-picker-input-group">-->
-            <!--<input name="date" dateField class="form-control"-->
-            <!--placeholder="pick a date" [value]="objTestimonial.testimonialDate"/>-->
-            <!--</div>-->
-            <!--</date-picker>-->
-            <!--</div>-->
 
             <div class="form-group">
                 <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize"
@@ -87,17 +85,16 @@
 
             </div>
             <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input class="" type="checkbox" [(ngModel)]="objTestimonial.active"
-                               formControlName="active">
+                <label>
+                    <md-checkbox [checked]="objTestimonial.active" formControlName="active"
+                                 [(ngModel)]="objTestimonial.active">
                         Active
-                    </label>
-                </div>
-
+                    </md-checkbox>
+                </label>
             </div>
-            <button type="submit" class="btn btn-primary" processing >Save</button>
-            <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger">Cancel</button>
+
+            <button type="submit" class="btn btn-primary" processing><i class="fa fa-floppy-o"></i>  Save</button>
+                        <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger"><i class="fa fa-times"></i> Cancel</button>
         </form>
     </div>
 </div>

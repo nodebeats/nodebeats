@@ -1,14 +1,13 @@
-import {Component, EventEmitter, Output, Input, ViewChild, OnInit, ElementRef, AfterViewInit} from '@angular/core';
+import {Component, EventEmitter, Output, OnInit} from '@angular/core';
 import {UserService} from "./user.service";
-import {UserModel, UserResponse} from "./user.model";
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
+import {UserModel} from "./user.model";
 import {ValidationService} from "../../../shared/services/validation.service";
 import{Config} from "../../../shared/configs/general.config";
 import{ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
-import {ImageUploader} from "../../../shared/components/image-uploader.component";
-import {Validators, FormBuilder, FormGroup,  FormControl} from "@angular/forms";
-import {Password} from 'primeng/primeng';
+import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import{QUESTION_LIST} from '../../../shared/configs/security-question.config'
+import {RoleService} from "../role-management/role.service";
+import {RoleModel} from "../role-management/role.model";
 
 declare var jQuery:any;
 @Component({
@@ -16,13 +15,14 @@ declare var jQuery:any;
     templateUrl: 'admin-templates/user-management/user-form.html'
 })
 
-export class UserRegistrationComponent {
+export class UserRegistrationComponent implements OnInit {
     // @Input() userId:string;
     // @Input objUser:UserModel;
     @Output() showListEvent:EventEmitter<any> = new EventEmitter();
     objUser:UserModel = new UserModel();
     userForm:FormGroup;
     isSubmitted:boolean = false;
+    objRoleList:RoleModel[]=[];
     /* Image Upload Handle*/
     imageDeleted:boolean = false;
     file:File;
@@ -33,7 +33,7 @@ export class UserRegistrationComponent {
     /* End Image Upload handle */
     questionlist:string[] = QUESTION_LIST;
 
-    constructor(private _objUserService:UserService, private _formBuilder:FormBuilder) {
+    constructor(private _objUserService:UserService, private _formBuilder:FormBuilder, private roleService:RoleService) {
         this.userForm = this._formBuilder.group({
                 "firstName": ['', Validators.required],
                 "lastName": ['', Validators.required],
@@ -54,8 +54,15 @@ export class UserRegistrationComponent {
         );
     }
 
+    ngOnInit() {
+        this.getRoleList();
+    }
 
-
+    getRoleList() {
+        this.roleService.getRoleList(true) /*get active role*/
+            .subscribe(objRes => this.objRoleList = objRes,
+                err=>this.errorMessage(err));
+    }
 
     saveUser() {
 

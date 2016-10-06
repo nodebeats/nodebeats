@@ -124,19 +124,14 @@ var EventEditorComponent = (function () {
                 _this._objService.deleteImage(_this.objEvent.imageName, _this.objEvent.imageProperties.imageExtension, _this.objEvent.imageProperties.imagePath)
                     .subscribe(function (res) {
                     _this.imageDeleted = true;
+                    _this.objEvent.imageName = "";
                     _this.drawImageToCanvas(general_config_1.Config.DefaultWideImage);
                     jQuery.jAlert({
                         'title': 'Success',
                         'content': res.message,
                         'theme': 'green'
                     });
-                }, function (error) {
-                    jQuery.jAlert({
-                        'title': 'Alert',
-                        'content': error.message,
-                        'theme': 'red'
-                    });
-                });
+                }, function (error) { return _this.errorMessage(error); });
             }
         });
     };

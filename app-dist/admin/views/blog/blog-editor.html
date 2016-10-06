@@ -89,18 +89,18 @@
                 </select>
 
             </div>
-
             <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input class="" type="checkbox" [(ngModel)]="objBlog.active"
-                               formControlName="active">
+                <label>
+                    <md-checkbox [checked]="objBlog.active" formControlName="active"
+                                 [(ngModel)]="objBlog.active">
                         Active
-                    </label>
-                </div>
+                    </md-checkbox>
+                </label>
             </div>
+
             <button type="submit" class="btn btn-primary" processing >Save</button>
-            <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger">Cancel</button>
+            <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger"><i class="fa fa-times"></i> Cancel
+            </button>
         </form>
     </div>
 </div>

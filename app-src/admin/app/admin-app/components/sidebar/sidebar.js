@@ -26,6 +26,8 @@ var SidebarCmp = (function () {
         this.sidebarRoute = [];
         var menuItem = [];
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/user-management", "User", "fa-user"));
+        menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/role", "Role", "fa-shield"));
+        menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/access", "Api Access", "fa-shield"));
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/blog", "Blog", "fa-newspaper-o"));
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/contact", "Contact List", "fa-list"));
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/email-template", "Email Template", "fa-envelope"));
@@ -37,6 +39,7 @@ var SidebarCmp = (function () {
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/news", "News", "fa-newspaper-o"));
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/partner", "Partners", "fa-link"));
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/team", "Team Management", "fa-users"));
+        menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/testimonial", "Testimonial", "fa-comment-o"));
         this.sidebarRoute.push(new sidebar_model_1.SidebarParentMenuModel(menuItem, null, "", ""));
         menuItem = [];
         menuItem.push(new sidebar_model_1.SidebarMenuModel("/admin/cloudinary", "Cloudinary", "fa-cloud"));

@@ -16,14 +16,17 @@ var general_config_1 = require("../../../shared/configs/general.config");
 var enum_config_1 = require('../../../shared/configs/enum.config');
 var forms_1 = require("@angular/forms");
 var security_question_config_1 = require("../../../shared/configs/security-question.config");
+var role_service_1 = require("../role-management/role.service");
 var UserEditComponent = (function () {
-    function UserEditComponent(_objUserService, _formBuilder) {
+    function UserEditComponent(_objUserService, _formBuilder, roleService) {
         this._objUserService = _objUserService;
         this._formBuilder = _formBuilder;
+        this.roleService = roleService;
         // @Input objUser:UserModel;
         this.showListEvent = new core_1.EventEmitter();
         this.objUser = new user_model_1.UserModel();
         this.isSubmitted = false;
+        this.objRoleList = [];
         /* Image Upload Handle*/
         this.imageDeleted = false;
         this.fileName = "";
@@ -47,6 +50,12 @@ var UserEditComponent = (function () {
     }
     UserEditComponent.prototype.ngOnInit = function () {
         this.getUserDetail();
+        this.getRoleList();
+    };
+    UserEditComponent.prototype.getRoleList = function () {
+        var _this = this;
+        this.roleService.getRoleList(true) /*get active role*/
+            .subscribe(function (objRes) { return _this.objRoleList = objRes; }, function (err) { return _this.errorMessage(err); });
     };
     UserEditComponent.prototype.getUserDetail = function () {
         var _this = this;
@@ -121,7 +130,10 @@ var UserEditComponent = (function () {
             'onConfirm': function (e, btn) {
                 e.preventDefault();
                 _this._objUserService.deleteImage(_this.objUser.imageName, _this.objUser.imageProperties.imageExtension, _this.objUser.imageProperties.imagePath)
-                    .subscribe(function (resUser) { return _this.handleDeleteSuccess(resUser); }, function (error) { return _this.errorMessage(error); });
+                    .subscribe(function (resUser) {
+                    _this.objUser.imageName = "";
+                    _this.handleDeleteSuccess(resUser);
+                }, function (error) { return _this.errorMessage(error); });
             }
         });
     };
@@ -138,7 +150,7 @@ var UserEditComponent = (function () {
             selector: 'user-edit',
             templateUrl: 'admin-templates/user-management/user-form.html'
         }), 
-        __metadata('design:paramtypes', [user_service_1.UserService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [user_service_1.UserService, forms_1.FormBuilder, role_service_1.RoleService])
     ], UserEditComponent);
     return UserEditComponent;
 }());

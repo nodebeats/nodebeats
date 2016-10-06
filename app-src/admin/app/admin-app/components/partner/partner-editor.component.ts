@@ -134,6 +134,7 @@ export class PartnerEditorComponent implements OnInit,AfterViewInit {
                 this._objService.deleteImage(this.objPartner.imageName, this.objPartner.imageProperties.imageExtension, this.objPartner.imageProperties.imagePath)
                     .subscribe(res=> {
                             this.imageDeleted = true;
+                            this.objPartner.imageName = "";
                             this.drawImageToCanvas(Config.DefaultImage);
                             jQuery.jAlert({
                                 'title': 'Success',

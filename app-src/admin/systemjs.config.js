@@ -86,7 +86,10 @@
     mdPackagesName =
         [
             'all',
-            'slide-toggle'
+            'slide-toggle',
+            'checkbox',
+            'button'
+
         ];
     function mdPackUmd(pkgName) {
         packages['@angular2-material/' + pkgName] = {main: '/' + pkgName + '.umd.js', defaultExtension: 'js'}

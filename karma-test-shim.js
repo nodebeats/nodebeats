@@ -46,6 +46,8 @@ System.config(
             '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
             '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
             '@angular2-material/slide-toggle': 'npm:@angular2-material/slide-toggle/slide-toggle.umd.js',
+            '@angular2-material/checkbox': 'npm:@angular2-material/checkbox/checkbox.umd.js',
+            '@angular2-material/button': 'npm:@angular2-material/button/button.umd.js',
             '@angular2-material/core': 'npm:@angular2-material/core/core.umd.js',
 
             // angular testing umd bundles

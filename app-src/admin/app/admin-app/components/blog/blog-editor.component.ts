@@ -170,7 +170,6 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
     }
 
     deleteImage(imageId) {
-
         jQuery.jAlert({
             'type': 'confirm',
             'title': 'Alert',
@@ -181,6 +180,7 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
                 this._objService.deleteImage(this.objBlog.bannerImage, this.objBlog.imageProperties.imageExtension, this.objBlog.imageProperties.imagePath)
                     .subscribe(res=> {
                             this.imageDeleted = true;
+                            this.objBlog.bannerImage = "";
                             this.drawImageToCanvas(Config.DefaultWideImage);
                             jQuery.jAlert({
                                 'title': 'Success',
@@ -188,13 +188,7 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
                                 'theme': 'green'
                             });
                         },
-                        error=> {
-                            jQuery.jAlert({
-                                'title': 'Alert',
-                                'content': error.message,
-                                'theme': 'red'
-                            });
-                        });
+                        error=>this.errorMessage(error));
             }
         });
     }

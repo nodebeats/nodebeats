@@ -1,6 +1,13 @@
 /node_modules/*
+/public/lib/*
 /idea/*
 .idea
 /atlassian-ide-plugin.xml
+gulpfile.js
 logs/*
+#/app-dist/
+*.tar.gz
+#public/uploads/*
+public/assets/*
+#lib/configs/database.config.js
 

@@ -1,14 +1,9 @@
 import {Component, EventEmitter, Output, Input, AfterViewInit, OnInit} from '@angular/core';
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {NewsCategoryModel, NewsModel} from "./news.model";
 import {NewsService} from "./news.service";
-import{TinyEditor} from '../../../shared/components/tinymce.component';
 import{Config} from "../../../shared/configs/general.config";
 import{ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
-import  {Calendar} from "primeng/primeng";
-import {ImageUploader} from "../../../shared/components/image-uploader.component";
 import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
-import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 
 
 @Component({

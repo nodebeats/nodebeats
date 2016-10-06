@@ -156,11 +156,16 @@ export class ImageListComponent implements OnInit {
                         });
             },
             "onDeny": (e)=> {
-                if (this.prevCoverImage.nativeElement.value)
-                    jQuery('input[name=rdbCoverImage][value=' + this.prevCoverImage.nativeElement.value + ']').prop('checked', true);
+                if (!this.prevCoverImage)
+                    jQuery('input[name="rdbCoverImage"]').prop('checked', false);
 
+                else if (this.prevCoverImage && this.prevCoverImage.nativeElement.value)
+                    jQuery('input[name=rdbCoverImage][value=' + this.prevCoverImage.nativeElement.value + ']').prop('checked', true);
+                else
+                    return false;
             }
-        });
+        })
+        ;
     }
 
 

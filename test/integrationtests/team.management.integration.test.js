@@ -9,7 +9,7 @@
         Promise = require("bluebird"),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, imagePathUrl, accessToken) {
+    module.exports = function(expect, request, imagePathUrl, accessToken) {
         describe('Team Management Integration test', function(){
 
             this.timeout(4000);
@@ -233,7 +233,7 @@
 
             describe('getTeamMembers() to retreive list of team members after saving records of team  members', function () {
                 it('should return a list of team members ', function(){
-                    request
+                    return request
                         .get(apiUrlTeam)
                         .set('Accept', 'application/json')
                         .expect('Content-Type', /json/)
@@ -536,7 +536,7 @@
                             describe('patchTeamMemberInfo()  to delete team member information  for ID ' + _teamMemberId +'  with access tokens', function () {
                                 it('should return a successfull delete message stating that team member information is deleted ', function(){
 
-                                    request
+                                    return request
                                         .patch(apiUrlTeam + _teamMemberId)
                                         .set('Accept', 'application/x-www-form-urlencoded')
                                         .set('x-access-token', accessToken)

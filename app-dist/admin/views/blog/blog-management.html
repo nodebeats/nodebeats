@@ -16,11 +16,11 @@
 
 <p-tabView (onChange)="tabSwitch($event)">
     <p-tabPanel header="Blog Category" >
-        <blog-category-list [hidden]="!isCatList" [showList]="isCatList"></blog-category-list>
+        <blog-category-list *ngIf="isCatList" [showList]="isCatList"></blog-category-list>
 
     </p-tabPanel>
     <p-tabPanel header="Blog"  >
-        <blog-list [hidden]="!isBlogList" [showList]="isBlogList"
+        <blog-list *ngIf="isBlogList" [showList]="isBlogList"
                    (showMetaFormEvent)="showMetaForm($event)"
                    (showDocListEvent)="showDocList($event)"
                    [isCanceled]="isCanceled"></blog-list>
@@ -30,19 +30,4 @@
 
     </p-tabPanel>
 </p-tabView>
-<!--
-<tabset>
-    <tab heading="Blog Category" (select)="tabSwitch($event)">
-        <blog-category-list [hidden]="!isCatList" [showList]="isCatList"></blog-category-list>
-    </tab>
 
-    <tab heading="Blog" (select)="tabSwitch($event)">
-        <blog-list [hidden]="!isBlogList" [showList]="isBlogList"
-                   (showMetaFormEvent)="showMetaForm($event)"
-                   (showDocListEvent)="showDocList($event)"
-                   [isCanceled]="isCanceled"></blog-list>
-        <blog-doc-list *ngIf="isDocList" [blogId]="id" (showBlogListEvent)="showBlogList($event)"></blog-doc-list>
-        <blog-metatag-editor *ngIf="isMetaForm" [blogId]="id"
-                             (showBlogListEvent)="showBlogList($event)"></blog-metatag-editor>
-    </tab>
-</tabset>-->

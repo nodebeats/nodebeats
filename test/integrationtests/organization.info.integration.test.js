@@ -9,7 +9,7 @@
         Promise = require("bluebird"),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, imagePathUrl, accessToken) {
+    module.exports = function(expect, request, imagePathUrl, accessToken) {
 
         describe('Organization Information Setting Configuration Integration test', function(){
 
@@ -279,7 +279,7 @@
 
             describe('getOrganizationInfo()  to retreive organization information data', function () {
                 it('should return a organization information setting object', function(){
-                    request
+                    return request
                         .get(apiUrl)
                         .set('Accept', 'application/json')
                         .expect('Content-Type', /json/)

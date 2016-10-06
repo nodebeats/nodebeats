@@ -1,11 +1,8 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "./user.service";
 import {UserModel, UserResponse} from "./user.model";
-import {UserRegistrationComponent} from "./user-registration.component";
-import {UserManagementComponent} from './user-management.component';
-import {UserViewComponent} from "./user-view.component";
-import {UserEditComponent} from "./user-edit.component";
-import {Paginator} from 'primeng/primeng';
+import {RoleModel} from "../role-management/role.model";
+import {RoleService} from "../role-management/role.service";
 @Component({
     selector: 'admin-user',
     templateUrl: 'admin-templates/user-management/user-list.html'
@@ -22,6 +19,7 @@ export class UserListComponent implements OnInit {
     showManage:boolean = false;
     userId:string;
     objResponse:UserResponse;
+    objRoleList:RoleModel[] = [];
     name:string;
     /* Pagination */
     perPage:number = 10;
@@ -31,15 +29,22 @@ export class UserListComponent implements OnInit {
     preIndex:number = 0;
 
     /* End Pagination */
+    constructor(private _objUserService:UserService, private roleService:RoleService) {
+    }
 
     ngOnInit() {
         this.perPage = 10;
         this.currentPage = 1;
+        this.getRoleList();
         this.getUserList();
     }
 
-    constructor(private _objUserService:UserService) {
+    getRoleList() {
+        this.roleService.getRoleList(true) /*get active role*/
+            .subscribe(objRes => this.objRoleList = objRes,
+                err=>this.errorMessage(err));
     }
+
 
     getUserList() {
         this._objUserService.getUserList(this.perPage, this.currentPage)
@@ -143,6 +148,14 @@ export class UserListComponent implements OnInit {
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
         this.getUserList();
         jQuery(".tablesorter").trigger("update");
+    }
+
+    roleFilter(args) {
+        let role = (<HTMLSelectElement>args.srcElement).value;
+        this.currentPage = 1;
+        this._objUserService.getUserList(this.perPage, this.currentPage, role)
+            .subscribe(res => this.bindList(res),
+                error=>this.errorMessage(error));
     }
 
     hideAll() {

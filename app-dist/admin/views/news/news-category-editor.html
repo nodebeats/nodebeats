@@ -6,29 +6,30 @@
                     <label>Category Name</label>
                     <input type="text" class="form-control" [(ngModel)]="objNewsCat.categoryName" name="categoryName"
                            placeholder="Enter Category" [formControl]="newsCategoryForm.controls['newsCategory']">
-                    <control-messages  [isSubmitted]="isSubmitted"
+                    <control-messages [isSubmitted]="isSubmitted"
                                       [control]="newsCategoryForm.controls['newsCategory']"></control-messages>
                 </div>
                 <div class="form-group">
                     <label>Category Description</label>
-                <textarea class="form-control" [(ngModel)]="objNewsCat.categoryDescription" name="categoryDescription"
-                          placeholder="Enter Category Description"
-                          [formControl]="newsCategoryForm.controls['newsCategoryDescription']">
+                    <textarea class="form-control" [(ngModel)]="objNewsCat.categoryDescription"
+                              name="categoryDescription"
+                              placeholder="Enter Category Description"
+                              [formControl]="newsCategoryForm.controls['newsCategoryDescription']">
                     </textarea>
                     <control-messages [isSubmitted]="isSubmitted"
                                       [control]="newsCategoryForm.controls['newsCategoryDescription']"></control-messages>
                 </div>
                 <div class="form-group">
-                    <div class="checkbox">
-                        <label>
-                            <input class="" type="checkbox" [(ngModel)]="objNewsCat.active"
-                                   formControlName="active">
+                    <label>
+                        <md-checkbox [checked]="objNewsCat.active" formControlName="active"
+                                     [(ngModel)]="objNewsCat.active">
                             Active
-                        </label>
-                    </div>
+                        </md-checkbox>
+                    </label>
                 </div>
-                <button type="submit" class="btn btn-primary" processing >Save</button>
-                <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger">Cancel</button>
+                <button type="submit" class="btn btn-primary" processing><i class="fa fa-floppy-o"></i>  Save</button>
+                            <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger"><i class="fa fa-times"></i> Cancel
+                </button>
 
             </div>
 

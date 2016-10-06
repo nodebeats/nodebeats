@@ -5,7 +5,9 @@ import {SharedModule} from '../../../shared/shared.module';
 
 @NgModule({
     imports: [SharedModule],
-    declarations: [OrganizationInfoComponent]
+    declarations: [OrganizationInfoComponent],
+    providers: [OrganizationInfoService]
+
 })
 
 export class OrganizationInformationModule {

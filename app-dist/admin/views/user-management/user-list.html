@@ -23,6 +23,15 @@
                     <div class="container">
                         <a class="navbar-brand fa fa-plus-circle btn btn-primary" title="Add User" (click)="addUser()"
                            href="javascript:void(0)"> Add User</a>
+
+                        <div class="col-lg-4">
+                            <select role="listbox" title="select question" (change)="roleFilter($event)"
+                                    class="form-control" name="roleFilter">
+                                <option value="">Select Role</option>
+                                <option *ngFor="let obj of objRoleList" [value]="obj.roleName">{{obj.roleName}}</option>
+                            </select>
+                        </div>
+
                     </div>
                 </nav>
                 <table class="tablesorter table table-bordered table-hover table-striped">

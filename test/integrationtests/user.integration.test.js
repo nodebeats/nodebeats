@@ -9,7 +9,7 @@
         Promise = require("bluebird"),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, imagePathUrl, accessToken) {
+    module.exports = function(expect, request, imagePathUrl, accessToken) {
 
         describe('User Integration test', function(){
 
@@ -125,7 +125,7 @@
                     self.validUserObj = userInfo;
                     self.validUserObj.email = "hello1@bitsbeat.com";
 
-                    request
+                    return request
                         .post(apiUrl)
                         .set('Accept', 'multipart/form-data')
                         .set('x-access-token', accessToken)
@@ -383,23 +383,6 @@
                         });
                 });
 
-                it('should return a message stating validation error - Internal server erro. user role  can be only any of guest, admin and authuser', function(done){
-                    var self = this;
-                    self.invalidUserObj = userInfo;
-                    self.invalidUserObj.email = "shrawanlakhe@hotmail.com";
-                    self.invalidUserObj.userRole = "ewe";
-                    request
-                        .post(apiUrl)
-                        .set('Accept', 'application/x-www-form-urlencoded')
-                        .set('x-access-token', accessToken)
-                        .field('data', JSON.stringify(self.invalidUserObj))
-                        .expect('Content-Type', 'text/html; charset=utf-8')
-                        .then(function(res) {
-                            expect(res.statusCode).to.equal(HTTPStatus.INTERNAL_SERVER_ERROR);
-                            done();
-                        });
-                });
-
                 it('should return a message stating validation error - invalid email address for invalid email address', function(done){
                     var self = this;
                     self.invalidUserObj = userInfo;
@@ -479,7 +462,7 @@
 
             describe('getUsers() to retreive list of users with access tokens after saving user records', function () {
                 it('should return a list of users', function(){
-                    request
+                    return request
                         .get(apiUrl)
                         .set('Accept', 'application/json')
                         .set('x-access-token', accessToken)
@@ -597,7 +580,7 @@
                                     self.validUserObj.firstName = "Aamir";
                                     self.validUserObj.lastName = "Khan";
                                     self.validUserObj.email = "testnodecms@gmail.com";
-                                    request
+                                    return request
                                         .put(apiUrl + _userId)
                                         .set('Accept', 'multipart/form-data')
                                         .set('x-access-token', accessToken)

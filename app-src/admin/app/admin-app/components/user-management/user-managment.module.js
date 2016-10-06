@@ -19,12 +19,13 @@ var user_password_update_component_1 = require("./user-password-update.component
 var user_service_1 = require("./user.service");
 var shared_module_1 = require('../../../shared/shared.module');
 var user_view_component_1 = require("./user-view.component");
+var role_module_1 = require("../role-management/role.module");
 var UserManagementModule = (function () {
     function UserManagementModule() {
     }
     UserManagementModule = __decorate([
         core_1.NgModule({
-            imports: [shared_module_1.SharedModule],
+            imports: [shared_module_1.SharedModule, role_module_1.RoleModule],
             declarations: [user_edit_component_1.UserEditComponent, user_list_component_1.UserListComponent,
                 user_management_component_1.UserManagementComponent, user_registration_component_1.UserRegistrationComponent, user_view_component_1.UserViewComponent,
                 user_security_question_component_1.UserSecurityUpdateComponent, user_setting_component_1.UserSettingComponent, user_password_update_component_1.UserPasswordUpdateComponent],

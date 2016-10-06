@@ -1,14 +1,11 @@
 import {
     Component, EventEmitter, Output, Input, AfterViewInit, ViewChild, OnInit
 } from '@angular/core';
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {EventModel} from "./event.model";
 import {EventService} from "./event.service";
 import{Config} from "../../../shared/configs/general.config";
 import{ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
-import {Calendar} from 'primeng/primeng';
 import * as moment from 'moment';
-import {ImageUploader} from "../../../shared/components/image-uploader.component";
 import {FormControl, FormGroup, Validators, FormBuilder} from "@angular/forms";
 
 //declare var require;
@@ -141,6 +138,7 @@ export class EventEditorComponent implements OnInit,AfterViewInit {
                 this._objService.deleteImage(this.objEvent.imageName, this.objEvent.imageProperties.imageExtension, this.objEvent.imageProperties.imagePath)
                     .subscribe(res=> {
                             this.imageDeleted = true;
+                            this.objEvent.imageName = "";
                             this.drawImageToCanvas(Config.DefaultWideImage);
                             jQuery.jAlert({
                                 'title': 'Success',
@@ -148,13 +146,7 @@ export class EventEditorComponent implements OnInit,AfterViewInit {
                                 'theme': 'green'
                             });
                         },
-                        error=> {
-                            jQuery.jAlert({
-                                'title': 'Alert',
-                                'content': error.message,
-                                'theme': 'red'
-                            });
-                        });
+                        error=> this.errorMessage(error));
             }
         });
     }

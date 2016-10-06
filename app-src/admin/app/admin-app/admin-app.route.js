@@ -22,6 +22,9 @@ var user_management_component_1 = require('./components/user-profile/user-manage
 var admin_app_component_1 = require('./admin-app.component');
 var auth_guard_service_1 = require("../login-app/auth.guard.service");
 var email_template_route_1 = require("./components/email-template/email-template.route");
+var partner_list_component_1 = require("./components/partner/partner-list.component");
+var role_list_component_1 = require("./components/role-management/role-list.component");
+var api_access_component_1 = require("./components/api-access/api-access.component");
 exports.adminAppRoute = [
     {
         path: 'admin',
@@ -34,6 +37,8 @@ exports.adminAppRoute = [
                 children: [
                     { path: 'dashboard', component: dashboard_component_1.DashboardComponent },
                     { path: 'user-management', component: user_list_component_1.UserListComponent },
+                    { path: 'role', component: role_list_component_1.RoleComponent },
+                    { path: 'access', component: api_access_component_1.ApiAccessComponent },
                     { path: 'contact', component: contact_list_component_1.ContactListCompoent },
                     { path: 'email-service', component: email_service_component_1.EmailServiceComponent },
                     { path: 'cloudinary', component: cloudinary_component_1.CloudinarySettingComponent },
@@ -50,7 +55,7 @@ exports.adminAppRoute = [
                     { path: 'event', component: event_list_component_1.EventComponent },
                     { path: 'html', component: html_content_list_component_1.HtmlContentComponent },
                     { path: 'errorlog', component: application_log_list_component_1.ApplicationLogComponent },
-                    { path: 'errorlog', component: application_log_list_component_1.ApplicationLogComponent },
+                    { path: 'partner', component: partner_list_component_1.PartnerComponent },
                     { path: 'comment', component: comment_setting_component_1.CommentSettingComponent },
                     { path: 'profile', component: user_management_component_1.UserProfileManagementComponent },
                     { path: '', redirectTo: 'dashboard', pathMatch: "full" }

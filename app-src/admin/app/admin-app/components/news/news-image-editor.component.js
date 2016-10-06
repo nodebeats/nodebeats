@@ -111,6 +111,7 @@ var NewsImageEditorComponent = (function () {
                 _this._objService.deleteImage(_this.objNewsImage.imageName, _this.objNewsImage.imageProperties.imageExtension, _this.objNewsImage.imageProperties.imagePath)
                     .subscribe(function (res) {
                     _this.imageDeleted = true;
+                    _this.objNewsImage.imageName = "";
                     _this.drawImageToCanvas(general_config_1.Config.DefaultImage);
                     jQuery.jAlert({
                         'title': 'Success',

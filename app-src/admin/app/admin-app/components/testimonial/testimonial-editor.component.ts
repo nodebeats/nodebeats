@@ -6,7 +6,7 @@ import{Config} from "../../../shared/configs/general.config";
 import{ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
 import {ValidationService} from "../../../shared/services/validation.service";
 import {ImageUploader} from "../../../shared/components/image-uploader.component";
-import {Validators, FormBuilder, FormGroup,  FormControl} from "@angular/forms";
+import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 
 @Component({
     selector: 'testimonial-editor',
@@ -39,10 +39,10 @@ export class TestimonialEditorComponent implements OnInit,AfterViewInit {
             "email": ['', ValidationService.emailValidator],
             "imageFormControl": this.imageFormControl,
             designation: [''],
-            fbUrl: ['',ValidationService.urlValidator],
-            twitterUrl: ['',ValidationService.urlValidator],
-            gplusUrl: ['',ValidationService.urlValidator],
-            linkendinUrl: ['',ValidationService.urlValidator],
+            fbUrl: ['', ValidationService.urlValidator],
+            twitterUrl: ['', ValidationService.urlValidator],
+            gplusUrl: ['', ValidationService.urlValidator],
+            linkendinUrl: ['', ValidationService.urlValidator],
             active: ['']
         });
 
@@ -130,6 +130,7 @@ export class TestimonialEditorComponent implements OnInit,AfterViewInit {
                 this._objService.deleteImage(this.objTestimonial.imageName, this.objTestimonial.imageProperties.imageExtension, this.objTestimonial.imageProperties.imagePath)
                     .subscribe(res=> {
                             this.imageDeleted = true;
+                            this.objTestimonial.imageName = "";
                             this.drawImageToCanvas(Config.DefaultAvatar);
                             jQuery.jAlert({
                                 'title': 'Success',

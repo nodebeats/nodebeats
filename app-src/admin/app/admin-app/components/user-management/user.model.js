@@ -2,7 +2,7 @@
 var UserModel = (function () {
     function UserModel() {
         this.twoFactorAuthEnabled = false;
-        this.userRole = "admin";
+        this.userRole = "";
         this.active = false;
         this.securityQuestion = "";
     }

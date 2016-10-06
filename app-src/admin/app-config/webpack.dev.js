@@ -5,7 +5,7 @@
 const helpers = require('./helpers');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
-
+const webpack = require('webpack');
 /**
  * Webpack Plugins
  */
@@ -18,11 +18,12 @@ const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = webpackMerge(commonConfig.metadata, {
     host: 'localhost',
-    port: 3000,
+    port: 3001,
     ENV: ENV,
     HMR: HMR
 });
-
+/* Configuring Root for App */
+const appRootPath = helpers.root('app-src/admin');
 /**
  * Webpack configuration
  *
@@ -45,11 +46,13 @@ module.exports = webpackMerge(commonConfig, {
     debug: true,
 
     /**
-     * Developer tool to enhance debugging
-     *
-     * See: http://webpack.github.io/docs/configuration.html#devtool
+     * Developer tool HotModuleReplacementPluginHotModuleReplacementPluginto enhance debugging
+     *const webpack = require('webpack');
+
+     * See: http://webHotModuleReplacementPluginpack.github.io/docs/configuration.html#devtool
      * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
      */
+
     devtool: 'cheap-module-source-map',
 
     /**
@@ -65,7 +68,6 @@ module.exports = webpackMerge(commonConfig, {
          * See: http://webpack.github.io/docs/configuration.html#output-path
          */
         path: helpers.root('app-dist/admin'),
-
         /**
          * Specifies the name of each output file on disk.
          * IMPORTANT: You must not specify an absolute path here!
@@ -87,14 +89,13 @@ module.exports = webpackMerge(commonConfig, {
          *
          * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
          */
-        chunkFilename: '[id].chunk.js',
+        chunkFilename: '[id].chunk.js'
 
-        library: 'ac_[name]',
-        libraryTarget: 'var'
-    },
+    }
+    ,
 
     plugins: [
-
+        new webpack.HotModuleReplacementPlugin(),
         /**
          * Plugin: DefinePlugin
          * Description: Define free variables.
@@ -137,6 +138,10 @@ module.exports = webpackMerge(commonConfig, {
      * See: https://webpack.github.io/docs/webpack-dev-server.html
      */
     devServer: {
+        // proxy: {
+        //     "**": "http://localhost:3000"
+        //
+        // },
         port: METADATA.port,
         host: METADATA.host,
         historyApiFallback: true,
@@ -144,7 +149,16 @@ module.exports = webpackMerge(commonConfig, {
             aggregateTimeout: 300,
             poll: 1000
         },
-        outputPath: helpers.root('app-dist/admin')
+        outputPath: helpers.root('app-dist/admin/'),
+        contentBase: helpers.root('app-dist/admin/'),
+        stats: {
+            colors: true,
+            hash: false,
+            version: false,
+            timings: false,
+            assets: false,
+            chunks: false
+        }
     },
 
     /*
@@ -162,4 +176,5 @@ module.exports = webpackMerge(commonConfig, {
         setImmediate: false
     }
 
-});
+})
+;

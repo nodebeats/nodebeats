@@ -16,15 +16,18 @@ var general_config_1 = require("../../../shared/configs/general.config");
 var enum_config_1 = require("../../../shared/configs/enum.config");
 var forms_1 = require("@angular/forms");
 var security_question_config_1 = require('../../../shared/configs/security-question.config');
+var role_service_1 = require("../role-management/role.service");
 var UserRegistrationComponent = (function () {
-    function UserRegistrationComponent(_objUserService, _formBuilder) {
+    function UserRegistrationComponent(_objUserService, _formBuilder, roleService) {
         this._objUserService = _objUserService;
         this._formBuilder = _formBuilder;
+        this.roleService = roleService;
         // @Input() userId:string;
         // @Input objUser:UserModel;
         this.showListEvent = new core_1.EventEmitter();
         this.objUser = new user_model_1.UserModel();
         this.isSubmitted = false;
+        this.objRoleList = [];
         /* Image Upload Handle*/
         this.imageDeleted = false;
         this.fileName = "";
@@ -50,6 +53,14 @@ var UserRegistrationComponent = (function () {
             validator: validation_service_1.ValidationService.matchingPasswords('password', 'confirmPassword')
         });
     }
+    UserRegistrationComponent.prototype.ngOnInit = function () {
+        this.getRoleList();
+    };
+    UserRegistrationComponent.prototype.getRoleList = function () {
+        var _this = this;
+        this.roleService.getRoleList(true) /*get active role*/
+            .subscribe(function (objRes) { return _this.objRoleList = objRes; }, function (err) { return _this.errorMessage(err); });
+    };
     UserRegistrationComponent.prototype.saveUser = function () {
         var _this = this;
         this.isSubmitted = true;
@@ -95,7 +106,7 @@ var UserRegistrationComponent = (function () {
             selector: 'user-form',
             templateUrl: 'admin-templates/user-management/user-form.html'
         }), 
-        __metadata('design:paramtypes', [user_service_1.UserService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [user_service_1.UserService, forms_1.FormBuilder, role_service_1.RoleService])
     ], UserRegistrationComponent);
     return UserRegistrationComponent;
 }());

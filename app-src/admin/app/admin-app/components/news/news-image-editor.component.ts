@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Output, Input, AfterViewInit, ViewChild, OnInit} from '@angular/core';
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {NewsImageModel} from "./news.model";
 import {NewsService} from "./news.service";
 import {Config} from "../../../shared/configs/general.config";
-import {ImageUploader} from "../../../shared/components/image-uploader.component";
-import { FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
+import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 
 
 @Component({
@@ -130,6 +128,7 @@ export class NewsImageEditorComponent implements OnInit,AfterViewInit {
                 this._objService.deleteImage(this.objNewsImage.imageName, this.objNewsImage.imageProperties.imageExtension, this.objNewsImage.imageProperties.imagePath)
                     .subscribe(res=> {
                             this.imageDeleted = true;
+                            this.objNewsImage.imageName = "";
                             this.drawImageToCanvas(Config.DefaultImage);
                             jQuery.jAlert({
                                 'title': 'Success',

@@ -9,7 +9,7 @@
         Promise = require("bluebird"),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, imagePathUrl, apiFileDeleteUrl, accessToken) {
+    module.exports = function(expect, request, imagePathUrl, apiFileDeleteUrl, accessToken) {
 
         describe('Event Manager Integration test', function(){
 

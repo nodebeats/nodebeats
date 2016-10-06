@@ -37,12 +37,16 @@
 				<li>Run the application</li>
 				<li>Login to the application</li>
 				<li>Manage User</li>
+				<li>Manage User Role</li>
+				<li>Manage API Access Management</li>
 				<li>Two factor authentication set up</li>
+				<li>Application Error Logs</li>
 				<li>Configure Email Service Setting</li>
 				<li>Configure Cloudinary Setting</li>
 				<li>Disqus Comment Setting</li>
 				<li>Google Analytics Setting</li>
 				<li>Email Template Setting</li>
+				<li>Other Dynamic Modules</li>
 				<li>Application Deployment setup</li>
 				<li>Deploy project to Openshift Cloud</li>
 				<li>Configuring Nginx on Openshift</li>
@@ -462,6 +466,85 @@
 						To get that TOTP token, you need app that can verify 2-step verification codes.  Next, you are going to set-up two-factor authentication and install required app.
 					</p>
 				</div>
+				<div class="docpanel doc_start_user_role_mgmt">
+					<p>
+						<b>Role based access control</b> is an approach to restricting system access to authorized users. It has been implemented by almost all of the systems around the world.
+						 We have also implemented Role based authorization in our system.
+					</p>
+					<p>
+						During the initial setup of the application, a default user is created with an <b>admin</b> role. At the same time, an <b>admin</b> role is created with all of the permissions provided. Currently,  any role can be authorized to perform all or certain tasks as deemed necessary. There are currently five access control features:
+						<ul>
+							<li>
+								<p>
+									<b>Read</b>		-		Read access to the system features. By default, it is always true and it cannot be disabled.
+								</p>
+								</li>
+							<li>
+								<p>
+									<b>Write</b>	-		Write access to the system either in combination with <b>Create</b> and <b>Change</b> action to enable insert and update features respectively.
+								</p>
+							</li>
+							<li>
+								<p>
+									<b>Create</b>	-		Any role having both <b>write and create action</b>  enabled, can <b>insert</b> new documents.
+								</p>
+							</li>
+							<li>
+								<p>
+									<b>Change</b>	-		Any role having both <b>write and change action enabled</b>, can <b>update</b> existing documents.
+								</p>
+							</li>
+							<li>
+								<p>
+									<b>Delete</b>	-		Any role having <b>delete action enabled</b> , can <b>delete</b> documents from the system permanently.
+								</p>
+							</li>
+						</ul>
+					</p>
+					<p>
+						Below are some of the snapshots of the Role based Authorization System.
+						<br />
+						<br>
+
+
+						Below figure shows the listing of user roles entered by the user. An admin role is created by default during application setup. So, Admin role can neither be edited nor be deleted from the application system as it is associated with the superuser of the system.
+						<br />
+						<br />
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/role_access_authorization_dj9i3r.png">
+					</p>
+
+					<br />
+					<p>
+						Below figure shows the form used to create new user roles.
+						<br />
+						<br />
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/role_access_form_cmaaqt.png">
+					</p>
+
+				</div>
+				<div class="docpanel doc_start_api_access_mgmt">
+					<p>
+						The user role permissions are implemented globally across the application. Sometimes we want to only authorize the access to certain API routes to users with certain roles only. Like, application system settings should not be available to all users. So, if want to authorize the access to those setting API routes to certain roles only, then API access management can help you.
+					</p>
+					<p>
+						All you have to do is entry the api route and choose user roles. Here, you can authorize multiple roles to access the route API. Then after saving the data successfully, only users with those entered roles can access the specified API route. Others will not be authorized to access the API route.
+					</p>
+					<p>
+						While entering the API route value, if the API route url is <b>http://localhost:3000/api/roles</b>, then all you have to enter is <b><strong>/api/roles</strong></b> and choose the roles that you want only it  to authorize to access the specified API route
+					</p>
+					<p>
+						Below is the API Access Management List,
+						<br />
+						<br />
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/api_access_management_zpp7v3.png">
+					</p>
+					<p>
+						Below is the form that you can use to enter the API access routes and choose roles to manage API access.
+						<br />
+						<br />
+						<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/api_access_mgmt_form_r3sxvz.png">
+					</p>
+				</div>
 				<div class="docpanel doc_start_2fa_setup">
 					<p>
 						We need some kind of applications that can scan QR code, generate TOTP token and verify it at the same time. There are many alternatives but the most popular one is <b>Google Authenticator</b>  and there is another one which is also popular <b>Authy</b>. So, go to the <b>Google play store </b> if you are in android and download    either one of those app and install in your phone.
@@ -513,6 +596,14 @@
 					<p>
 						So, you have two-factor authentication feature enabled in your web application, <b> time to do data-entry in Settings section</b>.
 					</p>
+				</div>
+				<div class="docpanel doc_start_application_error_logs">
+					<p>
+						This is the module that will list out all of the application error logs  so that you can easily know what is the actual problem with the application code. There is another feature that will sent the application logs to <b>help@nodebeats.com</b> if you click on <b>Notify Log </b> button. If you want to change the recipient email address, then edit the <b>error.log.server.controller.js</b> file and at the top, replace help@nodebeats.com with the appropriate email address.
+					</p>
+					<br />
+					<br />
+					<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/application_error_logs_mgmt_ntqotd.png">
 				</div>
 				<div class="docpanel doc_start_email_service_setting">
 					<p>
@@ -1116,6 +1207,249 @@
 					<br>
 					<br>
 					<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/email-template-form_kkwfpf.png">
+				</div>
+				<div class="docpanel doc_start_dynamic_modules_custom">
+					<p>
+						There are several other dynamic modules that we have provided with Nodebeats. You can use those modules to easily create custom websites without doing much in the backend. So, here, we are going to briefly discuss  about all of those modules. They are as follows:
+
+					</p>
+					<p>
+						<ol type="1">
+							<li>
+								<h3>Blog Management</h3>
+								<br />
+								<br />
+								<p>
+									You can use Blog Management module to easily post blog articles. Some of the features of this module are as follows:
+								</p>
+								<ul>
+									<li>
+										<h4>Blog Category Management</h4>
+										<br />
+										<p>You can add categories that blog articles belong to here. Below are the figures about Blog Category Management.</p>
+										<br />
+										<br />
+										<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/blog_category_management_zcgzwm.png">
+										<br />
+										<br />
+										<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/blog_category_mgmt_form_du7rrm.png">
+
+									</li>
+									<li>
+
+										<h4>Blog Article Management</h4>
+										<br />
+										<p>You can add Blog articles here.</p>
+										<br />
+										<br />
+										<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/blog_article_list_cwz3qw.png">
+										<br />
+										<br />
+										<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/blog_article_form_o46mfc.png">
+
+									</li>
+									<li>
+										<h4>Blog Document Management</h4>
+										<br />
+										<p>After adding blog article, you can add multiple documents related to the blog if any by clicking Add Document icon in the blog article list.</p>
+										<br />
+										<br />
+										<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/blog_document_mgmt_list_mr1xys.png">
+										<br />
+										<br />
+										<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/blog_document_mgmt_form_dxs7ca.png">
+
+									</li>
+									<li>
+										<h4>Blog SEO Tags Management</h4>
+										<br />
+										<p>After adding blog article, you can add SEO meta tag information related to the article by clicking Add Metatag icon in the blog article list.</p>
+										<br />
+										<br />
+										<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/blog_seo_meta_tag_info_w67hah.png">
+
+									</li>
+								</ul>
+							</li>
+							<li>
+
+								<h3>Contact List Management</h3>
+								<br />
+								<br />
+								<p>You can manage clients who are interested in your organization here. Clients who respond via Contact Information Form is listed here.</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/contact_mgmt_list_ee1pxp.png">
+								<br />
+								<p>Contact Information Form is from one of our Client Projects. You can easily create one, if needed in your website.</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/contact_mgmt_form_qif9cm.png">
+
+							</li>
+							<li>
+								<h3>Event Management</h3>
+								<br />
+								<br />
+								<p>You can add events for various programs using this module.</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/event_mgmt_list_h1aelu.png">
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/event_mgmt_form_ibde6a.png">
+
+							</li>
+							<li>
+								<h3>HTML Content Management</h3>
+								<br />
+								<br />
+								<p>In our Websites, there are several html contents. We can use this module to dynamically display all of those html contents in our website.</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/html_content_mgmt_list_wpm6dj.png">
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/html_content_mgmt_form_qktlll.png">
+
+							</li>
+							<li>
+								<h3>Image Gallery Management</h3>
+								<br />
+								<br />
+								<p>You can use this module to show image galleries in your website.</p>
+								<br>
+								<p>
+									FIrst of all, You create an Album.
+								</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/image_gallery_mgmt_album_list_x5kmt5.png">
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/image_gallery_mgmt_form_ktvvae.png">
+
+								<br />
+								<br />
+								<p>
+									Then, You can add images to the Album by clicking on ImageList icon in the Album list grid.
+								</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/image_gallery_mgmt_image_list_d1chq6.png">
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/image_gallery_mgmt_image_form_ihmuuj.png">
+
+								<br />
+								<p>
+									You can click on radio button in the grid to set the image as cover image which will be displayed as the main image of the album when listing in view section.
+								</p>
+							</li>
+							<li>
+								<h3>Image Slider Management</h3>
+								<br />
+								<br />
+								<p>In every website, there is some kind of image slider. You can slide images and other html contents using this module.</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/image_slider_mgmt_list_kamprc.png">
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/image_slider_mgmt_form_vqc8zk.png">
+
+							</li>
+							<li>
+								<h3>News Management</h3>
+								<br />
+								<br />
+								<p>First of all, you add News category.</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/news_category_mgmt_list_ma18oi.png">
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/news_category_mgmt_form_opdxb0.png">
+								<br />
+								<p>Then, click on News tab to add latest news.</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/news_mgmt_list_k72pcm.png">
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/news_mgmt_form_naopig.png">
+
+								<br />
+								<br />
+								<p>Then, Click on ImageList icon on news grid list to add multiple images with description related to the news. Image added during news saving is listed as cover image in News Image list section. You can change cover image by clicking on radio button in the news image list grid.</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/news_image_list_mgmt_p6tjfn.png">
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/news_image_mgmt_form_ji6xus.png">
+
+							</li>
+							<li>
+								<h3>Partner List Management</h3>
+								<br />
+								<br />
+								<p>We can use this module to add partners of our organization to show them in our website.</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/partner_mgmt_list_qqn8jn.png">
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/partner_mgmt_form_b9fb2g.png">
+
+							</li>
+							<li>
+								<h3>Team Members Management</h3>
+								<br />
+								<br />
+								<p>We can use this module to add team members of our organization and show it in our website.</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/team_member_mgmt_list_a7oouq.png">
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/team_member_mgmt_form_zmplmn.png">
+
+							</li>
+							<li>
+								<h3>Testimonial Management</h3>
+								<br />
+								<br />
+								<p>We can use this module to add testimonials of our clients and show it in our website.</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/testimonial_mgmt_list_o43pwt.png">
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/testimonial_mgmt_form_pipowj.png">
+
+							</li>
+							<li>
+								<h3>Google Map Management</h3>
+								<br />
+								<br />
+								<p>We can use this module to show our location info along with showing our location info in maps using those data.</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/google_map_mgmt_d3jp5p.png">
+
+							</li>
+							<li>
+								<h3>Organization Information Management</h3>
+								<br />
+								<br />
+								<p>We can use this module to show our Organization's various information like displaying logo, social links, contact information and address information.</p>
+								<br />
+								<br />
+								<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1470738860/organization_Info_mgmt_jc6y7k.png">
+							</li>
+						</ol>
+					</p>
 				</div>
 				<div class="docpanel doc_start_deployment_setup">
 					<h2>Deploying to the cloud:</h2>

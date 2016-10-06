@@ -30,6 +30,7 @@ export class ValidationService {
         }
         return null;
     };
+
     static numberValidator(control:FormControl) {
         var num = control.value;
         var regex = /^[0-9]*$/;
@@ -40,6 +41,7 @@ export class ValidationService {
         }
         return null;
     };
+
     static minValueValidator(minvalue:number) {
         return (control:FormControl) => {
             var num = +control.value;
@@ -63,6 +65,9 @@ export class ValidationService {
             return null;
         }
     };
+
+
+
 
     static    creditCardValidator(control) {
         // Visa, MasterCard, American Express, Diners Club, Discover, JCB

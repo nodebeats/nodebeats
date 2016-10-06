@@ -29,14 +29,17 @@ var ImageUploader = (function () {
                 case enum_config_1.ImageCanvasSizeEnum.small:
                     this.canvasHeight = 170;
                     this.canvasWidth = 150;
+                    this.defaultImage = general_config_1.Config.DefaultImage;
                     break;
                 case enum_config_1.ImageCanvasSizeEnum.wide:
                     this.canvasHeight = 170;
                     this.canvasWidth = 300;
+                    this.defaultImage = general_config_1.Config.DefaultWideImage;
                     break;
                 default:
                     this.canvasHeight = 170;
                     this.canvasWidth = 150;
+                    this.defaultImage = general_config_1.Config.DefaultAvatar;
                     break;
             }
         this.drawImageToCanvas(this.drawImagePath);
@@ -97,17 +100,24 @@ var ImageUploader = (function () {
         }
     };
     ImageUploader.prototype.onDeleteFile = function (imageId) {
+        if (!this.isFresh)
+            this.deleteImageEvent.emit(imageId);
+        else {
+            this.clearPreview();
+        }
+    };
+    ImageUploader.prototype.clearPreview = function () {
         this.file = null;
         this.imageName = "";
         this.imageFormControl.patchValue("");
         this.inputFile.nativeElement.value = "";
-        this.drawImageToCanvas(this.drawImagePath);
-        if (!this.isFresh)
-            this.deleteImageEvent.emit(imageId);
+        this.drawImageToCanvas(this.defaultImage);
     };
     ImageUploader.prototype.ngOnChanges = function () {
         if (this.imageName)
             this.imageFormControl.patchValue(this.imageName);
+        else
+            this.clearPreview();
         if (this.previewCanvas && !this.isSubmitted)
             this.drawImageToCanvas(this.drawImagePath);
     };

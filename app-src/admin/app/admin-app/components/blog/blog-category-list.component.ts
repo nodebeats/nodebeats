@@ -58,12 +58,11 @@ export class BlogCategoryListComponent implements OnInit,OnChanges {
         if (objRes.dataList.length > 0) {
             let totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-
             setTimeout(()=> {
                 jQuery('.tablesorter').tablesorter({
                     headers: {
-                        3: {sorter: false},
-                        4: {sorter: false}
+                        2: {sorter: false},
+                        3: {sorter: false}
                     }
                 });
             }, 50);

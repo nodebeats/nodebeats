@@ -139,8 +139,12 @@ var ImageListComponent = (function () {
                 });
             },
             "onDeny": function (e) {
-                if (_this.prevCoverImage.nativeElement.value)
+                if (!_this.prevCoverImage)
+                    jQuery('input[name="rdbCoverImage"]').prop('checked', false);
+                else if (_this.prevCoverImage && _this.prevCoverImage.nativeElement.value)
                     jQuery('input[name=rdbCoverImage][value=' + _this.prevCoverImage.nativeElement.value + ']').prop('checked', true);
+                else
+                    return false;
             }
         });
     };

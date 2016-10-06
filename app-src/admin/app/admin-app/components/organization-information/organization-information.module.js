@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var orginfo_component_1 = require("./orginfo.component");
+var orginfo_service_1 = require("./orginfo.service");
 var shared_module_1 = require('../../../shared/shared.module');
 var OrganizationInformationModule = (function () {
     function OrganizationInformationModule() {
@@ -17,7 +18,8 @@ var OrganizationInformationModule = (function () {
     OrganizationInformationModule = __decorate([
         core_1.NgModule({
             imports: [shared_module_1.SharedModule],
-            declarations: [orginfo_component_1.OrganizationInfoComponent]
+            declarations: [orginfo_component_1.OrganizationInfoComponent],
+            providers: [orginfo_service_1.OrganizationInfoService]
         }), 
         __metadata('design:paramtypes', [])
     ], OrganizationInformationModule);

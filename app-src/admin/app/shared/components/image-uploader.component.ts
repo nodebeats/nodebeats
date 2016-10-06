@@ -12,7 +12,6 @@ import {ValidationService} from "../services/validation.service";
 import {ImageCanvasSizeEnum} from "../configs/enum.config";
 import {Config} from "../configs/general.config";
 import {FormControl} from "@angular/forms";
-import {FormControlMessages} from "./control-valdation-message.component";
 @Component({
     selector: 'image-uploader',
     template: `<canvas #previewCanvas></canvas>
@@ -33,10 +32,12 @@ export class ImageUploader implements AfterViewInit,OnChanges {
     @Input() drawImagePath:string;
     @Input() isSubmitted:boolean;
     @Input() canvasSize:number;
+
     @Output() fileSelectedEvent:EventEmitter<any> = new EventEmitter();
     @Output() deleteImageEvent:EventEmitter<any> = new EventEmitter();
     @ViewChild('previewCanvas') previewCanvas;
     @ViewChild('inputFile') inputFile;
+    defaultImage:string;
     context:CanvasRenderingContext2D;
     file:File;
     isValidImage:boolean = true;
@@ -57,14 +58,17 @@ export class ImageUploader implements AfterViewInit,OnChanges {
                 case ImageCanvasSizeEnum.small:
                     this.canvasHeight = 170;
                     this.canvasWidth = 150;
+                    this.defaultImage = Config.DefaultImage;
                     break;
                 case ImageCanvasSizeEnum.wide:
                     this.canvasHeight = 170;
                     this.canvasWidth = 300;
+                    this.defaultImage = Config.DefaultWideImage;
                     break;
                 default:
                     this.canvasHeight = 170;
                     this.canvasWidth = 150;
+                    this.defaultImage = Config.DefaultAvatar;
                     break;
             }
         this.drawImageToCanvas(this.drawImagePath);
@@ -131,19 +135,27 @@ export class ImageUploader implements AfterViewInit,OnChanges {
     }
 
     onDeleteFile(imageId:string) {
+        if (!this.isFresh)
+            this.deleteImageEvent.emit(imageId);
+        else {
+            this.clearPreview();
+        }
+
+    }
+
+    clearPreview() {
         this.file = null;
         this.imageName = "";
         this.imageFormControl.patchValue("");
         this.inputFile.nativeElement.value = "";
-        this.drawImageToCanvas(this.drawImagePath);
-        if (!this.isFresh)
-            this.deleteImageEvent.emit(imageId);
-
+        this.drawImageToCanvas(this.defaultImage);
     }
 
     ngOnChanges() {
         if (this.imageName)
             this.imageFormControl.patchValue(this.imageName);
+        else
+            this.clearPreview();
         if (this.previewCanvas && !this.isSubmitted)
             this.drawImageToCanvas(this.drawImagePath);
     }

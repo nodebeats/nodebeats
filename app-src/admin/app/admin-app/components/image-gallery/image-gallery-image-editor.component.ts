@@ -1,15 +1,10 @@
 import {Component, EventEmitter, Output, Input, AfterViewInit, OnInit} from '@angular/core';
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {ImageGalleryModel} from "./image-gallery.model";
 import {ImageGalleryService} from "./image-gallery.service";
 import{Config} from "../../../shared/configs/general.config";
 import{ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
-import {ImageUploader} from "../../../shared/components/image-uploader.component";
 import {FormGroup, FormControl, FormBuilder, Validators} from "@angular/forms";
-import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 
-//declare var require;
-//const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
 @Component({
     selector: 'image-gallery-image-editor',
     templateUrl: 'admin-templates/image-gallery/image-gallery-image-editor.html'
@@ -132,6 +127,7 @@ export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
                 this._objService.deleteImageFile(this.objImage.imageName, this.objImage.imageProperties.imageExtension, this.objImage.imageProperties.imagePath)
                     .subscribe(res=> {
                             this.imageDeleted = true;
+                            this.objImage.imageName = "";
                             this.drawImageToCanvas(Config.DefaultImage);
                             jQuery.jAlert({
                                 'title': 'Success',

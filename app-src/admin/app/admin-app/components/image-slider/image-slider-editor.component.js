@@ -120,6 +120,7 @@ var ImageSliderEditorComponent = (function () {
                 _this._objService.deleteImage(_this.objSlider.imageName, _this.objSlider.imageProperties.imageExtension, _this.objSlider.imageProperties.imagePath)
                     .subscribe(function (res) {
                     _this.imageDeleted = true;
+                    _this.objSlider.imageName = "";
                     _this.drawImageToCanvas(general_config_1.Config.DefaultImage);
                     jQuery.jAlert({
                         'title': 'Success',

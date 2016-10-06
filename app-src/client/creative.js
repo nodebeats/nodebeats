@@ -61,6 +61,10 @@
         if ($(this).hasClass("page-scroll"))
             event.preventDefault();
     });
+    $('.nav-external').on('click', function (event) {
+        var $anchor = $(this);
+        window.open($anchor.prop("href"));
+    });
 
     // Highlight the top nav as scrolling occurs
     $('body').scrollspy({

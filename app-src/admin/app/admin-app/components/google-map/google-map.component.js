@@ -31,7 +31,7 @@ var GoogleMapComponent = (function () {
             zoom: ['5', forms_1.Validators.compose([validation_service_1.ValidationService.numberValidator, validation_service_1.ValidationService.minValueValidator(1), validation_service_1.ValidationService.maxValueValidator(20)])],
             mapType: [''],
             markerTitle: [''],
-            secure: [''],
+            scrollWheel: [''],
             showMarker: ['']
         });
     }

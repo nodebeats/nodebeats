@@ -1,0 +1,9 @@
+{
+  "roleName": "admin",
+  "active": true,
+  "change": true,
+  "create": true,
+  "delete": true,
+  "write": true,
+  "read": true
+}

@@ -2,7 +2,7 @@ import {ImageModel, ImageProperties} from '../../../shared/models/image.model';
 
 export class UserModel {
     constructor() {
-        this.userRole = "admin";
+        this.userRole = "";
         this.active = false;
         this.securityQuestion = "";
     }

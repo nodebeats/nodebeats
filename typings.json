@@ -2,6 +2,7 @@
   "globalDependencies": {
     "angular-protractor": "registry:dt/angular-protractor#1.5.0+20160425143459",
     "core-js": "registry:dt/core-js#0.0.0+20160602141332",
+    "hammerjs": "registry:dt/hammerjs#2.0.8+20160724063812",
     "jasmine": "registry:dt/jasmine#2.2.0+20160621224255",
     "lodash": "registry:dt/lodash#3.10.0+20160619033623",
     "node": "registry:dt/node#6.0.0+20160709114037",

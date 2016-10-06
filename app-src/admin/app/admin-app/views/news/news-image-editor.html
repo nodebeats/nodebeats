@@ -8,7 +8,7 @@
                            name="imageTitle"
                            placeholder="Enter Image Title"
                            [formControl]="newsImageForm.controls['imageTitle']">
-                    <control-messages  [isSubmitted]="isSubmitted"
+                    <control-messages [isSubmitted]="isSubmitted"
                                       [control]="newsImageForm.controls['imageTitle']"></control-messages>
 
                 </div>
@@ -19,7 +19,7 @@
                            placeholder="Enter alternet text"
                            [formControl]="newsImageForm.controls['imageAltText']">
                     <control-messages
-                                      [control]="newsImageForm.controls['imageAltText']"></control-messages>
+                            [control]="newsImageForm.controls['imageAltText']"></control-messages>
 
                 </div>
                 <div class="form-group">
@@ -31,17 +31,17 @@
 
                 </div>
                 <div class="form-group">
-                    <div class="checkbox">
-                        <label>
-                            <input class="" type="checkbox" [(ngModel)]="objNewsImage.active"
-                                   formControlName="active">
-                            Active
-                        </label>
-                    </div>
 
+                    <label>
+                        <md-checkbox [checked]="objNewsImage.active" formControlName="active"
+                                     [(ngModel)]="objNewsImage.active">
+                            Active
+                        </md-checkbox>
+                    </label>
                 </div>
-                <button type="submit" class="btn btn-primary" processing >Save</button>
-                <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger">Cancel</button>
+                <button type="submit" class="btn btn-primary" processing><i class="fa fa-floppy-o"></i>  Save</button>
+                            <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger"><i class="fa fa-times"></i> Cancel
+                </button>
             </div>
         </form>
     </div>

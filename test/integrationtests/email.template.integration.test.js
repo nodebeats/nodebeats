@@ -9,7 +9,7 @@
         Promise = require("bluebird"),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, accessToken) {
+    module.exports = function(expect, request, accessToken) {
 
         describe('Email Template Integration test', function(){
 

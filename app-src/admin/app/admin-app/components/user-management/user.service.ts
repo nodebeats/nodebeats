@@ -82,8 +82,12 @@ export class UserService {
         });
     }
 
-    getUserList(perPage:number, currentPage:number):Observable < UserResponse > {
-        return this._http.get(API_URL + this.apiRoute + "?perpage=" + perPage + "&page=" + currentPage)
+    getUserList(perPage:number, currentPage:number, roleName?:string):Observable < UserResponse > {
+        let queryString:string = "";
+        queryString += perPage ? "?perpage=" + perPage : "";
+        queryString += currentPage ? "&page=" + currentPage : "";
+        queryString += roleName ? "&role=" + roleName : "";
+        return this._http.get(API_URL + this.apiRoute + queryString)
             .map(res =><UserResponse>res.json())
             .catch(this.handleError);
     }

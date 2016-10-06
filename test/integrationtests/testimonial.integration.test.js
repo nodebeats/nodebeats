@@ -9,7 +9,7 @@
         Promise = require("bluebird"),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, imagePathUrl, accessToken) {
+    module.exports = function(expect, request, imagePathUrl, accessToken) {
         describe('Testimonial Integration test', function(){
 
             this.timeout(4000);
@@ -226,7 +226,7 @@
 
             describe('getAllTestimonials() to retreive the list of testimonials after saving records of testimonial', function () {
                 it('should return a list of testimonials ', function(){
-                    request
+                    return request
                         .get(apiUrl)
                         .set('Accept', 'application/json')
                         .expect('Content-Type', /json/)
@@ -442,7 +442,7 @@
                             describe('patchTestimonial() to delete testimonial for ID ' + _testimonialId +'  with access tokens', function () {
                                 it('should return a successfull delete message stating that testimonial is deleted ', function(){
 
-                                    request
+                                    return request
                                         .patch(apiUrl + _testimonialId)
                                         .set('Accept', 'application/x-www-form-urlencoded')
                                         .set('x-access-token', accessToken)

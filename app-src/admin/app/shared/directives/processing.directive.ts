@@ -32,19 +32,21 @@ export class ProcessingDirective implements OnChanges {
         let origOpen = XMLHttpRequest.prototype.open;
         let that = this;
         let cacheButtonContent:string = this.element.nativeElement.textContent;
+        let checkMethod:string[] = ["POST", "PUT", "DELETE"];
         XMLHttpRequest.prototype.open = function (method, url, async) {
-            if (url.indexOf(HOST_URL + '/api') != -1) {
+            if (url.indexOf(HOST_URL + '/api') != -1 && checkMethod.indexOf(method) != -1) {
                 that.element.nativeElement.textContent = "Processing...";
                 that.element.nativeElement.disabled = true;
                 that.isProccessing = true;
+
+                this.addEventListener('load', function () {
+                    setTimeout(()=> {
+                        that.element.nativeElement.textContent = cacheButtonContent;
+                        that.element.nativeElement.disabled = false;
+                        that.isProccessing = false;
+                    }, 1000);
+                });
             }
-            this.addEventListener('load', function () {
-                setTimeout(()=> {
-                    that.element.nativeElement.textContent = cacheButtonContent;
-                    that.element.nativeElement.disabled = false;
-                    that.isProccessing = false;
-                }, 1000);
-            });
             origOpen.apply(this, arguments);
         };
 

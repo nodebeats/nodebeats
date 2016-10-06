@@ -10,7 +10,7 @@
         Promise = require("bluebird"),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, imagePathUrl, accessToken) {
+    module.exports = function(expect, request, imagePathUrl, accessToken) {
         describe('Image Slider Integration test', function(){
 
             this.timeout(4000);
@@ -103,7 +103,7 @@
 
             describe('getAllSliderImages()  to retreive slider images', function () {
                 it('should return a list of slider images', function(){
-                    request
+                    return request
                         .get(apiUrl)
                         .set('Accept', 'application/json')
                         .expect('Content-Type', /json/)
@@ -239,7 +239,7 @@
                             describe('patchSliderImage()  to delete slider image  for ID ' + imageSliderId, function () {
                                 it('should return a successfull delete message stating slider image deleted successfully', function(){
 
-                                    request
+                                    return request
                                         .patch(apiUrl + imageSliderId)
                                         .set('Accept', 'application/x-www-form-urlencoded')
                                         .set('x-access-token', accessToken)
@@ -249,7 +249,7 @@
                                             expect(res.body).to.be.an('object');
                                             expect(res.body).to.have.property("message");
                                             expect(res.body.message).to.equal(apiMessageConfig.imageSlider.deleteMessage);
-                                            Promise.resolve();
+                                            return Promise.resolve();
                                         })
                                         .then(function(){
                                             describe('getAllSliderImages() to retreive list of slider images after delete', function () {

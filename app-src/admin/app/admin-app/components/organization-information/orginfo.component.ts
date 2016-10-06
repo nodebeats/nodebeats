@@ -1,13 +1,11 @@
 import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {OrganizationInfoService} from "./orginfo.service";
 import {OrganizationModel} from "./orginfo.model";
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {Alert} from "../../../shared/components/alert/alert";
 import {AlertModel} from "../../../shared/models/alert.model";
 import {ValidationService} from "../../../shared/services/validation.service";
 import{CountryListService, CountryModel}from "../../../shared/services/countrylist.service";
 import{Config}from "../../../shared/configs/general.config";
-import {ImageUploader} from "../../../shared/components/image-uploader.component";
 import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import {ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
 @Component({
@@ -50,8 +48,8 @@ export class OrganizationInfoComponent implements OnInit, AfterViewInit {
             twitterUrl: ['', ValidationService.urlValidator],
             gplusUrl: ['', ValidationService.urlValidator],
             linkendinUrl: ['', ValidationService.urlValidator],
-            youTubeUrl: ['', ValidationService.urlValidator],
-            instagramUrl: ['', ValidationService.urlValidator],
+            youtubeURL: ['', ValidationService.urlValidator],
+            instagramURL: ['', ValidationService.urlValidator],
             slogan: ['']
         });
     }
@@ -161,6 +159,7 @@ export class OrganizationInfoComponent implements OnInit, AfterViewInit {
                 this._objService.deleteImage(this.objOrg.logoImageName, this.objOrg.imageProperties.imageExtension, this.objOrg.imageProperties.imagePath)
                     .subscribe(res=> {
                             this.imageDeleted = true;
+                            this.objOrg.logoImageName = "";
                             this.drawImageToCanvas(Config.DefaultImage);
                             jQuery.jAlert({
                                 'title': 'Success',

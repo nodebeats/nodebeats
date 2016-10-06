@@ -10,7 +10,7 @@
         Promise = require("bluebird"),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, accessToken) {
+    module.exports = function(expect, request, accessToken) {
 
         describe('Two factor authentication Integration test', function(){
 
@@ -40,7 +40,7 @@
 
             describe('getUsers() to retreive list of users with access tokens after saving user records', function () {
                 it('should return a list of users', function () {
-                    request
+                    return request
                         .get(apiUrlUser)
                         .set('Accept', 'application/json')
                         .set('x-access-token', accessToken)

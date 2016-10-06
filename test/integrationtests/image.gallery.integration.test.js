@@ -10,7 +10,7 @@
         Promise = require("bluebird"),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, imagePathUrl, accessToken) {
+    module.exports = function(expect, request, imagePathUrl, accessToken) {
 
         describe('Image Gallery Integration test', function(){
 
@@ -132,7 +132,7 @@
 
             describe('getAllGalleryAlbums() to retreive list of image gallery albums', function () {
                 it('should return a list of gallery albums after saving of album data', function(){
-                    request
+                    return request
                         .get(apiUrlAlbum)
                         .set('Accept', 'application/json')
                         .expect('Content-Type', /json/)
@@ -415,7 +415,7 @@
 
                             describe('getAllGalleryImagesByAlbumID() to retreive all the images of album ' + _albumName, function () {
                                 it('should return a list of images related to the Album ', function () {
-                                    request
+                                    return request
                                         .get(apiUrlImage + _imageGalleryAlbumId)
                                         .set('Accept', 'application/json')
                                         .expect('Content-Type', /json/)
@@ -654,7 +654,7 @@
                                                     var galleryImagePatchData = {
                                                         coverImage: false
                                                     };
-                                                    request
+                                                    return request
                                                         .patch(apiUrlImage + _imageGalleryAlbumId + '/' + _imageId)
                                                         .set('Accept', 'application/x-www-form-urlencoded')
                                                         .set('x-access-token', accessToken)
@@ -672,7 +672,7 @@
 
                                                             describe('removeImage() to delete image for ID ' + _imageId +' with access token', function () {
                                                                 it('should return a message stating that image deleted successfully', function(){
-                                                                    request
+                                                                    return request
                                                                         .delete(apiUrlImage + _imageGalleryAlbumId + '/' + _imageId)
                                                                         .set('x-access-token', accessToken)
                                                                         .expect('Content-Type', /json/)
@@ -708,7 +708,7 @@
                                             describe('patchGalleryAlbum to delte gallery album for ID ' + _imageGalleryAlbumId +' with access token ', function () {
                                                 it('should return a successfull delete message', function () {
 
-                                                    request
+                                                    return request
                                                         .patch(apiUrlAlbum + _imageGalleryAlbumId)
                                                         .set('Accept', 'application/x-www-form-urlencoded')
                                                         .set('x-access-token', accessToken)

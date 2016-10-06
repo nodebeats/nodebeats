@@ -18,8 +18,8 @@ export class OrganizationModel {
     twitterURL:string;
     googlePlusURL:string;
     linkedInURL:string;
-    youTubeUrl:string;
-    instagramUrl:string;
+    youtubeURL:string;
+    instagramURL:string;
     slogan:string;
     logoImageName:string;
     imageProperties:ImageProperties;

@@ -29,7 +29,7 @@ export class GoogleMapComponent implements OnInit {
             zoom: ['5', Validators.compose([ValidationService.numberValidator, ValidationService.minValueValidator(1), ValidationService.maxValueValidator(20)])],
             mapType: [''],
             markerTitle: [''],
-            secure: [''],
+            scrollWheel: [''],
             showMarker: ['']
         })
     }

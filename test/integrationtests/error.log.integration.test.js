@@ -9,7 +9,7 @@
     var apiMessageConfig = require('../../lib/configs/api.message.config'),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, accessToken) {
+    module.exports = function(expect, request, accessToken) {
         describe('Error logs Integration test', function(){
 
             this.timeout(6000);

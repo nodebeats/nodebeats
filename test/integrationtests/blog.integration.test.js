@@ -10,7 +10,7 @@
         utilityHelper = require('../../lib/helpers/utilities.helper'),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, imagePathUrl, documentPathUrl, accessToken) {
+    module.exports = function(expect, request, imagePathUrl, documentPathUrl, accessToken) {
 
         describe('Blog  Integration test', function(){
 
@@ -237,7 +237,7 @@
             });
             describe('getBlogCategories() to retreive list of blog categories', function () {
                 it('should return a list of blog categories', function(){
-                    request
+                    return request
                         .get(apiUrlBlogCategory)
                         .set('Accept', 'application/json')
                         .expect('Content-Type', /json/)
@@ -491,7 +491,7 @@
 
                             describe('getAllBlogArticles() to retreive list of blog articles', function () {
                                 it('should return a list of blog articles', function(){
-                                    request
+                                    return request
                                         .get(apiUrlBlog)
                                         .set('Accept', 'application/json')
                                         .expect('Content-Type', /json/)
@@ -545,7 +545,7 @@
 
                                             describe('getAllBlogTags() to retreive all the blog tags of the blogs', function () {
                                                 it('should return a list of blog tags', function(){
-                                                    request
+                                                    return request
                                                         .get(apiUrlBlogTag)
                                                         .set('Accept', 'application/json')
                                                         .expect('Content-Type', /json/)
@@ -601,7 +601,7 @@
                                                     self.validBlogCategoryObj.categoryName = "Entertainment";
                                                     self.validBlogCategoryObj.active = true;
 
-                                                    request
+                                                    return request
                                                         .put(apiUrlBlogCategory + _blogCategoryId)
                                                         .set('Accept', 'application/x-www-form-urlencoded')
                                                         .set('x-access-token', accessToken)
@@ -617,7 +617,7 @@
                                                         .then(function(){
                                                             describe('getBlogByCategory() to filter blogs according to blog category ' + self.validBlogCategoryObj.categoryName, function () {
                                                                 it('should return a list of blog articles related to that category', function(){
-                                                                    request
+                                                                    return request
                                                                         .get(apiUrlFilterCategory + self.validBlogCategoryObj.categoryName)
                                                                         .set('Accept', 'application/json')
                                                                         .expect('Content-Type', /json/)
@@ -625,7 +625,7 @@
                                                                             expect(res.body).to.be.an('object');
                                                                             expect(res.body.dataList).to.be.instanceof(Array);
                                                                             expect(res.body.dataList).to.have.length.of.at.least(2);
-                                                                            Promise.resolve();
+                                                                            return Promise.resolve();
                                                                         })
                                                                         .then(function(){
                                                                             describe('getBlogByID() to retreive blog article object for blog ID ' + _blogId, function () {
@@ -974,7 +974,7 @@
 
                                                                             describe('getAllRelatedBlogDocuments() to retrive blog related documents for blog id ' + _blogId, function () {
                                                                                 it('should return a list of documents for blog', function(){
-                                                                                    request
+                                                                                    return request
                                                                                         .get(apiUrlBlogDocument + _blogId)
                                                                                         .set('Accept', 'application/json')
                                                                                         .expect('Content-Type', /json/)
@@ -1174,7 +1174,7 @@
 
                                                                                             describe('deleteBlogDocumentInfo() for document ID ' + _documentId +' to remove blog document with access token ', function () {
                                                                                                 it('should return a successfull delete message', function(){
-                                                                                                    request
+                                                                                                    return request
                                                                                                         .patch(apiUrlBlogDocument + _blogId + '/' + _documentId)
                                                                                                         .set('Accept', 'application/x-www-form-urlencoded')
                                                                                                         .set('x-access-token', accessToken)
@@ -1230,7 +1230,7 @@
                                                                                             describe('deleteBlog() for blog ID ' + _blogId +' to delete blog articles record with access token', function () {
                                                                                                 it('should return a successfull delete message stating blog article deleted successfully', function(){
 
-                                                                                                    request
+                                                                                                    return request
                                                                                                         .patch(apiUrlBlog + _blogId)
                                                                                                         .set('Accept', 'application/x-www-form-urlencoded')
                                                                                                         .set('x-access-token', accessToken)
@@ -1288,7 +1288,7 @@
                                                                                             describe('patchBlogCategory() to delete blog category for category ID ' + _blogCategoryId +' with access token', function () {
                                                                                                 it('should return a successfull delete message stating blog deleted successfully', function(){
 
-                                                                                                    request
+                                                                                                    return request
                                                                                                         .patch(apiUrlBlogCategory + _blogCategoryId)
                                                                                                         .set('Accept', 'application/x-www-form-urlencoded')
                                                                                                         .set('x-access-token', accessToken)

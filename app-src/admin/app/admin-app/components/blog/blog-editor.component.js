@@ -155,19 +155,14 @@ var BlogEditorComponent = (function () {
                 _this._objService.deleteImage(_this.objBlog.bannerImage, _this.objBlog.imageProperties.imageExtension, _this.objBlog.imageProperties.imagePath)
                     .subscribe(function (res) {
                     _this.imageDeleted = true;
+                    _this.objBlog.bannerImage = "";
                     _this.drawImageToCanvas(general_config_1.Config.DefaultWideImage);
                     jQuery.jAlert({
                         'title': 'Success',
                         'content': res.message,
                         'theme': 'green'
                     });
-                }, function (error) {
-                    jQuery.jAlert({
-                        'title': 'Alert',
-                        'content': error.message,
-                        'theme': 'red'
-                    });
-                });
+                }, function (error) { return _this.errorMessage(error); });
             }
         });
     };

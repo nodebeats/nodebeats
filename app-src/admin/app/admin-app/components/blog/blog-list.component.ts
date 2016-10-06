@@ -89,6 +89,7 @@ export class BlogListComponent implements OnInit,OnChanges {
                     headers: {
                         3: {sorter: false},
                         4: {sorter: false}
+
                     }
                 });
             }, 50);

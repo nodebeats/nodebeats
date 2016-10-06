@@ -14,8 +14,6 @@ var image_gallery_service_1 = require("./image-gallery.service");
 var general_config_1 = require("../../../shared/configs/general.config");
 var enum_config_1 = require("../../../shared/configs/enum.config");
 var forms_1 = require("@angular/forms");
-//declare var require;
-//const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
 var ImageGalleryImageEditorComponent = (function () {
     /* End Image Upload handle */
     function ImageGalleryImageEditorComponent(_objService, _formBuilder) {
@@ -118,6 +116,7 @@ var ImageGalleryImageEditorComponent = (function () {
                 _this._objService.deleteImageFile(_this.objImage.imageName, _this.objImage.imageProperties.imageExtension, _this.objImage.imageProperties.imagePath)
                     .subscribe(function (res) {
                     _this.imageDeleted = true;
+                    _this.objImage.imageName = "";
                     _this.drawImageToCanvas(general_config_1.Config.DefaultImage);
                     jQuery.jAlert({
                         'title': 'Success',

@@ -9,7 +9,7 @@
         Promise = require("bluebird"),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, accessToken) {
+    module.exports = function(expect, request, accessToken) {
 
         describe('Comment Setting  Integration test', function(){
 
@@ -122,7 +122,7 @@
 
             describe('getCommentSetting() to retreive  comment setting object after saving data', function () {
                 it('should return an object containing  comment setting data', function(){
-                    request
+                    return request
                         .get(apiUrlCommentSetting)
                         .set('Accept', 'application/json')
                         .expect('Content-Type', /json/)

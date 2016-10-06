@@ -9,7 +9,7 @@
         Promise = require("bluebird"),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, accessToken) {
+    module.exports = function(expect, request, accessToken) {
         describe('Google Maps Configuration Setting Integration test', function(){
 
             this.timeout(4000);
@@ -317,7 +317,7 @@
 
             describe('getGoogleMapsConfig()  to retreive google maps configuration data', function () {
                 it('should return a google maps setting configuration in object', function(){
-                    request
+                    return request
                         .get(apiUrl)
                         .set('Accept', 'application/json')
                         .expect('Content-Type', /json/)

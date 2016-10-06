@@ -1,15 +1,14 @@
-import {Component, EventEmitter, Output, Input, ViewChild, OnInit} from '@angular/core';
+import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
 import {UserService} from "./user.service";
-import {UserModel, UserResponse} from "./user.model";
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
+import {UserModel} from "./user.model";
 import {ValidationService} from "../../../shared/services/validation.service";
 import {Response} from "@angular/http";
 import {Config} from "../../../shared/configs/general.config";
 import{ImageCanvasSizeEnum} from '../../../shared/configs/enum.config';
-import {ImageUploader} from "../../../shared/components/image-uploader.component";
-import {Validators, FormBuilder, FormGroup,  FormControl} from "@angular/forms";
-import {Password} from 'primeng/primeng';
+import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import {QUESTION_LIST} from "../../../shared/configs/security-question.config";
+import {RoleService} from "../role-management/role.service";
+import {RoleModel} from "../role-management/role.model";
 
 @Component({
     selector: 'user-edit',
@@ -22,6 +21,7 @@ export class UserEditComponent implements OnInit {
     userForm:FormGroup;
     objUser:UserModel = new UserModel();
     isSubmitted:boolean = false;
+    objRoleList:RoleModel[] = [];
     /* Image Upload Handle*/
     imageDeleted:boolean = false;
     file:File;
@@ -33,7 +33,7 @@ export class UserEditComponent implements OnInit {
     questionlist:string[] = QUESTION_LIST;
 
 
-    constructor(private _objUserService:UserService, private _formBuilder:FormBuilder) {
+    constructor(private _objUserService:UserService, private _formBuilder:FormBuilder, private roleService:RoleService) {
         this.userForm = this._formBuilder.group({
             "firstName": ['', Validators.required],
             "lastName": ['', Validators.required],
@@ -51,6 +51,13 @@ export class UserEditComponent implements OnInit {
 
     ngOnInit() {
         this.getUserDetail();
+        this.getRoleList();
+    }
+
+    getRoleList() {
+        this.roleService.getRoleList(true) /*get active role*/
+            .subscribe(objRes => this.objRoleList = objRes,
+                err=>this.errorMessage(err));
     }
 
     getUserDetail() {
@@ -138,9 +145,11 @@ export class UserEditComponent implements OnInit {
             'onConfirm': (e, btn)=> {
                 e.preventDefault();
                 this._objUserService.deleteImage(this.objUser.imageName, this.objUser.imageProperties.imageExtension, this.objUser.imageProperties.imagePath)
-                    .subscribe(resUser=>this.handleDeleteSuccess(resUser),
-                        error => this.errorMessage(error)
-                    );
+                    .subscribe(resUser=> {
+                            this.objUser.imageName = "";
+                            this.handleDeleteSuccess(resUser);
+                        },
+                        error => this.errorMessage(error));
             }
         });
     }

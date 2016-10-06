@@ -30,19 +30,20 @@ var ProcessingDirective = (function () {
         var origOpen = XMLHttpRequest.prototype.open;
         var that = this;
         var cacheButtonContent = this.element.nativeElement.textContent;
+        var checkMethod = ["POST", "PUT", "DELETE"];
         XMLHttpRequest.prototype.open = function (method, url, async) {
-            if (url.indexOf(env_config_1.HOST_URL + '/api') != -1) {
+            if (url.indexOf(env_config_1.HOST_URL + '/api') != -1 && checkMethod.indexOf(method) != -1) {
                 that.element.nativeElement.textContent = "Processing...";
                 that.element.nativeElement.disabled = true;
                 that.isProccessing = true;
+                this.addEventListener('load', function () {
+                    setTimeout(function () {
+                        that.element.nativeElement.textContent = cacheButtonContent;
+                        that.element.nativeElement.disabled = false;
+                        that.isProccessing = false;
+                    }, 1000);
+                });
             }
-            this.addEventListener('load', function () {
-                setTimeout(function () {
-                    that.element.nativeElement.textContent = cacheButtonContent;
-                    that.element.nativeElement.disabled = false;
-                    that.isProccessing = false;
-                }, 1000);
-            });
             origOpen.apply(this, arguments);
         };
     };

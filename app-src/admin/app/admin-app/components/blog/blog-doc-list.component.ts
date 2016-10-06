@@ -1,8 +1,6 @@
 import {Component, ElementRef, OnInit, Output, Input, EventEmitter, ViewChild} from '@angular/core';
 import {BlogService} from "./blog.service";
 import {BlogDocumentModel} from "./blog.model";
-// import {Pagination} from 'fuel-ui/fuel-ui';
-import{BlogDocEditorComponent} from "./blog-doc-editor.component";
 
 @Component({
     selector: 'blog-doc-list',

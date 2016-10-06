@@ -14,19 +14,19 @@
         baseUrl = 'http://localhost:3000',
         request = supertest.agent(baseUrl),
         mongoose  = require('mongoose'),
-        apiMessageConfig = require('../lib/configs/api.message.config'),
         databaseConfig = require('../lib/configs/database.config'),
         Promise = require("bluebird"),
         HTTPStatus = require('http-status'),
-        dbUrl = "mongodb://" + databaseConfig.test.host + ":" + databaseConfig.test.port + "/" + databaseConfig.test.dbName;
+
+        dbUrl = "mongodb://" +databaseConfig.test.username +":"+ databaseConfig.test.password +"@" + databaseConfig.test.host + ":" + databaseConfig.test.port + "/" + databaseConfig.test.dbName;
 
     var loginUrl = '/api/login/';
-    var imagePathUrl = ['/home/lakhe/Desktop/images/depay.jpg', '/home/lakhe/Desktop/images/herrerea.jpg'];
+    var imagePathUrl = ['/home/lakhe/Desktop/nodebeats/images/mountain_nepal.jpg', '/home/lakhe/Desktop/nodebeats/images/homepage.png'];
     var loginObj = {
         username : "superadmin",
         password : "superadmin@123"
     };
-    var documentPathUrl = ['/home/lakhe/Desktop/images/6-things-you-want-to-know-about-MEAN-Stack.pdf', '/home/lakhe/Desktop/images/googleanalytics-jsonconfig.json'];
+    var documentPathUrl = ['/home/lakhe/Desktop/nodebeats/documents/proposal_example.pdf', '/home/lakhe/Desktop/nodebeats/documents/googleanalytics-jsonconfig.json'];
     var apiFileDeleteUrl = '/api/deletefile';
 
     beforeEach(function (done) {
@@ -84,25 +84,28 @@
                     var accessToken = response.body.token;
                     return Promise.resolve(accessToken);
                 }).then(function(accessToken){
-                    require('./integrationtests/cloudinary.setting.integration.test')(expect, request, loginObj, loginUrl, accessToken);
-                    require('./integrationtests/email.service.configure.integration.test')(expect, request, loginObj, loginUrl, accessToken);
-                    require('./integrationtests/email.template.integration.test')(expect, request, loginObj, loginUrl, accessToken);
-                    require('./integrationtests/html.module.integration.test')(expect, request, loginObj, loginUrl, accessToken);
-                    require('./integrationtests/google.maps.integration.test')(expect, request, loginObj, loginUrl, accessToken);
-                    require('./integrationtests/comment.setting.integration.test')(expect, request, loginObj, loginUrl, accessToken);
-                    require('./integrationtests/google.analytics.integration.test')(expect, request, loginObj, loginUrl, documentPathUrl, apiFileDeleteUrl, accessToken);
-                    require('./integrationtests/organization.info.integration.test')(expect, request, loginObj, loginUrl, imagePathUrl, accessToken);
-                    require('./integrationtests/contact.integration.test')(expect, request, loginObj, loginUrl, accessToken);
-                    require('./integrationtests/event.integration.test')(expect, request, loginObj, loginUrl, imagePathUrl, apiFileDeleteUrl, accessToken);
-                    require('./integrationtests/image.slider.integration.test')(expect, request, loginObj, loginUrl, imagePathUrl, accessToken);
-                    require('./integrationtests/news.integration.test')(expect, request, loginObj, loginUrl, imagePathUrl, accessToken);
-                    require('./integrationtests/image.gallery.integration.test')(expect, request, loginObj, loginUrl, imagePathUrl, accessToken);
-                    require('./integrationtests/testimonial.integration.test')(expect, request, loginObj, loginUrl, imagePathUrl, accessToken);
-                    require('./integrationtests/team.management.integration.test')(expect, request, loginObj, loginUrl, imagePathUrl, accessToken);
-                    require('./integrationtests/blog.integration.test')(expect, request, loginObj, loginUrl, imagePathUrl, documentPathUrl, accessToken);
-                    require('./integrationtests/user.integration.test')(expect, request, loginObj, loginUrl, imagePathUrl, accessToken);
-                    require('./integrationtests/two.factor.authentication.integration.test')(expect, request, loginObj, loginUrl, accessToken);
-                    require('./integrationtests/error.log.integration.test')(expect, request, loginObj, loginUrl, accessToken);
+                    require('./integrationtests/cloudinary.setting.integration.test')(expect, request, accessToken);
+                    require('./integrationtests/email.service.configure.integration.test')(expect, request, accessToken);
+                    require('./integrationtests/email.template.integration.test')(expect, request, accessToken);
+                    require('./integrationtests/role.management.integration.test')(expect, request, accessToken);
+                    require('./integrationtests/apiAccess.management.integration.test')(expect, request, accessToken);
+                    require('./integrationtests/html.module.integration.test')(expect, request, accessToken);
+                    require('./integrationtests/google.maps.integration.test')(expect, request, accessToken);
+                    require('./integrationtests/comment.setting.integration.test')(expect, request, accessToken);
+                    require('./integrationtests/google.analytics.integration.test')(expect, request, documentPathUrl, apiFileDeleteUrl, accessToken);
+                    require('./integrationtests/organization.info.integration.test')(expect, request, imagePathUrl, accessToken);
+                    require('./integrationtests/contact.integration.test')(expect, request, accessToken);
+                    require('./integrationtests/event.integration.test')(expect, request, imagePathUrl, apiFileDeleteUrl, accessToken);
+                    require('./integrationtests/image.slider.integration.test')(expect, request, imagePathUrl, accessToken);
+                    require('./integrationtests/news.integration.test')(expect, request, imagePathUrl, accessToken);
+                    require('./integrationtests/image.gallery.integration.test')(expect, request, imagePathUrl, accessToken);
+                    require('./integrationtests/testimonial.integration.test')(expect, request, imagePathUrl, accessToken);
+                    require('./integrationtests/team.management.integration.test')(expect, request, imagePathUrl, accessToken);
+                    require('./integrationtests/blog.integration.test')(expect, request, imagePathUrl, documentPathUrl, accessToken);
+                    require('./integrationtests/user.integration.test')(expect, request, imagePathUrl, accessToken);
+                    require('./integrationtests/partner.integration.test')(expect, request, imagePathUrl, accessToken);
+                    require('./integrationtests/two.factor.authentication.integration.test')(expect, request, accessToken);
+                    require('./integrationtests/error.log.integration.test')(expect, request, accessToken);
                     require('./integrationtests/login.integration.test')(expect, request, loginObj, loginUrl, accessToken);
                 });
         });

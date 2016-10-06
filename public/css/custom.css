@@ -349,3 +349,48 @@ select.input-underline option {
 }
 
 /*End Prime UI Dialog background*/
+
+/*api access legen*/
+fieldset.access {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow: 0px 0px 0px 0px #000;
+    box-shadow: 0px 0px 0px 0px #000;
+}
+
+legend.access {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width: auto;
+    padding: 0 10px;
+    border-bottom: none;
+}
+
+fieldset.access .form-check-inline {
+    margin-left: 1rem;
+}
+
+/*api access legen*/
+
+/*prime Multi select*/
+.ui-multiselect-panel.ui-widget-content {
+    border: 1px solid #D5D5D5;
+    background: #ffffff;
+    color: #222222;
+}
+
+.ui-multiselect {
+    width: inherit;
+}
+
+.ui-multiselect {
+    width: inherit;
+}
+
+.ui-multiselect .ui-multiselect-trigger {
+    width: initial;
+}
+
+/*prime Multi select*/

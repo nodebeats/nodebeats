@@ -51,8 +51,8 @@ var OrganizationInfoComponent = (function () {
             twitterUrl: ['', validation_service_1.ValidationService.urlValidator],
             gplusUrl: ['', validation_service_1.ValidationService.urlValidator],
             linkendinUrl: ['', validation_service_1.ValidationService.urlValidator],
-            youTubeUrl: ['', validation_service_1.ValidationService.urlValidator],
-            instagramUrl: ['', validation_service_1.ValidationService.urlValidator],
+            youtubeURL: ['', validation_service_1.ValidationService.urlValidator],
+            instagramURL: ['', validation_service_1.ValidationService.urlValidator],
             slogan: ['']
         });
     }
@@ -147,6 +147,7 @@ var OrganizationInfoComponent = (function () {
                 _this._objService.deleteImage(_this.objOrg.logoImageName, _this.objOrg.imageProperties.imageExtension, _this.objOrg.imageProperties.imagePath)
                     .subscribe(function (res) {
                     _this.imageDeleted = true;
+                    _this.objOrg.logoImageName = "";
                     _this.drawImageToCanvas(general_config_1.Config.DefaultImage);
                     jQuery.jAlert({
                         'title': 'Success',

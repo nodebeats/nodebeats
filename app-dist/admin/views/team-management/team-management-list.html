@@ -43,7 +43,7 @@
                     <td>{{preIndex+(i+1)}}</td>
                     <td>{{obj.teamMemberName}}</td>
                     <td>{{obj.designation}}</td>
-                    <td *ngIf="objListResponse.totalItems==0"></td>
+                    <td *ngIf="objListResponse.totalItems==1"></td>
                     <td *ngIf="objListResponse.totalItems>1 && preIndex+(i+1)==1">
                         <a href="javascript:void(null)" class="fa fa-caret-down order-sort red-hover"
                            (click)="moveDown(obj._id,obj.hierarchyOrder)"

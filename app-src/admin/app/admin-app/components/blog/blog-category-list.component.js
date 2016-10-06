@@ -53,8 +53,8 @@ var BlogCategoryListComponent = (function () {
             setTimeout(function () {
                 jQuery('.tablesorter').tablesorter({
                     headers: {
-                        3: { sorter: false },
-                        4: { sorter: false }
+                        2: { sorter: false },
+                        3: { sorter: false }
                     }
                 });
             }, 50);

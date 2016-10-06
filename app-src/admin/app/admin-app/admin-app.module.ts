@@ -1,4 +1,4 @@
-import {NgModule}      from '@angular/core';
+import {NgModule} from '@angular/core';
 import {ApplicationLogModule} from './components/application-log/application-log.module';
 import{BlogModule} from './components/blog/blog.module';
 import{CloudinaryModule} from './components/cloudinary/cloudinary.module';
@@ -24,8 +24,12 @@ import{adminAppRouting} from './admin-app.route';
 import {SpinnerComponent} from '../shared/components/spinner/spinner.component';
 import {SidebarCmp} from './components/sidebar/sidebar'
 import {TopNavCmp}from './components/topnav/topnav';
-import {AuthGuardService} from "../login-app/auth.guard.service";
 import {SharedModule} from "../shared/shared.module";
+import {PartnerModule} from "./components/partner/partner.module";
+import {CountryListService} from "../shared/services/countrylist.service";
+import {RoleModule} from "./components/role-management/role.module";
+import {ApiAccessModule} from "./components/api-access/api-access.module";
+
 @NgModule({
     imports: [
         adminAppRouting,
@@ -48,10 +52,15 @@ import {SharedModule} from "../shared/shared.module";
         TeamManagementModule,
         TestimonialModule,
         UserManagementModule,
+        PartnerModule,
         UserProfileModule,
+        RoleModule,
+        ApiAccessModule,
         SharedModule
     ],
-    declarations: [AdminAppComponent, SpinnerComponent, SidebarCmp, TopNavCmp]
+    declarations: [AdminAppComponent, SpinnerComponent, SidebarCmp, TopNavCmp],
+    providers: [CountryListService]
+
 })
 
 export class AdminAppModule {

@@ -3,7 +3,6 @@ import {LoginModel, LoginResponse} from './login.model';
 import {LoginService} from "./login.service";
 import {Response} from "@angular/http";
 import {FormBuilder, Validators, FormControl, FormGroup} from "@angular/forms";
-import {FormControlMessages} from '../../../shared/components/control-valdation-message.component';
 import {Config} from "../../../shared/configs/general.config";
 import {Router} from "@angular/router";
 import {UserModel} from "../../../admin-app/components/user-management/user.model";
@@ -18,7 +17,7 @@ import {UserModel} from "../../../admin-app/components/user-management/user.mode
                 state('collapse, void', style({opacity: 0})),
                 state('expand', style({opacity: 1})),
                 transition(
-                    'void <=> expand', [animate("1s ease-in", style({opacity: 1})), animate(500)])
+                    'void => expand', [animate("1s ease-in", style({opacity: 1})), animate(500)])
             ])]
     })
 export class LoginComponent implements OnInit {
@@ -84,6 +83,7 @@ export class LoginComponent implements OnInit {
         if (res.success) {
             if (res.twoFactorAuthEnabled) {
                 this.isSubmitted = false;
+                this.slide = "collapse";
                 this.tfaEnabled = true;
                 this.formImage = Config.GoogleAuthImage;
                 this.userId = res.userId;

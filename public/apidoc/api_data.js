@@ -1,6 +1,944 @@
 define({ "api": [
   {
     "type": "patch",
+    "url": "/api/access/:apiAccessId",
+    "title": "Deletes existing API Route Access Information",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "deleteApiAccessInfo",
+    "group": "API_Access_Management",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "apiAccessId",
+            "description": "<p>Object ID of the API Access Route data</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"apiAccessId\": \"57f33e6fb01d0b1b04a2e0ed\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Deletes existing API Route access information from the system.</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\ncurl \\\n-v \\\n-X PATCH  \\\nhttp://localhost:3000/api/access/57f33e6fb01d0b1b04a2e0ed \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTU2NTg3OCwiZXhwIjoxNDc1NjUyMjc4LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.D5FJ7i6ycZBhYc-kHni6WnjCOGCEZBMsZu9yeCajO_bhVzH-muqUvZ6K5072vwO7LoKB0eTKa1friGngrpRJ9w\"",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Route api for api access management deleted successfully.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Route api for api access management deleted successfully\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/apiaccess.management.route.js",
+    "groupTitle": "API_Access_Management"
+  },
+  {
+    "type": "get",
+    "url": "/api/access/",
+    "title": "Get API Route Access Management list",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "getAllApiAccess",
+    "group": "API_Access_Management",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "active",
+            "description": "<p>whether to get data with active bit true or false, if true, then returns data list with active bit set to true only</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "apiroute",
+            "description": "<p>Filter the list of API access routes  and display only those matching specified api route</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"active\": true\n}",
+          "type": "json"
+        },
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"apiroute\": \"/api/roles\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Retrieves the API Route Access Management list, if exists, else return empty array</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\ncurl \\\n-G \\\n-v \\\n\"http://localhost:3000/api/access\" \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTY0NjA0NiwiZXhwIjoxNDc1NzMyNDQ2LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.y0U0FeQJRlXIRX0iTUZSa1WrqLfIAqsun25pfF0rtio82o5engk17snLBkRzcah187sGPcmWfZcDSLL_Uu0V8w\"",
+        "type": "curl"
+      },
+      {
+        "title": "Example usage:",
+        "content": "curl \\\n-G \\\n-v \\\n\"http://localhost:3000/api/access\" \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTY0NjA0NiwiZXhwIjoxNDc1NzMyNDQ2LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.y0U0FeQJRlXIRX0iTUZSa1WrqLfIAqsun25pfF0rtio82o5engk17snLBkRzcah187sGPcmWfZcDSLL_Uu0V8w\" \\\n--data-urlencode \"active=true\"",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>object id of API Route access data.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "roleName",
+            "description": "<p>title of the role entered by the user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "routeApi",
+            "description": "<p>API route access url.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "active",
+            "description": "<p>active bit status.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n[\n       {\n           \"_id\": \"57f33e6fb01d0b1b04a2e0ed\",\n           \"roleName\": \"writer,admin\",\n           \"routeApi\": \"/api/cloudinary\",\n           \"active\": true\n       }\n   ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "NotFound": [
+          {
+            "group": "NotFound",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Route api not found</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"Route api not found\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/apiaccess.management.route.js",
+    "groupTitle": "API_Access_Management"
+  },
+  {
+    "type": "get",
+    "url": "/api/access/:apiAccessId",
+    "title": "Get API Route Access Management information object by ID",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "getApiAccessById",
+    "group": "API_Access_Management",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "apiAccessId",
+            "description": "<p>Object ID of the API Access Route data</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"apiAccessId\": \"57f33e6fb01d0b1b04a2e0ed\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Retrieves the API Route Access Management information object by ID, if exists, else return empty object</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\ncurl \\\n-G \\\n-v \\\n\"http://localhost:3000/api/access/57f33e6fb01d0b1b04a2e0ed\" \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTY0NjA0NiwiZXhwIjoxNDc1NzMyNDQ2LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.y0U0FeQJRlXIRX0iTUZSa1WrqLfIAqsun25pfF0rtio82o5engk17snLBkRzcah187sGPcmWfZcDSLL_Uu0V8w\"",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>object id of API Route access data.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "roleName",
+            "description": "<p>title of the role entered by the user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "routeApi",
+            "description": "<p>API route access url.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "active",
+            "description": "<p>active bit status.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n           \"_id\": \"57f33e6fb01d0b1b04a2e0ed\",\n           \"roleName\": \"writer,admin\",\n           \"routeApi\": \"/api/cloudinary\",\n           \"active\": true\n       }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "NotFound": [
+          {
+            "group": "NotFound",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Route api not found</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"Route api not found\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/apiaccess.management.route.js",
+    "groupTitle": "API_Access_Management"
+  },
+  {
+    "type": "post",
+    "url": "/api/access/",
+    "title": "Post API Route Access Information",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "postApiAccessInfo",
+    "group": "API_Access_Management",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "roleName",
+            "description": "<p>Mandatory title of the role.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "routeApi",
+            "description": "<p>Mandatory Api Route URL.</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>saves API Route access information to the database so that users with specified roles only can access the API route.</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\ncurl \\\n-v \\\n-X POST  \\\nhttp://localhost:3000/api/access/ \\\n-H 'Content-Type: application/json' \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTU2NTg3OCwiZXhwIjoxNDc1NjUyMjc4LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.D5FJ7i6ycZBhYc-kHni6WnjCOGCEZBMsZu9yeCajO_bhVzH-muqUvZ6K5072vwO7LoKB0eTKa1friGngrpRJ9w\" \\\n-d '{\"roleName\": \"agent\", \"routeApi\": \"/api/teammember\",  \"active\": true}'",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Route api for api access management saved successfully.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Route api for api access management saved successfully\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "BadRequest": [
+          {
+            "group": "BadRequest",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Validation errors due to not entering values for roleName and routeApi</p>"
+          }
+        ],
+        "AlreadyExists": [
+          {
+            "group": "AlreadyExists",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Route api with same api route already exists</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n\n{\n  \"message\":[\n                 {\n                      \"param\": \"routeApi\",\n                      \"msg\": \"Route api is required\"\n                  },\n                  {\n                      \"param\": \"roleName\",\n                      \"msg\": \"Role is required\"\n                  }\n            ]\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 409 Conflict\n{\n  \"message\": \"Route api with same api route already exists\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/apiaccess.management.route.js",
+    "groupTitle": "API_Access_Management"
+  },
+  {
+    "type": "put",
+    "url": "/api/access/:apiAccessId",
+    "title": "Updates existing API Route Access Information",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "updateApiAccessInfo",
+    "group": "API_Access_Management",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "apiAccessId",
+            "description": "<p>Object ID of the API Access Route data</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"apiAccessId\": \"57f33e6fb01d0b1b04a2e0ed\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Updates existing API Route access information to the database so that users with specified roles only can access the API route.</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\ncurl \\\n-v \\\n-X PUT  \\\nhttp://localhost:3000/api/access/57f33e6fb01d0b1b04a2e0ed \\\n-H 'Content-Type: application/json' \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTU2NTg3OCwiZXhwIjoxNDc1NjUyMjc4LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.D5FJ7i6ycZBhYc-kHni6WnjCOGCEZBMsZu9yeCajO_bhVzH-muqUvZ6K5072vwO7LoKB0eTKa1friGngrpRJ9w\" \\\n-d '{\"roleName\": \"agent,accountant\", \"routeApi\": \"/api/testimonial33\",  \"active\": true}'",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Route api for api access management updated successfully.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Route api for api access management updated successfully\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "BadRequest": [
+          {
+            "group": "BadRequest",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Validation errors due to not entering values for roleName and routeApi</p>"
+          }
+        ],
+        "AlreadyExists": [
+          {
+            "group": "AlreadyExists",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Route api with same api route already exists</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n\n{\n  \"message\":[\n                 {\n                      \"param\": \"routeApi\",\n                      \"msg\": \"Route api is required\"\n                  },\n                  {\n                      \"param\": \"roleName\",\n                      \"msg\": \"Role is required\"\n                  }\n            ]\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 409 Conflict\n{\n  \"message\": \"Route api with same api route already exists\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/apiaccess.management.route.js",
+    "groupTitle": "API_Access_Management"
+  },
+  {
+    "type": "patch",
     "url": "/api/blog/:blogId",
     "title": "Deletes existing Blog article data",
     "permission": [
@@ -104,6 +1042,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -118,6 +1074,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -242,6 +1208,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -256,6 +1240,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -2778,6 +3772,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -2792,6 +3804,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -2916,6 +3938,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -2948,6 +3988,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -3068,6 +4118,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -3100,6 +4168,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -3227,6 +4305,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -3250,6 +4346,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -3377,6 +4483,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -3409,6 +4533,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -3536,6 +4670,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -3568,6 +4720,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -3702,6 +4864,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -3725,6 +4905,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -3852,6 +5042,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -3866,6 +5074,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -3984,6 +5202,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -4007,6 +5243,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -4150,6 +5396,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -4173,6 +5437,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -4302,6 +5576,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -4334,6 +5626,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -4461,6 +5763,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -4484,6 +5804,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -4725,6 +6055,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -4748,6 +6096,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -4863,6 +6221,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -4895,6 +6271,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -5022,6 +6408,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -5045,6 +6449,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -5341,6 +6755,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -5364,6 +6796,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -5580,6 +7022,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -5603,6 +7063,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -5725,6 +7195,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -5739,6 +7227,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -6031,6 +7529,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -6054,6 +7570,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -6267,6 +7793,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -6290,6 +7834,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -6405,6 +7959,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -6437,6 +8009,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -6564,6 +8146,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -6587,6 +8187,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -7029,6 +8639,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -7043,6 +8671,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -7174,6 +8812,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -7206,6 +8862,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -7333,6 +8999,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -7365,6 +9049,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -7472,6 +9166,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -7486,6 +9198,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -7603,6 +9325,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -7617,6 +9357,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -7821,6 +9571,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -7844,6 +9612,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -7946,6 +9724,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -7969,6 +9765,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -8484,6 +10290,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -8498,6 +10322,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -8636,6 +10470,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -8668,6 +10520,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -8795,6 +10657,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -8827,6 +10707,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -9649,6 +11539,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -9663,6 +11571,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -9773,6 +11691,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -9805,6 +11741,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -9939,6 +11885,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -9962,6 +11926,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -10091,6 +12065,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -10114,6 +12106,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -10236,6 +12238,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -10268,6 +12288,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -10402,6 +12432,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -10416,6 +12464,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -10540,6 +12598,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -10563,6 +12639,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -10700,6 +12786,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -10723,6 +12827,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -10880,6 +12994,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -10903,6 +13035,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -11032,6 +13174,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -11064,6 +13224,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -11196,6 +13366,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -11219,6 +13407,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -11556,6 +13754,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -11579,6 +13795,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -11729,6 +13955,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -11761,6 +14005,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -11888,6 +14142,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -11920,6 +14192,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -12027,6 +14309,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -12041,6 +14341,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -12228,6 +14538,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -12251,6 +14579,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -12616,6 +14954,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -12630,6 +14986,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -12747,6 +15113,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -12779,6 +15163,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -12941,6 +15335,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -12955,6 +15367,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -13052,6 +15474,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -13084,6 +15524,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -13508,6 +15958,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -13522,6 +15990,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -13632,6 +16110,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -13655,6 +16151,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -13777,6 +16283,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -13800,6 +16324,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -14318,6 +16852,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -14332,6 +16884,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -14443,6 +17005,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -14466,6 +17046,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -14588,6 +17178,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -14606,7 +17214,27 @@ define({ "api": [
         },
         {
           "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n   \"message\": \"TOTP Token not verified\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -16040,6 +18668,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -16054,6 +18700,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -16171,6 +18827,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -16185,6 +18859,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -16316,6 +19000,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -16348,6 +19050,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -16468,6 +19180,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -16500,6 +19230,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -16634,6 +19374,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -16657,6 +19415,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -16786,6 +19554,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -16809,6 +19595,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -16945,6 +19741,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -16959,6 +19773,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -17076,6 +19900,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -17108,6 +19950,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -17235,6 +20087,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -17267,6 +20137,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -17401,6 +20281,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -17424,6 +20322,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -18049,6 +20957,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -18081,6 +21007,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -18208,6 +21144,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -18231,6 +21185,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -18358,6 +21322,1021 @@ define({ "api": [
     },
     "filename": "lib/routes/password.change.verify.route.js",
     "groupTitle": "PasswordChangeVerify"
+  },
+  {
+    "type": "patch",
+    "url": "/api/roles/:roleId",
+    "title": "Deletes existing User Role Information object",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "deleteRoleInfo",
+    "group": "Role_Management",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "roleId",
+            "description": "<p>Object ID of the user role object information</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"roleId\": \"57f365b9ef6b0749194f8101\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Deletes existing user role information from the database.</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\ncurl \\\n-v \\\n-X PATCH  \\\nhttp://localhost:3000/api/roles/57f365b9ef6b0749194f8101 \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTU2NTg3OCwiZXhwIjoxNDc1NjUyMjc4LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.D5FJ7i6ycZBhYc-kHni6WnjCOGCEZBMsZu9yeCajO_bhVzH-muqUvZ6K5072vwO7LoKB0eTKa1friGngrpRJ9w\"",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User Role deleted successfully.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"User Role deleted successfully\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "NotAllowed": [
+          {
+            "group": "NotAllowed",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Admin role cannot be deleted.</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 405 Not Allowed\n{\n  \"message\": \"Admin role cannot be deleted\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/role.management.route.js",
+    "groupTitle": "Role_Management"
+  },
+  {
+    "type": "get",
+    "url": "/api/roles/",
+    "title": "Get User Role list",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "getAllRoles",
+    "group": "Role_Management",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "active",
+            "description": "<p>whether to get data with active bit true or false, if true, then returns data list with active bit set to true only</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "rolename",
+            "description": "<p>Filter the list of roles and display only those matching specified role</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"active\": true\n}",
+          "type": "json"
+        },
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"rolename\": \"admin\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Retrieves the User Role list for role based authorization, if exists, else return empty array</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\ncurl \\\n-G \\\n-v \\\n\"http://localhost:3000/api/roles\" \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTU2NTg3OCwiZXhwIjoxNDc1NjUyMjc4LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.D5FJ7i6ycZBhYc-kHni6WnjCOGCEZBMsZu9yeCajO_bhVzH-muqUvZ6K5072vwO7LoKB0eTKa1friGngrpRJ9w\"",
+        "type": "curl"
+      },
+      {
+        "title": "Example usage:",
+        "content": "curl \\\n-G \\\n-v \\\n\"http://localhost:3000/api/roles\" \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTU2NTg3OCwiZXhwIjoxNDc1NjUyMjc4LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.D5FJ7i6ycZBhYc-kHni6WnjCOGCEZBMsZu9yeCajO_bhVzH-muqUvZ6K5072vwO7LoKB0eTKa1friGngrpRJ9w\" \\\n--data-urlencode \"active=true\"",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>object id of User role data.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "roleName",
+            "description": "<p>title of the role entered by the user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "active",
+            "description": "<p>active bit status.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "read",
+            "description": "<p>read access granted to the role.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "write",
+            "description": "<p>write access granted to the role in combination with either create or change action enables either insert or update features respectively.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "create",
+            "description": "<p>User having both create and write access  granted to the role can insert new document.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "change",
+            "description": "<p>User having both change and write access  granted to the role can update existing document.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "delete",
+            "description": "<p>delete access granted to the role, deletes data permanently .</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n[\n       {\n              \"_id\": \"57f347c55dd74725fd59cce1\",\n              \"roleName\": \"reader\",\n              \"active\": true,\n              \"change\": false,\n              \"delete\": false,\n              \"create\": false,\n              \"write\": false,\n              \"read\": true\n          }\n   ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "NotFound": [
+          {
+            "group": "NotFound",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User Role not found</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"User Role not found\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/role.management.route.js",
+    "groupTitle": "Role_Management"
+  },
+  {
+    "type": "get",
+    "url": "/api/roles/:roleId",
+    "title": "Get User Role information object by ID",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "getRoleById",
+    "group": "Role_Management",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "roleId",
+            "description": "<p>Object ID of the user role object information</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"roleId\": \"57f347c55dd74725fd59cce1\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Retrieves the User Role information object, if exists, else return empty object</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\ncurl \\\n-G \\\n-v \\\n\"http://localhost:3000/api/roles/57f347c55dd74725fd59cce1\" \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTU2NTg3OCwiZXhwIjoxNDc1NjUyMjc4LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.D5FJ7i6ycZBhYc-kHni6WnjCOGCEZBMsZu9yeCajO_bhVzH-muqUvZ6K5072vwO7LoKB0eTKa1friGngrpRJ9w\"",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>object id of User role data.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "roleName",
+            "description": "<p>title of the role entered by the user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "active",
+            "description": "<p>active bit status.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "read",
+            "description": "<p>read access granted to the role.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "write",
+            "description": "<p>write access granted to the role in combination with either create or change action enables either insert or update features respectively.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "create",
+            "description": "<p>User having both create and write access  granted to the role can insert new document.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "change",
+            "description": "<p>User having both change and write access  granted to the role can update existing document.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "delete",
+            "description": "<p>delete access granted to the role, deletes data permanently .</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n      \"_id\": \"57f347c55dd74725fd59cce1\",\n      \"roleName\": \"reader\",\n      \"active\": true,\n      \"change\": false,\n      \"delete\": false,\n      \"create\": false,\n      \"write\": false,\n      \"read\": true\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "NotFound": [
+          {
+            "group": "NotFound",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User Role not found</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"User Role not found\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/role.management.route.js",
+    "groupTitle": "Role_Management"
+  },
+  {
+    "type": "post",
+    "url": "/api/roles/",
+    "title": "Post User Role Information",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "postRoleInfo",
+    "group": "Role_Management",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "roleName",
+            "description": "<p>Mandatory title of the role.</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>saves user role information to the database with permitted actions.</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\ncurl \\\n-v \\\n-X POST  \\\nhttp://localhost:3000/api/roles/ \\\n-H 'Content-Type: application/json' \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTU2NTg3OCwiZXhwIjoxNDc1NjUyMjc4LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.D5FJ7i6ycZBhYc-kHni6WnjCOGCEZBMsZu9yeCajO_bhVzH-muqUvZ6K5072vwO7LoKB0eTKa1friGngrpRJ9w\" \\\n-d '{\"roleName\": \"agent\", \"active\": true,  \"change\": false, \"delete\":false, \"create\":true, \"write\":true, \"read\":true}'",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User Role saved successfully.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"User Role saved successfully\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "BadRequest": [
+          {
+            "group": "BadRequest",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Please enter Role Name</p>"
+          }
+        ],
+        "AlreadyExists": [
+          {
+            "group": "AlreadyExists",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User Role with same name already exists</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n\n{\n  \"message\": \"Please enter Role Name\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 409 Conflict\n{\n  \"message\": \"User Role with same name already exists\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/role.management.route.js",
+    "groupTitle": "Role_Management"
+  },
+  {
+    "type": "put",
+    "url": "/api/roles/:roleId",
+    "title": "Updates existing User Role Information object",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "updateRoleInfo",
+    "group": "Role_Management",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "roleId",
+            "description": "<p>Object ID of the user role object information</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"roleId\": \"57f365b9ef6b0749194f8101\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Updates existing user role information to the database with permitted actions.</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\ncurl \\\n-v \\\n-X PUT  \\\nhttp://localhost:3000/api/roles/57f365b9ef6b0749194f8101 \\\n-H 'Content-Type: application/json' \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTU2NTg3OCwiZXhwIjoxNDc1NjUyMjc4LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.D5FJ7i6ycZBhYc-kHni6WnjCOGCEZBMsZu9yeCajO_bhVzH-muqUvZ6K5072vwO7LoKB0eTKa1friGngrpRJ9w\" \\\n-d '{\"roleName\": \"agent2\", \"active\": true,  \"change\": false, \"delete\":false, \"create\":true, \"write\":true, \"read\":true}'",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User Role updated successfully.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"User Role updated successfully\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "BadRequest": [
+          {
+            "group": "BadRequest",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Please enter Role Name</p>"
+          }
+        ],
+        "AlreadyExists": [
+          {
+            "group": "AlreadyExists",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User Role with same name already exists</p>"
+          }
+        ],
+        "NotAllowed": [
+          {
+            "group": "NotAllowed",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Admin role cannot be edited.</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n\n{\n  \"message\": \"Please enter Role Name\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 409 Conflict\n{\n  \"message\": \"User Role with same name already exists\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 405 Not Allowed\n{\n  \"message\": \"Admin role cannot be edited\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/role.management.route.js",
+    "groupTitle": "Role_Management"
   },
   {
     "type": "get",
@@ -18913,6 +22892,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -18927,6 +22924,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -19051,6 +23058,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -19083,6 +23108,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -19222,6 +23257,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -19245,6 +23298,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -19367,6 +23430,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "AlreadyExists": [
           {
             "group": "AlreadyExists",
@@ -19399,6 +23480,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -19968,6 +24059,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "InternalServerError": [
           {
             "group": "InternalServerError",
@@ -19982,6 +24091,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -20100,6 +24219,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -20123,6 +24260,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -20245,6 +24392,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -20268,6 +24433,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -20641,6 +24816,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -20664,6 +24857,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -20957,6 +25160,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "NotFound": [
           {
             "group": "NotFound",
@@ -20984,6 +25205,16 @@ define({ "api": [
         },
         {
           "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
           "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"User not found\"\n}",
           "type": "json"
         },
@@ -20999,7 +25230,7 @@ define({ "api": [
   },
   {
     "type": "patch",
-    "url": "/api/change-password/confirm/:userId",
+    "url": "/api/change-password/confirm/:accessToken",
     "title": "Updates  user's password information to the  database",
     "permission": [
       {
@@ -21015,15 +25246,15 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "userId",
-            "description": "<p>object id of the user</p>"
+            "field": "accessToken",
+            "description": "<p>Password verify access token</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"userId\": \"57833052319c2cae0defc7b5\"\n}",
+          "content": "{\n  \"accessToken\": \"57833052319c2cae0defc7b5\"\n}",
           "type": "json"
         }
       ]
@@ -21087,301 +25318,6 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 400 Bad Request\n\n{\n  \"message\": \"Password is very weak. Please try the combination of lowercase alphabets, uppercase alphabets, numbers, symbols and a minimum of 8 characters long password\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "lib/routes/user.route.js",
-    "groupTitle": "User"
-  },
-  {
-    "type": "patch",
-    "url": "/api/user/:userId",
-    "title": "Updates  user's password information to the  database",
-    "permission": [
-      {
-        "name": "admin"
-      }
-    ],
-    "name": "patchUserInformation",
-    "group": "User",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "userId",
-            "description": "<p>object id of the user</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"userId\": \"57833052319c2cae0defc7b5\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "description": "<p>Updates user's password information data to the database</p>",
-    "version": "0.0.1",
-    "header": {
-      "fields": {
-        "AuthorizationHeader": [
-          {
-            "group": "AuthorizationHeader",
-            "type": "String",
-            "optional": false,
-            "field": "authorization",
-            "description": "<p>x-access-token value.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "\n\n\ncurl \\\n-v \\\n-X PATCH  \\\nhttp://localhost:3000/api/user/5791fc7cf7b57f69796ef444 \\\n-H 'Content-Type: application/json' \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c2JlYXQuY29tIiwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiX2lkIjoiNTc3ZjVjMWI1ODY5OTAyZDY3ZWIyMmE4IiwidXNlckNvbmZpcm1lZCI6ZmFsc2UsImJsb2NrZWQiOmZhbHNlLCJkZWxldGVkIjpmYWxzZSwiYWRkZWRPbiI6IjIwMTYtMDctMDhUMDc6NTQ6MDMuNzY2WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZSwidXNlclJvbGUiOiJhZG1pbiIsImFjdGl2ZSI6dHJ1ZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTc3ZjVjMWI1ODY5OTAyZDY3ZWIyMmE4IiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ2OTE4MzQ0MCwiZXhwIjoxNDY5MjAzNDQwLCJpc3MiOiI1NzdmNWMxYjU4Njk5MDJkNjdlYjIyYTgifQ.KSp3_S2LEhixyzTnNJE9AtD5u7-8ljImr-Np0kzxkoNWWjqB66a_T67NTCTMoMZys7PIYPFNBR9VwLOhkrX7BQ\" \\\n-d '{\"password\":\"nodecms@123\"}'",
-        "type": "curl"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>Password changed successfully.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Password changed successfully\"\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "UnAuthorizedError": [
-          {
-            "group": "UnAuthorizedError",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>authentication token was not supplied</p>"
-          },
-          {
-            "group": "UnAuthorizedError",
-            "type": "Boolean",
-            "optional": false,
-            "field": "isToken",
-            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
-          },
-          {
-            "group": "UnAuthorizedError",
-            "type": "Boolean",
-            "optional": false,
-            "field": "success",
-            "description": "<p>true if jwt token verifies</p>"
-          }
-        ],
-        "BadRequest": [
-          {
-            "group": "BadRequest",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>password must not be same as username of the user</p>"
-          }
-        ],
-        "Forbidden": [
-          {
-            "group": "Forbidden",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>You are not allowed to change the password of superadmin user</p>"
-          }
-        ],
-        "InternalServerError": [
-          {
-            "group": "InternalServerError",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>Internal Server Error</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n\n{\n  \"message\": \"Password must not contain the username\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n\n{\n  \"message\": \"Password is very weak. Please try the combination of lowercase alphabets, uppercase alphabets, numbers, symbols and a minimum of 8 characters long password\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 403 Forbidden\n\n{\n  \"message\": \"You are not allowed to change the password of superadmin user\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "lib/routes/user.route.js",
-    "groupTitle": "User"
-  },
-  {
-    "type": "patch",
-    "url": "/api/user/:userId",
-    "title": "Updates  user's security answer information to the  database",
-    "permission": [
-      {
-        "name": "admin"
-      }
-    ],
-    "name": "patchUserInformation",
-    "group": "User",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "userId",
-            "description": "<p>object id of the user</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"userId\": \"57833052319c2cae0defc7b5\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "description": "<p>Updates user's security answer information data to the database</p>",
-    "version": "0.0.1",
-    "header": {
-      "fields": {
-        "AuthorizationHeader": [
-          {
-            "group": "AuthorizationHeader",
-            "type": "String",
-            "optional": false,
-            "field": "authorization",
-            "description": "<p>x-access-token value.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "\n\n\ncurl \\\n-v \\\n-X PATCH  \\\nhttp://localhost:3000/api/user/5791fc7cf7b57f69796ef444 \\\n-H 'Content-Type: application/json' \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c2JlYXQuY29tIiwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiX2lkIjoiNTc3ZjVjMWI1ODY5OTAyZDY3ZWIyMmE4IiwidXNlckNvbmZpcm1lZCI6ZmFsc2UsImJsb2NrZWQiOmZhbHNlLCJkZWxldGVkIjpmYWxzZSwiYWRkZWRPbiI6IjIwMTYtMDctMDhUMDc6NTQ6MDMuNzY2WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZSwidXNlclJvbGUiOiJhZG1pbiIsImFjdGl2ZSI6dHJ1ZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTc3ZjVjMWI1ODY5OTAyZDY3ZWIyMmE4IiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ2OTE4MzQ0MCwiZXhwIjoxNDY5MjAzNDQwLCJpc3MiOiI1NzdmNWMxYjU4Njk5MDJkNjdlYjIyYTgifQ.KSp3_S2LEhixyzTnNJE9AtD5u7-8ljImr-Np0kzxkoNWWjqB66a_T67NTCTMoMZys7PIYPFNBR9VwLOhkrX7BQ\" \\\n-d '{\"securityQuestion\":\"favorite movie\",\"securityAnswer\":\"Harry Potter\"}'",
-        "type": "curl"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>Security answer changed successfully.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Security answer changed successfully\"\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "UnAuthorizedError": [
-          {
-            "group": "UnAuthorizedError",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>authentication token was not supplied</p>"
-          },
-          {
-            "group": "UnAuthorizedError",
-            "type": "Boolean",
-            "optional": false,
-            "field": "isToken",
-            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
-          },
-          {
-            "group": "UnAuthorizedError",
-            "type": "Boolean",
-            "optional": false,
-            "field": "success",
-            "description": "<p>true if jwt token verifies</p>"
-          }
-        ],
-        "InternalServerError": [
-          {
-            "group": "InternalServerError",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>Internal Server Error</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
           "type": "json"
         },
         {
@@ -21499,6 +25435,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "MethodNotAllowed": [
           {
             "group": "MethodNotAllowed",
@@ -21526,7 +25480,368 @@ define({ "api": [
         },
         {
           "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
           "content": "HTTP/1.1 405 Method Not Allowed\n{\n   \"message\": \"superadmin cannot be deleted\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/user.route.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "patch",
+    "url": "/api/user/:userId",
+    "title": "Updates  user's security answer information to the  database",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "patchUserInformation",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>object id of the user</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"userId\": \"57833052319c2cae0defc7b5\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Updates user's security answer information data to the database</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\n\n\ncurl \\\n-v \\\n-X PATCH  \\\nhttp://localhost:3000/api/user/5791fc7cf7b57f69796ef444 \\\n-H 'Content-Type: application/json' \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c2JlYXQuY29tIiwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiX2lkIjoiNTc3ZjVjMWI1ODY5OTAyZDY3ZWIyMmE4IiwidXNlckNvbmZpcm1lZCI6ZmFsc2UsImJsb2NrZWQiOmZhbHNlLCJkZWxldGVkIjpmYWxzZSwiYWRkZWRPbiI6IjIwMTYtMDctMDhUMDc6NTQ6MDMuNzY2WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZSwidXNlclJvbGUiOiJhZG1pbiIsImFjdGl2ZSI6dHJ1ZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTc3ZjVjMWI1ODY5OTAyZDY3ZWIyMmE4IiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ2OTE4MzQ0MCwiZXhwIjoxNDY5MjAzNDQwLCJpc3MiOiI1NzdmNWMxYjU4Njk5MDJkNjdlYjIyYTgifQ.KSp3_S2LEhixyzTnNJE9AtD5u7-8ljImr-Np0kzxkoNWWjqB66a_T67NTCTMoMZys7PIYPFNBR9VwLOhkrX7BQ\" \\\n-d '{\"securityQuestion\":\"favorite movie\",\"securityAnswer\":\"Harry Potter\"}'",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Security answer changed successfully.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Security answer changed successfully\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/user.route.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "patch",
+    "url": "/api/user/:userId",
+    "title": "Updates  user's password information to the  database",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "patchUserInformation",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>object id of the user</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"userId\": \"57833052319c2cae0defc7b5\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Updates user's password information data to the database</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\n\n\ncurl \\\n-v \\\n-X PATCH  \\\nhttp://localhost:3000/api/user/5791fc7cf7b57f69796ef444 \\\n-H 'Content-Type: application/json' \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c2JlYXQuY29tIiwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiX2lkIjoiNTc3ZjVjMWI1ODY5OTAyZDY3ZWIyMmE4IiwidXNlckNvbmZpcm1lZCI6ZmFsc2UsImJsb2NrZWQiOmZhbHNlLCJkZWxldGVkIjpmYWxzZSwiYWRkZWRPbiI6IjIwMTYtMDctMDhUMDc6NTQ6MDMuNzY2WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZSwidXNlclJvbGUiOiJhZG1pbiIsImFjdGl2ZSI6dHJ1ZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTc3ZjVjMWI1ODY5OTAyZDY3ZWIyMmE4IiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ2OTE4MzQ0MCwiZXhwIjoxNDY5MjAzNDQwLCJpc3MiOiI1NzdmNWMxYjU4Njk5MDJkNjdlYjIyYTgifQ.KSp3_S2LEhixyzTnNJE9AtD5u7-8ljImr-Np0kzxkoNWWjqB66a_T67NTCTMoMZys7PIYPFNBR9VwLOhkrX7BQ\" \\\n-d '{\"password\":\"nodecms@123\"}'",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Password changed successfully.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Password changed successfully\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "BadRequest": [
+          {
+            "group": "BadRequest",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>password must not be same as username of the user</p>"
+          }
+        ],
+        "Forbidden": [
+          {
+            "group": "Forbidden",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not allowed to change the password of superadmin user</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n\n{\n  \"message\": \"Password must not contain the username\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n\n{\n  \"message\": \"Password is very weak. Please try the combination of lowercase alphabets, uppercase alphabets, numbers, symbols and a minimum of 8 characters long password\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 403 Forbidden\n\n{\n  \"message\": \"You are not allowed to change the password of superadmin user\"\n}",
           "type": "json"
         },
         {
@@ -21672,6 +25987,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -21704,6 +26037,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {
@@ -21841,6 +26184,24 @@ define({ "api": [
             "description": "<p>true if jwt token verifies</p>"
           }
         ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
         "BadRequest": [
           {
             "group": "BadRequest",
@@ -21873,6 +26234,16 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
           "type": "json"
         },
         {

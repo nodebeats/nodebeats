@@ -9,7 +9,7 @@
         utilityHelper = require('../../lib/helpers/utilities.helper'),
         HTTPStatus = require('http-status');
 
-    module.exports = function(expect, request, loginObj, loginUrl, imagePathUrl, accessToken) {
+    module.exports = function(expect, request, imagePathUrl, accessToken) {
 
         describe('News Integration test', function(){
 
@@ -202,7 +202,7 @@
 
             describe('getAllNewsCategory() to retreive list of news categories', function () {
                 it('should return a list of news categories', function(){
-                    request
+                    return request
                         .get(apiUrlNewsCategory)
                         .set('Accept', 'application/json')
                         .expect('Content-Type', /json/)
@@ -485,7 +485,7 @@
 
                             describe('getAllNews() to retreive a list of news', function () {
                                 it('should return a list of news', function(){
-                                    request
+                                    return request
                                         .get(apiUrlNews)
                                         .set('Accept', 'application/json')
                                         .expect('Content-Type', /json/)
@@ -773,7 +773,7 @@
 
                                             describe('getAllNewsImagesByNewsID() to retreive news related images for news id ' + _newsId, function () {
                                                 it('should return a list of images for news', function(){
-                                                    request
+                                                    return request
                                                         .get(apiUrlNewsImage + _newsId)
                                                         .set('Accept', 'application/json')
                                                         .expect('Content-Type', /json/)
@@ -1030,7 +1030,7 @@
                                                             describe('patchNews()  to delete news  for ID ' + _newsId + ' with access token', function () {
                                                                 it('should return a successfull delete message stating news deleted successfully', function(){
 
-                                                                    request
+                                                                    return request
                                                                         .patch(apiUrlNews + _newsId)
                                                                         .set('Accept', 'application/x-www-form-urlencoded')
                                                                         .set('x-access-token', accessToken)
@@ -1084,7 +1084,7 @@
                                                                             describe('patchNewsCategory() to delete news category for ID ' + _newsCategoryId +' with access token to delete news category', function () {
                                                                                 it('should return a successfull delete message stating news category deleted successfully', function(){
 
-                                                                                    request
+                                                                                    return request
                                                                                         .patch(apiUrlNewsCategory + _newsCategoryId)
                                                                                         .set('Accept', 'application/x-www-form-urlencoded')
                                                                                         .set('x-access-token', accessToken)

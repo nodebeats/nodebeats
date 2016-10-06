@@ -115,6 +115,7 @@ var TestimonialEditorComponent = (function () {
                 _this._objService.deleteImage(_this.objTestimonial.imageName, _this.objTestimonial.imageProperties.imageExtension, _this.objTestimonial.imageProperties.imagePath)
                     .subscribe(function (res) {
                     _this.imageDeleted = true;
+                    _this.objTestimonial.imageName = "";
                     _this.drawImageToCanvas(general_config_1.Config.DefaultAvatar);
                     jQuery.jAlert({
                         'title': 'Success',

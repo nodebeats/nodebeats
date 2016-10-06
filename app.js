@@ -30,7 +30,6 @@ require('dotenv').config();
 var configureAppSecurity = require('./lib/securityconfigs/security.config');
 var dbConnector = require('./lib/helpers/database.helper');
 var redisStoreOpts = {};
-
 app.set('rootDir', __dirname);
 logWriter.init(app);
 
@@ -88,13 +87,13 @@ app.set('view engine', 'hbs');
 
 var admin = express();
 if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
-   redisStoreOpts = {
-       host: redisConfig.development.host,
-       port: redisConfig.development.port,
-       ttl: (20 * 60), // TTL of 20 minutes represented in seconds
+      redisStoreOpts = {
+        host: redisConfig.development.host,
+        port: redisConfig.development.port,
+        ttl: (20 * 60), // TTL of 20 minutes represented in seconds
        db: redisConfig.development.db,
-       pass: redisConfig.development.pass
-   };
+        pass: redisConfig.development.pass
+       };
     var adminRootPath = __dirname + "/app-src/admin/";
     app.use("/", express.static(__dirname + '/public/'));
     app.use('/scripts', express.static(__dirname + '/node_modules/'));
@@ -115,6 +114,7 @@ else if (process.env.NODE_ENV === "production") {
         host: redisConfig.production.host,
         port: redisConfig.production.port,
         ttl: (20 * 60), // TTL of 20 minutes represented in seconds
+        db: redisConfig.production.db,
         pass: redisConfig.production.pass
     };
     app.use(minify());

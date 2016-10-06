@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Output, Input, AfterViewInit, ViewChild, OnInit} from '@angular/core';
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {ImageSliderModel} from "./image-slider.model";
 import {ImageSliderService} from "./image-slider.service";
 import{Config} from "../../../shared/configs/general.config";
 import{ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
-import {ImageUploader} from "../../../shared/components/image-uploader.component";
 import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 
 //declare var require;
@@ -135,6 +133,7 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
                 this._objService.deleteImage(this.objSlider.imageName, this.objSlider.imageProperties.imageExtension, this.objSlider.imageProperties.imagePath)
                     .subscribe(res=> {
                             this.imageDeleted = true;
+                            this.objSlider.imageName = "";
                             this.drawImageToCanvas(Config.DefaultImage);
                             jQuery.jAlert({
                                 'title': 'Success',

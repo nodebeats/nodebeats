@@ -11,15 +11,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var user_service_1 = require("./user.service");
 var user_model_1 = require("./user.model");
+var role_service_1 = require("../role-management/role.service");
 var UserListComponent = (function () {
-    function UserListComponent(_objUserService) {
+    /* End Pagination */
+    function UserListComponent(_objUserService, roleService) {
         this._objUserService = _objUserService;
+        this.roleService = roleService;
         this.objUser = new user_model_1.UserModel();
         this.showForm = false;
         this.isEdit = false;
         this.showInfo = false;
         this.changePassword = false;
         this.showManage = false;
+        this.objRoleList = [];
         /* Pagination */
         this.perPage = 10;
         this.currentPage = 1;
@@ -27,11 +31,16 @@ var UserListComponent = (function () {
         this.nextPage = 1;
         this.preIndex = 0;
     }
-    /* End Pagination */
     UserListComponent.prototype.ngOnInit = function () {
         this.perPage = 10;
         this.currentPage = 1;
+        this.getRoleList();
         this.getUserList();
+    };
+    UserListComponent.prototype.getRoleList = function () {
+        var _this = this;
+        this.roleService.getRoleList(true) /*get active role*/
+            .subscribe(function (objRes) { return _this.objRoleList = objRes; }, function (err) { return _this.errorMessage(err); });
     };
     UserListComponent.prototype.getUserList = function () {
         var _this = this;
@@ -119,6 +128,13 @@ var UserListComponent = (function () {
         this.getUserList();
         jQuery(".tablesorter").trigger("update");
     };
+    UserListComponent.prototype.roleFilter = function (args) {
+        var _this = this;
+        var role = args.srcElement.value;
+        this.currentPage = 1;
+        this._objUserService.getUserList(this.perPage, this.currentPage, role)
+            .subscribe(function (res) { return _this.bindList(res); }, function (error) { return _this.errorMessage(error); });
+    };
     UserListComponent.prototype.hideAll = function () {
         this.showManage = false;
         this.showForm = false;
@@ -135,7 +151,7 @@ var UserListComponent = (function () {
             selector: 'admin-user',
             templateUrl: 'admin-templates/user-management/user-list.html'
         }), 
-        __metadata('design:paramtypes', [user_service_1.UserService])
+        __metadata('design:paramtypes', [user_service_1.UserService, role_service_1.RoleService])
     ], UserListComponent);
     return UserListComponent;
 }());

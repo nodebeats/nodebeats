@@ -4,19 +4,33 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+var DefinePlugin = require('webpack/lib/DefinePlugin');
 var Debug = process.env.NODE_ENV != "production";
+
 module.exports = {
     entry: {
         main: appRootPath + '/vendor-scripts',
+        contact: appRootPath + '/app/contact-form',
         css: appRootPath + '/vendor-css'
     },
 
     output: {
-        path: path.join(__dirname, 'public/offline/'),
+        path: path.join(__dirname, 'public/package/'),
         filename: '[name].bundle.js'
-   },
+    },
     module: {
         loaders: [
+            {test: require.resolve('jquery'), loader: 'expose?jQuery!expose?$'},
+            {
+                test: /modernizr\.js$/,
+                loader: "imports?this=>window!exports?window.Modernizr"
+            },
+            {
+                test: /\.js$/,
+                exclude: path.join(appRootPath, 'node_modules'),
+                loaders: ['babel'],
+                include: path.join(appRootPath, 'app')
+            },
 
             {
                 test: /\.css$/,
@@ -24,7 +38,7 @@ module.exports = {
             },
             {
                 test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
-                loader: 'file?name=assets/[hash].[ext]'
+                loader: 'file?hash=sha512&digest=hex&name=assets/[hash].[ext]'
             },
             // {
             //     test: /\.(eot|svg|ttf|woff|woff2)$/,
@@ -42,6 +56,7 @@ module.exports = {
     },
     debug: Debug,
     devtool: Debug ? "cheap-module-source-map" : false,
+    // devtool: "cheap-module-source-map",
     resolve: {
 
         /*
@@ -49,7 +64,7 @@ module.exports = {
          *
          * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
          */
-        extensions: ['', '.js', '.css'],
+        extensions: ['', '.js', '.css', '.jsx'],
 
         // Make sure root is src
         root: appRootPath,
@@ -57,24 +72,29 @@ module.exports = {
         // remove other default values
         modulesDirectories: ['node_modules'],
         alias: {
-            'offline': __dirname + '/public/offline',
             'public': __dirname + '/public',
             'scripts': __dirname + '/node_modules/',
-            'scrollreveal': __dirname + '/public/plugins/scrollreveal/scrollreveal.js',
-            'client': __dirname + '/app-src/client'
+            'client': __dirname + '/public/client/'
 
         }
     },
     plugins: [
+        new DefinePlugin({
+            'ENV': JSON.stringify(process.env.NODE_ENV),
+            'process.env': {
+                'ENV': JSON.stringify(process.env.NODE_ENV),
+                'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+            }
+        }),
+
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",
-            'window.jQuery': "jquery",
-            "ScrollReveal": "scrollreveal"
+            React: "react",
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: ['main'].reverse()
-        }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name:['main']
+        // }),
         /*Single Css */
         new ExtractTextPlugin("style.css", {
             allChunks: true
@@ -105,12 +125,14 @@ module.exports = {
          * See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
          */
         // NOTE: To debug prod builds uncomment //debug lines and comment //prod lines
+
         new UglifyJsPlugin({
             warnings: false,
-            beautify: false, //prod
+            beautify: Debug, //prod
             mangle: {screw_ie8: true}, //prod
-            compress: {screw_ie8: true}, //prod
+            compress: {screw_ie8: true, warnings: false}, //prod
             comments: false //prod
+
         })
     ]
 
