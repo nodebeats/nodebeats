@@ -115,7 +115,6 @@ else if (process.env.NODE_ENV === "production") {
         host: redisConfig.production.host,
         port: redisConfig.production.port,
         ttl: (20 * 60), // TTL of 20 minutes represented in seconds
-        db: redisConfig.production.db,
         pass: redisConfig.production.pass
     };
     app.use(minify());
@@ -170,7 +169,7 @@ app.use(expressValidator({
 
 
 var sessionOpts = {
-    //store: new RedisStore(redisStoreOpts),
+    store: new RedisStore(redisStoreOpts),
     name: 'id', // <-- a generic name for the session id
     secret: process.env.SESSION_SECRET,
     resave: false,
