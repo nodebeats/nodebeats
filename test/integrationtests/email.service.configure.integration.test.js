@@ -26,7 +26,7 @@
                 };
             });
 
-            describe('getMailServiceConfig() without access token to retreive email service setting object', function () {
+            describe('getMailServiceConfig() without access token to retrieve email service setting object', function () {
                 it('should return a message stating that authentication is failed', function(done){
                     request
                         .get(apiUrl)
@@ -61,7 +61,7 @@
                 });
             });
 
-            describe('getMailServiceConfig()  to retreive email service setting object with access token for the first time', function () {
+            describe('getMailServiceConfig()  to retrieve email service setting object with access token for the first time', function () {
                 it('should return an empty response .i.e no email service setting data', function(done){
                     request
                         .get(apiUrl)
@@ -219,7 +219,7 @@
                 });
             });
 
-            describe('getMailServiceConfig() with access token after saving data to retreive email service setting data', function () {
+            describe('getMailServiceConfig() with access token after saving data to retrieve email service setting data', function () {
                 it('should return a email service setting data in array', function(){
                     return request
                         .get(apiUrl)
@@ -239,7 +239,7 @@
                             var _emailSettingId = emailServiceObj._id;
                             var _emailServiceProvider = emailServiceObj.serviceProviderType;
 
-                            describe('getMailServiceConfigByID() for ID ' + _emailSettingId +' without access token to retreive email service setting object', function () {
+                            describe('getMailServiceConfigByID() for ID ' + _emailSettingId +' without access token to retrieve email service setting object', function () {
                                 it('should return a message stating that authentication is failed', function(done){
                                     request
                                         .get(apiUrl + _emailSettingId)
@@ -256,7 +256,7 @@
                                 });
                             });
 
-                            describe('getMailServiceConfigByID() to retreive email service setting object for ID ' + _emailSettingId, function () {
+                            describe('getMailServiceConfigByID() to retrieve email service setting object for ID ' + _emailSettingId, function () {
                                 it('should return an email service setting configuration object', function(done){
                                     request
                                         .get(apiUrl + _emailSettingId)

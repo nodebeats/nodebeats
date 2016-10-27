@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import{Config} from "../../../shared/configs/general.config";
-import{ API_URL} from "../../../shared/configs/env.config";
+import{API_URL} from "../../../shared/configs/env.config";
 import {FileOperrationService} from '../../../shared/services/fileOperation.service';
 
 @Injectable()
@@ -83,9 +83,11 @@ export class TeamManagementService {
         });
     }
 
-    getTeamMemberList():Observable < TeamManagementResponse> {
-
-        return this._http.get(API_URL + this.apiRoute)
+    getTeamMemberList(perPage:number, currentPage:number):Observable < TeamManagementResponse> {
+        let queryString:string = "";
+        queryString += perPage ? "?perpage=" + perPage : "";
+        queryString += currentPage ? "&page=" + currentPage : "";
+        return this._http.get(API_URL + this.apiRoute+queryString)
             .map(res =><TeamManagementResponse>res.json())
             .catch(this.handleError);
     }

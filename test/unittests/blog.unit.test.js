@@ -12,7 +12,7 @@
          BlogCategory = blogModel.BlogCategory,
          BlogTag = blogModel.BlogTag,
          BlogMetaTag = blogModel.BlogMetaTag,
-         blogController = require("../../controllers/blog.server.controller")(),
+         blogController = require("../../controllers/blog.server.controller"),
          chai = require("chai"),
          should = chai.should(),
          sinon=require('sinon'),

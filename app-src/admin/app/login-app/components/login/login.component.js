@@ -62,11 +62,10 @@ var LoginComponent = (function () {
         }
     };
     LoginComponent.prototype.loginHandler = function (res) {
-        var _this = this;
         if (res.success) {
+            this.slide = "collapse";
             if (res.twoFactorAuthEnabled) {
                 this.isSubmitted = false;
-                this.slide = "collapse";
                 this.tfaEnabled = true;
                 this.formImage = general_config_1.Config.GoogleAuthImage;
                 this.userId = res.userId;
@@ -79,9 +78,6 @@ var LoginComponent = (function () {
             if (!res.isToken) {
                 this.objResponse = res;
                 this.slide = "expand";
-                setTimeout(function () {
-                    _this.slide = "collapse";
-                }, 5000);
             }
         }
     };
@@ -106,7 +102,9 @@ var LoginComponent = (function () {
         // else if (res.status == 403) {
         general_config_1.Config.clearToken();
         var objResponse = res.json();
-        this.loginHandler(objResponse);
+        if (objResponse.status == "401") {
+            this.loginHandler(objResponse);
+        }
         //  }
     };
     // handleError(res:any) {
@@ -127,7 +125,7 @@ var LoginComponent = (function () {
             animations: [core_1.trigger('slideMsg', [
                     core_1.state('collapse, void', core_1.style({ opacity: 0 })),
                     core_1.state('expand', core_1.style({ opacity: 1 })),
-                    core_1.transition('void => expand', [core_1.animate("1s ease-in", core_1.style({ opacity: 1 })), core_1.animate(500)])
+                    core_1.transition('collapse => expand', [core_1.animate("1s ease-in", core_1.style({ opacity: 1 })), core_1.animate(500)])
                 ])]
         }), 
         __metadata('design:paramtypes', [forms_1.FormBuilder, login_service_1.LoginService, router_1.Router])

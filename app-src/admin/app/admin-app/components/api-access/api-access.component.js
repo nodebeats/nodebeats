@@ -19,8 +19,9 @@ var ApiAccessComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
         this.preIndex = 0;
+        this.bindSort = false;
     }
     // /* End Pagination */
     ApiAccessComponent.prototype.ngOnInit = function () {
@@ -44,15 +45,22 @@ var ApiAccessComponent = (function () {
         this.preIndex = (this.perPage * (this.currentPage - 1));
         if (objRes.length > 0) {
             /*End Pagination */
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        3: { sorter: false },
-                        4: { sorter: false }
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
         }
+    };
+    ApiAccessComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: { sorter: false },
+                    3: { sorter: false },
+                    4: { sorter: false }
+                }
+            });
+        }, 50);
     };
     ApiAccessComponent.prototype.edit = function (id) {
         this.showForm = true;
@@ -93,9 +101,11 @@ var ApiAccessComponent = (function () {
         });
     };
     ApiAccessComponent.prototype.showAccessList = function (arg) {
-        if (!arg)
+        if (!arg) {
             this.getRoleList();
+        }
         this.showForm = false;
+        this.sortTable();
     };
     ApiAccessComponent = __decorate([
         core_1.Component({

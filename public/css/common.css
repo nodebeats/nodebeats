@@ -37,12 +37,12 @@ control-messages div, .error-msg {
     margin: 6px 0;
 }
 
-.alert, .form-wrapper {
-    -webkit-transition: all 1s ease-in;
-    -moz-transition: all 1s ease-in;
-    -o-transition: all 1s ease-in;
-    transition: all 1s ease-in;
-}
+/*.alert, .form-wrapper {*/
+    /*-webkit-transition: all 1s ease-in;*/
+    /*-moz-transition: all 1s ease-in;*/
+    /*-o-transition: all 1s ease-in;*/
+    /*transition: all 1s ease-in;*/
+/*}*/
 .grid-wrapper{
     -webkit-transition: all 0.5s ease-in;
     -moz-transition: all 0.5s ease-in;

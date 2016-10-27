@@ -19,7 +19,8 @@ export class ContactListCompoent implements OnInit {
     perPage:number = 10;
     currentPage:number = 1;
     totalPage:number = 1;
-    nextPage:number = 1;
+    first:number = 0;
+    bindSort:boolean = false;
     preIndex:number = 1;
     /* End Pagination */
 
@@ -52,17 +53,25 @@ export class ContactListCompoent implements OnInit {
         if (objRes.totalItems > 0) {
             let totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-            setTimeout(()=> {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        3: {sorter: false},
-                        4: {sorter: false}
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
     }
 
+    sortTable() {
+        setTimeout(()=> {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    3: {sorter: false},
+                    4: {sorter: false}
+                }
+            });
+        }, 50);
+    }
 
     delete(id:string) {
 
@@ -103,13 +112,16 @@ export class ContactListCompoent implements OnInit {
 
     handleCancel(args) {
         this.showInfo = false;
+        this.sortTable();
     }
 
     pageChanged(event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getContactList();
-        jQuery(".tablesorter").trigger("update");
     }
 
 

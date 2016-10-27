@@ -18,7 +18,7 @@
             var apiUrlErrorNotifyLogs = '/api/log/notify/error/';
 
 
-            describe('getErrorLogs() to retreive error log list without access token ', function () {
+            describe('getErrorLogs() to retrieve error log list without access token ', function () {
                 it('should return a message stating that authentication is failed', function(done){
                     request
                         .get(apiUrlErrorLogs)
@@ -35,7 +35,7 @@
                 });
             });
 
-            describe('getErrorLogs() to retreive error log list with access token ', function () {
+            describe('getErrorLogs() to retrieve error log list with access token ', function () {
                 it('should return a list of error logs', function(done){
                     request
                         .get(apiUrlErrorLogs)

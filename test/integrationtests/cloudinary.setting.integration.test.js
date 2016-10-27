@@ -13,7 +13,7 @@
 
         describe('Cloudinary Image Management Setting Configuration Integration test', function(){
 
-            this.timeout(4000);
+            this.timeout(400000000);
             var apiUrl = '/api/cloudinary/';
             var cloudinarySettingConfig;
             
@@ -25,7 +25,7 @@
                 };
             });
 
-            describe('getCloudinarySetting() without access token to retreive cloudinary setting object', function () {
+            describe('getCloudinarySetting() without access token to retrieve cloudinary setting object', function () {
                 it('should return a message stating that authentication is failed', function(done){
                     request
                         .get(apiUrl)
@@ -197,7 +197,7 @@
                         .then(function(cloudinarySettingData){
                             var _cloudinarySettingId = cloudinarySettingData._id;
 
-                            describe('getCloudinarySettingByID() for ID ' + _cloudinarySettingId +' without access token to retreive cloudinary setting object', function () {
+                            describe('getCloudinarySettingByID() for ID ' + _cloudinarySettingId +' without access token to retrieve cloudinary setting object', function () {
                                 it('should return a message stating that authentication is failed', function(done){
                                     request
                                         .get(apiUrl + _cloudinarySettingId)
@@ -214,7 +214,7 @@
                                 });
                             });
 
-                            describe('getCloudinarySettingByID()  token to retreive cloudinary setting object for ID ' + _cloudinarySettingId, function () {
+                            describe('getCloudinarySettingByID()  token to retrieve cloudinary setting object for ID ' + _cloudinarySettingId, function () {
                                 it('should return a cloudinary setting configuration object', function(done){
                                     request
                                         .get(apiUrl + _cloudinarySettingId)

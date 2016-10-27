@@ -19,7 +19,8 @@ export class PartnerComponent implements OnInit {
     perPage:number = 10;
     currentPage:number = 1;
     totalPage:number = 1;
-    nextPage:number = 1;
+    first:number = 0;
+    bindSort:boolean = false;
     preIndex:number = 0;
     // /* End Pagination */
 
@@ -52,17 +53,21 @@ export class PartnerComponent implements OnInit {
         if (objRes.dataList.length > 0) {
             let totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-
+            this.sortTable();
             /*End Pagination */
-            setTimeout(()=> {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: {sorter: false},
-                        3: {sorter: false}
-                    }
-                });
-            }, 50);
+
         }
+    }
+
+    sortTable() {
+        setTimeout(()=> {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: {sorter: false},
+                    3: {sorter: false}
+                }
+            });
+        }, 50);
     }
 
     edit(id:string) {
@@ -110,6 +115,7 @@ export class PartnerComponent implements OnInit {
         if (!arg) // is not Canceled
             this.getPartnerList();
         this.showForm = false;
+        this.sortTable();
     }
 
 

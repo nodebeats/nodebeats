@@ -24,7 +24,8 @@ var BlogListComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
+        this.bindSort = false;
         this.preIndex = 0;
     }
     /* End Pagination */
@@ -70,15 +71,23 @@ var BlogListComponent = (function () {
         if (objRes.dataList.length > 0) {
             var totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        3: { sorter: false },
-                        4: { sorter: false }
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    };
+    BlogListComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    3: { sorter: false },
+                    4: { sorter: false }
+                }
+            });
+        }, 50);
     };
     BlogListComponent.prototype.addNews = function () {
         // this.showFormEvent.emit(null);
@@ -91,9 +100,11 @@ var BlogListComponent = (function () {
         this.blogId = id;
     };
     BlogListComponent.prototype.showBlogList = function (args) {
-        if (!args)
+        if (!args) {
             this.getBlogList();
+        }
         this.showForm = false;
+        this.sortTable();
     };
     BlogListComponent.prototype.showDocList = function (blogId) {
         this.showDocListEvent.emit(blogId);
@@ -134,8 +145,10 @@ var BlogListComponent = (function () {
     BlogListComponent.prototype.pageChanged = function (event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getBlogList();
-        jQuery(".tablesorter").trigger("update");
     };
     __decorate([
         core_1.Output(), 

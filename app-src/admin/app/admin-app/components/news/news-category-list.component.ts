@@ -21,7 +21,7 @@ export class NewsCategoryListComponent implements OnInit,OnChanges {
     perPage:number = 10;
     currentPage:number = 1;
     totalPage:number = 1;
-    nextPage:number = 1;
+    first:number = 0;
 
     ngOnInit() {
         this.perPage = 10;
@@ -55,15 +55,19 @@ export class NewsCategoryListComponent implements OnInit,OnChanges {
     bindList(objRes:NewsCategoryModel[]) {
         this.objListResponse = objRes;
         if (objRes.length > 0) {
-            setTimeout(()=> {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: {sorter: false},
-                        3: {sorter: false}
-                    }
-                });
-            }, 50);
+            this.sortTable();
         }
+    }
+
+    sortTable() {
+        setTimeout(()=> {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: {sorter: false},
+                    3: {sorter: false}
+                }
+            });
+        }, 50);
     }
 
     edit(id:string) {
@@ -82,6 +86,7 @@ export class NewsCategoryListComponent implements OnInit,OnChanges {
         if (!args) // is Cancelled
             this.getNewsCategoryList();
         this.showForm = false;
+        this.sortTable();
     }
 
     delete(id:string) {
@@ -122,11 +127,10 @@ export class NewsCategoryListComponent implements OnInit,OnChanges {
     }
 
     pageChanged(arg) {
-        if (arg != this.nextPage) {
-            this.nextPage = arg;
-            this.currentPage = arg;
-            this.getNewsCategoryList();
-        }
+
+        this.currentPage = arg;
+        this.getNewsCategoryList();
+
     }
 
 

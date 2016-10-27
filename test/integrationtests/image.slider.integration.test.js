@@ -29,7 +29,7 @@
             });
 
 
-            describe('getAllSliderImages() to retreive slider images', function () {
+            describe('getAllSliderImages() to retrieve slider images', function () {
                 it('should return an empty list i.e. no slider image', function(done){
                     request
                         .get(apiUrl)
@@ -101,7 +101,7 @@
                 });
             });
 
-            describe('getAllSliderImages()  to retreive slider images', function () {
+            describe('getAllSliderImages()  to retrieve slider images', function () {
                 it('should return a list of slider images', function(){
                     return request
                         .get(apiUrl)
@@ -117,7 +117,7 @@
                             var imageSliderId = resultImageSliderObj._id;
                             var _imageName = resultImageSliderObj.imageName;
 
-                            describe('getSliderImageByID() to retreive slider image object for ID ' + imageSliderId, function () {
+                            describe('getSliderImageByID() to retrieve slider image object for ID ' + imageSliderId, function () {
                                 it('should return a slider image information object', function(done){
                                     request
                                         .get(apiUrl + imageSliderId)
@@ -198,7 +198,7 @@
                                 });
                             });
 
-                            describe('getSliderImageByID() to retreive slider image information object for ID ' + imageSliderId, function () {
+                            describe('getSliderImageByID() to retrieve slider image information object for ID ' + imageSliderId, function () {
                                 it('should return a slider image information object', function(done){
                                     request
                                         .get(apiUrl + imageSliderId)
@@ -252,7 +252,7 @@
                                             return Promise.resolve();
                                         })
                                         .then(function(){
-                                            describe('getAllSliderImages() to retreive list of slider images after delete', function () {
+                                            describe('getAllSliderImages() to retrieve list of slider images after delete', function () {
                                                 it('should not return a list of slider images i.e. empty response', function(done){
                                                     request
                                                         .get(apiUrl)

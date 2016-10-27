@@ -25,7 +25,7 @@
                 };
             });
 
-            describe('getAllHtmlModuleContents() to retreive list of html contents', function () {
+            describe('getAllHtmlModuleContents() to retrieve list of html contents', function () {
                 it('should return an empty list i.e. no html content', function(done){
                     request
                         .get(apiUrl)
@@ -169,7 +169,7 @@
                 });
             });
 
-            describe('getAllHtmlModuleContents() to retreive a list of html contents', function () {
+            describe('getAllHtmlModuleContents() to retrieve a list of html contents', function () {
                 it('should return a list of html contents', function(){
                     return request
                         .get(apiUrl)
@@ -189,7 +189,7 @@
                             var _htmlContentId = resultHtmlContentObj._id;
                             var _contentTitle = resultHtmlContentObj.htmlContentTitle;
 
-                            describe('getHtmlContentByID() to retreive html content object for ID ' + _htmlContentId, function () {
+                            describe('getHtmlContentByID() to retrieve html content object for ID ' + _htmlContentId, function () {
                                 it('should return a html content object' , function(done){
                                     request
                                         .get(apiUrl + _htmlContentId)
@@ -340,7 +340,7 @@
                                                 Promise.resolve();
                                             })
                                             .then(function(){
-                                                describe('getAllHtmlModuleContents() to retreive html content  after record deletion', function () {
+                                                describe('getAllHtmlModuleContents() to retrieve html content  after record deletion', function () {
                                                     it('should not return an html content list i.e. empty response', function(done){
                                                         request
                                                             .get(apiUrl)

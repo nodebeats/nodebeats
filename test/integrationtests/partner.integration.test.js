@@ -30,7 +30,7 @@
                 };
             });
 
-            describe('getPartners() to retreive partners list', function () {
+            describe('getPartners() to retrieve partners list', function () {
                 it('should return an empty list of partners', function(done){
                     request
                         .get(apiUrlPartner)
@@ -189,7 +189,7 @@
                 });
             });
 
-            describe('getPartners() to retreive a list of partners', function () {
+            describe('getPartners() to retrieve a list of partners', function () {
                 it('should return a list of partners', function(){
                     return request
                         .get(apiUrlPartner)
@@ -209,7 +209,7 @@
                             var _partnerId = partnerObj._id;
                             var _partnerName = partnerObj.partnerName;
 
-                            describe('getPartnerById() to retreive partner information object for ID ' + _partnerId, function () {
+                            describe('getPartnerById() to retrieve partner information object for ID ' + _partnerId, function () {
                                 it('should return a partner information object', function(done){
                                     request
                                         .get(apiUrlPartner + _partnerId)
@@ -401,7 +401,7 @@
                                 });
                             });
 
-                            describe('getPartners() to retreive a list of partners', function () {
+                            describe('getPartners() to retrieve a list of partners', function () {
                                 it('should return a list of partners with only active bit true', function(done){
                                     request
                                         .get(apiUrlPartner)
@@ -454,7 +454,7 @@
                                             return Promise.resolve();
                                         })
                                         .then(function () {
-                                            describe('getPartners() to retreive a list of partners', function () {
+                                            describe('getPartners() to retrieve a list of partners', function () {
                                                 it('should return a list of partners with deleted bit set to false', function(done){
                                                     request
                                                         .get(apiUrlPartner)

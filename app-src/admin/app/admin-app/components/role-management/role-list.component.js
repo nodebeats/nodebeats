@@ -19,7 +19,8 @@ var RoleComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
+        this.bindSort = false;
         this.preIndex = 0;
     }
     // /* End Pagination */
@@ -44,20 +45,26 @@ var RoleComponent = (function () {
         this.preIndex = (this.perPage * (this.currentPage - 1));
         if (objRes.length > 0) {
             /*End Pagination */
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: { sorter: false },
-                        3: { sorter: false },
-                        4: { sorter: false },
-                        5: { sorter: false },
-                        6: { sorter: false },
-                        7: { sorter: false },
-                        8: { sorter: false }
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
         }
+    };
+    RoleComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: { sorter: false },
+                    3: { sorter: false },
+                    4: { sorter: false },
+                    5: { sorter: false },
+                    6: { sorter: false },
+                    7: { sorter: false },
+                    8: { sorter: false }
+                }
+            });
+        }, 50);
     };
     RoleComponent.prototype.edit = function (id) {
         this.showForm = true;
@@ -98,9 +105,11 @@ var RoleComponent = (function () {
         });
     };
     RoleComponent.prototype.showRoleList = function (arg) {
-        if (!arg)
+        if (!arg) {
             this.getRoleList();
+        }
         this.showForm = false;
+        this.sortTable();
     };
     RoleComponent = __decorate([
         core_1.Component({

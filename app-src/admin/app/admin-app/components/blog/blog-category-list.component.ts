@@ -19,9 +19,10 @@ export class BlogCategoryListComponent implements OnInit,OnChanges {
     showForm:boolean = false;
     /* Pagination */
     perPage:number = 10;
+    first:number = 0;
+    bindSort:boolean = false;
     currentPage:number = 1;
     totalPage:number = 1;
-    nextPage:number = 1;
 
     ngOnInit() {
         this.perPage = 10;
@@ -58,15 +59,19 @@ export class BlogCategoryListComponent implements OnInit,OnChanges {
         if (objRes.dataList.length > 0) {
             let totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-            setTimeout(()=> {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: {sorter: false},
-                        3: {sorter: false}
-                    }
-                });
-            }, 50);
+            this.sortTable();
         }
+    }
+
+    sortTable() {
+        setTimeout(()=> {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: {sorter: false},
+                    3: {sorter: false}
+                }
+            });
+        }, 50);
     }
 
     edit(id:string) {
@@ -85,6 +90,8 @@ export class BlogCategoryListComponent implements OnInit,OnChanges {
         if (!args) // is Cancelled
             this.getBlogCategoryList();
         this.showForm = false;
+        this.sortTable();
+
     }
 
     delete(id:string) {
@@ -124,14 +131,12 @@ export class BlogCategoryListComponent implements OnInit,OnChanges {
         this.getBlogCategoryList();
     }
 
-    pageChanged(arg) {
-        if (arg != this.nextPage) {
-            this.nextPage = arg;
-            this.currentPage = arg;
-            this.getBlogCategoryList();
-            jQuery(".tablesorter").trigger("update");
-
-        }
+    pageChanged(event) {
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
+        this.getBlogCategoryList();
+        jQuery(".tablesorter").trigger("update");
     }
 
 

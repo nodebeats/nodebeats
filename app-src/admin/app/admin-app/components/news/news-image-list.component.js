@@ -16,7 +16,7 @@ var NewsImageListComponent = (function () {
     // perPage:number = 10;
     // currentPage:number = 1;
     // totalPage:number = 1;
-    // nextPage:number = 1;
+    // first:number = 0;
     /* End Pagination */
     function NewsImageListComponent(_objService, eleRef) {
         this._objService = _objService;
@@ -42,16 +42,19 @@ var NewsImageListComponent = (function () {
     NewsImageListComponent.prototype.bindList = function (objRes) {
         this.objListResponse = objRes;
         if (objRes.image.length > 0) {
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: { sorter: false },
-                        3: { sorter: false },
-                        4: { sorter: false }
-                    }
-                });
-            }, 50);
+            this.sortTable();
         }
+    };
+    NewsImageListComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: { sorter: false },
+                    3: { sorter: false },
+                    4: { sorter: false }
+                }
+            });
+        }, 50);
     };
     NewsImageListComponent.prototype.edit = function (id) {
         this.showImageForm = true;
@@ -95,6 +98,7 @@ var NewsImageListComponent = (function () {
         if (!arg)
             this.getNewsImageList();
         this.showImageForm = false;
+        this.sortTable();
     };
     NewsImageListComponent.prototype.changeCoverImage = function (args) {
         var _this = this;

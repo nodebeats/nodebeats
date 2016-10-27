@@ -27,7 +27,7 @@
                 };
             });
 
-            describe('getApiAccess() to retreive API Access list without access token', function () {
+            describe('getApiAccess() to retrieve API Access list without access token', function () {
                 it('should return a message stating that authentication is failed', function(done){
                     request
                         .get(apiAccessUrl)
@@ -150,7 +150,7 @@
                 });
             });
 
-            describe('getApiAccess() to retreive API Access list with access token', function () {
+            describe('getApiAccess() to retrieve API Access list with access token', function () {
                 it('should return a list of route Apis which are to be allowed only for users with certain roles', function(){
 
                     return request
@@ -169,7 +169,7 @@
                             var _apiRouteAccessId = apiRouteAccessObj._id;
                             var _apiAccessRoute = apiRouteAccessObj.routeApi;
 
-                            describe('getApiAccessById() to retreive api route access information object for ID ' + _apiRouteAccessId + ' without access token', function () {
+                            describe('getApiAccessById() to retrieve api route access information object for ID ' + _apiRouteAccessId + ' without access token', function () {
                                 it('should return a message stating that authentication is failed', function(done){
                                     request
                                         .get(apiAccessUrl + _apiRouteAccessId)
@@ -186,8 +186,8 @@
                                 });
                             });
 
-                            describe('getApiAccessById() to retreive api route access information object for ID ' + _apiRouteAccessId + ' with access token', function () {
-                                it('should return a object containing route api access data', function(done){
+                            describe('getApiAccessById() to retrieve api route access information object for ID ' + _apiRouteAccessId + ' with access token', function () {
+                                it('should return an object containing route api access data', function(done){
                                     request
                                         .get(apiAccessUrl + _apiRouteAccessId)
                                         .set('Accept', 'application/json')
@@ -317,7 +317,7 @@
                                 });
                             });
 
-                            describe('getApiAccess() to retreive only active API route Access list with access token', function () {
+                            describe('getApiAccess() to retrieve only active API route Access list with access token', function () {
                                 it('should return an active list of route Apis which are to be allowed only for users with certain roles', function(done){
 
                                     request
@@ -369,7 +369,7 @@
                                             return Promise.resolve();
                                         })
                                         .then(function () {
-                                            describe('getApiAccess() to retreive API route Access list with access token and deleted bit set to false', function () {
+                                            describe('getApiAccess() to retrieve API route Access list with access token and deleted bit set to false', function () {
                                                 it('should return only undeleted list of route Apis which are to be allowed only for users with certain roles', function(done){
 
                                                     request

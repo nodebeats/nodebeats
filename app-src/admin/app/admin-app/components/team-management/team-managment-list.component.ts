@@ -19,7 +19,8 @@ export class TeamManagementComponent implements OnInit {
     perPage:number = 10;
     currentPage:number = 1;
     totalPage:number = 1;
-    nextPage:number = 1;
+    first:number = 0;
+    bindSort:boolean = false;
     preIndex:number = 0;
     /* End Pagination */
     ngOnInit() {
@@ -31,7 +32,7 @@ export class TeamManagementComponent implements OnInit {
     }
 
     getTeamMemberList() {
-        this._objService.getTeamMemberList()
+        this._objService.getTeamMemberList(this.perPage, this.currentPage)
             .subscribe(objRes =>this.bindList(objRes),
                 error => this.errorMessage(error));
     }
@@ -44,17 +45,26 @@ export class TeamManagementComponent implements OnInit {
         if (objRes.dataList.length > 0) {
             let totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-
-            setTimeout(()=> {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        3: {sorter: false},
-                        4: {sorter: false},
-                        5: {sorter: false}
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    }
+
+    sortTable() {
+        setTimeout(()=> {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    3: {sorter: false},
+                    4: {sorter: false},
+                    5: {sorter: false}
+                }
+            });
+
+        }, 50);
     }
 
     edit(id:string) {
@@ -128,16 +138,22 @@ export class TeamManagementComponent implements OnInit {
 
     showList(arg) {
         if (!arg) // is not Canceled
+        {
             this.getTeamMemberList();
+        }
         this.showForm = false;
+        this.sortTable();
     }
 
 
     pageChanged(event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getTeamMemberList();
-        jQuery(".tablesorter").trigger("update");
+
     }
 
 

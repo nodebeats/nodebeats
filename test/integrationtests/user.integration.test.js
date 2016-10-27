@@ -40,7 +40,7 @@
                 };
             });
 
-            describe('getUsers() to retreive list of users without access tokens', function () {
+            describe('getUsers() to retrieve list of users without access tokens', function () {
                 it('should return a message stating that authentication is failed', function(done){
                     request
                         .get(apiUrl)
@@ -78,7 +78,7 @@
             });
 
 
-            describe('getUsers() to retreive list of users  with access tokens', function () {
+            describe('getUsers() to retrieve list of users  with access tokens', function () {
                 it('should return a single list of users with username superadmin', function (done) {
                     request
                         .get(apiUrl)
@@ -460,7 +460,7 @@
                 });
             });
 
-            describe('getUsers() to retreive list of users with access tokens after saving user records', function () {
+            describe('getUsers() to retrieve list of users with access tokens after saving user records', function () {
                 it('should return a list of users', function(){
                     return request
                         .get(apiUrl)
@@ -482,7 +482,7 @@
                             var _imageName = resultUserlst[0].imageName;
                             var _superAdminUserId = resultUserlst[2]._id;
 
-                            describe('getUserByID()  to retreive user information object for ID ' + _userId +'  without access tokens', function () {
+                            describe('getUserByID()  to retrieve user information object for ID ' + _userId +'  without access tokens', function () {
                                 it('should return a message stating that authentication is failed', function(done){
                                     request
                                         .get(apiUrl + _userId)
@@ -499,7 +499,7 @@
                                 });
                             });
 
-                            describe('getUserByID()  to retreive user information object for ID ' + _userId +' with access token', function () {
+                            describe('getUserByID()  to retrieve user information object for ID ' + _userId +' with access token', function () {
                                 it('should return a user information object', function(done){
                                     request
                                         .get(apiUrl + _userId)

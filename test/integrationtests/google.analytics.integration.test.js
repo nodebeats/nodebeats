@@ -24,7 +24,7 @@
                 };
             });
 
-            describe('getGoogleAnalyticsConfig() to retreive google analytics configuration object without access token', function () {
+            describe('getGoogleAnalyticsConfig() to retrieve google analytics configuration object without access token', function () {
                 it('should return a message stating that authentication is failed', function(done){
                     request
                         .get(apiUrl)
@@ -59,7 +59,7 @@
                 });
             });
 
-            describe('getGoogleAnalyticsConfig() to retreive google analytics configuration object with access token for the first time', function () {
+            describe('getGoogleAnalyticsConfig() to retrieve google analytics configuration object with access token for the first time', function () {
                 it('should return empty response i.e. no analytics list', function(done){
                     request
                         .get(apiUrl)
@@ -163,7 +163,7 @@
                 });
             });
 
-            describe('getGoogleAnalyticsConfig() to retreive google analytics configuration list with access token ', function () {
+            describe('getGoogleAnalyticsConfig() to retrieve google analytics configuration list with access token ', function () {
                 it('should return a single google analytics setting in object', function(){
                     return request
                         .get(apiUrl)
@@ -184,7 +184,7 @@
                             var _googleAnalyticsJsonSettingFileName = googleAnalyticsObj.serviceAccountKeyFileName;
                             var _googleAnalyticsJsonSettingFilePath = googleAnalyticsObj.docProperties.docPath;
 
-                            describe('getGoogleAnalyticsConfigByID() to retreive google analytics configuration setting object  for ID ' + _googleAnalyticsSettingId + ' without access token', function () {
+                            describe('getGoogleAnalyticsConfigByID() to retrieve google analytics configuration setting object  for ID ' + _googleAnalyticsSettingId + ' without access token', function () {
                                 it('should return a message stating that authentication is failed', function(done){
                                     request
                                         .get(apiUrl + _googleAnalyticsSettingId)
@@ -201,7 +201,7 @@
                                 });
                             });
 
-                            describe('getGoogleAnalyticsConfigByID() to retreive google analytics configuration setting object  for ID ' + _googleAnalyticsSettingId, function () {
+                            describe('getGoogleAnalyticsConfigByID() to retrieve google analytics configuration setting object  for ID ' + _googleAnalyticsSettingId, function () {
                                 it('should return a google analytics setting configuration object', function(done){
                                     request
                                         .get(apiUrl + _googleAnalyticsSettingId)

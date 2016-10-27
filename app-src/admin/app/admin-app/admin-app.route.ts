@@ -24,6 +24,7 @@ import {EmailTemplateRoutes} from "./components/email-template/email-template.ro
 import {PartnerComponent} from "./components/partner/partner-list.component";
 import {RoleComponent} from "./components/role-management/role-list.component";
 import {ApiAccessComponent} from "./components/api-access/api-access.component";
+import {TokenManagementComponent} from "./components/token-management/token-management.component";
 
 export const adminAppRoute:Routes = [
     {
@@ -58,6 +59,7 @@ export const adminAppRoute:Routes = [
                     {path: 'partner', component: PartnerComponent},
                     {path: 'comment', component: CommentSettingComponent},
                     {path: 'profile', component: UserProfileManagementComponent},
+                    {path: 'token', component: TokenManagementComponent},
                     {path: '', redirectTo: 'dashboard', pathMatch: "full"}
                 ]
             }

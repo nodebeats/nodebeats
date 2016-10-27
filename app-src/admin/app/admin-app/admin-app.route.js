@@ -25,6 +25,7 @@ var email_template_route_1 = require("./components/email-template/email-template
 var partner_list_component_1 = require("./components/partner/partner-list.component");
 var role_list_component_1 = require("./components/role-management/role-list.component");
 var api_access_component_1 = require("./components/api-access/api-access.component");
+var token_management_component_1 = require("./components/token-management/token-management.component");
 exports.adminAppRoute = [
     {
         path: 'admin',
@@ -58,6 +59,7 @@ exports.adminAppRoute = [
                     { path: 'partner', component: partner_list_component_1.PartnerComponent },
                     { path: 'comment', component: comment_setting_component_1.CommentSettingComponent },
                     { path: 'profile', component: user_management_component_1.UserProfileManagementComponent },
+                    { path: 'token', component: token_management_component_1.TokenManagementComponent },
                     { path: '', redirectTo: 'dashboard', pathMatch: "full" }
                 ])
             }

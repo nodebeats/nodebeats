@@ -9,6 +9,7 @@ export class LoginResponse {
     success:boolean;
     message:string;
     token:string;
+    status:string;
     isToken:boolean;
     twoFactorAuthEnabled:boolean;
     userId:string;

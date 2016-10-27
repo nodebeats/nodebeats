@@ -26,7 +26,7 @@
 
             });
 
-            describe('getCommentSetting() to retreive  comment setting object', function () {
+            describe('getCommentSetting() to retrieve  comment setting object', function () {
                 it('should return an empty object for the first time', function(done){
                     request
                         .get(apiUrlCommentSetting)
@@ -120,7 +120,7 @@
             });
 
 
-            describe('getCommentSetting() to retreive  comment setting object after saving data', function () {
+            describe('getCommentSetting() to retrieve  comment setting object after saving data', function () {
                 it('should return an object containing  comment setting data', function(){
                     return request
                         .get(apiUrlCommentSetting)
@@ -136,7 +136,7 @@
                             var _commentSettingUrl = commentSettingObj.disqusURL
                             var _commentSettingId = commentSettingObj._id;
 
-                            describe('getCommentSettingByID() to retreive  comment setting object for setting ID ' + _commentSettingId + ' without access token', function () {
+                            describe('getCommentSettingByID() to retrieve  comment setting object for setting ID ' + _commentSettingId + ' without access token', function () {
                                 it('should return a message stating that authentication is failed', function(done){
                                     request
                                         .get(apiUrlCommentSetting + _commentSettingId)
@@ -153,7 +153,7 @@
                                 });
                             });
 
-                            describe('getCommentSettingByID() to retreive  comment setting object for setting ID ' + _commentSettingId, function () {
+                            describe('getCommentSettingByID() to retrieve  comment setting object for setting ID ' + _commentSettingId, function () {
                                 it('should return a  comment setting information object', function(done){
                                     request
                                         .get(apiUrlCommentSetting + _commentSettingId)
@@ -213,7 +213,7 @@
                                 });
                             });
 
-                            describe('getCommentSettingByID() to retreive  comment setting object for setting ID ' + _commentSettingId + ' after update operation with different disqus URL', function () {
+                            describe('getCommentSettingByID() to retrieve  comment setting object for setting ID ' + _commentSettingId + ' after update operation with different disqus URL', function () {
                                 it('should return a  comment setting information object with different disqus URL', function(done){
                                     request
                                         .get(apiUrlCommentSetting + _commentSettingId)

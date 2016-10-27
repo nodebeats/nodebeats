@@ -33,7 +33,7 @@
                 };
             });
 
-            describe('getTeamMembers() to retreive team members', function () {
+            describe('getTeamMembers() to retrieve team members', function () {
                 it('should return an empty list of team members for the first time', function(done){
                     request
                         .get(apiUrlTeam)
@@ -231,7 +231,7 @@
                 });
             });
 
-            describe('getTeamMembers() to retreive list of team members after saving records of team  members', function () {
+            describe('getTeamMembers() to retrieve list of team members after saving records of team  members', function () {
                 it('should return a list of team members ', function(){
                     return request
                         .get(apiUrlTeam)
@@ -251,7 +251,7 @@
                             var _teamMemberName = resultTeamMemberObj.teamMemberName;
                             var _imageName = resultTeamMemberObj.imageName;
 
-                            describe('getTeamMemberInfoByID() to retreive team member information object for ID ' + _teamMemberId, function () {
+                            describe('getTeamMemberInfoByID() to retrieve team member information object for ID ' + _teamMemberId, function () {
                                 it('should return a team member information object ', function(done){
                                     request
                                         .get(apiUrlTeam + _teamMemberId)
@@ -332,7 +332,7 @@
                                 });
                             });
 
-                            describe('getTestimonialByID() to retreive team member information object for ID ' + _teamMemberId +' after update operation', function () {
+                            describe('getTestimonialByID() to retrieve team member information object for ID ' + _teamMemberId +' after update operation', function () {
                                 it('should return a team member information object date with different  image Name and person name ', function(done){
                                     request
                                         .get(apiUrlTeam + _teamMemberId)

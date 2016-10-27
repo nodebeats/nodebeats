@@ -85,8 +85,11 @@ var TestimonialService = (function () {
             xhr.send(formData);
         });
     };
-    TestimonialService.prototype.getTestimonialList = function () {
-        return this._http.get(env_config_1.API_URL + this.apiRoute)
+    TestimonialService.prototype.getTestimonialList = function (perPage, currentPage) {
+        var queryString = "";
+        queryString += perPage ? "?perpage=" + perPage : "";
+        queryString += currentPage ? "&page=" + currentPage : "";
+        return this._http.get(env_config_1.API_URL + this.apiRoute + queryString)
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
     };

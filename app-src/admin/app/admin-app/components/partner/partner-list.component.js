@@ -20,7 +20,8 @@ var PartnerComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
+        this.bindSort = false;
         this.preIndex = 0;
     }
     // /* End Pagination */
@@ -46,16 +47,18 @@ var PartnerComponent = (function () {
         if (objRes.dataList.length > 0) {
             var totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-            /*End Pagination */
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: { sorter: false },
-                        3: { sorter: false }
-                    }
-                });
-            }, 50);
+            this.sortTable();
         }
+    };
+    PartnerComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: { sorter: false },
+                    3: { sorter: false }
+                }
+            });
+        }, 50);
     };
     PartnerComponent.prototype.edit = function (id) {
         this.showForm = true;
@@ -99,6 +102,7 @@ var PartnerComponent = (function () {
         if (!arg)
             this.getPartnerList();
         this.showForm = false;
+        this.sortTable();
     };
     PartnerComponent = __decorate([
         core_1.Component({

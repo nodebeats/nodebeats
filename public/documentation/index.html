@@ -26,6 +26,16 @@
 			<p>
 				This guide will walk you through everything from installing the software to deploying it on various cloud platforms. So, let's get started.
 			</p>
+			<p>
+				<h2>
+					Note:
+				</h2>
+			</p>
+			<p>
+				<b>
+					Upto Nodebeats v0.4(current version), We have primarily focused on backend of the content management system and in the next version, we will introduce a nice responsive Html template containing all the view section of the available modules.
+				</b>
+			</p>
 		</div>
 
 		<div id="ChildVerticalTab_1">
@@ -40,6 +50,7 @@
 				<li>Manage User Role</li>
 				<li>Manage API Access Management</li>
 				<li>Two factor authentication set up</li>
+				<li>Authorization Token Management</li>
 				<li>Application Error Logs</li>
 				<li>Configure Email Service Setting</li>
 				<li>Configure Cloudinary Setting</li>
@@ -596,6 +607,13 @@
 					<p>
 						So, you have two-factor authentication feature enabled in your web application, <b> time to do data-entry in Settings section</b>.
 					</p>
+				</div>
+				<div class="docpanel doc_start_authorization_token">
+					<p>
+						Authorization token management module manages all the authorization tokens that are used for token based authentication. In this module, all the tokens generated after successful login will be listed here. You can view all the details about the token including client IP address, User-Agents, expiry date etc. You can revoke access to those tokens by deleting them. You can also delete all the previously generated tokens at once as well.
+					</p>
+					<br>
+					<img src="{{protocol}}://res.cloudinary.com/{{cloudinaryname}}/image/upload/v1477546218/token_ic3m62.png">
 				</div>
 				<div class="docpanel doc_start_application_error_logs">
 					<p>
@@ -2771,7 +2789,7 @@ echo $REDIS_CLI
 					<ul>
 						<li>
 							<p>
-								Implementing <b>Role-based access control </b> to the system so that users can do only things which they are allowed to do.
+								Implementing Plugin based feature in Nodebeats.
 							</p>
 						</li>
 						<li>

@@ -22,7 +22,8 @@ var EmailTemplateListComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
+        this.bindSort = false;
         this.preIndex = 1;
     }
     /* End Pagination */
@@ -49,15 +50,23 @@ var EmailTemplateListComponent = (function () {
         if (objRes.totalItems > 0) {
             var totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        4: { sorter: false },
-                        5: { sorter: false }
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    };
+    EmailTemplateListComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    4: { sorter: false },
+                    5: { sorter: false }
+                }
+            });
+        }, 50);
     };
     EmailTemplateListComponent.prototype.addTemplate = function () {
         this.router.navigate(['/admin/email-template/email-template-editor']);
@@ -98,8 +107,10 @@ var EmailTemplateListComponent = (function () {
     EmailTemplateListComponent.prototype.pageChanged = function (event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getEmailTemplateList();
-        jQuery(".tablesorter").trigger("update");
     };
     EmailTemplateListComponent = __decorate([
         core_1.Component({

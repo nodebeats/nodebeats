@@ -37,6 +37,7 @@ export class SidebarCmp {
         menuItem.push(new SidebarMenuModel("/admin/partner", "Partners", "fa-link"));
         menuItem.push(new SidebarMenuModel("/admin/team", "Team Management", "fa-users"));
         menuItem.push(new SidebarMenuModel("/admin/testimonial", "Testimonial", "fa-comment-o"));
+        menuItem.push(new SidebarMenuModel("/admin/token", "Token", "fa-ticket"));
         this.sidebarRoute.push(new SidebarParentMenuModel(menuItem, null, "", ""));
         menuItem = [];
         menuItem.push(new SidebarMenuModel("/admin/cloudinary", "Cloudinary", "fa-cloud"));

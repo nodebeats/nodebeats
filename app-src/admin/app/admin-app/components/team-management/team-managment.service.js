@@ -85,8 +85,11 @@ var TeamManagementService = (function () {
             xhr.send(formData);
         });
     };
-    TeamManagementService.prototype.getTeamMemberList = function () {
-        return this._http.get(env_config_1.API_URL + this.apiRoute)
+    TeamManagementService.prototype.getTeamMemberList = function (perPage, currentPage) {
+        var queryString = "";
+        queryString += perPage ? "?perpage=" + perPage : "";
+        queryString += currentPage ? "&page=" + currentPage : "";
+        return this._http.get(env_config_1.API_URL + this.apiRoute + queryString)
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
     };

@@ -15,7 +15,7 @@ var BlogDocListComponent = (function () {
     // perPage:number = 10;
     // currentPage:number = 1;
     // totalPage:number = 1;
-    // nextPage:number = 1;
+    // first:number = 0;
     /* End Pagination */
     function BlogDocListComponent(_objService) {
         this._objService = _objService;
@@ -40,15 +40,18 @@ var BlogDocListComponent = (function () {
     BlogDocListComponent.prototype.bindList = function (objRes) {
         this.objListResponse = objRes;
         if (objRes.length > 0) {
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: { sorter: false },
-                        3: { sorter: false }
-                    }
-                });
-            }, 50);
+            this.sortTable();
         }
+    };
+    BlogDocListComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: { sorter: false },
+                    3: { sorter: false }
+                }
+            });
+        }, 50);
     };
     BlogDocListComponent.prototype.edit = function (id) {
         this.showForm = true;
@@ -92,6 +95,7 @@ var BlogDocListComponent = (function () {
         if (!arg)
             this.getBlogDocList();
         this.showForm = false;
+        this.sortTable();
     };
     __decorate([
         core_1.Input(), 

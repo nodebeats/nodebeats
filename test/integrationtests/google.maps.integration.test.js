@@ -30,7 +30,7 @@
                 };
             });
 
-            describe('getGoogleMapsConfig() to retreive google maps configuration data', function () {
+            describe('getGoogleMapsConfig() to retrieve google maps configuration data', function () {
                 it('should return an empty response ie. no google maps configuration data', function(done){
                     request
                         .get(apiUrl)
@@ -315,7 +315,7 @@
                 });
             });
 
-            describe('getGoogleMapsConfig()  to retreive google maps configuration data', function () {
+            describe('getGoogleMapsConfig()  to retrieve google maps configuration data', function () {
                 it('should return a google maps setting configuration in object', function(){
                     return request
                         .get(apiUrl)
@@ -333,7 +333,7 @@
                             var _googleMapsSettingId = googleMapsObj._id;
                             var _placeName = googleMapsObj.placeName;
 
-                            describe('getGoogleMapsConfigByID()  to retreive google maps configuration object without access token for ID ' + _googleMapsSettingId, function () {
+                            describe('getGoogleMapsConfigByID()  to retrieve google maps configuration object without access token for ID ' + _googleMapsSettingId, function () {
                                 it('should return a message stating that authentication is failed', function(done){
                                     request
                                         .get(apiUrl + _googleMapsSettingId)
@@ -350,7 +350,7 @@
                                 });
                             });
 
-                            describe('getGoogleMapsConfigByID()  to retreive google maps configuration object for ID ' + _googleMapsSettingId, function () {
+                            describe('getGoogleMapsConfigByID()  to retrieve google maps configuration object for ID ' + _googleMapsSettingId, function () {
                                 it('should return a google map setting configuration object', function(done){
                                     request
                                         .get(apiUrl + _googleMapsSettingId)

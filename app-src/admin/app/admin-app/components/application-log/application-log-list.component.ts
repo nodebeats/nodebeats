@@ -18,7 +18,8 @@ export class ApplicationLogComponent implements OnInit {
     perPage:number = 10;
     currentPage:number = 1;
     totalPage:number = 1;
-    nextPage:number = 1;
+    first:number = 0;
+    bindSort:boolean = false;
     preIndex:number = 1;
     /* End Pagination */
 
@@ -56,15 +57,23 @@ export class ApplicationLogComponent implements OnInit {
         if (objRes.totalItems > 0) {
             let totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-
-            setTimeout(()=> {
-                jQuery(this.ele.nativeElement).find('.tablesorter').tablesorter({
-                    headers: {
-                        4: {sorter: false}
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    }
+
+    sortTable() {
+        setTimeout(()=> {
+            jQuery(this.ele.nativeElement).find('.tablesorter').tablesorter({
+                headers: {
+                    4: {sorter: false}
+                }
+            });
+        }, 50);
     }
 
     showDetail(logIndex:string) {
@@ -168,8 +177,11 @@ export class ApplicationLogComponent implements OnInit {
     pageChanged(event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getApplicationLogList();
-        jQuery(".tablesorter").trigger("update");
+
     }
 
 

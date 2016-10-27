@@ -17,19 +17,20 @@ var express = require('express'),
     compression = require('compression'),
     minify = require('express-minify'),
     hpp = require('hpp'),
-    // userAgent = require('useragent'),
+    userAgent = require('useragent'),
     cloudinary = require('cloudinary'),
     redisConfig = require('./lib/configs/redis.config'),
     messageConfig = require('./lib/configs/api.message.config'),
-    cloudinaryController = require('./lib/controllers/cloudinary.setting.server.controller')(),
-    errorLogController = require('./lib/controllers/error.log.server.controller')(),
+    cloudinaryController = require('./lib/controllers/cloudinary.setting.server.controller'),
+    errorLogController = require('./lib/controllers/error.log.server.controller'),
     logWriter = require('./lib/helpers/application.log.writer.helper');
 
-
-require('dotenv').config();
 var configureAppSecurity = require('./lib/securityconfigs/security.config');
 var dbConnector = require('./lib/helpers/database.helper');
 var redisStoreOpts = {};
+
+require('dotenv').config();
+
 app.set('rootDir', __dirname);
 logWriter.init(app);
 
@@ -40,7 +41,7 @@ app.use(compression());
 //fetch  RegExp library live from the remote server
 //will async load the database from the server and compile it to a proper JavaScript supported format
 
-//userAgent(true);
+userAgent(true);
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -87,13 +88,13 @@ app.set('view engine', 'hbs');
 
 var admin = express();
 if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
-      redisStoreOpts = {
-        host: redisConfig.development.host,
-        port: redisConfig.development.port,
-        ttl: (20 * 60), // TTL of 20 minutes represented in seconds
-       db: redisConfig.development.db,
-        pass: redisConfig.development.pass
-       };
+    //  redisStoreOpts = {
+    //    host: redisConfig.development.host,
+    //     port: redisConfig.development.port,
+    //     ttl: (20 * 60), // TTL of 20 minutes represented in seconds
+    //     db: redisConfig.development.db,
+    //     pass: redisConfig.development.pass
+    //   };
     var adminRootPath = __dirname + "/app-src/admin/";
     app.use("/", express.static(__dirname + '/public/'));
     app.use('/scripts', express.static(__dirname + '/node_modules/'));
@@ -149,6 +150,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(hpp());
 
+
 app.use(expressValidator({
     errorFormatter: function (param, msg, value) {
         var namespace = param.split('.'),
@@ -168,7 +170,7 @@ app.use(expressValidator({
 
 
 var sessionOpts = {
-    store: new RedisStore(redisStoreOpts),
+    //store: new RedisStore(redisStoreOpts),
     name: 'id', // <-- a generic name for the session id
     secret: process.env.SESSION_SECRET,
     resave: false,

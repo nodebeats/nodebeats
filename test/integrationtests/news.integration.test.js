@@ -46,7 +46,7 @@
                 };
             });
 
-            describe('getAllNewsCategory() to retreive news category list', function () {
+            describe('getAllNewsCategory() to retrieve news category list', function () {
                 it('should return an empty list of news category', function(done){
                     request
                         .get(apiUrlNewsCategory)
@@ -81,7 +81,7 @@
 
             //News Integration test
 
-            describe('getAllNews() to retreive list of news', function () {
+            describe('getAllNews() to retrieve list of news', function () {
                 it('should return an empty list i.e. no news', function(done){
                     request
                         .get(apiUrlNews)
@@ -200,7 +200,7 @@
                 });
             });
 
-            describe('getAllNewsCategory() to retreive list of news categories', function () {
+            describe('getAllNewsCategory() to retrieve list of news categories', function () {
                 it('should return a list of news categories', function(){
                     return request
                         .get(apiUrlNewsCategory)
@@ -217,7 +217,7 @@
                             var _newsCategoryName = newsCategoryObj.categoryName;
 
 
-                            describe('getNewsCategoryInfoByID() to retreive news category information object for ID ' + _newsCategoryId, function () {
+                            describe('getNewsCategoryInfoByID() to retrieve news category information object for ID ' + _newsCategoryId, function () {
                                 it('should return a news category information object', function(done){
                                     request
                                         .get(apiUrlNewsCategory + _newsCategoryId)
@@ -298,7 +298,7 @@
                                 });
                             });
 
-                            describe('getAllNewsCategory() to retreive list of news category with active bit true', function () {
+                            describe('getAllNewsCategory() to retrieve list of news category with active bit true', function () {
                                 it('should return an empty array of news categories', function(done){
                                     request
                                         .get(apiUrlNewsCategory)
@@ -483,7 +483,7 @@
                                 });
                             });
 
-                            describe('getAllNews() to retreive a list of news', function () {
+                            describe('getAllNews() to retrieve a list of news', function () {
                                 it('should return a list of news', function(){
                                     return request
                                         .get(apiUrlNews)
@@ -508,7 +508,7 @@
 
                                             //News Detail List
 
-                                            describe('getNewsDetailByTitleSlog() to retreive news detailed information', function () {
+                                            describe('getNewsDetailByTitleSlog() to retrieve news detailed information', function () {
                                                 it('should return a a news article with all the available information', function (done) {
                                                     request
                                                         .get(apiUrlBlogDetail + addedOnDateFormat + '/' + newsUrlSlog)
@@ -524,7 +524,7 @@
                                             });
 
 
-                                            describe('getNewsByID() to retreive news information object for ID ' + _newsId, function () {
+                                            describe('getNewsByID() to retrieve news information object for ID ' + _newsId, function () {
                                                 it('should return a news information object', function(done){
                                                     request
                                                         .get(apiUrlNews + _newsId)
@@ -672,7 +672,7 @@
                                                 });
                                             });
 
-                                            describe('getAllNews() to retreive list of news with active bit true', function () {
+                                            describe('getAllNews() to retrieve list of news with active bit true', function () {
                                                 it('should return a single list of news array as response ignoring data records with active bit false', function(done){
                                                     request
                                                         .get(apiUrlNews)
@@ -696,7 +696,7 @@
 
                                             //News Image Integration test
 
-                                            describe('getAllNewsImagesByNewsID to retreive news related images  for news id ' + _newsId, function () {
+                                            describe('getAllNewsImagesByNewsID to retrieve news related images  for news id ' + _newsId, function () {
                                                 it('should return an image list related to the news', function(done){
                                                     request
                                                         .get(apiUrlNewsImage + _newsId)
@@ -771,7 +771,7 @@
                                                 });
                                             });
 
-                                            describe('getAllNewsImagesByNewsID() to retreive news related images for news id ' + _newsId, function () {
+                                            describe('getAllNewsImagesByNewsID() to retrieve news related images for news id ' + _newsId, function () {
                                                 it('should return a list of images for news', function(){
                                                     return request
                                                         .get(apiUrlNewsImage + _newsId)
@@ -789,7 +789,7 @@
                                                             var _newsImageId = newsImageObj._id;
                                                             var _imageName = newsImageObj.imageName;
 
-                                                            describe('getNewsImageInfoByImageID() to retreive news related image information object for image ID ' + _newsImageId, function () {
+                                                            describe('getNewsImageInfoByImageID() to retrieve news related image information object for image ID ' + _newsImageId, function () {
                                                                 it('should return a news image information object', function(done){
                                                                     request
                                                                         .get(apiUrlNewsImage + _newsId + '/' + _newsImageId)
@@ -870,7 +870,7 @@
                                                                 });
                                                             });
 
-                                                            describe('getAllNewsImagesByNewsID() to retreive list of images for news with image ID ' + _newsImageId +'  and  with active bit true', function () {
+                                                            describe('getAllNewsImagesByNewsID() to retrieve list of images for news with image ID ' + _newsImageId +'  and  with active bit true', function () {
                                                                 it('should return an image list with active bit true only', function(done){
                                                                     request
                                                                         .get(apiUrlNewsImage + _newsId)
@@ -934,7 +934,7 @@
                                                             });
 
 
-                                                            describe('getNewsImageInfoByImageID() to retreive news image object for image ID ' + _newsImageId + ' after updating cover image to image with id ' + _newsImageId, function () {
+                                                            describe('getNewsImageInfoByImageID() to retrieve news image object for image ID ' + _newsImageId + ' after updating cover image to image with id ' + _newsImageId, function () {
                                                                 it('should return a news image information object', function(done){
                                                                     request
                                                                         .get(apiUrlNewsImage + _newsId + '/' + _newsImageId)
@@ -1043,7 +1043,7 @@
                                                                             return Promise.resolve();
                                                                         })
                                                                         .then(function () {
-                                                                            describe('getAllNews() to retreive news list after delete of one record', function () {
+                                                                            describe('getAllNews() to retrieve news list after delete of one record', function () {
                                                                                 it('should  return only a single news record in  list', function(done){
                                                                                     request
                                                                                         .get(apiUrlNews)

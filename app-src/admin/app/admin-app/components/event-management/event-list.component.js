@@ -19,7 +19,8 @@ var EventComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
+        this.bindSort = false;
         this.preIndex = 1;
     }
     /* End Pagination */
@@ -46,15 +47,23 @@ var EventComponent = (function () {
             var totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
             /*End Pagination */
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        4: { sorter: false },
-                        5: { sorter: false }
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    };
+    EventComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    4: { sorter: false },
+                    5: { sorter: false }
+                }
+            });
+        }, 50);
     };
     EventComponent.prototype.edit = function (id) {
         this.showForm = true;
@@ -105,9 +114,11 @@ var EventComponent = (function () {
         });
     };
     EventComponent.prototype.showList = function (arg) {
-        if (!arg)
+        if (!arg) {
             this.getEventList();
+        }
         this.showForm = false;
+        this.sortTable();
     };
     EventComponent.prototype.vppChanged = function (event) {
         this.perPage = Number(event.srcElement.value);
@@ -116,8 +127,10 @@ var EventComponent = (function () {
     EventComponent.prototype.pageChanged = function (event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getEventList();
-        jQuery(".tablesorter").trigger("update");
     };
     EventComponent = __decorate([
         core_1.Component({

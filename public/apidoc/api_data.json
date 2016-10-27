@@ -938,6 +938,748 @@
     "groupTitle": "API_Access_Management"
   },
   {
+    "type": "delete",
+    "url": "/api/authtoken/",
+    "title": "Deletes all existing authorization token data",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "deleteAllAuthorizationToken",
+    "group": "Authorization_Token_Management",
+    "description": "<p>Deletes all existing authorization token data</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\n\n curl \\\n-v \\\n-X DELETE  \\\n\"http://localhost:3000/api/authtoken/\" \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3Njk0NjIxNywiZXhwIjoxNDc3MDMyNjE3LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.sV68ixmYS_u5Rcti0ahOj9UKThatqDgw9BTA-75BUTnpUTZa5DjVvOhv0UwjXSYCDqfo7VMT2bwNg52M2aXJZg\"",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>All authorization tokens deleted successfully</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"All authorization tokens deleted successfully\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/authorization.token.management.route.js",
+    "groupTitle": "Authorization_Token_Management"
+  },
+  {
+    "type": "delete",
+    "url": "/api/authtoken/:authorizationTokenId",
+    "title": "Deletes existing authorization token data",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "deleteAuthorizationToken",
+    "group": "Authorization_Token_Management",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "authorizationTokenId",
+            "description": "<p>object id of the authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"authorizationTokenId\": \"58085e79a3e13932aa2b7bc2\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Deletes existing authorization token data</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\n\ncurl \\\n-v \\\n- X DELETE  \\\n\"http://localhost:3000/api/authtoken/58085e79a3e13932aa2b7bc2\" \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3Njk0MzQ4MSwiZXhwIjoxNDc3MDI5ODgxLCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.nrc0dvEIr8TklRdqw9JL2pIMEAQ166z8Y4-vVZzDLdnGh3gr_lQy4C-4XOkNbtoX8qC4cP0ycH7GNigu0hrPQw\"",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Authorization token deleted successfully</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Authorization token deleted successfully\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/authorization.token.management.route.js",
+    "groupTitle": "Authorization_Token_Management"
+  },
+  {
+    "type": "get",
+    "url": "/api/authtoken/",
+    "title": "Get authorization token list",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "getAllAuthorizationTokens",
+    "group": "Authorization_Token_Management",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>object id of the user to filter authorization tokens so that tokens associated with only that user will be listed</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"userId\": \"58085e79a3e13932aa2b7bc2\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Retrieves the authorization token list, if exists, else return empty array</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\ncurl \\\n-G \\\n-v \\\n\"http://localhost:3000/api/authtoken\" \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTY0NjA0NiwiZXhwIjoxNDc1NzMyNDQ2LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.y0U0FeQJRlXIRX0iTUZSa1WrqLfIAqsun25pfF0rtio82o5engk17snLBkRzcah187sGPcmWfZcDSLL_Uu0V8w\"",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>object id of authorization token data.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>object id of the associated user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "ipAddress",
+            "description": "<p>IP address of the user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "browser",
+            "description": "<p>browser from which request is made.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "userAgent",
+            "description": "<p>userAgent of the user's browser.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "authorizationToken",
+            "description": "<p>authorization token.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "addedOn",
+            "description": "<p>date of the record creation.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "expiresOn",
+            "description": "<p>expiry date of the authorization token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n[\n   {\n       \"_id\": \"58085e79a3e13932aa2b7bc2\",\n       \"userId\": \"57d1755efe6feb6e34a85cda\",\n       \"ipAddress\": \"192.168.10.6\",\n       \"browser\": \"Chrome\",\n       \"userAgent\": \"Chrome 47.0.2526 / Linux 0.0.0\",\n       \"authorizationToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3Njk0MzQ4MSwiZXhwIjoxNDc3MDI5ODgxLCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.nrc0dvEIr8TklRdqw9JL2pIMEAQ166z8Y4-vVZzDLdnGh3gr_lQy4C-4XOkNbtoX8qC4cP0ycH7GNigu0hrPQw\",\n       \"addedOn\": \"2016-10-20T06:04:41.907Z\",\n       \"expiresOn\": \"2016-10-21T06:04:41.898Z\"\n   }\n   ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "NotFound": [
+          {
+            "group": "NotFound",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Authorization token not found</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"Authorization token not found\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/authorization.token.management.route.js",
+    "groupTitle": "Authorization_Token_Management"
+  },
+  {
+    "type": "get",
+    "url": "/api/authtoken/:authorizationTokenId",
+    "title": "Get authorization token information object",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "getAuthorizationTokenInfoById",
+    "group": "Authorization_Token_Management",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "authorizationTokenId",
+            "description": "<p>object id of the authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"authorizationTokenId\": \"58085e79a3e13932aa2b7bc2\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Retrieves the authorization token information object , if exists, else return not found message</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\ncurl \\\n-G \\\n-v \\\n\"http://localhost:3000/api/authtoken/58085e79a3e13932aa2b7bc2\" \\\n-H \"x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3NTY0NjA0NiwiZXhwIjoxNDc1NzMyNDQ2LCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.y0U0FeQJRlXIRX0iTUZSa1WrqLfIAqsun25pfF0rtio82o5engk17snLBkRzcah187sGPcmWfZcDSLL_Uu0V8w\"",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>object id of authorization token data.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>object id of the associated user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "ipAddress",
+            "description": "<p>IP address of the user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "browser",
+            "description": "<p>browser from which request is made.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "userAgent",
+            "description": "<p>userAgent of the user's browser.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "authorizationToken",
+            "description": "<p>authorization token.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "addedOn",
+            "description": "<p>date of the record creation.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "expiresOn",
+            "description": "<p>expiry date of the authorization token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n   {\n       \"_id\": \"58085e79a3e13932aa2b7bc2\",\n       \"userId\": \"57d1755efe6feb6e34a85cda\",\n       \"ipAddress\": \"192.168.10.6\",\n       \"browser\": \"Chrome\",\n       \"userAgent\": \"Chrome 47.0.2526 / Linux 0.0.0\",\n       \"authorizationToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3ZDE3NTVlZmU2ZmViNmUzNGE4NWNkYSIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJoZWxwQG5vZGViZWF0cy5jb20iLCJ1c2VyUm9sZSI6ImFkbWluIiwiYWRkZWRPbiI6IjIwMTYtMDktMDhUMTQ6Mjc6NDIuNjc3WiIsInR3b0ZhY3RvckF1dGhFbmFibGVkIjpmYWxzZX0sImNsYWltcyI6eyJzdWJqZWN0IjoiNTdkMTc1NWVmZTZmZWI2ZTM0YTg1Y2RhIiwiaXNzdWVyIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwicGVybWlzc2lvbnMiOlsic2F2ZSIsInVwZGF0ZSIsInJlYWQiLCJkZWxldGUiXX0sImlhdCI6MTQ3Njk0MzQ4MSwiZXhwIjoxNDc3MDI5ODgxLCJpc3MiOiI1N2QxNzU1ZWZlNmZlYjZlMzRhODVjZGEifQ.nrc0dvEIr8TklRdqw9JL2pIMEAQ166z8Y4-vVZzDLdnGh3gr_lQy4C-4XOkNbtoX8qC4cP0ycH7GNigu0hrPQw\",\n       \"addedOn\": \"2016-10-20T06:04:41.907Z\",\n       \"expiresOn\": \"2016-10-21T06:04:41.898Z\"\n   }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "NotFound": [
+          {
+            "group": "NotFound",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Authorization token not found</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"Authorization token not found\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/authorization.token.management.route.js",
+    "groupTitle": "Authorization_Token_Management"
+  },
+  {
     "type": "patch",
     "url": "/api/blog/:blogId",
     "title": "Deletes existing Blog article data",
@@ -9083,145 +9825,6 @@
   },
   {
     "type": "put",
-    "url": "/api/errordeleteall/",
-    "title": "Deletes all the existing error logs from the collection",
-    "permission": [
-      {
-        "name": "admin"
-      }
-    ],
-    "name": "deleteErrorLog",
-    "group": "ErrorLog",
-    "description": "<p>Deletes all the existing error logs from the collection</p>",
-    "version": "0.0.1",
-    "header": {
-      "fields": {
-        "AuthorizationHeader": [
-          {
-            "group": "AuthorizationHeader",
-            "type": "String",
-            "optional": false,
-            "field": "authorization",
-            "description": "<p>x-access-token value.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "curl \\\n-v \\\n-X PUT \\\nhttp://localhost:3000/api/errordeleteall \\\n-H 'x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3OTRjZjE5OTgwMWYzMWMwZGRiZjkwNyIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJ0ZXN0bm9kZWNtc0BnbWFpbC5jb20iLCJlbWFpbCI6InRlc3Rub2RlY21zQGdtYWlsLmNvbSIsInVzZXJSb2xlIjoiYWRtaW4iLCJhZGRlZE9uIjoiMjAxNi0wNy0yNFQxNDoyMjoxNy45MTNaIiwidHdvRmFjdG9yQXV0aEVuYWJsZWQiOmZhbHNlfSwiY2xhaW1zIjp7InN1YmplY3QiOiI1Nzk0Y2YxOTk4MDFmMzFjMGRkYmY5MDciLCJpc3N1ZXIiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJwZXJtaXNzaW9ucyI6WyJzYXZlIiwidXBkYXRlIiwicmVhZCIsImRlbGV0ZSJdfSwiaWF0IjoxNDY5NTE4Nzg3LCJleHAiOjE0Njk2MDUxODcsImlzcyI6IjU3OTRjZjE5OTgwMWYzMWMwZGRiZjkwNyJ9.18Pr3N71Ard5MB_0qK4e1RpyA36LOz2Y64RC9i1T7rQLUqULZbEpwKIQ9qrNX8hY1n5FvVzAnhL2g5AeAr_dtA'",
-        "type": "curl"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>Error Log deleted successfully.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Error Log deleted successfully\"\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "UnAuthorizedError": [
-          {
-            "group": "UnAuthorizedError",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>authentication token was not supplied or token was not verified</p>"
-          },
-          {
-            "group": "UnAuthorizedError",
-            "type": "Boolean",
-            "optional": false,
-            "field": "isToken",
-            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
-          },
-          {
-            "group": "UnAuthorizedError",
-            "type": "Boolean",
-            "optional": false,
-            "field": "success",
-            "description": "<p>true if jwt token verifies</p>"
-          }
-        ],
-        "UnAuthorizedError_1": [
-          {
-            "group": "UnAuthorizedError_1",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>You are not authorized to access this api route.</p>"
-          }
-        ],
-        "UnAuthorizedError_2": [
-          {
-            "group": "UnAuthorizedError_2",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>You are not authorized to perform this action.</p>"
-          }
-        ],
-        "InternalServerError": [
-          {
-            "group": "InternalServerError",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>Internal Server Error</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "lib/routes/error.log.route.js",
-    "groupTitle": "ErrorLog"
-  },
-  {
-    "type": "put",
     "url": "/api/error/:errorLogId",
     "title": "Deletes the error log data by Id",
     "permission": [
@@ -9309,6 +9912,145 @@
             "optional": false,
             "field": "message",
             "description": "<p>authentication token was not supplied or failed</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "isToken",
+            "description": "<p>to check if token is supplied or not , if token is supplied , returns true else returns false</p>"
+          },
+          {
+            "group": "UnAuthorizedError",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true if jwt token verifies</p>"
+          }
+        ],
+        "UnAuthorizedError_1": [
+          {
+            "group": "UnAuthorizedError_1",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to access this api route.</p>"
+          }
+        ],
+        "UnAuthorizedError_2": [
+          {
+            "group": "UnAuthorizedError_2",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You are not authorized to perform this action.</p>"
+          }
+        ],
+        "InternalServerError": [
+          {
+            "group": "InternalServerError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Internal Server Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"isToken\": true,\n   \"success\": false,\n   \"message\": \"Authentication failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to access this api route.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"You are not authorized to perform this action\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"message\": \"Internal Server Error\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "lib/routes/error.log.route.js",
+    "groupTitle": "ErrorLog"
+  },
+  {
+    "type": "put",
+    "url": "/api/errordeleteall/",
+    "title": "Deletes all the existing error logs from the collection",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "name": "deleteErrorLog",
+    "group": "ErrorLog",
+    "description": "<p>Deletes all the existing error logs from the collection</p>",
+    "version": "0.0.1",
+    "header": {
+      "fields": {
+        "AuthorizationHeader": [
+          {
+            "group": "AuthorizationHeader",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>x-access-token value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n \"x-access-token\": \"yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiaGVsbG9AYml0c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl \\\n-v \\\n-X PUT \\\nhttp://localhost:3000/api/errordeleteall \\\n-H 'x-access-token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjU3OTRjZjE5OTgwMWYzMWMwZGRiZjkwNyIsImFjdGl2ZSI6dHJ1ZSwidXNlcm5hbWUiOiJ0ZXN0bm9kZWNtc0BnbWFpbC5jb20iLCJlbWFpbCI6InRlc3Rub2RlY21zQGdtYWlsLmNvbSIsInVzZXJSb2xlIjoiYWRtaW4iLCJhZGRlZE9uIjoiMjAxNi0wNy0yNFQxNDoyMjoxNy45MTNaIiwidHdvRmFjdG9yQXV0aEVuYWJsZWQiOmZhbHNlfSwiY2xhaW1zIjp7InN1YmplY3QiOiI1Nzk0Y2YxOTk4MDFmMzFjMGRkYmY5MDciLCJpc3N1ZXIiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJwZXJtaXNzaW9ucyI6WyJzYXZlIiwidXBkYXRlIiwicmVhZCIsImRlbGV0ZSJdfSwiaWF0IjoxNDY5NTE4Nzg3LCJleHAiOjE0Njk2MDUxODcsImlzcyI6IjU3OTRjZjE5OTgwMWYzMWMwZGRiZjkwNyJ9.18Pr3N71Ard5MB_0qK4e1RpyA36LOz2Y64RC9i1T7rQLUqULZbEpwKIQ9qrNX8hY1n5FvVzAnhL2g5AeAr_dtA'",
+        "type": "curl"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Error Log deleted successfully.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Error Log deleted successfully\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "UnAuthorizedError": [
+          {
+            "group": "UnAuthorizedError",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>authentication token was not supplied or token was not verified</p>"
           },
           {
             "group": "UnAuthorizedError",

@@ -6,12 +6,12 @@
             <div [@slideMsg]="slide" class="alert alert-danger auth-message"
                  role="alert">{{objResponse.message}}
             </div>
-            <form  role="form" novalidate [formGroup]="loginForm"
+            <form role="form" novalidate [formGroup]="loginForm"
                   (ngSubmit)=" onSubmit()">
 
                 <div class="form-group">
                     <label class="sr-only">Username</label>
-                    <input autocomplete="off"  type="text" placeholder="Username..."
+                    <input autocomplete="off" type="text" placeholder="Username..."
                            class="form-username form-control input-underline input-lg"
                            [formControl]="username">
                     <span class="error-msg" *ngIf="!username.valid && username.dirty">
@@ -39,7 +39,7 @@
         <img [src]="formImage" fadeInDirective width="150px" alt="Google Authenticator App logo"
              title="Google Authenticator App logo" class="user-avatar"/>
         <h1 class="login-title">Nodebeats 2FA Login</h1>
-        <div [@slideMsg]="slide" [class]="'alert alert-danger auth-message'"
+        <div [@slideMsg]="slide" class="alert alert-danger auth-message"
              role="alert">{{objResponse.message}}
         </div>
         <form role="form" novalidate [formGroup]="tfaForm"

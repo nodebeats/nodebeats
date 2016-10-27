@@ -29,6 +29,7 @@ import {PartnerModule} from "./components/partner/partner.module";
 import {CountryListService} from "../shared/services/countrylist.service";
 import {RoleModule} from "./components/role-management/role.module";
 import {ApiAccessModule} from "./components/api-access/api-access.module";
+import {TokenModule} from "./components/token-management/token-management.module";
 
 @NgModule({
     imports: [
@@ -56,6 +57,7 @@ import {ApiAccessModule} from "./components/api-access/api-access.module";
         UserProfileModule,
         RoleModule,
         ApiAccessModule,
+        TokenModule,
         SharedModule
     ],
     declarations: [AdminAppComponent, SpinnerComponent, SidebarCmp, TopNavCmp],

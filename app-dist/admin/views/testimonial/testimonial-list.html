@@ -65,7 +65,7 @@
             <div class="list-pagination" *ngIf="objListResponse?.dataList?.length>0">
 
                 <p-paginator [rows]="perPage" [totalRecords]="objListResponse.totalItems"
-                             [rowsPerPageOptions]="[5,10,20,50,100]"
+                             [rowsPerPageOptions]="[5,10,20,50,100]" [first]="first"
                              (onPageChange)="pageChanged($event)"></p-paginator>
 
             </div>

@@ -24,7 +24,8 @@ export class ImageListComponent implements OnInit {
     perPage:number = 10;
     currentPage:number = 1;
     totalPage:number = 1;
-    nextPage:number = 1;
+    first:number = 0;
+    bindSort:boolean = false;
     preIndex:number = 0;
     // /* End Pagination */
 
@@ -60,16 +61,26 @@ export class ImageListComponent implements OnInit {
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
 
             /*End Pagination */
-            setTimeout(()=> {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: {sorter: false},
-                        3: {sorter: false},
-                        4: {sorter: false}
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    }
+
+    sortTable() {
+        setTimeout(()=> {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: {sorter: false},
+                    3: {sorter: false},
+                    4: {sorter: false}
+                }
+            });
+        }, 50);
+
     }
 
     edit(id:string) {
@@ -116,8 +127,11 @@ export class ImageListComponent implements OnInit {
 
     showImageList(arg) {
         if (!arg) // is not Canceled
+        {
             this.getAlbumImageList();
+        }
         this.showImageForm = false;
+        this.sortTable();
     }
 
     changeCoverImage(e) {
@@ -172,8 +186,10 @@ export class ImageListComponent implements OnInit {
     pageChanged(event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getAlbumImageList();
-        jQuery(".tablesorter").trigger("update");
     }
 
 

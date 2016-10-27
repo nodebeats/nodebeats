@@ -17,11 +17,11 @@
         databaseConfig = require('../lib/configs/database.config'),
         Promise = require("bluebird"),
         HTTPStatus = require('http-status'),
-
-        dbUrl = "mongodb://" +databaseConfig.test.username +":"+ databaseConfig.test.password +"@" + databaseConfig.test.host + ":" + databaseConfig.test.port + "/" + databaseConfig.test.dbName;
+        async = require('async'),
+        dbUrl = "mongodb://" + databaseConfig.test.host + ":" + databaseConfig.test.port + "/" + databaseConfig.test.dbName;
 
     var loginUrl = '/api/login/';
-    var imagePathUrl = ['/home/lakhe/Desktop/nodebeats/images/mountain_nepal.jpg', '/home/lakhe/Desktop/nodebeats/images/homepage.png'];
+    var imagePathUrl = ['/home/lakhe/Desktop/nodebeats/images/mountain_nepal.png', '/home/lakhe/Desktop/nodebeats/images/homepage.png'];
     var loginObj = {
         username : "superadmin",
         password : "superadmin@123"
@@ -64,8 +64,8 @@
     });
 
     describe('User login', function () {
-        it('should return authentication token along with logged in user object', function () {
-            return request
+        it('should return authentication token along with logged in user object', function (done) {
+            request
                 .post(loginUrl)
                 .set('Accept', 'application/x-www-form-urlencoded')
                 .send(loginObj)
@@ -82,8 +82,7 @@
                     expect(response.body.userInfo.userRole).to.equal('admin');
 
                     var accessToken = response.body.token;
-                    return Promise.resolve(accessToken);
-                }).then(function(accessToken){
+
                     require('./integrationtests/cloudinary.setting.integration.test')(expect, request, accessToken);
                     require('./integrationtests/email.service.configure.integration.test')(expect, request, accessToken);
                     require('./integrationtests/email.template.integration.test')(expect, request, accessToken);
@@ -107,6 +106,9 @@
                     require('./integrationtests/two.factor.authentication.integration.test')(expect, request, accessToken);
                     require('./integrationtests/error.log.integration.test')(expect, request, accessToken);
                     require('./integrationtests/login.integration.test')(expect, request, loginObj, loginUrl, accessToken);
+                    require('./integrationtests/authorization.token.integration.test')(expect, request, loginObj, loginUrl);
+
+                    done();
                 });
         });
     });

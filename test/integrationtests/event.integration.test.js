@@ -29,7 +29,7 @@
                 };
             });
 
-            describe('getAllEvents() to retreive events for the first time', function () {
+            describe('getAllEvents() to retrieve events for the first time', function () {
                 it('should return an empty event list', function(done){
                     request
                         .get(apiUrl)
@@ -294,7 +294,7 @@
                 });
             });
 
-            describe('getAllEvents() to retreive events', function () {
+            describe('getAllEvents() to retrieve events', function () {
                 it('should return a list of events', function(){
                     return request
                         .get(apiUrl)
@@ -315,7 +315,7 @@
                             var _imageName = resultEventObj.imageName;
                             var _imagePath = resultEventObj.imageProperties.imagePath;
 
-                            describe('getEventByID() to retreive event object for ID ' + _eventId, function () {
+                            describe('getEventByID() to retrieve event object for ID ' + _eventId, function () {
                                 it('should return an event object' , function(done){
                                     request
                                         .get(apiUrl + _eventId)
@@ -587,7 +587,7 @@
                                                 return Promise.resolve();
                                             })
                                             .then(function(){
-                                                describe('getAllEvents() to retreive events after record deletion', function () {
+                                                describe('getAllEvents() to retrieve events after record deletion', function () {
                                                     it('should not return an event list with only one record', function(done){
                                                         request
                                                             .get(apiUrl)

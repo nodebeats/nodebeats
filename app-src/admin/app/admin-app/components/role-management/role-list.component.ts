@@ -19,7 +19,8 @@ export class RoleComponent implements OnInit {
     perPage:number = 10;
     currentPage:number = 1;
     totalPage:number = 1;
-    nextPage:number = 1;
+    first:number = 0;
+    bindSort:boolean = false;
     preIndex:number = 0;
     // /* End Pagination */
 
@@ -52,21 +53,28 @@ export class RoleComponent implements OnInit {
         if (objRes.length > 0) {
 
             /*End Pagination */
-            setTimeout(()=> {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: {sorter: false},
-                        3: {sorter: false},
-                        4: {sorter: false},
-                        5: {sorter: false},
-                        6: {sorter: false},
-                        7: {sorter: false},
-                        8: {sorter: false}
-
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
         }
+    }
+
+    sortTable() {
+        setTimeout(()=> {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: {sorter: false},
+                    3: {sorter: false},
+                    4: {sorter: false},
+                    5: {sorter: false},
+                    6: {sorter: false},
+                    7: {sorter: false},
+                    8: {sorter: false}
+
+                }
+            });
+        }, 50);
     }
 
     edit(id:string) {
@@ -112,8 +120,11 @@ export class RoleComponent implements OnInit {
 
     showRoleList(arg) {
         if (!arg) // is not Canceled
+        {
             this.getRoleList();
+        }
         this.showForm = false;
+        this.sortTable();
     }
 
 

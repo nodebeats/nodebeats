@@ -21,7 +21,8 @@ var ContactListCompoent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
+        this.bindSort = false;
         this.preIndex = 1;
     }
     /* End Pagination */
@@ -48,15 +49,23 @@ var ContactListCompoent = (function () {
         if (objRes.totalItems > 0) {
             var totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        3: { sorter: false },
-                        4: { sorter: false }
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    };
+    ContactListCompoent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    3: { sorter: false },
+                    4: { sorter: false }
+                }
+            });
+        }, 50);
     };
     ContactListCompoent.prototype.delete = function (id) {
         var _this = this;
@@ -94,12 +103,15 @@ var ContactListCompoent = (function () {
     };
     ContactListCompoent.prototype.handleCancel = function (args) {
         this.showInfo = false;
+        this.sortTable();
     };
     ContactListCompoent.prototype.pageChanged = function (event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getContactList();
-        jQuery(".tablesorter").trigger("update");
     };
     ContactListCompoent = __decorate([
         core_1.Component({

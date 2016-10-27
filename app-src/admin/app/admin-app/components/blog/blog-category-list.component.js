@@ -19,9 +19,10 @@ var BlogCategoryListComponent = (function () {
         this.showForm = false;
         /* Pagination */
         this.perPage = 10;
+        this.first = 0;
+        this.bindSort = false;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
     }
     BlogCategoryListComponent.prototype.ngOnInit = function () {
         this.perPage = 10;
@@ -50,15 +51,18 @@ var BlogCategoryListComponent = (function () {
         if (objRes.dataList.length > 0) {
             var totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: { sorter: false },
-                        3: { sorter: false }
-                    }
-                });
-            }, 50);
+            this.sortTable();
         }
+    };
+    BlogCategoryListComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: { sorter: false },
+                    3: { sorter: false }
+                }
+            });
+        }, 50);
     };
     BlogCategoryListComponent.prototype.edit = function (id) {
         //  this.showFormEvent.emit(id);
@@ -74,6 +78,7 @@ var BlogCategoryListComponent = (function () {
         if (!args)
             this.getBlogCategoryList();
         this.showForm = false;
+        this.sortTable();
     };
     BlogCategoryListComponent.prototype.delete = function (id) {
         var _this = this;
@@ -109,13 +114,12 @@ var BlogCategoryListComponent = (function () {
         this.perPage = Number(event.srcElement.value);
         this.getBlogCategoryList();
     };
-    BlogCategoryListComponent.prototype.pageChanged = function (arg) {
-        if (arg != this.nextPage) {
-            this.nextPage = arg;
-            this.currentPage = arg;
-            this.getBlogCategoryList();
-            jQuery(".tablesorter").trigger("update");
-        }
+    BlogCategoryListComponent.prototype.pageChanged = function (event) {
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
+        this.getBlogCategoryList();
+        jQuery(".tablesorter").trigger("update");
     };
     __decorate([
         core_1.Input(), 

@@ -39,6 +39,7 @@ var partner_module_1 = require("./components/partner/partner.module");
 var countrylist_service_1 = require("../shared/services/countrylist.service");
 var role_module_1 = require("./components/role-management/role.module");
 var api_access_module_1 = require("./components/api-access/api-access.module");
+var token_management_module_1 = require("./components/token-management/token-management.module");
 var AdminAppModule = (function () {
     function AdminAppModule() {
     }
@@ -69,6 +70,7 @@ var AdminAppModule = (function () {
                 user_profile_module_1.UserProfileModule,
                 role_module_1.RoleModule,
                 api_access_module_1.ApiAccessModule,
+                token_management_module_1.TokenModule,
                 shared_module_1.SharedModule
             ],
             declarations: [admin_app_component_1.AdminAppComponent, spinner_component_1.SpinnerComponent, sidebar_1.SidebarCmp, topnav_1.TopNavCmp],

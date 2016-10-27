@@ -19,7 +19,8 @@ var TeamManagementComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
+        this.bindSort = false;
         this.preIndex = 0;
     }
     /* End Pagination */
@@ -28,7 +29,7 @@ var TeamManagementComponent = (function () {
     };
     TeamManagementComponent.prototype.getTeamMemberList = function () {
         var _this = this;
-        this._objService.getTeamMemberList()
+        this._objService.getTeamMemberList(this.perPage, this.currentPage)
             .subscribe(function (objRes) { return _this.bindList(objRes); }, function (error) { return _this.errorMessage(error); });
     };
     TeamManagementComponent.prototype.bindList = function (objRes) {
@@ -37,16 +38,24 @@ var TeamManagementComponent = (function () {
         if (objRes.dataList.length > 0) {
             var totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        3: { sorter: false },
-                        4: { sorter: false },
-                        5: { sorter: false }
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    };
+    TeamManagementComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    3: { sorter: false },
+                    4: { sorter: false },
+                    5: { sorter: false }
+                }
+            });
+        }, 50);
     };
     TeamManagementComponent.prototype.edit = function (id) {
         this.showForm = true;
@@ -109,15 +118,19 @@ var TeamManagementComponent = (function () {
         }, function (err) { return _this.errorMessage(err); });
     };
     TeamManagementComponent.prototype.showList = function (arg) {
-        if (!arg)
+        if (!arg) {
             this.getTeamMemberList();
+        }
         this.showForm = false;
+        this.sortTable();
     };
     TeamManagementComponent.prototype.pageChanged = function (event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getTeamMemberList();
-        jQuery(".tablesorter").trigger("update");
     };
     TeamManagementComponent = __decorate([
         core_1.Component({

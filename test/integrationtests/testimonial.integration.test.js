@@ -31,7 +31,7 @@
                 };
             });
 
-            describe('getAllTestimonials() to retreive list of testimonials', function () {
+            describe('getAllTestimonials() to retrieve list of testimonials', function () {
                 it('should return an empty list of testimonials for the first time', function(done){
                     request
                         .get(apiUrl)
@@ -224,7 +224,7 @@
                 });
             });
 
-            describe('getAllTestimonials() to retreive the list of testimonials after saving records of testimonial', function () {
+            describe('getAllTestimonials() to retrieve the list of testimonials after saving records of testimonial', function () {
                 it('should return a list of testimonials ', function(){
                     return request
                         .get(apiUrl)
@@ -244,7 +244,7 @@
                             var _personName = resultTestimonialObj.personName;
                             var _imageName = resultTestimonialObj.imageName;
 
-                            describe('getTestimonialByID() to retreive testimonial object for ID ' + _testimonialId, function () {
+                            describe('getTestimonialByID() to retrieve testimonial object for ID ' + _testimonialId, function () {
                                 it('should return a testimonial information object ', function(done){
                                     request
                                         .get(apiUrl + _testimonialId)
@@ -324,7 +324,7 @@
                                 });
                             });
 
-                            describe('getTestimonialByID() to retreive testimonial object for ID ' + _testimonialId +' after update operation', function () {
+                            describe('getTestimonialByID() to retrieve testimonial object for ID ' + _testimonialId +' after update operation', function () {
                                 it('should return a testimonial object date with different  image Name and person name ', function(done){
                                     request
                                         .get(apiUrl + _testimonialId)
@@ -344,7 +344,7 @@
                                 });
                             });
 
-                            describe('updateTestimonial()  to retreive testimonial object  with invalid data i.e. no person name, no testimonial content', function () {
+                            describe('updateTestimonial()  to retrieve testimonial object  with invalid data i.e. no person name, no testimonial content', function () {
                                 afterEach(function(){
                                     testimonialObj = {
                                         personName : "Shrawan Lakhe",
@@ -400,7 +400,7 @@
                             });
 
 
-                            describe('getAllTestimonials() to retreive list of testimonials after update operation for active bit', function () {
+                            describe('getAllTestimonials() to retrieve list of testimonials after update operation for active bit', function () {
                                 it('should return only list of testimonials with active bit set to true', function(done){
                                     request
                                         .get(apiUrl)
@@ -455,7 +455,7 @@
                                             return Promise.resolve();
                                         })
                                         .then(function () {
-                                            describe('getAllTestimonials() to retreive list of testimonials after delete of one record', function () {
+                                            describe('getAllTestimonials() to retrieve list of testimonials after delete of one record', function () {
                                                 it('should return a single list of testimonial', function(done){
                                                     request
                                                         .get(apiUrl)

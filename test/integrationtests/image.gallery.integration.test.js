@@ -34,7 +34,7 @@
                 };
             });
 
-            describe('getAllGalleryAlbums() to retreive image gallery albums for the first time', function () {
+            describe('getAllGalleryAlbums() to retrieve image gallery albums for the first time', function () {
                 it('should return an empty list of gallery albums', function(done){
                     request
                         .get(apiUrlAlbum)
@@ -130,7 +130,7 @@
             });
 
 
-            describe('getAllGalleryAlbums() to retreive list of image gallery albums', function () {
+            describe('getAllGalleryAlbums() to retrieve list of image gallery albums', function () {
                 it('should return a list of gallery albums after saving of album data', function(){
                     return request
                         .get(apiUrlAlbum)
@@ -149,7 +149,7 @@
                             var _imageGalleryAlbumId = galleryAlbumObj._id;
                             var _albumName = galleryAlbumObj.albumName;
 
-                            describe('getAlbumInfoByID() to retreive album information object for ID ' + _imageGalleryAlbumId, function () {
+                            describe('getAlbumInfoByID() to retrieve album information object for ID ' + _imageGalleryAlbumId, function () {
                                 it('should return an album information object', function (done) {
                                     request
                                         .get(apiUrlAlbum + _imageGalleryAlbumId)
@@ -231,7 +231,7 @@
                             });
 
 
-                            describe('getAllGalleryAlbums() to retreive only active albums with active bit true after setting active bit false using update operation', function () {
+                            describe('getAllGalleryAlbums() to retrieve only active albums with active bit true after setting active bit false using update operation', function () {
                                 it('should return an empty array', function(done){
                                     request
                                         .get(apiUrlAlbum)
@@ -252,7 +252,7 @@
 
 
 
-                            describe('getAlbumInfoByID() to retreive updated album information for ID ' + _imageGalleryAlbumId + 'after update operation', function () {
+                            describe('getAlbumInfoByID() to retrieve updated album information for ID ' + _imageGalleryAlbumId + 'after update operation', function () {
                                 it('should return an album information object with different data in albumName field and active field', function(done){
                                     request
                                         .get(apiUrlAlbum + _imageGalleryAlbumId)
@@ -337,7 +337,7 @@
 
 //Image Gallery Album image Integration test
 
-                            describe('getAllGalleryImagesByAlbumID() for the first time to retreive images for album with album name ' + _albumName, function () {
+                            describe('getAllGalleryImagesByAlbumID() for the first time to retrieve images for album with album name ' + _albumName, function () {
                                 it('should return an empty list of images for album ' + _albumName, function(done){
                                     request
                                         .get(apiUrlImage + _imageGalleryAlbumId)
@@ -413,7 +413,7 @@
                                 });
                             });
 
-                            describe('getAllGalleryImagesByAlbumID() to retreive all the images of album ' + _albumName, function () {
+                            describe('getAllGalleryImagesByAlbumID() to retrieve all the images of album ' + _albumName, function () {
                                 it('should return a list of images related to the Album ', function () {
                                     return request
                                         .get(apiUrlImage + _imageGalleryAlbumId)
@@ -433,7 +433,7 @@
                                             var _imageTitle = resultImageGalleryImageObj.imageTitle;
                                             var _imageName = resultImageGalleryImageObj.imageName;
 
-                                            describe('getGalleryImageInfoByImageID() to retreive gallery image object for ID ' + _imageId, function () {
+                                            describe('getGalleryImageInfoByImageID() to retrieve gallery image object for ID ' + _imageId, function () {
                                                 it('should return a gallery image object for album ' + _albumName, function(done){
                                                     request
                                                         .get(apiUrlImage + _imageGalleryAlbumId + '/' + _imageId)
@@ -513,7 +513,7 @@
                                                 });
                                             });
 
-                                            describe('getGalleryImageInfoByImageID() to retreive newly updated gallery image object for ID ' + _imageId + 'after updating data with different image', function () {
+                                            describe('getGalleryImageInfoByImageID() to retrieve newly updated gallery image object for ID ' + _imageId + 'after updating data with different image', function () {
                                                 it('should return a gallery image object for album ' + _albumName + ' with different values', function(done){
                                                     request
                                                         .get(apiUrlImage + _imageGalleryAlbumId + '/' + _imageId)

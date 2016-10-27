@@ -38,16 +38,21 @@ export class ImageSliderComponent implements OnInit {
 
     bindList(objRes:ImageSliderModel[]) {
         this.objListResponse = objRes;
-        if (objRes.length > 0){
-            setTimeout(()=> {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: {sorter: false},
-                        3: {sorter: false}
-                    }
-                });
-            }, 50);
+        if (objRes.length > 0) {
+            this.sortTable();
+
         }
+    }
+
+    sortTable() {
+        setTimeout(()=> {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: {sorter: false},
+                    3: {sorter: false}
+                }
+            });
+        }, 50);
     }
 
     edit(id:string) {
@@ -95,6 +100,7 @@ export class ImageSliderComponent implements OnInit {
         if (!arg) // is not Canceled
             this.getImageSliderList();
         this.showForm = false;
+        this.sortTable();
     }
 
 

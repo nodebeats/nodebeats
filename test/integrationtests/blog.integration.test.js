@@ -61,7 +61,7 @@
 
             });
 
-            describe('getBlogCategories() to retreive blog categories', function () {
+            describe('getBlogCategories() to retrieve blog categories', function () {
                 it('should return an empty list of blog category for the first time', function(done){
                     request
                         .get(apiUrlBlogCategory)
@@ -79,7 +79,7 @@
                 });
             });
 
-            describe('getAllBlogTags()  to retreive blog tags', function () {
+            describe('getAllBlogTags()  to retrieve blog tags', function () {
                 it('should return an empty list of blog related tags', function(done){
                     request
                         .get(apiUrlBlogTag)
@@ -115,7 +115,7 @@
 
             //Blog Integration test
 
-            describe('getAllBlogArticles()  to retreive blog articles', function () {
+            describe('getAllBlogArticles()  to retrieve blog articles', function () {
                 it('should return an empty list of blog articles for the first time', function(done){
                     request
                         .get(apiUrlBlog)
@@ -235,7 +235,7 @@
                         });
                 });
             });
-            describe('getBlogCategories() to retreive list of blog categories', function () {
+            describe('getBlogCategories() to retrieve list of blog categories', function () {
                 it('should return a list of blog categories', function(){
                     return request
                         .get(apiUrlBlogCategory)
@@ -255,7 +255,7 @@
                             blogInfo.categoryId = _blogCategoryId;
                             var _blogCategoryName = blogCategoryObj.categoryName;
 
-                            describe('getBlogCategoryByID() to retreive blog category object for category ID ' + _blogCategoryId, function () {
+                            describe('getBlogCategoryByID() to retrieve blog category object for category ID ' + _blogCategoryId, function () {
                                 it('should return a blog category information object', function(done){
                                     request
                                         .get(apiUrlBlogCategory + _blogCategoryId)
@@ -336,7 +336,7 @@
                                 });
                             });
 
-                            describe('getBlogCategories() to retreive list of blog categories with active bit true', function () {
+                            describe('getBlogCategories() to retrieve list of blog categories with active bit true', function () {
                                 it('should return an empty array of blog categories', function(done){
                                     request
                                         .get(apiUrlBlogCategory)
@@ -489,7 +489,7 @@
                             });
 
 
-                            describe('getAllBlogArticles() to retreive list of blog articles', function () {
+                            describe('getAllBlogArticles() to retrieve list of blog articles', function () {
                                 it('should return a list of blog articles', function(){
                                     return request
                                         .get(apiUrlBlog)
@@ -517,7 +517,7 @@
 
 
 
-                                            describe('getBlogDetailByUrlSlog() to retreive blog detailed information', function () {
+                                            describe('getBlogDetailByUrlSlog() to retrieve blog detailed information', function () {
                                                 it('should return a a blog article with all the available information', function (done) {
                                                     request
                                                         .get(apiUrlBlogDetail + addedOnDateFormat + '/' + blogUrlSlog)
@@ -543,7 +543,7 @@
 
                                             //Blog Tag Get List
 
-                                            describe('getAllBlogTags() to retreive all the blog tags of the blogs', function () {
+                                            describe('getAllBlogTags() to retrieve all the blog tags of the blogs', function () {
                                                 it('should return a list of blog tags', function(){
                                                     return request
                                                         .get(apiUrlBlogTag)
@@ -628,7 +628,7 @@
                                                                             return Promise.resolve();
                                                                         })
                                                                         .then(function(){
-                                                                            describe('getBlogByID() to retreive blog article object for blog ID ' + _blogId, function () {
+                                                                            describe('getBlogByID() to retrieve blog article object for blog ID ' + _blogId, function () {
                                                                                 it('should return a blog article information object', function(done){
                                                                                     request
                                                                                         .get(apiUrlBlog + _blogId)
@@ -1049,7 +1049,7 @@
                                                                                                 });
                                                                                             });
 
-                                                                                            describe('getBlogDocumentInfoByBlogID() to retreive blog document object for document ID ' + _documentId + ' after updating should give different document name', function () {
+                                                                                            describe('getBlogDocumentInfoByBlogID() to retrieve blog document object for document ID ' + _documentId + ' after updating should give different document name', function () {
                                                                                                 it('should return a blog document information object', function(done){
                                                                                                     request
                                                                                                         .get(apiUrlBlogDocument + _blogId + '/' + _documentId)
@@ -1136,7 +1136,7 @@
                                                                                                 });
                                                                                             });
 
-                                                                                            describe('getAllRelatedBlogDocuments() to retreive blog related documents for document ID ' + _documentId +' with active bit true', function () {
+                                                                                            describe('getAllRelatedBlogDocuments() to retrieve blog related documents for document ID ' + _documentId +' with active bit true', function () {
                                                                                                 it('should return an empty document list', function(done){
                                                                                                     request
                                                                                                         .get(apiUrlBlogDocument + _blogId)

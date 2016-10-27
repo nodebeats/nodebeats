@@ -40,7 +40,7 @@
                 };
             });
 
-            describe('getOrganizationInfo() to retreive organization information data', function () {
+            describe('getOrganizationInfo() to retrieve organization information data', function () {
                 it('should return an empty object i.e. no organization info', function(done){
                     request
                         .get(apiUrl)
@@ -277,7 +277,7 @@
                 });
             });
 
-            describe('getOrganizationInfo()  to retreive organization information data', function () {
+            describe('getOrganizationInfo()  to retrieve organization information data', function () {
                 it('should return a organization information setting object', function(){
                     return request
                         .get(apiUrl)
@@ -295,7 +295,7 @@
                         .then(function(organizationInfoObj){
                             var _organizationInfoId = organizationInfoObj._id;
 
-                            describe('getOrganizationInfoByID() to retreive organization information object for ID ' + _organizationInfoId, function () {
+                            describe('getOrganizationInfoByID() to retrieve organization information object for ID ' + _organizationInfoId, function () {
                                 it('should return an organization information setting configuration object', function(done){
                                     request
                                         .get(apiUrl + _organizationInfoId)

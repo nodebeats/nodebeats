@@ -20,7 +20,7 @@ var NewsCategoryListComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
     }
     NewsCategoryListComponent.prototype.ngOnInit = function () {
         this.perPage = 10;
@@ -47,15 +47,18 @@ var NewsCategoryListComponent = (function () {
     NewsCategoryListComponent.prototype.bindList = function (objRes) {
         this.objListResponse = objRes;
         if (objRes.length > 0) {
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: { sorter: false },
-                        3: { sorter: false }
-                    }
-                });
-            }, 50);
+            this.sortTable();
         }
+    };
+    NewsCategoryListComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: { sorter: false },
+                    3: { sorter: false }
+                }
+            });
+        }, 50);
     };
     NewsCategoryListComponent.prototype.edit = function (id) {
         //  this.showFormEvent.emit(id);
@@ -71,6 +74,7 @@ var NewsCategoryListComponent = (function () {
         if (!args)
             this.getNewsCategoryList();
         this.showForm = false;
+        this.sortTable();
     };
     NewsCategoryListComponent.prototype.delete = function (id) {
         var _this = this;
@@ -107,11 +111,8 @@ var NewsCategoryListComponent = (function () {
         this.getNewsCategoryList();
     };
     NewsCategoryListComponent.prototype.pageChanged = function (arg) {
-        if (arg != this.nextPage) {
-            this.nextPage = arg;
-            this.currentPage = arg;
-            this.getNewsCategoryList();
-        }
+        this.currentPage = arg;
+        this.getNewsCategoryList();
     };
     __decorate([
         core_1.Input(), 

@@ -28,7 +28,7 @@
                 };
             });
 
-            describe('getEmailTemplate() to retreive email template list', function () {
+            describe('getEmailTemplate() to retrieve email template list', function () {
                 it('should return an empty list', function(done){
                     request
                         .get(apiUrl)
@@ -210,7 +210,7 @@
                 });
             });
 
-            describe('getEmailTemplate()  to retreive email template list after saving a record', function () {
+            describe('getEmailTemplate()  to retrieve email template list after saving a record', function () {
                 it('should return a list of email templates', function(){
                     return request
                         .get(apiUrl)
@@ -436,7 +436,7 @@
 
                                             })
                                             .then(function(){
-                                                describe('getEmailTemplate() to retreive email templates after record delete', function () {
+                                                describe('getEmailTemplate() to retrieve email templates after record delete', function () {
                                                     it('should not return an email template list i.e empty response', function(done){
                                                         request
                                                             .get(apiUrl)

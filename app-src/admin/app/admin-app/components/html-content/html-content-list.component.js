@@ -21,7 +21,8 @@ var HtmlContentComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
+        this.bindSort = false;
         this.preIndex = 1;
     }
     /* End Pagination */
@@ -48,15 +49,23 @@ var HtmlContentComponent = (function () {
         if (objRes.totalItems) {
             var totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: { sorter: false },
-                        3: { sorter: false }
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    };
+    HtmlContentComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: { sorter: false },
+                    3: { sorter: false }
+                }
+            });
+        }, 50);
     };
     HtmlContentComponent.prototype.edit = function (id) {
         this.showForm = true;
@@ -67,9 +76,11 @@ var HtmlContentComponent = (function () {
         this.contentId = null;
     };
     HtmlContentComponent.prototype.showList = function (args) {
-        if (!args)
+        if (!args) {
             this.getHtmlEditorList(); // if not
+        }
         this.showForm = false;
+        this.sortTable();
     };
     HtmlContentComponent.prototype.delete = function (id) {
         var _this = this;
@@ -104,8 +115,10 @@ var HtmlContentComponent = (function () {
     HtmlContentComponent.prototype.pageChanged = function (event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getHtmlEditorList();
-        jQuery(".tablesorter").trigger("update");
     };
     HtmlContentComponent = __decorate([
         core_1.Component({

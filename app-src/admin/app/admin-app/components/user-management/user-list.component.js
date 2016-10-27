@@ -28,7 +28,8 @@ var UserListComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
+        this.bindSort = false;
         this.preIndex = 0;
     }
     UserListComponent.prototype.ngOnInit = function () {
@@ -60,15 +61,23 @@ var UserListComponent = (function () {
         if (objRes.dataList.length > 0) {
             var totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        5: { sorter: false },
-                        7: { sorter: false }
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    };
+    UserListComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    5: { sorter: false },
+                    7: { sorter: false }
+                }
+            });
+        }, 50);
     };
     UserListComponent.prototype.addUser = function () {
         this.hideAll();
@@ -96,8 +105,10 @@ var UserListComponent = (function () {
         this.showInfo = true;
     };
     UserListComponent.prototype.handleList = function (args) {
-        if (!args)
+        if (!args) {
             this.getUserList();
+        }
+        this.sortTable();
         this.hideAll();
     };
     UserListComponent.prototype.handleFormCancel = function (arg) {
@@ -125,8 +136,10 @@ var UserListComponent = (function () {
     UserListComponent.prototype.pageChanged = function (event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getUserList();
-        jQuery(".tablesorter").trigger("update");
     };
     UserListComponent.prototype.roleFilter = function (args) {
         var _this = this;

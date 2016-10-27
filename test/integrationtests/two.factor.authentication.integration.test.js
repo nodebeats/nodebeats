@@ -38,7 +38,7 @@
             });
 
 
-            describe('getUsers() to retreive list of users with access tokens after saving user records', function () {
+            describe('getUsers() to retrieve list of users with access tokens after saving user records', function () {
                 it('should return a list of users', function () {
                     return request
                         .get(apiUrlUser)

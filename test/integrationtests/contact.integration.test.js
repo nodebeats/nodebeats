@@ -28,7 +28,7 @@
                 };
             });
 
-            describe('getContactInfo() to retreive interested people contact list without access token ', function () {
+            describe('getContactInfo() to retrieve interested people contact list without access token ', function () {
                 it('should return a message stating that authentication is failed', function(done){
                     request
                         .get(apiUrl)
@@ -168,7 +168,7 @@
 
 
 
-            describe('getContactInfo() to retreive interested people contact list  with access token', function () {
+            describe('getContactInfo() to retrieve interested people contact list  with access token', function () {
                 it('should return a list of contacts of interested people', function(){
                     return request
                         .get(apiUrl)
@@ -188,7 +188,7 @@
                             var _contactId = contactObj._id;
                             var _fullName = contactObj.fullName;
 
-                            describe('getContactInfoByID() to retreive contact information object for ID ' + _contactId + 'without access token', function () {
+                            describe('getContactInfoByID() to retrieve contact information object for ID ' + _contactId + 'without access token', function () {
                                 it('should return a message stating that authentication is failed', function(done){
                                     request
                                         .get(apiUrl + _contactId)
@@ -205,7 +205,7 @@
                                 });
                             });
 
-                            describe('getContactInfoByID() to retreive contact information object  for ID ' + _contactId + ' with access token', function () {
+                            describe('getContactInfoByID() to retrieve contact information object  for ID ' + _contactId + ' with access token', function () {
                                 it('should return an interested person contact object', function(done){
                                     request
                                         .get(apiUrl + _contactId)
@@ -256,7 +256,7 @@
                                             return Promise.resolve();
                                         })
                                         .then(function () {
-                                            describe('getContactInfo()  to retreive interested people contact list  after deleteing record', function () {
+                                            describe('getContactInfo()  to retrieve interested people contact list  after deleteing record', function () {
                                                 it('should return an empty list of contacts i.e. empty response', function(done){
                                                     request
                                                         .get(apiUrl)

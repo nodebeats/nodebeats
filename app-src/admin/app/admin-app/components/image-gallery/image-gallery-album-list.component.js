@@ -20,7 +20,8 @@ var ImageAlbumListComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
+        this.bindSort = false;
         this.preIndex = 0;
     }
     // /* End Pagination */
@@ -47,15 +48,23 @@ var ImageAlbumListComponent = (function () {
             var totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
             /*End Pagination */
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: { sorter: false },
-                        3: { sorter: false }
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    };
+    ImageAlbumListComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: { sorter: false },
+                    3: { sorter: false }
+                }
+            });
+        }, 50);
     };
     ImageAlbumListComponent.prototype.addImageAlbum = function () {
         this.showForm = true;
@@ -69,6 +78,7 @@ var ImageAlbumListComponent = (function () {
         this.showForm = false;
         if (!args)
             this.getAlbumList();
+        this.sortTable();
     };
     ImageAlbumListComponent.prototype.showImageList = function (albumId) {
         this.showImageListEvent.emit(albumId);
@@ -106,8 +116,10 @@ var ImageAlbumListComponent = (function () {
     ImageAlbumListComponent.prototype.pageChanged = function (event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getAlbumList();
-        jQuery(".tablesorter").trigger("update");
     };
     __decorate([
         core_1.Output(), 

@@ -23,7 +23,8 @@ var ImageListComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
+        this.bindSort = false;
         this.preIndex = 0;
     }
     ImageListComponent.prototype.ngOnInit = function () {
@@ -49,16 +50,24 @@ var ImageListComponent = (function () {
             var totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
             /*End Pagination */
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: { sorter: false },
-                        3: { sorter: false },
-                        4: { sorter: false }
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    };
+    ImageListComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: { sorter: false },
+                    3: { sorter: false },
+                    4: { sorter: false }
+                }
+            });
+        }, 50);
     };
     ImageListComponent.prototype.edit = function (id) {
         this.showImageForm = true;
@@ -99,9 +108,11 @@ var ImageListComponent = (function () {
         this.showAlbumListEvent.emit(true); // cancelled true
     };
     ImageListComponent.prototype.showImageList = function (arg) {
-        if (!arg)
+        if (!arg) {
             this.getAlbumImageList();
+        }
         this.showImageForm = false;
+        this.sortTable();
     };
     ImageListComponent.prototype.changeCoverImage = function (e) {
         var _this = this;
@@ -151,8 +162,10 @@ var ImageListComponent = (function () {
     ImageListComponent.prototype.pageChanged = function (event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getAlbumImageList();
-        jQuery(".tablesorter").trigger("update");
     };
     __decorate([
         core_1.Input(), 

@@ -24,7 +24,8 @@ var ApplicationLogComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
+        this.bindSort = false;
         this.preIndex = 1;
         this.startDate = new forms_1.FormControl('');
         this.endDate = new forms_1.FormControl('');
@@ -48,20 +49,28 @@ var ApplicationLogComponent = (function () {
         });
     };
     ApplicationLogComponent.prototype.bindList = function (objRes) {
-        var _this = this;
         this.objResponse = objRes;
         this.preIndex = (this.perPage * (this.currentPage - 1));
         if (objRes.totalItems > 0) {
             var totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-            setTimeout(function () {
-                jQuery(_this.ele.nativeElement).find('.tablesorter').tablesorter({
-                    headers: {
-                        4: { sorter: false }
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    };
+    ApplicationLogComponent.prototype.sortTable = function () {
+        var _this = this;
+        setTimeout(function () {
+            jQuery(_this.ele.nativeElement).find('.tablesorter').tablesorter({
+                headers: {
+                    4: { sorter: false }
+                }
+            });
+        }, 50);
     };
     ApplicationLogComponent.prototype.showDetail = function (logIndex) {
         var objTemp;
@@ -155,8 +164,10 @@ var ApplicationLogComponent = (function () {
     ApplicationLogComponent.prototype.pageChanged = function (event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getApplicationLogList();
-        jQuery(".tablesorter").trigger("update");
     };
     ApplicationLogComponent = __decorate([
         core_1.Component({

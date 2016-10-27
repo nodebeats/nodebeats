@@ -19,7 +19,7 @@ export class BlogDocListComponent implements OnInit {
     // perPage:number = 10;
     // currentPage:number = 1;
     // totalPage:number = 1;
-    // nextPage:number = 1;
+    // first:number = 0;
     /* End Pagination */
 
 
@@ -48,15 +48,19 @@ export class BlogDocListComponent implements OnInit {
         this.objListResponse = objRes;
 
         if (objRes.length > 0) {
-            setTimeout(()=> {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: {sorter: false},
-                        3: {sorter: false}
-                    }
-                });
-            }, 50);
+            this.sortTable();
         }
+    }
+
+    sortTable() {
+        setTimeout(()=> {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: {sorter: false},
+                    3: {sorter: false}
+                }
+            });
+        }, 50);
     }
 
     edit(id:string) {
@@ -105,6 +109,8 @@ export class BlogDocListComponent implements OnInit {
         if (!arg) // is not Canceled
             this.getBlogDocList();
         this.showForm = false;
+        this.sortTable();
+
     }
 
 }

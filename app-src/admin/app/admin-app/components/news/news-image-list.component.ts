@@ -22,7 +22,7 @@ export class NewsImageListComponent implements OnInit {
     // perPage:number = 10;
     // currentPage:number = 1;
     // totalPage:number = 1;
-    // nextPage:number = 1;
+    // first:number = 0;
     /* End Pagination */
 
 
@@ -50,16 +50,20 @@ export class NewsImageListComponent implements OnInit {
     bindList(objRes:NewsImageResponse) {
         this.objListResponse = objRes;
         if (objRes.image.length > 0) {
-            setTimeout(()=> {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: {sorter: false},
-                        3: {sorter: false},
-                        4: {sorter: false}
-                    }
-                });
-            }, 50);
+            this.sortTable();
         }
+    }
+
+    sortTable() {
+        setTimeout(()=> {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: {sorter: false},
+                    3: {sorter: false},
+                    4: {sorter: false}
+                }
+            });
+        }, 50);
     }
 
     edit(id:string) {
@@ -109,6 +113,7 @@ export class NewsImageListComponent implements OnInit {
         if (!arg) // is not Canceled
             this.getNewsImageList();
         this.showImageForm = false;
+        this.sortTable();
     }
 
     changeCoverImage(args) {

@@ -19,7 +19,8 @@ var TestimonialComponent = (function () {
         this.perPage = 10;
         this.currentPage = 1;
         this.totalPage = 1;
-        this.nextPage = 1;
+        this.first = 0;
+        this.bindSort = false;
         this.preIndex = 0;
     }
     /* End Pagination */
@@ -28,7 +29,7 @@ var TestimonialComponent = (function () {
     };
     TestimonialComponent.prototype.getTestimonialList = function () {
         var _this = this;
-        this._objService.getTestimonialList()
+        this._objService.getTestimonialList(this.perPage, this.currentPage)
             .subscribe(function (objRes) { return _this.bindList(objRes); }, function (error) { return _this.errorMessage(error); });
     };
     TestimonialComponent.prototype.errorMessage = function (objResponse) {
@@ -44,15 +45,23 @@ var TestimonialComponent = (function () {
         if (objRes.dataList.length > 0) {
             var totalPage = objRes.totalItems / this.perPage;
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        3: { sorter: false },
-                        4: { sorter: false }
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    };
+    TestimonialComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    3: { sorter: false },
+                    4: { sorter: false }
+                }
+            });
+        }, 50);
     };
     TestimonialComponent.prototype.edit = function (id) {
         this.showForm = true;
@@ -93,15 +102,19 @@ var TestimonialComponent = (function () {
         });
     };
     TestimonialComponent.prototype.showList = function (arg) {
-        if (!arg)
+        if (!arg) {
             this.getTestimonialList();
+        }
         this.showForm = false;
+        this.sortTable();
     };
     TestimonialComponent.prototype.pageChanged = function (event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getTestimonialList();
-        jQuery(".tablesorter").trigger("update");
     };
     TestimonialComponent = __decorate([
         core_1.Component({

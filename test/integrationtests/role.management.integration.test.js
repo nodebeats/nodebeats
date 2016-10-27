@@ -31,7 +31,7 @@
                 };
             });
 
-            describe('getRoles() to retreive user role list without access token', function () {
+            describe('getRoles() to retrieve user role list without access token', function () {
                 it('should return a message stating that authentication is failed', function(done){
                     request
                         .get(apiUrlRole)
@@ -125,7 +125,7 @@
                 });
             });
 
-            describe('getRoles() to retreive a list of user roles with access token', function () {
+            describe('getRoles() to retrieve a list of user roles with access token', function () {
                 it('should return a list of user roles', function(){
 
                     return request
@@ -144,7 +144,7 @@
                             var _roleId = roleObj._id;
                             var _roleName = roleObj.roleName;
 
-                            describe('getRoleById() to retreive user role information object for ID ' + _roleId + ' without access token', function () {
+                            describe('getRoleById() to retrieve user role information object for ID ' + _roleId + ' without access token', function () {
                                 it('should return a message stating that authentication is failed', function(done){
                                     request
                                         .get(apiUrlRole + _roleId)
@@ -161,7 +161,7 @@
                                 });
                             });
 
-                            describe('getRoleById() to retreive user role information object for ID ' + _roleId + ' with access token', function () {
+                            describe('getRoleById() to retrieve user role information object for ID ' + _roleId + ' with access token', function () {
                                 it('should return a user role information object', function(done){
                                     request
                                         .get(apiUrlRole + _roleId)
@@ -272,7 +272,7 @@
                                 });
                             });
 
-                            describe('getRoles() to retreive a list of active user roles with access token', function () {
+                            describe('getRoles() to retrieve a list of active user roles with access token', function () {
                                 it('should return a list of user roles  with only active bit true', function(done){
 
                                     request
@@ -324,7 +324,7 @@
                                             return Promise.resolve();
                                         })
                                         .then(function () {
-                                            describe('getRoles() to retreive a list of user roles with access token that are not deleted', function () {
+                                            describe('getRoles() to retrieve a list of user roles with access token that are not deleted', function () {
                                                 it('should return a list of user roles   with deleted bit set to false', function(done){
 
                                                     request

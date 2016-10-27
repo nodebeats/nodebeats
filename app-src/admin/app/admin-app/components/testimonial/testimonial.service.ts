@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import{Config} from "../../../shared/configs/general.config";
-import{ API_URL} from "../../../shared/configs/env.config";
+import{API_URL} from "../../../shared/configs/env.config";
 import {FileOperrationService} from '../../../shared/services/fileOperation.service';
 
 @Injectable()
@@ -83,9 +83,12 @@ export class TestimonialService {
         });
     }
 
-    getTestimonialList():Observable < TestimonialResponse> {
+    getTestimonialList(perPage:number, currentPage:number):Observable < TestimonialResponse> {
 
-        return this._http.get(API_URL + this.apiRoute)
+        let queryString:string = "";
+        queryString += perPage ? "?perpage=" + perPage : "";
+        queryString += currentPage ? "&page=" + currentPage : "";
+        return this._http.get(API_URL + this.apiRoute + queryString)
             .map(res =><TestimonialResponse>res.json())
             .catch(this.handleError);
     }

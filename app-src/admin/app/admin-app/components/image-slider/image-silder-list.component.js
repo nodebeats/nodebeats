@@ -34,15 +34,18 @@ var ImageSliderComponent = (function () {
     ImageSliderComponent.prototype.bindList = function (objRes) {
         this.objListResponse = objRes;
         if (objRes.length > 0) {
-            setTimeout(function () {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: { sorter: false },
-                        3: { sorter: false }
-                    }
-                });
-            }, 50);
+            this.sortTable();
         }
+    };
+    ImageSliderComponent.prototype.sortTable = function () {
+        setTimeout(function () {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: { sorter: false },
+                    3: { sorter: false }
+                }
+            });
+        }, 50);
     };
     ImageSliderComponent.prototype.edit = function (id) {
         this.showForm = true;
@@ -86,6 +89,7 @@ var ImageSliderComponent = (function () {
         if (!arg)
             this.getImageSliderList();
         this.showForm = false;
+        this.sortTable();
     };
     ImageSliderComponent = __decorate([
         core_1.Component({

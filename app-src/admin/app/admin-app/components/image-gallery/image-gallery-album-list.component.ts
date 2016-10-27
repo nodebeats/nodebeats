@@ -20,7 +20,8 @@ export class ImageAlbumListComponent implements OnInit {
     perPage:number = 10;
     currentPage:number = 1;
     totalPage:number = 1;
-    nextPage:number = 1;
+    first:number = 0;
+    bindSort:boolean = false;
     preIndex:number = 0;
     // /* End Pagination */
 
@@ -56,15 +57,24 @@ export class ImageAlbumListComponent implements OnInit {
             this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
 
             /*End Pagination */
-            setTimeout(()=> {
-                jQuery('.tablesorter').tablesorter({
-                    headers: {
-                        2: {sorter: false},
-                        3: {sorter: false}
-                    }
-                });
-            }, 50);
+            if (!this.bindSort) {
+                this.bindSort = true;
+                this.sortTable();
+            }
+            else
+                jQuery("table").trigger("update", [true]);
         }
+    }
+
+    sortTable() {
+        setTimeout(()=> {
+            jQuery('.tablesorter').tablesorter({
+                headers: {
+                    2: {sorter: false},
+                    3: {sorter: false}
+                }
+            });
+        }, 50);
     }
 
     addImageAlbum() {
@@ -81,6 +91,7 @@ export class ImageAlbumListComponent implements OnInit {
         this.showForm = false;
         if (!args)// if not Cancelled
             this.getAlbumList();
+        this.sortTable();
     }
 
     showImageList(albumId:string) {
@@ -123,8 +134,10 @@ export class ImageAlbumListComponent implements OnInit {
     pageChanged(event) {
         this.perPage = event.rows;
         this.currentPage = (Math.floor(event.first / event.rows)) + 1;
+        this.first = event.first;
+        if (event.first == 0)
+            this.first = 1;
         this.getAlbumList();
-        jQuery(".tablesorter").trigger("update");
     }
 
 

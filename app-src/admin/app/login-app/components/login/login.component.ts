@@ -17,7 +17,7 @@ import {UserModel} from "../../../admin-app/components/user-management/user.mode
                 state('collapse, void', style({opacity: 0})),
                 state('expand', style({opacity: 1})),
                 transition(
-                    'void => expand', [animate("1s ease-in", style({opacity: 1})), animate(500)])
+                    'collapse => expand', [animate("1s ease-in", style({opacity: 1})), animate(500)])
             ])]
     })
 export class LoginComponent implements OnInit {
@@ -81,15 +81,14 @@ export class LoginComponent implements OnInit {
 
     loginHandler(res:LoginResponse) {
         if (res.success) {
+            this.slide = "collapse";
             if (res.twoFactorAuthEnabled) {
                 this.isSubmitted = false;
-                this.slide = "collapse";
                 this.tfaEnabled = true;
                 this.formImage = Config.GoogleAuthImage;
                 this.userId = res.userId;
             }
             else {
-
                 this.forwardAfterSuccess(res.token, res.userInfo);
             }
         }
@@ -97,9 +96,7 @@ export class LoginComponent implements OnInit {
             if (!res.isToken) {
                 this.objResponse = res;
                 this.slide = "expand";
-                setTimeout(()=> {
-                    this.slide = "collapse";
-                }, 5000);
+
 
             }
         }
@@ -128,8 +125,11 @@ export class LoginComponent implements OnInit {
         // else if (res.status == 403) {
         Config.clearToken();
         let objResponse:LoginResponse = res.json();
-        this.loginHandler(objResponse);
+        if (objResponse.status == "401") {
+            this.loginHandler(objResponse);
+        }
         //  }
+
     }
 
 // handleError(res:any) {
