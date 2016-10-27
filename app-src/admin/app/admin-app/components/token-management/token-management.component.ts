@@ -107,6 +107,7 @@ export class TokenManagementComponent implements OnInit {
                     .subscribe(res=> {
                             if (this.totalItem > 1)
                                 this.getApplicationLogList();
+                            else this.totalItem = 0;
                             jQuery.jAlert({
                                 'title': 'Success',
                                 'content': res.message,
@@ -122,7 +123,7 @@ export class TokenManagementComponent implements OnInit {
                         });
             },
             'onClose': (e, btn)=> {
-                if (this.totalItem <= 1) {
+                if (this.totalItem == 0) {
                     this.loginService.logout();
                     this.router.navigate(['/login']);
                 }

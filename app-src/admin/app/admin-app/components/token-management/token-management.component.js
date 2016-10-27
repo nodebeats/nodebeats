@@ -102,6 +102,8 @@ var TokenManagementComponent = (function () {
                     .subscribe(function (res) {
                     if (_this.totalItem > 1)
                         _this.getApplicationLogList();
+                    else
+                        _this.totalItem = 0;
                     jQuery.jAlert({
                         'title': 'Success',
                         'content': res.message,
@@ -116,7 +118,7 @@ var TokenManagementComponent = (function () {
                 });
             },
             'onClose': function (e, btn) {
-                if (_this.totalItem <= 1) {
+                if (_this.totalItem == 0) {
                     _this.loginService.logout();
                     _this.router.navigate(['/login']);
                 }
