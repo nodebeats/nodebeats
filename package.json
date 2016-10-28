@@ -16,7 +16,7 @@
     "test": "NODE_ENV=test node server.js",
     "outdated": "npm outdated --depth 0",
     "coverage": "istanbul cover _mocha -- -R spec",
-    "start": "NODE_ENV=development node server.js",
+    "start": "node server.js",
     "copy": "cp app-src/ app/",
     "build:client:prod": "NODE_ENV=production  npm run clean:client && webpack --config webpack-client.config.js -p",
     "build:admin:prod": "NODE_ENV=production  npm run clean:admin  && webpack -p",
