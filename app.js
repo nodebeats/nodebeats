@@ -17,7 +17,7 @@ var express = require('express'),
     compression = require('compression'),
     minify = require('express-minify'),
     hpp = require('hpp'),
-    userAgent = require('useragent'),
+    //userAgent = require('useragent'),
     cloudinary = require('cloudinary'),
     redisConfig = require('./lib/configs/redis.config'),
     messageConfig = require('./lib/configs/api.message.config'),
@@ -34,14 +34,12 @@ require('dotenv').config();
 app.set('rootDir', __dirname);
 logWriter.init(app);
 
-console.log(process.env.NODE_ENV);
-
 // Add content compression middleware
 app.use(compression());
 //fetch  RegExp library live from the remote server
 //will async load the database from the server and compile it to a proper JavaScript supported format
 
-userAgent(true);
+//userAgent(true);
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -50,7 +48,6 @@ app.use(function (req, res, next) {
 
     // Set cache control header to eliminate cookies from cache
     res.setHeader('Cache-Control', 'no-cache="Set-Cookie, Set-Cookie2"');
-
 
     cloudinaryController.getCloudinarySetting()
         .then(function (cloudinarySetting) {
@@ -87,14 +84,15 @@ app.set('view engine', 'hbs');
 // Static path setup for Client App
 
 var admin = express();
-if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
-    //  redisStoreOpts = {
-    //    host: redisConfig.development.host,
-    //     port: redisConfig.development.port,
-    //     ttl: (20 * 60), // TTL of 20 minutes represented in seconds
-    //     db: redisConfig.development.db,
-    //     pass: redisConfig.development.pass
-    //   };
+if (app.get('env') === "development" || app.get('env') === "test") {
+    console.log('development environment');
+    redisStoreOpts = {
+        host: redisConfig.development.host,
+        port: redisConfig.development.port,
+        ttl: (20 * 60), // TTL of 20 minutes represented in seconds
+        db: redisConfig.development.db,
+        pass: redisConfig.development.pass
+    };
     var adminRootPath = __dirname + "/app-src/admin/";
     app.use("/", express.static(__dirname + '/public/'));
     app.use('/scripts', express.static(__dirname + '/node_modules/'));
@@ -110,11 +108,13 @@ if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
         res.render(path.join(adminRootPath, '/index.html'), {layout: false});
     });
 }
-else if (process.env.NODE_ENV === "production") {
+else if (app.get('env') === "production") {
+    console.log('production environment');
     redisStoreOpts = {
         host: redisConfig.production.host,
         port: redisConfig.production.port,
         ttl: (20 * 60), // TTL of 20 minutes represented in seconds
+        db: redisConfig.production.db,
         pass: redisConfig.production.pass
     };
     app.use(minify());
@@ -203,26 +203,9 @@ configureAppSecurity.init(app);
 //Map the Routes
 router.init(app);
 
-//development error handler
-//will print stacktraces
-
-
-if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
-        if (err) {
-            errorLogController.postErrorLogs(err, req, next);
-        }
-        res.status(500);
-        res.json({
-            message: messageConfig.errorMessage.internalServerError
-        });
-    });
-}
-
-
-if (app.get('env') === 'production') {
-    // production error handler
-    // no stacktraces leaked to user
+// development and production error handler
+// no stacktraces leaked to user
+if (app.get('env') === 'development' || app.get('env') === 'production') {
     app.use(function (err, req, res, next) {
         if (err) {
             errorLogController.postErrorLogs(err, req, next);

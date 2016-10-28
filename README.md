@@ -12,6 +12,7 @@ Check out the [**Nodebeats Getting Started Guide**](http://www.nodebeats.com/get
 * Two factor authentication
 * Token based authentication
 * Role based authorization
+* Authorization Token Management
 * Real time Google Analytics data
 * Host of options for email service providers like [**Mailgun**](https://www.mailgun.com/), [**Postmark**](https://postmarkapp.com/), [**Sendgrid**](https://sendgrid.com/), [**Mandrill**](https://www.mandrill.com/), [**Google SMTP**](https://mail.google.com) etc.
 * Integration with [**Cloudinary**](http://cloudinary.com/) for Image management
@@ -47,6 +48,10 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
 * Go to the cloned project's root directory and run the following command to install required dependencies:
 
     * npm install
+
+**Important Note**
+
+Run the following commands only if you have modified client code. If you are using it for the first time, you can skip this step.
 
 * If you have changed code and want to rebuid everything, then run the following commands
 
@@ -218,23 +223,23 @@ You can host your website built using Nodebeats in any of the available hosting 
 
 ## Staying Up to Date
 
-We will be adding new features regularly and also keep the project's npm dependencies upto date so that there will not be any security vulnerabilities due to the npm packages. This release version is powered by Angular 2 latest version and an added feature in **Role based authorization**. All the **npm** packages are upgraded to their latest version. We will release the next version as soon as the planned features are completed. We aim to make this software as secured as possible and announce the new version releases on our twitter account. So, to get the information about the latest releases, follow us on Twitter [**@Nodebeats**](https://twitter.com/nodebeats). You can also contact us at **help@nodebeats.com** regarding anything about the software.
+We will be adding new features regularly and also keep the project's npm dependencies upto date so that there will not be any security vulnerabilities due to the npm packages. In this release version, we have introduced Authorization token management feature. We will release the next version as soon as the planned features are completed. In the next version, we will be working on the frontend section of the application and integrate beautiful responsive html template with the content management system so that you can download the file and deploy that in the cloud. We aim to make this software as secured as possible and announce the new version releases on our twitter account. So, to get the information about the latest releases, follow us on Twitter [**@Nodebeats**](https://twitter.com/nodebeats). You can also contact us at **help@nodebeats.com** regarding anything about the software.
 
 
 ## Project Maturity
 
-Nodebeats is relatively new that is only 6 months old from the start of project inception date. Even though the project is relatively new, the product is stable and you can use it to create web applications.
+Nodebeats is relatively new that is around 7 months old from the start of project inception date. Even though the project is relatively new, the product is highly stable for production purposes and you can use it to create web applications.
 
 
 ## Inspiration
 
-As We all know [Wordpress](https://wordpress.com/), one of the most popular Content Management System currently in use and [Ghost](https://ghost.org/), a blogging platform that is probably the best in the technology world related to creating blogs, Mainly these two projects inspire us to start this product. People around the world use wordpress to create thousands of websites everyday. When someone talks about Content Management System for PHP programming language, then most of the time we hear about Wordpress. We also want to make this product like wordpress which people will use to create their websites in the future. Right now, it may seem very hard to acheive the goal but it is not impossible. We will continue to improve this product continually.
+As We all know [Wordpress](https://wordpress.com/), one of the most popular Content Management System currently in use and [Ghost](https://ghost.org/), a blogging platform that is probably the best in the technology world related to creating blogs, Mainly these two projects inspire us to start this product. People around the world use wordpress to create hundred of thousands of websites everyday. When someone talks about Content Management System for PHP programming language, then most of the time we hear about Wordpress. We also want to make this product like wordpress which people will use to create their websites in the future. Right now, it may seem very hard to acheive the goal but it is not impossible. We will continue to improve this product continually.
 
 
 
 ## Note
 
-We have added a Role based authorization feature and updated all the npm packages to their latest versions  in this release in this version. In the next release, we will add some more features and implementation of Javascript Best Practices in all of the code.
+We have added Authorization token management feature  so that you can revoke the access to the authorization tokens if you wish to in this release version. In the next release, we will be working on the frontend section of the application. We will introduce a nice responsive html template integrated with Nodebeats so that you can directly use that for your personal purpose and deploy it in the cloud and also introduce install setup wizard so that you can directly input database connections form user Interface elements.
 
 
 ## License
