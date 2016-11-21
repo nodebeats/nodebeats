@@ -1,4 +1,4 @@
-///<reference path="../../../../node_modules/@angular/router/src/router_module.d.ts"/>
+
 import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {AuthGuardService} from './auth.guard.service';
