@@ -1,0 +1,58 @@
+<!-- Page Heading -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            User Management
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i> <a [routerLink]="['/admin']">Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-user"></i> UserManagement
+            </li>
+        </ol>
+    </div>
+</div><!-- /.row -->
+<div class="col-lg-12 ns-view-wrapper jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="col-lg-4">
+            <div class="form-inline-group">
+                <label class="col-sm-4 form-control-label"> Name :</label>
+                <label class="form-control-label">{{objUser.firstName}} {{objUser.middleName}}
+                    {{objUser.lastName}}</label>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-inline-group">
+                <label class="col-sm-4 form-control-label">Email :</label>
+                <label class="form-control-label"> {{objUser.email}}</label>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-inline-group">
+                <label class="col-sm-4 form-control-label">Role :</label>
+                <label class="form-control-label">{{objUser.userRole}}</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-tabView>
+    <p-tabPanel header="Security" (onChange)="tabSwitch($event)">
+        <user-security [userId]="userId"
+                       (showListEvent)="onShowList($event)"></user-security>
+
+    </p-tabPanel>
+    <p-tabPanel header="Password" (onChange)="tabSwitch($event)" >
+        <user-password [userId]="userId"
+                       (showListEvent)="onShowList($event)"></user-password>
+
+    </p-tabPanel>
+    <p-tabPanel header="Setting" (onChange)="tabSwitch($event)" >
+        <user-setting [tfaEnabled]="objUser.twoFactorAuthEnabled" [userId]="userId"
+                      (showListEvent)="onShowList($event)"></user-setting>
+
+    </p-tabPanel>
+</p-tabView>

@@ -239,7 +239,6 @@ As We all know [Wordpress](https://wordpress.com/), one of the most popular Cont
 
 ## Note
 
-
 We have added Authorization token management feature  so that you can revoke the access to the authorization tokens if you wish to in this release version. In the next release, we will be working on the frontend section of the application. We will introduce a nice responsive html template integrated with Nodebeats so that you can directly use that for your personal purpose and deploy it in the cloud and also introduce install setup wizard so that you can directly input database connections form user Interface elements.
 
 

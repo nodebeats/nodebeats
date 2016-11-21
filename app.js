@@ -8,7 +8,7 @@ var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     exphbs = require('express-handlebars'),
-    cookieParser = require('cookie-parser'),
+    //cookieParser = require('cookie-parser'),
     session = require('express-session'),
     easySession = require('easy-session'),
     RedisStore = require('connect-redis')(session),
@@ -32,7 +32,7 @@ var redisStoreOpts = {};
 require('dotenv').config();
 
 app.set('rootDir', __dirname);
-logWriter.init(app);
+//logWriter.init(app);
 
 // Add content compression middleware
 app.use(compression());
@@ -119,9 +119,10 @@ else if (app.get('env') === "production") {
     };
     app.use(minify());
     app.enable('view cache');
-    var adminDistRootPath = path.join(__dirname, '/app-dist/admin');
+    var adminDistRootPath = path.join(__dirname, '/admin/dist');
     app.use("/", express.static(path.join(__dirname, '/public'), {maxAge: 86400000}));
-    app.use('/scripts', express.static(path.join(__dirname, '/node_modules/'), {maxAge: 86400000}));
+    app.use('/dist', express.static(path.join(__dirname, '/admin/dist/'), {maxAge: 86400000}));
+    app.use('/assets', express.static(path.join(__dirname, '/admin/dist/assets/'), {maxAge: 86400000}));
 
     var adminViews = ['/login-templates', '/admin-templates'];
     app.use(adminViews, express.static(path.join(adminDistRootPath, '/views/')));
@@ -184,7 +185,8 @@ var sessionOpts = {
     }
 };
 
-app.use(cookieParser(process.env.COOKIE_SECRET));
+//app.use(cookieParser(process.env.COOKIE_SECRET));
+
 // if server behind proxy, then below should be uncommented
 // app.set('trust proxy', 1) // trust first proxy
 app.use(session(sessionOpts));

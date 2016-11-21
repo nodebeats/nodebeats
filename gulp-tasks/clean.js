@@ -25,7 +25,7 @@ gulp.task('clean:sw', function (cb) {
         });
 });
 gulp.task('clean:admin', function (cb) {
-    del(['app-dist/admin/*'], {dot: true})
+    del(['/admin/dist'], {dot: true})
         .then(function () {
             cb();
         });

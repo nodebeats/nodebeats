@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            News Management
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i> <a [routerLink]="['/admin']">Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-newspaper"></i> News Management
+            </li>
+        </ol>
+    </div>
+</div>
+<p-tabView (onChange)="tabSwitch($event)">
+    <p-tabPanel header="News Category">
+        <news-category-list *ngIf="isCatList" [showList]="isCatList"></news-category-list>
+    </p-tabPanel>
+    <p-tabPanel header="News">
+        <news-list *ngIf="isNewsList" [showList]="isNewsList"
+                   (showImageListEvent)="showImageList($event)"></news-list>
+        <news-image-list *ngIf="isImageList" [newsId]="id" (showNewsListEvent)="showNewsList($event)"></news-image-list>
+
+    </p-tabPanel>
+</p-tabView>
