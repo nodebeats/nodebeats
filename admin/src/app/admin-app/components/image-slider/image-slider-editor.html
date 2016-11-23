@@ -1,0 +1,58 @@
+<div class="row form-outer" fadeInDirective>
+    <div class="col-lg-12 form-wrapper">
+        <form role="form" novalidate [formGroup]="imageSliderForm" (ngSubmit)="saveImageSlider()">
+            <div class="form-group">
+                <label>Image Title</label>
+                <input type="text" class="form-control" [(ngModel)]="objSlider.imageTitle"
+                       name="imageTitle"
+                       placeholder="Enter Image Title"
+                       [formControl]="imageSliderForm.controls['imageTitle']">
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="imageSliderForm.controls['imageTitle']"></control-messages>
+            </div>
+            <div class="form-group">
+                <label>Image Alt Text</label>
+                <input type="text" class="form-control" [(ngModel)]="objSlider.imageAltText"
+                       name="imageAltText"
+                       placeholder="Enter alternet text"
+                       [formControl]="imageSliderForm.controls['imageAltText']">
+                <control-messages [isSubmitted]="isSubmitted"
+                                  [control]="imageSliderForm.controls['imageAltText']"></control-messages>
+            </div>
+            <div class="form-group">
+                <label>Image Primary Content</label>
+                <textarea class="form-control" [(ngModel)]="objSlider.imagePrimaryContent"
+                          formControlName="imagePrimaryContent" rows="5"
+                          placeholder="Enter Primary Content">
+                </textarea>
+            </div>
+            <div class="form-group">
+                <label>Image Secondary Content</label>
+                <textarea class="form-control" [(ngModel)]="objSlider.imageSecondaryContent"
+                          formControlName="imageSecondaryContent" rows="5"
+                          placeholder="Enter Secondary Content">
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize"
+                                [imageFormControl]="imageFormControl"
+                                (deleteImageEvent)="deleteImage($event)"
+                                [imageName]="objSlider.imageName" [drawImagePath]="drawImagePath"
+                                (fileSelectedEvent)="changeFile($event)"></image-uploader>
+
+            </div>
+            <div class="form-group">
+                <label>
+                    <md-checkbox [checked]="objSlider.active" formControlName="active"
+                                 [(ngModel)]="objSlider.active">
+                        Active
+                    </md-checkbox>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary" processing><i class="fa fa-floppy-o"></i>  Save</button>
+                        <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger"><i class="fa fa-times"></i> Cancel</button>
+        </form>
+    </div>
+</div>
+
