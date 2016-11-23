@@ -57,7 +57,7 @@
     "karma-mocha-reporter": "^2.2.1",
     "karma-remap-istanbul": "^0.2.1",
     "karma-super-dots-reporter": "^0.1.0",
-    "primeng": "1.0.0-beta.20",
+    "primeng": "1.0.0-beta.17",
     "protractor": "4.0.9",
     "ts-node": "1.2.1",
     "tslint": "3.13.0",
