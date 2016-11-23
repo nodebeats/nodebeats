@@ -6,8 +6,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import{HOST_URL}  from '../../configs/env.config';
 @Component({
-    selector: 'ajax-spinner',
-    template: `<div *ngIf="show" class="spinner-wrapper fadeInDirectives">
+  selector: 'ajax-spinner',
+  template: `<div [hidden]="hide" class="spinner-wrapper animated" [class.fadeIn]="showSpinner" [class.fadeOut]="!showSpinner">
                     <div class="spinner-back"></div>
                        <div class="spinner">  
                        <div class="rect1"></div>
@@ -16,7 +16,7 @@ import{HOST_URL}  from '../../configs/env.config';
                          <div class="rect4"></div>
                          <div class="rect5"></div>
                     </div></div>`,
-    styles: [`
+  styles: [`
         .spinner-wrapper {
             height: 100%;
             width: 100%;
@@ -89,63 +89,71 @@ import{HOST_URL}  from '../../configs/env.config';
         }`]
 })
 export class SpinnerComponent implements OnDestroy,OnInit {
-    private currentTimeout:any;
-    private isDelayedRunning:boolean = false;
-    show:boolean = false;
+  private currentTimeout: any;
+  private isDelayedRunning: boolean = false;
+  showSpinner: boolean = false;
+  hide: boolean = true;
 
-    constructor() {
+  constructor() {
+  }
+
+  ngOnInit() {
+    this.detectAjax();
+  }
+
+  @Input()
+  public delay: number = 300;
+
+  @Input()
+  public set isRunning(value: boolean) {
+    if (!value) {
+      this.cancelTimeout();
+      this.isDelayedRunning = false;
     }
 
-    ngOnInit() {
-        this.detectAjax();
+    if (this.currentTimeout) {
+      return;
     }
 
-    @Input()
-    public delay:number = 300;
+    this.currentTimeout = setTimeout(() => {
+      this.isDelayedRunning = value;
+      this.cancelTimeout();
+    }, this.delay);
+  }
 
-    @Input()
-    public set isRunning(value:boolean) {
-        if (!value) {
-            this.cancelTimeout();
-            this.isDelayedRunning = false;
-        }
-
-        if (this.currentTimeout) {
-            return;
-        }
-
-        this.currentTimeout = setTimeout(() => {
-            this.isDelayedRunning = value;
-            this.cancelTimeout();
-        }, this.delay);
-    }
-
-    detectAjax() {
-        let origOpen = XMLHttpRequest.prototype.open;
-        let that = this;
-        XMLHttpRequest.prototype.open = function (method, url, async) {
-            if (url.indexOf(HOST_URL + '/api') != -1)
-                that.show = true;
-            this.addEventListener('load', function () {
-                // console.log('request completed!');
-                // console.log(this.readyState); //will always be 4 (ajax is completed successfully)
-                // console.log(this.responseText); //whatever the response was
-                setTimeout(()=>that.show = false, 500);
-            });
-            origOpen.apply(this, arguments);
-          //  this.setRequestHeader("Auth","123");
-        };
+  detectAjax() {
+    let origOpen = XMLHttpRequest.prototype.open;
+    let that = this;
+    XMLHttpRequest.prototype.open = function (method, url, async) {
+      if (url.indexOf(HOST_URL + '/api') != -1)
+        that.showSpinner = true;
+      that.hide = false;
+      this.addEventListener('load', function () {
+        // console.log('request completed!');
+        // console.log(this.readyState); //will always be 4 (ajax is completed successfully)
+        // console.log(this.responseText); //whatever the response was
+        setTimeout(()=>
+            that.showSpinner = false
+          , 500
+        );
+        setTimeout(()=>
+          that.hide = true, 1000
+        );
+      });
+      origOpen.apply(this, arguments);
+      //  this.setRequestHeader("Auth","123");
+    };
 
 
-    }
+  }
 
 
-    private cancelTimeout():void {
-        clearTimeout(this.currentTimeout);
-        this.currentTimeout = undefined;
-    }
+  private cancelTimeout(): void {
+    clearTimeout(this.currentTimeout);
+    this.currentTimeout = undefined;
+  }
 
-    ngOnDestroy():any {
-        this.cancelTimeout();
-    }
+  ngOnDestroy(): any {
+    this.cancelTimeout();
+  }
 }
