@@ -11,7 +11,7 @@ import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'blog-editor',
-  templateUrl: '../../views/blog/blog-editor.html'
+  templateUrl: './blog-editor.html'
 
   // styles: [style]
 })

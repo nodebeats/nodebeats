@@ -6,7 +6,7 @@ import {Paginator} from 'primeng/primeng';
 
 @Component({
   selector: 'image-gallery-album-list',
-  templateUrl: '../../views/image-gallery/image-gallery-album-list.html'
+  templateUrl: './image-gallery-album-list.html'
 })
 
 export class ImageAlbumListComponent implements OnInit {

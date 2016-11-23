@@ -1,16 +1,14 @@
 import {Component, EventEmitter, Output, Input, ViewChild, OnInit,} from '@angular/core';
 import {UserService} from "./user.service";
 import {UserModel} from "./user.model";
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {ValidationService} from "../../../shared/services/validation.service";
 import {Validators, FormBuilder, FormGroup} from "@angular/forms";
-import {Password} from 'primeng/primeng';
-import {Config} from "../../../shared/configs/general.config";
+
 import {ActivatedRoute, Router} from "@angular/router";
 import {LoginService} from "../../../login-app/components/login/login.service";
 @Component({
   selector: 'user-password',
-  templateUrl: '../../views/user-management/user-password-update.html'
+  templateUrl: './user-password-update.html'
 })
 
 export class UserPasswordUpdateComponent {

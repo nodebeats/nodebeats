@@ -1,11 +1,10 @@
 import {Component, ElementRef, OnInit, Output, Input, EventEmitter} from '@angular/core';
 import {PartnerService} from "./partner.service";
 import{PartnerResponse, PartnerModel} from "./partner.model";
-import {PartnerEditorComponent}from "./partner-editor.component";
 
 @Component({
     selector: 'partner-list',
-    templateUrl: '../../views/partner/partner-list.html'
+    templateUrl: './partner-list.html'
 })
 
 export class PartnerComponent implements OnInit {

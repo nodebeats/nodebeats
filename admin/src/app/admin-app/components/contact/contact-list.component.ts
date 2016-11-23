@@ -6,7 +6,7 @@ import{ContactViewComponent} from "./contact-view.component";
 
 @Component({
   selector: 'contact-list',
-  templateUrl: '../../views/contact/contact-list.html'
+  templateUrl: './contact-list.html'
 })
 
 export class ContactListCompoent implements OnInit {

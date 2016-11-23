@@ -1,12 +1,10 @@
 import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
 import {UserService} from "./user.service";
 import {UserSettingModel} from "./user.model";
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
-import {MdSlideToggle} from '@angular2-material/slide-toggle/slide-toggle';
 @Component({
   selector: 'user-setting',
-  templateUrl: '../../views/user-management/user-setting.html'
+  templateUrl: './user-setting.html'
 })
 
 export class UserSettingComponent implements OnInit {

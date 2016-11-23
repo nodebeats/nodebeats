@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {RoleService} from "./role.service";
 import{RoleModel} from "./role.model";
-import {RoleEditorComponent}from "./role-editor.component";
 
 @Component({
   selector: 'role-list',
-  templateUrl: '../../views/role/role-list.html'
+  templateUrl: './role-list.html'
 })
 
 export class RoleComponent implements OnInit {

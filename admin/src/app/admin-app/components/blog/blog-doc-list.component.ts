@@ -4,7 +4,7 @@ import {BlogDocumentModel} from "./blog.model";
 
 @Component({
   selector: 'blog-doc-list',
-  templateUrl: '../../views/blog/blog-doc-list.html'
+  templateUrl: './blog-doc-list.html'
 })
 
 export class BlogDocListComponent implements OnInit {

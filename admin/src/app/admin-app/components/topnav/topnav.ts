@@ -5,11 +5,9 @@ import {Config} from "../../../shared/configs/general.config";
 import {UserModel} from "../user-management/user.model";
 @Component({
     selector: 'topnav',
-    templateUrl: '../../views/shared/topnav.html'
+    templateUrl: './topnav.html'
 })
-// @RouteConfig([
-//     {path: '/home', component: HomeCmp, as: 'Home'}
-// ])
+
 export class TopNavCmp {
     public oneAtATime:boolean = true;
     public items:Array<any> = [{name: 'google', link: 'https://google.com'}, {

@@ -1,18 +1,14 @@
 import {Component, EventEmitter, Output, Input, AfterViewInit, ViewChild, OnInit} from '@angular/core';
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {PartnerModel} from "./partner.model";
 import {PartnerService} from "./partner.service";
 import{Config} from "../../../shared/configs/general.config";
 import{ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
-import {ImageUploader} from "../../../shared/components/image-uploader.component";
 import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 import {ValidationService} from "../../../shared/services/validation.service";
 
-//declare var require;
-//const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
 @Component({
     selector: 'partner-editor',
-    templateUrl: '../../views/partner/partner-editor.html'
+    templateUrl: './partner-editor.html'
 })
 export class PartnerEditorComponent implements OnInit,AfterViewInit {
     objPartner:PartnerModel = new PartnerModel();

@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {OrganizationInfoService} from "./orginfo.service";
 import {OrganizationModel} from "./orginfo.model";
-import {Alert} from "../../../shared/components/alert/alert";
 import {AlertModel} from "../../../shared/models/alert.model";
 import {ValidationService} from "../../../shared/services/validation.service";
 import{CountryListService, CountryModel}from "../../../shared/services/countrylist.service";
@@ -10,7 +9,7 @@ import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import {ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
 @Component({
     selector: 'google-analytics',
-    templateUrl: '../../views/organization-information/orginfo.html'
+    templateUrl: './orginfo.html'
 })
 export class OrganizationInfoComponent implements OnInit, AfterViewInit {
     objOrg:OrganizationModel = new OrganizationModel();

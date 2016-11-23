@@ -361,8 +361,8 @@ export class LastWeekVsThisWeekAnalysisChart implements OnChanges {
 
 @Component({
   selector: 'home',
-  templateUrl: '../../views/dashboard/dashboard.html',
-  styleUrls: ['../../views/dashboard/css/home.css']
+  templateUrl: './dashboard.html',
+  styleUrls: ['./css/home.css']
 })
 
 export class DashboardComponent implements OnInit,OnDestroy {

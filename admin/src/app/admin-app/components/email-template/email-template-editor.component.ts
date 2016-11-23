@@ -9,7 +9,7 @@ import {FormBuilder, Validators, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'email-template-editor',
-    templateUrl: '../../views/email-template/email-template-editor.html'
+    templateUrl: './email-template-editor.html'
 })
 export class EmailTemplateEditorComponent implements OnInit {
     objEmailTemp:EmailTemplateModel = new EmailTemplateModel();

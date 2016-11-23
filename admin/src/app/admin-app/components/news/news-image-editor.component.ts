@@ -7,7 +7,7 @@ import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 
 @Component({
     selector: 'news-image-editor',
-    templateUrl: '../../views/news/news-image-editor.html'
+    templateUrl: './news-image-editor.html'
     // styles: [style]
 })
 export class NewsImageEditorComponent implements OnInit,AfterViewInit {

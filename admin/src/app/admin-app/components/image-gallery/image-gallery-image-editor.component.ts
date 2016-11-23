@@ -7,7 +7,7 @@ import {FormGroup, FormControl, FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'image-gallery-image-editor',
-  templateUrl: '../../views/image-gallery/image-gallery-image-editor.html'
+  templateUrl: './image-gallery-image-editor.html'
 })
 export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
   objImage:ImageGalleryModel = new ImageGalleryModel();

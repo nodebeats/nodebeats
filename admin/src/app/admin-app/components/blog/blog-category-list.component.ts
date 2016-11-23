@@ -6,7 +6,7 @@ import {BlogCategoryEditorComponent} from  "./blog-category-editor.component";
 
 @Component({
   selector: 'blog-category-list',
-  templateUrl: '../../views/blog/blog-category-list.html'
+  templateUrl: './blog-category-list.html'
 })
 
 export class BlogCategoryListComponent implements OnInit,OnChanges {

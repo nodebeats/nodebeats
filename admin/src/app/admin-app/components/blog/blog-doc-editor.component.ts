@@ -9,7 +9,7 @@ import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'blog-doc-editor',
-  templateUrl: '../../views/blog/blog-doc-editor.html'
+  templateUrl: './blog-doc-editor.html'
   // styles: [style]
 })
 export class BlogDocEditorComponent implements OnInit {

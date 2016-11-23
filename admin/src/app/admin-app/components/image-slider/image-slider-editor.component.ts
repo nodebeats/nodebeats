@@ -9,7 +9,7 @@ import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 //const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
 @Component({
   selector: 'image-slider-editor',
-  templateUrl: '../../views/image-slider/image-slider-editor.html'
+  templateUrl: './image-slider-editor.html'
 })
 export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
   objSlider:ImageSliderModel = new ImageSliderModel();

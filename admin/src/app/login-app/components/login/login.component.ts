@@ -10,7 +10,7 @@ import {UserModel} from "../../../admin-app/components/user-management/user.mode
 @Component(
     {
         selector: 'login-comp',
-        templateUrl: '../../views/login-form.html',
+        templateUrl: './/login-form.html',
         animations: [trigger(
             'slideMsg',
             [

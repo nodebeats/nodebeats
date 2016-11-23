@@ -7,7 +7,7 @@ import { FormGroup, Validators, FormBuilder, FormControl} from "@angular/forms";
 
 @Component({
     selector: 'html-content-editor',
-    templateUrl: '../../views/html-content/html-content-editor.html'
+    templateUrl: './html-content-editor.html'
 })
 export class HtmlContentEditorComponent implements OnInit {
     objHtml:HtmlContentModel = new HtmlContentModel();

@@ -6,7 +6,7 @@ import {FormGroup, Validators, FormBuilder,} from "@angular/forms";
 
 @Component({
     selector: 'news-category-editor',
-    templateUrl: '../../views/news/news-category-editor.html'
+    templateUrl: './news-category-editor.html'
 })
 
 export class NewsCategoryEditorComponent implements OnInit {

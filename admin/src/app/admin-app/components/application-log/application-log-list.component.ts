@@ -6,7 +6,7 @@ import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'application-log-list',
-  templateUrl: '../../views/application-log/application-log.html',
+  templateUrl: './application-log.html',
 })
 
 export class ApplicationLogComponent implements OnInit {

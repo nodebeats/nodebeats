@@ -7,7 +7,7 @@ import {RoleModel} from "../role-management/role.model";
 
 @Component({
   selector: 'api-access-editor',
-  templateUrl: '../../views/api-access/api-access-editor.html'
+  templateUrl: './api-access-editor.html'
 })
 
 export class ApiAccessEditorComponent implements OnInit {

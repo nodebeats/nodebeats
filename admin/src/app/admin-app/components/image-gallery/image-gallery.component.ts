@@ -1,10 +1,8 @@
 import{Component}from'@angular/core';
-import{ImageAlbumListComponent} from "./image-gallery-album-list.component";
-import{ImageListComponent} from "./image-gallery-image-list.component";
 
 @Component({
     selector: 'image-gallery',
-    templateUrl: '../../views/image-gallery/image-gallery.html'
+    templateUrl: './image-gallery.html'
 })
 export class ImageGalleryComponent {
     isImageList:boolean = false;

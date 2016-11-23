@@ -8,7 +8,7 @@ import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 
 @Component({
     selector: 'news-editor',
-    templateUrl: '../../views/news/news-editor.html'
+    templateUrl: './news-editor.html'
     // styles: [style]
 })
 export class NewsEditorComponent implements AfterViewInit,OnInit {

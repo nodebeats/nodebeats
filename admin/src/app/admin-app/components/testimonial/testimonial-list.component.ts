@@ -1,13 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {TestimonialService} from "./testimonial.service";
 import{TestimonialModel, TestimonialResponse} from "./testimonial.model";
-import {TestimonialEditorComponent} from "./testimonial-editor.component";
-import {Paginator} from 'primeng/primeng';
-import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 
 @Component({
     selector: 'testimonial-list',
-    templateUrl: '../../views/testimonial/testimonial-list.html'
+    templateUrl: './testimonial-list.html'
 })
 
 export class TestimonialComponent implements OnInit {

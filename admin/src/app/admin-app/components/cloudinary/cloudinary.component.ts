@@ -6,7 +6,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Config} from "../../../shared/configs/general.config";
 @Component({
     selector: 'cloudinary-settings',
-    templateUrl: '../../views/cloudinary/cloudinary.html'
+    templateUrl: './cloudinary.html'
 })
 export class CloudinarySettingComponent implements OnInit {
     objCloudinary:CloudinaryModel = new CloudinaryModel();

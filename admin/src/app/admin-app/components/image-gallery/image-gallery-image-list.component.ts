@@ -7,7 +7,7 @@ import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 
 @Component({
   selector: 'image-gallery-image-list',
-  templateUrl: '../../views/image-gallery/image-gallery-image-list.html',
+  templateUrl: './image-gallery-image-list.html',
   providers: [ImageGalleryService]
 })
 

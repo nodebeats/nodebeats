@@ -10,7 +10,7 @@ import {DocumentUploader} from "../../../shared/components/doc-uploader.componen
 
 @Component({
   selector: 'google-analytics',
-  templateUrl: '../../views/google-analytics/google-analytics.html'
+  templateUrl: './google-analytics.html'
 })
 export class GoogleAnalyticsComponent implements OnInit {
   objAnalytics: GoogleAnalyticsModel = new GoogleAnalyticsModel();

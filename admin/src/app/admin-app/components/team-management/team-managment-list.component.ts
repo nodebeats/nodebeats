@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {TeamManagementService} from "./team-managment.service";
 import{TeamManagementModel, TeamManagementResponse} from "./team-managment.model";
-import {TeamManagementEditorComponent} from "./team-management-editor.component";
-import {Paginator} from 'primeng/primeng';
 
 @Component({
     selector: 'team-management-list',
-    templateUrl: '../../views/team-management/team-management-list.html'
+    templateUrl: './team-management-list.html'
 })
 
 export class TeamManagementComponent implements OnInit {

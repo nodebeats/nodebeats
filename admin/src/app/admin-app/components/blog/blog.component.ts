@@ -11,7 +11,7 @@ import {BlogMetaTagEditorComponent} from './blog-metatag.component';
 
 @Component({
     selector: 'blog-management',
-    templateUrl: '../../views/blog/blog-management.html'
+    templateUrl: './blog-management.html'
 })
 export class BlogManagementComponent {
     isCatList:boolean = true;

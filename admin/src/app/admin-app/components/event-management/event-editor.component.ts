@@ -12,7 +12,7 @@ import {FormControl, FormGroup, Validators, FormBuilder} from "@angular/forms";
 //const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
 @Component({
     selector: 'event-editor',
-    templateUrl: '../../views/event-management/event-editor.html'
+    templateUrl: './event-editor.html'
 })
 export class EventEditorComponent implements OnInit,AfterViewInit {
     objEvent:EventModel = new EventModel();

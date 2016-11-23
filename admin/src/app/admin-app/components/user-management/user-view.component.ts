@@ -4,12 +4,11 @@ import {UserService} from "../user-management/user.service";
 import {Config} from "../../../shared/configs/general.config";
 @Component({
     selector: 'user-view',
-    templateUrl: '../../views/user-management/user-view.html'
+    templateUrl: './user-view.html'
 
 })
 
 export class UserViewComponent implements OnInit {
-    //  @Input showInfo:boolean;
     @Input() userId:string;
     @Output() userEditEvent:EventEmitter<any> = new EventEmitter();
     @Output() showListEvent:EventEmitter<any> = new EventEmitter();

@@ -7,7 +7,7 @@ import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 
 @Component({
     selector: 'html-content-list',
-    templateUrl: '../../views/html-content/html-content-list.html'
+    templateUrl: './html-content-list.html'
 })
 
 export class HtmlContentComponent implements OnInit {

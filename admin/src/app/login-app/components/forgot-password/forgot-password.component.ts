@@ -9,7 +9,7 @@ import {ValidationService} from "../../../shared/services/validation.service";
 @Component(
     {
         selector: 'forgot-password',
-        templateUrl: '../../views/forgot-password.html',
+        templateUrl: './/forgot-password.html',
         animations: [trigger(
             'slideMsg',
             [

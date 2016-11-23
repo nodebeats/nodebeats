@@ -12,7 +12,7 @@ import {RoleModel} from "../role-management/role.model";
 declare var jQuery:any;
 @Component({
   selector: 'user-form',
-  templateUrl: '../../views/user-management/user-form.html'
+  templateUrl: './user-form.html'
 })
 
 export class UserRegistrationComponent implements OnInit {

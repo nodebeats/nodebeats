@@ -6,7 +6,7 @@ import {NewsCategoryEditorComponent} from  "./news-category-editor.component";
 
 @Component({
     selector: 'news-category-list',
-    templateUrl: '../../views/news/news-category-list.html'
+    templateUrl: './news-category-list.html'
 })
 
 export class NewsCategoryListComponent implements OnInit,OnChanges {

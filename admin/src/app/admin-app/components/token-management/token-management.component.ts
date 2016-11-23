@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {TokenManagementService} from "./token-manangement.service";
-import {TokenModel, TokenResponse} from "./token-managment.model";
+import {TokenModel} from "./token-managment.model";
 import * as moment from 'moment'
 import {FormControl} from "@angular/forms";
 import{LoginService} from '../../../login-app/components/login/login.service';
@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'token-list',
-  templateUrl: '../../views/token-management/token-management.html',
+  templateUrl: './token-management.html',
 })
 
 export class TokenManagementComponent implements OnInit {

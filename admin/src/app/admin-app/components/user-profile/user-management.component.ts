@@ -1,19 +1,13 @@
 /**
  * Created by sanedev on 6/27/16.
  */
-// import {TAB_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-import {TabView, TabPanel} from 'primeng/primeng';
 import{Component, Output, EventEmitter, Input, OnInit}from'@angular/core';
-import {UserService} from "../user-management/user.service";
-import {UserSecurityUpdateComponent} from '../user-management/user-security-question.component';
-import {UserPasswordUpdateComponent} from '../user-management/user-password-update.component';
-import {UserSettingComponent} from '../user-management/user-setting.component';
+
 import {UserModel} from '../user-management/user.model';
-import {UserProfileComponent} from "./user-profile.component";
 import {Config} from "../../../shared/configs/general.config";
 @Component({
     selector: 'user-management',
-    templateUrl: '../../views/user-profile/user-management.html'
+    templateUrl: './user-management.html'
 })
 export class UserProfileManagementComponent implements OnInit {
     @Output() showListEvent:EventEmitter<any> = new EventEmitter();

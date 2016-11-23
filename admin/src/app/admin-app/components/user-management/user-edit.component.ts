@@ -11,7 +11,7 @@ import {RoleService} from "../role-management/role.service";
 import {RoleModel} from "../role-management/role.model";
 @Component({
   selector: 'user-edit',
-  templateUrl: '../../views/user-management/user-form.html'
+  templateUrl: './user-form.html'
 })
 export class UserEditComponent implements OnInit {
   @Input() userId:string;

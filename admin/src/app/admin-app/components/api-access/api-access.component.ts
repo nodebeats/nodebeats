@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiAccessService} from "./api-access.service";
 import{ApiAccessModel} from "./api-access.model";
-import {ApiAccessEditorComponent}from "./api-access-editor.component";
 
 @Component({
   selector: 'api-access-list',
-  templateUrl: '../../views/api-access/api-access-list.html'
+  templateUrl: './api-access-list.html'
 })
 
 export class ApiAccessComponent implements OnInit {

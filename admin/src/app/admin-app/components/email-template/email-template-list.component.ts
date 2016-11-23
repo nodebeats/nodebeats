@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'email-template-list',
-  templateUrl: '../../views/email-template/email-template-list.html'
+  templateUrl: './email-template-list.html'
 })
 
 export class EmailTemplateListComponent implements OnInit {

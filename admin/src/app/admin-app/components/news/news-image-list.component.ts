@@ -2,11 +2,9 @@ import {Component, ElementRef, OnInit, Output, Input, EventEmitter, ViewChild} f
 import {NewsService} from "./news.service";
 import {NewsImageModel, NewsImageResponse} from "./news.model";
 
-// import {Pagination} from 'fuel-ui/fuel-ui';
-import{NewsImageEditorComponent} from "./news-image-editor.component";
 @Component({
     selector: 'news-image-list',
-    templateUrl: '../../views/news/news-image-list.html'
+    templateUrl: './news-image-list.html'
 })
 
 export class NewsImageListComponent implements OnInit {

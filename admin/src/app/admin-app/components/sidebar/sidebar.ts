@@ -1,10 +1,8 @@
 import {Component, Output, EventEmitter} from '@angular/core';
-import {ACCORDION_PROVIDERS} from '../../../shared/components/accordion/accordionItem';
-import {SidebarParentMenuModel, SidebarMenuModel} from './sidebar.model';
 import {menuItem} from '../../../shared/configs/menu.config';
 @Component({
   selector: 'sidebar',
-  templateUrl: '../../views/shared/sidebar.html'
+  templateUrl: './sidebar.html'
 })
 
 export class SidebarCmp {

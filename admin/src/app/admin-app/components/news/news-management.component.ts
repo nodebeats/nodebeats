@@ -1,14 +1,10 @@
-// import {TAB_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-import {TabView, TabPanel} from 'primeng/primeng';
+
 import{Component}from'@angular/core';
-import{NewsCategoryListComponent} from "./news-category-list.component"
-import {NewsListComponent} from  "./news-list.component";
-import{NewsImageListComponent} from "./news-image-list.component";
-import {NewsService} from "./news.service";
+
 
 @Component({
     selector: 'news-management',
-    templateUrl: '../../views/news/news-management.html'
+    templateUrl: './news-management.html'
 })
 export class NewsManagementComponent {
     isCatList:boolean = true;

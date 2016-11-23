@@ -6,7 +6,7 @@ import{BlogEditorComponent} from"./blog-editor.component";
 
 @Component({
   selector: 'blog-list',
-  templateUrl: '../../views/blog/blog-list.html'
+  templateUrl: './blog-list.html'
 })
 
 export class BlogListComponent implements OnInit,OnChanges {

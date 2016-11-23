@@ -10,7 +10,7 @@ import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 
 @Component({
   selector: 'testimonial-editor',
-  templateUrl: '../../views/testimonial/testimonial-editor.html'
+  templateUrl: './testimonial-editor.html'
   // styles: [style]
 })
 export class TestimonialEditorComponent implements OnInit,AfterViewInit {

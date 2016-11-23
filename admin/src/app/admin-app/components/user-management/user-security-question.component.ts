@@ -1,12 +1,11 @@
 import {Component, EventEmitter, Output, Input, ViewChild, OnInit,} from '@angular/core';
 import {UserService} from "./user.service";
 import {UserSecurityModel} from "./user.model";
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {Validators, FormBuilder, FormGroup} from "@angular/forms";
 import{QUESTION_LIST} from '../../../shared/configs/security-question.config'
 @Component({
     selector: 'user-security',
-    templateUrl: '../../views/user-management/user-security-update.html'
+    templateUrl: './user-security-update.html'
 })
 
 export class UserSecurityUpdateComponent {

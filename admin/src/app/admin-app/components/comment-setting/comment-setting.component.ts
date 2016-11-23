@@ -5,7 +5,7 @@ import {AlertModel} from "../../../shared/models/alert.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 @Component({
     selector: 'comment-setting',
-    templateUrl: '../../views/comment-setting/comment-setting.html'
+    templateUrl: './comment-setting.html'
 })
 export class CommentSettingComponent implements OnInit {
     objComment:CommentSettingModel = new CommentSettingModel();

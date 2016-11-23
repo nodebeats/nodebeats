@@ -1,17 +1,14 @@
 import {Component, EventEmitter, Output, Input, AfterViewInit, ViewChild, OnInit} from '@angular/core';
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {TeamManagementModel} from "./team-managment.model";
 import {TeamManagementService} from "./team-managment.service";
 import{Config} from "../../../shared/configs/general.config";
 import{ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
 import {ValidationService} from "../../../shared/services/validation.service";
-import {ImageUploader} from "../../../shared/components/image-uploader.component";
 import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 
 @Component({
     selector: 'team-management-editor',
-    templateUrl: '../../views/team-management/team-management-editor.html'
-    // styles: [style]
+    templateUrl: './team-management-editor.html'
 })
 export class TeamManagementEditorComponent implements OnInit,AfterViewInit {
     objTeam:TeamManagementModel = new TeamManagementModel();

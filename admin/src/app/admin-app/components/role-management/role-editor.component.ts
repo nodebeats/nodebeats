@@ -5,7 +5,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 
 @Component({
     selector: 'role-editor',
-    templateUrl: '../../views/role/role-editor.html'
+    templateUrl: './role-editor.html'
 })
 
 export class RoleEditorComponent implements OnInit {

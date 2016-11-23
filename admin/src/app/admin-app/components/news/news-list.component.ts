@@ -1,12 +1,10 @@
 import {Component, ElementRef, OnInit, Output, EventEmitter, Input, OnChanges} from '@angular/core';
 import {NewsService} from "./news.service";
 import {NewsModel, NewsCategoryModel, NewsResponse} from "./news.model";
-import {Paginator} from 'primeng/primeng';
-import{NewsEditorComponent} from"./news-editor.component";
 
 @Component({
     selector: 'news-list',
-    templateUrl: '../../views/news/news-list.html'
+    templateUrl: './news-list.html'
 })
 
 export class NewsListComponent implements OnInit,OnChanges {

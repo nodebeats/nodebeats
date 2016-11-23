@@ -8,7 +8,7 @@ import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 import {Paginator} from 'primeng/primeng';
 @Component({
     selector: 'event-list',
-    templateUrl: '../../views/event-management/event-list.html'
+    templateUrl: './event-list.html'
 })
 
 export class EventComponent implements OnInit {

@@ -2,10 +2,9 @@ import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
 import {UserModel, UserResponse} from "../user-management/user.model";
 import {UserService} from "../user-management/user.service";
 import {Config} from "../../../shared/configs/general.config";
-import {UserEditComponent} from '../user-management/user-edit.component';
 @Component({
     selector: 'user-profile',
-    templateUrl: '../../views/user-profile/user-profile.html'
+    templateUrl: './user-profile.html'
 
 })
 

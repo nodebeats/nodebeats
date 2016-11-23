@@ -10,7 +10,7 @@ import{EmailTemplateModule} from './components/email-template/email-template.mod
 import{EventManagementModule} from './components/event-management/event-managment.module';
 import{GoogleAnalyticsModuless} from './components/google-analytics/google-analytics.module';
 import {GoogleMapModule} from './components/google-map/google-map.module';
-import{HtmlContentModule} from './components/html-content/html-content.mdule';
+import{HtmlContentModule} from './components/html-content/html-content.module';
 import{ImageGalleryModule} from './components/image-gallery/image-gallery.module';
 import{ImageSlideModule} from './components/image-slider/image-slider.module';
 import{NewsModule}from'./components/news/news.module';

@@ -5,7 +5,7 @@ import {RoleModel} from "../role-management/role.model";
 import {RoleService} from "../role-management/role.service";
 @Component({
     selector: 'admin-user',
-    templateUrl: '../../views/user-management/user-list.html'
+    templateUrl: './user-list.html'
 })
 
 export class UserListComponent implements OnInit {
