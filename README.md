@@ -49,14 +49,21 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
 
     * npm install
 
+* For setting up admin app (angular 2 app) go to the cloned project's admin directory and run the following command to install required dependencies for admin app:
+
+    * npm install
+
+* To run the admin clint (angular 2) app in development environment, Go to admin directory and run app
+    * cd admin
+    * npm start
+
 **Important Note**
 
 Run the following commands only if you have modified client code. If you are using it for the first time, you can skip this step.
 
-* If you have changed code and want to rebuid everything, then run the following commands
+* If you have changed code and want to rebuild everything, then run the following commands
 
-    * NODE_ENV=production webpack -p
-    * NODE_ENV=production webpack --config webpack-client.config.js
+    * NODE_ENV=production webpack
     * gulp service-worker
 
     Or, You can run following npm scripts directly as well:
@@ -69,14 +76,15 @@ Run the following commands only if you have modified client code. If you are usi
 
         To generate deployment package of client frontend
 
-   * npm run build:admin:prod
+   * Go To admin direction and run the script
+         * cd admin
+         * npm run prod
 
         To generate deployment package of admin frontend
 
    * npm run clean:uploads
 
         To clear uploaded documents and images
-
 
 
 * Edit the database configuration file in **/lib/configs/database.config.js** and enter the appropriate MongoDB credentials.
@@ -176,6 +184,16 @@ Well, that's it. Now you can run test. To run the test,
 
 *   Then, run **gulp test** in another terminal window to run our test files.
 
+
+ To run the test in admin app,
+
+*   Open two terminal windows
+
+*   Go to admin directory i.e cd admin
+
+*   First step is to run **npm run test** command
+
+*   For end to end testing run **npm run e2e** command
 
 
 
