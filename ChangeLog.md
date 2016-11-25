@@ -7,26 +7,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.5] - xxxx-xx-xx
 
 ### Upgraded
--Angular 2 version upgraded to v 2.1.0
+- Angular 2 version upgraded to v 2.1.0
 
-### Changed 
--Changed the old angular 2 app structure with angular cli implementation.
--Easy to run the app in development environment and easy to produce production.
--Better in performance and faster loading in the admin app compared to the previous version with very less network request
--File structures optimized, removed/merged into very few file for admin app than previous version.
+### Changed
+- Changed the old angular 2 app structure with angular cli implementation.
+- Easy to run the app in development environment and easy to produce production.
+- Better in performance and faster loading in the admin app compared to the previous version with very less network request
+- File structures optimized, removed/merged into very few file for admin app than previous version.
 
 
 ## [0.4] - 2016-10-28
 
 ### Features
--Added Access Token Management.
+- Added Access Token Management.
 
 
 
 ## [0.3] - 2016-10-06
 
 ### Upgrade
--Upgraded all the npm packages to their latest version.
+- Upgraded all the npm packages to their latest version.
 
 ### Features
 - Added role based authorization.
