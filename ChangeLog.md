@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5] - xxxx-xx-xx
+
+### Upgraded
+-Angular 2 version upgraded to v 2.1.0
+
+### Changed
+-Changed the old angular 2 app structure with angular cli implementation.
+-Easy to run the app in development environment and easy to produce production.
+-Very Fast in performance in the admin app compared to the previous version with very less network request
+-File structures optimized, removed/merged into very few file for admin app than previous version.
+
+
+## [0.4] - 2016-10-28
+
+### Features
+-Added Access Token Management.
+
+
 
 ## [0.3] - 2016-10-06
 
