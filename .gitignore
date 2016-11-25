@@ -1,5 +1,8 @@
 /node_modules/*
 /public/lib/*
+/admin/node_modules/*
+/admin/dist
+/public/sw.js
 /idea/*
 .idea
 /atlassian-ide-plugin.xml
@@ -9,5 +12,6 @@ logs/*
 *.tar.gz
 #public/uploads/*
 public/assets/*
-#lib/configs/database.config.js
+#/lib/configs/database.config.js
+#/lib/configs/redis.config.js
 

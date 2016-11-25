@@ -63,7 +63,7 @@ export class EmailTemplateEditorComponent implements OnInit {
     }
 
     resStatusMessage(res:any) {
-        this.router.navigate(['/admin/email-template']);
+        this.router.navigate(['/email-template']);
       swal("Success !", res.message, "success")
 
     }
@@ -74,7 +74,7 @@ export class EmailTemplateEditorComponent implements OnInit {
     }
 
     triggerCancelForm() {
-        this.router.navigate(['/admin/email-template']);
+        this.router.navigate(['/email-template']);
     }
 
     errorMessage(objResponse:any) {

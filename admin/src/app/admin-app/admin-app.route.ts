@@ -28,7 +28,7 @@ import {TokenManagementComponent} from "./components/token-management/token-mana
 
 export const adminAppRoute:Routes = [
     {
-        path: 'admin',
+        path: '',
         component: AdminAppComponent,
         canActivate: [AuthGuardService],
         children: [

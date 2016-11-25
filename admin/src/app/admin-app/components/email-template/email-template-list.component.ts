@@ -68,11 +68,11 @@ export class EmailTemplateListComponent implements OnInit {
   }
 
   addTemplate() {
-    this.router.navigate(['/admin/email-template/email-template-editor']);
+    this.router.navigate(['/email-template/email-template-editor']);
   }
 
   editDetail(id:string) {
-    this.router.navigate(['/admin/email-template/email-template-editor', id]);
+    this.router.navigate(['/email-template/email-template-editor', id]);
 
   }
 

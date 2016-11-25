@@ -84,6 +84,7 @@ app.set('view engine', 'hbs');
 // Static path setup for Client App
 
 var admin = express();
+
 if (app.get('env') === "development" || app.get('env') === "test") {
     console.log('development environment');
     redisStoreOpts = {
@@ -119,23 +120,18 @@ else if (app.get('env') === "production") {
     };
     app.use(minify());
     app.enable('view cache');
-    var adminDistRootPath = path.join(__dirname, '/admin/dist');
-    app.use("/", express.static(path.join(__dirname, '/public'), {maxAge: 86400000}));
+    var adminDistRootPath = path.join(__dirname, '/admin/dist/');
+    admin.use("/", express.static(path.join(__dirname, '/admin/dist/'), {maxAge: 86400000}));
+    app.use("/", express.static(path.join(__dirname, '/public/'), {maxAge: 86400000}));
     app.use('/dist', express.static(path.join(__dirname, '/admin/dist/'), {maxAge: 86400000}));
     app.use('/assets', express.static(path.join(__dirname, '/admin/dist/assets/'), {maxAge: 86400000}));
-
-    var adminViews = ['/login-templates', '/admin-templates'];
-    app.use(adminViews, express.static(path.join(adminDistRootPath, '/views/')));
-
-    var adminApp = ['/login-app', '/app-template', '/shared', '/config', '/admin-app', '/dist/admin', '/app-src/app', '/app-src'];
-    app.use(adminApp, express.static(adminDistRootPath));
-
     admin.get("/*", function (req, res) {
         res.render(path.join(adminDistRootPath, 'index.html'), {layout: false});
     });
 
 }
 app.use("/admin", admin);
+
 app.use("/docs", express.static(__dirname + "/public/apidoc/"));
 ///  End of Static path setup for Client app
 

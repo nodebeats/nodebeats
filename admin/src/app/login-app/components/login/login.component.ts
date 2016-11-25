@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     userId:string;
     formImage:string = Config.LoginImage;
     slide:string = "collapse";
-    adminRoute:string = "/admin";
+    adminRoute:string = "/dashboard";
 
     ngOnInit() {
         if (Config.getAuthToken()) {
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
                     this.isValidLogin = isValid;
                     // let redirectRoute = Config.getAdminRoute();
                     let redirectRoute = this._loginService.redirectUrl;
-                    this.adminRoute = redirectRoute ? redirectRoute : "/admin";
+                    this.adminRoute = redirectRoute ? redirectRoute : "/dashboard";
                 },
                 error => this.handleError(error)
             );
@@ -104,7 +104,7 @@ export class LoginComponent implements OnInit {
 
     forwardAfterSuccess(token:string, userInfo:UserModel) {
         Config.setLoggedInToken(token, userInfo);
-        this._router.navigate(['/admin']);
+        this._router.navigate(['/dashboard']);
     }
 
     onVerifyTfa() {

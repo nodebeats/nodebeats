@@ -8,10 +8,8 @@ export class EventModel {
     eventDescription:string;
     venue:string;
     venueAddress:string;
-    startDate:string;
-    endDate:string;
-    eventStartTime:string;
-    eventEndTime:string;
+    startDate:any;
+    endDate:any;
     imageName:string;
     imageTitle:string;
     imageAltText:string;

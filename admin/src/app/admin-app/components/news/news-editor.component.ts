@@ -9,7 +9,6 @@ import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 @Component({
     selector: 'news-editor',
     templateUrl: './news-editor.html'
-    // styles: [style]
 })
 export class NewsEditorComponent implements AfterViewInit,OnInit {
     objNews:NewsModel = new NewsModel();
@@ -18,7 +17,7 @@ export class NewsEditorComponent implements AfterViewInit,OnInit {
     @Output() showListEvent:EventEmitter<any> = new EventEmitter();
     newsForm:FormGroup;
     id:string = "";
-    editorFormControl:FormControl = new FormControl('', Validators.required)
+    editorFormControl:FormControl = new FormControl('', Validators.required);
     isSubmitted:boolean = false;
 
     /* Image Upload Handle*/

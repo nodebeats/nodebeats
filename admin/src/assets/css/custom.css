@@ -381,7 +381,7 @@ fieldset.access .form-check-inline {
   color: #222222;
 }
 
-.ui-multiselect {
+.ui-datepicker.ui-multiselect {
   width: inherit;
 }
 
@@ -395,6 +395,14 @@ fieldset.access .form-check-inline {
 
 .ui-widget {
   font-family: "Cambria, Georgia";
+}
+
+.ui-widget {
+  font-family: "Cambria, Georgia";
+}
+
+.ui-widget.ui-datepicker {
+  background: #ffffff;
 }
 
 h1.page-header {

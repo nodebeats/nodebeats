@@ -9,8 +9,8 @@
     "test": "ng test",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
-    "dist:dev": "ng build",
-    "dist:prod": "ng build --prod"
+    "dev": "ng build --bh /admin/",
+    "prod": "ng build --prod --bh /admin/"
   },
   "private": true,
   "dependencies": {

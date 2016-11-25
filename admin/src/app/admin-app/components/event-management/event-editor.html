@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <label>Start Date/Time (yyyy/mm/dd)</label>
                     <p-calendar tabindex="5" [(ngModel)]="objEvent.startDate" [formControl]="eventForm.controls['startDate']"
-                                [showIcon]="true" minDate="0" [maxDate]="objEvent.endDate"
+                                [showIcon]="true" [minDate]="today" [maxDate]="objEvent.endDate"
                                 timeFormat="HH:mm"
                                 inputStyleClass="form-control, inline-cal" [readonlyInput]="true"
                                 dateFormat="yy-mm-dd"></p-calendar>
@@ -46,7 +46,7 @@
                 <div class="form-group">
                     <label>End Date/Time  (yyyy/mm/dd)</label>
                     <p-calendar tabindex="6" [(ngModel)]="objEvent.endDate" [readonlyInput]="true" [showIcon]="true"
-                                [minDate]="objEvent.startDate?objEvent.startDate:0" timeFormat="HH:mm"
+                                [minDate]="objEvent.startDate?objEvent.startDate:today" timeFormat="HH:mm"
                                 inputStyleClass="form-control, inline-cal"
                                 [formControl]="eventForm.controls['endDate']"
                                 dateFormat="yy-mm-dd"></p-calendar>

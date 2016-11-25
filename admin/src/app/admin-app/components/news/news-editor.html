@@ -32,8 +32,7 @@
             </div>
             <div class="form-group">
                 <label>News Description</label>
-                <!--<ckeditor [ckFormControl]="ckFormControl" [value]="objNews.newsDescription"-->
-                <!--(valueChange)="changeEditor($event)"></ckeditor>-->
+
                 <tiny-editor [value]="objNews.newsDescription"
                              [editorFormControl]="editorFormControl"
                              (valueChange)="editorValueChange($event)"></tiny-editor>
@@ -49,15 +48,14 @@
             <div class="form-group">
                 <label>Publish Date</label>
                 <div class="form-group">
-                    <!--<p-calendar [(ngModel)]="objNews.newsDate" [readonlyInput]="true" [showIcon]="true"-->
-                    <!--[minDate]="0"-->
-                    <!--[formControl]="newsForm.controls['newsDate']"-->
-                    <!--inputStyleClass="form-control, inline-cal"-->
-                    <!--dateFormat="yy-mm-dd"></p-calendar>-->
-                    <p-calendar [(ngModel)]="objNews.newsDate" [readonlyInput]="true" [showIcon]="true"
-                                [formControl]="newsForm.controls['newsDate']"
-                                inputStyleClass="form-control, inline-cal"
-                                dateFormat="yy-mm-dd"></p-calendar>
+
+                  <p-calendar [(ngModel)]="objNews.newsDate" [readonlyInput]="true"
+                              [showIcon]="true"
+                              [minDate]="0"
+                              [formControl]="newsForm.controls['newsDate']"
+                              inputStyleClass="form-control, inline-cal"
+                              dateFormat="yy-mm-dd"></p-calendar>
+
                     <control-messages [isSubmitted]="isSubmitted"
                                       [control]="newsForm.controls['newsDate']"></control-messages>
 

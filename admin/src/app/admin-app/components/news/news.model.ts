@@ -34,7 +34,7 @@ export class NewsModel {
     newsSummary:string;
     newsDescription:string;
     newsAuthor:string;
-    newsDate:string;
+    newsDate:any;
     image:NewsImageModel [];
     pageViews:number;
     active:boolean;

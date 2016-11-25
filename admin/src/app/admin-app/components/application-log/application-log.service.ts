@@ -49,7 +49,7 @@ export class ApplicationLogService {
 
     sendLogEmailToSupport() {
         let body = JSON.stringify({body: ""});
-        return this._http.put(API_URL + this.apiRouteSendEmail, body)
+      return this._http.put(API_URL + this.apiRouteSendEmail, body)
             .map(res => res.json())
             .catch(this.handleError);
     }

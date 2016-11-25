@@ -1,11 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {EventService} from "./event.service";
 import{EventResponse, EventModel} from "./event.model";
-import {EventEditorComponent}from "./event-editor.component";
-import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 
-// import {Pagination} from 'fuel-ui/fuel-ui';
-import {Paginator} from 'primeng/primeng';
+
 @Component({
     selector: 'event-list',
     templateUrl: './event-list.html'
