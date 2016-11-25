@@ -76,15 +76,17 @@ Run the following commands only if you have modified client code. If you are usi
 
         To generate deployment package of client frontend
 
-   * Go To admin direction and run the script
-         * cd admin
-         * npm run prod
-
-        To generate deployment package of admin frontend
-
    * npm run clean:uploads
 
         To clear uploaded documents and images
+
+
+* To build the admin app for production
+
+         * cd admin
+         * npm run prod
+
+        To generate deployment package of admin app
 
 
 * Edit the database configuration file in **/lib/configs/database.config.js** and enter the appropriate MongoDB credentials.
