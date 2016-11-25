@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 -Changed the old angular 2 app structure with angular cli implementation.
 -Easy to run the app in development environment and easy to produce production.
--Very Fast in performance in the admin app compared to the previous version with very less network request
+-Better in performance and faster loading in the admin app compared to the previous version with very less network request
 -File structures optimized, removed/merged into very few file for admin app than previous version.
 
 
