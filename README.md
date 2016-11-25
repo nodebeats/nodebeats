@@ -53,7 +53,7 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
 
     * npm install
 
-* To run the admin clint (angular 2) app in development environment, Go to admin directory and run app
+* To run the admin (angular 2) app in development environment, Go to admin directory and run app
     * cd admin
     * npm start
 
