@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Upgraded
 -Angular 2 version upgraded to v 2.1.0
 
-### Changed
+### Changed 
 -Changed the old angular 2 app structure with angular cli implementation.
 -Easy to run the app in development environment and easy to produce production.
 -Better in performance and faster loading in the admin app compared to the previous version with very less network request
