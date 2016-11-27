@@ -51,7 +51,7 @@ export class NewsService {
     }
 
     deleteNewsCategory(objDel:NewsCategoryModel):Observable<any> {
-        let body = JSON.stringify(objDel);
+        let body = JSON.stringify({});
         return this._http.patch(API_URL + this.NewsCategoryApiRoute + "/" + objDel._id, body)
             .map(res => res.json())
             .catch(this.handleError);

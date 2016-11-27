@@ -93,7 +93,7 @@ export class UserService {
     }
 
     updatePassword(objUser:UserModel):Observable<any> {
-        let body = JSON.stringify(objUser);
+        let body = JSON.stringify({});
         return this._http.patch(API_URL + this.apiRoute + "/" + objUser._id, body)
             .map(res => res.json())
             .catch(this.handleError);

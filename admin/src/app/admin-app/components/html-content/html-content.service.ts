@@ -32,7 +32,7 @@ export class HtmlContentService {
 
     deleteHtmlEditor(objUpdate:HtmlContentModel) {
         objUpdate.deleted = true;
-        let body = JSON.stringify(objUpdate);
+        let body = JSON.stringify({});
         return this._http.patch(API_URL + this.apiRoute + "/" + objUpdate._id, body)
             .map(res => res.json())
             .catch(this.handleError);

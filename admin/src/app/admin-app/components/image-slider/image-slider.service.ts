@@ -97,7 +97,7 @@ export class ImageSliderService {
     }
 
     deleteImageSlider(objSlider:ImageSliderModel):Observable < any> {
-        let body = JSON.stringify(objSlider);
+        let body = JSON.stringify({});
         return this._http.patch(API_URL + this.apiRoute + "/" + objSlider._id, body)
             .map(res =><any>res.json())
             .catch(this.handleError);

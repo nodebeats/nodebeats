@@ -47,7 +47,7 @@ export class ApiAccessService {
     }
 
     deleteAccess(objDel:ApiAccessModel):Observable<any> {
-        let body = JSON.stringify(objDel);
+        let body = JSON.stringify({});
         return this._http.patch(API_URL + this.apiRoute + "/" + objDel._id, body)
             .map(res => res.json())
             .catch(this.handleError);

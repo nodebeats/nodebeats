@@ -50,7 +50,7 @@ export class ImageGalleryService {
     }
 
     deleteImageAlbum(objDel:ImageAlbumModel):Observable<any> {
-        let body = JSON.stringify(objDel);
+        let body = JSON.stringify({});
         return this._http.patch(API_URL + this.imageAlbumApiRoute + "/" + objDel._id, body)
             .map(res => res.json())
             .catch(this.handleError);

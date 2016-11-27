@@ -66,7 +66,7 @@ export class BlogService {
     }
 
     deleteBlogCategory(objDel:BlogCategoryModel):Observable<any> {
-        let body = JSON.stringify(objDel);
+        let body = JSON.stringify({});
         return this._http.patch(API_URL + this.blogCategoryApiRoute + "/" + objDel._id, body)
             .map(res => res.json())
             .catch(this.handleError);
@@ -152,7 +152,7 @@ export class BlogService {
     }
 
     deleteBlog(objUpdate:BlogModel) {
-        let body = JSON.stringify(objUpdate);
+        let body = JSON.stringify({});
         return this._http.patch(API_URL + this.blogApiRoute + "/" + objUpdate._id, body)
             .map(res => res.json())
             .catch(this.handleError);
