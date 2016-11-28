@@ -71,7 +71,7 @@ export class TinyEditor implements AfterViewInit {
       });
     function RoxyFileBrowser(field_name, url, type, win) {
       win.getSelection().removeAllRanges();
-      var roxyFileman = url + '/assets/plugins/tinymce/plugins/fileman/index.html';
+      var roxyFileman =  '/assets/plugins/tinymce/plugins/fileman/index.html';
       //var roxyFileman = '/fileman/index.html';
       if (roxyFileman.indexOf("?") < 0) {
         roxyFileman += "?type=" + type;
