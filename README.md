@@ -77,7 +77,7 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
 
 
 
-**Running Production Environment in Browser**
+**Running Production Environment**
 
 * For admin app
     * To generate deployment package the admin app for production type :    
