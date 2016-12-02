@@ -85,7 +85,7 @@ app.set('view engine', 'hbs');
 
 var admin = express();
 
-if (app.get('env') === "development" || app.get('env') === "test") {
+if (app.get('env') === "development" ) {
     console.log('development environment');
     redisStoreOpts = {
         host: redisConfig.development.host,
@@ -109,7 +109,7 @@ if (app.get('env') === "development" || app.get('env') === "test") {
         res.render(path.join(adminRootPath, '/index.html'), {layout: false});
     });
 }
-else if (app.get('env') === "production") {
+else if (app.get('env') === "production" || app.get('env') === "test") {
     console.log('production environment');
     redisStoreOpts = {
         host: redisConfig.production.host,
@@ -166,7 +166,7 @@ app.use(expressValidator({
 
 
 var sessionOpts = {
-    store: new RedisStore(redisStoreOpts),
+    // store: new RedisStore(redisStoreOpts),
     name: 'id', // <-- a generic name for the session id
     secret: process.env.SESSION_SECRET,
     resave: false,

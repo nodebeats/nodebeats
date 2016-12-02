@@ -16,6 +16,7 @@ import {
 import {HttpModule} from "@angular/http";
 import {ForgotPasswordComponent} from "../forgot-password/forgot-password.component";
 import {Config} from "../../../shared/configs/general.config";
+import createSpy = jasmine.createSpy;
 
 //TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 // export const IncludProvider = [
@@ -278,7 +279,7 @@ describe("Verify Already Login", () => {
         var fixture = TestBed.createComponent(LoginComponent);
         fixture.detectChanges();
         var component = fixture.debugElement.componentInstance;
-        Config.getAuthToken = jasmine.createSpy('getItem() spy').and.returnValue("token");
+        Config.getAuthToken = createSpy('getAuthToken() spy').and.returnValue("token");
         component.ngOnInit();
         //    fixture.detectChanges();
         expect(component.isValidLogin).toBe(true);

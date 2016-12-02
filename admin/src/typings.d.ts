@@ -8,6 +8,7 @@ declare var tinymce:any;
 declare var moment:any;
 declare var swal:any;
 
+
 interface FileReaderEventTarget extends EventTarget {
   result:string;
 }

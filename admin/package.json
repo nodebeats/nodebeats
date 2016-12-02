@@ -27,6 +27,7 @@
     "@angular2-material/core": "^2.0.0-alpha.8-2",
     "@angular2-material/radio": "^2.0.0-alpha.8-2",
     "@angular2-material/slide-toggle": "^2.0.0-alpha.8-2",
+    "@types/jasmine": "^2.5.38",
     "bootstrap": "4.0.0-alpha.2",
     "cloudinary-jquery": "^2.1.6",
     "core-js": "^2.4.1",

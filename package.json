@@ -17,6 +17,7 @@
     "outdated": "npm outdated --depth 0",
     "coverage": "istanbul cover _mocha -- -R spec",
     "start": "node server.js",
+    "server": "NODE_ENV=development node server.js",
     "copy": "cp app-src/ app/",
     "build:client:prod": "NODE_ENV=production  npm run clean:client && webpack  -p",
     "build:admin:prod": "NODE_ENV=production  npm run clean:admin  && webpack -p",
@@ -49,6 +50,7 @@
     "node": ">= 0.11.15"
   },
   "dependencies": {
+    "@types/es6-promise": "0.0.32",
     "bcrypt": "^0.8.7",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",

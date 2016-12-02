@@ -53,9 +53,50 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
 
     * npm install
 
-* To run the admin (angular 2) app in development environment, Go to admin directory and run app
-    * cd admin
-    * npm start
+
+**Running Development Environment**
+* To run admin app 
+    * Go to admin directory
+        * cd admin
+    
+    * Type the following script
+        * npm start
+    
+    * Go to browser and type 
+        * http://localhost:4200/login -  for login page
+        * http://localhost:4200       -  for dashboard
+        * http://localhost:4200/{{route}}   - any {{route}}
+        * ( default port - 4200 )
+
+* To run server       
+    * In the root directory type the following script
+        * npm run server
+    * Go to browser and type 
+        * http://localhost:3000 
+        * ( default port - 3000 )
+
+
+
+**Running Production Environment in Browser**
+
+* For admin app
+    * To generate deployment package the admin app for production type :    
+        * cd admin
+        * npm run prod
+    * To run the admin app in browser 
+        * http://localhost:3000/admin/login - for login page
+        * http://localhost:3000/admin/dashboard  -  for dashboard page
+        * https://localhost:3000/admin/{{route}} - for any {{route}}
+        
+* For Client app
+    * To generate deployment package the client app for production type :    
+        * webpack 
+              
+* To Run the server type
+    * NODE_ENV=production npm start
+* To run client app in browser
+    * http://localhost:3000
+
 
 **Important Note**
 
@@ -81,12 +122,6 @@ Run the following commands only if you have modified client code. If you are usi
         To clear uploaded documents and images
 
 
-* To build the admin app for production
-
-         * cd admin
-         * npm run prod
-
-        To generate deployment package of admin app
 
 
 * Edit the database configuration file in **/lib/configs/database.config.js** and enter the appropriate MongoDB credentials.

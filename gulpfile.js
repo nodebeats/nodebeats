@@ -45,16 +45,16 @@
         // gulp.start("compile-ts");
 
     });
-    var tsProject = typescript.createProject('tsconfig.json');
-    gulp.task("compile-ts", function () {
-        return tsProject.src("app/**/*.ts")
-            .pipe(sourcemaps.init())
-            .pipe(typescript(
-                tsProject
-            ))
-            .pipe(sourcemaps.write('app/maps', {includeContent: false}))
-            .pipe(gulp.dest('app/build'));
-    });
+    //var tsProject = typescript.createProject('tsconfig.json');
+    // gulp.task("compile-ts", function () {
+    //     return tsProject.src("app/**/*.ts")
+    //         .pipe(sourcemaps.init())
+    //         .pipe(typescript(
+    //             tsProject
+    //         ))
+    //         .pipe(sourcemaps.write('app/maps', {includeContent: false}))
+    //         .pipe(gulp.dest('app/build'));
+    // });
     gulp.task("copy-html", function () {
         return gulp.src(['app/**/**.html', 'app/**/**.css'])
             .pipe(gulp.dest('app/build'));
@@ -112,13 +112,13 @@
             browserSync.reload();
         });
     });
-    gulp.task("watch:ts", function () {
-        gulp.watch('adminapp/**/*.ts', ['compile-ts']);
-        browserSync.watch('adminapp/**/*.ts').on('change', function () {
-            browserSync.reload();
-        });
-
-    });
+    // gulp.task("watch:ts", function () {
+    //     gulp.watch('adminapp/**/*.ts', ['compile-ts']);
+    //     browserSync.watch('adminapp/**/*.ts').on('change', function () {
+    //         browserSync.reload();
+    //     });
+    //
+    // });
     gulp.task('lint', function () {
         gulp.src('./**/*.js')
             .pipe(jshint());

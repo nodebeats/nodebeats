@@ -4,7 +4,7 @@ import { browser, element, by } from 'protractor';
 describe('Login e2e with DFA Enabled', () => {
 
     beforeEach(() => {
-        browser.get('/login');
+        browser.get('/admin/login');
     });
 
     it('should have login Form', () => {
@@ -92,7 +92,8 @@ describe('Login e2e with DFA Enabled', () => {
         // let validationMsg = element(by.css('.error-msg')).isPresent();
         // expect(validationMsg).toBe(false);
         return browser.wait(function() {
-            return browser.getCurrentUrl().then(function(url) {
+            //noinspection TypeScriptUnresolvedFunction
+          return browser.getCurrentUrl().then(function(url) {
                 return /admin/.test(url);
             });
         }, 3000);
