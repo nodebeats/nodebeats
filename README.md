@@ -90,10 +90,11 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
         
 * For Client app
     * To generate deployment package the client app for production type :    
-        * webpack 
+        * npm run build:client:prod 
               
 * To Run the server type
     * NODE_ENV=production npm start
+    
 * To run client app in browser
     * http://localhost:3000
 
@@ -200,7 +201,7 @@ So, to run test, first we will have to modify couple of things to make test succ
             cloudinaryApiKey: "124895ewewd177286781",
             cloudinaryApiSecret: "HKRL0Ovd46r7iRoxBxAq194niAZBvM"
         };
-    ```
+     ```
 * The last thing you need to do is modify **email.service.configure.integration.test.js**  file inside of **test/integrationtests/** and replace the existing mail service configuration data with valid data.
 
 ```
