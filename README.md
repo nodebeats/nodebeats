@@ -63,9 +63,9 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
         * npm start
     
     * Go to browser and type the following url 
-        * http://localhost:4200/login -  for login page
-        * http://localhost:4200       -  for dashboard
-        * http://localhost:4200/{{route}}   - any {{route}}
+        * [**http://localhost:4200/login**](http://localhost:4200/login)  -  for login page
+        * [**http://localhost:4200**](http://localhost:4200)        -  for dashboard
+        * [**http://localhost:4200/{{route}}**](http://localhost:4200/{{route}})    - any {{route}}
         * ( default port - 4200 )
 
 * To run server       
@@ -73,7 +73,7 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
         * npm run server
         
     * Go to browser and type the following url  
-        * http://localhost:3000 
+        * [**http://localhost:3000**](http://localhost:3000) 
         * ( default port - 3000 )
 
 
@@ -86,9 +86,9 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
         * npm run prod
         
     * To run the admin app in browser, type the following url 
-        * http://localhost:3000/admin/login - for login page
-        * http://localhost:3000/admin/dashboard  -  for dashboard page
-        * https://localhost:3000/admin/{{route}} - for any {{route}}
+        * [**http://localhost:3000/admin/login**](http://localhost:3000/admin/login) - for login page
+        * [**http://localhost:3000/admin/dashboard**](http://localhost:3000/admin/dashboard)  -  for dashboard page
+        * [**http://localhost:3000/admin/{{route}}**](http://localhost:3000/admin/{{route}}) - for any {{route}}
         
 * For Client app
     * To generate deployment package the client app for production run the given command    
