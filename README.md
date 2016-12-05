@@ -49,8 +49,14 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
 
     * npm install
 
-* For setting up admin app (angular 2 app), go to the cloned project's admin directory and run the following command to install required dependencies for admin app:
 
+**Important Note**
+* First install the angular cli globally in your local machine before install packages for admin app
+    
+    * npm install -g angular-cli
+    
+* For setting up admin app (angular 2 app), go to the cloned project's admin directory and run the following command to install required dependencies for admin app:
+    * cd admin
     * npm install
 
 

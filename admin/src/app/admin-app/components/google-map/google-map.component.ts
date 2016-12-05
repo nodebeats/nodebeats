@@ -109,7 +109,7 @@ export class GoogleMapComponent implements OnInit {
     this.objAlert.hideAlert();
     if (this.isPost)
       this.getGoogleMap();
-    swal("Alert !", res.message, "info");
+    swal("Success !", res.message, "success");
   }
 
   errorMessage(res:any) {
