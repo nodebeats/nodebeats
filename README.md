@@ -1,5 +1,5 @@
 # Nodebeats
-![Nodebeats homepage](https://raw.githubusercontent.com/nodebeats/nodebeats/master/homepage_m0guov.png)
+![Nodebeats homepage](https://raw.githubusercontent.com/nodebeats/nodebeats/master/homepage_m0guov.jpg)
 
 ###### Nodebeats is an Open source Content Management System built using MEAN framework.
 
