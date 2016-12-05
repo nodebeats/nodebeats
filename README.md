@@ -51,7 +51,7 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
 
 
 **Important Note**
-* First install the angular cli globally in your local machine before install packages for admin app
+* First install the angular cli globally in your local machine before installing packages for admin app
     
     * npm install -g angular-cli
     
