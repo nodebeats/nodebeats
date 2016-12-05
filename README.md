@@ -50,7 +50,7 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
     * npm install
 
 
-**Important Note**
+***Important Note**
 * First install the angular cli globally in your local machine before installing packages for admin app
     
     * npm install -g angular-cli
@@ -95,7 +95,8 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
         * [**http://localhost:3000/admin/login**](http://localhost:3000/admin/login) - for login page
         * [**http://localhost:3000/admin/dashboard**](http://localhost:3000/admin/dashboard)  -  for dashboard page
         * [**http://localhost:3000/admin/{{route}}**](http://localhost:3000/admin/{{route}}) - for any {{route}}
-        
+    **Please Notice that for in production server, admin app is accessed using "/admin/(someroute)" but "/admin" is not required in development server**
+
 * For Client app
     * To generate deployment package the client app for production run the given command    
         * npm run build:client:prod 
