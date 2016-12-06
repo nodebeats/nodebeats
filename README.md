@@ -61,6 +61,15 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
 
 
 **Running Development Environment**
+
+* To run server       
+    * In the root directory run the given command
+        * npm run server
+        
+    * Go to browser and type the following url  
+        * [**http://localhost:3000**](http://localhost:3000) 
+        * ( default port - 3000 )
+
 * To run admin app 
     * Go to admin directory
         * cd admin
@@ -74,18 +83,15 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
         * [**http://localhost:4200/{{route}}**](http://localhost:4200/{{route}})    - any {{route}}
         * ( default port - 4200 )
 
-* To run server       
-    * In the root directory run the given command
-        * npm run server
-        
-    * Go to browser and type the following url  
-        * [**http://localhost:3000**](http://localhost:3000) 
-        * ( default port - 3000 )
+
 
 
 
 **Running Production Environment**
 
+* To Run the server run the given command
+    * NODE_ENV=production npm start
+    
 * For admin app
     * To generate deployment package the admin app for production type     
         * cd admin
@@ -103,8 +109,7 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
     * To generate deployment package the client app for production run the given command    
         * npm run build:client:prod 
               
-* To Run the server run the given command
-    * NODE_ENV=production npm start
+
     
 * To run client app in browser, type the following url 
     * http://localhost:3000
