@@ -102,7 +102,7 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
         * [**http://localhost:3000/admin/dashboard**](http://localhost:3000/admin/dashboard)  -  for dashboard page
         * [**http://localhost:3000/admin/{{route}}**](http://localhost:3000/admin/{{route}}) - for any {{route}}
         
-         **Please Notice that in production server, admin app is accessed using "/admin/(someroute)" but "/admin" is not required in development server**
+         **Please Notice that in production environment, admin app is accessed using "/admin/(someroute)" but "/admin" is not required in development environment**
         
 
 * **For Client app**
