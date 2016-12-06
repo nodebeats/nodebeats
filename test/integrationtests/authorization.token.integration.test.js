@@ -68,7 +68,7 @@
                             expect(response.body).to.have.property("userInfo");
                             expect(response.body.userInfo).to.be.an('object');
                             expect(response.body.userInfo).to.have.property("userRole");
-                            expect(response.body.userInfo.userRole).to.equal('admin');
+                            expect(response.body.userInfo.userRole).to.equal('superadmin');
 
                             var accessToken = response.body.token;
                             return Promise.resolve(accessToken);

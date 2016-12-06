@@ -1,6 +1,7 @@
 (function ($) {
     "use strict"; // Start of use strict
-    registerServiceWorker();
+    // registerServiceWorker(); /* To Use service worker*/
+
     function registerServiceWorker() {
         if (!('serviceWorker' in navigator)) {
             // Service worker is not supported on this platform

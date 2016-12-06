@@ -10,14 +10,12 @@ var express = require('express'),
     exphbs = require('express-handlebars'),
     //cookieParser = require('cookie-parser'),
     session = require('express-session'),
-    easySession = require('easy-session'),
     RedisStore = require('connect-redis')(session),
     expressValidator = require('express-validator'),
     passport = require('passport'),
     compression = require('compression'),
     minify = require('express-minify'),
     hpp = require('hpp'),
-    //userAgent = require('useragent'),
     cloudinary = require('cloudinary'),
     redisConfig = require('./lib/configs/redis.config'),
     messageConfig = require('./lib/configs/api.message.config'),
@@ -25,21 +23,18 @@ var express = require('express'),
     errorLogController = require('./lib/controllers/error.log.server.controller'),
     logWriter = require('./lib/helpers/application.log.writer.helper');
 
+
+require('dotenv').config();
+
 var configureAppSecurity = require('./lib/securityconfigs/security.config');
 var dbConnector = require('./lib/helpers/database.helper');
 var redisStoreOpts = {};
 
-require('dotenv').config();
-
 app.set('rootDir', __dirname);
-//logWriter.init(app);
+logWriter.init(app);
 
 // Add content compression middleware
 app.use(compression());
-//fetch  RegExp library live from the remote server
-//will async load the database from the server and compile it to a proper JavaScript supported format
-
-//userAgent(true);
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -52,14 +47,12 @@ app.use(function (req, res, next) {
     cloudinaryController.getCloudinarySetting()
         .then(function (cloudinarySetting) {
             if (cloudinarySetting) {
-                if (cloudinarySetting) {
-                    cloudinary.config({
-                        cloud_name: cloudinarySetting.cloudinaryCloudName,
-                        api_key: cloudinarySetting.cloudinaryApiKey,
-                        api_secret: cloudinarySetting.cloudinaryApiSecret,
-                        secure: true
-                    });
-                }
+                cloudinary.config({
+                    cloud_name: cloudinarySetting.cloudinaryCloudName,
+                    api_key: cloudinarySetting.cloudinaryApiKey,
+                    api_secret: cloudinarySetting.cloudinaryApiSecret,
+                    secure: true
+                });
             }
         });
     next();
@@ -94,20 +87,19 @@ if (app.get('env') === "development" ) {
         db: redisConfig.development.db,
         pass: redisConfig.development.pass
     };
-    var adminRootPath = __dirname + "/app-src/admin/";
-    app.use("/", express.static(__dirname + '/public/'));
-    app.use('/scripts', express.static(__dirname + '/node_modules/'));
-    app.use('/login-templates', express.static(adminRootPath + '/app/login-app/views/'));
-    app.use('/app-template', express.static(adminRootPath + '/app/'));
-    app.use('/login-app', express.static(adminRootPath + '/app/login-app/'));
-    app.use('/shared', express.static(adminRootPath + '/app/shared/'));
-    app.use('/config', express.static(adminRootPath + '/app-config/'));
-    app.use('/app-src', express.static(adminRootPath));
-    app.use('/admin-app', express.static(adminRootPath + '/app/admin-app/'));
-    app.use('/admin-templates', express.static(adminRootPath + '/app/admin-app/views/'));
-    admin.get("/*", function (req, res) {
-        res.render(path.join(adminRootPath, '/index.html'), {layout: false});
-    });
+     app.use("/", express.static(__dirname + '/public/'));
+    // var adminRootPath = __dirname + "/app-src/admin/";
+    // app.use('/scripts', express.static(__dirname + '/node_modules/'));
+    // app.use('/login-templates', express.static(adminRootPath + '/app/login-app/views/'));
+    // app.use('/app-template', express.static(adminRootPath + '/app/'));
+    // app.use('/login-app', express.static(adminRootPath + '/app/login-app/'));
+    // app.use('/shared', express.static(adminRootPath + '/app/shared/'));
+    // app.use('/config', express.static(adminRootPath + '/app-config/'));
+    // app.use('/admin-app', express.static(adminRootPath + '/app/admin-app/'));
+    // app.use('/admin-templates', express.static(adminRootPath + '/app/admin-app/views/'));
+    // admin.get("/*", function (req, res) {
+    //     res.render(path.join(adminRootPath, '/index.html'), {layout: false});
+    // });
 }
 else if (app.get('env') === "production" || app.get('env') === "test") {
     console.log('production environment');
@@ -186,13 +178,6 @@ var sessionOpts = {
 // if server behind proxy, then below should be uncommented
 // app.set('trust proxy', 1) // trust first proxy
 app.use(session(sessionOpts));
-app.use(easySession.main(session, {
-    ipCheck: true,
-    uaCheck: true,
-    freshTimeout: 5 * 60 * 1000,
-    maxFreshTimeout: 20 * 60 * 1000
-}));
-
 app.use(passport.initialize());
 
 configureAppSecurity.init(app);

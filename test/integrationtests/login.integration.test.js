@@ -57,7 +57,7 @@
                             expect(res.body).to.have.property("userInfo");
                             expect(res.body.userInfo).to.be.an('object');
                             expect(res.body.userInfo).to.have.property("userRole");
-                            expect(res.body.userInfo.userRole).to.equal('admin');
+                            expect(res.body.userInfo.userRole).to.equal('superadmin');
                             done();
                         });
                 });
@@ -99,7 +99,7 @@
                                     expect(res.body).to.have.property("userInfo");
                                     expect(res.body.userInfo).to.be.an('object');
                                     expect(res.body.userInfo).to.have.property("userRole");
-                                    expect(res.body.userInfo.userRole).to.equal('admin');
+                                    expect(res.body.userInfo.userRole).to.equal('superadmin');
                                 } else {
 
                                     expect(res.statusCode).to.equal(HTTPStatus.UNAUTHORIZED);

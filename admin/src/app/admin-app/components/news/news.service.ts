@@ -137,7 +137,7 @@ export class NewsService {
     }
 
     deleteNews(objUpdate:NewsModel) {
-        let body = JSON.stringify(objUpdate);
+        let body = JSON.stringify({});
         return this._http.patch(API_URL + this.newsApiRoute + "/" + objUpdate._id, body)
             .map(res => res.json())
             .catch(this.handleError);
