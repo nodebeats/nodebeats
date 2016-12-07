@@ -410,3 +410,12 @@ h1.page-header {
 }
 
 /*prime Multi select*/
+.btn:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-transition: background-color .3s, color .15s, box-shadow .3s, opacity 0.3s, filter 0.3s;
+  transition: background-color .3s, color .15s, box-shadow .3s, opacity 0.3s, filter 0.3s;
+}
+
+a.fa.btn:hover {
+  color: #ffffff;
+}
