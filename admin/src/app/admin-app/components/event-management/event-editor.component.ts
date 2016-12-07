@@ -120,8 +120,8 @@ export class EventEditorComponent implements OnInit,AfterViewInit {
   }
 
   changeDateFormatToView(data: string) {
-   // return new Date(data);
-    return moment(data).format("YYYY-MM-DD HH:mm");
+    return new Date(data);
+    //return moment(data).format("YYYY-MM-DD HH:mm");
   }
 
   /*Image handler */

@@ -13,24 +13,24 @@ import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 
 export class ImageListComponent implements OnInit {
 
-  objListResponse:ImageGalleryResponse = new ImageGalleryResponse();
-  error:any;
-  @Input() albumId:string;
-  @ViewChild('prevCoverImage') prevCoverImage:ElementRef;
-  @Output() showAlbumListEvent:EventEmitter<any> = new EventEmitter();
-  showImageForm:boolean = false;
-  imageId:string;
+  objListResponse: ImageGalleryResponse = new ImageGalleryResponse();
+  error: any;
+  @Input() albumId: string;
+  @ViewChild('prevCoverImage') prevCoverImage: ElementRef;
+  @Output() showAlbumListEvent: EventEmitter<any> = new EventEmitter();
+  showImageForm: boolean = false;
+  imageId: string;
   // /* Pagination */
-  perPage:number = 10;
-  currentPage:number = 1;
-  totalPage:number = 1;
-  first:number = 0;
-  bindSort:boolean = false;
-  preIndex:number = 0;
+  perPage: number = 10;
+  currentPage: number = 1;
+  totalPage: number = 1;
+  first: number = 0;
+  bindSort: boolean = false;
+  preIndex: number = 0;
   // /* End Pagination */
 
 
-  constructor(private _objService:ImageGalleryService, private eleRef:ElementRef) {
+  constructor(private _objService: ImageGalleryService, private eleRef: ElementRef) {
   }
 
   ngOnInit() {
@@ -43,12 +43,12 @@ export class ImageListComponent implements OnInit {
         error => this.errorMessage(error));
   }
 
-  errorMessage(objResponse:any) {
+  errorMessage(objResponse: any) {
     swal("Alert !", objResponse.message, "info");
 
   }
 
-  bindList(objRes:ImageGalleryResponse) {
+  bindList(objRes: ImageGalleryResponse) {
     this.objListResponse = objRes;
     this.preIndex = (this.perPage * (this.currentPage - 1));
 
@@ -80,7 +80,7 @@ export class ImageListComponent implements OnInit {
 
   }
 
-  edit(id:string) {
+  edit(id: string) {
     this.showImageForm = true;
     this.imageId = id;
   }
@@ -90,7 +90,7 @@ export class ImageListComponent implements OnInit {
     this.imageId = null;
   }
 
-  delete(imageId:string) {
+  delete(imageId: string) {
     swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Image !",
@@ -129,50 +129,31 @@ export class ImageListComponent implements OnInit {
 
   changeCoverImage(e) {
     let imageId = e.target.value;
-    jQuery.jAlert({
-      'type': 'confirm',
-      'title': 'Alert',
-      'confirmQuestion': 'Are you sure to change cover image ?',
-      'theme': 'red',
-      'onConfirm': (e, btn)=> {
-        e.preventDefault();
-        // let prevCoverImage:NewsImageModel[] = this.objListResponse.image.filter(function (img:NewsImageModel) {
-        //     return img.coverImage == true;
-        // });
-        // if (prevCoverImage.length > 0)
-        //  prevCoverImageId = prevCoverImage[0]._id;
+    swal({
+        title: "Are you sure?",
+        text: "You are going to change the cover image !",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, change it!",
+        closeOnConfirm: false
+      },
+      ()=> {
         let prevCoverImageId = this.prevCoverImage ? this.prevCoverImage.nativeElement.value : "";
-        let objImage:ImageGalleryModel = new ImageGalleryModel();
+        let objImage: ImageGalleryModel = new ImageGalleryModel();
         objImage._id = imageId;
         objImage.coverImage = true;
         this._objService.updateCoverImage(this.albumId, objImage)
           .subscribe(res=> {
               this.getAlbumImageList();
-              jQuery.jAlert({
-                'title': 'Success',
-                'content': res.message,
-                'theme': 'green'
-              });
+              swal("Changed!", res.message, "success");
             },
             error=> {
-              jQuery.jAlert({
-                'title': 'Alert',
-                'content': error.message,
-                'theme': 'red'
-              });
-            });
-      },
-      "onDeny": (e)=> {
-        if (!this.prevCoverImage)
-          jQuery('input[name="rdbCoverImage"]').prop('checked', false);
+              swal("Alert!", error.message, "info");
 
-        else if (this.prevCoverImage && this.prevCoverImage.nativeElement.value)
-          jQuery('input[name=rdbCoverImage][value=' + this.prevCoverImage.nativeElement.value + ']').prop('checked', true);
-        else
-          return false;
-      }
-    })
-    ;
+            });
+      });
+
   }
 
 

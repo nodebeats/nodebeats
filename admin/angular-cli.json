@@ -59,9 +59,7 @@
         "assets/plugins/tinymce/plugins/contextmenu/plugin.js",
         "../node_modules/cloudinary-jquery/cloudinary-jquery.js",
         "assets/plugins/table-sorter.js",
-        "assets/plugins/jalert/jAlert-v3.js",
-        "../node_modules/sweetalert/dist/sweetalert-dev.js",
-        "assets/plugins/jalert/jAlert-functions.js"
+        "../node_modules/sweetalert/dist/sweetalert-dev.js"
       ],
       "environments": {
         "source": "environments/environment.ts",
