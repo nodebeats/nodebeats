@@ -20,6 +20,7 @@ var express = require('express'),
     redisConfig = require('./lib/configs/redis.config'),
     messageConfig = require('./lib/configs/api.message.config'),
     cloudinaryController = require('./lib/controllers/cloudinary.setting.server.controller'),
+    applicationConfig = require('./lib/configs/application.config'),
     errorLogController = require('./lib/controllers/error.log.server.controller'),
     logWriter = require('./lib/helpers/application.log.writer.helper');
 
@@ -49,6 +50,13 @@ app.use(function (req, res, next) {
                     cloud_name: cloudinarySetting.cloudinaryCloudName,
                     api_key: cloudinarySetting.cloudinaryApiKey,
                     api_secret: cloudinarySetting.cloudinaryApiSecret,
+                    secure: true
+                });
+            }else{
+                cloudinary.config({
+                    cloud_name: applicationConfig.cloudinary.defaultCloudName,
+                    api_key: "",
+                    api_secret: "",
                     secure: true
                 });
             }
