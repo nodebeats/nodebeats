@@ -1,7 +1,7 @@
 # Nodebeats
 ![Nodebeats homepage](https://raw.githubusercontent.com/nodebeats/nodebeats/master/homepage_m0guov.jpg)
 
-###### Nodebeats is an Open source Content Management System built using MEAN framework.
+###### Nodebeats is an Open source Content Management System built using MEAN framework from [**Bitsbeat IT Solution**](https://www.bitsbeat.com/).
 
 **Nodebeats** makes it easy to create web sites and applications and comes with beautiful admin UI.
 
@@ -17,54 +17,55 @@ Check out the [**Nodebeats Getting Started Guide**](http://www.nodebeats.com/get
 * Host of options for email service providers like [**Mailgun**](https://www.mailgun.com/), [**Postmark**](https://postmarkapp.com/), [**Sendgrid**](https://sendgrid.com/), [**Mandrill**](https://www.mandrill.com/), [**Google SMTP**](https://mail.google.com) etc.
 * Integration with [**Cloudinary**](http://cloudinary.com/) for Image management
 * Commenting system using Disqus
+* Responsive html template integration
 * And many more features that you will love to have around.
 
 
 
-## Usage
+## **Usage**
 
 For detailed usage documentation, Check out the [**Nodebeats Getting Started Guide**](http://www.nodebeats.com/getting-started) to start using Nodebeats
 
 For api documentation, Check out the  [**API Documentation**](http://www.nodebeats.com/docs/api/)
 
-**Installation**
+## **Installation**
 * Install Node.js and MongoDB if not already installed
 
     * Recommended Node version: >= v5.10.1
-    * Recommended MongoDB version: >= v3.0
+    * MongoDB version: >= v3.2
 
 
 * Clone the project repository
 
-    * git clone https://github.com/nodebeats/nodebeats.git
-    * cd nodebeats
+    * **git clone https://github.com/nodebeats/nodebeats.git**
+    * **cd nodebeats**
 
 
-* Install gulp, webpack and webpack dev server
+* Install express, gulp, webpack and webpack dev server globally in your local development machine
 
-    * npm install gulp webpack webpack-dev-server -g
+    * **npm install express gulp webpack webpack-dev-server -g**
 
 
 * Go to the cloned project's root directory and run the following command to install required dependencies:
 
-    * npm install
+    * **npm install**
 
 
-**Important Note**
+## **Installation Note for Admin App**
 * First install the **angular cli** globally in your local machine before installing packages for admin app
     
-    * npm install -g angular-cli
+    * **npm install -g angular-cli**
     
 * For setting up admin app (angular 2 app), go to the cloned project's admin directory and run the following command to install required dependencies for admin app:
-    * cd admin
-    * npm install
+    * **cd admin**
+    * **npm install**
 
 
-**Running Development Environment**
+## **Running Application in the Development Environment**
 
 * **To run server**     
     * In the root directory run the given command
-        * npm run server
+        * **npm start**
         
     * Go to browser and type the following url  
         * [**http://localhost:3000**](http://localhost:3000) 
@@ -87,15 +88,28 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
 
 
 
-**Running Production Environment**
+## **Running Application in Production Environment**
 
-* **To Run the server run the given command**
-    * NODE_ENV=production npm start
+* **To Run the server in the production environment,  run the following command**
+    * **NODE_ENV=production npm start**
+    
+        or
+          
+    * **export NODE_ENV=production**        
+    ```
+        Or if you are in windows you could try this:
+        
+        SET NODE_ENV=production
+        
+        then
+        
+        npm start
+    ```
     
 * **For admin app**
-    * To generate deployment package the admin app for production type     
-        * cd admin
-        * npm run prod
+    * To generate deployment package of the admin app for production type  , run the following commands:   
+        * **cd admin**
+        * **npm run prod**
         
     * To run the admin app in browser, type the following url 
         * [**http://localhost:3000/admin/login**](http://localhost:3000/admin/login) - for login page
@@ -106,44 +120,29 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
         
 
 * **For Client app**
-    * To generate deployment package the client app for production run the given command    
-        * npm run build:client:prod 
+    * To generate deployment package of the client app for production, run the given command    
+        * **npm run build:client:prod** 
               
 
     
 * To run client app in browser, type the following url 
-    * http://localhost:3000
+    * **http://localhost:3000**
 
 
-**Important Note**
+## **Important Note**
 
-Run the following commands only if you have modified client code. If you are using it for the first time, you can skip this step.
+You need to configure some files before you can actually run the application.
 
-* If you have changed code and want to rebuild everything, then run the following commands
-
-    * NODE_ENV=production webpack
-    * gulp service-worker
-
-    Or, You can run following npm scripts directly as well:
-
-   * npm run start
-
-        To start the application
-
-   * npm run build:client:prod
-
-        To generate deployment package of client frontend
-
-   * npm run clean:uploads
-
-        To clear uploaded documents and images
-
-
-
-
-* Edit the database configuration file in **/lib/configs/database.config.js** and enter the appropriate MongoDB credentials.
+* Edit the database configuration file in **/lib/configs/database.config.js** and enter the appropriate MongoDB credentials based on your current environment.
 
 ```
+development: {
+    username: '',
+    password: '',
+    host: '',
+    port: '',
+    dbName: ''
+},
 production: {
     username: '',
     password: '',
@@ -154,15 +153,31 @@ production: {
 ```
 
 
-* Edit the redis configuration file in **/lib/configs/redis.config.js** and enter the appropriate REDIS credentials.
+* Edit the redis configuration file in **/lib/configs/redis.config.js** and enter the appropriate REDIS credentials. I f you are in development environment, you can skip configuring redis connection url but we highly recommend you to enable redis in production environment for performance reasons.
 
 ```
 production : {
     host: '',
     port: '',
     pass: ''
+},
+production : {
+    host: '',
+    port: '',
+    pass: ''
 }
 ```
+
+* To delete all the uploaded files, if any, from the uploads folder inside of public/ directory
+   ```
+        npm run clean:uploads
+        
+        
+
+        To clear uploaded documents and images
+    ```
+
+
 Once this is done, you are ready to start the application.
 
 * Run the server
@@ -171,7 +186,7 @@ Once this is done, you are ready to start the application.
 
 * Browse [**http://localhost:3000**](http://localhost:3000/) if you are in local machine.
 
-* To login, navigate to [**http://localhost:3000/login**](http://localhost:3000/login/) and use following application default credentials to access dashboard menu.
+* To login while in the development environment, navigate to [**http://localhost:4200/login**](http://localhost:4200/login/) and if you are in **production environment**, to login, navigate to [**http://localhost:3000/admin/login**](http://localhost:3000/admin/login/)    and use following application default credentials to access dashboard menu.
 
 ```
     username: superadmin
@@ -181,7 +196,7 @@ Once this is done, you are ready to start the application.
 
 ## Test
 
-We have written integration test for much of the functionality for this application. We haven't written any unit tests for this release, but we are planning to write unit tests for much of the functionality for the next release phase. Your contribution in writing unit tests for this application will be hugely appreciated and welcomed.
+We have written integration tests for much of the functionality for this application. We haven't written any unit tests for this release, but we are planning to write unit tests for much of the functionality in the next release phase. Your contribution in writing unit tests for this application will be hugely appreciated and welcomed.
 
 So, to run test, first we will have to modify couple of things to make test successfull. So, let's get started:
 
@@ -195,21 +210,24 @@ So, to run test, first we will have to modify couple of things to make test succ
         dbName: ''
     }
 ```
-*   If you have enabled **authentication**  for MongoDB server instance on your machine, then you need to create a database and an authenticated user on the newly created database. You must do this step if you have enabled authentication in your MongoDB configuration file.
-
-    You also need to modify the **database.helper.js** file from **lib/helpers/** directory and add the username and password to the existing database connection url.
+*   If you have enabled **authentication**  for MongoDB server instance on your machine, then at first, you need to create a database and an authenticated user on the newly created database. You must do this step if you have enabled authentication in your MongoDB configuration file.
 
     ```
         dbUrl = "mongodb://"  + databaseConfig.test.username + ":" + databaseConfig.test.password + "@" +  databaseConfig.test.host + ":" + databaseConfig.test.port + "/" + databaseConfig.test.dbName;
     ```
 
-    You also need to modify the database connection url in  **index.js** inside of **test/** directory.
+    If you haven't enabled authentication in MongoDB server, then you need to remove the username and password from the connection url.You also need to modify the database connection url in  **index.js** inside of **test/** directory.
+
+    ```
+        dbUrl = "mongodb://" +  databaseConfig.test.host + ":" + databaseConfig.test.port + "/" + databaseConfig.test.dbName;
+    ```
+
 
 *   Now, that we have modified database configuration file, now we need to change some inputs in the test index file. So, navigate to **test** folder from the root of your project and then modify the **index.js** file.
 
 *   You need to change the contents of **imagePathUrl** and **documentPathUrl** variable with the appropriate data. You must change these values, otherwise test will fail.
 
-*   Once you have changed the variable contents, you also need to modify **cloudinary.setting.integration.test.js**  file inside of **test/integrationtests/** and replace the existing coudinary config with the valid data.
+*   Once you have changed the variable contents of index.js file inside of test/ folder, you also need to modify **cloudinary.setting.integration.test.js**  file inside of **test/integrationtests/** and replace the existing coudinary config with the valid data.
 
      ```
         cloudinarySettingConfig = {
@@ -234,16 +252,18 @@ Well, that's it. Now you can run test. To run the test,
 
 *   Open two terminal windows
 
-*   First step is to run **npm run test** command in one terminal window. This command will start the server and listen for client requests.
+*   First step is to run **npm run test** command in one terminal window. This command will start the server and listen for client requests in test environment mode.
 
 *   Then, run **gulp test** in another terminal window to run our test files.
 
 
- To run the test in admin app,
+## To run the test in admin app,
+
+*   Go to admin directory from your project root directory
+
+    **cd admin**
 
 *   Open two terminal windows
-
-*   Go to admin directory i.e cd admin
 
 *   First step is to run **npm run test** command
 
@@ -295,12 +315,12 @@ You can host your website built using Nodebeats in any of the available hosting 
 
 ## Staying Up to Date
 
-We will be adding new features regularly and also keep the project's npm dependencies upto date so that there will not be any security vulnerabilities due to the npm packages. In this release version, we have introduced Authorization token management feature. We will release the next version as soon as the planned features are completed. In the next version, we will be working on the frontend section of the application and integrate beautiful responsive html template with the content management system so that you can download the file and deploy that in the cloud. We aim to make this software as secured as possible and announce the new version releases on our twitter account. So, to get the information about the latest releases, follow us on Twitter [**@Nodebeats**](https://twitter.com/nodebeats). You can also contact us at **help@nodebeats.com** regarding anything about the software.
+We will be adding new features regularly, improve the codebase continually and also keep the project's npm dependencies upto date so that there will not be any security vulnerabilities due to the npm packages. In this release version, we have implemented the responsive html 5 template to showcase the data saved in the database using handlebars templating engine. Likewise, We have changed the project directory structure of the admin section entirely and with the use of angular-cli, now the build process of the project is extremely easy and fast. We will release the next version as soon as the planned features are completed. In the next version, we plan to implement install setup wizard and create and deploy docker image in docker hub. We aim to make this software as secured as possible and announce the new version releases on our twitter account. So, to get the information about the latest releases, follow us on Twitter [**@Nodebeats**](https://twitter.com/nodebeats). You can also contact us at **help@nodebeats.com** regarding anything about the software.
 
 
 ## Project Maturity
 
-Nodebeats is relatively new that is around 7 months old from the start of project inception date. Even though the project is relatively new, the product is highly stable for production purposes and you can use it to create web applications.
+Nodebeats is around 8 months old from the start of project inception date. Even though the project is relatively new, the product is highly stable for production deployment purposes and you can use it to create and deploy web applications in the production server.
 
 
 ## Inspiration
@@ -311,7 +331,14 @@ As We all know [Wordpress](https://wordpress.com/), one of the most popular Cont
 
 ## Note
 
-We have added Authorization token management feature  so that you can revoke the access to the authorization tokens if you wish to in this release version. In the next release, we will be working on the frontend section of the application. We will introduce a nice responsive html template integrated with Nodebeats so that you can directly use that for your personal purpose and deploy it in the cloud and also introduce install setup wizard so that you can directly input database connections form user Interface elements.
+With this major new release, We have implemented responsive html 5
+template to showcase data saved in the database 
+using handlebars templating engine.
+ We have changed the project directory structure of the Admin 
+ section entirely and used angular-cli to make the project extremely easy to build.
+  Likewise, we have deleted much of the un-necessary files after the change to make the project file size smaller.
+
+In the next release, We plan to introduce install setup wizard so that you can directly input database and redis connections form user Interface elements. We also plan to create and deploy the Nodebeats docker image in [dockerhub](https://hub.docker.com/).
 
 
 ## License
