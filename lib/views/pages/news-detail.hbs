@@ -1,0 +1,21 @@
+{{#pagetitle 'page'}}
+    <title>{{data.newsDetailData.newsTitle}}</title>
+{{/pagetitle}}
+
+{{>shared/article-detail-header title=data.newsDetailData.newsTitle author=data.newsDetailData.newsAuthor  date=data.newsDetailData.newsDate  views=data.newsDetailData.pageViews}}
+
+<section class="single-post">
+    <div class="container">
+        <div class="row">
+            {{>news/news-detail newsDetailObj=data.newsDetailData}}
+        </div>
+    </div>
+</section>
+
+
+{{#pagetitle 'pagescripts'}}
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="js/news-image-carousel.js"></script>
+    {{>shared/article-comment urlSlog=data.newsDetailData.urlSlog disqusURL=data.commentSettingData.disqusURL}}
+
+{{/pagetitle}}

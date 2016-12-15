@@ -1,0 +1,41 @@
+<div class="row">
+    <h1 class="title">Beautiful Photo Stack Gallery with jQuery and CSS3</h1>
+</div>
+<div class="clarifix"></div>
+{{#checkValueExists imageGalleries}}
+    <div class="row">
+        <div  id="ps_slider" class="col-md-12 ps_slider"  data-wow-delay="0.2s">
+            <div id="ps_albums">
+                {{#checkAndBindList imageGalleries}}
+                    <div class="col-md-4 gallery-albums-items ps_album" id="{{_id}}">
+                        <img src="{{cloudinaryUrl image.imageName option='{"width":"260", "height":"130", "crop":"thumb"}'}}" alt="{{image.imageAltText}}">
+                        <div class="ps_desc">
+                            <h2>{{albumName}}</h2>
+                            <span>
+                                {{albumDescription}}
+                            </span>
+                        </div>
+                    </div>
+                {{/checkAndBindList}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="ps_overlay" class="ps_overlay" style="display:none;"></div>
+        <a id="ps_close" class="ps_close" style="display:none;"></a>
+        <div id="ps_container" class="ps_container" style="display:none;">
+            <a id="ps_next_photo" class="ps_next_photo" style="display:none;"></a>
+        </div>
+    </div>
+{{else}}
+    {{>shared/no-data-found}}
+{{/checkValueExists}}
+
+
+
+
+
+
+
+
+

@@ -6,7 +6,7 @@
   "apidoc": {
     "name": "nodebeats",
     "title": "Nodebeats Api Docs",
-    "url": "http://localhost:3000"
+    "url": "www.nodebeats.com/docs/api"
   },
   "main": "server.js",
   "directories": {
@@ -17,12 +17,9 @@
     "outdated": "npm outdated --depth 0",
     "coverage": "istanbul cover _mocha -- -R spec",
     "start": "node server.js",
-    "server": "NODE_ENV=development node server.js",
-    "copy": "cp app-src/ app/",
     "build:client:prod": "NODE_ENV=production  npm run clean:client && webpack  -p",
     "build:client": " NODE_ENV=developement  npm run clean:client && webpack  -d",
     "build:admin": "NODE_ENV=developement webpack -d",
-    "build:sw": "gulp service-worker",
     "clean:admin": "gulp clean:admin",
     "clean:client": "gulp clean:client",
     "clean:uploads": "npm run clean:images && npm run clean:documents",
@@ -33,18 +30,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/BitsBeat/nodeframework.git"
+    "url": "git+ssh://git@github.com:nodebeats/nodebeats.git"
   },
   "keywords": [
     "Node",
     "Express",
     "JWT",
+    "MEAN",
+    "CMS",
+    "Angular",
     "MFA",
     "2FA"
   ],
   "author": "BitsBeat IT Solution",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/BitsBeat/nodeframework#readme",
+  "license": "APACHE v2",
+  "homepage": "https://github.com/nodebeats/nodebeats/blob/master/README.md",
   "engines": {
     "node": ">= 0.11.15"
   },
@@ -70,6 +70,7 @@
     "file-stream-rotator": "0.0.7",
     "geoip-lite": "^1.1.8",
     "googleapis": "^14.2.0",
+    "handlebars-paginate": "^0.1.0",
     "helmet": "^3.1.0",
     "hpp": "^0.2.1",
     "html-minifier": "^3.1.1",

@@ -1,0 +1,19 @@
+<!-- ==================================================
+Footer Section Start
+================================================== -->
+<footer id="footer">
+    <div class="container">
+        <div class="col-md-8">
+            <p class="copyright">
+                Copyright: <span>{{data.commonData.currentYear}}</span> | Developed By
+                <a target="_blank" href="/">{{data.commonData.organizationInfoData.orgName}}</a> | Powered By
+                <a target="_blank" href="https://www.nodebeats.com">Nodebeats</a> | Template by
+                <a target="_blank" href="http://www.Themefisher.com">Themefisher</a>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <!-- Social Media -->
+            {{>organization-info/organization-social-info orgInfo=data.commonData.organizationInfoData}}
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,15 @@
+{{#pagetitle 'page'}}
+    <title>About Us | {{data.commonData.organizationInfoData.orgName}}</title>
+{{/pagetitle}}
+
+
+{{#pagetitle 'pagestylesheets'}}
+    <link rel="stylesheet" href="css/ionicons.min.css">
+{{/pagetitle}}
+
+{{>shared/global-header headerTitle=activePageMenu}}
+
+{{>html-module-content/company-intro companyIntroData=data.companyIntroHtmlData}}
+{{>html-module-content/company-objective visionData=data.visionHtmlData missionData=data.missionHtmlData}}
+{{>html-module-content/service serviceData=data.servicesHtmlData}}
+{{>html-module-content/contact-link contactLinkData=data.contactLinkHtmlData}}

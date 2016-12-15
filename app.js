@@ -23,7 +23,6 @@ var express = require('express'),
     errorLogController = require('./lib/controllers/error.log.server.controller'),
     logWriter = require('./lib/helpers/application.log.writer.helper');
 
-
 require('dotenv').config();
 
 var configureAppSecurity = require('./lib/securityconfigs/security.config');
@@ -31,7 +30,6 @@ var dbConnector = require('./lib/helpers/database.helper');
 var redisStoreOpts = {};
 
 app.set('rootDir', __dirname);
-logWriter.init(app);
 
 // Add content compression middleware
 app.use(compression());
@@ -73,13 +71,14 @@ app.set('view engine', 'hbs');
 
 
 // end handlebar setup
-// app.use('/public', express.static(__dirname + '/public', {maxAge: 86400000}));
+
 // Static path setup for Client App
 
 var admin = express();
 
 if (app.get('env') === "development" ) {
     console.log('development environment');
+    logWriter.init(app);
     redisStoreOpts = {
         host: redisConfig.development.host,
         port: redisConfig.development.port,
@@ -88,18 +87,6 @@ if (app.get('env') === "development" ) {
         pass: redisConfig.development.pass
     };
      app.use("/", express.static(__dirname + '/public/'));
-    // var adminRootPath = __dirname + "/app-src/admin/";
-    // app.use('/scripts', express.static(__dirname + '/node_modules/'));
-    // app.use('/login-templates', express.static(adminRootPath + '/app/login-app/views/'));
-    // app.use('/app-template', express.static(adminRootPath + '/app/'));
-    // app.use('/login-app', express.static(adminRootPath + '/app/login-app/'));
-    // app.use('/shared', express.static(adminRootPath + '/app/shared/'));
-    // app.use('/config', express.static(adminRootPath + '/app-config/'));
-    // app.use('/admin-app', express.static(adminRootPath + '/app/admin-app/'));
-    // app.use('/admin-templates', express.static(adminRootPath + '/app/admin-app/views/'));
-    // admin.get("/*", function (req, res) {
-    //     res.render(path.join(adminRootPath, '/index.html'), {layout: false});
-    // });
 }
 else if (app.get('env') === "production" || app.get('env') === "test") {
     console.log('production environment');
@@ -123,8 +110,6 @@ else if (app.get('env') === "production" || app.get('env') === "test") {
 
 }
 app.use("/admin", admin);
-
-app.use("/docs", express.static(__dirname + "/public/apidoc/"));
 ///  End of Static path setup for Client app
 
 dbConnector.init(app);
@@ -158,7 +143,7 @@ app.use(expressValidator({
 
 
 var sessionOpts = {
-    // store: new RedisStore(redisStoreOpts),
+    // store: new RedisStore(redisStoreOpts),//if in production environment, uncomment it
     name: 'id', // <-- a generic name for the session id
     secret: process.env.SESSION_SECRET,
     resave: false,

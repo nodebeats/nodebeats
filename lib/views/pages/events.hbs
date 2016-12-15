@@ -1,0 +1,25 @@
+{{#pagetitle 'page'}}
+    <title>Latest Events | {{data.commonData.organizationInfoData.orgName}}</title>
+{{/pagetitle}}
+
+{{>shared/global-header headerTitle=activePageMenu}}
+
+<section id="events">
+    <div class="container">
+        <div class="row header_events">
+            <h1>Latest Events</h1>
+        </div>
+        <div class="row">
+            {{#checkData data.eventData}}
+                    <ul class="event-items">
+                        {{>events/event-list events=data.eventData hostUrl=data.commonData.staticDataObj.hostUrl }}
+                    </ul>
+            <div class="clarifix"></div>
+                <!-- Page Pagination -->
+                {{>shared/pagination pagination=data.pagination rootUrl=data.commonData.staticDataObj.eventHostUrl}}
+            {{else}}
+                {{>shared/no-data-found}}
+            {{/checkData}}
+        </div>
+    </div>
+</section>
