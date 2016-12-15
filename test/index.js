@@ -15,16 +15,17 @@
         request = supertest.agent(baseUrl),
         mongoose  = require('mongoose'),
         databaseConfig = require('../lib/configs/database.config'),
+        applicationConfig = require('../lib/configs/application.config'),
         Promise = require("bluebird"),
         HTTPStatus = require('http-status'),
         async = require('async'),
-        dbUrl = "mongodb://" + databaseConfig.test.host + ":" + databaseConfig.test.port + "/" + databaseConfig.test.dbName;
+        dbUrl = "mongodb://" + databaseConfig.test.username + ":" + databaseConfig.test.password + "@" + databaseConfig.test.host + ":" + databaseConfig.test.port + "/" + databaseConfig.test.dbName;
 
     var loginUrl = '/api/login/';
     var imagePathUrl = ['/home/lakhe/Desktop/nodebeats/images/mountain_nepal.png', '/home/lakhe/Desktop/nodebeats/images/homepage.png'];
     var loginObj = {
-        username : "superadmin",
-        password : "superadmin@123"
+        username : applicationConfig.user.defaultUsername,
+        password : applicationConfig.user.defaultPassword
     };
     var documentPathUrl = ['/home/lakhe/Desktop/nodebeats/documents/proposal_example.pdf', '/home/lakhe/Desktop/nodebeats/documents/googleanalytics-jsonconfig.json'];
     var apiFileDeleteUrl = '/api/deletefile';
