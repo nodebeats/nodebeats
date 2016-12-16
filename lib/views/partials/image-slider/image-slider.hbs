@@ -5,6 +5,18 @@
                 <img src="{{cloudinaryUrl imageName option='{}'}}" class="img-responsive"
                      alt="{{imageTitle}}" />
             </div>
+            <div class="col-md-12 text-center" id="hero-area">
+                <div class="block wow fadeInUp" data-wow-delay=".3s">
+                    <section class="cd-intro">
+                        <h1 class="wow fadeInUp animated cd-headline slide" data-wow-delay=".4s" >
+                            <span>{{imageTitle}}</span><br>
+                        </h1>
+                    </section>
+                    <h2 class="wow fadeInUp animated" data-wow-delay=".6s" >
+                        {{imagePrimaryContent}}
+                    </h2>
+                </div>
+            </div>
         </div>
     {{/checkAndBindList}}
 </div>
