@@ -1,9 +1,6 @@
 import {Component, EventEmitter, Output, Input, AfterViewInit, ViewChild, OnInit} from '@angular/core';
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {BlogDocumentModel} from "./blog.model";
 import {BlogService} from "./blog.service";
-import {Config} from "../../../shared/configs/general.config";
-import {DocumentUploader} from "../../../shared/components/doc-uploader.component";
 import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 
 

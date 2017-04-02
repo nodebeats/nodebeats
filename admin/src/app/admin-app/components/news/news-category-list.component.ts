@@ -1,8 +1,6 @@
 import {Component, ElementRef, OnInit, Output, Input, EventEmitter, OnChanges} from '@angular/core';
 import {NewsService} from "./news.service";
 import {NewsModel, NewsCategoryModel, NewsResponse} from "./news.model";
-import {Paginator} from 'primeng/primeng';
-import {NewsCategoryEditorComponent} from  "./news-category-editor.component";
 
 @Component({
     selector: 'news-category-list',

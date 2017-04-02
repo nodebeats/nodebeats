@@ -8,7 +8,7 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i> <a [routerLink]="['/admin']">Dashboard</a>
+                <i class="fa fa-dashboard"></i> <a [routerLink]="['/dashboard']">Dashboard</a>
             </li>
             <li class="active">
                 <i class="fa fa-stack-overflow"></i> Error Log
@@ -27,11 +27,11 @@
                 <div class="col-lg-2">
                     <p-calendar [formControl]="startDate"
                                 placeholder="Select Start Date" [showIcon]="true" [maxDate]="endDate.value"
-                                inputStyleClass="form-control, inline-cal" [readonlyInput]="true"
+                                inputStyleClass="form-control, inline-cal"
                                 dateFormat="yy-mm-dd"></p-calendar>
                 </div>
                 <div class="col-lg-2">
-                    <p-calendar [formControl]="endDate" [readonlyInput]="true" [showIcon]="true"
+                    <p-calendar [formControl]="endDate" [showIcon]="true"
                                 placeholder="Select End Date" [minDate]="startDate.value"
                                 inputStyleClass="form-control, inline-cal"
                                 dateFormat="yy-mm-dd"></p-calendar>

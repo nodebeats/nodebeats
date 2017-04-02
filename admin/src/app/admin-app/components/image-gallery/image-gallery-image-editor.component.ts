@@ -22,7 +22,7 @@ export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
   fileName:string = "";
   drawImagePath:string = Config.DefaultImage;
   imageFormControl:FormControl = new FormControl('', Validators.required);
-  canvasCanvas:number = ImageCanvasSizeEnum.wide;
+  canvasSize:number = ImageCanvasSizeEnum.wide;
   /* End Image Upload handle */
 
   constructor(private _objService:ImageGalleryService, private _formBuilder:FormBuilder) {
@@ -100,7 +100,6 @@ export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
   /*Image handler */
   changeFile(args) {
     this.file = args;
-    if (this.file)
       this.fileName = this.file.name;
   }
 
@@ -123,6 +122,7 @@ export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
           .subscribe(res=> {
               this.imageDeleted = true;
               this.objImage.imageName = "";
+              this.fileName = "";
               this.drawImageToCanvas(Config.DefaultImage);
               swal("Deleted!", res.message, "success");
             },

@@ -1,10 +1,10 @@
 {
   "/api": {
-    "target": "http://localhost:3000",
+    "target": "http://nodebeats-node-dev:3000",
     "secure": false
   },
   "/data": {
-    "target": "http://localhost:3000",
+    "target": "http://nodebeats-node-dev:3000",
     "secure": false
   }
 }

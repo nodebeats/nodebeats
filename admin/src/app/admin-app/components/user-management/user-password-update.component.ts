@@ -12,15 +12,15 @@ import {LoginService} from "../../../login-app/components/login/login.service";
 })
 
 export class UserPasswordUpdateComponent {
-  @Input() userId:string;
-  @Input() hideCancel:boolean;
-  @Output() showListEvent:EventEmitter<any> = new EventEmitter();
-  objUser:UserModel = new UserModel();
-  error:any;
-  userPasswordForm:FormGroup;
-  isSubmitted:boolean = false;
+  @Input() userId: string;
+  @Input() hideCancel: boolean;
+  @Output() showListEvent: EventEmitter<any> = new EventEmitter();
+  objUser: UserModel = new UserModel();
+  error: any;
+  userPasswordForm: FormGroup;
+  isSubmitted: boolean = false;
 
-  constructor(private _objUserService:UserService, private router:Router, private _formBuilder:FormBuilder, private activatedRoute:ActivatedRoute, private loginService:LoginService) {
+  constructor(private _objUserService: UserService, private router: Router, private _formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private loginService: LoginService) {
     this.userPasswordForm = this._formBuilder.group({
         "password": ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
         "confirmPassword": ['', Validators.required]
@@ -41,20 +41,21 @@ export class UserPasswordUpdateComponent {
     }
   }
 
-  saveUserStatusMessage(res:any) {
-    swal("Success !", res.message, "success",
-      ()=> {
-        if (this.activatedRoute.snapshot.url[0].path.indexOf("profile") != -1) {
-          this.loginService.logout();
-          this.router.navigate(['/login']);
-        }
-      });
-
+  saveUserStatusMessage(res: any) {
+    swal({
+      title: "Success !",
+      type:"success",
+      text:res.message,
+      timer: 3000,
+      showConfirmButton: false
+    });
+    this.loginService.logout();
+    this.router.navigate(['/login']);
 
     // this.triggerCancelForm();
   }
 
-  errorMessage(objResponse:any) {
+  errorMessage(objResponse: any) {
 
     swal("Alert !", objResponse.message, "info");
 
@@ -62,7 +63,7 @@ export class UserPasswordUpdateComponent {
 
 
   triggerCancelForm() {
-    let isCancel:boolean = true;
+    let isCancel: boolean = true;
     this.showListEvent.emit(isCancel);
   }
 

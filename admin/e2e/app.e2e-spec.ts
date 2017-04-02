@@ -1,10 +1,10 @@
-import { AdminPage } from './app.po';
+import { Admin2Page } from './app.po';
 
-describe('admin App', function() {
-  let page: AdminPage;
+describe('admin2 App', () => {
+  let page: Admin2Page;
 
   beforeEach(() => {
-    page = new AdminPage();
+    page = new Admin2Page();
   });
 
   it('should display message saying app works', () => {

@@ -1,7 +1,7 @@
 # Nodebeats
 ![Nodebeats homepage](https://raw.githubusercontent.com/nodebeats/nodebeats/master/homepage_m0guov.jpg)
 
-###### Nodebeats is an Open source Content Management System built using MEAN framework from [**Bitsbeat IT Solution**](https://www.bitsbeat.com/).
+###### Nodebeats is an Open source Content Management System built using MEAN framework developed by [**Bitsbeat IT Solution**](https://www.bitsbeat.com/).
 
 **Nodebeats** makes it easy to create web sites and applications and comes with beautiful admin UI.
 
@@ -9,6 +9,7 @@ Check out the [**Nodebeats Getting Started Guide**](http://www.nodebeats.com/get
 
 ## About
 **Nodebeats** provides following features:
+* Docker configurations to run the application in containers
 * Two factor authentication
 * Token based authentication
 * Role based authorization
@@ -29,160 +30,91 @@ For detailed usage documentation, Check out the [**Nodebeats Getting Started Gui
 For api documentation, Check out the  [**API Documentation**](http://www.nodebeats.com/docs/api/)
 
 ## **Installation**
-* Install Node.js and MongoDB if not already installed
+* Install Node.js  if not already installed
 
-    * Recommended Node version: >= v5.10.1
-    * MongoDB version: >= v3.2
+    * Recommended Node version: >= v5.10.1, latest version is always better
 
 
+* Install Docker and Docker compose if not already installed
+
+    You will have to install these separately. To know more about docker installation process, please follow the following link : [**https://docs.docker.com/engine/installation/**](https://docs.docker.com/engine/installation/) and choose appropriate Operating System platform.
+    
+    To install docker-compose,  please follow the following link [**https://docs.docker.com/compose/install/**](https://docs.docker.com/compose/install/) and select the appropriate Operating System.
+
+    * Recommended Docker version: >= v1.12.5, latest version is always better
+    * Docker-compose version: >= v1.9.0, **Try to install version greater than 1.10**
+    
+    
 * Clone the project repository
 
     * **git clone https://github.com/nodebeats/nodebeats.git**
     * **cd nodebeats**
 
 
-* Install express, gulp, webpack and webpack dev server globally in your local development machine
+* Install express, gulp, webpack, angular-cli and webpack dev server globally in your local development machine
 
-    * **npm install express gulp webpack webpack-dev-server -g**
-
-
-* Go to the cloned project's root directory and run the following command to install required dependencies:
-
-    * **npm install**
+    * **npm install express gulp webpack webpack-dev-server angular-cli -g**
 
 
-## **Installation Note for Admin App**
-* First install the **angular cli** globally in your local machine before installing packages for admin app
+* Go to the cloned project's root directory and run the following commands to get nodebeats up and running:
+
+    * **docker-compose build**
     
-    * **npm install -g angular-cli**
-    
-* For setting up admin app (angular 2 app), go to the cloned project's admin directory and run the following command to install required dependencies for admin app:
-    * **cd admin**
-    * **npm install**
-
-
-## **Running Application in the Development Environment**
-
-* **To run server**     
-    * In the root directory run the given command
-        * **npm start**
+            To create docker images from the docker configuration files. This will create four different docker images namely nodebeats-node-dev, nodebeats-node-dev-admin, nodebeats-mongo-dev and nodebeats-redis-dev. 
+            This might take some time to create docker images depending upon the availability of core docker images of node, mongo and redis.
+            
+    * **docker images**
         
-    * Go to browser and type the following url  
-        * [**http://localhost:3000**](http://localhost:3000) 
-        * ( default port - 3000 )
-
-* **To run admin app** 
-    * Go to admin directory
-        * cd admin
-    
-    * Type the following script
-        * npm start
-    
-    * Go to browser and type the following url 
-        * [**http://localhost:4200/login**](http://localhost:4200/login)  -  for login page
-        * [**http://localhost:4200**](http://localhost:4200)        -  for dashboard
-        * [**http://localhost:4200/{{route}}**](http://localhost:4200/{{route}})    - any {{route}}
-        * ( default port - 4200 )
-
-
-
-
+            To check for docker images. This command will list all the docker images in your system.
+             
+    * **docker ps**
+        
+            To check for active docker containers. This command will list only the active docker containers from your system.
+                                     
+    * **docker ps -a**
+        
+            To check for all the docker containers. This command will list all the docker containers from your system.
+                                 
+    * **docker-compose up**
+        
+            To build and start docker containers from previously created docker images. 
+            This will start the nodebeats application. In the first run, this command will also restore the default databbase for the nodebeats 
+            and start the backend server  and admin server and initializes the mongodb and redis server.
+                             
+    * **docker-compose down**
+        
+            To stop and remove docker containers from your system. If you no longer need the containers, then you can run this command to remove those containers. Otherwise it will eat up the harddisk space.
+                        
+    * **docker volume rm $(docker volume ls -qf dangling=true)**
+        
+            To  remove unwanted volumes associated with unused/deleted docker containers  from your system. 
+                               
+    * **docker rmi $(docker images -f "dangling=true" -q)**
+        
+            To  remove dangling images from your system.
+                                          
+    * **docker inspect <containerID/containerName>**
+        
+            To inspect the running docker containers.            
+                                                  
+    * **docker logs <containerID/containerName>**
+        
+            To see the logs inside of docker containers
+            
+            
+    To know more about docker commands, please go through the docker documentation.
 
 ## **Running Application in Production Environment**
 
-* **To Run the server in the production environment,  run the following command**
-    * **NODE_ENV=production npm start**
-    
-        or
-          
-    * **export NODE_ENV=production**        
-    ```
-        Or if you are in windows you could try this:
-        
-        SET NODE_ENV=production
-        
-        then
-        
-        npm start
-    ```
-    
-* **For admin app**
-    * To generate deployment package of the admin app for production type  , run the following commands:   
+* **You need to tweak some docker configuration settings to make nodebeats run on production environment. Please go through the docker documentation to apply best practices for production environment.**
+
+
+* **To generate dist files needed to run the application in production environment**
+    * To generate deployment package of the admin app for production type, run the following commands:   
         * **cd admin**
-        * **npm run prod**
-        
-    * To run the admin app in browser, type the following url 
-        * [**http://localhost:3000/admin/login**](http://localhost:3000/admin/login) - for login page
-        * [**http://localhost:3000/admin/dashboard**](http://localhost:3000/admin/dashboard)  -  for dashboard page
-        * [**http://localhost:3000/admin/{{route}}**](http://localhost:3000/admin/{{route}}) - for any {{route}}
-        
-         **Please Notice that in production environment, admin app is accessed using "/admin/(someroute)" but "/admin" is not required in development environment**
-        
-
-* **For Client app**
-    * To generate deployment package of the client app for production, run the given command    
-        * **npm run build:client:prod** 
+        * **npm run build**
               
-
-    
-* To run client app in browser, type the following url 
-    * **http://localhost:3000**
-
-
-## **Important Note**
-
-You need to configure some files before you can actually run the application.
-
-* Edit the database configuration file in **/lib/configs/database.config.js** and enter the appropriate MongoDB credentials based on your current environment.
-
-```
-development: {
-    username: '',
-    password: '',
-    host: '',
-    port: '',
-    dbName: ''
-},
-production: {
-    username: '',
-    password: '',
-    host: '',
-    port: '',
-    dbName: ''
-},
-```
-
-
-* Edit the redis configuration file in **/lib/configs/redis.config.js** and enter the appropriate REDIS credentials. I f you are in development environment, you can skip configuring redis connection url but we highly recommend you to enable redis in production environment for performance reasons.
-
-```
-production : {
-    host: '',
-    port: '',
-    pass: ''
-},
-production : {
-    host: '',
-    port: '',
-    pass: ''
-}
-```
-
-* To delete all the uploaded files, if any, from the uploads folder inside of public/ directory
-   ```
-        npm run clean:uploads
-        
-        
-
-        To clear uploaded documents and images
-    ```
-
-
-Once this is done, you are ready to start the application.
-
-* Run the server
-    * npm start
-    * gulp if you are on local machine
+## **Note**
 
 * Browse [**http://localhost:3000**](http://localhost:3000/) if you are in local machine.
 
@@ -315,12 +247,12 @@ You can host your website built using Nodebeats in any of the available hosting 
 
 ## Staying Up to Date
 
-We will be adding new features regularly, improve the codebase continually and also keep the project's npm dependencies upto date so that there will not be any security vulnerabilities due to the npm packages. In this release version, we have implemented the responsive html 5 template to showcase the data saved in the database using handlebars templating engine. Likewise, We have changed the project directory structure of the admin section entirely and with the use of angular-cli, now the build process of the project is extremely easy and fast. We will release the next version as soon as the planned features are completed. In the next version, we plan to implement install setup wizard and create and deploy docker image in docker hub. We aim to make this software as secured as possible and announce the new version releases on our twitter account. So, to get the information about the latest releases, follow us on Twitter [**@Nodebeats**](https://twitter.com/nodebeats). You can also contact us at **help@nodebeats.com** regarding anything about the software.
+We will be adding new features regularly, improve the codebase continually and also keep the project's npm dependencies upto date so that there will not be any security vulnerabilities due to the npm packages. In this release version, we have integrated docker configuration with nodebeats so that then installation process of nodebeats is quick and easy and uniform across multiple platforms. We will release the next version as soon as the planned features are completed. In the next version, we plan to implement install setup wizard and deploy docker image in docker hub. We aim to make this software as secured as possible and announce the new version releases on our twitter account. So, to get the information about the latest releases, follow us on Twitter [**@Nodebeats**](https://twitter.com/nodebeats). You can also contact us at **help@nodebeats.com** regarding anything about the software.
 
 
 ## Project Maturity
 
-Nodebeats is around 8 months old from the start of project inception date. Even though the project is relatively new, the product is highly stable for production deployment purposes and you can use it to create and deploy web applications in the production server.
+Nodebeats is around 10 months old from the start of project inception date. You can use nodebeats cms to create and deploy web applications in the production server.
 
 
 ## Inspiration
@@ -331,19 +263,14 @@ As We all know [Wordpress](https://wordpress.com/), one of the most popular Cont
 
 ## Note
 
-With this major new release, We have implemented responsive html 5
-template to showcase data saved in the database 
-using handlebars templating engine.
- We have changed the project directory structure of the Admin 
- section entirely and used angular-cli to make the project extremely easy to build.
-  Likewise, we have deleted much of the un-necessary files after the change to make the project file size smaller.
+With this new release version, we have introduced docker with nodebeats so that installation process is quick and easy and uniform across different platforms.
 
-In the next release, We plan to introduce install setup wizard so that you can directly input database and redis connections form user Interface elements. We also plan to create and deploy the Nodebeats docker image in [dockerhub](https://hub.docker.com/).
+In the next release, We plan to introduce install setup wizard where you can input some necessary configuration settings. We also plan to deploy the Nodebeats docker image in [dockerhub](https://hub.docker.com/).
 
 
 ## License
 
- Copyright (c) 2016 [Nodebeats](http://www.nodebeats.com/)
+ Copyright (c) 2017 [Nodebeats](http://www.nodebeats.com/)
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

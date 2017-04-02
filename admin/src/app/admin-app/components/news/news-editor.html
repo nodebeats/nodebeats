@@ -1,88 +1,88 @@
 <div class="row" fadeInDirective>
-    <div class="col-lg-12 form-wrapper">
-        <h1 class="page-header">
-            News Editor
-        </h1>
-        <form role="form" novalidate [formGroup]="newsForm" (ngSubmit)="saveNews()">
-            <div class="form-group">
-                <label>Category</label>
-                <select [(ngModel)]="objNews.categoryID" class="form-control"
-                        [formControl]="newsForm.controls['selectCategory']">
-                    <option value="">Select Category</option>
-                    <option *ngFor="let obj of objCatList" [value]="obj._id">{{obj.categoryName}}</option>
-                </select>
-                <control-messages [isSubmitted]="isSubmitted"
-                                  [control]="newsForm.controls['selectCategory']"></control-messages>
-            </div>
-            <div class="form-group">
-                <label>News</label>
-                <input class="form-control" [(ngModel)]="objNews.newsTitle" name="newsTitle"
-                       placeholder="Enter News Title" [formControl]="newsForm.controls['newsTitle']">
-                <control-messages [isSubmitted]="isSubmitted"
-                                  [control]="newsForm.controls['newsTitle']"></control-messages>
-            </div>
-            <div class="form-group">
-                <label>News Summary</label>
-                <textarea class="form-control" [(ngModel)]="objNews.newsSummary"
-                          [formControl]="newsForm.controls['newsSummary']"
-                          name="newsSummary"
-                          placeholder="Enter News Summary"></textarea>
-                <control-messages [isSubmitted]="isSubmitted"
-                                  [control]="newsForm.controls['newsSummary']"></control-messages>
-            </div>
-            <div class="form-group">
-                <label>News Description</label>
+  <div class="col-lg-12 form-wrapper">
+    <h1 class="page-header">
+      News Editor
+    </h1>
+    <form role="form" novalidate [formGroup]="newsForm" (ngSubmit)="saveNews()">
+      <div class="form-group">
+        <label>Category</label>
+        <select [(ngModel)]="objNews.categoryID" class="form-control"
+                [formControl]="newsForm.controls['selectCategory']">
+          <option value="">Select Category</option>
+          <option *ngFor="let obj of objCatList" [value]="obj._id">{{obj.categoryName}}</option>
+        </select>
+        <control-messages [isSubmitted]="isSubmitted"
+                          [control]="newsForm.controls['selectCategory']"></control-messages>
+      </div>
+      <div class="form-group">
+        <label>News</label>
+        <input class="form-control" [(ngModel)]="objNews.newsTitle" name="newsTitle"
+               placeholder="Enter News Title" [formControl]="newsForm.controls['newsTitle']">
+        <control-messages [isSubmitted]="isSubmitted"
+                          [control]="newsForm.controls['newsTitle']"></control-messages>
+      </div>
+      <div class="form-group">
+        <label>News Summary</label>
+        <textarea class="form-control" [(ngModel)]="objNews.newsSummary"
+                  [formControl]="newsForm.controls['newsSummary']"
+                  name="newsSummary"
+                  placeholder="Enter News Summary"></textarea>
+        <control-messages [isSubmitted]="isSubmitted"
+                          [control]="newsForm.controls['newsSummary']"></control-messages>
+      </div>
+      <div class="form-group">
+        <label>News Description</label>
 
-                <tiny-editor [value]="objNews.newsDescription"
-                             [editorFormControl]="editorFormControl"
-                             (valueChange)="editorValueChange($event)"></tiny-editor>
-            </div>
-            <div class="form-group">
-                <label>News Author</label>
-                <input class="form-control" name="role" [(ngModel)]="objNews.newsAuthor"
-                       [formControl]="newsForm.controls['newsAuthor']"
-                       placeholder="Enter News Author">
-                <control-messages [isSubmitted]="isSubmitted"
-                                  [control]="newsForm.controls['newsAuthor']"></control-messages>
-            </div>
-            <div class="form-group">
-                <label>Publish Date</label>
-                <div class="form-group">
+        <tiny-editor [value]="objNews.newsDescription"
+                     [editorFormControl]="editorFormControl"
+                     (valueChange)="editorValueChange($event)"></tiny-editor>
+      </div>
+      <div class="form-group">
+        <label>News Author</label>
+        <input class="form-control" name="role" [(ngModel)]="objNews.newsAuthor"
+               [formControl]="newsForm.controls['newsAuthor']"
+               placeholder="Enter News Author">
+        <control-messages [isSubmitted]="isSubmitted"
+                          [control]="newsForm.controls['newsAuthor']"></control-messages>
+      </div>
+      <div class="form-group">
+        <label>Publish Date</label>
+        <div class="form-group">
 
-                  <p-calendar [(ngModel)]="objNews.newsDate" [readonlyInput]="true"
-                              [showIcon]="true"
-                              [minDate]="0"
-                              [formControl]="newsForm.controls['newsDate']"
-                              inputStyleClass="form-control, inline-cal"
-                              dateFormat="yy-mm-dd"></p-calendar>
+          <p-calendar [(ngModel)]="objNews.newsDate" [readonlyInput]="true"
+                      [showIcon]="true"
+                      [formControl]="newsForm.controls['newsDate']"
+                      inputStyleClass="form-control, inline-cal"
+                      dateFormat="yy-mm-dd"></p-calendar>
 
-                    <control-messages [isSubmitted]="isSubmitted"
-                                      [control]="newsForm.controls['newsDate']"></control-messages>
+          <control-messages [isSubmitted]="isSubmitted"
+                            [control]="newsForm.controls['newsDate']"></control-messages>
 
-                </div>
+        </div>
 
-            </div>
-            <div class="form-group ">
-                <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize"
-                                [imageFormControl]="imageFormControl"
-                                (deleteImageEvent)="deleteImage($event)"
-                                [imageName]="fileName" [drawImagePath]="drawImagePath"
-                                (fileSelectedEvent)="changeFile($event)"></image-uploader>
-            </div>
-            <div class="form-group ">
+      </div>
+      <div class="form-group ">
+        <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize"
+                        [imageFormControl]="imageFormControl"
+                        (deleteImageEvent)="deleteImage($event)"
+                        [imageName]="fileName" [drawImagePath]="drawImagePath"
+                        (fileSelectedEvent)="changeFile($event)"></image-uploader>
+      </div>
+      <div class="form-group ">
 
-                <label>
-                    <md-checkbox [checked]="objNews.active" formControlName="active"
-                                 [(ngModel)]="objNews.active">
-                        Active
-                    </md-checkbox>
-                </label>
-            </div>
+        <label>
+          <md-checkbox [checked]="objNews.active" formControlName="active"
+                       [(ngModel)]="objNews.active">
+            Active
+          </md-checkbox>
+        </label>
+      </div>
 
-            <button type="submit" class="btn btn-primary" processing><i class="fa fa-floppy-o"></i>  Save</button>
-                        <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger"><i class="fa fa-times"></i> Cancel</button>
+      <button type="submit" class="btn btn-primary" processing><i class="fa fa-floppy-o"></i> Save</button>
+      <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger"><i class="fa fa-times"></i> Cancel
+      </button>
 
-        </form>
-    </div>
+    </form>
+  </div>
 </div>
 

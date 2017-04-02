@@ -14,25 +14,25 @@ import {RoleModel} from "../role-management/role.model";
   templateUrl: './user-form.html'
 })
 export class UserEditComponent implements OnInit {
-  @Input() userId:string;
+  @Input() userId: string;
   // @Input objUser:UserModel;
-  @Output() showListEvent:EventEmitter<any> = new EventEmitter();
-  userForm:FormGroup;
-  objUser:UserModel = new UserModel();
-  isSubmitted:boolean = false;
-  objRoleList:RoleModel[] = [];
+  @Output() showListEvent: EventEmitter<any> = new EventEmitter();
+  userForm: FormGroup;
+  objUser: UserModel = new UserModel();
+  isSubmitted: boolean = false;
+  objRoleList: RoleModel[] = [];
   /* Image Upload Handle*/
-  imageDeleted:boolean = false;
-  file:File;
-  fileName:string = "";
-  drawImagePath:string = Config.DefaultAvatar;
-  imageFormControl:FormControl = new FormControl('');
-  canvasSize:number = ImageCanvasSizeEnum.small;
+  imageDeleted: boolean = false;
+  file: File;
+  fileName: string = "";
+  drawImagePath: string = Config.DefaultAvatar;
+  imageFormControl: FormControl = new FormControl('');
+  canvasSize: number = ImageCanvasSizeEnum.small;
   /* End Image Upload handle */
-  questionlist:string[] = QUESTION_LIST;
+  questionlist: string[] = QUESTION_LIST;
 
 
-  constructor(private _objUserService:UserService, private _formBuilder:FormBuilder, private roleService:RoleService) {
+  constructor(private _objUserService: UserService, private _formBuilder: FormBuilder, private roleService: RoleService) {
     this.userForm = this._formBuilder.group({
       "firstName": ['', Validators.required],
       "lastName": ['', Validators.required],
@@ -65,9 +65,11 @@ export class UserEditComponent implements OnInit {
         error => this.errorMessage(error));
   }
 
-  userDetailView(objUser:UserModel) {
+  userDetailView(objUser: UserModel) {
     this.objUser = objUser;
-    let path:string = "";
+    let path: string = "";
+    if (this.objUser.userRole == "superadmin")
+      this.userForm.controls["userRole"].reset({value: this.objUser.userRole, disabled: true})
     if (this.objUser.imageName) {
       var cl = Config.Cloudinary;
       path = cl.url(this.objUser.imageName);
@@ -93,19 +95,19 @@ export class UserEditComponent implements OnInit {
     }
   }
 
-  saveUserStatusMessage(objResponse:any) {
+  saveUserStatusMessage(objResponse: any) {
     swal("Success !", objResponse.message, "success");
 
     this.showListEvent.emit(false);
   }
 
-  errorMessage(objResponse:any) {
+  errorMessage(objResponse: any) {
     swal("Alert !", objResponse.message, "info");
 
   }
 
 
-  handleDeleteSuccess(resUser:Response) {
+  handleDeleteSuccess(resUser: Response) {
     this.imageDeleted = true;
     this.objUser.imageName = "";
     let path = Config.DefaultAvatar;
@@ -113,7 +115,7 @@ export class UserEditComponent implements OnInit {
   }
 
   triggerCancelForm() {
-    let isCancel:boolean = true;
+    let isCancel: boolean = true;
     this.showListEvent.emit(isCancel);
   }
 
@@ -121,11 +123,10 @@ export class UserEditComponent implements OnInit {
 
   changeFile(args) {
     this.file = args;
-    if (this.file)
-      this.fileName = this.file.name;
+    this.fileName = this.file.name;
   }
 
-  drawImageToCanvas(path:string) {
+  drawImageToCanvas(path: string) {
     this.drawImagePath = path;
   }
 
@@ -143,6 +144,7 @@ export class UserEditComponent implements OnInit {
         this._objUserService.deleteImage(this.objUser.imageName, this.objUser.imageProperties.imageExtension, this.objUser.imageProperties.imagePath)
           .subscribe(resUser=> {
               this.objUser.imageName = "";
+              this.fileName = "";
               this.handleDeleteSuccess(resUser);
               swal("Deleted!", resUser.message, "success");
             },

@@ -10,7 +10,7 @@
            [routerLinkActiveOptions]="{ exact: true }">
             <i class="fa fa-fw fa-dashboard"></i> Dashboard
         </a>
-        <template ngFor let-parentMenu [ngForOf]="sidebarRoute">
+        <ng-template ngFor let-parentMenu [ngForOf]="sidebarRoute">
             <div *ngIf="parentMenu.headerTitle" class="sidebar-dropdown">
                 <accordion [closeOthers]="true" [duration]="duration">
                     <div accordion-item class="fuel-ui-accordion" #itemStyled [(open)]="lastOpen">
@@ -30,13 +30,13 @@
                     </div>
                 </accordion>
             </div>
-            <template [ngIf]="!parentMenu.headerTitle">
+            <ng-template [ngIf]="!parentMenu.headerTitle">
                 <a *ngFor="let menu of parentMenu.menuItem" routerLinkActive="router-link-active"
                    class="list-group-item" [routerLink]="menu.route">
                     <i class="fa fa-fw {{menu.icon}}"></i> {{menu.title}}
                 </a>
-            </template>
-        </template>
+            </ng-template>
+        </ng-template>
 
 
     </div>

@@ -32,36 +32,37 @@ import {ApiAccessModule} from "./components/api-access/api-access.module";
 import {TokenModule} from "./components/token-management/token-management.module";
 
 @NgModule({
-    imports: [
-        adminAppRouting,
-        ApplicationLogModule,
-        BlogModule,
-        CloudinaryModule,
-        CommentSettingModule,
-        ContactModule,
-        DashboardModule,
-        EmailServiceModule,
-        EmailTemplateModule,
-        EventManagementModule,
-        GoogleAnalyticsModuless,
-        GoogleMapModule,
-        HtmlContentModule,
-        ImageGalleryModule,
-        ImageSlideModule,
-        NewsModule,
-        OrganizationInformationModule,
-        TeamManagementModule,
-        TestimonialModule,
-        UserManagementModule,
-        PartnerModule,
-        UserProfileModule,
-        RoleModule,
-        ApiAccessModule,
-        TokenModule,
-        SharedModule
-    ],
-    declarations: [AdminAppComponent, SpinnerComponent, SidebarCmp, TopNavCmp],
-    providers: [CountryListService]
+  imports: [
+    adminAppRouting,
+    ApplicationLogModule,
+    BlogModule,
+    CloudinaryModule,
+    CommentSettingModule,
+    ContactModule,
+    DashboardModule,
+    EmailServiceModule,
+    EmailTemplateModule,
+    EventManagementModule,
+    GoogleAnalyticsModuless,
+    GoogleMapModule,
+    HtmlContentModule,
+    ImageGalleryModule,
+    ImageSlideModule,
+    NewsModule,
+    OrganizationInformationModule,
+    TeamManagementModule,
+    TestimonialModule,
+    UserManagementModule,
+    PartnerModule,
+    UserProfileModule,
+    RoleModule,
+    ApiAccessModule,
+    TokenModule,
+    SharedModule.forRoot()
+
+  ],
+  declarations: [AdminAppComponent, SpinnerComponent, SidebarCmp, TopNavCmp],
+  providers: [CountryListService]
 
 })
 

@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [2.0 - Major Release Version] - 2017-03-31
+
+### New Implementation
+- Dockerized the entire CMS
+
+### Upgraded
+- Upgraded the Angular 2 code to the recent stable release of  Angular 4
+
+
+### Changed
+- Major bug fixes.
+- Updated the packages to their latest compatible version.
+- Improvement in performance and faster loading in the admin app compared to the previous version with significant less network requests
+- File structures optimized, removed/merged into very few file for admin app than previous version.
+- Code Re-factorization and clean-up, magic strings and numbers removed.
+- Un-necessary npm packages removed.
+
+
 ## [1.0 - Major Release Version] - 2016-12-16
 
 ### New Implementation

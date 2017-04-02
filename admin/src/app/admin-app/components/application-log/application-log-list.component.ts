@@ -11,16 +11,16 @@ import {FormControl} from "@angular/forms";
 
 export class ApplicationLogComponent implements OnInit {
 
-  objLog:ApplicationLogModel = new ApplicationLogModel();
-  objResponse:ApplicationLogResponse = new ApplicationLogResponse();
-  showModal:boolean = false;
+  objLog: ApplicationLogModel = new ApplicationLogModel();
+  objResponse: ApplicationLogResponse = new ApplicationLogResponse();
+  showModal: boolean = false;
   /* Pagination */
-  perPage:number = 10;
-  currentPage:number = 1;
-  totalPage:number = 1;
-  first:number = 0;
-  bindSort:boolean = false;
-  preIndex:number = 1;
+  perPage: number = 10;
+  currentPage: number = 1;
+  totalPage: number = 1;
+  first: number = 0;
+  bindSort: boolean = false;
+  preIndex: number = 1;
   /* End Pagination */
 
   ngOnInit() {
@@ -29,25 +29,25 @@ export class ApplicationLogComponent implements OnInit {
     this.getApplicationLogList();
   }
 
-  startDate:FormControl = new FormControl('');
-  endDate:FormControl = new FormControl('');
+  startDate: FormControl = new FormControl('');
+  endDate: FormControl = new FormControl('');
 
-  constructor(private _objService:ApplicationLogService, private ele:ElementRef) {
+  constructor(private _objService: ApplicationLogService, private ele: ElementRef) {
 
   }
 
   getApplicationLogList() {
-    this._objService.getApplicationLog(this.perPage, this.currentPage)
+    this._objService.getApplicationLog(this.perPage, this.currentPage, this.startDate.value, this.endDate.value)
       .subscribe(objRes =>this.bindList(objRes),
         error => this.errorMessage(error)
       );
   }
 
-  errorMessage(objResponse:any) {
+  errorMessage(objResponse: any) {
     swal("Alert !", objResponse.message, "info");
   }
 
-  bindList(objRes:ApplicationLogResponse) {
+  bindList(objRes: ApplicationLogResponse) {
     this.objResponse = objRes;
     this.preIndex = (this.perPage * (this.currentPage - 1));
     if (objRes.totalItems > 0) {
@@ -72,8 +72,8 @@ export class ApplicationLogComponent implements OnInit {
     }, 50);
   }
 
-  showDetail(logIndex:string) {
-    let objTemp:ApplicationLogModel;
+  showDetail(logIndex: string) {
+    let objTemp: ApplicationLogModel;
     objTemp = this.objResponse.dataList[logIndex];
     if (objTemp) {
       //  objTemp.addedOn = this.changeDateFormat(objTemp.addedOn);
@@ -82,11 +82,11 @@ export class ApplicationLogComponent implements OnInit {
     }
   }
 
-  changeDateFormat(date:string) {
+  changeDateFormat(date: string) {
     return moment(date).format('YYYY-MM-DD HH:mm:ss');
   }
 
-  deleteLogById(id:string) {
+  deleteLogById(id: string) {
     swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Log !",
@@ -97,7 +97,7 @@ export class ApplicationLogComponent implements OnInit {
         closeOnConfirm: false
       },
       ()=> {
-        let objTemp:ApplicationLogModel = new ApplicationLogModel();
+        let objTemp: ApplicationLogModel = new ApplicationLogModel();
         objTemp._id = id;
         objTemp.deleted = true;
         this._objService.deleteLogById(objTemp)
@@ -151,7 +151,7 @@ export class ApplicationLogComponent implements OnInit {
         error => this.errorMessage(error));
   }
 
-  resStatusMessage(res:any) {
+  resStatusMessage(res: any) {
     swal("Success !", res.message, "success")
 
   }

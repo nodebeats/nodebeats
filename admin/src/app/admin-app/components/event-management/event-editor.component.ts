@@ -128,33 +128,33 @@ export class EventEditorComponent implements OnInit,AfterViewInit {
 
   changeFile(args) {
     this.file = args;
-    if (this.file)
-      this.fileName = this.file.name;
+    this.fileName = this.file.name;
   }
 
   deleteImage(imageId) {
-
-    jQuery.jAlert({
-      'type': 'confirm',
-      'title': 'Alert',
-      'confirmQuestion': 'Are you sure to delete the Image ?',
-      'theme': 'red',
-      'onConfirm': (e, btn)=> {
-        e.preventDefault();
+    swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this Image !",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: false
+      },
+      ()=> {
         this._objService.deleteImage(this.objEvent.imageName, this.objEvent.imageProperties.imageExtension, this.objEvent.imageProperties.imagePath)
           .subscribe(res=> {
               this.imageDeleted = true;
               this.objEvent.imageName = "";
+              this.fileName = "";
               this.drawImageToCanvas(Config.DefaultWideImage);
-              jQuery.jAlert({
-                'title': 'Success',
-                'content': res.message,
-                'theme': 'green'
-              });
+              swal("Deleted!", res.message, "success");
             },
-            error=> this.errorMessage(error));
-      }
-    });
+            error=> {
+              swal("Alert!", error.message, "info");
+
+            });
+      });
   }
 
   drawImageToCanvas(path: string) {

@@ -27,6 +27,7 @@
                                     [imageFormControl]="imageFormControl" (deleteImageEvent)="deleteImage($event)"
                                     [imageName]="objNewsImage.imageName" [drawImagePath]="drawImagePath"
                                     [isSubmitted]="isSubmitted"
+                                    allowDelete="false"
                                     (fileSelectedEvent)="changeFile($event)"></image-uploader>
 
                 </div>

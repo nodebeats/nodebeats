@@ -1,6 +1,3 @@
-/*
- * Created by lakhe on 4/19/16.
- */
 'use strict';
 
 var express = require('express'),
@@ -108,7 +105,7 @@ else if (app.get('env') === "production" || app.get('env') === "test") {
     app.use(minify());
     app.enable('view cache');
     var adminDistRootPath = path.join(__dirname, '/admin/dist/');
-    admin.use("/", express.static(path.join(__dirname, '/admin/dist/'), {maxAge: 86400000}));
+    admin.use("/", express.static(adminDistRootPath, {maxAge: 86400000}));
     app.use("/", express.static(path.join(__dirname, '/public/'), {maxAge: 86400000}));
     app.use('/dist', express.static(path.join(__dirname, '/admin/dist/'), {maxAge: 86400000}));
     app.use('/assets', express.static(path.join(__dirname, '/admin/dist/assets/'), {maxAge: 86400000}));
@@ -118,6 +115,8 @@ else if (app.get('env') === "production" || app.get('env') === "test") {
 
 }
 app.use("/admin", admin);
+
+app.use("/docs", express.static(__dirname + "/public/apidoc/"));
 ///  End of Static path setup for Client app
 
 dbConnector.init(app);
@@ -151,7 +150,7 @@ app.use(expressValidator({
 
 
 var sessionOpts = {
-    // store: new RedisStore(redisStoreOpts),//if in production environment, uncomment it
+    store: new RedisStore(redisStoreOpts),//if in production environment, uncomment it
     name: 'id', // <-- a generic name for the session id
     secret: process.env.SESSION_SECRET,
     resave: false,

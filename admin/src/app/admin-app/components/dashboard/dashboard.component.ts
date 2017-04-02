@@ -10,7 +10,7 @@ import {DashboardService} from './dashboard.service';
 declare var gapi:any;
 @Component({
   selector: 'browser-chart',
-  template: '<p-chart type="pie" [data]="data"></p-chart>'
+  template: '<p-chart *ngIf="data.datasets.length>0" type="pie" [data]="data"></p-chart>'
 })
 export class BrowserAnalysisChart implements OnChanges {
   @Input() viewId:string;
@@ -65,13 +65,13 @@ export class BrowserAnalysisChart implements OnChanges {
             }]
         };
       })
-      .catch((err:any)=>console.log(err));
+      .catch((err:any)=>{});
   }
 }
 
 @Component({
   selector: 'country-chart',
-  template: '<p-chart type="doughnut" [data]="data"></p-chart>'
+  template: '<p-chart *ngIf="data.datasets.length>0" type="doughnut" [data]="data"></p-chart>'
 })
 export class CountryWiseChart implements OnChanges {
   @Input() viewId:string;
@@ -275,7 +275,7 @@ export class PageViewComponent implements OnChanges {
 
 @Component({
   selector: 'week-chart',
-  template: `<p-chart type="line" [data]="data"></p-chart>`
+  template: `<p-chart *ngIf="data.datasets.length>0" type="line" [data]="data"></p-chart>`
 })
 export class LastWeekVsThisWeekAnalysisChart implements OnChanges {
 
@@ -314,7 +314,7 @@ export class LastWeekVsThisWeekAnalysisChart implements OnChanges {
       'end-date': moment().day(6).subtract(1, 'week')
         .format('YYYY-MM-DD')
     });
-    Promise.all([thisWeek, lastWeek])
+    Promise.all<string>([thisWeek, lastWeek])
       .then((results:any)=> {
           let data1 = [];
           let data2 = [];

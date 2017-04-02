@@ -1,7 +1,7 @@
 {{#checkAndBindList events}}
 <li class="col-md-4 col-sm-6 grid-item">
     <div class="grid-item-inner">
-        <a href="{{hostUrl}}/event-detail/{{dateFormatter startDate}}/{{urlSlog}}" class="media-box">
+        <a href="{{hostUrl}}/event-detail/{{dateFormatter startDate  '/'}}/{{urlSlog}}" class="media-box">
             <img src="{{cloudinaryUrl imageName option='{"crop":"thumb","width":"360","height":"240"}'}}"
                  title="{{eventTitle}}" alt="{{eventTitle}}">
         </a>
@@ -13,7 +13,7 @@
                 <span class="meta-data">{{justDay startDate}}, {{justTime startDate}}</span>
             </span>
             <h3 class="post-title"><a
-                    href="{{hostUrl}}/event-detail/{{dateFormatter startDate}}/{{urlSlog}}">{{eventTitle}}</a>
+                    href="{{hostUrl}}/event-detail/{{dateFormatter startDate '/'}}/{{urlSlog}}">{{eventTitle}}</a>
             </h3>
             <p>{{longSummaryLimit eventDescription}}</p>
             <ul class="list-group event-list">

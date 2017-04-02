@@ -8,8 +8,7 @@ import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import{QUESTION_LIST} from '../../../shared/configs/security-question.config'
 import {RoleService} from "../role-management/role.service";
 import {RoleModel} from "../role-management/role.model";
-
-declare var jQuery:any;
+import {Response} from "@angular/http";
 @Component({
   selector: 'user-form',
   templateUrl: './user-form.html'
@@ -18,22 +17,23 @@ declare var jQuery:any;
 export class UserRegistrationComponent implements OnInit {
   // @Input() userId:string;
   // @Input objUser:UserModel;
-  @Output() showListEvent:EventEmitter<any> = new EventEmitter();
-  objUser:UserModel = new UserModel();
-  userForm:FormGroup;
-  isSubmitted:boolean = false;
-  objRoleList:RoleModel[] = [];
+  @Output() showListEvent: EventEmitter<any> = new EventEmitter();
+  objUser: UserModel = new UserModel();
+  userId: string = null;
+  userForm: FormGroup;
+  isSubmitted: boolean = false;
+  objRoleList: RoleModel[] = [];
   /* Image Upload Handle*/
-  imageDeleted:boolean = false;
-  file:File;
-  fileName:string = "";
-  drawImagePath:string = Config.DefaultAvatar;
-  imageFormControl:FormControl = new FormControl('');
-  canvasSize:number = ImageCanvasSizeEnum.small;
+  imageDeleted: boolean = false;
+  file: File;
+  fileName: string = "";
+  drawImagePath: string = Config.DefaultAvatar;
+  imageFormControl: FormControl = new FormControl('');
+  canvasSize: number = ImageCanvasSizeEnum.small;
   /* End Image Upload handle */
-  questionlist:string[] = QUESTION_LIST;
+  questionlist: string[] = QUESTION_LIST;
 
-  constructor(private _objUserService:UserService, private _formBuilder:FormBuilder, private roleService:RoleService) {
+  constructor(private _objUserService: UserService, private _formBuilder: FormBuilder, private roleService: RoleService) {
     this.userForm = this._formBuilder.group({
         "firstName": ['', Validators.required],
         "lastName": ['', Validators.required],
@@ -74,19 +74,19 @@ export class UserRegistrationComponent implements OnInit {
     }
   }
 
-  errorMessage(objResponse:any) {
+  errorMessage(objResponse: any) {
     swal("Alert !", objResponse.message, "info");
 
   }
 
-  saveUserStatusMessage(objResponse:any) {
+  saveUserStatusMessage(objResponse: any) {
     swal("Success !", objResponse.message, "success");
 
     this.showListEvent.emit(false); //isCancel false
   }
 
   triggerCancelForm() {
-    let isCancel:boolean = true;
+    let isCancel: boolean = true;
     this.showListEvent.emit(isCancel);
   }
 
@@ -94,12 +94,44 @@ export class UserRegistrationComponent implements OnInit {
 
   changeFile(args) {
     this.file = args;
-    if (this.file)
-      this.fileName = this.file.name;
+    this.fileName = this.file.name;
   }
 
-  drawImageToCanvas(path:string) {
+  drawImageToCanvas(path: string) {
     this.drawImagePath = path;
+  }
+
+  deleteImage() {
+    swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover  the image  !",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: false
+      },
+      ()=> {
+        this._objUserService.deleteImage(this.objUser.imageName, this.objUser.imageProperties.imageExtension, this.objUser.imageProperties.imagePath)
+          .subscribe(resUser=> {
+              this.objUser.imageName = "";
+              this.fileName = "";
+              this.handleDeleteSuccess(resUser);
+              swal("Deleted!", resUser.message, "success");
+            },
+            error=> {
+              swal("Alert!", error.message, "info");
+
+            });
+      });
+
+  }
+
+  handleDeleteSuccess(resUser: Response) {
+    this.imageDeleted = true;
+    this.objUser.imageName = "";
+    let path = Config.DefaultAvatar;
+    this.drawImageToCanvas(path);
   }
 
   /* End Image handler */

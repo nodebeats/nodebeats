@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Output, Input, AfterViewInit, OnInit} from '@angular/core';
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {NewsCategoryModel} from "./news.model";
 import {NewsService} from "./news.service";
 import {FormGroup, Validators, FormBuilder,} from "@angular/forms";

@@ -35,7 +35,6 @@ export class BlogMetaTagEditorComponent implements OnInit {
     }
 
     public typeaheadOnSelect(e:any):void {
-        console.log(`Selected value: ${e.item}`);
     }
 
     getBlogTagList():void {

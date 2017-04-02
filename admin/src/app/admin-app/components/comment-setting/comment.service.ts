@@ -37,7 +37,6 @@ export class CommentSettingService {
     }
 
     handleError(error) {
-        console.log(error.json());
         return Observable.throw(error.json() || 'server error');
     }
 

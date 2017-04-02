@@ -5,7 +5,6 @@ var http = require('http'),
     server = http.createServer(app),
     port = process.env.PORT || 3000;
 
-
 /**
  *  Define the application.
  */
@@ -24,6 +23,7 @@ var NodeBeats = function() {
      *  Start the server
      */
     self.start = function() {
+        app.set('portNumber', port);
         //  Start the app on the specific interface (and port).
         server.listen(self.port, function() {
             console.log('Node server started on  ' + self.port + ' at ' + Date(new Date()));

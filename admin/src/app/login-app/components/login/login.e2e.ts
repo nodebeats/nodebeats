@@ -59,7 +59,6 @@ describe('Login e2e with DFA Enabled', () => {
         element(by.css('input[type="password"]')).sendKeys("superadmin@123");
         form.submit();
         form = element(by.css('form'));
-        element(by.css('input[type="text"]')).sendKeys("");
         form.submit();
         let errorMsg = element(by.css('.auth-message')).getText();
         expect(errorMsg).toEqual('');
@@ -94,7 +93,7 @@ describe('Login e2e with DFA Enabled', () => {
         return browser.wait(function() {
             //noinspection TypeScriptUnresolvedFunction
           return browser.getCurrentUrl().then(function(url) {
-                return /admin/.test(url);
+                return /dashboard/.test(url);
             });
         }, 3000);
 

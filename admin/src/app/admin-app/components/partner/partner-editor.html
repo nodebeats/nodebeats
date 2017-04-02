@@ -29,6 +29,7 @@
                 <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize"
                                 [imageFormControl]="imageFormControl"
                                 (deleteImageEvent)="deleteImage($event)"
+                                allowDelete="true"
                                 [imageName]="objPartner.imageName" [drawImagePath]="drawImagePath"
                                 (fileSelectedEvent)="changeFile($event)"></image-uploader>
 

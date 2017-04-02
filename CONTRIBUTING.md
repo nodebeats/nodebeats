@@ -1,7 +1,7 @@
 # CONTRIBUTING
 
 First of all, We would like to thank you for reading this and taking interest in this product. We want this product to be reliable, secured and highly optimized for which we need your guidances and contributions.
-By participating in this project, you agree to abide by the Nodebeat  [Code of conduct](https://github.com/nodebeats/nodebeats/blob/master/code_of_conduct.md).
+By participating in this project, you agree to abide by the Nodebeats  [Code of conduct](https://github.com/nodebeats/nodebeats/blob/master/code_of_conduct.md).
 
 If you haven't already join our community, then contact us via following channels:
 * Chat with us at [**gitter.im**](https://gitter.im/nodebeats/nodebeats)

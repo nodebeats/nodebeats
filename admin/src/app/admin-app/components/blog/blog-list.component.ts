@@ -1,8 +1,6 @@
 import {Component, ElementRef, OnInit, Output, EventEmitter, Input, OnChanges} from '@angular/core';
 import {BlogService} from "./blog.service";
-import {BlogModel, BlogCategoryModel, BlogResponse, BlogCategoryResponse, BlogTagModel} from "./blog.model";
-import {Paginator} from 'primeng/primeng';
-import{BlogEditorComponent} from"./blog-editor.component";
+import {BlogModel,  BlogResponse, BlogCategoryResponse} from "./blog.model";
 
 @Component({
   selector: 'blog-list',

@@ -1,8 +1,8 @@
 
 export * from './components/dropdown';
 export * from './components/typeahead';
-export * from './components/position';
-export * from './components/common';
+//export * from './components/position';
+//export * from './components/common';
 export * from './components/ng2-bootstrap-config';
 
 

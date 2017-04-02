@@ -1,67 +1,67 @@
 <div class="container-fluid" fadeInDirective>
-    <h2 class="text-muted">Dashboard
-        <small>Statistics Overview</small>
-    </h2>
+  <h2 class="text-muted">Dashboard
+    <small>Statistics Overview</small>
+  </h2>
 
-    <div class="row">
-        <div class="col-xl-3 col-lg-6">
+  <div class="row">
+    <div class="col-xl-3 col-lg-6">
 
-            <div class="card card-blue card-inverse">
-                <div class="card-header card-blue">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-street-view fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-xs-right">
-                            <div class="huge active-user">{{activeUserCount}}</div>
-                            <div>
-                                <i [class]="'fa huge '+activeClass" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <a class="text-blue" target="_blank" href="https://analytics.google.com">
-                        <span class="pull-xs-left">Active Users</span>
-                        <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </a>
-                </div>
+      <div class="card card-blue card-inverse">
+        <div class="card-header card-blue">
+          <div class="row">
+            <div class="col-xs-3">
+              <i class="fa fa-street-view fa-5x"></i>
             </div>
+            <div class="col-xs-9 text-xs-right">
+              <div class="huge active-user">{{activeUserCount}}</div>
+              <div>
+                <i [class]="'fa huge '+activeClass" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <user-count [viewId]="viewId"></user-count>
-        <page-view [viewId]="viewId"></page-view>
+        <div class="card-footer">
+          <a class="text-blue" target="_blank" href="https://analytics.google.com">
+            <span class="pull-xs-left">Active Users</span>
+            <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
+            <div class="clearfix"></div>
+          </a>
+        </div>
+      </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card card-default">
-                <div class="card-header">
-                    <i class="fa fa-clock-o fa-fw"></i> This Week Vs Last Week Visit
-                    <span>By Session</span>
-                </div>
-                <week-chart [viewId]="viewId"></week-chart>
+    <user-count [viewId]="viewId"></user-count>
+    <page-view [viewId]="viewId"></page-view>
+  </div>
 
-            </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card card-default">
+        <div class="card-header">
+          <i class="fa fa-clock-o fa-fw"></i> This Week Vs Last Week Visit
+          <span>By Session</span>
         </div>
-        <div class="col-lg-6">
-            <div class="card card-default">
-                <div class="card-header">
-                    <i class="fa fa-pie-chart fa-fw"></i> Browser wise visit (last 7 days)
-                </div>
-                <browser-chart [viewId]="viewId"></browser-chart>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card card-default">
-                <div class="card-header">
-                    <i class="fa fa-globe fa-fw"></i> Country wise visit (last 7 days)
-                </div>
-                <country-chart [viewId]="viewId"></country-chart>
-            </div>
-        </div>
+        <week-chart  [viewId]="viewId"></week-chart>
+
+      </div>
     </div>
+    <div class="col-lg-6">
+      <div class="card card-default">
+        <div class="card-header">
+          <i class="fa fa-pie-chart fa-fw"></i> Browser wise visit (last 7 days)
+        </div>
+        <browser-chart [viewId]="viewId"></browser-chart>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card card-default">
+        <div class="card-header">
+          <i class="fa fa-globe fa-fw"></i> Country wise visit (last 7 days)
+        </div>
+        <country-chart [viewId]="viewId"></country-chart>
+      </div>
+    </div>
+  </div>
 
 </div>
 

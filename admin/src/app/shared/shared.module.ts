@@ -18,11 +18,7 @@ import{HttpInterceptor} from './services/interceptHttp.service';
 import {FileOperrationService} from './services/fileOperation.service';
 import {Router, RouterModule} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-/*Material Design*/
-import {MdCoreModule} from '@angular2-material/core';
-import {MdCheckboxModule} from '@angular2-material/checkbox';
-import {MdSlideToggleModule} from '@angular2-material/slide-toggle';
-import {MdButtonModule} from '@angular2-material/button';
+
 
 /*Prime Module*/
 import {PasswordModule} from 'primeng/primeng';
@@ -33,8 +29,9 @@ import {ChartModule} from 'primeng/primeng';
 import {MessagesModule} from 'primeng/primeng';
 import {TabViewModule} from 'primeng/primeng';
 import {MultiSelectModule} from 'primeng/primeng';
+import {MaterialModule} from "@angular/material";
 @NgModule({
-  imports: [CommonModule, RouterModule, HttpModule, FormsModule, ReactiveFormsModule, DropdownModule],
+  imports: [CommonModule, RouterModule, HttpModule, FormsModule, ReactiveFormsModule, DropdownModule, MaterialModule],
   declarations: [FadeInDirective, ProcessingDirective,
     ImageUploader, DocumentUploader, FormControlMessages,
     Alert, TinyEditor, ACCORDION_PROVIDERS,
@@ -45,18 +42,22 @@ import {MultiSelectModule} from 'primeng/primeng';
     Alert, TinyEditor, ACCORDION_PROVIDERS,
     CommonModule, FormsModule, HttpModule, ReactiveFormsModule, DropdownModule,
     PasswordModule, RouterModule, CalendarModule, PaginatorModule, DialogModule, ChartModule,
-    MessagesModule, TabViewModule, MdCoreModule, MdSlideToggleModule,
-    MdButtonModule, MdCheckboxModule, MultiSelectModule]
+    MessagesModule, TabViewModule, MultiSelectModule, MaterialModule]
 })
 export class SharedModule {
+
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
       providers: [{
         provide: Http,
-        useFactory: (xhrBackend: XHRBackend, requestOptions: RequestOptions, router: Router) => new HttpInterceptor(xhrBackend, requestOptions, router),
+        useFactory: httpFactory,
         deps: [XHRBackend, RequestOptions, Router]
       }, FileOperrationService]
     };
   }
+}
+
+export function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, router: Router) {
+  return new HttpInterceptor(xhrBackend, requestOptions, router);
 }

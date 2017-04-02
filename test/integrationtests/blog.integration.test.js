@@ -1,7 +1,3 @@
-/**
- * Created by lakhe on 6/29/16.
- */
-
 (function(){
     "use strict";
 

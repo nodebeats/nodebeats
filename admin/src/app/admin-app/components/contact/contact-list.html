@@ -4,7 +4,7 @@
         <h1 class="page-header">
             Contact List </h1>
         <ol class="breadcrumb">
-            <li><i class="fa fa-dashboard"></i> <a [routerLink]="['/admin']">Dashboard</a>
+            <li><i class="fa fa-dashboard"></i> <a [routerLink]="['/dashboard']">Dashboard</a>
             </li>
 
             <li class="active">
@@ -24,7 +24,8 @@
                     <th>SN</th>
                     <th>Full Name</th>
                     <th>Email</th>
-                    <th>Contact Number</th>
+                  <th>Contact Number</th>
+                  <th>Date</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -33,7 +34,8 @@
                     <td>{{preIndex+(i+1)}}</td>
                     <td>{{obj.fullName}}</td>
                     <td>{{obj.email}}</td>
-                    <td>{{obj.contactNumber}}</td>
+                  <td>{{obj.contactNumber}}</td>
+                  <td>{{changeDateFormat(obj.addedOn)}}</td>
                     <td class="action">
                         <a class="fa fa-eye" (click)="showDetail(obj._id)" title="View"
                            href="javascript:void(0)"></a>

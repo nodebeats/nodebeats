@@ -145,9 +145,27 @@ a:hover {
 }
 
 #image-content-slider .img-wrapper {
+  height: 88vh;
   width: 100vw;
 }
 
+#hero-area {
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+#hero-area:before {
+  content: '';
+  z-index: 9;
+  background: rgba(255, 255, 255, 0.78);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 #hero-area .block {
   position: relative;
   z-index: 999;
@@ -166,7 +184,7 @@ a:hover {
   margin-bottom: 38px;
   line-height: 27px;
   text-transform: uppercase;
-  color: #FFF;
+  color: #666;
   font-family: 'Roboto', sans-serif;
   margin-top: 25px;
 }
@@ -192,14 +210,6 @@ a:hover {
   position: relative;
   color: #fff;
 }
-#image-content-slider .owl-theme .owl-controls{
-  margin-top: -50px;
-}
-
-#image-content-slider .owl-theme .owl-controls .owl-page span {
-  background: #FFF;
-}
-
 #call-to-action .block {
   position: relative;
   z-index: 99;
@@ -1293,11 +1303,4 @@ div.theme_reference {
 
 .html-content-about{
   margin: 40px 0;
-}
-
-#image-content-slider #hero-area{
-  position: absolute;
-  top: 100px;
-  padding: 0 11%;
-  mix-blend-mode: difference;
 }

@@ -37,6 +37,7 @@ export class TinyEditor implements AfterViewInit {
         selector: ".tinyMCE",
         forced_root_block: "p",
         verify_html: false,
+        valid_children : "+body[style],+div[style]",
         skin_url: '/assets/plugins/tinymce/skins/lightgray',
         plugins: ["code", 'advlist autolink lists link image charmap print preview anchor',
           'searchreplace visualblocks code fullscreen',

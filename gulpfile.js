@@ -30,41 +30,16 @@
             'lib/views/**/*.*',
             'public/**/*.css',
             'adminapp/**/*.js'
-        ],
-        typescript = require('gulp-typescript'),
-        sourcemaps = require('gulp-sourcemaps');
-// Get tasks from gulp-tasks directory
-    require('require-dir')('gulp-tasks');
+        ];
 
 
     gulp.task("default", ["nodemon"], function () {
-        //gulp.start("watch:clientFiles");
-        // gulp.start("watch:js");
-        // gulp.start('test');
-        //gulp.start("watch:ts");
-        // gulp.start("compile-ts");
 
     });
-    //var tsProject = typescript.createProject('tsconfig.json');
-    // gulp.task("compile-ts", function () {
-    //     return tsProject.src("app/**/*.ts")
-    //         .pipe(sourcemaps.init())
-    //         .pipe(typescript(
-    //             tsProject
-    //         ))
-    //         .pipe(sourcemaps.write('app/maps', {includeContent: false}))
-    //         .pipe(gulp.dest('app/build'));
-    // });
     gulp.task("copy-html", function () {
         return gulp.src(['app/**/**.html', 'app/**/**.css'])
             .pipe(gulp.dest('app/build'));
     });
-
-    // gulp.task('compile-ts', function(){
-    //        gulp.src('/adminapp/**/*.ts')
-    //            .pipe(typescript(n))
-    //            .pipe(gulp.dest('adminapp/'));
-    //    });
     gulp.task("browser-sync", function () {
         browserSync({
             proxy: "http://localhost:3000",
@@ -112,13 +87,6 @@
             browserSync.reload();
         });
     });
-    // gulp.task("watch:ts", function () {
-    //     gulp.watch('adminapp/**/*.ts', ['compile-ts']);
-    //     browserSync.watch('adminapp/**/*.ts').on('change', function () {
-    //         browserSync.reload();
-    //     });
-    //
-    // });
     gulp.task('lint', function () {
         gulp.src('./**/*.js')
             .pipe(jshint());

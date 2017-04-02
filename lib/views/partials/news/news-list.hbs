@@ -2,7 +2,7 @@
 
     {{#checkAndBindList lstNews}}
         <div class="blog-post-image">
-            <a href="{{hostUrl}}/news-detail/{{dateFormatter addedOn}}/{{urlSlog}}">
+            <a href="{{hostUrl}}/news-detail/{{dateFormatter addedOn '/'}}/{{urlSlog}}">
                 {{#checkAndBindList image}}
                     <img class="img-responsive"
                          src="{{cloudinaryUrl imageName option='{"width":"940", "height":"300", "crop":"crop"}'}}"
@@ -12,17 +12,17 @@
         </div>
         <div class="blog-content">
             <h2 class="blogpost-title">
-                <a href="{{hostUrl}}/news-detail/{{dateFormatter addedOn}}/{{urlSlog}}">{{newsTitle}}</a>
+                <a href="{{hostUrl}}/news-detail/{{dateFormatter addedOn '/'}}/{{urlSlog}}">{{newsTitle}}</a>
             </h2>
             <div class="blog-meta">
-                <span>{{date addedOn}}</span>
+                <span>{{dateFormatter addedOn '-'}}</span>
                 <span>by <a href="">{{newsAuthor}}</a></span>
                 <span>Page Views:  <a href="">{{pageViews}}</a></span>
             </div>
             <p>
                 {{{newsSummary}}}
             </p>
-            <a href="{{hostUrl}}/news-detail/{{dateFormatter addedOn}}/{{urlSlog}}" class="btn btn-dafault btn-details">Continue
+            <a href="{{hostUrl}}/news-detail/{{dateFormatter addedOn  '/'}}/{{urlSlog}}" class="btn btn-dafault btn-details">Continue
                 Reading</a>
         </div>
     {{else}}

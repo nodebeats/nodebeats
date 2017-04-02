@@ -6,7 +6,7 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i> <a [routerLink]="['/admin']">Dashboard</a>
+                <i class="fa fa-dashboard"></i> <a [routerLink]="['/dashboard']">Dashboard</a>
             </li>
             <li class="active">
                 <i class="fa fa-user"></i> User Registration
@@ -22,7 +22,7 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <label>First Name</label>
-                    <input class="form-control" [(ngModel)]="objUser.firstName" name="firstName"
+                    <input class="form-control" [(ngModel)]="objUser.firstName"
                            placeholder="Enter First Name" [formControl]="userForm.controls['firstName']">
                     <control-messages [isSubmitted]="isSubmitted"
                                       [control]="userForm.controls['firstName']"></control-messages>
@@ -30,12 +30,12 @@
                 <div class="form-group">
                     <label>Middle Name</label>
                     <input class="form-control" formControlName="middleName" [(ngModel)]="objUser.middleName"
-                           name="middleName"
+
                            placeholder="Enter Middle Name">
                 </div>
                 <div class="form-group">
                     <label>Last Name</label>
-                    <input class="form-control" [(ngModel)]="objUser.lastName" required name="lastName"
+                    <input class="form-control" [(ngModel)]="objUser.lastName" required
                            placeholder="Enter Last Name" [formControl]="userForm.controls['lastName']">
                     <control-messages [isSubmitted]="isSubmitted"
                                       [control]="userForm.controls['lastName']"></control-messages>
@@ -44,7 +44,7 @@
                 <div class="form-group">
                     <label>Email</label>
                     <input class="form-control" type="email" [(ngModel)]="objUser.email" required
-                           name="email" placeholder="email@example.com" [formControl]="userForm.controls['email']">
+                           placeholder="email@example.com" [formControl]="userForm.controls['email']">
                     <control-messages [isSubmitted]="isSubmitted"
                                       [control]="userForm.controls['email']"></control-messages>
 
@@ -125,7 +125,7 @@
 
                 <div class="form-group">
                     <image-uploader [canvasSize]="canvasSize" [imageFormControl]="imageFormControl"
-                                    (deleteImageEvent)="deleteImage($event)"
+                                    (deleteImageEvent)="deleteImage()"
                                     [imageName]="objUser.imageName" [drawImagePath]="drawImagePath"
                                     [isSubmitted]="isSubmitted"
                                     (fileSelectedEvent)="changeFile($event)"></image-uploader>

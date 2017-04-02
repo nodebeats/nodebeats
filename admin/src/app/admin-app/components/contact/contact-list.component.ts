@@ -63,12 +63,22 @@ export class ContactListCompoent implements OnInit {
       jQuery('.tablesorter').tablesorter({
         headers: {
           3: {sorter: false},
-          4: {sorter: false}
+          4: {sorter: false},
+          5: {sorter: false}
         }
       });
     }, 50);
   }
-
+  changeDateFormat(data:string) {
+    return new Date(data).toLocaleString('en-GB', {
+      month: "numeric",
+      year: "numeric",
+      day: "numeric",
+      hour12: false,
+      hour: "numeric",
+      minute: "numeric"
+    });
+  }
   delete(id:string) {
     swal({
         title: "Are you sure?",

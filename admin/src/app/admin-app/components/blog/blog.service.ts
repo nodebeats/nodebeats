@@ -91,7 +91,6 @@ export class BlogService {
                         observer.complete();
                     } else {
                         observer.error(JSON.parse(xhr.response));
-                        console.log(xhr.response);
                     }
                 }
             };
@@ -121,7 +120,6 @@ export class BlogService {
                         observer.complete();
                     } else {
                         observer.error(xhr.response);
-                        console.log(xhr.response);
                     }
                 }
             };
@@ -192,7 +190,6 @@ export class BlogService {
                         observer.complete();
                     } else {
                         observer.error(JSON.parse(xhr.response))
-                        console.log(xhr.response);
                     }
                 }
             };
@@ -222,7 +219,6 @@ export class BlogService {
                         observer.complete();
                     } else {
                         observer.error(JSON.parse(xhr.response));
-                        console.log(xhr.response);
                     }
                 }
             };
@@ -295,7 +291,6 @@ export class BlogService {
      End Blog Meta
      */
     handleError(error) {
-        console.log(error.json());
         return Observable.throw(error.json() || 'server error');
     }
 

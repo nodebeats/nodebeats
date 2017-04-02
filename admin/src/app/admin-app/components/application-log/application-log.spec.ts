@@ -9,6 +9,7 @@ import {
 } from '@angular/core/testing'
 import {SharedModule} from "../../../shared/shared.module";
 import {RouterTestingModule} from "@angular/router/testing";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 class MockService extends ApplicationLogService {
 
@@ -45,7 +46,7 @@ class MockService extends ApplicationLogService {
 describe('Application Log', ()=> {
   beforeEach(()=> {
     TestBed.configureTestingModule({
-      imports: [SharedModule, RouterTestingModule],
+      imports: [BrowserAnimationsModule,SharedModule, RouterTestingModule],
       declarations: [ApplicationLogComponent],
       providers: [
         {provide: ApplicationLogService, useClass: MockService}

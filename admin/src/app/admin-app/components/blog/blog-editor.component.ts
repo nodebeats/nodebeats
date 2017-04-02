@@ -1,8 +1,6 @@
  import {Component, EventEmitter, Output, Input, AfterViewInit, OnInit} from '@angular/core';
-import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {BlogTagModel, BlogModel, BlogCategoryResponse} from "./blog.model";
 import {BlogService} from "./blog.service";
-import{TinyEditor} from '../../../shared/components/tinymce.component';
 import {Config} from "../../../shared/configs/general.config";
 import {ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
 import  {Calendar} from "primeng/primeng";
@@ -30,7 +28,7 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
   file:File;
   fileName:string = "";
   drawImagePath:string = Config.DefaultWideImage;
-  imageFormControl:FormControl = new FormControl('', Validators.required);
+  imageFormControl:FormControl = new FormControl('');
   canvasSize:number = ImageCanvasSizeEnum.wide;
   /* End Image Upload handle */
 
@@ -51,8 +49,8 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
       "editorFormControl": this.editorFormControl,
       "blogCategory": ['', Validators.required],
       "tags": ['', Validators.required],
-      "bannerImageTitle": ['', Validators.required],
-      "bannerImageAltText": ['', Validators.required],
+      "bannerImageTitle": [''],
+      "bannerImageAltText": [''],
       "imageFormControl": this.imageFormControl,
       "status": [''],
       "active": ['']
@@ -154,7 +152,6 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
   /*Image Handler */
   changeFile(args) {
     this.file = args;
-    if (this.file)
       this.fileName = this.file.name;
   }
 
@@ -177,6 +174,7 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
           .subscribe(res=> {
               this.imageDeleted = true;
               this.objBlog.bannerImage = "";
+              this.fileName = "";
               this.drawImageToCanvas(Config.DefaultWideImage);
               swal("Deleted!", res.message, "success");
             },

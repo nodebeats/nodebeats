@@ -12,23 +12,23 @@ import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
   templateUrl: './image-slider-editor.html'
 })
 export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
-  objSlider:ImageSliderModel = new ImageSliderModel();
-  @Input() sliderId:string;
-  @Output() showSliderListEvent:EventEmitter<any> = new EventEmitter();
-  imageSliderForm:FormGroup;
-  isSubmitted:boolean = false;
+  objSlider: ImageSliderModel = new ImageSliderModel();
+  @Input() sliderId: string;
+  @Output() showSliderListEvent: EventEmitter<any> = new EventEmitter();
+  imageSliderForm: FormGroup;
+  isSubmitted: boolean = false;
 
   /* Image Upload Handle*/
-  imageDeleted:boolean = false;
-  file:File;
-  fileName:string = "";
-  drawImagePath:string = Config.DefaultImage;
-  imageFormControl:FormControl = new FormControl('', Validators.required);
-  canvasSize:number = ImageCanvasSizeEnum.small;
+  imageDeleted: boolean = false;
+  file: File;
+  fileName: string = "";
+  drawImagePath: string = Config.DefaultImage;
+  imageFormControl: FormControl = new FormControl('', Validators.required);
+  canvasSize: number = ImageCanvasSizeEnum.small;
   /* End Image Upload handle */
 
 
-  constructor(private _objService:ImageSliderService, private _formBuilder:FormBuilder) {
+  constructor(private _objService: ImageSliderService, private _formBuilder: FormBuilder) {
     this.imageSliderForm = _formBuilder.group({
       "imageTitle": ['', Validators.required],
       "imageAltText": ['', Validators.required],
@@ -56,11 +56,11 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
         error => this.errorMessage(error));
   }
 
-  bindDetail(objRes:ImageSliderModel) {
+  bindDetail(objRes: ImageSliderModel) {
     this.objSlider = objRes;
     this.fileName = this.objSlider.imageName;
     (<FormControl>this.imageSliderForm.controls['imageFormControl']).patchValue(this.fileName);
-    let path:string = "";
+    let path: string = "";
     if (this.objSlider.imageName) {
       var cl = Config.Cloudinary;
       path = cl.url(this.objSlider.imageName);
@@ -89,7 +89,7 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
     }
   }
 
-  resStatusMessage(objSave:any) {
+  resStatusMessage(objSave: any) {
     this.showSliderListEvent.emit(false); // is Form Canceled
     swal("Success !", objSave.message, "success")
 
@@ -100,7 +100,7 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
     this.showSliderListEvent.emit(isCanceled);
   }
 
-  errorMessage(objResponse:any) {
+  errorMessage(objResponse: any) {
     swal("Alert !", objResponse.message, "info");
 
   }
@@ -108,15 +108,14 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
   /*Image handler */
   changeFile(args) {
     this.file = args;
-    if (this.file)
-      this.fileName = this.file.name;
+    this.fileName = this.file.name;
   }
 
-  drawImageToCanvas(path:string) {
+  drawImageToCanvas(path: string) {
     this.drawImagePath = path;
   }
 
-  deleteImage(id:string) {
+  deleteImage(id: string) {
     swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Image !",
@@ -131,6 +130,7 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
           .subscribe(res=> {
               this.imageDeleted = true;
               this.objSlider.imageName = "";
+              this.fileName = "";
               this.drawImageToCanvas(Config.DefaultImage);
               swal("Deleted!", res.message, "success");
             },

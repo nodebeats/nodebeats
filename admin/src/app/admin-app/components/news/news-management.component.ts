@@ -7,8 +7,8 @@ import{Component}from'@angular/core';
     templateUrl: './news-management.html'
 })
 export class NewsManagementComponent {
-    isCatList:boolean = true;
-    isNewsList:boolean = false;
+    isCatList:boolean = false;
+    isNewsList:boolean = true;
     isImageList:boolean = false;
     id:string;
     isCanceled:boolean = false;
@@ -45,11 +45,11 @@ export class NewsManagementComponent {
     public tabSwitch(args) {
         if (1 == args.index) {
             this.hideAll();
-            this.isNewsList = true;
+          this.isCatList = true;
         }
         else {
             this.hideAll();
-            this.isCatList = true;
+          this.isNewsList = true;
         }
 
     }

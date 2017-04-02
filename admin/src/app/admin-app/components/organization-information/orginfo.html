@@ -1,174 +1,176 @@
 <!-- Page Heading -->
 <div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            Organization Information
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <i class="fa fa-dashboard"></i> <a [routerLink]="['/admin']">Dashboard</a>
-            </li>
-            <li class="active">
-                <i class="fa fa-building-o"></i> Organization Information
-            </li>
-        </ol>
-    </div>
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      Organization Information
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <i class="fa fa-dashboard"></i> <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="active">
+        <i class="fa fa-building-o"></i> Organization Information
+      </li>
+    </ol>
+  </div>
 </div>
 <!-- /.row -->
 
 <div class="row form-outer" fadeInDirective>
-    <div class="col-lg-12">
-        <alert [(displayed)]="objAlert.show" [type]="objAlert.type" [closeButton]="objAlert.closeButton">
-            <strong>{{objAlert.title}}!</strong> {{objAlert.message}}
-        </alert>
-    </div>
-    <div class="col-lg-12 form-wrapper">
-        <form role="form" novalidate [formGroup]="orgInfoForm" (ngSubmit)="saveOrgInfo()">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label>Organization Name</label>
-                    <input class="form-control" type="text" [(ngModel)]="objOrg.orgName"
-                           [formControl]="orgInfoForm.controls['orgName']"
-                           placeholder="Enter Organization Name">
-                    <control-messages [isSubmitted]="isSubmitted"
-                                      [control]="orgInfoForm.controls['orgName']"></control-messages>
+  <div class="col-lg-12">
+    <alert [(displayed)]="objAlert.show" [type]="objAlert.type" [closeButton]="objAlert.closeButton">
+      <strong>{{objAlert.title}}!</strong> {{objAlert.message}}
+    </alert>
+  </div>
+  <div class="col-lg-12 form-wrapper">
+    <form role="form" novalidate [formGroup]="orgInfoForm" (ngSubmit)="saveOrgInfo()">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label>Organization Name</label>
+          <input class="form-control" type="text" [(ngModel)]="objOrg.orgName"
+                 [formControl]="orgInfoForm.controls['orgName']"
+                 placeholder="Enter Organization Name">
+          <control-messages [isSubmitted]="isSubmitted"
+                            [control]="orgInfoForm.controls['orgName']"></control-messages>
 
-                </div>
-                <div class="form-group">
-                    <label>County</label>
-                    <select class="form-control" [(ngModel)]="objOrg.country"
-                            [formControl]="orgInfoForm.controls['country']">
-                        <option value="">Select Country</option>
-                        <option *ngFor="let obj of objCountyList" [value]="obj.name">{{obj.name}}</option>
-                    </select>
-                    <control-messages [isSubmitted]="isSubmitted"
-                                      [control]="orgInfoForm.controls['country']"></control-messages>
-                </div>
-                <div class="form-group">
-                    <label>Region</label>
-                    <input class="form-control" type="text" [(ngModel)]="objOrg.region"
-                           formControlName="region"
-                           placeholder="Enter Region">
-                </div>
-                <div class="form-group">
-                    <label>State</label>
-                    <input class="form-control" type="text" [(ngModel)]="objOrg.state"
-                          formControlName="state"  placeholder="Enter State">
-                </div>
-                <div class="form-group">
-                    <label>City</label>
-                    <input class="form-control" type="text" [(ngModel)]="objOrg.city"
-                           [formControl]="orgInfoForm.controls['city']" placeholder="Enter City">
-                    <control-messages [isSubmitted]="isSubmitted"
-                                      [control]="orgInfoForm.controls['city']"></control-messages>
-                </div>
-                <div class="form-group">
-                    <label>Street Address</label>
-                    <input class="form-control" [formControl]="orgInfoForm.controls['streetAddress']" type="text"
-                            [(ngModel)]="objOrg.streetAddress"
-                           placeholder="Enter Street Address">
-                    <control-messages  [isSubmitted]="isSubmitted"
-                                      [control]="orgInfoForm.controls['streetAddress']"></control-messages>
-                </div>
-                <div class="form-group">
-                    <label>Address Line</label>
-                    <input class="form-control" type="text" formControlName="addressLine"
-                           [(ngModel)]="objOrg.addressLine"
-                           placeholder="Enter Address Line">
-                </div>
-                <div class="form-group">
-                    <label>Zip Address</label>
-                    <input class="form-control" type="text" formControlName="zipAddress" [(ngModel)]="objOrg.zipAddress"
-                           placeholder="Enter Zip Address">
-                </div>
+        </div>
+        <div class="form-group">
+          <label>County</label>
+          <select class="form-control" [(ngModel)]="objOrg.country"
+                  [formControl]="orgInfoForm.controls['country']">
+            <option value="">Select Country</option>
+            <option *ngFor="let obj of objCountyList" [value]="obj.name">{{obj.name}}</option>
+          </select>
+          <control-messages [isSubmitted]="isSubmitted"
+                            [control]="orgInfoForm.controls['country']"></control-messages>
+        </div>
+        <div class="form-group">
+          <label>Region</label>
+          <input class="form-control" type="text" [(ngModel)]="objOrg.region"
+                 formControlName="region"
+                 placeholder="Enter Region">
+        </div>
+        <div class="form-group">
+          <label>State</label>
+          <input class="form-control" type="text" [(ngModel)]="objOrg.state"
+                 formControlName="state" placeholder="Enter State">
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input class="form-control" type="text" [(ngModel)]="objOrg.city"
+                 [formControl]="orgInfoForm.controls['city']" placeholder="Enter City">
+          <control-messages [isSubmitted]="isSubmitted"
+                            [control]="orgInfoForm.controls['city']"></control-messages>
+        </div>
+        <div class="form-group">
+          <label>Street Address</label>
+          <input class="form-control" [formControl]="orgInfoForm.controls['streetAddress']" type="text"
+                 [(ngModel)]="objOrg.streetAddress"
+                 placeholder="Enter Street Address">
+          <control-messages [isSubmitted]="isSubmitted"
+                            [control]="orgInfoForm.controls['streetAddress']"></control-messages>
+        </div>
+        <div class="form-group">
+          <label>Address Line</label>
+          <input class="form-control" type="text" formControlName="addressLine"
+                 [(ngModel)]="objOrg.addressLine"
+                 placeholder="Enter Address Line">
+        </div>
+        <div class="form-group">
+          <label>Zip Address</label>
+          <input class="form-control" type="text" formControlName="zipAddress" [(ngModel)]="objOrg.zipAddress"
+                 placeholder="Enter Zip Address">
+        </div>
 
-                <div class="form-group">
-                    <label>Postal Code</label>
-                    <input class="form-control" type="text" formControlName="postalCode" [(ngModel)]="objOrg.postalCode"
-                           placeholder="Enter Postal Code">
+        <div class="form-group">
+          <label>Postal Code</label>
+          <input class="form-control" type="text" formControlName="postalCode" [(ngModel)]="objOrg.postalCode"
+                 placeholder="Enter Postal Code">
 
-                </div>
-                <div class="form-group">
-                    <label>Organization Email</label>
-                    <input class="form-control" [formControl]="orgInfoForm.controls['organizationEmail']"
-                            type="text" [(ngModel)]="objOrg.organizationEmail"
-                           placeholder="Enter Organization Email">
-                    <control-messages [isSubmitted]="isSubmitted" [control]="orgInfoForm.controls['organizationEmail']"></control-messages>
-                </div>
+        </div>
+        <div class="form-group">
+          <label>Organization Email</label>
+          <input class="form-control" [formControl]="orgInfoForm.controls['organizationEmail']"
+                 type="text" [(ngModel)]="objOrg.organizationEmail"
+                 placeholder="Enter Organization Email">
+          <control-messages [isSubmitted]="isSubmitted"
+                            [control]="orgInfoForm.controls['organizationEmail']"></control-messages>
+        </div>
 
-                <div class="form-group">
-                    <label>Fax Number</label>
-                    <input class="form-control" formControlName="faxNumber" type="text" [(ngModel)]="objOrg.faxNumber"
-                           placeholder="Enter Fax Number">
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input class="form-control" formControlName="phoneNumber" type="text" [(ngModel)]="objOrg.phoneNumber"
-                           placeholder="Enter Phone Number">
-                </div>
-                <div class="form-group">
-                    <label>Mobile Number</label>
-                    <input class="form-control" formControlName="mobileNumber" type="text" [(ngModel)]="objOrg.mobileNumber"
-                           placeholder="Enter Mobile Number">
-                </div>
-                <div class="form-group">
-                    <label>Facebook Page URL <i class="fa fa-facebook color" aria-hidden="true"></i></label>
-                    <input class="form-control" formControlName="fbUrl" type="text" [(ngModel)]="objOrg.facebookURL"
-                           placeholder="Enter Facebook Page URL">
-                    <control-messages [control]="orgInfoForm.controls['fbUrl']"></control-messages>
-                </div>
-                <div class="form-group">
-                    <label>Twitter URL <i class="fa fa-twitter color" aria-hidden="true"></i></label>
-                    <input class="form-control" formControlName="twitterUrl" type="text" [(ngModel)]="objOrg.twitterURL"
-                           placeholder="Enter Twitter URL">
-                    <control-messages [control]="orgInfoForm.controls['twitterUrl']"></control-messages>
-                </div>
-                <div class="form-group">
-                    <label>Google Plus URL <i class="fa fa-google-plus color" aria-hidden="true"></i></label>
-                    <input class="form-control" formControlName="gplusUrl" type="text" [(ngModel)]="objOrg.googlePlusURL"
-                           placeholder="Enter Google Plus URL">
-                    <control-messages [control]="orgInfoForm.controls['gplusUrl']"></control-messages>
-                </div>
-                <div class="form-group">
-                    <label>LinkedIn Page URL <i class="fa fa-linkedin color" aria-hidden="true"></i></label>
-                    <input class="form-control" formControlName="linkendinUrl" type="text" [(ngModel)]="objOrg.linkedInURL"
-                           placeholder="Enter LinkedIn Page URL">
-                    <control-messages [control]="orgInfoForm.controls['linkendinUrl']"></control-messages>
-                </div>
-                <div class="form-group">
-                    <label>Youtube URL <i class="fa fa-youtube-play color" aria-hidden="true"></i></label>
-                    <input class="form-control" formControlName="youtubeURL" type="text" [(ngModel)]="objOrg.youtubeURL"
-                           placeholder="Enter Youtube Channel URL">
-                    <control-messages [control]="orgInfoForm.controls['youtubeURL']"></control-messages>
-                </div>
-                <div class="form-group">
-                    <label>Instagram URL <i class="fa fa-instagram color" aria-hidden="true"></i></label>
-                    <input class="form-control" formControlName="instagramURL" type="text" [(ngModel)]="objOrg.instagramURL"
-                           placeholder="Enter Instagram  URL">
-                    <control-messages [control]="orgInfoForm.controls['instagramURL']"></control-messages>
-                </div>
+        <div class="form-group">
+          <label>Fax Number</label>
+          <input class="form-control" formControlName="faxNumber" type="text" [(ngModel)]="objOrg.faxNumber"
+                 placeholder="Enter Fax Number">
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input class="form-control" formControlName="phoneNumber" type="text" [(ngModel)]="objOrg.phoneNumber"
+                 placeholder="Enter Phone Number">
+        </div>
+        <div class="form-group">
+          <label>Mobile Number</label>
+          <input class="form-control" formControlName="mobileNumber" type="text" [(ngModel)]="objOrg.mobileNumber"
+                 placeholder="Enter Mobile Number">
+        </div>
+        <div class="form-group">
+          <label>Facebook Page URL <i class="fa fa-facebook color" aria-hidden="true"></i></label>
+          <input class="form-control" formControlName="fbUrl" type="text" [(ngModel)]="objOrg.facebookURL"
+                 placeholder="Enter Facebook Page URL">
+          <control-messages [control]="orgInfoForm.controls['fbUrl']"></control-messages>
+        </div>
+        <div class="form-group">
+          <label>Twitter URL <i class="fa fa-twitter color" aria-hidden="true"></i></label>
+          <input class="form-control" formControlName="twitterUrl" type="text" [(ngModel)]="objOrg.twitterURL"
+                 placeholder="Enter Twitter URL">
+          <control-messages [control]="orgInfoForm.controls['twitterUrl']"></control-messages>
+        </div>
+        <div class="form-group">
+          <label>Google Plus URL <i class="fa fa-google-plus color" aria-hidden="true"></i></label>
+          <input class="form-control" formControlName="gplusUrl" type="text" [(ngModel)]="objOrg.googlePlusURL"
+                 placeholder="Enter Google Plus URL">
+          <control-messages [control]="orgInfoForm.controls['gplusUrl']"></control-messages>
+        </div>
+        <div class="form-group">
+          <label>LinkedIn Page URL <i class="fa fa-linkedin color" aria-hidden="true"></i></label>
+          <input class="form-control" formControlName="linkendinUrl" type="text" [(ngModel)]="objOrg.linkedInURL"
+                 placeholder="Enter LinkedIn Page URL">
+          <control-messages [control]="orgInfoForm.controls['linkendinUrl']"></control-messages>
+        </div>
+        <div class="form-group">
+          <label>Youtube URL <i class="fa fa-youtube-play color" aria-hidden="true"></i></label>
+          <input class="form-control" formControlName="youtubeURL" type="text" [(ngModel)]="objOrg.youtubeURL"
+                 placeholder="Enter Youtube Channel URL">
+          <control-messages [control]="orgInfoForm.controls['youtubeURL']"></control-messages>
+        </div>
+        <div class="form-group">
+          <label>Instagram URL <i class="fa fa-instagram color" aria-hidden="true"></i></label>
+          <input class="form-control" formControlName="instagramURL" type="text" [(ngModel)]="objOrg.instagramURL"
+                 placeholder="Enter Instagram  URL">
+          <control-messages [control]="orgInfoForm.controls['instagramURL']"></control-messages>
+        </div>
 
-                <div class="form-group">
-                    <label>Organization's Slogan</label>
-                    <input class="form-control" formControlName="slogan" type="text" [(ngModel)]="objOrg.slogan"
-                           placeholder="Enter Organization's Slogan">
-                </div>
-                <div class="form-group">
-                    <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize"
-                                    [imageFormControl]="imageFormControl"
-                                    (deleteImageEvent)="deleteImage($event)"
-                                    [imageName]="fileName" [drawImagePath]="drawImagePath"
-                                    (fileSelectedEvent)="changeFile($event)"></image-uploader>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="col-lg-12">
-                <button type="submit" class="btn btn-primary" processing><i class="fa fa-floppy-o"></i>  Save</button>
-            </div>
-        </form>
-    </div>
+        <div class="form-group">
+          <label>Organization's Slogan</label>
+          <input class="form-control" formControlName="slogan" type="text" [(ngModel)]="objOrg.slogan"
+                 placeholder="Enter Organization's Slogan">
+        </div>
+        <div class="form-group">
+          <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize"
+                          [imageFormControl]="imageFormControl"
+                          allowDelete="true"
+                          (deleteImageEvent)="deleteImage($event)"
+                          [imageName]="fileName" [drawImagePath]="drawImagePath"
+                          (fileSelectedEvent)="changeFile($event)"></image-uploader>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-lg-12">
+        <button type="submit" class="btn btn-primary" processing><i class="fa fa-floppy-o"></i> Save</button>
+      </div>
+    </form>
+  </div>
 
 </div>
 

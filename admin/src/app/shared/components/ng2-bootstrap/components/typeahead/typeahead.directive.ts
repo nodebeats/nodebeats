@@ -70,6 +70,7 @@ export class TypeaheadDirective implements OnInit {
       // esc
       if (e.keyCode === 27) {
         this.hide();
+        (this.ngControl.control as FormControl).setValue("");
         return;
       }
 
@@ -88,6 +89,8 @@ export class TypeaheadDirective implements OnInit {
       // enter
       if (e.keyCode === 13) {
         this.container.selectActiveMatch();
+        this.hide();
+        (this.ngControl.control as FormControl).setValue("");
         return;
       }
     }
@@ -171,7 +174,7 @@ export class TypeaheadDirective implements OnInit {
     let valueStr:string = TypeaheadUtils.getValueFromObject(value, this.typeaheadOptionField);
     this.ngControl.viewToModelUpdate(valueStr);
     (this.ngControl.control as FormControl).setValue(valueStr);
-    this.hide();
+    //this.hide();
   }
 
   public get matches():Array<any> {
@@ -212,6 +215,7 @@ export class TypeaheadDirective implements OnInit {
     if (this.container) {
       this.popup.destroy();
       this.container = void 0;
+
     }
   }
 

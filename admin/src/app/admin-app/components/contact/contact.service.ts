@@ -2,7 +2,6 @@ import {ContactModel, ContactResponse} from './contact.model';
 import {Injectable} from "@angular/core";
 import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import{Config} from "../../../shared/configs/general.config";
 import{ API_URL} from "../../../shared/configs/env.config";
 @Injectable()
 export class ContactService {
@@ -36,7 +35,6 @@ export class ContactService {
     }
 
     handleError(error) {
-        console.log(error.json());
         return Observable.throw(error.json() || 'server error');
     }
 

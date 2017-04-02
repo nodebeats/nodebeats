@@ -1,3 +1,4 @@
+///<reference path="components/email-template/email-template-editor.component.ts"/>
 import {Routes, RouterModule} from '@angular/router';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {UserListComponent} from "./components/user-management/user-list.component";
@@ -20,51 +21,72 @@ import {CommentSettingComponent}from './components/comment-setting/comment-setti
 import {UserProfileManagementComponent} from './components/user-profile/user-management.component';
 import{AdminAppComponent} from  './admin-app.component';
 import {AuthGuardService} from "../login-app/auth.guard.service";
-import {EmailTemplateRoutes} from "./components/email-template/email-template.route";
 import {PartnerComponent} from "./components/partner/partner-list.component";
 import {RoleComponent} from "./components/role-management/role-list.component";
 import {ApiAccessComponent} from "./components/api-access/api-access.component";
 import {TokenManagementComponent} from "./components/token-management/token-management.component";
+import {NgModule} from "@angular/core";
+import {EmailTemplateListComponent} from "./components/email-template/email-template-list.component";
+import {EmailTemplateEditorComponent} from "./components/email-template/email-template-editor.component";
 
-export const adminAppRoute:Routes = [
-    {
+export const adminAppRoute: Routes = [
+  {
+    path: '',
+    component: AdminAppComponent,
+    canActivate: [AuthGuardService],
+    children: [
+      {
         path: '',
-        component: AdminAppComponent,
-        canActivate: [AuthGuardService],
+        canActivateChild: [AuthGuardService],
         children: [
-            {
-                path: '',
-                canActivateChild: [AuthGuardService],
-                children: [
-                    {path: 'dashboard', component: DashboardComponent},
-                    {path: 'user-management', component: UserListComponent},
-                    {path: 'role', component: RoleComponent},
-                    {path: 'access', component: ApiAccessComponent},
-                    {path: 'contact', component: ContactListCompoent},
-                    {path: 'email-service', component: EmailServiceComponent},
-                    {path: 'cloudinary', component: CloudinarySettingComponent},
-                    {path: 'blog', component: BlogManagementComponent},
-                    ...EmailTemplateRoutes,
-                    {path: 'analytics', component: GoogleAnalyticsComponent},
-                    {path: 'organization', component: OrganizationInfoComponent},
-                    {path: 'news', component: NewsManagementComponent},
-                    {path: 'imageslider', component: ImageSliderComponent},
-                    {path: 'googlemap', component: GoogleMapComponent},
-                    {path: 'testimonial', component: TestimonialComponent},
-                    {path: 'imagegallery', component: ImageGalleryComponent},
-                    {path: 'team', component: TeamManagementComponent},
-                    {path: 'event', component: EventComponent},
-                    {path: 'html', component: HtmlContentComponent},
-                    {path: 'errorlog', component: ApplicationLogComponent},
-                    {path: 'partner', component: PartnerComponent},
-                    {path: 'comment', component: CommentSettingComponent},
-                    {path: 'profile', component: UserProfileManagementComponent},
-                    {path: 'token', component: TokenManagementComponent},
-                    {path: '', redirectTo: 'dashboard', pathMatch: "full"}
-                ]
-            }
+          {path: 'dashboard', component: DashboardComponent},
+          {path: 'user-management', component: UserListComponent},
+          {path: 'role', component: RoleComponent},
+          {path: 'access', component: ApiAccessComponent},
+          {path: 'contact', component: ContactListCompoent},
+          {path: 'email-service', component: EmailServiceComponent},
+          {path: 'cloudinary', component: CloudinarySettingComponent},
+          {path: 'blog', component: BlogManagementComponent},
+          {path: 'analytics', component: GoogleAnalyticsComponent},
+          {path: 'organization', component: OrganizationInfoComponent},
+          {path: 'news', component: NewsManagementComponent},
+          {path: 'imageslider', component: ImageSliderComponent},
+          {path: 'googlemap', component: GoogleMapComponent},
+          {path: 'testimonial', component: TestimonialComponent},
+          {path: 'imagegallery', component: ImageGalleryComponent},
+          {
+            path: 'email-template',
+            children: [
+              {path: '', component: EmailTemplateListComponent},
+              {path: 'email-template-editor', component: EmailTemplateEditorComponent},
+              {
+                path: 'email-template-editor/:id', component: EmailTemplateEditorComponent
+              }
+            ]
+          },
+          {path: 'team', component: TeamManagementComponent},
+          {path: 'event', component: EventComponent},
+          {path: 'html', component: HtmlContentComponent},
+          {path: 'errorlog', component: ApplicationLogComponent},
+          {path: 'partner', component: PartnerComponent},
+          {path: 'comment', component: CommentSettingComponent},
+          {path: 'profile', component: UserProfileManagementComponent},
+          {path: 'token', component: TokenManagementComponent},
+          {path: '', redirectTo: 'dashboard', pathMatch: "full"}
         ]
-    }
+      }
+    ]
+  }
 
 ];
-export const adminAppRouting = RouterModule.forChild(adminAppRoute);
+
+@NgModule({
+  imports: [
+    RouterModule.forChild(adminAppRoute)
+  ],
+  exports: [
+    RouterModule
+  ]
+})
+export class adminAppRouting {
+}

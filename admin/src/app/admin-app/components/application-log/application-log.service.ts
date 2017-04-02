@@ -55,7 +55,6 @@ export class ApplicationLogService {
     }
 
     handleError(error:Response) {
-        console.log(error.json());
         return Observable.throw(error.json() || 'server error');
     }
 

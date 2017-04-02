@@ -3,7 +3,6 @@ import {ApiAccessModel} from "./api-access.model";
 import {ApiAccessService} from "./api-access.service";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {RoleService} from "../role-management/role.service";
-import {RoleModel} from "../role-management/role.model";
 
 @Component({
   selector: 'api-access-editor',
@@ -11,16 +10,16 @@ import {RoleModel} from "../role-management/role.model";
 })
 
 export class ApiAccessEditorComponent implements OnInit {
-  objApiAccess:ApiAccessModel = new ApiAccessModel();
-  apiAccessForm:FormGroup;
-  isSubmitted:boolean = false;
+  objApiAccess: ApiAccessModel = new ApiAccessModel();
+  apiAccessForm: FormGroup;
+  isSubmitted: boolean = false;
   objRoleList = [];
-  objSelectedRole:any = null;
-  @Input() accessId:string;
-  @Output() showListEvent:EventEmitter<any> = new EventEmitter();
+  objSelectedRole: any = null;
+  @Input() accessId: string;
+  @Output() showListEvent: EventEmitter<any> = new EventEmitter();
 
 
-  constructor(private _objService:ApiAccessService, private roleService:RoleService, private _formBuilder:FormBuilder) {
+  constructor(private _objService: ApiAccessService, private roleService: RoleService, private _formBuilder: FormBuilder) {
     this.apiAccessForm = this._formBuilder.group({
         "routeApi": ['', Validators.required],
         "roleName": ['', Validators.required],
@@ -44,6 +43,7 @@ export class ApiAccessEditorComponent implements OnInit {
               //return objRole.roleName;
             });
             this.objRoleList = roles;
+            this.objSelectedRole = ["superadmin"];
             if (this.accessId)
               this.getAccessDetail();
           }
@@ -63,7 +63,7 @@ export class ApiAccessEditorComponent implements OnInit {
   saveApiAccess() {
     this.isSubmitted = true;
     if (this.apiAccessForm.valid) {
-      let selectedRole:string = "";
+      let selectedRole: string = "";
       let objAccessSave = new ApiAccessModel();
       objAccessSave = this.objApiAccess;
       if (this.apiAccessForm.controls["roleName"].value) {
@@ -83,13 +83,13 @@ export class ApiAccessEditorComponent implements OnInit {
     }
   }
 
-  resStatusMessage(res:any) {
+  resStatusMessage(res: any) {
     this.showListEvent.emit(false); // * isCanceled = false
 
     swal("Success !", res.message, "success")
   }
 
-  errorMessage(objResponse:any) {
+  errorMessage(objResponse: any) {
     swal("Alert !", objResponse.message, "info");
 
   }

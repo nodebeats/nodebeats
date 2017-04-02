@@ -1,7 +1,4 @@
-/**
- * Created by lakhe on 4/19/16.
- */
-    'use strict';
+'use strict';
 
 var cluster = require('cluster');
 var os = require('os');

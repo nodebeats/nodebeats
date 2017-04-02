@@ -1,13 +1,11 @@
 import {EmailTemplateModel, EmailTempalteResponse} from './email-template.model';
 import {Injectable} from "@angular/core";
 import {Http, Response} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import{Config} from "../../../shared/configs/general.config";
 import{ API_URL} from "../../../shared/configs/env.config";
+import {Observable} from "rxjs/Observable";
 @Injectable()
 export class EmailTemplateService {
     apiRoute:string = "emailtemplate";
-
 
     constructor(private _http:Http) {
 

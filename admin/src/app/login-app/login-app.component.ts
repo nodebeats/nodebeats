@@ -1,7 +1,7 @@
 import {Component, ViewContainerRef} from '@angular/core';
 @Component({
     selector: 'login-app',
-     templateUrl: 'login-app/login-index.html'
+     templateUrl: './login-index.html'
 })
 
 export class LoginAppComponent {

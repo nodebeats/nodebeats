@@ -3,15 +3,15 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm} from '@angular/forms';
 // import {isBlank} from '@angular/common/src/facade/lang';
 
 const KEYS = {
-    backspace: 8,
-    comma: 188,
-    enter: 13,
-    space: 32
+  backspace: 8,
+  comma: 188,
+  enter: 13,
+  space: 32
 };
 
 @Component({
-    selector: 'rl-tag-input',
-    template: `<rl-tag-input-item
+  selector: 'rl-tag-input',
+  template: `<rl-tag-input-item
     [text]="tag"
     [index]="index"
     [selected]="selectedTag === index"
@@ -27,13 +27,13 @@ const KEYS = {
     [placeholder]="placeholder"
     (paste)="inputPaste($event)"
     (keydown)="inputChanged($event)"
-    (blur)="inputBlurred($event)"
+    (blur)="inputBlurred()"
     (focus)="inputFocused()"
     [typeahead]="autoCompleteData"
      >
   </form>`,
 
-    styles: [`
+  styles: [`
     :host {
       display: block;
       box-shadow: 0 1px #ccc;
@@ -55,169 +55,169 @@ const KEYS = {
       border: 0;
     }
   `],
-    providers: [
-        {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => TagInputComponent), multi: true},
-    ]
+  providers: [
+    {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => TagInputComponent), multi: true},
+  ]
 })
 export class TagInputComponent implements ControlValueAccessor, OnInit, OnChanges {
-    @Input() addOnBlur:boolean = true;
-    @Input() addOnComma:boolean = true;
-    @Input() addOnEnter:boolean = true;
-    @Input() addOnPaste:boolean = true;
-    @Input() addOnSpace:boolean = false;
-    @Input() autoCompleteData:string[];
-    @Input() allowedTagsPattern:RegExp = /.+/;
-    @Input() ngModel:string[];
-    @Input() pasteSplitPattern:string = ',';
-    @Input() placeholder:string = 'Add a tag';
-    @HostBinding('class.ng2-tag-input-focus') isFocused;
-    @ViewChild('tagInputForm') tagInputForm:NgForm;
+  @Input() addOnBlur: boolean = true;
+  @Input() addOnComma: boolean = true;
+  @Input() addOnEnter: boolean = true;
+  @Input() addOnPaste: boolean = true;
+  @Input() addOnSpace: boolean = false;
+  @Input() autoCompleteData: string[];
+  @Input() allowedTagsPattern: RegExp = /.+/;
+  @Input() ngModel: string[];
+  @Input() pasteSplitPattern: string = ',';
+  @Input() placeholder: string = 'Add a tag';
+  @HostBinding('class.ng2-tag-input-focus') isFocused;
+  @ViewChild('tagInputForm') tagInputForm: NgForm;
 
-    public tagsList:string[] = [];
-    public inputValue:string = '';
-    public selectedTag:number;
-    private splitRegExp:RegExp;
+  public tagsList: string[] = [];
+  public inputValue: string = '';
+  public selectedTag: number;
+  private splitRegExp: RegExp;
 
-    constructor() {
+  constructor() {
+  }
+
+  ngOnInit() {
+    if (this.ngModel) {
+      this.tagsList = this.ngModel;
     }
+    this.onChange(this.tagsList);
+    this.splitRegExp = new RegExp(this.pasteSplitPattern);
+  }
 
-    ngOnInit() {
-        if (this.ngModel) {
-            this.tagsList = this.ngModel;
+  ngOnChanges() {
+    if (this.ngModel)
+      this.tagsList = this.ngModel;
+  }
+
+  inputChanged(event: KeyboardEvent): void {
+    console.log(this.tagInputForm.controls);
+    let key = event.keyCode;
+    switch (key) {
+      case KEYS.backspace:
+
+        this._handleBackspace();
+        break;
+
+      case KEYS.enter:
+        if (this.addOnEnter) {
+          this._addTags([this.inputValue.toLowerCase()]);
+          /*Custom for Nodebeats*/
+          // this._addTags([this.inputValue]);
+          event.preventDefault();
         }
-        this.onChange(this.tagsList);
-        this.splitRegExp = new RegExp(this.pasteSplitPattern);
-    }
+        break;
 
-    ngOnChanges() {
-        if (this.ngModel)
-            this.tagsList = this.ngModel;
-    }
-
-    inputChanged(event:KeyboardEvent):void {
-        console.log(this.tagInputForm.controls);
-        let key = event.keyCode;
-        switch (key) {
-            case KEYS.backspace:
-
-                this._handleBackspace();
-                break;
-
-            case KEYS.enter:
-                if (this.addOnEnter) {
-                    this._addTags([this.inputValue.toLowerCase()]);
-                    /*Custom for Nodebeats*/
-                    // this._addTags([this.inputValue]);
-                    event.preventDefault();
-                }
-                break;
-
-            case KEYS.comma:
-                if (this.addOnComma) {
-                    this._addTags([this.inputValue.toLowerCase()]);
-                    /*Custom for Nodebeats*/
-                    event.preventDefault();
-                }
-                break;
-
-            case KEYS.space:
-                if (this.addOnSpace) {
-                    this._addTags([this.inputValue.toLowerCase()]);
-                    /*Custom for Nodebeats*/
-                    event.preventDefault();
-                }
-                break;
-
-            default:
-                break;
+      case KEYS.comma:
+        if (this.addOnComma) {
+          this._addTags([this.inputValue.toLowerCase()]);
+          /*Custom for Nodebeats*/
+          event.preventDefault();
         }
-    }
+        break;
 
-    inputBlurred(event):void {
-        if (this.addOnBlur) {
-            this._addTags([this.inputValue.toLowerCase()]);
-            /*Custom for Nodebeats*/
-            // this._addTags([this.inputValue]);
+      case KEYS.space:
+        if (this.addOnSpace) {
+          this._addTags([this.inputValue.toLowerCase()]);
+          /*Custom for Nodebeats*/
+          event.preventDefault();
         }
-        this.isFocused = false;
+        break;
+
+      default:
+        break;
     }
+  }
 
-    inputFocused(event):void {
-        this.isFocused = true;
+  inputBlurred(): void {
+    if (this.addOnBlur) {
+      this._addTags([this.inputValue.toLowerCase()]);
+      /*Custom for Nodebeats*/
+      // this._addTags([this.inputValue]);
     }
+    this.isFocused = false;
+  }
 
-    inputPaste(event):void {
-        let clipboardData = event.clipboardData || (event.originalEvent && event.originalEvent.clipboardData);
-        let pastedString = clipboardData.getData('text/plain');
-        let tags = this._splitString(pastedString);
-        let tagsToAdd = tags.filter((tag) => this._isTagValid(tag));
-        this._addTags(tagsToAdd);
-        setTimeout(() => this._resetInput());
+  inputFocused(): void {
+    this.isFocused = true;
+  }
+
+  inputPaste(event): void {
+    let clipboardData = event.clipboardData || (event.originalEvent && event.originalEvent.clipboardData);
+    let pastedString = clipboardData.getData('text/plain');
+    let tags = this._splitString(pastedString);
+    let tagsToAdd = tags.filter((tag) => this._isTagValid(tag));
+    this._addTags(tagsToAdd);
+    setTimeout(() => this._resetInput());
+  }
+
+
+  private _splitString(tagString: string): string[] {
+    tagString = tagString.trim();
+    let tags = tagString.split(this.splitRegExp);
+    return tags.filter((tag) => !!tag);
+  }
+
+  private _isTagValid(tagString: string): boolean {
+    /*Custom for Nodebeats*/
+    if (this.tagsList.indexOf(tagString.toLowerCase()) == -1)
+      return this.allowedTagsPattern.test(tagString.toLowerCase());
+    else
+      return false;
+    // return this.allowedTagsPattern.test(tagString);
+  }
+
+  private _addTags(tags: string[]): void {
+    let validTags = tags.filter((tag) => this._isTagValid(tag));
+    this.tagsList = this.tagsList.concat(validTags.map(tag => tag.trim()));
+    this._resetSelected();
+    this._resetInput();
+    this.onChange(this.tagsList);
+  }
+
+  private _removeTag(tagIndexToRemove: number): void {
+    this.tagsList.splice(tagIndexToRemove, 1);
+    this._resetSelected();
+    this.onChange(this.tagsList);
+  }
+
+  private _handleBackspace(): void {
+    if (!this.inputValue.length && this.tagsList.length) {
+      if (this.selectedTag) {
+        this._removeTag(this.selectedTag);
+      } else {
+        this.selectedTag = this.tagsList.length - 1;
+      }
     }
+  }
 
+  private _resetSelected(): void {
+    this.selectedTag = null;
+  }
 
-    private _splitString(tagString:string):string[] {
-        tagString = tagString.trim();
-        let tags = tagString.split(this.splitRegExp);
-        return tags.filter((tag) => !!tag);
-    }
+  private _resetInput(): void {
+    this.tagInputForm.controls['tagInputField'].setValue('');
+  }
 
-    private _isTagValid(tagString:string):boolean {
-        /*Custom for Nodebeats*/
-        if (this.tagsList.indexOf(tagString.toLowerCase()) == -1)
-            return this.allowedTagsPattern.test(tagString.toLowerCase());
-        else
-            return false;
-        // return this.allowedTagsPattern.test(tagString);
-    }
+  /** Implemented as part of ControlValueAccessor. */
+  onChange: (value) => any = () => {
+  };
 
-    private _addTags(tags:string[]):void {
-        let validTags = tags.filter((tag) => this._isTagValid(tag));
-        this.tagsList = this.tagsList.concat(validTags.map(tag => tag.trim()));
-        this._resetSelected();
-        this._resetInput();
-        this.onChange(this.tagsList);
-    }
+  onTouched: () => any = () => {
+  };
 
-    private _removeTag(tagIndexToRemove:number):void {
-        this.tagsList.splice(tagIndexToRemove, 1);
-        this._resetSelected();
-        this.onChange(this.tagsList);
-    }
+  writeValue(value: any) {
+  }
 
-    private _handleBackspace():void {
-        if (!this.inputValue.length && this.tagsList.length) {
-            if (this.selectedTag) {
-                this._removeTag(this.selectedTag);
-            } else {
-                this.selectedTag = this.tagsList.length - 1;
-            }
-        }
-    }
+  registerOnChange(fn: any) {
+    this.onChange = fn;
+  }
 
-    private _resetSelected():void {
-        this.selectedTag = null;
-    }
-
-    private _resetInput():void {
-        this.tagInputForm.controls['tagInputField'].setValue('');
-    }
-
-    /** Implemented as part of ControlValueAccessor. */
-    onChange:(value) => any = () => {
-    };
-
-    onTouched:() => any = () => {
-    };
-
-    writeValue(value:any) {
-    }
-
-    registerOnChange(fn:any) {
-        this.onChange = fn;
-    }
-
-    registerOnTouched(fn:any) {
-        this.onTouched = fn;
-    }
+  registerOnTouched(fn: any) {
+    this.onTouched = fn;
+  }
 }

@@ -127,6 +127,7 @@ export class TestimonialEditorComponent implements OnInit,AfterViewInit {
           .subscribe(res=> {
               this.imageDeleted = true;
               this.objTestimonial.imageName = "";
+              this.fileName = "";
               this.drawImageToCanvas(Config.DefaultAvatar);
               swal("Deleted!", res.message, "success");
             },
@@ -139,7 +140,6 @@ export class TestimonialEditorComponent implements OnInit,AfterViewInit {
 
   changeFile(args) {
     this.file = args;
-    if (this.file)
       this.fileName = this.file.name;
   }
 

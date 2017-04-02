@@ -15,8 +15,7 @@ export class UserProfileComponent implements OnInit {
     @Input() showView:boolean;
     objUser:UserModel = new UserModel();
     objResponse:UserResponse = new UserResponse();
-    imageSrc:string;
-
+    imageSrc:string=Config.DefaultAvatar;
     ngOnInit() {
         this.getUserDetail();
     }

@@ -62,7 +62,32 @@ const TEMPLATE:any = {
 };
 @Component({
   selector: 'typeahead-container',
-  template: TEMPLATE[Ng2BootstrapConfig.theme],
+  template: `<div class="dropdown-menu"
+       style="display: block"
+       [ngStyle]="{top: top, left: left, display: display}"
+       (mouseleave)="focusLost()">
+       <div *ngIf="!itemTemplate">
+          <a href="#"
+            *ngFor="let match of matches"
+            class="dropdown-item"
+            (click)="selectMatch(match, $event)"
+            (mouseenter)="selectActive(match)"
+            [class.active]="isActive(match)"
+            [innerHtml]="hightlight(match, query)"></a>
+      </div>
+      <div *ngIf="itemTemplate">
+        <a href="#"
+         *ngFor="let match of matches; let i = index"
+         class="dropdown-item"
+         (click)="selectMatch(match, $event)"
+         (mouseenter)="selectActive(match)"
+         [class.active]="isActive(match)">
+          <ng-template [ngTemplateOutlet]="itemTemplate"
+                    [ngOutletContext]="{item: match, index: i}">
+          </ng-template>
+         </a>
+      </div>
+  </div>`,
   encapsulation: ViewEncapsulation.None
 })
 export class TypeaheadContainerComponent {
@@ -73,9 +98,9 @@ export class TypeaheadContainerComponent {
   private _active:any;
   private _matches:Array<any> = [];
   private _field:string;
-  private top:string;
-  private left:string;
-  private display:string;
+  public top:string;
+  public left:string;
+  public display:string;
   private placement:string;
 
   public constructor(element:ElementRef, options:TypeaheadOptions) {
@@ -171,7 +196,7 @@ export class TypeaheadContainerComponent {
     return itemStr;
   }
 
-  protected focusLost():void {
+  public focusLost():void {
     this.isFocused = false;
   }
 

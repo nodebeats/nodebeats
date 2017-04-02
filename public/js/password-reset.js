@@ -49,8 +49,9 @@ $(function () {
                 $('#btnSubmit').text('Changing...').prop("disabled", true);
             },
             success: function (data) {
+                var redirectUrl = $("#redirectUrl").val();
                 if (data.message)
-                    window.location = "/login";
+                    window.location = redirectUrl;
             },
             error: function (err, data, msg) {
                 // failed request; give feedback to user

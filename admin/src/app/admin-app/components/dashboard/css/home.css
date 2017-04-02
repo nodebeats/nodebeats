@@ -7,7 +7,7 @@ smile {
     height: 32px;
     display: inline-block;
     vertical-align: bottom;
-    background: url("./assets/img/smile.png");
+   /* background: url("./assets/img/smile.png");*/
 }
 
 .active-user.increasing {

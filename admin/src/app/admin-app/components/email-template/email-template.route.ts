@@ -14,4 +14,4 @@ export const EmailTemplateRoutes:Routes = [
         ]
     }
 ];
-export const EmailTemplateRouting = RouterModule.forRoot(EmailTemplateRoutes);
+// export const EmailTemplateRouting = RouterModule.forRoot(EmailTemplateRoutes);

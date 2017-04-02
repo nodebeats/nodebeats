@@ -54,7 +54,6 @@ export class ApiAccessService {
     }
 
     handleError(error) {
-        console.log(error.json());
         return Observable.throw(error.json() || 'server error');
     }
 

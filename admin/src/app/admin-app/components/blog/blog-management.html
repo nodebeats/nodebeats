@@ -5,7 +5,7 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i> <a [routerLink]="['/admin']">Dashboard</a>
+                <i class="fa fa-dashboard"></i> <a [routerLink]="['/dashboard']">Dashboard</a>
             </li>
             <li class="active">
                 <i class="fa fa-newspaper-o"></i> Blog Managment
@@ -15,10 +15,7 @@
 </div>
 
 <p-tabView (onChange)="tabSwitch($event)">
-    <p-tabPanel header="Blog Category" >
-        <blog-category-list *ngIf="isCatList" [showList]="isCatList"></blog-category-list>
 
-    </p-tabPanel>
     <p-tabPanel header="Blog"  >
         <blog-list *ngIf="isBlogList" [showList]="isBlogList"
                    (showMetaFormEvent)="showMetaForm($event)"
@@ -29,5 +26,9 @@
                              (showBlogListEvent)="showBlogList($event)"></blog-metatag-editor>
 
     </p-tabPanel>
+  <p-tabPanel header="Blog Category" >
+    <blog-category-list *ngIf="isCatList" [showList]="isCatList"></blog-category-list>
+
+  </p-tabPanel>
 </p-tabView>
 
