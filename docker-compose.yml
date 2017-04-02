@@ -1,0 +1,73 @@
+version:  "2"
+
+services:
+  nodebeats-node-dev-admin:
+    container_name: nodebeats-node-dev-admin
+    image: nodebeats-node-dev-admin
+    build:
+      context: .
+      dockerfile: .docker/node-nodebeats-admin.development.dockerfile
+    volumes:
+      - ./admin:/var/www/nodebeats/admin
+      - /var/www/nodebeats/admin/node_modules
+    working_dir: /var/www/nodebeats/admin
+    ports:
+      - "4200:4200"
+      - "49153:49153"
+    env_file:
+      - ./.docker/env/app.env
+    networks:
+      - nodebeats-network-dev
+
+  nodebeats-node-dev:
+    container_name: nodebeats-node-dev
+    image: nodebeats-node-dev
+    build:
+      context: .
+      dockerfile: .docker/node-nodebeats.development.dockerfile
+    volumes:
+      - .:/var/www/nodebeats
+      - /var/www/nodebeats/node_modules
+    working_dir: /var/www/nodebeats
+    links:
+      - nodebeats-node-dev-admin:nodebeats-node-dev-admin
+    ports:
+      - "3000:3000"
+      - "5858:5858"
+    entrypoint: ["npm", "run", "debug"]
+    env_file:
+      - ./.docker/env/app.env
+    networks:
+      - nodebeats-network-dev
+
+  nodebeats-mongo-dev:
+    container_name: nodebeats-mongo-dev
+    image: nodebeats-mongo-dev
+    build:
+      context: .
+      dockerfile: .docker/mongo.development.dockerfile
+    volumes:
+      - /data/db
+    ports:
+      - "27017"
+    env_file:
+      - ./.docker/env/mongo.env
+    networks:
+      - nodebeats-network-dev
+
+  nodebeats-redis-dev:
+    container_name: nodebeats-redis-dev
+    image: nodebeats-redis-dev
+    build:
+      context: .
+      dockerfile: .docker/redis.development.dockerfile
+    volumes:
+      - /data/cache
+    ports:
+      - "6379"
+    networks:
+      - nodebeats-network-dev
+
+networks:
+  nodebeats-network-dev:
+    driver: bridge

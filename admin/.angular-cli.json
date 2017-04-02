@@ -1,0 +1,97 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "admin"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+"styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/primeng/resources/themes/omega/theme.css",
+        "../node_modules/primeng/resources/primeng.min.css",
+        "assets/font-awesome/css/font-awesome.min.css",
+        "../node_modules/@angular/material/core/theming/prebuilt/deeppurple-amber.css",
+        "assets/css/admin.css",
+        "assets/css/common.css",
+        "assets/css/custom.css",
+        "assets/css/animate.css",
+        "assets/css/responsive-admin.css",
+        "assets/plugins/jalert/jAlert-v3.css",
+        "../node_modules/sweetalert/dist/sweetalert.css"
+      ],
+      "scripts": [
+        "../node_modules/primeui/primeui-ng-all.min.js",
+        "../node_modules/tether/dist/js/tether.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "assets/plugins/Chart.bundle.js",
+        "assets/inlineScripts",
+        "assets/plugins/tinymce/tinymce.js",
+        "assets/plugins/tinymce/themes/modern/theme.js",
+        "assets/plugins/tinymce/plugins/media/plugin.js",
+        "assets/plugins/tinymce/plugins/link/plugin.js",
+        "assets/plugins/tinymce/plugins/paste/plugin.js",
+        "assets/plugins/tinymce/plugins/table/plugin.js",
+        "assets/plugins/tinymce/plugins/advlist/plugin.js",
+        "assets/plugins/tinymce/plugins/autolink/plugin.js",
+        "assets/plugins/tinymce/plugins/lists/plugin.js",
+        "assets/plugins/tinymce/plugins/image/plugin.js",
+        "assets/plugins/tinymce/plugins/charmap/plugin.js",
+        "assets/plugins/tinymce/plugins/print/plugin.js",
+        "assets/plugins/tinymce/plugins/preview/plugin.js",
+        "assets/plugins/tinymce/plugins/anchor/plugin.js",
+        "assets/plugins/tinymce/plugins/searchreplace/plugin.js",
+        "assets/plugins/tinymce/plugins/visualblocks/plugin.js",
+        "assets/plugins/tinymce/plugins/code/plugin.js",
+        "assets/plugins/tinymce/plugins/fullscreen/plugin.js",
+        "assets/plugins/tinymce/plugins/insertdatetime/plugin.js",
+        "assets/plugins/tinymce/plugins/contextmenu/plugin.js",
+        "../node_modules/cloudinary-jquery/cloudinary-jquery.js",
+        "assets/plugins/table-sorter.js",
+        "../node_modules/sweetalert/dist/sweetalert-dev.js"
+      ],
+     "environmentSource": "environments/environment.ts",
+"environments": {
+  "dev": "environments/environment.ts",
+  "prod": "environments/environment.prod.ts"
+}
+}
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json"
+    },
+    {
+      "project": "src/tsconfig.spec.json"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}
