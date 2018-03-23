@@ -1,0 +1,26 @@
+<ul class="social">
+    {{#if orgInfo.facebookURL}}
+        <li>
+            <a href="{{orgInfo.facebookURL}}" target="_blank" class="Facebook">
+                <i class="ion-social-facebook"></i>
+            </a>
+        </li>{{/if}}
+    {{#if orgInfo.twitterURL}}
+        <li>
+            <a href="{{orgInfo.twitterURL}}" target="_blank" class="Twitter">
+                <i class="ion-social-twitter"></i>
+            </a>
+        </li>{{/if}}
+    {{#if orgInfo.linkedInURL}}
+        <li>
+            <a href="{{orgInfo.linkedInURL}}" target="_blank" class="Linkedin">
+                <i class="ion-social-linkedin"></i>
+            </a>
+        </li>{{/if}}
+    {{#if orgInfo.googlePlusURL}}
+        <li>
+            <a href="{{orgInfo.googlePlusURL}}" target="_blank" class="Google Plus">
+                <i class="ion-social-googleplus"></i>
+            </a>
+        </li> {{/if}}
+</ul>

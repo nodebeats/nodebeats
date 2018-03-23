@@ -1,0 +1,112 @@
+/* Preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff; /* change if the mask should have another color then white */
+    z-index: 99; /* makes sure it stays on top */
+}
+
+#status {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%; /* centers the loading animation horizontally one the screen */
+    top: 50%; /* centers the loading animation vertically one the screen */
+    background-image: url(../img/status.gif); /* path to your loading animation */
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: -100px 0 0 -100px; /* is width and height divided by two */
+}
+
+/*preloader end */
+/*pagination */
+
+.ng2-pagination li {
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
+/* pagination end */
+
+/*validation message */
+control-messages div, .error-msg {
+    color: #E82C0C;
+    margin: 6px 0;
+}
+
+/*.alert, .form-wrapper {*/
+    /*-webkit-transition: all 1s ease-in;*/
+    /*-moz-transition: all 1s ease-in;*/
+    /*-o-transition: all 1s ease-in;*/
+    /*transition: all 1s ease-in;*/
+/*}*/
+.grid-wrapper{
+    -webkit-transition: all 0.5s ease-in;
+    -moz-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+}
+.alert.ng-enter, .ng-enter {
+    opacity: 0;
+}
+
+.alert.ng-enter-active, .ng-enter-active {
+    opacity: 1;
+}
+
+.alert.ng-leave-active, .ng-leave-active {
+    opacity: 0;
+    height: 0;
+}
+
+/*validation message end */
+
+/* Color for Social Network icon */
+.fa-facebook.color {
+    color: rgb(59, 89, 152);
+}
+
+.fa-twitter.color {
+    color: rgb(85, 172, 238);
+
+}
+
+.fa-linkedin.color {
+    color: rgb(0, 123, 181);
+
+}
+
+.fa-google-plus.color {
+    color: rgb(221, 75, 57);
+
+}
+.fa-youtube-play.color {
+    color: rgb(187, 0, 0);
+
+}
+.fa-instagram.color {
+    color: rgb(18, 86, 136);
+
+}
+
+/* End Color for Social Network icon */
+/* alert  */
+.ui-messages-info {
+    color: #fff;
+    background-color: #2196f3;
+    border-color: #2196f3;
+}
+.ui-messages-warn {
+    color: #fff;
+    background-color: #ff9800;
+    border-color: #ff9800;
+}
+.ui-messages-error {
+    color: #fff;
+    background-color: #f44336;
+    border-color: #f44336;
+}
+/*alert message*/

@@ -1,0 +1,14 @@
+<div class="tags categories widget">
+    <h3 class="widget-head">Blog Associated Tags</h3>
+
+    <ul>
+        {{#checkAndBindList tags}}
+            <li>
+                <a href="{{hostUrl}}/filter/blogs/{{urlSlogTag}}">{{tag}}</a> <span class="badge">{{postCount}}</span>
+            </li>
+        {{else}}
+            {{>shared/no-data-found}}
+        {{/checkAndBindList}}
+
+    </ul>
+</div>

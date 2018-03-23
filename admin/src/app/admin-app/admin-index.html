@@ -1,0 +1,17 @@
+<div class="nb-dashboard">
+    <div class="nb-wrapper">
+        <topnav></topnav>
+        <ajax-spinner></ajax-spinner>
+        <div class="nb-dashboard-wrap">
+            <div class="nb-sidebar" [class.minimize]="containerSlide">
+                    <sidebar (toggleContainerEvent)="toggleContainer($event)"></sidebar>
+            </div>
+            <div class="nb-main-content">
+                <section class="nb-main-container">
+                    <router-outlet>
+                    </router-outlet>
+                </section>
+            </div>
+        </div>  
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="col-md-3">
+    <div class="address wow fadeInLeft" data-wow-duration="500ms" data-wow-delay=".3s">
+        <i class="ion-ios-location-outline"></i>
+        <h5>
+            {{#if orgInfo.streetAddress}}
+                {{orgInfo.streetAddress}}
+            {{/if}}
+            {{#if orgInfo.city}}
+                , {{orgInfo.city}}
+            {{/if}}
+            {{#if orgInfo.state}}
+                , {{orgInfo.state}}
+            {{/if}}
+            {{#if orgInfo.country}}
+                , {{orgInfo.country}}
+            {{/if}}
+
+        </h5>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="email wow fadeInLeft" data-wow-duration="500ms" data-wow-delay=".7s">
+        <i class="ion-ios-email-outline"></i>
+        <p>{{orgInfo.organizationEmail}}</p>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="phone wow fadeInLeft" data-wow-duration="500ms" data-wow-delay=".9s">
+        <i class="ion-ios-telephone-outline"></i>
+        <p>Tel: {{orgInfo.phoneNumber}},{{#if orgInfo.faxNumber}}
+            <br>Fax: {{orgInfo.faxNumber}} {{/if}}<br> Mobile : {{orgInfo.mobileNumber}}</p>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="phone wow fadeInLeft" data-wow-duration="500ms" data-wow-delay=".9s">
+        <i class="ion-ios-telephone-outline"></i>
+        <p>Postal Address: {{orgInfo.postalCode}}</p>
+    </div>
+</div>

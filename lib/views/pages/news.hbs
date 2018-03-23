@@ -1,0 +1,23 @@
+{{#pagetitle 'page'}}
+    <title>News | {{data.commonData.organizationInfoData.orgName}}</title>
+{{/pagetitle}}
+
+{{>shared/global-header headerTitle=activePageMenu}}
+
+
+<section id="news-full-width">
+    <div class="container">
+        <div class="row header_news">
+            <h1>News</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{>news/news-list hostUrl=data.commonData.staticDataObj.hostUrl lstNews=data.newsData}}
+                <div class="clarifix"></div>
+                {{#checkData data.newsData}}
+                    {{>shared/pagination  pagination=data.pagination rootUrl=data.commonData.staticDataObj.newsHostUrl}}
+                {{/checkData}}
+            </div>
+        </div>
+    </div>
+</section>

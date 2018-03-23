@@ -1,0 +1,45 @@
+<!-- Page Heading -->
+
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">User Management</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">User Management</h1>
+</div>
+
+<!-- /.row -->
+
+<mat-card class="material-card">
+    <div class="mb-3">
+              <label class="form-control-label"> Name :</label>
+        <label class="form-control-label">{{objUser.firstName}} {{objUser.middleName}} {{objUser.lastName}}
+        </label>
+     
+    </div>
+    <div class="mb-3">
+      
+        <label class="form-control-label">Email :</label>
+        <label class="form-control-label"> {{objUser.email}}</label>
+      
+    </div>
+    <div class="mb-3">
+      
+        <label class="form-control-label">Role :</label>
+        <label class="form-control-label">{{objUser.userRole}}</label>
+      
+    </div>
+</mat-card>
+
+<mat-tab-group>
+  <mat-tab label="Security">
+    <user-security [userId]="userId" (showListEvent)="onShowList($event)"></user-security>
+  </mat-tab>
+  <mat-tab label="Password">
+    <user-password [userId]="userId" (showListEvent)="onShowList($event)"></user-password>
+  </mat-tab>
+</mat-tab-group>

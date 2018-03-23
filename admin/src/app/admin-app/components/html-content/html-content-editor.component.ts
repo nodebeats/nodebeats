@@ -1,0 +1,95 @@
+import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
+import {HtmlContentService} from "./html-content.service";
+import {HtmlContentModel} from "./html-content.model";
+import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
+import {TinyEditor} from "../../../shared/components/tinymce.component";
+import { FormGroup, Validators, FormBuilder, FormControl} from "@angular/forms";
+import {Router, ActivatedRoute} from "@angular/router";
+import {Location} from '@angular/common';
+ 
+@Component({
+    selector: 'html-content-editor',
+    templateUrl: './html-content-editor.html'
+})
+export class HtmlContentEditorComponent implements OnInit {
+    objHtml:HtmlContentModel = new HtmlContentModel();
+    htmlForm:FormGroup;
+    contentId:string;
+    // @Input() contentId:string;
+    // @Output() showListEvent:EventEmitter<any> = new EventEmitter();
+    isSubmitted:boolean = false;
+
+    editorFormControl:FormControl = new FormControl('', Validators.required);
+
+    constructor(private router:Router,private location:Location,private activatedRoute:ActivatedRoute,private _objService:HtmlContentService, private _formBuilder:FormBuilder) {
+        activatedRoute.params.subscribe(param=>this.contentId=param['id']);
+        this.htmlForm = this._formBuilder.group({
+            "htmlContentTitle": ['', Validators.required],
+            "htmlModuleContent": this.editorFormControl,
+            active: ['']
+        });
+    }
+
+    ngOnInit() {
+        if (this.contentId)
+            this.getEditorDetail();
+    }
+
+    getEditorDetail() {
+        this._objService.getHtmlEditorById(this.contentId)
+            .subscribe(res =>this.bindDetail(res),
+                error => this.errorMessage(error));
+    }
+
+    bindDetail(objRes:HtmlContentModel) {
+        // this.objHtml = objRes;
+        this.objHtml.htmlModuleContent=objRes.htmlModuleContent;
+        this.htmlForm.patchValue({
+            htmlContentTitle:objRes.htmlContentTitle,
+            active:objRes.active
+        });
+        // (<FormControl>this.htmlForm.controls["editorFormControl"]).patchValue(objRes.htmlModuleContent);
+        this.editorFormControl.patchValue(objRes.htmlModuleContent);
+    }
+
+    saveHtmlEditor() {
+        this.isSubmitted = true;
+        if (this.htmlForm.valid) {
+            if (!this.contentId) {
+                this._objService.saveHtmlEditor(this.htmlForm.value)
+                    .subscribe(resUser => this.resStatusMessage(resUser),
+                        error => this.errorMessage(error));
+            }
+            else {
+                this._objService.updateHtmlEditor(this.htmlForm.value, this.contentId)
+                    .subscribe(resUser => this.resStatusMessage(resUser),
+                        error => this.errorMessage(error));
+            }
+        }
+    }
+
+    resStatusMessage(res:any) {
+        // this.showListEvent.emit(false); //isCanceled
+      swal("Success !", res.message, "success");
+      this.location.back();
+    }
+
+    editorValueChange(args) {
+        // this.objHtml.htmlModuleContent = args;
+        (<FormControl>this.htmlForm.controls["htmlModuleContent"]).patchValue(args);
+
+    }
+
+    triggerCancelForm() {
+        // this.showListEvent.emit(true); // is Canceled = true
+        this.location.back();
+    }
+
+    errorMessage(objResponse:any) {
+      swal("Alert !", objResponse.message, "info");
+
+    }
+
+
+}
+

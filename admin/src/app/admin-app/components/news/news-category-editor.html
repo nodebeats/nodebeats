@@ -1,0 +1,38 @@
+<div class="row form-outer" fadeInDirective>
+    <div class="col-lg-12 form-wrapper">
+        <form role="form" novalidate [formGroup]="newsCategoryForm" (ngSubmit)="saveNewsCategory()">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Category Name</label>
+                    <input type="text" class="form-control" name="categoryName"
+                           placeholder="Enter Category" formControlName="categoryName">
+                    <control-messages [isSubmitted]="isSubmitted"
+                                      [control]="newsCategoryForm.controls['categoryName']"></control-messages>
+                </div>
+                <div class="form-group">
+                    <label>Category Description</label>
+                    <textarea class="form-control" 
+                              name="categoryDescription"
+                              placeholder="Enter Category Description"
+                              formControlName="categoryDescription">
+                    </textarea>
+                    <control-messages [isSubmitted]="isSubmitted"
+                                      [control]="newsCategoryForm.controls['categoryDescription']"></control-messages>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <mat-checkbox formControlName="active">
+                            Active
+                        </mat-checkbox>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary" processing><i class="fa fa-floppy-o"></i>  Save</button>
+                            <button type="button" (click)="triggerCancelForm()" class="btn  btn-danger"><i class="fa fa-times"></i> Cancel
+                </button>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,22 @@
+{{#pagetitle 'page'}}
+    <title>Blog Articles | {{data.commonData.organizationInfoData.orgName}}</title>
+{{/pagetitle}}
+
+{{>shared/global-header headerTitle=activePageMenu}}
+
+<section id="blog-full-width">
+    <div class="container">
+        <div class="row header_blogs">
+            <h1>Blogs</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{>blogs/blog-list hostUrl=data.commonData.staticDataObj.hostUrl blogs=data.blogData}}
+                <div class="clarifix"></div>
+                {{#checkData data.blogData}}
+                    {{>shared/pagination pagination=data.pagination rootUrl=data.commonData.staticDataObj.blogHostUrl}}
+                {{/checkData}}
+            </div>
+        </div>
+    </div>
+</section>

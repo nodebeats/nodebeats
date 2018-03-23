@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      News Management
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <i class="fa fa-dashboard"></i> <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="active">
+        <i class="fa fa-newspaper"></i> News Management
+      </li>
+    </ol>
+  </div>
+</div>
+
+<nav mat-tab-nav-bar>
+    <a mat-tab-link
+       *ngFor="let link of navLinks"
+       [routerLink]="link.path"
+       [routerLinkActiveOptions]="{exact: true}"
+       routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive">
+      {{link.label}}
+    </a>
+  </nav>
+    
+    <router-outlet></router-outlet>

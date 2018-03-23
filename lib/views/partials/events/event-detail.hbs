@@ -1,0 +1,49 @@
+<div class="col-md-12">
+    <div class="col-md-6">
+        <ul class="list-group event-list">
+            <li class="list-group-item"><span class="col-md-9 col-xs-8">{{eventObj.venue}}</span><span
+                    class="badge col-md-3 col-xs-4">Venue</span></li>
+            <li class="list-group-item"><span class="col-md-9 col-xs-8">{{eventObj.venueAddress}}</span><span
+                    class="badge col-md-3 col-xs-4">Location</span></li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <div class="event-date alert alert-info">
+            <span class="col-md-9 col-xs-8">
+                <span class="date">{{justDate eventObj.startDate}}</span>
+                <span class="month">{{justMonth eventObj.startDate}}</span>
+                <span class="year">{{justYear eventObj.startDate}}</span>
+                <span class="meta-data">{{justDay eventObj.startDate}}, {{justTime eventObj.startDate}}</span>
+            </span>
+            <span class="badge col-md-3 col-xs-4">Start Date</span>
+        </div>
+        <div class="event-date alert alert-info">
+            <span class="col-md-9 col-xs-8">
+                <span class="date">{{justDate eventObj.endDate}}</span>
+                <span class="month">{{justMonth eventObj.endDate}}</span>
+                <span class="year">{{justYear eventObj.endDate}}</span>
+                <span class="meta-data">{{justDay eventObj.endDate}}, {{justTime eventObj.endDate}}</span>
+            </span>
+            <span class="badge col-md-3 col-xs-4">End Date</span>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 event-detail">
+    {{#if eventObj.imageName}}
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <img class="img-responsive" alt="{{eventObj.imageAltText}}" src="{{cloudinaryUrl eventObj.imageName option='{"width":"960"}'}}">
+        </div>
+        <div class="col-md-3">
+        </div>
+    {{/if}}
+</div>
+
+<div class="col-md-12 event-detail">
+    <div class="post-content">
+        <p>
+            {{{eventObj.eventDescription}}}
+        </p>
+    </div>
+</div>

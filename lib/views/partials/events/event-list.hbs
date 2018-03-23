@@ -1,0 +1,28 @@
+{{#checkAndBindList events}}
+<li class="col-md-4 col-sm-6 grid-item">
+    <div class="grid-item-inner">
+        <a href="{{hostUrl}}/event-detail/{{dateFormatter startDate  '/'}}/{{urlSlog}}" class="media-box">
+            <img src="{{cloudinaryUrl imageName option='{"crop":"thumb","width":"360","height":"240"}'}}"
+                 title="{{eventTitle}}" alt="{{eventTitle}}">
+        </a>
+        <div class="grid-item-content">
+            <span class="event-date alert alert-info">
+                <span class="date">{{justDate startDate}}</span>
+                <span class="month">{{justMonth startDate}}</span>
+                <span class="year">{{justYear startDate}}</span>
+                <span class="meta-data">{{justDay startDate}}, {{justTime startDate}}</span>
+            </span>
+            <h3 class="post-title"><a
+                    href="{{hostUrl}}/event-detail/{{dateFormatter startDate '/'}}/{{urlSlog}}">{{eventTitle}}</a>
+            </h3>
+            <p>{{longSummaryLimit eventDescription}}</p>
+            <ul class="list-group event-list">
+                <li class="list-group-item"><span class="col-md-9 col-xs-8">{{venue}}</span><span
+                        class="badge col-md-3 col-xs-4">Venue</span></li>
+                <li class="list-group-item"><span class="col-md-9 col-xs-8">{{venueAddress}}</span><span
+                        class="badge col-md-3 col-xs-4">Location</span></li>
+            </ul>
+        </div>
+    </div>
+</li>
+{{/checkAndBindList}}

@@ -1,0 +1,120 @@
+<div class="pb-4">
+        <button mat-raised-button color="primary" (click)="back()">Back to Album</button>
+        <button mat-raised-button color="primary" (click)="addImage()">
+            <i class="fa fa-plus-circle"></i> Add Image</button>
+</div>
+
+<mat-card class="nb-dashboard-table">
+        <div class="table-responsive">
+            <mat-table #table [dataSource]="dataSource">
+                <ng-container matColumnDef="SN">
+                    <mat-header-cell class="symbol-no" *matHeaderCellDef>SN</mat-header-cell>
+                    <mat-cell class="symbol-no" *matCellDef="let element let i=index"> {{i+1}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Image Title">
+                    <mat-header-cell *matHeaderCellDef> Image Title </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.imageTitle}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Active">
+                    <mat-header-cell class="text-center" *matHeaderCellDef>Active</mat-header-cell>
+                    <mat-cell class="text-center" *matCellDef="let element">
+                        <i *ngIf="element.active" class="fa green fa-check" aria-hidden="true"></i>
+                        <i *ngIf="!element.active" class="fa red fa-times" aria-hidden="true"></i>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Cover Image">
+                        <mat-header-cell class="text-center" *matHeaderCellDef>Cover Image</mat-header-cell>
+                        <mat-cell class="text-center" *matCellDef="let element">
+                                <mat-radio-group>
+                                        <mat-radio-button [value]="element._id" [checked]="element.coverImage" (change)="changeCoverImage($event)"></mat-radio-button>
+                                      </mat-radio-group>    
+                            <!-- <input type="radio" name="rdbCoverImage" [value]="element._id" [checked]="element.coverImage" -->
+                                <!-- (change)="changeCoverImage($event)"> -->
+                        </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Actions">
+                    <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+                    <mat-cell class="nb-icon-cell" *matCellDef="let element">
+                        <button mat-mini-fab class="material-icon-sm" color="primary" (click)="edit(element._id)">
+                            <i class="far fa-edit"></i>
+                        </button>
+                        <button mat-mini-fab class="material-icon-sm" color="warn" (click)="delete(element._id)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </mat-cell>
+
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+</mat-card>
+
+
+
+
+<!-- <div class="row grid-wrapper" fadeInDirective *ngIf="!showImageForm">
+    <div class="col-lg-12">
+        <nav class="jumbotron filter-wrapper">
+            <div class="container">
+                <a class="navbar-brand fa fa-arrow-left" title="Back to Album" (click)="back()"
+                   href="javascript:void(0)"> Back to Album </a>
+                <a class="navbar-brand fa fa-plus-circle btn btn-primary" title="Add News Image"
+                   (click)="addImage()"
+                   href="javascript:void(0)"> Add Image </a>
+            </div>
+        </nav>
+        <div class="table-responsive">
+            <table class="tablesorter table table-bordered table-hover table-striped">
+                <thead class="thead-inverse">
+                <tr #colCount>
+                    <th>SN</th>
+                    <th>Image Title</th>
+                    <th>Active</th>
+                    <th>Cover Image</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody *ngIf="objListResponse?.dataList?.length>0">
+                <tr *ngFor="let obj of objListResponse.dataList let i=index">
+                    <input type="hidden" *ngIf="obj.coverImage" #prevCoverImage [value]="obj._id">
+                    <td>{{preIndex+(i+1)}}</td>
+                    <td>{{obj.imageTitle}}</td>
+                    <td [ngSwitch]="obj.active">
+                        <i *ngSwitchCase="true" class="fa green fa-check" aria-hidden="true"></i>
+                        <i *ngSwitchCase="false" class="fa red fa-times" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                        <input type="radio" name="rdbCoverImage" [value]="obj._id" [checked]="obj.coverImage"
+                               (change)="changeCoverImage($event)">
+                    </td>
+                    <td class="action">
+                        <a class="fa fa-pencil-square-o" title="Edit" (click)="edit(obj._id)"
+                           href="javascript:void(0)"></a>
+                        <a class="fa fa-trash red-hover" (click)="delete(obj._id)"
+                           title="Delete"
+                           href="javascript:void(0)"></a>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody *ngIf="objListResponse?.dataList?.length==0">
+                <tr>
+                    <td [attr.colspan]="colCount.children.length">No Record Found</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="list-pagination" *ngIf="objListResponse?.dataList?.length>0">
+
+                
+
+            </div>
+
+        </div>
+    </div>
+
+</div> -->
+<mat-paginator [length]="totalItems"
+                             [pageSize]="perPage"
+                             [pageSizeOptions]="pageSizeOptions"
+                             (page)="pageChanged($event)">
+</mat-paginator>

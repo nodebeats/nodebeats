@@ -1,0 +1,10 @@
+node_modules/*
+admin/node_modules/*
+admin/npm-debug.log
+npm-debug.log
+/idea/*
+.idea
+/atlassian-ide-plugin.xml
+/logs/*
+.vscode
+/public

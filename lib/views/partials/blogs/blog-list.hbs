@@ -1,0 +1,27 @@
+<article class="wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">
+    {{#checkAndBindList blogs}}
+        <div class="blog-post-image">
+            <a href="{{hostUrl}}/blog-detail/{{dateFormatter addedOn '/'}}/{{urlSlog}}"><img class="img-responsive" src="{{cloudinaryUrl bannerImage option='{"width":"940", "height":"300", "crop":"crop"}'}}" alt="{{bannerImageAltText}}"/></a>
+        </div>
+        <div class="blog-content">
+            <h2 class="blogpost-title">
+                <a href="{{hostUrl}}/blog-detail/{{dateFormatter addedOn '/'}}/{{urlSlog}}">{{blogTitle}}</a>
+            </h2>
+            <div class="blog-meta">
+                <span>{{dateFormatter addedOn '-'}}</span>
+                <span>by <a href="">{{author}}</a></span>
+                <span>
+                    {{#checkAndBindList tags}}
+                        <a href="{{hostUrl}}/filter/blogs/{{urlSlogTag}}">{{ tag}}</a>,
+                    {{/checkAndBindList}}
+                </span>
+            </div>
+            <p>
+                {{{blogSummary}}}
+            </p>
+            <a href="{{hostUrl}}/blog-detail/{{dateFormatter addedOn '/'}}/{{urlSlog}}" class="btn btn-dafault btn-details">Continue Reading</a>
+        </div>
+    {{else}}
+        {{>shared/no-data-found}}
+    {{/checkAndBindList}}
+</article>

@@ -1,0 +1,49 @@
+<mat-card class="material-card-sm">
+    <form role="form" novalidate [formGroup]="roleForm" (ngSubmit)="saveRole()">
+        <div class="mb-3">
+            <mat-form-field class="material-input-full">
+                <input matInput placeholder="Enter Role Name" formControlName="roleName">
+                <mat-error>
+                    <control-messages [isSubmitted]="isSubmitted" [control]="roleForm.controls['roleName']"></control-messages>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="mb-3">
+            <h3 class="mb-3">Access Control</h3>
+            <label class="mr-2">
+                <mat-checkbox [checked]="true" [disabled]="true">
+                    Read
+                </mat-checkbox>
+            </label>
+            <label class="mr-2">
+                <mat-checkbox formControlName="write">
+                    Write
+                </mat-checkbox>
+            </label>
+            <label class="mr-2">
+                <mat-checkbox formControlName="create">
+                    Create
+                </mat-checkbox>
+            </label>
+            <label class="mr-2">
+                <mat-checkbox formControlName="change">
+                    Change
+                </mat-checkbox>
+            </label>
+            <label class="mr-2">
+                <mat-checkbox formControlName="delete">
+                    Delete
+                </mat-checkbox>
+            </label>
+        </div>
+        <label>
+            <mat-checkbox formControlName="active">
+                Active
+            </mat-checkbox>
+        </label>
+        <div class="mb-3">
+            <button mat-raised-button color="primary" type="submit">Save</button>
+            <button mat-raised-button color="warn" type="button" (click)="triggerCancelForm()">Cancel</button>
+        </div>
+    </form>
+</mat-card>

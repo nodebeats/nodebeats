@@ -1,0 +1,421 @@
+/*material design override*/
+button.submit {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+/*
+end material design ovveride */
+
+/*
+side bar */
+.sidebar::-webkit-scrollbar {
+  width: .2em;
+}
+
+.sidebar:hover {
+  overflow-y: scroll;
+}
+
+.sidebar {
+  overflow: hidden;
+}
+
+.accordian .fa {
+  margin-right: 1.1rem !important;
+}
+
+.accordian {
+  font-weight: 900;
+}
+
+.accordian .pull-right {
+  margin-top: 4px;
+}
+
+/* section.main-container {
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+} */
+
+.sidebar .fa {
+  margin-right: 6px;
+}
+
+/*
+end side bar
+/*
+side bar */
+.accordian .fa {
+  margin-right: 1.1rem !important;
+}
+
+.accordian {
+  font-weight: 900;
+}
+
+.accordian .pull-right {
+  margin-top: 4px;
+}
+
+/* section.main-container {
+  transition: all 1s ease-in;
+  background-color: #ffffff;
+} */
+
+.sidebar .fa {
+  margin-right: 10px;
+}
+
+/*
+end side bar
+*/
+
+/*
+main container*/
+/*
+.main-container {
+    margin: 50px 0 0 212px;
+    padding: 0;
+}
+*/
+
+/*
+end main container
+*/
+
+/*
+toogle continer menu*/
+.toggle-container {
+  position: fixed;
+  top: 0;
+  left: -7px;
+  color: #FFF;
+  background: #222;
+  font-size: 23px;
+  z-index: 3;
+  display: block;
+}
+
+.containerPushLeft {
+  margin: 50px 0 0 10px !important;
+  background-color: #FFFFFF;
+
+}
+
+/*end toggle container menu*/
+
+/*top nav*/
+.framework-title {
+  margin-left: 4rem;
+}
+
+/*end top nav*/
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+/*password strength*/
+.ui-password-panel {
+  z-index: 1;
+}
+
+/*end password strength*/
+
+/*view wrapper*/
+.view-wrapper {
+  padding: 28px;
+  margin-top: 2.5rem;
+}
+
+/*end view wrapper*/
+
+/* list top view wrapper with no shadow*/
+.ns-view-wrapper {
+  border: 1px solid;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+/*end list top view wrapper*/
+
+/*button font*/
+.btn {
+  font-weight: bold;
+}
+
+/*end button font*/
+
+/*Input file*/
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  color: #f1e5e6;
+  background-color: #d3394c;
+  max-width: 95%;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.4rem 1rem;
+  cursor: pointer; /* "hand" cursor */
+}
+
+.inputfile:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  background-color: #722040;
+}
+
+/*end INput file*/
+
+/*ns view wrapper*/
+.ns-view-wrapper .form-control-label {
+  padding: 0;
+  margin-bottom: 0;
+}
+
+/*end */
+
+/*Login*/
+.logged-in-wrapper {
+  font-size: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -2px 54px -6px #777;
+  padding: 3rem;
+}
+
+.logged-in-wrapper h3 {
+  font-size: 3rem;
+  color: #FFFFFF;
+}
+
+.login-title {
+  color: #FFFFFF;
+}
+
+/*End Login*/
+
+/*tab*/
+.ui-tabview .ui-tabview-panel {
+  border-width: 0;
+  padding: 0;
+  background: 0;
+}
+
+.ui-widget {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  font-size: 1em;
+}
+
+/*End Tab*/
+/*prime theme override*/
+.ui-widget-content a.btn {
+  color: #FFFFFF;
+}
+
+.ui-widget-content a {
+  color: #0275d8;
+}
+
+/* Action hover */
+.ui-widget-content .green {
+  color: #008000;
+}
+
+.ui-widget-content .red {
+  color: #ff0000;
+}
+
+.ui-widget-content a.fa:hover {
+  color: #00c600;
+
+}
+
+.ui-widget-content a.fa {
+  text-decoration: none;
+}
+
+.ui-widget-content a.fa.red-hover:hover {
+  color: #FF0000;
+}
+
+.ui-widget-content a.fa.purple-hover:hover {
+  color: #800080;
+}
+
+.ui-widget-content a.fa.orange-hover:hover {
+  color: #ffa500;
+}
+
+/* End Action Hover */
+/* Side Bar accordian  */
+
+/* endprime theme override*/
+/* Sortable tables */
+table.sortable thead {
+  background-color: #eee;
+  color: #666666;
+  font-weight: bold;
+  cursor: default;
+}
+
+/*End Sortable tables */
+
+/*slide toggle*/
+/* .md-checked .md-slide-toggle-bar {
+  background-color: #5CB85B;
+} */
+
+/*end slide toggle*/
+
+/*table sort*/
+/* tables */
+
+table.tablesorter thead tr .header::after {
+  font-family: FontAwesome;
+  top: 0;
+  left: -5px;
+  content: "\f0dc";
+  cursor: pointer;
+  margin-left: 9px;
+}
+
+table.tablesorter thead tr .headerSortUp::after {
+  font-family: FontAwesome;
+  top: 0;
+  left: -5px;
+  content: "\f0d8";
+  margin-left: 9px;
+}
+
+table.tablesorter thead tr .headerSortDown::after {
+  font-family: FontAwesome;
+  top: 0;
+  left: -5px;
+  content: "\f0d7";
+  margin-left: 9px;
+}
+
+/*end table sort*/
+
+/*tab view*/
+.ui-widget-content {
+  background: none;
+}
+
+.action a.fa:hover {
+  transform: scale(1.5);
+}
+
+/*end tab view*/
+
+/*Underline select*/
+select.input-underline option {
+  color: #000;
+}
+
+/*!Underline selec*/
+
+/*Prime UI Dialog background*/
+.ui-dialog {
+  background-color: #FFFFFF;
+}
+
+/*End Prime UI Dialog background*/
+
+/*api access legen*/
+fieldset.access {
+  border: 1px groove #ddd !important;
+  padding: 0 1.4em 1.4em 1.4em !important;
+  margin: 0 0 1.5em 0 !important;
+  -webkit-box-shadow: 0px 0px 0px 0px #000;
+  box-shadow: 0px 0px 0px 0px #000;
+}
+
+legend.access {
+  font-size: 1.2em !important;
+  font-weight: bold !important;
+  text-align: left !important;
+  width: auto;
+  padding: 0 10px;
+  border-bottom: none;
+}
+
+fieldset.access .form-check-inline {
+  margin-left: 1rem;
+}
+
+/*api access legen*/
+
+/*prime Multi select*/
+.ui-multiselect-panel.ui-widget-content {
+  border: 1px solid #D5D5D5;
+  background: #ffffff;
+  color: #222222;
+}
+
+.ui-datepicker.ui-multiselect {
+  width: inherit;
+}
+
+.ui-multiselect {
+  width: inherit;
+}
+
+.ui-multiselect .ui-multiselect-trigger {
+  width: initial;
+}
+
+.ui-widget {
+  font-family: "Cambria, Georgia";
+}
+
+.ui-widget {
+  font-family: "Cambria, Georgia";
+}
+
+.ui-widget.ui-datepicker {
+  background: #ffffff;
+}
+
+h1.page-header {
+  font-size: 150%;
+}
+
+/*prime Multi select*/
+.btn:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-transition: background-color .3s, color .15s, box-shadow .3s, opacity 0.3s, filter 0.3s;
+  transition: background-color .3s, color .15s, box-shadow .3s, opacity 0.3s, filter 0.3s;
+}
+
+a.fa.btn:hover {
+  color: #ffffff;
+}

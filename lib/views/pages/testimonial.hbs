@@ -1,0 +1,23 @@
+{{#pagetitle 'page'}}
+    <title>Testimonials | {{data.commonData.organizationInfoData.orgName}}</title>
+{{/pagetitle}}
+
+{{>shared/global-header headerTitle=activePageMenu}}
+
+<section id="testimonial">
+    <div class="container">
+        <div class="row header_testimonial">
+            <h1>Client Testimonials</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12" data-wow-delay="0.2s">
+                {{>testimonial/testimonial testimonials=data.testimonialData}}
+            </div>
+        </div>
+    </div>
+    <hr class="divider"/>
+    <div class="clarifix"></div>
+    <div class="theme_reference">
+        <strong>Theme by <a href="https://codepen.io/SaraSoueidan" target="_blank">Sara Soueidan</a></strong>
+    </div>
+</section>

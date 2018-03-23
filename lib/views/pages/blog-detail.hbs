@@ -1,0 +1,17 @@
+{{#pagetitle 'page'}}
+    <title>{{data.blogDetailData.blogTitle}}</title>
+{{/pagetitle}}
+{{data.blogDetailData.addedOn}}
+{{>shared/article-detail-header title=data.blogDetailData.blogTitle author=data.blogDetailData.author  date=data.blogDetailData.addedOn  views=data.blogDetailData.articleViews}}
+
+<section class="single-post">
+    <div class="container">
+        <div class="row">
+            {{>blogs/blog-detail blogDetailObj=data.blogDetailData hostUrl=data.commonData.staticDataObj.hostUrl categoryObj=data.blogCategoryData categoryRelatedBlogCount=data.categoryRelatedBlogCount}}
+        </div>
+    </div>
+</section>
+
+{{#pagetitle 'pagescripts'}}
+    {{>shared/article-comment urlSlog=data.blogDetailData.urlSlog disqusURL=data.commentSettingData.disqusURL}}
+{{/pagetitle}}

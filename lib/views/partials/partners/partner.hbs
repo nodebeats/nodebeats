@@ -1,0 +1,14 @@
+<div id="partners-slider" class="{{className}}">
+    {{#checkAndBindList partners}}
+        <div class="item">
+            <a href="{{linkURL}}" target="_blank">
+                <img src="{{cloudinaryUrl imageName option='{"crop":"limit","quality":"60","width":"146","height":"65"}'}}"
+                     alt="{{imageAltText}}" title="{{partnerName}}">
+            </a>
+            <br>
+            <h3><a href="{{linkURL}}" target="_blank">{{partnerName}}</a></h3>
+        </div>
+    {{else}}
+        {{>shared/no-data-found}}
+    {{/checkAndBindList}}
+</div>

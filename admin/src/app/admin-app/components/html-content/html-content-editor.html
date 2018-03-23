@@ -1,0 +1,33 @@
+<mat-card>
+    <h1 class="page-header">
+        HTML Content Editor
+    </h1>
+
+    <form role="form" novalidate [formGroup]="htmlForm" (ngSubmit)="saveHtmlEditor()">
+
+        <div class="mb-3">
+            <mat-form-field class="material-input-full">
+                <input matInput placeholder="Enter Title" formControlName="htmlContentTitle">
+                <mat-error>
+                    <control-messages [isSubmitted]="isSubmitted" [control]="htmlForm.controls['htmlContentTitle']"></control-messages>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="mb-3">
+            <label>Html Content</label>
+            <tiny-editor [isSubmitted]="isSubmitted" module="html" [editorFormControl]="editorFormControl" [value]="objHtml.htmlModuleContent"
+                (valueChange)="editorValueChange($event)"></tiny-editor>
+        </div>
+        <div class="form-group">
+            <label>
+                <mat-checkbox formControlName="active">
+                    Active
+                </mat-checkbox>
+            </label>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" processing>Save</button>
+        <button mat-raised-button color="warn"type="button" (click)="triggerCancelForm()">Cancel</button>
+    </form>
+</mat-card>

@@ -1,0 +1,124 @@
+<!-- Page Heading -->
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Token Management</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">Token Management</h1>
+</div>
+
+<!-- /.row -->
+<div class="pb-4">
+  <button mat-raised-button color="primary" (click)="deleteAllLog()">
+    <i class="fa fa-plus-circle"></i> Clear All Token</button>
+</div>
+<!-- <table class="tablesorter table table-bordered table-hover table-striped">
+        <thead class="thead-inverse">
+        <tr #colCount>
+          <th>SN</th>
+          <th>User ID</th>
+          <th>IP Address</th>
+          <th>Expires On</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="objResponse?.length>0">
+        <tr *ngFor="let obj of objResponse let i=index">
+          <td>{{preIndex+(i+1)}}</td>
+          <td>{{obj.userId}}</td>
+          <td>{{obj.ipAddress}}</td>
+          <td>{{changeDateFormat(obj.expiresOn)}}</td>
+          <td class="action">
+            <a class="fa fa-eye" (click)="showDetail(i)" data-target="#tokenModal" data-toggle="modal" title="View"
+               href="javascript:void(0)"></a>
+
+            <a *ngIf="obj.authorizationToken!=currentToken" class="fa fa-trash red-hover" title="delete"
+               (click)="deleteLogById(obj._id)"
+               href="javascript:void(0)"></a>
+          </td>
+        </tr>
+        </tbody>
+        <tbody *ngIf="objResponse?.length==0">
+        <tr>
+          <td [attr.colspan]="colCount.children.length">No Record Found</td>
+        </tr>
+        </tbody>
+      </table> -->
+<mat-card class="nb-dashboard-table">
+  <div class="table-responsive">
+    <mat-table #table [dataSource]="dataSource">
+      <ng-container matColumnDef="SN">
+        <mat-header-cell class="symbol-no" *matHeaderCellDef>SN</mat-header-cell>
+        <mat-cell class="symbol-no" *matCellDef="let element let i=index"> {{preIndex+(i+1)}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="User ID">
+        <mat-header-cell *matHeaderCellDef> User ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.userId}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="IP Address">
+        <mat-header-cell *matHeaderCellDef>IP Address</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.ipAddress}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Expires On">
+        <mat-header-cell class="text-center" *matHeaderCellDef>Expires On</mat-header-cell>
+        <mat-cell class="text-center" *matCellDef="let element">
+          {{changeDateFormat(element.expiresOn)}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Actions">
+        <mat-header-cell class="text-center" *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell class="nb-icon-cell" class="text-center" *matCellDef="let element let i=index">
+          <button mat-mini-fab class="material-icon-sm" color="primary" (click)="showDetail(i)" data-target="#tokenModal" data-toggle="modal">
+            <i class="fa fa-eye"></i>
+          </button>
+          <button mat-mini-fab class="material-icon-sm" color="warn" (click)="deleteLogById(element._id)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</mat-card>
+<div class="modal" tabindex="-1" role="dialog" id="tokenModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Token Information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label class="col-sm-4 form-control-label">User Agent</label>
+          <label class="form-control-static">{{objToken.userAgent}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-control-label">Browser</label>
+          <label class="form-control-static">{{objToken.browser}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-control-label">IP Address</label>
+          <label class="form-control-static">{{objToken.ipAddress}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-control-label">Expires On</label>
+          <label class="form-control-static">{{changeDateFormat(objToken.expiresOn)}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-control-label">User ID</label>
+          <label class="form-control-static">{{objToken.userId}}</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button mat-raised-button type="button" color="warn" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

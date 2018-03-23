@@ -1,0 +1,26 @@
+<mat-card class="material-card-sm">
+  <form role="form" novalidate [formGroup]="blogDocForm" (ngSubmit)="saveBlogDoc()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Document Title" [(ngModel)]="objBlogDoc.documentTitle" [formControl]="blogDocForm.controls['docTitle']">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="blogDocForm.controls['docTitle']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <doc-uploader [isSubmitted]="isSubmitted" [allowedExt]="allowedExt" [allowedSize]="allowedSize" [docFormControl]="docFormControl"
+        (deleteFileEvent)="onDeleteFile($event)" [fileName]="fileName" (fileSelectedEvent)="onFileSelect($event)"></doc-uploader>
+    </div>
+    <div class="mb-3">
+      <mat-checkbox [checked]="objBlogDoc.active" formControlName="active" [(ngModel)]="objBlogDoc.active">
+        Active
+      </mat-checkbox>
+    </div>
+    <div class="mb-3">
+      <button mat-raised-button color="primary" type="submit" processing><i class="fas fa-save"></i> Save</button>
+      <button mat-raised-button color="warn" type="button" (click)="triggerCancelForm()">
+        <i class="fa fa-times"></i> Cancel</button>
+    </div>
+  </form>
+</mat-card>

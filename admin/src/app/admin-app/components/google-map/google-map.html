@@ -1,0 +1,99 @@
+<!-- Page Heading -->
+<div class="d-flex flex-row-reverse">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb nb-breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Google Map Settings</li>
+            </ol>
+        </nav>
+        <h1 class="nb-heading-one mr-auto">Google Map Settings</h1>
+</div>
+
+<mat-card class="material-card-sm">
+        <alert [(displayed)]="objAlert.show" [type]="objAlert.type" [closeButton]="objAlert.closeButton">
+            <strong>{{objAlert.title}}!</strong> {{objAlert.message}}
+        </alert>
+        
+        <form role="form" novalidate [formGroup]="googleMapForm" (ngSubmit)="saveMapSettings()">
+                <div class="mb-3">
+                        <mat-form-field class="material-input-full">
+                            <input matInput placeholder="Api Key" formControlName="googleMapsApiKey" [(ngModel)]="objMap.googleMapsApiKey">
+                            <mat-error>
+                                <control-messages [isSubmitted]="isSubmitted" [control]="googleMapForm.controls['googleMapsApiKey']"></control-messages>
+                            </mat-error>
+                        </mat-form-field>
+                </div>
+
+            
+                <div class="mb-3">
+                        <mat-form-field class="material-input-full">
+                            <input matInput placeholder="Place Name" formControlName="placeName" [(ngModel)]="objMap.placeName">
+                            <mat-error>
+                                <control-messages [isSubmitted]="isSubmitted" [control]="googleMapForm.controls['placeName']"></control-messages>
+                            </mat-error>
+                        </mat-form-field>
+                </div>
+                
+                <div class="mb-3">
+                        <mat-form-field class="material-input-full">
+                            <input matInput placeholder="Longitude" type="number" formControlName="longitude" [(ngModel)]="objMap.longitude">
+                            <mat-error>
+                                <control-messages [isSubmitted]="isSubmitted" [control]="googleMapForm.controls['longitude']"></control-messages>
+                            </mat-error>
+                        </mat-form-field>
+                </div>
+
+                <div class="mb-3">
+                        <mat-form-field class="material-input-full">
+                            <input matInput placeholder="Latitude" type="number" formControlName="latitude" [(ngModel)]="objMap.latitude">
+                            <mat-error>
+                                <control-messages [isSubmitted]="isSubmitted" [control]="googleMapForm.controls['latitude']"></control-messages>
+                            </mat-error>
+                        </mat-form-field>
+                </div>
+
+                <div class="mb-3">
+                        <mat-form-field class="material-input-full">
+                            <input matInput placeholder="Zoom Level" type="number" formControlName="zoom" [(ngModel)]="objMap.zoom" min="1" max="20">
+                            <mat-error>
+                                    <control-messages [isSubmitted]="isSubmitted" [control]="googleMapForm.controls['zoom']"></control-messages>
+                            </mat-error>
+                        </mat-form-field>
+                </div>
+                
+                
+                <div class="mb-3">
+                        <mat-form-field class="full-width">
+                                <mat-select class="full-width" placeholder="Map Type" formControlName="mapType" [(ngModel)]="objMap.mapType">
+                                  <mat-option value="">Select Map Type</mat-option>
+                                  <mat-option *ngFor="let type of mapTypes" [value]="type">
+                                        {{type}}
+                                  </mat-option>
+                                </mat-select>
+                        </mat-form-field>
+                </div>
+
+                <div class="mb-3">
+                        <mat-form-field class="material-input-full">
+                            <input matInput placeholder="Marker Title" formControlName="markerTitle" [(ngModel)]="objMap.markerTitle">
+                        </mat-form-field>
+                </div>
+
+                <div class="mb-3">
+                        <mat-checkbox [checked]="objMap.scrollWheel" formControlName="scrollWheel"[(ngModel)]="objMap.scrollWheel">
+                            Scroll Wheel
+                        </mat-checkbox>
+                </div>
+
+                <div class="mb-3">
+                        <mat-checkbox [checked]="objMap.showMarker" formControlName="showMarker"[(ngModel)]="objMap.showMarker">
+                            Show Marker
+                        </mat-checkbox>
+                </div>
+
+                <div class="mb-3">
+                        <button mat-raised-button color="primary" type="submit">Save</button>
+                </div>
+        </form>
+</mat-card>
+
