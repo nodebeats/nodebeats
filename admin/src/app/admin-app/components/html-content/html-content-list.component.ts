@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HtmlContentService } from "./html-content.service";
 import { HtmlContentModel, HtmlContentResponse } from "./html-content.model";
-import { Paginator } from 'primeng/primeng';
 import { HtmlContentEditorComponent } from "./html-content-editor.component";
 import { FadeInDirective } from '../../../shared/directives/fadeInDirective';
 import { Router } from '@angular/router';

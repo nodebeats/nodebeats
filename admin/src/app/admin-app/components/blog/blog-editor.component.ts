@@ -1,12 +1,11 @@
+import { Router, ActivatedRoute } from '@angular/router';
  import {Component, AfterViewInit, OnInit} from '@angular/core';
 import {BlogTagModel, BlogModel, BlogCategoryResponse} from "./blog.model";
 import {BlogService} from "./blog.service";
 import {Config} from "../../../shared/configs/general.config";
 import {ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
-import  {Calendar} from "primeng/primeng";
 import {ImageUploader} from "../../../shared/components/image-uploader.component";
 import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'blog-editor',

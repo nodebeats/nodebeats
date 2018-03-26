@@ -7,29 +7,13 @@
       <div class="media">
         <i class="fas fa-street-view orange"></i>
         <div class="media-body p-2">
-          <h5>Street Views</h5>
-          <span class="count">2000</span>
+          <h5>Active Users</h5>
+          <span class="count">{{activeUserCount}}</span>
         </div>
       </div>
     </div>
-    <div class="col-lg-3">
-      <div class="media ">
-        <i class="fas fa-users grn"></i>
-        <div class="media-body p-2">
-          <h5>Returning Users</h5>
-          <span class="count">2000</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3">
-      <div class="media">
-        <i class="fas fa-user-plus rd "></i>
-        <div class="media-body p-2">
-          <h5>New Users</h5>
-          <span class="count">2000</span>
-        </div>
-      </div>
-    </div>
+    <user-count [viewId]="viewId"></user-count>
+    
     <div class="col-lg-3">
       <div class="media ">
         <i class="fas fa-eye blue"></i>

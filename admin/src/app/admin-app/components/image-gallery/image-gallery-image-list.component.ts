@@ -2,7 +2,6 @@ import {Component, ElementRef, OnInit, Output, Input, EventEmitter, ViewChild} f
 import {ImageGalleryService} from "./image-gallery.service";
 import {ImageGalleryModel, ImageGalleryResponse} from "./image-gallery.model";
 import{ImageGalleryImageEditorComponent} from "./image-gallery-image-editor.component";
-import {Paginator} from 'primeng/primeng';
 import {FadeInDirective}from '../../../shared/directives/fadeInDirective';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';

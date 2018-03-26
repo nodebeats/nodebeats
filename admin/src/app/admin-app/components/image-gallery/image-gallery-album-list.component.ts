@@ -2,7 +2,6 @@ import {Component, ElementRef, OnInit, Output, EventEmitter, Input, OnChanges} f
 import {ImageGalleryService} from "./image-gallery.service";
 import {ImageAlbumModel, ImageAlbumResponse} from "./image-gallery.model";
 import {ImageAlbumEditorComponent} from "./image-gallery-album-editor.component";
-import {Paginator} from 'primeng/primeng';
 import {Router} from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 

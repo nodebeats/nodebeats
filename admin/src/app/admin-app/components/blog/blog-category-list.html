@@ -3,6 +3,7 @@
     <i class="fa fa-plus-circle"></i> Add Blog Category</button>
 </div>
 <mat-card class="nb-dashboard-table">
+  <mat-progress-spinner *ngIf="isLoading"></mat-progress-spinner>
   <div class="table-responsive">
     <mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="SN">

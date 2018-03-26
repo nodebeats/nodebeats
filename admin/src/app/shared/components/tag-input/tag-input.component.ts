@@ -29,10 +29,10 @@ const KEYS = {
     (keydown)="inputChanged($event)"
     (blur)="inputBlurred()"
     (focus)="inputFocused()"
-    [typeahead]="autoCompleteData"
-     >
-  </form>`,
-
+    >
+    </form>`,
+    // [typeahead]="autoCompleteData"
+    
   styles: [`
     :host {
       display: block;
@@ -95,7 +95,6 @@ export class TagInputComponent implements ControlValueAccessor, OnInit, OnChange
   }
 
   inputChanged(event: KeyboardEvent): void {
-    console.log(this.tagInputForm.controls);
     let key = event.keyCode;
     switch (key) {
       case KEYS.backspace:

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BlogService} from "./blog.service";
 import {BlogCategoryModel, BlogCategoryResponse} from "./blog.model";
-import {Paginator} from 'primeng/primeng';
 import {BlogCategoryEditorComponent} from  "./blog-category-editor.component";
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import { Router } from '@angular/router';

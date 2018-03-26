@@ -1,8 +1,7 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {ContactService} from "./contact.service";
 import {ContactModel, ContactResponse} from "./contact.model";
-import {Paginator} from 'primeng/primeng';
-import{ContactViewComponent} from "./contact-view.component";
+import {ContactViewComponent} from "./contact-view.component";
 import {ActivatedRoute,Router} from '@angular/router';
 import {Location} from '@angular/common';
 import { MatTableDataSource } from '@angular/material';
