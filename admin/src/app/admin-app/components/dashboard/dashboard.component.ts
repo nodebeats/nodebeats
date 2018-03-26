@@ -2,7 +2,6 @@
  * Created by sanedev on 4/8/16.
  */
 import {Component, AfterViewInit, OnInit, Input, OnChanges, OnDestroy} from '@angular/core';
-import {Message}from 'primeng/primeng';
 import * as moment from 'moment';
 import {DashboardResponseModel} from './dashboard.model';
 import {DashboardService} from './dashboard.service';
@@ -10,7 +9,9 @@ import {DashboardService} from './dashboard.service';
 declare var gapi:any;
 @Component({
   selector: 'browser-chart',
-  template: '<p-chart *ngIf="data.datasets.length>0" type="doughnut" [data]="data"></p-chart>'
+  template: `
+  `
+  // <p-chart *ngIf="data.datasets.length>0" type="doughnut" [data]="data"></p-chart>
 })
 export class BrowserAnalysisChart implements OnChanges {
   @Input() viewId:string;
@@ -71,7 +72,9 @@ export class BrowserAnalysisChart implements OnChanges {
 
 @Component({
   selector: 'country-chart',
-  template: '<p-chart *ngIf="data.datasets.length>0" type="doughnut" [data]="data"></p-chart>'
+  template: `
+  `
+  // <p-chart *ngIf="data.datasets.length>0" type="doughnut" [data]="data"></p-chart>
 })
 export class CountryWiseChart implements OnChanges {
   @Input() viewId:string;
@@ -135,49 +138,25 @@ export class CountryWiseChart implements OnChanges {
 @Component({
   selector: 'user-count',
   template: ` 
-        <div class="col-xl-3 col-lg-6">
-            <div class="card card-green card-inverse">
-                <div class="card-header card-green">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-user-plus fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-xs-right">
-                        <animate-counter [valueToCount]="newUserCount"></animate-counter>
-                          
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer ">
-                    <a class="text-green"  target="_blank" href="https://analytics.google.com">
-                        <span class="pull-xs-left">New Users</span>
-                        <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-6">
-            <div class="card card-purple card-inverse">
-                <div class="card-header card-purple">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-user fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-xs-right">
-                              <animate-counter [valueToCount]="returningUserCount"></animate-counter>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer ">
-                    <a class="text-purple" target="_blank" href="https://analytics.google.com">
-                        <span class="pull-xs-left">Returning Users</span>
-                        <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </a>
-                </div>
-            </div>
-        </div>`
+<div class="col-lg-3">
+  <div class="media">
+    <i class="fas fa-user-plus rd "></i>
+    <div class="media-body p-2">
+      <h5>New Users</h5>
+      <span class="count"><animate-counter [valueToCount]="newUserCount"></animate-counter></span>
+    </div>
+  </div>
+</div>
+<div class="col-lg-3">
+  <div class="media ">
+    <i class="fas fa-users grn"></i>
+    <div class="media-body p-2">
+      <h5>Returning Users</h5>
+      <span class="count"><animate-counter [valueToCount]="returningUserCount"></animate-counter></span>
+    </div>
+  </div>
+</div>
+        `
 })
 export class UserCount implements OnChanges {
   activeUserCount:number = 0;
@@ -189,12 +168,13 @@ export class UserCount implements OnChanges {
   }
 
   ngOnChanges() {
-    if (this.viewId)
+    console.log(this.viewId)
+    // if (this.viewId)
       this.getTotalUsers();
-
   }
 
   getTotalUsers() {
+    console.log("Here")
     this.objService.queryGoogleApi({
       'ids': 'ga:' + this.viewId,
       'dimensions': 'ga:userType',
@@ -275,7 +255,9 @@ export class PageViewComponent implements OnChanges {
 
 @Component({
   selector: 'week-chart',
-  template: `<p-chart *ngIf="data.datasets.length>0" type="line" [data]="data"></p-chart>`
+  template: `
+  `
+  // <p-chart *ngIf="data.datasets.length>0" type="line" [data]="data"></p-chart>
 })
 export class LastWeekVsThisWeekAnalysisChart implements OnChanges {
 
@@ -283,7 +265,6 @@ export class LastWeekVsThisWeekAnalysisChart implements OnChanges {
     labels: [],
     datasets: []
   };
-  msgs:Message[];
   @Input() viewId;
 
   constructor(private objService:DashboardService) {

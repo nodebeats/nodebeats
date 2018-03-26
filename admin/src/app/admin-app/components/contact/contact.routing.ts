@@ -3,7 +3,6 @@ import {ContactListComponent} from './contact-list.component';
 import {ContactViewComponent} from './contact-view.component';
 import {ContactHomeComponent} from './contact-home.component';
 import {Routes, RouterModule} from '@angular/router';
-import { SharedModule } from 'primeng/primeng';
 
 export const ContactRoute: Routes = [
     {path:'', component: ContactHomeComponent,

@@ -10,8 +10,7 @@ import { FormControlMessages } from "./components/control-valdation-message.comp
 import { Alert } from "./components/alert/alert";
 import { TinyEditor } from "./components/tinymce.component";
 import { ACCORDION_PROVIDERS } from './components/accordion/accordionItem';
-import { DropdownModule } from './components/ng2-bootstrap/ng2-bootstrap'; //provider
-import { TypeaheadModule } from './components/ng2-bootstrap/ng2-bootstrap';
+// import { DropdownModule } from './components/ng2-bootstrap/ng2-bootstrap'; //provider
 import { FadeInDirective } from './directives/fadeInDirective';
 import { ProcessingDirective } from './directives/processing.directive';
 import { HttpInterceptor } from './services/interceptHttp.service';
@@ -32,8 +31,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 /*Prime Module*/
-import { PasswordModule } from 'primeng/primeng';
+// import { PasswordModule } from 'primeng/primeng';
 
 
 
@@ -43,7 +43,7 @@ import { PasswordModule } from 'primeng/primeng';
     HttpModule, 
     FormsModule, 
     ReactiveFormsModule, 
-    DropdownModule 
+    // DropdownModule 
    ],
     declarations: [FadeInDirective, 
       ProcessingDirective,
@@ -67,8 +67,8 @@ import { PasswordModule } from 'primeng/primeng';
     FormsModule, 
     HttpModule, 
     ReactiveFormsModule, 
-    DropdownModule,
-    PasswordModule, 
+    // DropdownModule,
+    // PasswordModule, 
     RouterModule, 
     MatCheckboxModule, 
     MatPaginatorModule,
@@ -82,7 +82,8 @@ import { PasswordModule } from 'primeng/primeng';
     MatInputModule,
     MatRadioModule,
     MatSlideToggleModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule {
