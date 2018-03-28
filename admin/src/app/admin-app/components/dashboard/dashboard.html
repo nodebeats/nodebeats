@@ -12,18 +12,33 @@
         </div>
       </div>
     </div>
-    <user-count [viewId]="viewId"></user-count>
-    
+    <div class="col-lg-3">
+        <div class="media">
+          <i class="fas fa-user-plus rd "></i>
+          <div class="media-body p-2">
+            <h5>New Users</h5>
+            <span class="count"><animate-counter [valueToCount]="newUserCount"></animate-counter></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="media ">
+          <i class="fas fa-users grn"></i>
+          <div class="media-body p-2">
+            <h5>Returning Users</h5>
+            <span class="count"><animate-counter [valueToCount]="returningUserCount"></animate-counter></span>
+          </div>
+        </div>
+      </div>
     <div class="col-lg-3">
       <div class="media ">
-        <i class="fas fa-eye blue"></i>
-        <div class="media-body p-2">
-          <h5>Views</h5>
-          <span class="count">2000</span>
-        </div>
+        <page-view [viewId]="viewId"></page-view>
       </div>
     </div>
   </div>
+  <week-chart  [viewId]="viewId"></week-chart>
+  <browser-chart [viewId]="viewId"></browser-chart>
+  <country-chart [viewId]="viewId"></country-chart>
   <!-- <div class="row">
     <div class="col-xl-3 col-lg-6">
 

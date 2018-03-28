@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {Component, EventEmitter, Output, Input, ViewChild, OnInit} from '@angular/core';
 import {GoogleMapService} from "./google-map.service";
 import {GoogleMapModel} from "./google-map.model";
@@ -9,6 +10,7 @@ import {ValidationService} from "../../../shared/services/validation.service";
   selector: 'google-map',
   templateUrl: './google-map.html'
 })
+
 export class GoogleMapComponent implements OnInit {
   objMap:GoogleMapModel = new GoogleMapModel();
   mapTypes:string[] = ['ROADMAP', 'SATELLITE', 'HYBRID', 'TERRAIN'];
@@ -63,7 +65,6 @@ export class GoogleMapComponent implements OnInit {
             .subscribe(res => this.resStatusMessage(res),
               error => this.errorMessage(error));
         }
-
       }
     }
   }
@@ -78,7 +79,6 @@ export class GoogleMapComponent implements OnInit {
       this.objAlert.showAlert("danger", "Alert !!", "Please Enter Place name, longitude and latitude");
     else
       return true;
-
   }
 
   switchEmbed() {
@@ -109,14 +109,11 @@ export class GoogleMapComponent implements OnInit {
     this.objAlert.hideAlert();
     if (this.isPost)
       this.getGoogleMap();
-    swal("Success !", res.message, "success");
+    Swal("Success !", res.message, "success");
   }
 
   errorMessage(res:any) {
     this.objAlert.showAlert("danger", "Alert !!", res.message, true);
-
   }
-
-
 }
 

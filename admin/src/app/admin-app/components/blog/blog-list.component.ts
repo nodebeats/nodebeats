@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {Component, OnInit} from '@angular/core';
 import {BlogService} from "./blog.service";
 import {BlogModel,  BlogResponse, BlogCategoryResponse} from "./blog.model";
@@ -17,12 +18,10 @@ export class BlogListComponent implements OnInit {
   showForm:boolean = false;
   blogId:string;
   /* Pagination */
-  pageSizeOptions = [5, 10, 25, 50, 100];
-  perPage:number = 10;
-  currentPage:number = 1;
-  totalItems:number = 1;
-  bindSort:boolean = false;
-  preIndex:number = 1;
+  pageSizeOptions = [5, 10, 25, 50, 100];  
+  perPage: number = 10;
+  currentPage: number = 1;
+  totalItems: number = 1;
   /* End Pagination */
 
   ngOnInit() {
@@ -55,33 +54,13 @@ export class BlogListComponent implements OnInit {
   }
 
   errorMessage(objResponse:any) {
-    swal("Alert !", objResponse.message, "info");
+    Swal("Alert !", objResponse.message, "info");
   }
 
   bindList(objRes:BlogResponse) {
     this.objListResponse = objRes;
     this.dataSource = new MatTableDataSource(this.objListResponse.dataList);        
-    this.preIndex = (this.perPage * (this.currentPage - 1));
     this.totalItems = objRes.totalItems;
-    if (objRes.dataList.length > 0) {
-      if (!this.bindSort) {
-        this.bindSort = true;
-        this.sortTable();
-      }
-      else
-        jQuery("table").trigger("update", [true]);
-    }
-  }
-
-  sortTable() {
-    setTimeout(()=> {
-      jQuery('.tablesorter').tablesorter({
-        headers: {
-          3: {sorter: false},
-          4: {sorter: false}
-        }
-      });
-    }, 50);
   }
 
   addBlog() {
@@ -101,28 +80,28 @@ export class BlogListComponent implements OnInit {
   }
 
   delete(id:string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Blog !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+      })
+      .then((result)=> {
+        if(result.value){
         let objTemp:BlogModel = new BlogModel();
         objTemp._id = id;
         objTemp.deleted = true;
         this._objService.deleteBlog(objTemp)
           .subscribe(res=> {
               this.getBlogList();
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
   }
 

@@ -1,12 +1,13 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {TokenManagementService} from "./token-manangement.service";
 import {TokenModel} from "./token-managment.model";
-import * as moment from 'moment'
+import * as moment from 'moment';
 import {FormControl} from "@angular/forms";
 import{LoginService} from '../../../login-app/components/login/login.service';
 import {Router} from "@angular/router";
 import {Config} from "../../../shared/configs/general.config";
 import { MatTableDataSource } from '@angular/material';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'token-list',
@@ -51,7 +52,7 @@ export class TokenManagementComponent implements OnInit {
   }
 
   errorMessage(objResponse: any) {
-    swal("Alert !", objResponse.message, "info");
+  Swal("Alert !", objResponse.message, "info");
 
   }
 
@@ -59,25 +60,6 @@ export class TokenManagementComponent implements OnInit {
     this.objResponse = objRes;
     this.dataSource = new MatTableDataSource(this.objResponse);          
     this.totalItem = objRes.length;
-    this.preIndex = (this.perPage * (this.currentPage - 1));
-    if (this.objResponse) {
-      // let totalPage = objRes.totalItems / this.perPage;
-      // this.totalPage = totalPage > 1 ? Math.ceil(totalPage) : 1;
-
-      this.sortTable();
-    }
-  }
-
-  sortTable() {
-    setTimeout(()=> {
-      jQuery(this.ele.nativeElement).find('.tablesorter').tablesorter({
-        headers: {
-          1: {sorter: false},
-          2: {sorter: false},
-          4: {sorter: false}
-        }
-      });
-    }, 50);
   }
 
   showDetail(logIndex: string) {
@@ -96,16 +78,16 @@ export class TokenManagementComponent implements OnInit {
   }
 
   deleteLogById(id: string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Token !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+      })
+      .then((result)=> {
+        if(result.value){
         let objTemp: TokenModel = new TokenModel();
         objTemp._id = id;
         this._objService.deleteLogById(objTemp)
@@ -113,30 +95,30 @@ export class TokenManagementComponent implements OnInit {
               if (this.totalItem > 1)
                 this.getApplicationLogList();
               else this.totalItem = 0;
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
 
   }
 
   deleteAllLog() {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recoverall the Token  !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteAllLog()
           .subscribe(res=> {
-              swal({
+             Swal({
                 title: "Deleted !",
                 type: "success",
                 text: res.message,
@@ -147,18 +129,15 @@ export class TokenManagementComponent implements OnInit {
               this.router.navigate(['/login']);
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
-
-
   }
 
 
   resStatusMessage(res: any) {
-    swal("Success !", res.message, "success")
-
+    Swal("Success !", res.message, "success")
   }
 
   pageChanged(event) {
@@ -168,7 +147,6 @@ export class TokenManagementComponent implements OnInit {
     if (event.first == 0)
       this.first = 1;
     this.getApplicationLogList();
-
   }
 
 

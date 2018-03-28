@@ -22,13 +22,12 @@
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
         "assets/scss/bundle.scss",
-        "assets/plugins/jalert/jAlert-v3.css"
+        "../node_modules/sweetalert2/dist/sweetalert2.min.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
-        "../node_modules/popper.js/dist//umd/popper.min.js",
+        "../node_modules/popper.js/dist/umd/popper.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
-        "assets/plugins/Chart.bundle.js",
         "assets/inlineScripts.js",
         "assets/plugins/tinymce/tinymce.js",
         "assets/plugins/tinymce/themes/modern/theme.js",
@@ -51,8 +50,8 @@
         "assets/plugins/tinymce/plugins/insertdatetime/plugin.js",
         "assets/plugins/tinymce/plugins/contextmenu/plugin.js",
         "../node_modules/cloudinary-jquery/cloudinary-jquery.js",
-        "assets/plugins/table-sorter.js",
-        "../node_modules/sweetalert/dist/sweetalert.min.js"
+        "../node_modules/sweetalert2/dist/sweetalert2.all.min.js",
+        "../node_modules/chart.js/dist/Chart.js"
       ],
      "environmentSource": "environments/environment.ts",
 "environments": {

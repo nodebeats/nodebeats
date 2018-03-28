@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {Component, OnInit} from '@angular/core';
 import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {BlogMetaTagModel, BlogTagModel} from "./blog.model";
@@ -72,11 +73,11 @@ export class BlogMetaTagEditorComponent implements OnInit {
 
     resStatusMessage(res:any){ 
         this.router.navigate(['/blog']);    
-        swal("Success !", res.message, "success")
+        Swal("Success !", res.message, "success")
     }
 
     errorMessage(objResponse:any) {
-      swal("Alert !", objResponse.message, "info");
+        Swal("Alert !", objResponse.message, "info");
     }
 
     triggerCancelForm() {

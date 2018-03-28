@@ -1,3 +1,5 @@
+import { UserService } from './user.service';
+import { ActivatedRoute } from '@angular/router';
 /**
  * Created by sanedev on 6/27/16.
  */
@@ -10,24 +12,24 @@ import {UserModel} from './user.model';
     templateUrl: './user-management.html',
 })
 export class UserManagementComponent implements OnInit {
-    @Output() showListEvent:EventEmitter<any> = new EventEmitter();
-    @Input('userInfo') objUser :UserModel = new UserModel();
+    objUser :UserModel;
     userId:string;
-    constructor() {
+    navLinks: any[];
+    
+    constructor(private activatedRoute: ActivatedRoute, private userService: UserService) {
+        activatedRoute.params.subscribe(param => this.userId = param['userId']);
+        this.navLinks = [{label:'Security', path: '/user-management/manage/'+this.userId+'/security'}, {label: 'Password', path: '/user-management/manage/'+this.userId+'/password'}];
     }
 
     ngOnInit() {
-        this.userId = this.objUser._id;
+        this.getUserDetail();
     }
 
-    onShowList(args) {
-        this.showListEvent.emit(args);
-    }
-
-    public tabSwitch(args) {
-        if (args.active) {
-
-        }
+    getUserDetail(){
+        this.userService.getUserDetail(this.userId)
+            .subscribe(res => {
+                this.objUser = res;
+            });
     }
 
 }

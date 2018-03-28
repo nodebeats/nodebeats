@@ -9,11 +9,21 @@ export class CountryListService {
     constructor(private _http:Http) {
     }
 
-    getCountryList():Observable<CountryModel[]> {
-        return this._http.get(JSON_URL + this.jsonFile)
-            .map(res =><CountryModel[]>res.json())
-            .catch(this.handleError);
-    }
+    // getCountryList():Observable<CountryModel[]> {
+    //     return this._http.get(JSON_URL + this.jsonFile)
+    //         .map(res =><CountryModel[]>res.json())
+    //         .catch(this.handleError);
+    // }
+    
+    getCountryList(): Observable<any> {
+        // get users from api
+        return this._http.get('assets/country.json')//, options)
+            .map((response: Response) => {
+                return response.json();
+            }
+        )
+        .catch(this.handleError);
+    } 
 
     handleError(error) {
         console.log(error.json());

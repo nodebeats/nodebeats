@@ -3,24 +3,29 @@ import {UserService} from "./user.service";
 import {UserModel} from "./user.model";
 import {ValidationService} from "../../../shared/services/validation.service";
 import {Validators, FormBuilder, FormGroup} from "@angular/forms";
-
-import {ActivatedRoute, Router} from "@angular/router";
+import Swal from 'sweetalert2';
+import {Router} from "@angular/router";
 import {LoginService} from "../../../login-app/components/login/login.service";
+import { Config } from '../../../shared/configs/general.config';
+
 @Component({
   selector: 'user-password',
   templateUrl: './user-password-update.html'
 })
 
 export class UserPasswordUpdateComponent {
-  @Input() userId: string;
-  @Input() hideCancel: boolean;
-  @Output() showListEvent: EventEmitter<any> = new EventEmitter();
+  userId: string;
   objUser: UserModel = new UserModel();
-  error: any;
   userPasswordForm: FormGroup;
   isSubmitted: boolean = false;
 
-  constructor(private _objUserService: UserService, private router: Router, private _formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private loginService: LoginService) {
+  constructor(private _objUserService: UserService, private router: Router, private _formBuilder: FormBuilder, private loginService: LoginService) {
+    if(router.routerState.snapshot.url.split('/').length>3){
+      this.userId = router.routerState.snapshot.url.split('/')[3];
+    }else{
+      let userInfo: UserModel = JSON.parse(Config.getUserInfoToken());
+      this.userId = userInfo._id;
+    }
     this.userPasswordForm = this._formBuilder.group({
         "password": ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
         "confirmPassword": ['', Validators.required]
@@ -42,7 +47,7 @@ export class UserPasswordUpdateComponent {
   }
 
   saveUserStatusMessage(res: any) {
-    swal({
+  Swal({
       title: "Success !",
       type:"success",
       text:res.message,
@@ -51,20 +56,14 @@ export class UserPasswordUpdateComponent {
     });
     this.loginService.logout();
     this.router.navigate(['/login']);
-
-    // this.triggerCancelForm();
   }
 
   errorMessage(objResponse: any) {
-
-    swal("Alert !", objResponse.message, "info");
-
+    Swal("Alert !", objResponse.message, "info");
   }
 
-
   triggerCancelForm() {
-    let isCancel: boolean = true;
-    this.showListEvent.emit(isCancel);
+    
   }
 
 

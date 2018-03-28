@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Output, Input, AfterViewInit, OnInit} from '@angular/core';
+import Swal from 'sweetalert2';
+import {Component, AfterViewInit, OnInit} from '@angular/core';
 import {ImageGalleryModel} from "./image-gallery.model";
 import {ImageGalleryService} from "./image-gallery.service";
-import{Config} from "../../../shared/configs/general.config";
-import{ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
+import {Config} from "../../../shared/configs/general.config";
+import {ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
 import {FormGroup, FormControl, FormBuilder, Validators} from "@angular/forms";
 import { ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
@@ -11,8 +12,8 @@ import {Location} from '@angular/common';
   selector: 'image-gallery-image-editor',
   templateUrl: './image-gallery-image-editor.html'
 })
+
 export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
-  // objImage:ImageGalleryModel = new ImageGalleryModel();
   imageExtension: any;
   imagePath: any;
   imageId:string;
@@ -60,7 +61,7 @@ export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
     this.fileName=objRes.imageName;
     this.imageExtension = objRes.imageProperties? objRes.imageProperties.imageExtension: '';
     this.imagePath = objRes.imageProperties? objRes.imageProperties.imagePath : '';
-    (<FormControl>this.imageForm.controls['imageFormControl']).patchValue(this.fileName)
+    (<FormControl>this.imageForm.controls['imageFormControl']).patchValue(this.fileName);
     this.imageForm.patchValue({
       imageTitle:objRes.imageTitle,
       imageAltText:objRes.imageAltText,
@@ -95,8 +96,7 @@ export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
 
   resStatusMessage(objSave:any) {
     this.location.back();
-    swal("Success !", objSave.message, "success")
-
+    Swal("Success !", objSave.message, "success");
   }
 
   triggerCancelForm() {
@@ -104,13 +104,12 @@ export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
   }
 
   errorMessage(objResponse:any) {
-    swal("Alert !", objResponse.message, "info");
+    Swal("Alert !", objResponse.message, "info");
   }
 
   /*Image handler */
   changeFile(args) {
     this.file = args;
-    // console.log(this.file)
     this.fileName = this.file.name;
   }
 
@@ -119,32 +118,29 @@ export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
   }
 
   deleteImage(id:string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Image !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteImage(this.fileName, this.imageExtension, this.imagePath)
           .subscribe(res=> {
               this.imageDeleted = true;
               this.fileName = "";
               this.drawImageToCanvas(Config.DefaultImage);
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
-
   }
-
-
   /* End ImageHandler */
 }
 

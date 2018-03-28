@@ -7,12 +7,13 @@ import{CountryListService, CountryModel}from "../../../shared/services/countryli
 import{Config}from "../../../shared/configs/general.config";
 import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import {ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'google-analytics',
   templateUrl: './orginfo.html'
 })
 export class OrganizationInfoComponent implements OnInit, AfterViewInit {
-  // objOrg: OrganizationModel = new OrganizationModel();
   objAlert: AlertModel = new AlertModel();
   orgInfoForm: FormGroup;
   objCountyList: CountryModel[];
@@ -60,12 +61,11 @@ export class OrganizationInfoComponent implements OnInit, AfterViewInit {
     this.getCountryList();
     this.getOrgInfo();
     this.objAlert.showAlert("info", "Information", "Please fill the necessary information about the organization.");
-
   }
 
   ngAfterViewInit() {
-    //let path = Config.DefaultImage;
-    //this.drawImageToCanvas(path);
+    let path = Config.DefaultImage;
+    this.drawImageToCanvas(path);
   }
 
   getCountryList() {
@@ -82,10 +82,8 @@ export class OrganizationInfoComponent implements OnInit, AfterViewInit {
   }
 
   bindInfo(objOrg: OrganizationModel) {
-    // this.fileName=objOrg.logoImageName;
     this.imageExtension = objOrg.imageProperties? objOrg.imageProperties.imageExtension: '';
     this.imagePath = objOrg.imageProperties? objOrg.imageProperties.imagePath : '';
-
     this.orgId=objOrg._id;
     (<FormControl>this.orgInfoForm.controls['imageFormControl']).patchValue(this.fileName);
     this.orgInfoForm.patchValue({
@@ -141,27 +139,16 @@ export class OrganizationInfoComponent implements OnInit, AfterViewInit {
 
   }
 
-// validateForm() {
-//     if ((this.objOrg.api_Key != "" && typeof this.objOrg.api_Key != "undefined") || (this.objOrg.host != "" && typeof this.objOrg.host != "undefined"))
-//         return true;
-//     else {
-//         this.objAlert.showAlert("danger", "Alert !!", "Please Enter Either Host or API Key");
-//
-//     }
-// }
-
   resStatusMessage(res: any) {
     if (this.isPost)
       this.getOrgInfo();
     this.file = null;
-    swal("Success !", res.message, "success")
-
+    Swal("Success !", res.message, "success")
   }
 
   errorMessage(objResponse: any) {
     this.objAlert.showAlert("danger", "Alert !!", objResponse.message, true);
   }
-
 
   /*Image handler */
   changeFile(args) {
@@ -174,31 +161,29 @@ export class OrganizationInfoComponent implements OnInit, AfterViewInit {
   }
 
   deleteImage(id: string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Image !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteImage(this.fileName, this.imageExtension, this.imagePath)
           .subscribe(res=> {
               this.imageDeleted = true;
               this.fileName = "";
               this.drawImageToCanvas(Config.DefaultImage);
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
-
   }
-
   /* End Image Handler */
 }
 

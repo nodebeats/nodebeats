@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, Input, AfterViewInit, ViewChild, OnInit} from '@angular/core';
+import {Component, AfterViewInit, OnInit} from '@angular/core';
 import {TeamManagementModel} from "./team-managment.model";
 import {TeamManagementService} from "./team-managment.service";
 import{Config} from "../../../shared/configs/general.config";
@@ -7,15 +7,14 @@ import {ValidationService} from "../../../shared/services/validation.service";
 import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import {Location} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'team-management-editor',
   templateUrl: './team-management-editor.html'
 })
 export class TeamManagementEditorComponent implements OnInit,AfterViewInit {
-  // objTeam: TeamManagementModel = new TeamManagementModel();
   memberId: string;
-  // @Output() showListEvent: EventEmitter<any> = new EventEmitter();
   teamMgmtForm: FormGroup;
   isSubmitted: boolean = false;
 
@@ -115,7 +114,7 @@ export class TeamManagementEditorComponent implements OnInit,AfterViewInit {
   resStatusMessage(objSave: any) {
     this.location.back();
     // this.showListEvent.emit(false); // is Form Canceled
-    swal("Success !", objSave.message, "success")
+   Swal("Success !", objSave.message, "success")
 
   }
 
@@ -126,7 +125,7 @@ export class TeamManagementEditorComponent implements OnInit,AfterViewInit {
   }
 
   errorMessage(objResponse: any) {
-    swal("Alert !", objResponse.message, "info");
+   Swal("Alert !", objResponse.message, "info");
 
   }
 
@@ -141,28 +140,28 @@ export class TeamManagementEditorComponent implements OnInit,AfterViewInit {
   }
 
   deleteImage(id: string) {
-    swal({
-        title: "Are you sure?",
-        text: "You will not be able to recover this Image !",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
-        this._objService.deleteImage(this.fileName, this.imageExtension, this.imagePath)
-          .subscribe(res=> {
-              this.imageDeleted = true;
-              this.fileName = "";
-              this.drawImageToCanvas(Config.DefaultAvatar);
-              swal("Deleted!", res.message, "success");
-            },
-            error=> {
-              swal("Alert!", error.message, "info");
+  // Swal({
+  //       title: "Are you sure?",
+  //       text: "You will not be able to recover this Image !",
+  //       type: "warning",
+  //       showCancelButton: true,
+  //       confirmButtonColor: "#DD6B55",
+  //       confirmButtonText: "Yes, delete it!",
+  //       closeOnConfirm: false
+  //     },
+  //     ()=> {
+  //       this._objService.deleteImage(this.fileName, this.imageExtension, this.imagePath)
+  //         .subscribe(res=> {
+  //             this.imageDeleted = true;
+  //             this.fileName = "";
+  //             this.drawImageToCanvas(Config.DefaultAvatar);
+  //            //("Deleted!", res.message, "success");
+  //           },
+  //           error=> {
+  //            //("Alert!", error.message, "info");
 
-            });
-      });
+  //           });
+  //     });
 
   }
 

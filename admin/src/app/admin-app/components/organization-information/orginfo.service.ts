@@ -48,9 +48,12 @@ export class OrganizationInfoService {
     }
 
     getCountryList() {
-        return this._http.get(API_URL + this.apiRoute)
-            .map(res =><OrganizationModel[]>res.json())
-            .catch(this.handleError);
+        return this._http.get('assets/country.json')//, options)
+            .map((response: Response) => {
+                return response.json();
+            }
+        )
+        .catch(this.handleError);
     }
 
     updateOrgInfo(objUpdate:OrganizationModel, file:File, id:string, imageDeleted:boolean) {

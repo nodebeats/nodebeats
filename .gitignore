@@ -8,3 +8,5 @@ npm-debug.log
 /logs/*
 .vscode
 /public
+yarn-error.log
+/admin/yarn-error.log

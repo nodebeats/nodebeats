@@ -3,6 +3,7 @@ import {BlogService} from "./blog.service";
 import {BlogDocumentModel} from "./blog.model";
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'blog-doc-list',
@@ -33,26 +34,12 @@ export class BlogDocListComponent implements OnInit {
   }
 
   errorMessage(objResponse:any) {
-    swal("Alert !", objResponse.message, "info");
+    Swal("Alert !", objResponse.message, "info");
   }
 
   bindList(objRes:BlogDocumentModel[]) {
     this.objListResponse = objRes;
     this.dataSource = new MatTableDataSource(this.objListResponse);
-    if (objRes.length > 0) {
-      this.sortTable();
-    }
-  }
-
-  sortTable() {
-    setTimeout(()=> {
-      jQuery('.tablesorter').tablesorter({
-        headers: {
-          2: {sorter: false},
-          3: {sorter: false}
-        }
-      });
-    }, 50);
   }
 
   edit(id:string) {
@@ -64,25 +51,25 @@ export class BlogDocListComponent implements OnInit {
   }
 
   delete(id:string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Document !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteBlogDoc(this.blogId, id)
           .subscribe(res=> {
               this.getBlogDocList();
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
   }
 

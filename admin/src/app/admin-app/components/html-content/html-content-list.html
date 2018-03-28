@@ -14,7 +14,6 @@
     <i class="fa fa-plus-circle"></i> Add HTML Content</button>
 </div>
 <mat-card class="nb-dashboard-table">
-  <div class="table-responsive">
     <mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="SN">
         <mat-header-cell class="symbol-no" *matHeaderCellDef> SN </mat-header-cell>
@@ -45,8 +44,9 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-    <div class="list-pagination" *ngIf="objResponse?.dataList?.length>0">
-      <mat-paginator [length]="totalItems" [pageSize]="perPage" [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)">
-      </mat-paginator>
+    <div class="p-3 text-center" *ngIf="objResponse?.dataList?.length==0">
+        No Records Found
     </div>
-  </div>
+      <mat-paginator *ngIf="objResponse?.dataList?.length>0" [length]="totalItems" [pageSize]="perPage" [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)">
+      </mat-paginator>
+    </mat-card>

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {Component, EventEmitter, Output, Input, ViewChild, OnInit} from '@angular/core';
 import {EmailTemplateService} from "./email-template.service";
 import {EmailTemplateModel, EmailTempalteResponse} from "./email-template.model";
@@ -72,8 +73,7 @@ export class EmailTemplateEditorComponent implements OnInit {
 
     resStatusMessage(res:any) {
         this.router.navigate(['/email-template']);
-      swal("Success !", res.message, "success")
-
+        Swal("Success !", res.message, "success")
     }
 
     editorValueChange(args) {
@@ -86,9 +86,7 @@ export class EmailTemplateEditorComponent implements OnInit {
     }
 
     errorMessage(objResponse:any) {
-      swal("Alert !", objResponse.message, "info");
+        Swal("Alert !", objResponse.message, "info");
     }
-
-
 }
 

@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Output, Input, AfterViewInit, OnInit} from '@angular/core';
+import Swal from 'sweetalert2';
+import {Component, AfterViewInit, OnInit} from '@angular/core';
 import {NewsCategoryModel, NewsModel} from "./news.model";
 import {NewsService} from "./news.service";
 import{Config} from "../../../shared/configs/general.config";
@@ -7,21 +8,19 @@ import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 
-
 @Component({
   selector: 'news-editor',
   templateUrl: './news-editor.html'
 })
+
 export class NewsEditorComponent implements AfterViewInit,OnInit {
   objNews: NewsModel = new NewsModel();
   imageExtension: any;
   imagePath: any;
   objCatList: NewsCategoryModel[];
   newsId:string;
-  // @Input() newsId: string;
-  // @Output() showListEvent: EventEmitter<any> = new EventEmitter();
+  today: any = new Date();  
   newsForm: FormGroup;
-  id: string = "";
   editorFormControl: FormControl = new FormControl('', Validators.required);
   isSubmitted: boolean = false;
   /* Image Upload Handle*/
@@ -57,7 +56,6 @@ export class NewsEditorComponent implements AfterViewInit,OnInit {
     this.getCategoryList();
     if (this.newsId)
       this.getNewsDetail();
-
   }
 
   getCategoryList() {
@@ -82,11 +80,9 @@ export class NewsEditorComponent implements AfterViewInit,OnInit {
   }
 
   bindDetail(objRes: NewsModel) {
-    this.imageExtension = objRes.image[0].imageProperties.imageExtension;
-    this.imagePath = objRes.image[0].imageProperties.imagePath;
-    this.objNews.newsDescription = objRes.newsDescription;
+    this.imageExtension = objRes.image[0].imageProperties.imageExtension?objRes.image[0].imageProperties.imageExtension: '';
+    this.imagePath = objRes.image[0].imageProperties.imagePath?objRes.image[0].imageProperties.imagePath: '';
     objRes.newsDate = this.changeDateFormat(objRes.newsDate);
-    // this.objNews = objRes;
     this.newsForm.patchValue({
       newsTitle: objRes.newsTitle,
       newsSummary: objRes.newsSummary,
@@ -97,11 +93,11 @@ export class NewsEditorComponent implements AfterViewInit,OnInit {
     })
     this.editorFormControl.patchValue(objRes.newsDescription);
     this.imageFormControl.patchValue(objRes.image[0].imageName);
-    this.fileName = objRes.image[0].imageName;
+    this.fileName = objRes.image[0].imageName?objRes.image[0].imageName: '';
     let path: string = "";
-    if (objRes.image[0]) {
+    if (this.fileName) {
       var cl = Config.Cloudinary;
-      path = cl.url(objRes.image[0].imageName);
+      path = cl.url(this.fileName);
     }
     else
       path = Config.DefaultImage;
@@ -111,7 +107,6 @@ export class NewsEditorComponent implements AfterViewInit,OnInit {
 
   saveNews() {
     this.isSubmitted = true;
-    // (<FormControl>this.newsForm.controls["editorFormControl"]).patchValue(this.newsForm.value);
     if (this.newsForm.valid) {
       if (!this.newsId) {
         this._objService.saveNews(this.newsForm.value, this.file)
@@ -122,39 +117,31 @@ export class NewsEditorComponent implements AfterViewInit,OnInit {
         this._objService.updateNews(this.newsForm.value, this.file, this.imageDeleted, this.newsId)
           .subscribe(res => this.resStatusMessage(res),
             error => this.errorMessage(error));
-
       }
     }
   }
 
   resStatusMessage(objSave: any) {
-    // this.showListEvent.emit(false); // is Form Canceled
-    swal("Success !", objSave.message, "success")
+    Swal("Success !", objSave.message, "success")
     this.location.back();
-
   }
 
   editorValueChange(args) {
-    // this.newsForm = args;
     (<FormControl>this.newsForm.controls["newsDescription"]).patchValue(args);
   }
 
   triggerCancelForm() {
-    // let isCanceled = true;
-    // this.showListEvent.emit(isCanceled);
     this.location.back();
   }
 
   errorMessage(objResponse: any) {
-    swal("Alert !", objResponse.message, "info");
-
+    Swal("Alert !", objResponse.message, "info");
   }
 
   /*Image Handler */
   changeFile(args) {
     this.file = args;
     this.fileName = this.file.name;
-    // this.drawImageToCanvas(this.fileName);
   }
 
   drawImageToCanvas(path: string) {
@@ -162,31 +149,29 @@ export class NewsEditorComponent implements AfterViewInit,OnInit {
   }
 
   deleteImage(imageId) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Image !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+        confirmButtonText: "Yes, delete it!"
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteImage(this.fileName, this.imageExtension, this.imagePath)
           .subscribe(res=> {
               this.imageDeleted = true;
               this.fileName = "";
               this.drawImageToCanvas(Config.DefaultImage);
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
   }
-
   /* End Image Handler */
-
 }
 

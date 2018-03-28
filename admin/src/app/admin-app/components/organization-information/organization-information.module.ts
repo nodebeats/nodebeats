@@ -8,7 +8,6 @@ import {OrganizationInfoRouting} from './orginfo.route';
     imports: [SharedModule.forRoot(),OrganizationInfoRouting],
     declarations: [OrganizationInfoComponent],
     providers: [OrganizationInfoService]
-
 })
 
 export class OrganizationInformationModule {

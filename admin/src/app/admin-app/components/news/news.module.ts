@@ -1,4 +1,4 @@
-import {NgModule}      from '@angular/core';
+import {NgModule} from '@angular/core';
 import {NewsCategoryEditorComponent} from "./news-category-editor.component";
 import {NewsCategoryListComponent} from"./news-category-list.component";
 import {NewsEditorComponent} from"./news-editor.component";

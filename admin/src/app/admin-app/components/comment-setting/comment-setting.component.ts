@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {Component, OnInit} from '@angular/core';
 import {CommentSettingService} from "./comment.service";
 import {CommentSettingModel} from "./comment.model";
@@ -8,7 +9,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
     templateUrl: './comment-setting.html'
 })
 export class CommentSettingComponent implements OnInit {
-    // objComment:CommentSettingModel = new CommentSettingModel();
     isSubmitted:boolean = false;
     objAlert:AlertModel = new AlertModel();
     commentSettingForm:FormGroup;
@@ -73,14 +73,11 @@ export class CommentSettingComponent implements OnInit {
         if (this.isPost)
             this.getCommentSetting();
         this.objAlert.hideAlert();
-      swal("Success !", res.message, "success")
-
+        Swal("Success !", res.message, "success")
     }
 
     errorMessage(objResponse:any) {
         this.objAlert.showAlert("danger", "Alert !!", objResponse.message, true);
     }
-
-
 }
 

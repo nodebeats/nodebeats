@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Output, Input, AfterViewInit, OnInit} from '@angular/core';
+import Swal from 'sweetalert2';
+import {Component, OnInit} from '@angular/core';
 import {NewsCategoryModel} from "./news.model";
 import {NewsService} from "./news.service";
 import {FormGroup, Validators, FormBuilder,} from "@angular/forms";
@@ -15,9 +16,6 @@ export class NewsCategoryEditorComponent implements OnInit {
     newsCategoryForm:FormGroup;
     isSubmitted:boolean = false;
     newsCategoryId:string;
-    // @Input() newsCategoryId:string;
-    // @Output() showListEvent:EventEmitter<any> = new EventEmitter();
-
 
     constructor(private location:Location,private activatedRoute:ActivatedRoute,private _objService:NewsService, private _formBuilder:FormBuilder) {
         activatedRoute.params.subscribe(param=>this.newsCategoryId=param['id']);
@@ -37,22 +35,16 @@ export class NewsCategoryEditorComponent implements OnInit {
     getNewsCategoryDetail() {
         this._objService.getNewsCategoryDetail(this.newsCategoryId)
             .subscribe(res => this.bindCatDetail(res),
-                
                 error => this.errorMessage(error));
-            
-        }
+    }
 
     bindCatDetail(objNewsCat: NewsCategoryModel) {
-        // this.id=objNewsCat._id;
         this.newsCategoryForm.setValue({
             categoryName: objNewsCat.categoryName,
             categoryDescription: objNewsCat.categoryDescription,
             active: objNewsCat.active
-    });
-
-
+        });
     }
-
 
     saveNewsCategory() {
         this.isSubmitted = true;
@@ -71,23 +63,16 @@ export class NewsCategoryEditorComponent implements OnInit {
     }
 
     resStatusMessage(res:any) {
-        // this.showListEvent.emit(false); // * isCanceled = false
-      swal("Success !", res.message, "success")
-      this.location.back();
-
+        Swal("Success !", res.message, "success")
+        this.location.back();
     }
 
     errorMessage(objResponse:any) {
-      swal("Alert !", objResponse.message, "info");
-
+        Swal("Alert !", objResponse.message, "info");
     }
 
     triggerCancelForm() {
         this.location.back();
-        // let isCanceled = true;
-        // this.showListEvent.emit(isCanceled);
     }
-
-
 }
 

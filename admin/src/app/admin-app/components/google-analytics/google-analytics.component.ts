@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, Input, ViewChild, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GoogleAnalyticsService} from "./google-analytics.service";
 import {GoogleAnalyticsModel} from "./google-analytics.model";
 import {Alert} from "../../../shared/components/alert/alert";
@@ -8,6 +8,7 @@ import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
 import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {DocumentUploader} from "../../../shared/components/doc-uploader.component";
 import {Location} from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'google-analytics',
@@ -29,7 +30,6 @@ export class GoogleAnalyticsComponent implements OnInit {
   fileName: string = "";
   docFormControl: FormControl = new FormControl('', Validators.required);
   /* End File Upload handle */
-
 
   constructor(private location: Location, private _objService: GoogleAnalyticsService, private _formBuilder: FormBuilder) {
     this.analyticsForm = this._formBuilder.group({
@@ -92,8 +92,7 @@ export class GoogleAnalyticsComponent implements OnInit {
     this.objAlert.hideAlert();
     if (this.isPost)
       this.getGoogleAnalytics();
-    swal("Success !", objResponse.message, "success")
-
+    Swal("Success !", objResponse.message, "success")
   }
 
   errorMessage(res: any) {
@@ -110,25 +109,25 @@ export class GoogleAnalyticsComponent implements OnInit {
   }
 
   onDeleteFile(imageId: string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this File !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteFile(this.objAnalytics.serviceAccountKeyFileName, this.objAnalytics.docProperties.docPath)
           .subscribe(res=> {
               this.fileName = "";
-              swal("Deleted!", res.message, "success");
+             Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+             Swal("Alert!", error.message, "info");
             });
+          }
       });
   }
 

@@ -7,14 +7,10 @@ import {Location} from '@angular/common';
 @Component({
   selector: 'contact-view',
   templateUrl: './contact-view.html'
-  //providers: [UserService],
-
 })
 
 export class ContactViewComponent implements OnInit {
-  //  @Input showInfo:boolean;
   contactId: string;
-  // @Output() viewCancelEvent: EventEmitter<any> = new EventEmitter();
   objContact: ContactModel = new ContactModel();
   error: any;
   showDefaultImage: boolean = false;
@@ -41,10 +37,7 @@ export class ContactViewComponent implements OnInit {
 
   triggerCancelView(event?: Event) {
     let showInfo = false;
-    // this.viewCancelEvent.emit(showInfo);
     this.location.back();
   }
-
-
 }
 

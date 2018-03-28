@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {ApplicationLogService} from "./application-log.service";
 import {ApplicationLogModel, ApplicationLogResponse} from "./application-log.model";
@@ -13,7 +14,6 @@ import { MatTableDataSource } from '@angular/material';
 })
 
 export class ApplicationLogComponent implements OnInit {
-
   objLog: ApplicationLogModel = new ApplicationLogModel();
   objResponse: ApplicationLogResponse = new ApplicationLogResponse();
   showModal: boolean = false;
@@ -27,15 +27,14 @@ export class ApplicationLogComponent implements OnInit {
   bindSort:boolean = false;
   preIndex:number = 1;
   /* End Pagination */
+  startDate: FormControl = new FormControl('');
+  endDate: FormControl = new FormControl('');
 
   ngOnInit() {
     this.perPage = 10;
     this.currentPage = 1;
     this.getApplicationLogList();
   }
-
-  startDate: FormControl = new FormControl('');
-  endDate: FormControl = new FormControl('');
 
   constructor(private _objService: ApplicationLogService, private ele: ElementRef) {
 
@@ -49,34 +48,15 @@ export class ApplicationLogComponent implements OnInit {
   }
 
   errorMessage(objResponse: any) {
-    swal("Alert !", objResponse.message, "info");
+    Swal("Alert !", objResponse.message, "info");
   }
 
   bindList(objRes: ApplicationLogResponse) {
     this.objResponse = objRes;
     this.dataSource = new MatTableDataSource(this.objResponse.dataList);        
-    this.preIndex = (this.perPage * (this.currentPage - 1));
     this.totalItems = objRes.totalItems;
-    if (objRes.totalItems > 0) {
-      if (!this.bindSort) {
-        this.bindSort = true;
-        this.sortTable();
-      }
-      else
-        jQuery("table").trigger("update", [true]);
-    }
   }
 
-  sortTable() {
-    setTimeout(()=> {
-      jQuery(this.ele.nativeElement).find('.tablesorter').tablesorter({
-        headers: {
-          4: {sorter: false}
-        }
-      });
-    }, 50);
-  }
-  
   showDetail(logIndex: string) {
     let objTemp: ApplicationLogModel;
     objTemp = this.objResponse.dataList[logIndex];
@@ -92,51 +72,52 @@ export class ApplicationLogComponent implements OnInit {
   }
 
   deleteLogById(id: string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Log !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+      })
+      .then((result)=> {
+        if(result.value){
         let objTemp: ApplicationLogModel = new ApplicationLogModel();
         objTemp._id = id;
         objTemp.deleted = true;
         this._objService.deleteLogById(objTemp)
           .subscribe(res=> {
               this.getApplicationLogList();
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
   }
 
   deleteAllLog() {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover all the Log !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteAllLog()
           .subscribe(res=> {
               this.getApplicationLogList();
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
+              Swal("Alert!", error.message, "info");
 
             });
+          }
       });
 
   }
@@ -157,16 +138,15 @@ export class ApplicationLogComponent implements OnInit {
   }
 
   resStatusMessage(res: any) {
-    swal("Success !", res.message, "success")
-
+    Swal("Success !", res.message, "success")
   }
 
   pageChanged(event) {
     this.perPage = event.pageSize;
     this.currentPage = event.pageIndex + 1;
     this.getApplicationLogList();
-
   }
+
   modalFunction() {
     jQuery("#errorModal").insertAfter(jQuery("body"));
   }

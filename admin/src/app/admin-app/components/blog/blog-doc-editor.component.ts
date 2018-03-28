@@ -3,11 +3,11 @@ import {BlogDocumentModel} from "./blog.model";
 import {BlogService} from "./blog.service";
 import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'blog-doc-editor',
   templateUrl: './blog-doc-editor.html'
-  // styles: [style]
 })
 export class BlogDocEditorComponent implements OnInit {
   objBlogDoc: BlogDocumentModel = new BlogDocumentModel();
@@ -64,13 +64,12 @@ export class BlogDocEditorComponent implements OnInit {
           .subscribe(res => this.resStatusMessage(res),
             error => this.errorMessage(error));
       }
-
     }
   }
 
   resStatusMessage(objSave: any) {
     this.router.navigate(['/blog/documents', this.blogId]);
-    swal("Success !", objSave.message, "success");
+    Swal("Success !", objSave.message, "success");
   }
 
   triggerCancelForm() {
@@ -78,7 +77,7 @@ export class BlogDocEditorComponent implements OnInit {
   }
 
   errorMessage(objResponse: any) {
-    swal("Alert !", objResponse.message, "info");
+    Swal("Alert !", objResponse.message, "info");
   }
 
   /*file handler */
@@ -89,28 +88,27 @@ export class BlogDocEditorComponent implements OnInit {
   }
 
   onDeleteFile(id: string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Document !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
-        this._objService.deleteDoc(this.objBlogDoc.documentName, this.objBlogDoc.docProperties.documentMimeType, this.objBlogDoc.docProperties.docPath)
-          .subscribe(res=> {
-              this.fileDeleted = true;
-              this.fileName = "";
-              swal("Deleted!", res.message, "success");
-            },
-            error=> {
-              swal("Alert!", error.message, "info");
-
-            });
+        confirmButtonText: "Yes, delete it!"
+      })
+      .then((result)=> {
+        if(result.value){
+          this._objService.deleteDoc(this.objBlogDoc.documentName, this.objBlogDoc.docProperties.documentMimeType, this.objBlogDoc.docProperties.docPath)
+            .subscribe(res=> {
+                this.fileDeleted = true;
+                this.fileName = "";
+                Swal("Deleted!", res.message, "success");
+              },
+              error=> {
+                Swal("Alert!", error.message, "info");
+              });
+          }
       });
-
   }
   /* End File Handler */
 }

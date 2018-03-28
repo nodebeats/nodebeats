@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { ValidationService } from './../../../shared/services/validation.service';
 import {
   Component, EventEmitter, Output, Input, AfterViewInit, ViewChild, OnInit
@@ -11,19 +12,12 @@ import {FormControl, FormGroup, Validators, FormBuilder} from "@angular/forms";
 import { basename } from 'path';
 import {ActivatedRoute} from "@angular/router";
 import { Location } from "@angular/common";
-import "rxjs/add/operator/switchMap";
 
-
-//declare var require;
-//const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
 @Component({
   selector: 'event-editor',
   templateUrl: './event-editor.html'
 })
 export class EventEditorComponent implements OnInit,AfterViewInit {
-  // objEvent: EventModel = new EventModel();
-  // @Input() eventId: string;
-  // @Output() showListEvent: EventEmitter<any> = new EventEmitter();
   eventForm: FormGroup;
   eventId:string;
   isSubmitted: boolean = false;
@@ -77,7 +71,6 @@ export class EventEditorComponent implements OnInit,AfterViewInit {
   onEndDateSelect(date: any) {
     this.eD = this.changeDateFormatToView(date);
   }
-
 
   getEventDetail() {
     this._objService.getEventById(this.eventId)
@@ -150,25 +143,21 @@ export class EventEditorComponent implements OnInit,AfterViewInit {
   }
 
   resStatusMessage(objSave: any) {
-    // this.showListEvent.emit(false); // is Form Canceled
-    swal("Success !", objSave.message, "success");
+    Swal("Success !", objSave.message, "success");
     this.location.back();
 
   }
 
   triggerCancelForm() {
     this.location.back();
-    // let isCanceled = true;
-    // this.showListEvent.emit(isCanceled);
   }
 
   errorMessage(objResponse: any) {
-    swal("Alert !", objResponse.message, "info");
+    Swal("Alert !", objResponse.message, "info");
   }
 
   changeDateFormatToView(data: string) {
     return new Date(data);
-    //return moment(data).format("YYYY-MM-DD HH:mm");
   }
 
   /*Image handler */
@@ -179,27 +168,27 @@ export class EventEditorComponent implements OnInit,AfterViewInit {
   }
 
   deleteImage(imageId) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Image !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+        confirmButtonText: "Yes, delete it!"
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteImage(this.fileName, this.imageExtension, this.imagePath)
           .subscribe(res=> {
               this.imageDeleted = true;
               this.fileName = "";
               this.drawImageToCanvas(Config.DefaultImage);
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
   }
 
@@ -213,8 +202,5 @@ export class EventEditorComponent implements OnInit,AfterViewInit {
     let splitDate:any = newDate.split("/");
     let date:any = new Date(splitDate[2],splitDate[0]-1,splitDate[1], parseInt(inputHour), parseInt(inputMinute),0,0);
     return date;
-    
   }
-
-
 }

@@ -1,13 +1,10 @@
-<h2 class="nb-heading-one mr-auto">
-  Change Security Question
-</h2>
-
+<mat-card class="material-card-sm mt-3">
 <form role="form" novalidate [formGroup]="userSecurityForm" (ngSubmit)="updateSecurity()">
 
   <div class="mb-3">
 
     <mat-form-field style="width:100%">
-      <mat-select placeholder="Security Question">
+      <mat-select placeholder="Security Question" [(ngModel)]="objUserSecurity.securityQuestion" [formControl]="userSecurityForm.controls['securityQuestion']">
         <mat-option *ngFor="let question of questionlist" [value]="question">
           {{question}}
         </mat-option>
@@ -31,8 +28,8 @@
   <div class="mb-3">
     <button type="submit" mat-raised-button color="primary">
       Save</button>
-    <button type="button" *ngIf="!hideCancel" (click)="triggerCancelForm()" mat-raised-button color="warn">Cancel
+    <button type="button" (click)="triggerCancelForm()" mat-raised-button color="warn">Cancel
     </button>
   </div>
-
 </form>
+</mat-card>

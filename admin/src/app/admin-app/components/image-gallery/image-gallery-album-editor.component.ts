@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
 import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {ImageAlbumModel} from "./image-gallery.model";
@@ -12,11 +13,9 @@ import {ActivatedRoute} from '@angular/router';
 })
 
 export class ImageAlbumEditorComponent implements OnInit {
-  // objAlbum:ImageAlbumModel = new ImageAlbumModel();
   albumId:string;
   imageAlbumForm:FormGroup;
   isSubmitted:boolean = false;
-
 
   constructor(private _objService:ImageGalleryService, private _formBuilder:FormBuilder, private location: Location, private activatedRoute:ActivatedRoute) {
    activatedRoute.params.subscribe(res => this.albumId =res['albumId']);
@@ -36,9 +35,9 @@ export class ImageAlbumEditorComponent implements OnInit {
   getImageAlbumDetail() {
     this._objService.getImageAlbumDetail(this.albumId)
       .subscribe(res => this.bindDetail(res),
-            
         error => this.errorMessage(error));
   }
+  
   bindDetail(objRes:ImageAlbumModel){
     this.imageAlbumForm.setValue({
       albumName:objRes.albumName,
@@ -65,18 +64,15 @@ export class ImageAlbumEditorComponent implements OnInit {
 
   resStatusMessage(res:any) {
     this.location.back();
-    swal("Success !", res.message, "success")
+    Swal("Success !", res.message, "success")
   }
 
   errorMessage(objResponse:any) {
-    swal("Alert !", objResponse.message, "info");
-
+    Swal("Alert !", objResponse.message, "info");
   }
 
   triggerCancelForm() {
     this.location.back();
   }
-
-
 }
 

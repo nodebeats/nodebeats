@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {Component, ElementRef, OnInit, Output, Input, EventEmitter, ViewChild} from '@angular/core';
 import {ImageGalleryService} from "./image-gallery.service";
 import {ImageGalleryModel, ImageGalleryResponse} from "./image-gallery.model";
@@ -14,21 +15,19 @@ import { MatTableDataSource } from '@angular/material';
 
 export class ImageListComponent implements OnInit {
 
-  objListResponse: ImageGalleryResponse = new ImageGalleryResponse();
+  objListResponse: ImageGalleryResponse;
   error: any;
   albumId: string;
-  dataSource:any;
   @ViewChild('prevCoverImage') prevCoverImage: ElementRef;
   showImageForm: boolean = false;
   imageId: string;
   displayedColumns = ['SN','Image Title','Active','Cover Image', 'Actions'];
+  dataSource:any;
   // /* Pagination */
   pageSizeOptions = [5, 10, 25, 50, 100];
   perPage:number = 10;
   currentPage:number = 1;
   totalItems:number = 1;
-  bindSort:boolean = false;
-  preIndex:number = 1;
   // /* End Pagination */
 
 
@@ -47,73 +46,43 @@ export class ImageListComponent implements OnInit {
   }
 
   errorMessage(objResponse: any) {
-    swal("Alert !", objResponse.message, "info");
-
+    Swal("Alert !", objResponse.message, "info");
   }
 
   bindList(objRes: ImageGalleryResponse) {
     this.objListResponse = objRes;
     this.dataSource = new MatTableDataSource(this.objListResponse.dataList);    
-    this.preIndex = (this.perPage * (this.currentPage - 1));
     this.totalItems = objRes.totalItems;
-    /* Pagination */
-    if (objRes.dataList.length > 0) {
-
-      /*End Pagination */
-      if (!this.bindSort) {
-        this.bindSort = true;
-        this.sortTable();
-      }
-      else
-        jQuery("table").trigger("update", [true]);
-    }
-  }
-
-  sortTable() {
-    setTimeout(()=> {
-      jQuery('.tablesorter').tablesorter({
-        headers: {
-          2: {sorter: false},
-          3: {sorter: false},
-          4: {sorter: false}
-        }
-      });
-    }, 50);
-
   }
 
   edit(imageId: string) {
     this.router.navigate(['/imagegallery/album/gallery/' + this.albumId + '/editor', imageId]);
-    // this.showImageForm = true;
-    // this.imageId = imageId;
   }
 
   addImage() {
     this.router.navigate(['/imagegallery/album/gallery/' + this.albumId + '/editor']);
-    // this.showImageForm = true;
-    // this.imageId = null;
   }
 
   delete(imageId: string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Image !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteAlbumImage(this.albumId, imageId)
           .subscribe(res=> {
               this.getAlbumImageList();
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
 
   }
@@ -122,28 +91,18 @@ export class ImageListComponent implements OnInit {
     this.router.navigate(['/imagegallery/album']); // cancelled true
   }
 
-  showImageList(arg) {
-    if (!arg) // is not Canceled
-    {
-      this.getAlbumImageList();
-    }
-    this.showImageForm = false;
-    this.sortTable();
-  }
-
   changeCoverImage(e) {
     let imageId = e.value;
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You are going to change the cover image !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, change it!",
-        closeOnConfirm: false
-      },
-      (isConfirm)=> {
-        if (isConfirm) {
+      })
+      .then((isConfirm)=> {
+        if (isConfirm.value) {
           let prevCoverImageId = this.prevCoverImage ? this.prevCoverImage.nativeElement.value : "";
           let objImage: ImageGalleryModel = new ImageGalleryModel();
           objImage._id = imageId;
@@ -151,18 +110,15 @@ export class ImageListComponent implements OnInit {
           this._objService.updateCoverImage(this.albumId, objImage)
             .subscribe(res=> {
                 this.getAlbumImageList();
-                swal("Changed!", res.message, "success");
+                Swal("Changed!", res.message, "success");
               },
               error=> {
-                swal("Alert!", error.message, "info");
-
+                Swal("Alert!", error.message, "info");
               });
-
         } else {
           let prevCoverImageId = "";
           if (this.prevCoverImage.nativeElement.value)
             jQuery('input[name=rdbCoverImage][value=' + this.prevCoverImage.nativeElement.value + ']').prop('checked', true);
-
         }
       });
 

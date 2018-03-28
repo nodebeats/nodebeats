@@ -14,7 +14,7 @@
 
 <!-- /.row -->
 
-<mat-card class="material-card">
+<mat-card class="material-card" *ngIf="objUser">
     <div class="mb-3">
               <label class="form-control-label"> Name :</label>
         <label class="form-control-label">{{objUser.firstName}} {{objUser.middleName}} {{objUser.lastName}}
@@ -35,11 +35,11 @@
     </div>
 </mat-card>
 
-<mat-tab-group>
-  <mat-tab label="Security">
-    <user-security [userId]="userId" (showListEvent)="onShowList($event)"></user-security>
-  </mat-tab>
-  <mat-tab label="Password">
-    <user-password [userId]="userId" (showListEvent)="onShowList($event)"></user-password>
-  </mat-tab>
-</mat-tab-group>
+<nav mat-tab-nav-bar *ngIf="navLinks">
+    <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" [routerLinkActiveOptions]="{exact: true}" routerLinkActive
+      #rla="routerLinkActive" [active]="rla.isActive">
+      {{link.label}}
+    </a>
+  </nav>
+  
+  <router-outlet></router-outlet>

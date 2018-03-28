@@ -1,4 +1,4 @@
-<div class="view-wrapper" fadeInDirective *ngIf="showView">
+<div class="view-wrapper" *ngIf="objUser">
     <h2 class="page-header">
         My Profile
     </h2>
@@ -45,6 +45,4 @@
     </div>
     <div class="clearfix"></div>
     <button type="button" (click)="onShowEdit()" class="btn btn-primary">Edit</button>
-
 </div>
-<user-edit *ngIf="!showView" [userId]="userId" (showListEvent)="onShowView($event)"></user-edit>

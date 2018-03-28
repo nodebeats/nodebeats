@@ -1,7 +1,9 @@
+import Swal from 'sweetalert2';
 import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
 import {UserModel, UserResponse} from "../user-management/user.model";
 import {UserService} from "../user-management/user.service";
 import {Config} from "../../../shared/configs/general.config";
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'user-view',
   templateUrl: './user-view.html'
@@ -9,9 +11,7 @@ import {Config} from "../../../shared/configs/general.config";
 })
 
 export class UserViewComponent implements OnInit {
-  @Input() userId: string;
-  @Output() userEditEvent: EventEmitter<any> = new EventEmitter();
-  @Output() showListEvent: EventEmitter<any> = new EventEmitter();
+  userId: string;
   objUser: UserModel = new UserModel();
   objResponse: UserResponse = new UserResponse();
   imageSrc: string = Config.DefaultAvatar;
@@ -20,8 +20,8 @@ export class UserViewComponent implements OnInit {
     this.getUserDetail();
   }
 
-  constructor(private _objUserService: UserService) {
-
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private _objUserService: UserService) {
+    activatedRoute.params.subscribe(param => this.userId = param['userId']);
   }
 
   getUserDetail() {
@@ -31,8 +31,7 @@ export class UserViewComponent implements OnInit {
   }
 
   errorMessage(objResponse: any) {
-    swal("Alert !", objResponse.message, "info");
-
+    Swal("Alert !", objResponse.message, "info");
   }
 
   bindDetail(objUser: UserModel) {
@@ -41,20 +40,16 @@ export class UserViewComponent implements OnInit {
       this.imageSrc = Config.DefaultAvatar;
     else {
       let cl = Config.Cloudinary;
-      this.imageSrc = cl.url(this.objUser.imageName, {transformation: [{crop: "thumb", width: 150}]});
+      this.imageSrc = cl.url(this.objUser.imageName);
     }
   }
 
   triggerCancelView() {
-    let isCancel = true;
-    this.showListEvent.emit(isCancel);
+    this.router.navigate(['/user-management']);
   }
 
   triggerEdit() {
-    let isEdit = false;
-    // this.userEditEvent.emit({showForm: true, userId: userId});
-    this.userEditEvent.emit({isEdit: true, userId: this.userId});
-
+    this.router.navigate(['/user-management/editor', this.userId]);
   }
 
 

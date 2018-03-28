@@ -3,6 +3,8 @@ import {ApiAccessService} from "./api-access.service";
 import{ApiAccessModel} from "./api-access.model";
 import { Router } from '@angular/router';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'api-access-list',
   templateUrl: './api-access-list.html'
@@ -38,35 +40,13 @@ export class ApiAccessComponent implements OnInit {
   }
 
   errorMessage(objResponse:any) {
-    swal("Alert !", objResponse.message, "info");
+    Swal("Alert !", objResponse.message, "info");
   }
 
   bindList(objRes:ApiAccessModel[]) {
     this.objListResponse = objRes;
     /* Pagination */
     this.dataSource = new MatTableDataSource(this.objListResponse);    
-    this.preIndex = (this.perPage * (this.currentPage - 1));
-
-    if (objRes.length > 0) {
-
-      /*End Pagination */
-      if (!this.bindSort) {
-        this.bindSort = true;
-        this.sortTable();
-      }
-    }
-  }
-
-  sortTable() {
-    setTimeout(()=> {
-      jQuery('.tablesorter').tablesorter({
-        headers: {
-          2: {sorter: false},
-          3: {sorter: false},
-          4: {sorter: false}
-        }
-      });
-    }, 50);
   }
 
   edit(id:string) {
@@ -78,42 +58,30 @@ export class ApiAccessComponent implements OnInit {
   }
 
   delete(id:string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Access !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
-        let objRole:ApiAccessModel = new ApiAccessModel();
-        objRole._id = id;
-        objRole.deleted = true;
-        this._objService.deleteAccess(objRole)
-          .subscribe(res=> {
-              this.getRoleList();
-              swal("Deleted!", res.message, "success");
-            },
-            error=> {
-              swal("Alert!", error.message, "info");
+      })
+      .then((result) => {
+        if(result.value){
+          let objRole:ApiAccessModel = new ApiAccessModel();
+          objRole._id = id;
+          objRole.deleted = true;
+          this._objService.deleteAccess(objRole)
+            .subscribe(res=> {
+                this.getRoleList();
+                Swal("Deleted!", res.message, "success");
+              },
+              error=> {
+                Swal("Alert!", error.message, "info");
 
-            });
+              });
+        }
       });
-
   }
-
-  showAccessList(arg) {
-    if (!arg) // is not Canceled
-    {
-      this.getRoleList();
-
-    }
-    // this.showForm = false;
-    this.sortTable();
-  }
-
-
 }
 

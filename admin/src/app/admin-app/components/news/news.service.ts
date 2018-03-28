@@ -140,77 +140,21 @@ export class NewsService {
         return this._http.patch(API_URL + this.newsApiRoute + "/" + objUpdate._id, body)
             .map(res => res.json())
             .catch(this.handleError);
-        ;
     }
 
     /* End News */
 
     deleteImage(fileName:string, orgExt:string, path:string):Observable < any > {
         return this.fileService.deleteFile(fileName, orgExt, path, "image");
-
     }
 
     /* News Image */
     saveNewsImage(newsId:string, objSave:NewsImageModel, file:File):Observable<any> {
         return this.xhrService.xhrRequest<NewsImageModel, any>('POST', this.newsImageApi + "/" + newsId, "imageName", objSave, file);
-        
-        // return Observable.create(observer => {
-        //     let formData:FormData = new FormData(),
-        //         xhr:XMLHttpRequest = new XMLHttpRequest();
-
-        //     if (file) {
-        //         formData.append('imageName', file);
-        //     }
-        //     formData.append('data', JSON.stringify(objSave));
-        //     xhr.onreadystatechange = () => {
-        //         if (xhr.readyState === 4) {
-        //             if (xhr.status === 200) {
-        //                 observer.next(JSON.parse(xhr.response));
-        //                 observer.complete();
-        //             } else {
-        //                 observer.error(JSON.parse(xhr.response))
-        //             }
-        //         }
-        //     };
-        //     xhr.upload.onprogress = (event) => {
-        //         this.progress = Math.round(event.loaded / event.total * 100);
-        //         //this.progressObserver.next(this.progress);
-        //     };
-        //     xhr.open('POST', API_URL + this.newsImageApi + "/" + newsId, true);
-        //     xhr.setRequestHeader("Authorization", Config.AuthToken);
-        //     xhr.send(formData);
-        // });
     }
 
     updateNewsImage(newsId:string, newsImageId: string, objUpdate:NewsImageModel, file:File, imageDeleted:boolean):Observable<any> {
         return this.xhrService.xhrRequest<NewsImageModel, any>('PUT', this.newsImageApi + "/" + newsId , "imageName", objUpdate, file, newsImageId, imageDeleted);
-        
-        // return Observable.create(observer => {
-        //     let formData:FormData = new FormData(),
-        //         xhr:XMLHttpRequest = new XMLHttpRequest();
-
-        //     if (file) {
-        //         formData.append('imageName', file);
-        //     }
-        //     formData.append('data', JSON.stringify(objUpdate));
-        //     xhr.onreadystatechange = () => {
-        //         if (xhr.readyState === 4) {
-        //             if (xhr.status === 200) {
-        //                 observer.next(JSON.parse(xhr.response));
-        //                 observer.complete();
-        //             } else {
-        //                 observer.error(JSON.parse(xhr.response));
-        //             }
-        //         }
-        //     };
-        //     xhr.upload.onprogress = (event) => {
-        //         this.progress = Math.round(event.loaded / event.total * 100);
-        //         //this.progressObserver.next(this.progress);
-        //     };
-        //     xhr.open('PUT', API_URL + this.newsImageApi + "/" + newsId + "/" + newsImageId + "?imagedeleted=" + imageDeleted, true);
-        //     xhr.setRequestHeader("Authorization", Config.AuthToken);
-        //     xhr.send(formData);
-        // });
     }
 
     updateNewsCoverImage(newsId:string, prevCoverImageID:string, objNewsImage:NewsImageModel) {
@@ -218,7 +162,6 @@ export class NewsService {
         return this._http.patch(API_URL + this.newsImageApi + "/" + newsId + "/" + prevCoverImageID, body)
             .map(res => res.json())
             .catch(this.handleError);
-
     }
 
     getNewsImageList(newsId:string):Observable < NewsImageResponse> {
@@ -226,7 +169,6 @@ export class NewsService {
             .map(res =><NewsImageResponse>res.json())
             .catch(this.handleError);
     }
-
 
     getNewsImageDetail(newsId:string, newsImageId:string):Observable < NewsImageModel> {
         return this._http.get(API_URL + this.newsImageApi + "/" + newsId + "/" + newsImageId)
@@ -239,12 +181,10 @@ export class NewsService {
             .map(res =><any>res.json())
             .catch(this.handleError);
     }
-
     /* End News Image */
 
     handleError(error) {
         console.log(error.json());
         return Observable.throw(error.json() || 'server error');
     }
-
 }

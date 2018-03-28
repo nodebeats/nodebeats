@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
+import Swal from 'sweetalert2';
+import {Component, OnInit} from '@angular/core';
 import {HtmlContentService} from "./html-content.service";
 import {HtmlContentModel} from "./html-content.model";
 import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
@@ -15,8 +16,6 @@ export class HtmlContentEditorComponent implements OnInit {
     objHtml:HtmlContentModel = new HtmlContentModel();
     htmlForm:FormGroup;
     contentId:string;
-    // @Input() contentId:string;
-    // @Output() showListEvent:EventEmitter<any> = new EventEmitter();
     isSubmitted:boolean = false;
 
     editorFormControl:FormControl = new FormControl('', Validators.required);
@@ -42,13 +41,11 @@ export class HtmlContentEditorComponent implements OnInit {
     }
 
     bindDetail(objRes:HtmlContentModel) {
-        // this.objHtml = objRes;
         this.objHtml.htmlModuleContent=objRes.htmlModuleContent;
         this.htmlForm.patchValue({
             htmlContentTitle:objRes.htmlContentTitle,
             active:objRes.active
         });
-        // (<FormControl>this.htmlForm.controls["editorFormControl"]).patchValue(objRes.htmlModuleContent);
         this.editorFormControl.patchValue(objRes.htmlModuleContent);
     }
 
@@ -69,27 +66,20 @@ export class HtmlContentEditorComponent implements OnInit {
     }
 
     resStatusMessage(res:any) {
-        // this.showListEvent.emit(false); //isCanceled
-      swal("Success !", res.message, "success");
-      this.location.back();
+        Swal("Success !", res.message, "success");
+        this.location.back();
     }
 
     editorValueChange(args) {
-        // this.objHtml.htmlModuleContent = args;
         (<FormControl>this.htmlForm.controls["htmlModuleContent"]).patchValue(args);
-
     }
 
     triggerCancelForm() {
-        // this.showListEvent.emit(true); // is Canceled = true
         this.location.back();
     }
 
     errorMessage(objResponse:any) {
-      swal("Alert !", objResponse.message, "info");
-
+        Swal("Alert !", objResponse.message, "info");
     }
-
-
 }
 

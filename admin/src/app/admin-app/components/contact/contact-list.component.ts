@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {ContactService} from "./contact.service";
 import {ContactModel, ContactResponse} from "./contact.model";
@@ -12,7 +13,6 @@ import { MatTableDataSource } from '@angular/material';
 })
 
 export class ContactListComponent implements OnInit {
-
   objContact:ContactModel = new ContactModel();
   objResponse:ContactResponse = new ContactResponse();
   contactId:string;
@@ -23,8 +23,6 @@ export class ContactListComponent implements OnInit {
   perPage:number = 10;
   currentPage:number = 1;
   totalItems:number = 1;
-  bindSort:boolean = false;
-  preIndex:number = 1;
   /* End Pagination */
 
   ngOnInit() {
@@ -43,35 +41,15 @@ export class ContactListComponent implements OnInit {
   }
 
   errorMessage(objResponse:any) {
-    swal("Alert !", objResponse.message, "info");
+    Swal("Alert !", objResponse.message, "info");
   }
 
   bindList(objRes:ContactResponse) {
     this.objResponse = objRes;
     this.dataSource = new MatTableDataSource(this.objResponse.dataList);        
-    this.preIndex = (this.perPage * (this.currentPage - 1));
     this.totalItems = objRes.totalItems;
-    if (objRes.totalItems > 0) {
-      if (!this.bindSort) {
-        this.bindSort = true;
-        this.sortTable();
-      }
-      else
-        jQuery("table").trigger("update", [true]);
-    }
   }
 
-  sortTable() {
-    setTimeout(()=> {
-      jQuery('.tablesorter').tablesorter({
-        headers: {
-          3: {sorter: false},
-          4: {sorter: false},
-          5: {sorter: false}
-        }
-      });
-    }, 50);
-  }
   changeDateFormat(data:string) {
     return new Date(data).toLocaleString('en-GB', {
       month: "numeric",
@@ -82,29 +60,30 @@ export class ContactListComponent implements OnInit {
       minute: "numeric"
     });
   }
+
   delete(id:string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Contact !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+        confirmButtonText: "Yes, delete it!"
+      })
+      .then((result)=> {
+        if(result.value){
         let objTemp:ContactModel = new ContactModel();
         objTemp._id = id;
         objTemp.deleted = true;
         this._objService.deleteContact(objTemp)
           .subscribe(res=> {
               this.getContactList();
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
   }
 
@@ -114,7 +93,6 @@ export class ContactListComponent implements OnInit {
 
   handleCancel(args) {
     this.location.back();
-    this.sortTable();
   }
 
   pageChanged(event) {
@@ -122,7 +100,5 @@ export class ContactListComponent implements OnInit {
     this.currentPage = event.pageIndex + 1;
     this.getContactList();
   }
-
-
 }
 

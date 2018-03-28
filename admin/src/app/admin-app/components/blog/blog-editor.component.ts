@@ -6,12 +6,11 @@ import {Config} from "../../../shared/configs/general.config";
 import {ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
 import {ImageUploader} from "../../../shared/components/image-uploader.component";
 import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'blog-editor',
   templateUrl: './blog-editor.html'
-
-  // styles: [style]
 })
 export class BlogEditorComponent implements AfterViewInit,OnInit {
   objBlog:BlogModel = new BlogModel();
@@ -127,12 +126,12 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
 
   resStatusMessage(objSave:any) {
     this.router.navigate(['/blog']);
-    swal("Success !", objSave.message, "success");
+    Swal("Success !", objSave.message, "success");
   }
 
   editorValueChange(args) {
     this.objBlog.blogDescription = args;
-    // (<FormControl>this.newsForm.controls["editorFormControl"]).updateValue(args);
+    //  (<FormControl>this.newsForm.controls["editorFormControl"]).updateValue(args);
   }
 
   triggerCancelForm() {
@@ -140,13 +139,13 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
   }
 
   errorMessage(objResponse:any) {
-    swal("Alert !", objResponse.message, "info");
+    Swal("Alert !", objResponse.message, "info");
   }
 
   /*Image Handler */
   changeFile(args) {
     this.file = args;
-      this.fileName = this.file.name;
+    this.fileName = this.file.name;
   }
 
   drawImageToCanvas(path:string) {
@@ -154,28 +153,28 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
   }
 
   deleteImage(imageId) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Image !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+        confirmButtonText: "Yes, delete it!"
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteImage(this.objBlog.bannerImage, this.objBlog.imageProperties.imageExtension, this.objBlog.imageProperties.imagePath)
           .subscribe(res=> {
               this.imageDeleted = true;
               this.objBlog.bannerImage = "";
               this.fileName = "";
               this.drawImageToCanvas(Config.DefaultWideImage);
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
   }
   /* End Image Handler */

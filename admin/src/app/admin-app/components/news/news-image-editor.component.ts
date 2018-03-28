@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Output, Input, AfterViewInit, ViewChild, OnInit} from '@angular/core';
+import Swal from 'sweetalert2';
+import {Component, AfterViewInit, ViewChild, OnInit} from '@angular/core';
 import {NewsImageModel} from "./news.model";
 import {NewsService} from "./news.service";
 import {Config} from "../../../shared/configs/general.config";
@@ -10,17 +11,12 @@ import {Location} from '@angular/common';
 @Component({
   selector: 'news-image-editor',
   templateUrl: './news-image-editor.html'
-  // styles: [style]
 })
 export class NewsImageEditorComponent implements OnInit,AfterViewInit {
   imageExtension: any;
   imagePath: any;
   newsId:string;
   newsImageId:string;
-  // objNewsImage: NewsImageModel = new NewsImageModel();
-  // @Input() newsImageId: string;
-  // @Input() newsId: string;
-  // @Output() showImageListEvent: EventEmitter<any> = new EventEmitter();
   newsImageForm: FormGroup;
   isSubmitted: boolean = false;
 
@@ -33,7 +29,6 @@ export class NewsImageEditorComponent implements OnInit,AfterViewInit {
   canvasSize: number = ImageCanvasSizeEnum.wide;
   /* End Image Upload handle */
 
-
   constructor(private location:Location,private activatedRoute:ActivatedRoute,private _objService: NewsService, private _formBuilder: FormBuilder) {
     activatedRoute.params.subscribe(param=>this.newsId=param['id']);
     activatedRoute.params.subscribe(param=>this.newsImageId=param['imageId']);
@@ -43,7 +38,6 @@ export class NewsImageEditorComponent implements OnInit,AfterViewInit {
       imageFormControl: this.imageFormControl,
       active: ['']
     });
-
   }
 
   ngAfterViewInit() {
@@ -72,9 +66,6 @@ export class NewsImageEditorComponent implements OnInit,AfterViewInit {
       active: objRes.active,
     });
     this.imageFormControl.patchValue(objRes.imageName);
-  // (<FormControl>this.newsImageForm.controls["imageFormControl"]).patchValue(this.newsImageForm.value);
-    
-    
     let path: string = "";
     if (objRes.imageName) {
       var cl = Config.Cloudinary;
@@ -104,21 +95,17 @@ export class NewsImageEditorComponent implements OnInit,AfterViewInit {
   }
 
   resStatusMessage(objSave: any) {
-    // this.showImageListEvent.emit(false); // is Form Canceled
-    swal("Success !", objSave.message, "success")
+    Swal("Success !", objSave.message, "success")
     this.location.back();
 
   }
 
   triggerCancelForm() {
     this.location.back();
-    // let isCanceled = true;
-    // this.showImageListEvent.emit(isCanceled);
   }
 
   errorMessage(objResponse: any) {
-    swal("Alert !", objResponse.message, "info");
-
+    Swal("Alert !", objResponse.message, "info");
   }
 
   /*Image handler */
@@ -133,32 +120,29 @@ export class NewsImageEditorComponent implements OnInit,AfterViewInit {
   }
 
   deleteImage(id: string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Image !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+        confirmButtonText: "Yes, delete it!"
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteImage(this.fileName, this.imageExtension, this.imagePath)
           .subscribe(res=> {
               this.imageDeleted = true;
               this.fileName = "";
               this.drawImageToCanvas(Config.DefaultImage);
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
-
   }
-
-
   /* End ImageHandler */
 }
 

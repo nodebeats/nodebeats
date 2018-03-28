@@ -6,7 +6,7 @@
     <span class="opener" (click)="toggleContainer()">open</span>
     <ul class="list-group" id="nb-sidebar-list">
         <li matTooltip="Dashboard" matTooltipPosition="right" class="list-group-item" >
-            <a routerLinkActive="active" routerLink="/dashboard" [routerLinkActiveOptions]="{ exact: true }" class="nb-dashboard-item">
+            <a routerLinkActive="active" routerLink="/dashboard" class="nb-dashboard-item">
                 <i class="fas fa-tachometer-alt"></i>
                 <span class="min">Dashboard</span>
             </a>
@@ -19,7 +19,7 @@
                 </a>
                 <ul class="collapse accordion-list" data-parent="#nb-sidebar-list" id="collapse{{i}}">
                     <li matTooltip="{{menu.title}}" matTooltipPosition="right" *ngFor="let menu of parentMenu.menuItem" class="list-group-item">
-                        <a routerLinkActive="active" [routerLink]="menu.route" [routerLinkActiveOptions]="{exact: true}" class="nb-dashboard-item">
+                        <a routerLinkActive="active" [routerLink]="menu.route" class="nb-dashboard-item">
                             <i class="{{menu.icon}}"></i>
                             <span class="min">{{menu.title}}</span>
                         </a>
@@ -28,7 +28,7 @@
             </li>
             <ng-template [ngIf]="!parentMenu.headerTitle">
                 <li matTooltip="{{menu.title}}" matTooltipPosition="right" *ngFor="let menu of parentMenu.menuItem" class="list-group-item">
-                    <a routerLinkActive="active" [routerLink]="menu.route" [routerLinkActiveOptions]="{ exact: true }" class="nb-dashboard-item">
+                    <a routerLinkActive="active" [routerLink]="menu.route" class="nb-dashboard-item">
                         <i class="{{menu.icon}}"></i>
                         <span class="min">{{menu.title}}</span>
                     </a>

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {EmailTemplateService} from "./email-template.service";
 import {EmailTemplateModel, EmailTempalteResponse} from "./email-template.model";
@@ -13,7 +14,7 @@ export class EmailTemplateListComponent implements OnInit {
 
   objEmailTemplate:EmailTemplateModel = new EmailTemplateModel();
   objResponse:EmailTempalteResponse = new EmailTempalteResponse();
-  displayedColumns = ['SN','Template Name', 'Subject', 'From','Active', 'Actions'];
+  displayedColumns = ['SN', 'Template Name', 'Subject', 'From', 'Active', 'Actions'];
   dataSource:any;  
   /* Pagination */
   pageSizeOptions = [5, 10, 25, 50, 100];
@@ -40,33 +41,13 @@ export class EmailTemplateListComponent implements OnInit {
   }
 
   errorMessage(objResponse:any) {
-    swal("Alert !", objResponse.message, "info");
+    Swal("Alert !", objResponse.message, "info");
   }
 
   bindList(objRes:EmailTempalteResponse) {
     this.objResponse = objRes;
     this.dataSource = new MatTableDataSource(this.objResponse.dataList);        
-    this.preIndex = (this.perPage * (this.currentPage - 1));
     this.totalItems = objRes.totalItems;
-    if (objRes.totalItems > 0) {
-      if (!this.bindSort) {
-        this.bindSort = true;
-        this.sortTable();
-      }
-      else
-        jQuery("table").trigger("update", [true]);
-    }
-  }
-
-  sortTable() {
-    setTimeout(()=> {
-      jQuery('.tablesorter').tablesorter({
-        headers: {
-          4: {sorter: false},
-          5: {sorter: false}
-        }
-      });
-    }, 50);
   }
 
   addTemplate() {
@@ -75,42 +56,38 @@ export class EmailTemplateListComponent implements OnInit {
 
   editDetail(id:string) {
     this.router.navigate(['/email-template/email-template-editor', id]);
-
   }
 
   delete(id:string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Template !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+        confirmButtonText: "Yes, delete it!"
+      })
+      .then((result)=> {
+        if(result.value){
         let objTemp:EmailTemplateModel = new EmailTemplateModel();
         objTemp._id = id;
         objTemp.deleted = true;
         this._objService.deleteTemplate(objTemp)
           .subscribe(res=> {
               this.getEmailTemplateList();
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
   }
-
  
   pageChanged(event) {
     this.perPage = event.pageSize;
     this.currentPage = event.pageIndex + 1;
     this.getEmailTemplateList();
   }
-
-
 }
 

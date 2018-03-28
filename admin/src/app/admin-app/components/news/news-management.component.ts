@@ -1,6 +1,4 @@
-
 import{Component}from'@angular/core';
-
 
 @Component({
     selector: 'news-management',
@@ -11,22 +9,5 @@ export class NewsManagementComponent {
 
     constructor() {
     }
-
-
-    
-    // public tabSwitch(args) {
-    //     console.log(args)
-    //     if (1 == args.index) {
-    //         this.hideAll();
-    //       this.isCatList = true;
-    //     }
-    //     else {
-    //         this.hideAll();
-    //       this.isNewsList = true;
-    //     }
-
-    // }
-
-
 }
 

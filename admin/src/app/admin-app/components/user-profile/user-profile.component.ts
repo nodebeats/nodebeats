@@ -1,7 +1,10 @@
-import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import {Component, OnInit} from '@angular/core';
 import {UserModel, UserResponse} from "../user-management/user.model";
 import {UserService} from "../user-management/user.service";
 import {Config} from "../../../shared/configs/general.config";
+
 @Component({
     selector: 'user-profile',
     templateUrl: './user-profile.html'
@@ -9,19 +12,20 @@ import {Config} from "../../../shared/configs/general.config";
 })
 
 export class UserProfileComponent implements OnInit {
-    //  @Input showInfo:boolean;
-    @Input() userId:string;
-    @Output() userEditEvent:EventEmitter<any> = new EventEmitter();
-    @Input() showView:boolean;
+    userId:string;
+    tfaEnabled:boolean = false;    
     objUser:UserModel = new UserModel();
     objResponse:UserResponse = new UserResponse();
     imageSrc:string=Config.DefaultAvatar;
+
     ngOnInit() {
         this.getUserDetail();
     }
 
-    constructor(private _objUserService:UserService) {
-
+    constructor(private _objUserService:UserService, private router: Router) {
+        let userInfo:UserModel = JSON.parse(Config.getUserInfoToken());
+        this.userId = userInfo._id;
+        this.tfaEnabled = userInfo.twoFactorAuthEnabled;
     }
 
     getUserDetail() {
@@ -31,28 +35,21 @@ export class UserProfileComponent implements OnInit {
     }
 
     errorMessage(objResponse:any) {
-      swal("Alert !", objResponse.message, "info");
-
+        Swal("Alert !", objResponse.message, "info");
     }
 
-    bindDetail(objUser:UserModel) {
-        this.objUser = objUser;
+    bindDetail(objRes:UserModel) {
+        this.objUser = objRes;
         if (!this.objUser.imageName)
             this.imageSrc = Config.DefaultAvatar;
         else {
             let cl = Config.Cloudinary;
-            this.imageSrc = cl.url(this.objUser.imageName, {transformation: [{width: 100, crop: "scale"}]});
+            this.imageSrc = cl.url(this.objUser.imageName);
         }
     }
 
-    onShowView(args) {
-        if (!args) // isCanceled
-            this.getUserDetail();
-        this.showView = true;
-    }
-
     onShowEdit() {
-        this.showView = false;
+        this.router.navigate(['/profile/edit', this.userId]);
     }
 
 }

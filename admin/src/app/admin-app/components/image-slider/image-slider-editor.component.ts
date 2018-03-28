@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Output, Input, AfterViewInit, ViewChild, OnInit} from '@angular/core';
+import Swal from 'sweetalert2';
+import {Component, AfterViewInit, OnInit} from '@angular/core';
 import {ImageSliderModel} from "./image-slider.model";
 import {ImageSliderService} from "./image-slider.service";
 import{Config} from "../../../shared/configs/general.config";
@@ -7,19 +8,14 @@ import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 import { Router, ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 
-//declare var require;
-//const styles:string = require('../../../shared/components/datepicker/src/my-date-picker/my-date-picker.component.css');
 @Component({
   selector: 'image-slider-editor',
   templateUrl: './image-slider-editor.html'
 })
 export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
-  // objSlider: ImageSliderModel = new ImageSliderModel();
   imageExtension: any;
   imagePath: any;
   sliderId:string;
-  // @Input() sliderId: string;
-  // @Output() showSliderListEvent: EventEmitter<any> = new EventEmitter();
   imageSliderForm: FormGroup;
   isSubmitted: boolean = false;
 
@@ -63,7 +59,6 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
   }
 
   bindDetail(objRes: ImageSliderModel) {
-    // this.objSlider = objRes;
     this.imageExtension = objRes.imageProperties? objRes.imageProperties.imageExtension: '';
     this.imagePath = objRes.imageProperties? objRes.imageProperties.imagePath : '';
     this.fileName = objRes.imageName;
@@ -83,7 +78,6 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
     else
       path = Config.DefaultImage;
     this.drawImageToCanvas(path);
-    
   }
 
 
@@ -105,20 +99,16 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
   }
 
   resStatusMessage(objSave: any) {
-    // this.showSliderListEvent.emit(false); // is Form Canceled
-    swal("Success !", objSave.message, "success")
+    Swal("Success !", objSave.message, "success")
     this.location.back();
   }
 
   triggerCancelForm() {
-    // let isCanceled = true;
-    // this.showSliderListEvent.emit(isCanceled);
     this.location.back();
   }
 
   errorMessage(objResponse: any) {
-    swal("Alert !", objResponse.message, "info");
-
+   Swal("Alert !", objResponse.message, "info");
   }
 
   /*Image handler */
@@ -132,27 +122,27 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
   }
 
   deleteImage(id: string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Image !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteImage(this.fileName, this.imageExtension, this.imagePath)
         .subscribe(res=> {
             this.imageDeleted = true;
             this.fileName = "";
             this.drawImageToCanvas(Config.DefaultImage);
-            swal("Deleted!", res.message, "success");
+            Swal("Deleted!", res.message, "success");
           },
           error=> {
-            swal("Alert!", error.message, "info");
-
+            Swal("Alert!", error.message, "info");
           });
+        }
       });
   }
 

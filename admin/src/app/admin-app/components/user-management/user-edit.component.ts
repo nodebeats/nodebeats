@@ -1,22 +1,25 @@
-import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "./user.service";
 import {UserModel} from "./user.model";
 import {ValidationService} from "../../../shared/services/validation.service";
 import {Response} from "@angular/http";
 import {Config} from "../../../shared/configs/general.config";
-import{ImageCanvasSizeEnum} from '../../../shared/configs/enum.config';
+import {ImageCanvasSizeEnum} from '../../../shared/configs/enum.config';
 import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import {QUESTION_LIST} from "../../../shared/configs/security-question.config";
 import {RoleService} from "../role-management/role.service";
 import {RoleModel} from "../role-management/role.model";
+import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'user-edit',
   templateUrl: './user-form.html'
 })
+
 export class UserEditComponent implements OnInit {
-  @Input() userId: string;
-  // @Input objUser:UserModel;
-  @Output() showListEvent: EventEmitter<any> = new EventEmitter();
+  userId: string;
   userForm: FormGroup;
   objUser: UserModel = new UserModel();
   isSubmitted: boolean = false;
@@ -34,19 +37,17 @@ export class UserEditComponent implements OnInit {
   questionlist: string[] = QUESTION_LIST;
 
 
-  constructor(private _objUserService: UserService, private _formBuilder: FormBuilder, private roleService: RoleService) {
+  constructor(private location: Location, private router: Router, private activatedRoute: ActivatedRoute, private _objUserService: UserService, private _formBuilder: FormBuilder, private roleService: RoleService) {
+    activatedRoute.params.subscribe(param => this.userId = param['userId']);
     this.userForm = this._formBuilder.group({
       "firstName": ['', Validators.required],
+      "middleName": [''],
       "lastName": ['', Validators.required],
       "email": ['', Validators.compose([Validators.required, ValidationService.emailValidator])],
-      "phoneNumber": ['', Validators.minLength(7)],
+      "phoneNumber": ['',  Validators.minLength(7)],
       "mobileNumber": ['', Validators.minLength(10)],
       "imageFormControl": this.imageFormControl,
-      middleName: [''],
-      phone: [''],
-      mobile: [''],
-      userRole: ['']
-
+      "userRole": ['']
     });
   }
 
@@ -68,12 +69,10 @@ export class UserEditComponent implements OnInit {
   }
 
   userDetailView(objUser: UserModel) {
-    // this.objUser = objUser;
     this.imageExtension = objUser.imageProperties? objUser.imageProperties.imageExtension: '';
     this.imagePath = objUser.imageProperties? objUser.imageProperties.imagePath : '';
-
     this.userForm.patchValue({
-      firstName:objUser.firstName,
+      firstName: objUser.firstName,
       middleName: objUser.middleName,
       lastName: objUser.lastName,
       email: objUser.email,
@@ -81,30 +80,26 @@ export class UserEditComponent implements OnInit {
       mobileNumber: objUser.mobileNumber,
       userRole: objUser.userRole
     });
-    (<FormControl>this.userForm.controls['imageFormControl']).patchValue(this.fileName);
     this.fileName = objUser.imageName;
-
+    (<FormControl>this.userForm.controls['imageFormControl']).patchValue(this.fileName);
     let path: string = "";
-    if (this.objUser.userRole == "superadmin")
-      this.userForm.controls["userRole"].reset({value: this.objUser.userRole, disabled: true})
-    if (this.objUser.imageName) {
+    if (objUser.userRole == "superadmin"){
+      // this.userForm.controls["userRole"].reset({value: objUser.userRole, disabled: true})
+      this.userForm.controls["userRole"].patchValue(objUser.userRole);
+    }
+    if (this.fileName) {
       var cl = Config.Cloudinary;
-      path = cl.url(this.objUser.imageName);
+      path = cl.url(this.fileName);
     }
     // path = "/uploads/avatars/" + this.objUser.imageName;
     else
       path = Config.DefaultAvatar;
+    console.log(path);
     this.drawImageToCanvas(path);
   }
 
-
   saveUser() {
-    //  this.dataUrl = canvas.toDataURL('image/png').replace(/^data:image\/\w+;base64,/, "");
-    //let blob:Blob;
-    //blob = this.imageHelper.b64toBlob(this.dataUrl, 'image/png', 512);
-    //  this._objUserService.registerUser(this.objUser, blob)
     this.isSubmitted = true;
-    this.objUser.password = "";
     if (this.userForm.valid) {
       this._objUserService.updateUser(this.userForm.value, this.file, this.imageDeleted, this.userId)
         .subscribe(resUser => this.saveUserStatusMessage(resUser),
@@ -113,27 +108,23 @@ export class UserEditComponent implements OnInit {
   }
 
   saveUserStatusMessage(objResponse: any) {
-    swal("Success !", objResponse.message, "success");
-
-    this.showListEvent.emit(false);
+    Swal("Success !", objResponse.message, "success");
+    this.triggerCancelForm();
   }
 
   errorMessage(objResponse: any) {
-    swal("Alert !", objResponse.message, "info");
-
+   Swal("Alert !", objResponse.message, "info");
   }
-
 
   handleDeleteSuccess(resUser: Response) {
     this.imageDeleted = true;
-    this.objUser.imageName = "";
+    this.fileName = "";
     let path = Config.DefaultAvatar;
     this.drawImageToCanvas(path);
   }
 
   triggerCancelForm() {
-    let isCancel: boolean = true;
-    this.showListEvent.emit(isCancel);
+    this.location.back();
   }
 
   /*Image handler */
@@ -148,28 +139,27 @@ export class UserEditComponent implements OnInit {
   }
 
   deleteImage() {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover  the image  !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+        confirmButtonText: "Yes, delete it!"
+      })
+      .then((result)=> {
+        if(result.value){
         this._objUserService.deleteImage(this.fileName, this.imageExtension, this.imagePath)
           .subscribe(resUser=> {
               this.fileName = "";
               this.handleDeleteSuccess(resUser);
-              swal("Deleted!", resUser.message, "success");
+              Swal("Deleted!", resUser.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
-
   }
 
 }

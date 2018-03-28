@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Output, Input, AfterViewInit, ViewChild, OnInit} from '@angular/core';
+import Swal from 'sweetalert2';
+import {Component, AfterViewInit, OnInit} from '@angular/core';
 import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {TestimonialModel} from "./testimonial.model";
 import {TestimonialService} from "./testimonial.service";
@@ -13,13 +14,11 @@ import {Location} from '@angular/common';
 @Component({
   selector: 'testimonial-editor',
   templateUrl: './testimonial-editor.html'
-  // styles: [style]
 })
 export class TestimonialEditorComponent implements OnInit,AfterViewInit {
   imageExtension: any;
   imagePath: any;
   testimonialId:string;
-  // @Output() showListEvent:EventEmitter<any> = new EventEmitter();
   testimonialForm:FormGroup;
   isSubmitted:boolean = false;
 
@@ -118,8 +117,7 @@ export class TestimonialEditorComponent implements OnInit,AfterViewInit {
 
   resStatusMessage(objSave:any) {
     this.location.back();
-    swal("Success !", objSave.message, "success")
-
+    Swal("Success !", objSave.message, "success")
   }
 
   triggerCancelForm() {
@@ -127,47 +125,44 @@ export class TestimonialEditorComponent implements OnInit,AfterViewInit {
   }
 
   errorMessage(objResponse:any) {
-    swal("Alert !", objResponse.message, "info");
-
+    Swal("Alert !", objResponse.message, "info");
   }
 
   /*Image handler */
 
   deleteImage(id:string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Image !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteImage(this.fileName, this.imageExtension, this.imagePath)
         .subscribe(res=> {
             this.imageDeleted = true;
             this.fileName = "";
             this.drawImageToCanvas(Config.DefaultImage);
-            swal("Deleted!", res.message, "success");
+            Swal("Deleted!", res.message, "success");
           },
           error=> {
-            swal("Alert!", error.message, "info");
-
+            Swal("Alert!", error.message, "info");
           });
-            
+        }            
       });
   }
 
   changeFile(args) {
     this.file = args;
-      this.fileName = this.file.name;
+    this.fileName = this.file.name;
   }
 
   drawImageToCanvas(path:string) {
     this.drawImagePath = path;
   }
-
   /* End ImageHandler */
 }
 

@@ -1,34 +1,48 @@
-import {Component, EventEmitter, Output, Input, ViewChild, OnInit,} from '@angular/core';
+import Swal from 'sweetalert2';
+import {Component} from '@angular/core';
 import {UserService} from "./user.service";
-import {UserSecurityModel} from "./user.model";
+import {UserSecurityModel, UserModel} from "./user.model";
 import {Validators, FormBuilder, FormGroup} from "@angular/forms";
-import{QUESTION_LIST} from '../../../shared/configs/security-question.config'
+import {QUESTION_LIST} from '../../../shared/configs/security-question.config';
+import { Router } from '@angular/router';
+import { Config } from '../../../shared/configs/general.config';
+
 @Component({
     selector: 'user-security',
     templateUrl: './user-security-update.html'
 })
 
 export class UserSecurityUpdateComponent {
-    @Input() userId:string;
-    @Output() showListEvent:EventEmitter<any> = new EventEmitter();
-    @Input() hideCancel:boolean;
+    userId:string;
     objUserSecurity:UserSecurityModel = new UserSecurityModel();
-    error:any;
     userSecurityForm:FormGroup;
     isSubmitted:boolean = false;
     questionlist:string[] = QUESTION_LIST;
 
-    constructor(private _objUserService:UserService, private _formBuilder:FormBuilder) {
+    constructor(private router: Router, private _objUserService:UserService, private _formBuilder:FormBuilder) {
+        if(router.routerState.snapshot.url.split('/').length>3){
+            this.userId = router.routerState.snapshot.url.split('/')[3];
+        }else{
+            let userInfo: UserModel = JSON.parse(Config.getUserInfoToken());
+            this.userId = userInfo._id;
+        }
         this.userSecurityForm = this._formBuilder.group({
             "securityQuestion": ['', Validators.required],
             "securityAnswer": ['', Validators.required]
         });
     }
 
+    getSecurityQuestionDetail() {
+        this._objUserService.getUserDetail(this.userId)
+            .subscribe(res => console.log(res));
+    }
+
     updateSecurity() {
         this.isSubmitted = true;
         this.objUserSecurity._id = this.userId;
+        console.log("outside valid", this.objUserSecurity);
         if (this.userSecurityForm.valid) {
+        console.log("inside valid", this.objUserSecurity);            
             this._objUserService.updateSecurityQuestion(this.objUserSecurity)
                 .subscribe(res => this.successStatusMessage(res),
                     error => this.errorMessage);
@@ -36,22 +50,16 @@ export class UserSecurityUpdateComponent {
     }
 
     successStatusMessage(res:any) {
-      swal("Success !", res.message, "success");
-
-      // this.triggerCancelForm();
+        Swal("Success !", res.message, "success");
+        this.triggerCancelForm();
     }
 
     errorMessage(objResponse:any) {
-      swal("Alert !", objResponse.message, "info");
-
+        Swal("Alert !", objResponse.message, "info");
     }
-
 
     triggerCancelForm() {
-        let isCancel:boolean = true;
-        this.showListEvent.emit(isCancel);
+        this.router.navigate(['/']);
     }
-
-
 }
 

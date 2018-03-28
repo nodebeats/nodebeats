@@ -7,7 +7,7 @@ import {SharedModule} from '../../../shared/shared.module';
 import {RoleRouting} from './role.route';
 
 @NgModule({
-    imports: [SharedModule.forRoot(),RoleRouting],
+    imports: [SharedModule.forRoot(), RoleRouting],
     declarations: [RoleHomeComponent,RoleEditorComponent, RoleComponent],
     providers: [RoleService]
 })

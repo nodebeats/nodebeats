@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {Component, EventEmitter, Output, Input, AfterViewInit, ViewChild, OnInit} from '@angular/core';
 import {PartnerModel} from "./partner.model";
 import {PartnerService} from "./partner.service";
@@ -7,16 +8,13 @@ import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 import {ValidationService} from "../../../shared/services/validation.service";
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
-import { from } from 'rxjs/observable/from';
 
 @Component({
   selector: 'partner-editor',
   templateUrl: './partner-editor.html'
 })
+
 export class PartnerEditorComponent implements OnInit,AfterViewInit {
-  // objPartner: PartnerModel = new PartnerModel();
-  // @Input() partnerId: string;
-  // @Output() showPartnerListEvent: EventEmitter<any> = new EventEmitter();
   partnerId:string;
   partnerForm: FormGroup;
   isSubmitted: boolean = false;
@@ -69,8 +67,6 @@ export class PartnerEditorComponent implements OnInit,AfterViewInit {
       imageAltText: objRes.imageAltText,
       linkURL: objRes.linkURL,
       active: objRes.active,
-      
-
     });
     (<FormControl>this.partnerForm.controls['imageFormControl']).patchValue(this.fileName);
     this.fileName = objRes.imageName;
@@ -104,7 +100,7 @@ export class PartnerEditorComponent implements OnInit,AfterViewInit {
   }
 
   resStatusMessage(objSave: any) {
-    swal("Success !", objSave.message, "success")
+    Swal("Success !", objSave.message, "success")
     this.location.back();
   }
 
@@ -113,7 +109,7 @@ export class PartnerEditorComponent implements OnInit,AfterViewInit {
   }
 
   errorMessage(objResponse: any) {
-    swal("Alert !", objResponse.message, "info");
+    Swal("Alert !", objResponse.message, "info");
 
   }
 
@@ -128,32 +124,29 @@ export class PartnerEditorComponent implements OnInit,AfterViewInit {
   }
 
   deleteImage(id: string) {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover this Image !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
+        confirmButtonText: "Yes, delete it!"
+      })
+      .then((result)=> {
+        if(result.value){
         this._objService.deleteImage(this.fileName, this.imageExtension, this.imagePath)
           .subscribe(res=> {
               this.imageDeleted = true;
               this.fileName = "";
               this.drawImageToCanvas(Config.DefaultImage);
-              swal("Deleted!", res.message, "success");
+              Swal("Deleted!", res.message, "success");
             },
             error=> {
-              swal("Alert!", error.message, "info");
-
+              Swal("Alert!", error.message, "info");
             });
+          }
       });
-
   }
-
-
   /* End ImageHandler */
 }
 

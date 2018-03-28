@@ -1,25 +1,29 @@
 import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
 import {UserService} from "./user.service";
-import {UserSettingModel} from "./user.model";
+import {UserSettingModel, UserModel} from "./user.model";
 import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
+import Swal from 'sweetalert2';
+import { Config } from '../../../shared/configs/general.config';
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'user-setting',
   templateUrl: './user-setting.html'
 })
 
 export class UserSettingComponent implements OnInit {
-  @Input() userId:string;
-  @Input() tfaEnabled:boolean;
-  @Input() hideCancel:boolean;
-  @Output() showListEvent:EventEmitter<any> = new EventEmitter();
+  userId:string;
+  tfaEnabled:boolean;
   objUserSetting:UserSettingModel = new UserSettingModel();
   userSettingForm:FormGroup;
   isSubmitted:boolean = false;
   qrCodePath:string = "M0 0 L0 0 L0 0 Z";
   tfaChecked:boolean = false;
-  isCancel:boolean = true;
 
-  constructor(private _objUserService:UserService, private _formBuilder:FormBuilder) {
+  constructor(private location: Location, private _objUserService:UserService, private _formBuilder:FormBuilder) {
+    let userInfo: UserModel = JSON.parse(Config.getUserInfoToken());
+    this.userId = userInfo._id;
+    this.tfaEnabled = userInfo.twoFactorAuthEnabled;    
     this.userSettingForm = this._formBuilder.group({
       "token": ['', Validators.required]
     });
@@ -57,18 +61,15 @@ export class UserSettingComponent implements OnInit {
   }
 
   successStatusMessage(res:any) {
-    this.isCancel = false;
-    swal("Success !", res.message, "success")
-
+    Swal("Success !", res.message, "success");
   }
 
   errorMessage(objResponse:any) {
-    swal("Alert !", objResponse.message, "info");
-
+    Swal("Alert !", objResponse.message, "info");
   }
 
   triggerCancelForm() {
-    this.showListEvent.emit(this.isCancel);
+    this.location.back();
   }
 
   toggleEnable(args:boolean) {
@@ -76,17 +77,16 @@ export class UserSettingComponent implements OnInit {
     if (!this.tfaEnabled && this.tfaChecked)
       this.getTwoFactorSecret();
     if (!args && this.tfaEnabled) {
-      swal({
+    Swal({
           title: "Are you sure?",
           text: "You want to disable Two Factor Authentication  !",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
-          confirmButtonText: "Yes, delete it!",
-          closeOnConfirm: false
-        },
-        (isConfirm)=> {
-          if (isConfirm) {
+          confirmButtonText: "Yes, delete it!"
+        })
+        .then((isConfirm)=> {
+          if (isConfirm.value) {
             this.objUserSetting._id = this.userId;
             this.objUserSetting.twoFactorAuthEnabled = args;
             this._objUserService.updateSetting(this.objUserSetting)
@@ -95,12 +95,11 @@ export class UserSettingComponent implements OnInit {
                   this.successStatusMessage(res);
                 },
                 error=> {
-                  swal("Alert!", error.message, "info");
-
+                  Swal("Alert!", error.message, "info");
                 });
           } else {
             this.tfaChecked = true;
-            swal("Cancelled", "Your imaginary file is safe :)", "error");
+            Swal("Cancelled", "Your imaginary file is safe :)", "error");
           }
         });
     }
@@ -109,7 +108,5 @@ export class UserSettingComponent implements OnInit {
   clearTextField() {
     (<FormControl>this.userSettingForm.controls['token']).patchValue("");
   }
-
-
 }
 

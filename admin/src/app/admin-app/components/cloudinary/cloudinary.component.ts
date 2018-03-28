@@ -1,9 +1,11 @@
+import Swal from 'sweetalert2';
 import {Component, OnInit} from '@angular/core';
 import {CloudinaryService} from "./cloudinary.service";
 import {CloudinaryModel, CloudinaryResponse} from "./cloudinary.model";
 import {AlertModel} from "../../../shared/models/alert.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Config} from "../../../shared/configs/general.config";
+
 @Component({
     selector: 'cloudinary-settings',
     templateUrl: './cloudinary.html'
@@ -74,21 +76,12 @@ export class CloudinarySettingComponent implements OnInit {
         if (this.isPost)
             this.getClouindarySetting();
         this.objAlert.hideAlert();
-      swal("Success !", res.message, "success")
-
+        Swal("Success !", res.message, "success")
     }
 
     errorMessage(objResponse:CloudinaryResponse) {
         this.objAlert.showAlert("danger", "Alert !!", objResponse.message, true);
     }
-
-    triggerCancelForm() {
-        let isEdit = false;
-        //this.editCancelEvent.emit(false);
-    }
-
-    
- 
-    }
+}
     
 

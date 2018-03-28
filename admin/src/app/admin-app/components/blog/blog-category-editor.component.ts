@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {Component, OnInit} from '@angular/core';
 import {BlogCategoryModel} from "./blog.model";
 import {BlogService} from "./blog.service";
@@ -53,12 +54,12 @@ export class BlogCategoryEditorComponent implements OnInit {
     }
 
     resStatusMessage(res:any) {
-        swal("Success !", res.message, "success");
+        Swal("Success !", res.message, "success");
         this.router.navigate(['/blog/category']);
     }
 
     errorMessage(objResponse:any) {
-      swal("Alert !", objResponse.message, "info");
+        Swal("Alert !", objResponse.message, "info");
     }
 
     triggerCancelForm() {

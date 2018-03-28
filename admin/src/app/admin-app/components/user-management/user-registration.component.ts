@@ -9,17 +9,16 @@ import{QUESTION_LIST} from '../../../shared/configs/security-question.config'
 import {RoleService} from "../role-management/role.service";
 import {RoleModel} from "../role-management/role.model";
 import {Response} from "@angular/http";
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'user-form',
   templateUrl: './user-form.html'
 })
 
 export class UserRegistrationComponent implements OnInit {
-  // @Input() userId:string;
-  // @Input objUser:UserModel;
-  @Output() showListEvent: EventEmitter<any> = new EventEmitter();
-  objUser: UserModel = new UserModel();
-  userId: string = null;
+  // objUser: UserModel = new UserModel();
   userForm: FormGroup;
   isSubmitted: boolean = false;
   objRoleList: RoleModel[] = [];
@@ -32,8 +31,10 @@ export class UserRegistrationComponent implements OnInit {
   canvasSize: number = ImageCanvasSizeEnum.small;
   /* End Image Upload handle */
   questionlist: string[] = QUESTION_LIST;
+  imageExtension: string;
+  imagePath: string;
 
-  constructor(private _objUserService: UserService, private _formBuilder: FormBuilder, private roleService: RoleService) {
+  constructor(private router: Router, private _objUserService: UserService, private _formBuilder: FormBuilder, private roleService: RoleService) {
     this.userForm = this._formBuilder.group({
         "firstName": ['', Validators.required],
         "lastName": ['', Validators.required],
@@ -65,29 +66,25 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   saveUser() {
-
     this.isSubmitted = true;
     if (this.userForm.valid) {
-      this._objUserService.registerUser(this.objUser, this.file)
+      this._objUserService.registerUser(this.userForm.value, this.file)
         .subscribe(resUser => this.saveUserStatusMessage(resUser),
           error =>this.errorMessage(error));
     }
   }
 
   errorMessage(objResponse: any) {
-    swal("Alert !", objResponse.message, "info");
-
+    Swal("Alert !", objResponse.message, "info");
   }
 
   saveUserStatusMessage(objResponse: any) {
-    swal("Success !", objResponse.message, "success");
-
-    this.showListEvent.emit(false); //isCancel false
+    Swal("Success !", objResponse.message, "success");
+    this.triggerCancelForm();
   }
 
   triggerCancelForm() {
-    let isCancel: boolean = true;
-    this.showListEvent.emit(isCancel);
+    this.router.navigate(['/user-management']);
   }
 
   /*Image handler */
@@ -102,34 +99,34 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   deleteImage() {
-    swal({
+  Swal({
         title: "Are you sure?",
         text: "You will not be able to recover  the image  !",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
-      },
-      ()=> {
-        this._objUserService.deleteImage(this.objUser.imageName, this.objUser.imageProperties.imageExtension, this.objUser.imageProperties.imagePath)
-          .subscribe(resUser=> {
-              this.objUser.imageName = "";
-              this.fileName = "";
-              this.handleDeleteSuccess(resUser);
-              swal("Deleted!", resUser.message, "success");
-            },
-            error=> {
-              swal("Alert!", error.message, "info");
-
-            });
+        confirmButtonText: "Yes, delete it!"
+      })
+      .then((result)=> {
+        if(result.value){
+        // this._objUserService.deleteImage(this.fileName, this.objUser.imageProperties.imageExtension, this.objUser.imageProperties.imagePath)
+        //   .subscribe(resUser=> {
+        //       // this.objUser.imageName = "";
+        //       this.fileName = "";
+        //       this.handleDeleteSuccess(resUser);
+        //       Swal("Deleted!", resUser.message, "success");
+        //     },
+        //     error=> {
+        //       Swal("Alert!", error.message, "info");
+        //     });
+          }
       });
 
   }
 
   handleDeleteSuccess(resUser: Response) {
     this.imageDeleted = true;
-    this.objUser.imageName = "";
+    // this.objUser.imageName = "";
     let path = Config.DefaultAvatar;
     this.drawImageToCanvas(path);
   }

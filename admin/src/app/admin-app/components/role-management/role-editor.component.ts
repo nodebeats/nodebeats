@@ -4,6 +4,7 @@ import {RoleService} from "./role.service";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'role-editor',
@@ -17,7 +18,7 @@ export class RoleEditorComponent implements OnInit {
     isSubmitted:boolean = false;
     roleId:string;
 
-    constructor(private _objService:RoleService, private _formBuilder:FormBuilder, private location: Location, private activatedRoute: ActivatedRoute) {
+    constructor(private router: Router, private _objService:RoleService, private _formBuilder:FormBuilder, private location: Location, private activatedRoute: ActivatedRoute) {
        activatedRoute.params.subscribe(param => this.roleId = param['roleId']);
         this.roleForm = this._formBuilder.group({
                 "roleName": ['', Validators.required],
@@ -71,22 +72,16 @@ export class RoleEditorComponent implements OnInit {
     }
 
     resStatusMessage(res:any) {
-        this.location.back();
-      swal("Success !", res.message, "success")
-
+        this.router.navigate(['/role']);
+        Swal("Success !", res.message, "success")
     }
 
     errorMessage(objResponse:any) {
-      swal("Alert !", objResponse.message, "info");
-
+        Swal("Alert !", objResponse.message, "info");
     }
 
     triggerCancelForm() {
-        this.location.back();
-        // let isCanceled = true;
-        // this.showListEvent.emit(isCanceled);
+        this.router.navigate(['/role']);
     }
-
-
 }
 
