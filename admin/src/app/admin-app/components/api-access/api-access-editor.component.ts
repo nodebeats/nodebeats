@@ -5,8 +5,7 @@ import { ApiAccessService } from "./api-access.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { RoleService } from "../role-management/role.service";
 import { Config } from "../../../shared/configs/general.config";
-import { ActivatedRoute } from "@angular/router";
-import { Location } from "@angular/common";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "api-access-editor",
@@ -20,11 +19,11 @@ export class ApiAccessEditorComponent implements OnInit {
   accessId: string;
 
   constructor(
-    private location: Location,
     private _objService: ApiAccessService,
     private roleService: RoleService,
     private _formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     activatedRoute.params.subscribe(param => (this.accessId = param["id"]));
     this.apiAccessForm = this._formBuilder.group({
@@ -103,7 +102,7 @@ export class ApiAccessEditorComponent implements OnInit {
 
   resStatusMessage(res: any) {
     Swal("Success !", res.message, "success");
-    this.location.back();
+    this.triggerCancelForm();
   }
 
   errorMessage(objResponse: any) {
@@ -111,6 +110,6 @@ export class ApiAccessEditorComponent implements OnInit {
   }
 
   triggerCancelForm() {
-    this.location.back();
+    this.router.navigate(['/access']);
   }
 }

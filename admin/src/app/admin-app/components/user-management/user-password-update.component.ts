@@ -15,6 +15,7 @@ import { Config } from '../../../shared/configs/general.config';
 
 export class UserPasswordUpdateComponent {
   userId: string;
+  showCancel: boolean;
   objUser: UserModel = new UserModel();
   userPasswordForm: FormGroup;
   isSubmitted: boolean = false;
@@ -22,9 +23,11 @@ export class UserPasswordUpdateComponent {
   constructor(private _objUserService: UserService, private router: Router, private _formBuilder: FormBuilder, private loginService: LoginService) {
     if(router.routerState.snapshot.url.split('/').length>3){
       this.userId = router.routerState.snapshot.url.split('/')[3];
+      this.showCancel = true;
     }else{
       let userInfo: UserModel = JSON.parse(Config.getUserInfoToken());
       this.userId = userInfo._id;
+      this.showCancel = false;
     }
     this.userPasswordForm = this._formBuilder.group({
         "password": ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
@@ -63,7 +66,7 @@ export class UserPasswordUpdateComponent {
   }
 
   triggerCancelForm() {
-    
+      this.router.navigate(['/user-management']);
   }
 
 

@@ -2,18 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {ApiAccessService} from "./api-access.service";
 import{ApiAccessModel} from "./api-access.model";
 import { Router } from '@angular/router';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
 import Swal from 'sweetalert2';
+import {Sort} from '@angular/material';
 
 @Component({
   selector: 'api-access-list',
-  templateUrl: './api-access-list.html'
+  templateUrl: './api-access-list.html',
+  styleUrls: ['./api-access.component.css']
 })
 
 export class ApiAccessComponent implements OnInit {
   objListResponse:ApiAccessModel[];
-  error:any;
-  showForm:boolean = false;
   accessId:string;  
   dataSource: any;
   displayedColumns = ['SN','Api Route', 'Role', 'Active', 'Actions'];
@@ -30,7 +30,7 @@ export class ApiAccessComponent implements OnInit {
     this.getRoleList();
   }
 
-  constructor(private _objService:ApiAccessService,private router:Router) {
+  constructor(private _objService:ApiAccessService, private router:Router) {
   }
 
   getRoleList() {
@@ -46,7 +46,7 @@ export class ApiAccessComponent implements OnInit {
   bindList(objRes:ApiAccessModel[]) {
     this.objListResponse = objRes;
     /* Pagination */
-    this.dataSource = new MatTableDataSource(this.objListResponse);    
+    this.dataSource = new MatTableDataSource(this.objListResponse);
   }
 
   edit(id:string) {
@@ -78,7 +78,6 @@ export class ApiAccessComponent implements OnInit {
               },
               error=> {
                 Swal("Alert!", error.message, "info");
-
               });
         }
       });

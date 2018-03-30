@@ -4,8 +4,7 @@ import {ContactService} from "./contact.service";
 import {ContactModel, ContactResponse} from "./contact.model";
 import {ContactViewComponent} from "./contact-view.component";
 import {ActivatedRoute,Router} from '@angular/router';
-import {Location} from '@angular/common';
-import { MatTableDataSource } from '@angular/material';
+import {MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'contact-list',
@@ -26,12 +25,10 @@ export class ContactListComponent implements OnInit {
   /* End Pagination */
 
   ngOnInit() {
-    this.perPage = 10;
-    this.currentPage = 1;
     this.getContactList();
   }
 
-  constructor(private _objService:ContactService, private router:Router,private location: Location) {
+  constructor(private _objService:ContactService, private router:Router) {
   }
 
   getContactList() {
@@ -89,10 +86,6 @@ export class ContactListComponent implements OnInit {
 
   showDetail(id:string) {
     this.router.navigate(['/contact/detail', id]);
-  }
-
-  handleCancel(args) {
-    this.location.back();
   }
 
   pageChanged(event) {

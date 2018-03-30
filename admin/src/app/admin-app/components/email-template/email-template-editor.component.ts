@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import {Component, EventEmitter, Output, Input, ViewChild, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EmailTemplateService} from "./email-template.service";
 import {EmailTemplateModel, EmailTempalteResponse} from "./email-template.model";
 import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";

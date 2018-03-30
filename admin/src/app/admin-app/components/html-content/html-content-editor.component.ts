@@ -6,7 +6,6 @@ import {FormControlMessages} from "../../../shared/components/control-valdation-
 import {TinyEditor} from "../../../shared/components/tinymce.component";
 import { FormGroup, Validators, FormBuilder, FormControl} from "@angular/forms";
 import {Router, ActivatedRoute} from "@angular/router";
-import {Location} from '@angular/common';
  
 @Component({
     selector: 'html-content-editor',
@@ -20,7 +19,7 @@ export class HtmlContentEditorComponent implements OnInit {
 
     editorFormControl:FormControl = new FormControl('', Validators.required);
 
-    constructor(private router:Router,private location:Location,private activatedRoute:ActivatedRoute,private _objService:HtmlContentService, private _formBuilder:FormBuilder) {
+    constructor(private router:Router, private activatedRoute:ActivatedRoute, private _objService:HtmlContentService, private _formBuilder:FormBuilder) {
         activatedRoute.params.subscribe(param=>this.contentId=param['id']);
         this.htmlForm = this._formBuilder.group({
             "htmlContentTitle": ['', Validators.required],
@@ -67,7 +66,7 @@ export class HtmlContentEditorComponent implements OnInit {
 
     resStatusMessage(res:any) {
         Swal("Success !", res.message, "success");
-        this.location.back();
+        this.triggerCancelForm();
     }
 
     editorValueChange(args) {
@@ -75,7 +74,7 @@ export class HtmlContentEditorComponent implements OnInit {
     }
 
     triggerCancelForm() {
-        this.location.back();
+        this.router.navigate(['/html']);
     }
 
     errorMessage(objResponse:any) {

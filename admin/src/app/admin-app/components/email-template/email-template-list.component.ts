@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EmailTemplateService} from "./email-template.service";
 import {EmailTemplateModel, EmailTempalteResponse} from "./email-template.model";
 import {Router} from "@angular/router";

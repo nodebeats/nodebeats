@@ -6,7 +6,6 @@ import{Config} from "../../../shared/configs/general.config";
 import{ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
 import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 import { Router, ActivatedRoute } from '@angular/router';
-import {Location} from '@angular/common';
 
 @Component({
   selector: 'image-slider-editor',
@@ -29,7 +28,7 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
   /* End Image Upload handle */
 
 
-  constructor(private location:Location,private activatedRoute:ActivatedRoute,private _objService: ImageSliderService, private _formBuilder: FormBuilder) {
+  constructor(private router: Router, private activatedRoute:ActivatedRoute,private _objService: ImageSliderService, private _formBuilder: FormBuilder) {
     activatedRoute.params.subscribe(param=>this.sliderId=param['id']);
     this.imageSliderForm = _formBuilder.group({
       "imageTitle": ['', Validators.required],
@@ -99,12 +98,12 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
   }
 
   resStatusMessage(objSave: any) {
-    Swal("Success !", objSave.message, "success")
-    this.location.back();
+    this.triggerCancelForm();
+    Swal("Success !", objSave.message, "success");
   }
 
   triggerCancelForm() {
-    this.location.back();
+    this.router.navigate(['/imageslider']);
   }
 
   errorMessage(objResponse: any) {

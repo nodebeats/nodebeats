@@ -4,8 +4,7 @@ import {FormControlMessages} from "../../../shared/components/control-valdation-
 import {ImageAlbumModel} from "./image-gallery.model";
 import {ImageGalleryService} from "./image-gallery.service";
 import {Validators, FormBuilder, FormGroup} from "@angular/forms";
-import {Location} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'image-gallery-album-editor',
@@ -17,7 +16,7 @@ export class ImageAlbumEditorComponent implements OnInit {
   imageAlbumForm:FormGroup;
   isSubmitted:boolean = false;
 
-  constructor(private _objService:ImageGalleryService, private _formBuilder:FormBuilder, private location: Location, private activatedRoute:ActivatedRoute) {
+  constructor(private router: Router, private _objService:ImageGalleryService, private _formBuilder:FormBuilder, private activatedRoute:ActivatedRoute) {
    activatedRoute.params.subscribe(res => this.albumId =res['albumId']);
     this.imageAlbumForm = this._formBuilder.group({
         "albumName": ['', Validators.required],
@@ -63,7 +62,7 @@ export class ImageAlbumEditorComponent implements OnInit {
   }
 
   resStatusMessage(res:any) {
-    this.location.back();
+    this.triggerCancelForm();
     Swal("Success !", res.message, "success")
   }
 
@@ -72,7 +71,7 @@ export class ImageAlbumEditorComponent implements OnInit {
   }
 
   triggerCancelForm() {
-    this.location.back();
+    this.router.navigate(['/imagegallery/album']);
   }
 }
 

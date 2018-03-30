@@ -79,7 +79,7 @@ export class NewsImageListComponent implements OnInit {
   }
 
   changeCoverImage(args) {
-    let newsImageId = args.target.value;
+    let newsImageId = args.value;
     Swal({
           title: "Are you sure?",
           text: " you sure to change cover image ?",

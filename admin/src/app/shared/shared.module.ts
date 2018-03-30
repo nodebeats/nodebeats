@@ -9,7 +9,7 @@ import { DocumentUploader } from "./components/doc-uploader.component";
 import { FormControlMessages } from "./components/control-valdation-message.component";
 import { Alert } from "./components/alert/alert";
 import { TinyEditor } from "./components/tinymce.component";
-import { ACCORDION_PROVIDERS } from './components/accordion/accordionItem';
+// import { ACCORDION_PROVIDERS } from './components/accordion/accordionItem';
 // import { DropdownModule } from './components/ng2-bootstrap/ng2-bootstrap'; //provider
 import { FadeInDirective } from './directives/fadeInDirective';
 import { ProcessingDirective } from './directives/processing.directive';
@@ -22,16 +22,17 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatSelectModule} from '@angular/material/select';
-import {MatTableModule} from '@angular/material/table';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatInputModule} from '@angular/material/input';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
 /*Prime Module*/
 // import { PasswordModule } from 'primeng/primeng';
 
@@ -51,8 +52,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     DocumentUploader, 
     FormControlMessages,
     Alert, 
-    TinyEditor, 
-    ACCORDION_PROVIDERS
+    TinyEditor
+    // ACCORDION_PROVIDERS
   ],
   exports: [
     FadeInDirective, 
@@ -62,7 +63,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     FormControlMessages,
     Alert, 
     TinyEditor, 
-    ACCORDION_PROVIDERS,
+    // ACCORDION_PROVIDERS,
     CommonModule, 
     FormsModule, 
     HttpModule, 
@@ -83,7 +84,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatRadioModule,
     MatSlideToggleModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSortModule
   ]
 })
 export class SharedModule {

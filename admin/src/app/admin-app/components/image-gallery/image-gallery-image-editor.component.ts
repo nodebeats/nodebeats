@@ -95,7 +95,7 @@ export class ImageGalleryImageEditorComponent implements OnInit,AfterViewInit {
   }
 
   resStatusMessage(objSave:any) {
-    this.location.back();
+    this.triggerCancelForm();
     Swal("Success !", objSave.message, "success");
   }
 

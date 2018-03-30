@@ -94,7 +94,6 @@ export class UserEditComponent implements OnInit {
     // path = "/uploads/avatars/" + this.objUser.imageName;
     else
       path = Config.DefaultAvatar;
-    console.log(path);
     this.drawImageToCanvas(path);
   }
 

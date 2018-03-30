@@ -7,7 +7,6 @@ import {ValidationService}from "../../../shared/services/validation.service";
 import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
 import {FormControlMessages} from "../../../shared/components/control-valdation-message.component";
 import {DocumentUploader} from "../../../shared/components/doc-uploader.component";
-import {Location} from '@angular/common';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -31,7 +30,7 @@ export class GoogleAnalyticsComponent implements OnInit {
   docFormControl: FormControl = new FormControl('', Validators.required);
   /* End File Upload handle */
 
-  constructor(private location: Location, private _objService: GoogleAnalyticsService, private _formBuilder: FormBuilder) {
+  constructor(private _objService: GoogleAnalyticsService, private _formBuilder: FormBuilder) {
     this.analyticsForm = this._formBuilder.group({
       trackingId: ['', Validators.required],
       viewId: ['', Validators.required],

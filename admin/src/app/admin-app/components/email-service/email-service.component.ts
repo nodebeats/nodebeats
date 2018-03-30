@@ -1,10 +1,6 @@
 import Swal from "sweetalert2";
 import {
   Component,
-  EventEmitter,
-  Output,
-  Input,
-  ViewChild,
   OnInit
 } from "@angular/core";
 import { EmailServiceService } from "./email-service.service";

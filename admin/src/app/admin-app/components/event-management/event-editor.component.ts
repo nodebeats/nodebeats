@@ -5,13 +5,12 @@ import {
 } from '@angular/core';
 import {EventModel} from "./event.model";
 import {EventService} from "./event.service";
-import{Config} from "../../../shared/configs/general.config";
-import{ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
+import {Config} from "../../../shared/configs/general.config";
+import {ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
 import * as moment from 'moment';
 import {FormControl, FormGroup, Validators, FormBuilder} from "@angular/forms";
 import { basename } from 'path';
-import {ActivatedRoute} from "@angular/router";
-import { Location } from "@angular/common";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'event-editor',
@@ -35,8 +34,7 @@ export class EventEditorComponent implements OnInit,AfterViewInit {
   imagePath:any;
   /* End Image Upload handle */
 
-
-  constructor(private location:Location,private activatedRoute:ActivatedRoute,private _objService: EventService, private _formBuilder: FormBuilder) {
+  constructor(private router: Router, private activatedRoute:ActivatedRoute,private _objService: EventService, private _formBuilder: FormBuilder) {
     activatedRoute.params.subscribe(param=>this.eventId=param['id']);
     this.eventForm = this._formBuilder.group({
       "eventTitle": ['', Validators.required],
@@ -144,12 +142,11 @@ export class EventEditorComponent implements OnInit,AfterViewInit {
 
   resStatusMessage(objSave: any) {
     Swal("Success !", objSave.message, "success");
-    this.location.back();
-
+    this.triggerCancelForm();
   }
 
   triggerCancelForm() {
-    this.location.back();
+    this.router.navigate(['/event']);
   }
 
   errorMessage(objResponse: any) {

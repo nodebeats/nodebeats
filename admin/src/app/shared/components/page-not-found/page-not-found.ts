@@ -5,7 +5,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
     template: `<link href='//fonts.googleapis.com/css?family=Viga' rel='stylesheet' type='text/css'>
                 <div class="main page-not-found">                
                     <h1>404</h1>
-                    <h2>ooops, something goes wrong</h2>
+                    <h2>ooops, something went wrong</h2>
                     <div class="more_w3ls">
                         <a  href="/admin" title="Go To Dashboard">Go To Dashboard</a>
                     </div>
