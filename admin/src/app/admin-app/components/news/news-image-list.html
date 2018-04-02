@@ -23,8 +23,9 @@
       <ng-container matColumnDef="Cover Image">
         <mat-header-cell class="text-center" *matHeaderCellDef>Cover Image</mat-header-cell>
         <mat-cell class="text-center" *matCellDef="let element">
+          <!-- <input type="hidden" *ngIf="element.coverImage" #prevCoverImage [value]="element._id"> -->
           <mat-radio-group>
-            <mat-radio-button [value]="element._id" [checked]="element.coverImage" (change)="changeCoverImage($event)"></mat-radio-button>
+            <mat-radio-button name="rdbCoverImage" #prevCoverImage [value]="element._id" [checked]="element.coverImage" (change)="changeCoverImage($event)"></mat-radio-button>
           </mat-radio-group>
         </mat-cell>
       </ng-container>

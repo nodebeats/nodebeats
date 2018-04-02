@@ -13,7 +13,8 @@ import { MatTableDataSource } from '@angular/material';
 
 export class NewsImageListComponent implements OnInit {
   objListResponse: NewsImageResponse;
-  newsId:string;
+  newsId: string;
+  previousCoverImageId: string;
   @ViewChild('prevCoverImage') prevCoverImage: ElementRef;
   showImageForm: boolean = false;
   imageId: string;
@@ -40,7 +41,11 @@ export class NewsImageListComponent implements OnInit {
 
   bindList(objRes: NewsImageResponse) {
     this.objListResponse = objRes;
-    this.dataSource = new MatTableDataSource(this.objListResponse.image);        
+    const filteredArray = this.objListResponse.image.filter(
+      image => image.coverImage === true
+    );
+    this.previousCoverImageId = filteredArray[0]._id;
+    this.dataSource = new MatTableDataSource(this.objListResponse.image);
   }
 
   edit(newsImageId: string) {
@@ -62,14 +67,17 @@ export class NewsImageListComponent implements OnInit {
       })
       .then((result)=> {
         if(result.value){
-        this._objService.deleteNewsImage(this.newsId, id)
-          .subscribe(res=> {
-              this.getNewsImageList();
-              Swal("Deleted!", res.message, "success");
-            },
-            error=> {
-              Swal("Alert!", error.message, "info");
-            });
+          this._objService.deleteNewsImage(this.newsId, id)
+            .subscribe(res=> {
+                this.getNewsImageList();
+                Swal("Deleted!", res.message, "success");
+              },
+              error=> {
+                Swal("Alert!", error.message, "info");
+              });
+          }
+          else{
+            console.log(result);
           }
       });
   }
@@ -89,12 +97,13 @@ export class NewsImageListComponent implements OnInit {
           confirmButtonText: "Yes, change it!"
         })
         .then((isConfirm)=> {
+          console.log(isConfirm)
           if (isConfirm.value) {
-            let prevCoverImageId = this.prevCoverImage ? this.prevCoverImage.nativeElement.value : "";
+            // let prevCoverImageId = this.prevCoverImage ? this.prevCoverImage.nativeElement.value : "";
             let objNewsImage: NewsImageModel = new NewsImageModel();
             objNewsImage._id = newsImageId;
             objNewsImage.coverImage = true;
-            this._objService.updateNewsCoverImage(this.newsId, prevCoverImageId, objNewsImage)
+            this._objService.updateNewsCoverImage(this.newsId, this.previousCoverImageId, objNewsImage)
               .subscribe(res=> {
                   this.getNewsImageList();
                   Swal("Changed!", res.message, "success");
@@ -102,10 +111,11 @@ export class NewsImageListComponent implements OnInit {
                 error=> {
                   Swal("Alert!", error.message, "info");
                 })
-          } else {
-            let prevCoverImageId = "";
-            if (this.prevCoverImage.nativeElement.value)
-              jQuery('input[name=rdbCoverImage][value=' + this.prevCoverImage.nativeElement.value + ']').prop('checked', true);
+          } else   {
+            this.previousCoverImageId = "";
+            console.log(this.prevCoverImage);
+            if (this.prevCoverImage.value)
+              jQuery('mat-radio-button[name=rdbCoverImage][value=' + this.prevCoverImage.value + ']').prop('checked', false);
           }
         });
   }
