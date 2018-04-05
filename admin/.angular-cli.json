@@ -18,47 +18,43 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
-"styles": [
+      "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
         "assets/scss/bundle.scss",
-        "../node_modules/sweetalert2/dist/sweetalert2.min.css"
+        "../node_modules/sweetalert2/dist/sweetalert2.min.css",
+        "assets/plugins/tinymce/plugins/visualblocks/css/visualblocks.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/popper.js/dist/umd/popper.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "assets/inlineScripts.js",
-        "assets/plugins/tinymce/tinymce.js",
-        "assets/plugins/tinymce/themes/modern/theme.js",
-        "assets/plugins/tinymce/plugins/media/plugin.js",
-        "assets/plugins/tinymce/plugins/link/plugin.js",
-        "assets/plugins/tinymce/plugins/paste/plugin.js",
-        "assets/plugins/tinymce/plugins/table/plugin.js",
-        "assets/plugins/tinymce/plugins/advlist/plugin.js",
-        "assets/plugins/tinymce/plugins/autolink/plugin.js",
-        "assets/plugins/tinymce/plugins/lists/plugin.js",
-        "assets/plugins/tinymce/plugins/image/plugin.js",
-        "assets/plugins/tinymce/plugins/charmap/plugin.js",
-        "assets/plugins/tinymce/plugins/print/plugin.js",
-        "assets/plugins/tinymce/plugins/preview/plugin.js",
-        "assets/plugins/tinymce/plugins/anchor/plugin.js",
-        "assets/plugins/tinymce/plugins/searchreplace/plugin.js",
-        "assets/plugins/tinymce/plugins/visualblocks/plugin.js",
-        "assets/plugins/tinymce/plugins/code/plugin.js",
-        "assets/plugins/tinymce/plugins/fullscreen/plugin.js",
-        "assets/plugins/tinymce/plugins/insertdatetime/plugin.js",
-        "assets/plugins/tinymce/plugins/contextmenu/plugin.js",
+        "assets/plugins/tinymce/tinymce.min.js",
+        "assets/plugins/tinymce/themes/modern/theme.min.js",
+        "assets/plugins/tinymce/plugins/media/plugin.min.js",
+        "assets/plugins/tinymce/plugins/link/plugin.min.js",
+        "assets/plugins/tinymce/plugins/paste/plugin.min.js",
+        "assets/plugins/tinymce/plugins/table/plugin.min.js",
+        "assets/plugins/tinymce/plugins/advlist/plugin.min.js",
+        "assets/plugins/tinymce/plugins/autolink/plugin.min.js",
+        "assets/plugins/tinymce/plugins/lists/plugin.min.js",
+        "assets/plugins/tinymce/plugins/image/plugin.min.js",
+        "assets/plugins/tinymce/plugins/charmap/plugin.min.js",
+        "assets/plugins/tinymce/plugins/preview/plugin.min.js",
+        "assets/plugins/tinymce/plugins/searchreplace/plugin.min.js",
+        "assets/plugins/tinymce/plugins/code/plugin.min.js",
+        "assets/plugins/tinymce/plugins/contextmenu/plugin.min.js",
         "../node_modules/cloudinary-jquery/cloudinary-jquery.js",
         "../node_modules/sweetalert2/dist/sweetalert2.all.min.js",
         "../node_modules/chart.js/dist/Chart.js"
       ],
-     "environmentSource": "environments/environment.ts",
-"environments": {
-  "dev": "environments/environment.ts",
-  "prod": "environments/environment.prod.ts"
-}
-}
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
   ],
   "e2e": {
     "protractor": {

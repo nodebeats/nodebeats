@@ -10,9 +10,10 @@ import {SharedModule} from '../../../shared/shared.module';
 import {NewsManagementComponent} from "./news-management.component";
 import { XhrService } from '../../../shared/services/xhr.service';
 import { NewsRouting } from './news.routing';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
-    imports: [SharedModule.forRoot(), NewsRouting],
+    imports: [SharedModule.forRoot(), NewsRouting, EditorModule],
     declarations: [NewsImageListComponent,
         NewsImageEditorComponent,
         NewsManagementComponent,

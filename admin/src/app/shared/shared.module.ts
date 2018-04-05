@@ -36,8 +36,6 @@ import { MatSortModule } from '@angular/material/sort';
 /*Prime Module*/
 // import { PasswordModule } from 'primeng/primeng';
 
-
-
 @NgModule({
   imports: [CommonModule,
     RouterModule, 

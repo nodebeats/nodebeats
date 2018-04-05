@@ -33,7 +33,8 @@ export class UserRegistrationComponent implements OnInit {
   questionlist: string[] = QUESTION_LIST;
   imageExtension: string;
   imagePath: string;
-
+  userId: string;
+  
   constructor(private router: Router, private _objUserService: UserService, private _formBuilder: FormBuilder, private roleService: RoleService) {
     this.userForm = this._formBuilder.group({
         "firstName": ['', Validators.required],

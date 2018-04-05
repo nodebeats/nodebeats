@@ -12,8 +12,8 @@ import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'tiny-editor',
-  template: `<textarea class="tinyMCE" [formControl]="editorFormControl" #editor="ngForm" style="height:300px"></textarea>
-                <div class="error-msg" *ngIf="editor.control.hasError('required') && (isChanged ||isSubmitted)">Required</div>`
+  template: `<textarea id="tinyMCE" [formControl]="editorFormControl" #editor="ngForm" style="height:300px"></textarea>
+                <div class="ng-error-msg" *ngIf="editor.control.hasError('required') && (isChanged ||isSubmitted)">Required</div>`
 
 })
 export class TinyEditor implements AfterViewInit {
@@ -34,17 +34,16 @@ export class TinyEditor implements AfterViewInit {
     tinymce.remove();
     tinymce.init(
       {
-        selector: ".tinyMCE",
+        selector: "#tinyMCE",
         forced_root_block: "p",
         verify_html: false,
         valid_children : "+body[style],+div[style]",
         skin_url: '/assets/plugins/tinymce/skins/lightgray',
-        plugins: ["code", 'advlist autolink lists link image charmap print preview anchor',
-          'searchreplace visualblocks code fullscreen',
-          'insertdatetime media table contextmenu paste code'
+        plugins: ["code", 'advlist autolink lists link image charmap preview',
+          'searchreplace code',
+          'media table contextmenu paste'
         ],
-        toolbar1: 'code insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-        toolbar2: 'print preview  | forecolor backcolor',
+        toolbar1: 'code preview undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
         setup: (editor) => {
           editor.on('init', (e, l)=> {
             editor.getBody().style.fontSize = '15px';
@@ -68,11 +67,10 @@ export class TinyEditor implements AfterViewInit {
 
         },
         file_browser_callback: RoxyFileBrowser
-
       });
     function RoxyFileBrowser(field_name, url, type, win) {
-      win.getSelection().removeAllRanges();
-      var roxyFileman =  '/assets/plugins/tinymce/plugins/fileman/index.html';
+      // win.getSelection().removeAllRanges();
+      let roxyFileman =  '/assets/plugins/tinymce/plugins/fileman/index.html';
       //var roxyFileman = '/fileman/index.html';
       if (roxyFileman.indexOf("?") < 0) {
         roxyFileman += "?type=" + type;

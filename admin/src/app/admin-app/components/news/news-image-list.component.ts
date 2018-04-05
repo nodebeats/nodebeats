@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {NewsService} from "./news.service";
 import {NewsImageModel, NewsImageResponse} from "./news.model";
 import {ActivatedRoute,Router} from '@angular/router';
@@ -15,13 +15,12 @@ export class NewsImageListComponent implements OnInit {
   objListResponse: NewsImageResponse;
   newsId: string;
   previousCoverImageId: string;
-  @ViewChild('prevCoverImage') prevCoverImage: ElementRef;
   showImageForm: boolean = false;
   imageId: string;
   displayedColumns = ['SN','Image Title','Active','Cover Image', 'Actions'];
   dataSource:any;
 
-  constructor(private location:Location,private router:Router,private activatedRoute:ActivatedRoute,private _objService: NewsService, private eleRef: ElementRef) {
+  constructor(private location:Location,private router:Router,private activatedRoute:ActivatedRoute,private _objService: NewsService) {
     activatedRoute.params.subscribe(param=> this.newsId= param['id']);
   }
 
@@ -87,6 +86,7 @@ export class NewsImageListComponent implements OnInit {
   }
 
   changeCoverImage(args) {
+    console.log(args)
     let newsImageId = args.value;
     Swal({
           title: "Are you sure?",
@@ -97,7 +97,6 @@ export class NewsImageListComponent implements OnInit {
           confirmButtonText: "Yes, change it!"
         })
         .then((isConfirm)=> {
-          console.log(isConfirm)
           if (isConfirm.value) {
             // let prevCoverImageId = this.prevCoverImage ? this.prevCoverImage.nativeElement.value : "";
             let objNewsImage: NewsImageModel = new NewsImageModel();
@@ -113,9 +112,9 @@ export class NewsImageListComponent implements OnInit {
                 })
           } else   {
             this.previousCoverImageId = "";
-            console.log(this.prevCoverImage);
-            if (this.prevCoverImage.value)
-              jQuery('mat-radio-button[name=rdbCoverImage][value=' + this.prevCoverImage.value + ']').prop('checked', false);
+            // let radio_button = document.getElementById('radio'+newsImageId);
+            // console.log(radio_button)
+            args.source._checked = false;
           }
         });
   }

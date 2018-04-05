@@ -12,7 +12,7 @@ export class SidebarCmp {
   firstOpen: boolean = true;
   firstDisabled: boolean = false;
   lastOpen: boolean = false;
-  private containerSlide: boolean = false;
+  public containerSlide: boolean = false;
   @Output() toggleContainerEvent: EventEmitter<any> = new EventEmitter();
   public status: Object = {
     isFirstOpen: false,

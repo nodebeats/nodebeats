@@ -44,7 +44,7 @@ export class CommentSettingComponent implements OnInit {
     }
 
 
-    saveCommentSetting(objRes:CommentSettingModel) {
+    saveCommentSetting() {
         this.isSubmitted = true;
         if (this.commentSettingForm.valid) {
             if (!this.commentId) {

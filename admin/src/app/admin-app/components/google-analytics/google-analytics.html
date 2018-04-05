@@ -17,7 +17,7 @@
         <form role="form" novalidate [formGroup]="analyticsForm" (ngSubmit)="saveAnalytics()">
                 <div class="mb-3">
                         <mat-form-field class="material-input-full">
-                            <input matInput placeholder="Tracking ID" formControlName="trackingId">
+                            <input matInput placeholder="Tracking ID" [(ngModel)]="objAnalytics.trackingId" formControlName="trackingId">
                             <mat-error>
                                 <control-messages [isSubmitted]="isSubmitted" [control]="analyticsForm.controls['trackingId']"></control-messages>
                             </mat-error>
@@ -26,7 +26,7 @@
 
                 <div class="mb-3">
                         <mat-form-field class="material-input-full">
-                            <input matInput placeholder="View ID" formControlName="viewId">
+                            <input matInput placeholder="View ID" [(ngModel)]="objAnalytics.analyticsViewID" formControlName="viewId">
                             <mat-error>
                                     <control-messages [isSubmitted]="isSubmitted" [control]="analyticsForm.controls['viewId']"></control-messages>
                             </mat-error>
@@ -35,7 +35,7 @@
 
                 <div class="mb-3">
                         <mat-form-field class="material-input-full">
-                            <input matInput placeholder="Polling Interval (minutes)" formControlName="pollingInterval">
+                            <input matInput placeholder="Polling Interval (minutes)" [(ngModel)]="objAnalytics.pollingInterval" formControlName="pollingInterval">
                             <mat-error>
                                     <control-messages [isSubmitted]="isSubmitted" [control]="analyticsForm.controls['pollingInterval']"></control-messages>
                             </mat-error>

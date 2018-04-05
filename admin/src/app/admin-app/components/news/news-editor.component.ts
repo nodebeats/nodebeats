@@ -29,6 +29,7 @@ export class NewsEditorComponent implements AfterViewInit,OnInit {
   fileName: string = "";
   drawImagePath: string = Config.DefaultImage;
   imageFormControl: FormControl = new FormControl('', Validators.required);
+  dataModel: any;
   canvasSize: number = ImageCanvasSizeEnum.small;
   /* End Image Upload handle */
 

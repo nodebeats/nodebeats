@@ -1,6 +1,6 @@
+import { Observable } from 'rxjs/Observable';
 import {CloudinaryService} from  './cloudinary.service'
 import {CloudinaryModel} from './cloudinary.model';
-import {Observable} from "rxjs/Rx";
 import {
   inject,
   async,
@@ -9,8 +9,10 @@ import {
 import {SharedModule} from "../../../shared/shared.module";
 import {CloudinarySettingComponent} from "./cloudinary.component";
 import {RouterTestingModule} from "@angular/router/testing";
-class MockService extends CloudinaryService {
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
 
+class MockService extends CloudinaryService {
   objModel: CloudinaryModel = new CloudinaryModel();
 
   constructor() {
@@ -28,6 +30,13 @@ class MockService extends CloudinaryService {
     });
   };
 
+  updateCloudinarySettings(objUpdate: CloudinaryModel, id: string): Observable<any> {
+    return Observable.of({
+        success: true,
+        message: 'data updated successfully'
+      });
+  }
+
   getCloudinarySettings(): Observable < CloudinaryModel > {
     return Observable.of(this.objModel);
   }
@@ -37,7 +46,7 @@ describe('Cloudinary settings', ()=> {
 
   beforeEach(()=> {
     TestBed.configureTestingModule({
-      imports: [SharedModule, RouterTestingModule],
+      imports: [SharedModule, RouterTestingModule, BrowserAnimationsModule],
       declarations: [CloudinarySettingComponent],
       providers: [
         {provide: CloudinaryService, useClass: MockService}
@@ -48,26 +57,57 @@ describe('Cloudinary settings', ()=> {
     TestBed.compileComponents();
   }));
 
-  it('should save/update the cloudinary setting if valid ', async(()=> {
-    var fixture = TestBed.createComponent(CloudinarySettingComponent);
+  it('should call the getCloudinary function after the component initiation', async(() => {
+    let fixture = TestBed.createComponent(CloudinarySettingComponent);
+    let app = fixture.debugElement.componentInstance;
+    app.ngOnInit();
+    spyOn(app, 'getCloudinarySetting');
+    fixture.whenStable().then(() => {
+        expect(app.getCloudinarySetting).toHaveBeenCalledTimes(1);
+    });
+  }));
 
-    fixture.detectChanges();
-    var component = fixture.debugElement.componentInstance;
-    var compiled = fixture.debugElement.nativeElement;
-    component.cloudinaryForm.controls.cloudinaryApiKey.patchValue("123");
-    component.cloudinaryForm.controls.cloudinaryCloudName.patchValue("abc");
-    component.cloudinaryForm.controls.cloudinaryApiSecret.patchValue("123");
-    expect(compiled.querySelector('button.btn')).not.toBeNull();
-    expect(component.cloudinaryForm.valid).toBe(true);
-    //fixture.detectChanges();
-    expect(component.isPost).toBeUndefined();
+  it("should save the cloudinary setting if id isn't available", async(()=> {
+    const fixture = TestBed.createComponent(CloudinarySettingComponent);
+    const app = fixture.debugElement.componentInstance;
+
+    spyOn(app, 'saveCloudinarySetting');
+    app.id = "";
+    app.cloudinaryForm.reset();
+    app.cloudinaryForm.controls.cloudinaryApiKey.patchValue("123");
+    app.cloudinaryForm.controls.cloudinaryCloudName.patchValue("abc");
+    app.cloudinaryForm.controls.cloudinaryApiSecret.patchValue("123");
+    const el = fixture.debugElement.query(By.css('button')).nativeElement;
+    el.click();
+    fixture.whenStable().then(() => {
+        // expect(app.isPost).toBeTruthy();        
+        expect(app.saveCloudinarySettings).toHaveBeenCalledTimes(1);
+    });
+  }));
+
+  it("should update the cloudinary setting if id is available", async(()=> {
+    const fixture = TestBed.createComponent(CloudinarySettingComponent);
+    const app = fixture.debugElement.componentInstance;
+    spyOn(app, 'saveCloudinarySetting');
+    app.id = '123456abcdef';
+    app.cloudinaryForm.controls.cloudinaryApiKey.patchValue("123");
+    app.cloudinaryForm.controls.cloudinaryCloudName.patchValue("abc");
+    app.cloudinaryForm.controls.cloudinaryApiSecret.patchValue("123");
+    const el = fixture.debugElement.query(By.css('button')).nativeElement;
+    el.click();
+    fixture.whenStable().then(() => {
+        // expect(app.isPost).toBeFalsy();
+        // expect(app.swalMessage).toBe('data updated successfully');
+        expect(app.saveCloudinarySettings).toHaveBeenCalledTimes(1);        
+    });
   }));
 
   it('should get the cloudinary setting if already saved', async(() => {
-    var fixture = TestBed.createComponent(CloudinarySettingComponent);
+    let fixture = TestBed.createComponent(CloudinarySettingComponent);
     fixture.detectChanges();
-    var component = fixture.debugElement.componentInstance;
-    expect(component.objCloudinary._id).toBeDefined();
+    let component = fixture.debugElement.componentInstance;
+    component.id = "123456abcdef";
+    expect(component.id).toBeDefined();
     expect(component.cloudinaryForm.valid).toBe(true);
   }));
 });

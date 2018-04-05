@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiAccessService} from "./api-access.service";
-import{ApiAccessModel} from "./api-access.model";
+import {ApiAccessModel} from "./api-access.model";
 import { Router } from '@angular/router';
-import {MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
 import Swal from 'sweetalert2';
-import {Sort} from '@angular/material';
 
 @Component({
   selector: 'api-access-list',
@@ -27,13 +26,13 @@ export class ApiAccessComponent implements OnInit {
   // /* End Pagination */
 
   ngOnInit() {
-    this.getRoleList();
+    this.getApiAccessList();
   }
 
   constructor(private _objService:ApiAccessService, private router:Router) {
   }
 
-  getRoleList() {
+  getApiAccessList() {
     this._objService.getAccessList()
       .subscribe(objRes => this.bindList(objRes),
         error => this.errorMessage(error));
@@ -73,7 +72,7 @@ export class ApiAccessComponent implements OnInit {
           objRole.deleted = true;
           this._objService.deleteAccess(objRole)
             .subscribe(res=> {
-                this.getRoleList();
+                this.getApiAccessList();
                 Swal("Deleted!", res.message, "success");
               },
               error=> {

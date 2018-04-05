@@ -19,6 +19,7 @@ export class ApplicationLogComponent implements OnInit {
   showModal: boolean = false;
   displayedColumns = ['SN','Type', 'Notified', 'Date', 'Actions'];
   dataSource: any;    
+  today: Date = new Date();
   /* Pagination */
   pageSizeOptions = [5, 10, 25, 50, 100];
   perPage:number = 10;

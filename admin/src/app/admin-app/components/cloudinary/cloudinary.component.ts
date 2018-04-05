@@ -16,6 +16,7 @@ export class CloudinarySettingComponent implements OnInit {
     objAlert:AlertModel = new AlertModel();
     cloudinaryForm:FormGroup;
     isPost:boolean; // to detect the first data entry
+    swalMessage: any;
 
     constructor(private _objService:CloudinaryService, private _formBuilder:FormBuilder) {
         this.cloudinaryForm = this._formBuilder.group({
@@ -26,10 +27,10 @@ export class CloudinarySettingComponent implements OnInit {
     }
     
     ngOnInit() {
-        this.getClouindarySetting();
+        this.getCloudinarySetting();
     }
   
-    getClouindarySetting() {
+    getCloudinarySetting() {
         this._objService.getCloudinarySettings()
             .subscribe(res =>this.bindInfo(res),
                 error => this.errorMessage(error));
@@ -72,15 +73,17 @@ export class CloudinarySettingComponent implements OnInit {
     }
 
     resStatusMessage(res:any) {
+        this.swalMessage = res.message;
         Config.setCloudinary(this.cloudinaryForm.value);
         if (this.isPost)
-            this.getClouindarySetting();
+            this.getCloudinarySetting();
         this.objAlert.hideAlert();
-        Swal("Success !", res.message, "success")
+        Swal("Success !", this.swalMessage, "success")
     }
 
     errorMessage(objResponse:CloudinaryResponse) {
-        this.objAlert.showAlert("danger", "Alert !!", objResponse.message, true);
+        this.swalMessage = objResponse.message;
+        this.objAlert.showAlert("danger", "Alert !!", this.swalMessage, true);
     }
 }
     
