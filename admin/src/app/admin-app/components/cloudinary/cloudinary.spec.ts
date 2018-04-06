@@ -4,7 +4,9 @@ import {CloudinaryModel} from './cloudinary.model';
 import {
   inject,
   async,
-  TestBed
+  TestBed,
+  tick,
+  fakeAsync
 } from '@angular/core/testing'
 import {SharedModule} from "../../../shared/shared.module";
 import {CloudinarySettingComponent} from "./cloudinary.component";
@@ -57,57 +59,39 @@ describe('Cloudinary settings', ()=> {
     TestBed.compileComponents();
   }));
 
-  it('should call the getCloudinary function after the component initiation', async(() => {
+  it('should call the getCloudinary function after the component initiation', fakeAsync(() => {
     let fixture = TestBed.createComponent(CloudinarySettingComponent);
     let app = fixture.debugElement.componentInstance;
-    app.ngOnInit();
     spyOn(app, 'getCloudinarySetting');
-    fixture.whenStable().then(() => {
-        expect(app.getCloudinarySetting).toHaveBeenCalledTimes(1);
-    });
+    fixture.detectChanges();
+    expect(app.getCloudinarySetting).toHaveBeenCalledTimes(1);
   }));
 
-  it("should save the cloudinary setting if id isn't available", async(()=> {
+  it("should save the cloudinary setting if id isn't available", fakeAsync(()=> {
     const fixture = TestBed.createComponent(CloudinarySettingComponent);
     const app = fixture.debugElement.componentInstance;
-
-    spyOn(app, 'saveCloudinarySetting');
-    app.id = "";
-    app.cloudinaryForm.reset();
     app.cloudinaryForm.controls.cloudinaryApiKey.patchValue("123");
     app.cloudinaryForm.controls.cloudinaryCloudName.patchValue("abc");
     app.cloudinaryForm.controls.cloudinaryApiSecret.patchValue("123");
-    const el = fixture.debugElement.query(By.css('button')).nativeElement;
-    el.click();
-    fixture.whenStable().then(() => {
-        // expect(app.isPost).toBeTruthy();        
-        expect(app.saveCloudinarySettings).toHaveBeenCalledTimes(1);
-    });
-  }));
-
-  it("should update the cloudinary setting if id is available", async(()=> {
-    const fixture = TestBed.createComponent(CloudinarySettingComponent);
-    const app = fixture.debugElement.componentInstance;
-    spyOn(app, 'saveCloudinarySetting');
-    app.id = '123456abcdef';
-    app.cloudinaryForm.controls.cloudinaryApiKey.patchValue("123");
-    app.cloudinaryForm.controls.cloudinaryCloudName.patchValue("abc");
-    app.cloudinaryForm.controls.cloudinaryApiSecret.patchValue("123");
-    const el = fixture.debugElement.query(By.css('button')).nativeElement;
-    el.click();
-    fixture.whenStable().then(() => {
-        // expect(app.isPost).toBeFalsy();
-        // expect(app.swalMessage).toBe('data updated successfully');
-        expect(app.saveCloudinarySettings).toHaveBeenCalledTimes(1);        
-    });
+    fixture.detectChanges();
+    expect(app.cloudinaryForm.valid).toBeTruthy();
   }));
 
   it('should get the cloudinary setting if already saved', async(() => {
     let fixture = TestBed.createComponent(CloudinarySettingComponent);
-    fixture.detectChanges();
     let component = fixture.debugElement.componentInstance;
     component.id = "123456abcdef";
+    fixture.detectChanges();
     expect(component.id).toBeDefined();
     expect(component.cloudinaryForm.valid).toBe(true);
   }));
+
+  it('should get swal message according to response', async(() => {
+    let fixture = TestBed.createComponent(CloudinarySettingComponent);
+    let component = fixture.debugElement.componentInstance;
+    let service = TestBed.get(CloudinaryService);
+    expect(component.swalMessage).toBeUndefined();
+    spyOn(service, 'updateCloudinarySettings');
+    
+  }))
 });
