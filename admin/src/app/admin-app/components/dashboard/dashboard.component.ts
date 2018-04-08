@@ -1,7 +1,4 @@
 import Swal from 'sweetalert2';
-/**
- * Created by sanedev on 4/8/16.
- */
 import {Component, AfterViewInit, OnInit, Input, OnChanges, OnDestroy} from '@angular/core';
 import * as moment from 'moment';
 import {DashboardResponseModel} from './dashboard.model';
@@ -11,7 +8,7 @@ declare var gapi:any;
 @Component({
   selector: 'browser-chart',
   template: `
-  <div *ngIf="pieChartData?.length>0" style="display: block">
+  <div *ngIf="pieChartData?.length>0">
     <canvas baseChart
           [data]="pieChartData"
           [labels]="pieChartLabels"
@@ -25,10 +22,6 @@ export class BrowserAnalysisChart implements OnChanges {
   public pieChartType:string = 'pie';
  
   @Input() viewId:string;
-  // data:any = {
-  //   labels: [],
-  //   datasets: []
-  // };
 
   constructor(private objService:DashboardService) {
   }
@@ -54,27 +47,6 @@ export class BrowserAnalysisChart implements OnChanges {
             label.push(row[0]);
             value.push(+row[1]);
           });
-        // this.data = {
-        //   labels: label,
-        //   datasets: [
-        //     {
-        //       data: value,
-        //       backgroundColor: [
-        //         "#f03924",
-        //         "#36A2EB",
-        //         "#FFCE56",
-        //         '#E2EAE9',
-        //         '#2ab40b'
-        //       ],
-        //       hoverBackgroundColor: [
-        //         "#f03924",
-        //         "#36A2EB",
-        //         "#FFCE56",
-        //         '#E2EAE9',
-        //         '#2ab40b'
-        //       ]
-        //     }]
-        // };
         this.pieChartLabels = label;
         this.pieChartData = value;
       })
@@ -85,25 +57,20 @@ export class BrowserAnalysisChart implements OnChanges {
 @Component({
   selector: 'country-chart',
   template: `
-  <div *ngIf="doughnutChartData?.length>0" style="display: block">
-  <canvas baseChart
-              [data]="doughnutChartData"
-              [labels]="doughnutChartLabels"
-              [chartType]="doughnutChartType">
-  </canvas>
-</div>
+  <div *ngIf="doughnutChartData?.length>0">
+    <canvas baseChart
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType">
+    </canvas>
+  </div>
   `
-  // <p-chart *ngIf="data.datasets.length>0" type="doughnut" [data]="data"></p-chart>
 })
 export class CountryWiseChart implements OnChanges {
   public doughnutChartLabels:string[];
   public doughnutChartData:number[];
   public doughnutChartType:string = 'doughnut';
   @Input() viewId:string;
-  // data:any = {
-  //   labels: [],
-  //   datasets: []
-  // };
 
   constructor(private objService:DashboardService) {
   }
@@ -129,27 +96,6 @@ export class CountryWiseChart implements OnChanges {
             label.push(row[0]);
             value.push(+row[1]);
           });
-        // this.data = {
-        //   labels: label,
-        //   datasets: [
-        //     {
-        //       data: value,
-        //       backgroundColor: [
-        //         "#f03924",
-        //         "#36A2EB",
-        //         "#FFCE56",
-        //         '#E2EAE9',
-        //         '#2ab40b'
-        //       ],
-        //       hoverBackgroundColor: [
-        //         "#f03924",
-        //         "#36A2EB",
-        //         "#FFCE56",
-        //         '#E2EAE9',
-        //         '#2ab40b'
-        //       ]
-        //     }]
-        // };
         this.doughnutChartLabels = label;
         this.doughnutChartData = value;
       })
@@ -162,25 +108,27 @@ export class CountryWiseChart implements OnChanges {
 @Component({
   selector: 'user-count',
   template: ` 
-<div class="col-lg-3">
-  <div class="media">
-    <i class="fas fa-user-plus rd "></i>
-    <div class="media-body p-2">
-      <h5>New Users</h5>
-      <span class="count"><animate-counter [valueToCount]="newUserCount"></animate-counter></span>
-    </div>
-  </div>
-</div>
-<div class="col-lg-3">
-  <div class="media ">
-    <i class="fas fa-users grn"></i>
-    <div class="media-body p-2">
-      <h5>Returning Users</h5>
-      <span class="count"><animate-counter [valueToCount]="returningUserCount"></animate-counter></span>
-    </div>
-  </div>
-</div>
-        `
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="media">
+          <i class="fas fa-user-plus rd "></i>
+          <div class="media-body p-2">
+            <h5>New Users</h5>
+            <span class="count"><animate-counter [valueToCount]="newUserCount"></animate-counter></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="media">
+          <i class="fas fa-users grn"></i>
+          <div class="media-body p-2">
+            <h5>Returning Users</h5>
+            <span class="count"><animate-counter [valueToCount]="returningUserCount"></animate-counter></span>
+          </div>
+        </div>
+      </div>
+    </div>`,
+    styleUrls: ['./dashboard.scss'],
 })
 export class UserCount implements OnChanges {
   activeUserCount:number = 0;
@@ -192,13 +140,10 @@ export class UserCount implements OnChanges {
   }
 
   ngOnChanges() {
-    console.log(this.viewId)
-    // if (this.viewId)
-      this.getTotalUsers();
+    this.getTotalUsers();
   }
 
   getTotalUsers() {
-    console.log("Here")
     this.objService.queryGoogleApi({
       'ids': 'ga:' + this.viewId,
       'dimensions': 'ga:userType',
@@ -223,35 +168,17 @@ export class UserCount implements OnChanges {
 
 @Component({
   selector: 'page-view',
-  template: ` 
-  <i class="fas fa-eye blue"></i>
-        <div class="media-body p-2">
-          <h5><a target="_blank" href="https://analytics.google.com;">Page Views</a></h5>
-          <span class="count"><animate-counter [valueToCount]="pageView"></animate-counter></span>
-        </div>
+  template: `
+  <div class="media">
+    <a target="_blank" class="media-link" href="https://analytics.google.com"></a>
+    <i class="fas fa-eye blue"></i>
+    <div class="media-body p-2">
+      <h5>Page Views</h5>
+      <span class="count"><animate-counter [valueToCount]="pageView"></animate-counter></span>
+    </div>
+  </div>
   `,
   styleUrls: ['./dashboard.scss']
-//   <div class="col-xl-3 col-lg-6">
-//   <div class="card card-orange card-inverse">
-//       <div class="card-header card-orange">
-//           <div class="row">
-//               <div class="col-xs-3">
-//                   <i class="fa fa-eye fa-5x"></i>
-//               </div>
-//               <div class="col-xs-9 text-xs-right">
-//                      <animate-counter [valueToCount]="pageView"></animate-counter>
-//               </div>
-//           </div>
-//       </div>
-//       <div class="card-footer ">
-//           <a class="text-orange"  target="_blank" href="https://analytics.google.com;">
-//               <span class="pull-xs-left">Page Views</span>
-//               <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
-//               <div class="clearfix"></div>
-//           </a>
-//       </div>
-//   </div>
-// </div>
 })
 export class PageViewComponent implements OnChanges {
   pageView:number = 0;
@@ -286,18 +213,16 @@ export class PageViewComponent implements OnChanges {
 @Component({
   selector: 'week-chart',
   template: `
-  <div class="row" *ngIf="lineChartData">
-    <div style="display: block;">
-    <canvas baseChart width="800" height="400"
-                [datasets]="lineChartData"
-                [labels]="lineChartLabels"
-                [options]="lineChartOptions"
-                [colors]="lineChartColors"
-                [legend]="lineChartLegend"
-                [chartType]="lineChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
-  </div>
+  <div *ngIf="lineChartData">
+    <canvas baseChart width="800" height="150"
+    [datasets]="lineChartData"
+    [labels]="lineChartLabels"
+    [options]="lineChartOptions"
+    [colors]="lineChartColors"
+    [legend]="lineChartLegend"
+    [chartType]="lineChartType"
+    (chartHover)="chartHovered($event)"
+    (chartClick)="chartClicked($event)"></canvas>
 </div>
   `
 })
@@ -308,7 +233,7 @@ export class LastWeekVsThisWeekAnalysisChart implements OnChanges {
     responsive: true
   };
   public lineChartColors:Array<any> = [
-    { // grey
+    { 
       backgroundColor: 'rgba(148,159,177,0.2)',
       borderColor: 'rgba(148,159,177,1)',
       pointBackgroundColor: 'rgba(148,159,177,1)',
@@ -316,7 +241,7 @@ export class LastWeekVsThisWeekAnalysisChart implements OnChanges {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     },
-    { // dark grey
+    { 
       backgroundColor: 'rgba(77,83,96,0.2)',
       borderColor: 'rgba(77,83,96,1)',
       pointBackgroundColor: 'rgba(77,83,96,1)',
@@ -339,8 +264,6 @@ export class LastWeekVsThisWeekAnalysisChart implements OnChanges {
   }
 
   getSessionData() {
-    // Adjust `now` to experiment with different days, for testing only...
-    // let now = moment(); // .subtract(3, 'day');
     let thisWeek = this.objService.queryGoogleApi({
       'ids': 'ga:' + this.viewId,
       'dimensions': 'ga:date,ga:nthDay',
@@ -420,13 +343,14 @@ export class DashboardComponent implements OnInit,OnDestroy {
   }
 
   errorMessage(objResponse:any) {
-    Swal("Alert !", objResponse.message, "info");
+    Swal("Alert !", objResponse.stack, "info");
   }
 
   authenticateAnalyticsApi(res:DashboardResponseModel) {
-    let pollingInterval:number = 60000;//1 min default
+    let pollingInterval:number = 1000;//1 min default
     if (res.analyticsData)
       this.viewId = res.analyticsData.analyticsViewID;
+      
     gapi.analytics.auth.authorize({
       'serverAuth': {
         'access_token': res.token.access_token

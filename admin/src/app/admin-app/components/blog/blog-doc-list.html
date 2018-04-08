@@ -21,8 +21,8 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="Actions">
-      <mat-header-cell class="text-center" *matHeaderCellDef>Actions</mat-header-cell>
-      <mat-cell class="text-center" *matCellDef="let element">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell class="nb-icon-cell" *matCellDef="let element">
         <button mat-mini-fab class="material-icon-sm" color="primary" (click)="edit(element._id)">
           <i class="far fa-edit"></i>
         </button>

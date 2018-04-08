@@ -7,86 +7,39 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import{HOST_URL}  from '../../configs/env.config';
 @Component({
   selector: 'ajax-spinner',
-  template: `<div [hidden]="hide" class="spinner-wrapper animated" [class.fadeIn]="showSpinner" [class.fadeOut]="!showSpinner">
-                    <div class="spinner-back"></div>
-                       <div class="spinner">  
-                       <div class="rect1"></div>
-                       <div class="rect2"></div>
-                         <div class="rect3"></div>
-                         <div class="rect4"></div>
-                         <div class="rect5"></div>
-                    </div></div>`,
+  template: `<div [hidden]="hide" class="spinner-wrapper" [class.fadeIn]="showSpinner" [class.fadeOut]="!showSpinner">
+            </div>`,
   styles: [`
         .spinner-wrapper {
-            height: 100%;
-            width: 100%;
             position: fixed;         
             z-index: 999;
             overflow:hidden;
             left: 0;
             top: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #000;
+            background-color: rgba(0,0,0,0.5);
         }
-        .spinner-back{
-                background-color: #000;
-             opacity: .5;
-            height: inherit;
-            position: inherit;
-             width: inherit;
-
+        .spinner-wrapper:before {
+          content: '';
+          box-sizing: border-box;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 60px;
+          height: 60px;
+          margin-top: -15px;
+          margin-left: -15px;
+          border-radius: 50%;
+          border: 1px solid #ccc;
+          border-top-color: #07d;
+          animation: spinner .6s linear infinite;
         }
-        .spinner {
-          margin: 100px auto;
-          height: 100px;
-          text-align: center;
-          font-size: 10px;
-          color:#fff;
+        @keyframes spinner {
+          to {transform: rotate(360deg);}
         }
-        
-        .spinner > div {
-          background-color: #fff;
-          height: 100%;
-          margin-left: 5px;
-          display: inline-block;
-          width: 15px;
-           margin-left: 5px;
-          -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
-          animation: sk-stretchdelay 1.2s infinite ease-in-out;
-        }
-        
-        .spinner .rect2 {
-          -webkit-animation-delay: -1.1s;
-          animation-delay: -1.1s;
-        }
-        
-        .spinner .rect3 {
-          -webkit-animation-delay: -1.0s;
-          animation-delay: -1.0s;
-        }
-        
-        .spinner .rect4 {
-          -webkit-animation-delay: -0.9s;
-          animation-delay: -0.9s;
-        }
-        
-        .spinner .rect5 {
-          -webkit-animation-delay: -0.8s;
-          animation-delay: -0.8s;
-        }
-        
-        @-webkit-keyframes sk-stretchdelay {
-          0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
-          20% { -webkit-transform: scaleY(1.0) }
-        }
-        
-        @keyframes sk-stretchdelay {
-          0%, 40%, 100% { 
-            transform: scaleY(0.4);
-            -webkit-transform: scaleY(0.4);
-          }  20% { 
-            transform: scaleY(1.0);
-            -webkit-transform: scaleY(1.0);
-          }
-        }`]
+      `]
 })
 export class SpinnerComponent implements OnDestroy,OnInit {
   private currentTimeout: any;
