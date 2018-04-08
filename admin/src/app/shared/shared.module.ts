@@ -33,6 +33,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
+import { HttpClientModule } from '@angular/common/http';
 /*Prime Module*/
 // import { PasswordModule } from 'primeng/primeng';
 
@@ -41,7 +42,8 @@ import { MatSortModule } from '@angular/material/sort';
     RouterModule, 
     HttpModule, 
     FormsModule, 
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
+    HttpClientModule
     // DropdownModule 
    ],
     declarations: [FadeInDirective, 
@@ -64,7 +66,8 @@ import { MatSortModule } from '@angular/material/sort';
     // ACCORDION_PROVIDERS,
     CommonModule, 
     FormsModule, 
-    HttpModule, 
+    HttpModule,
+    HttpClientModule, 
     ReactiveFormsModule, 
     // DropdownModule,
     // PasswordModule, 

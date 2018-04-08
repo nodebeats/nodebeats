@@ -86,12 +86,13 @@ describe('Cloudinary settings', ()=> {
     expect(component.cloudinaryForm.valid).toBe(true);
   }));
 
-  it('should get swal message according to response', async(() => {
+  it('should get swal message according to response', fakeAsync(() => {
     let fixture = TestBed.createComponent(CloudinarySettingComponent);
     let component = fixture.debugElement.componentInstance;
-    let service = TestBed.get(CloudinaryService);
     expect(component.swalMessage).toBeUndefined();
-    spyOn(service, 'updateCloudinarySettings');
-    
-  }))
+    // spyOn(component, 'saveCloudinarySetting');
+    // fixture.detectChanges();
+    // fixture.detectChanges();
+    // expect(component.saveCloudinarySetting).toHaveBeenCalledTimes(1);
+  }));
 });

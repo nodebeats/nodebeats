@@ -334,8 +334,9 @@ export class LastWeekVsThisWeekAnalysisChart implements OnChanges {
   }
 
   ngOnChanges() {
-    if (this.viewId)
+    if (this.viewId){
       this.getSessionData();
+    }
   }
 
   getSessionData() {

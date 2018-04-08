@@ -11,7 +11,7 @@ import{API_URL} from "../../../shared/configs/env.config";
 export class CloudinaryService {
     apiRoute:string = "cloudinary";
 
-    constructor(private _http:Http) {
+    constructor(private _http: Http) {
 
     }
 
@@ -20,7 +20,6 @@ export class CloudinaryService {
         return this._http.post(API_URL + this.apiRoute, body)
             .map(res =>  res.json())
             .catch(this.handleError);
-
     }
 
     updateCloudinarySettings(objUpdate:CloudinaryModel, id:string) {
@@ -28,7 +27,6 @@ export class CloudinaryService {
         return this._http.put(API_URL + this.apiRoute + "/" + id, body)
             .map(res => res.json())
             .catch(this.handleError);
-
     }
 
     getCloudinarySettings():Observable < CloudinaryModel > {
@@ -38,7 +36,7 @@ export class CloudinaryService {
     }
 
     handleError(error) {
+        console.log(error)
         return Observable.throw(error.json() || 'server error');
     }
-
 }
