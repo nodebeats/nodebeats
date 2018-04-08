@@ -61,8 +61,8 @@
     </ng-container>
 
     <ng-container matColumnDef="Actions">
-      <mat-header-cell class="text-center" *matHeaderCellDef>Actions</mat-header-cell>
-      <mat-cell class="text-center" *matCellDef="let element let i=index">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell class="nb-icon-cell" *matCellDef="let element let i=index">
         <button mat-mini-fab class="material-icon-sm" color="primary" (click)="showUserDetail(element._id)" title="View" href="javascript:void(0)">
           <i class="fa fa-eye"></i>
         </button>
