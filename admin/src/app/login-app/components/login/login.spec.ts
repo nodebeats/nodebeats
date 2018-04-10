@@ -65,40 +65,38 @@ describe("Verify Not Already Login", () => {
 
   it('should check the Validation if there is previously stored token and respond with inValid Login',
     async(()=> {
-      var fixture = TestBed.createComponent(LoginComponent);
+      let fixture = TestBed.createComponent(LoginComponent);
       fixture.detectChanges();
-      var component = fixture.debugElement.componentInstance;
+      let component = fixture.debugElement.componentInstance;
       fixture.detectChanges();
       expect(component.isValidLogin).toBe(false);
-
-    }));
+  }));
 
   it('should show the LoginForm', async(()=> {
-    var fixture = TestBed.createComponent(LoginComponent);
+    let fixture = TestBed.createComponent(LoginComponent);
     fixture.detectChanges();
-    var compiled = fixture.debugElement.nativeElement;
+    let compiled = fixture.debugElement.nativeElement;
     expect(compiled.textContent).toContain('Nodebeats Login');
-    var component = fixture.debugElement.componentInstance;
+    let component = fixture.debugElement.componentInstance;
     expect(component.loginForm).toBeDefined();
-
   }));
 
   it('should show the required message when trying to login with empty username /password field',
     async(()=> {
-      var fixture = TestBed.createComponent(LoginComponent);
+      let fixture = TestBed.createComponent(LoginComponent);
       fixture.detectChanges();
-      var compiled = fixture.debugElement.nativeElement;
+      let compiled = fixture.debugElement.nativeElement;
       const button = fixture.debugElement.query(By.css('button')).nativeElement;
       button.click();
       fixture.detectChanges();
-      expect(compiled.querySelector('.error-msg').textContent).toContain('*');
+      expect(fixture.debugElement.query(By.css('mat-error')).nativeElement.textContent).toContain('User Name is required');
+  }));
 
-    }));
   it('should show the invalid credential message when trying to login with wrong credential', async(()=> {
-    var fixture = TestBed.createComponent(LoginComponent);
+    let fixture = TestBed.createComponent(LoginComponent);
     fixture.detectChanges();
-    var compiled = fixture.debugElement.nativeElement;
-    var component = fixture.debugElement.componentInstance;
+    let compiled = fixture.debugElement.nativeElement;
+    let component = fixture.debugElement.componentInstance;
     component.loginForm.controls.username.patchValue("wrongUserName");
     component.loginForm.controls.password.patchValue("wrongPassword");
     const button = fixture.debugElement.query(By.css('button')).nativeElement;
@@ -107,7 +105,6 @@ describe("Verify Not Already Login", () => {
     expect(component.objResponse.success).toBe(false);
     expect(component.slide).toBe("expand");
   }));
-
 });
 /*
  * Note:  Here we cannot test the success login due to the full Page redirect  to the admin  page.
@@ -169,41 +166,42 @@ describe('Login with the TFA Enabled ', ()=> {
   }));
 
   it('should check the Validation if there is previously stored token and respond with not Valid Login', async(()=> {
-    var fixture = TestBed.createComponent(LoginComponent);
+    let fixture = TestBed.createComponent(LoginComponent);
     fixture.detectChanges();
-    var component = fixture.debugElement.componentInstance;
+    let component = fixture.debugElement.componentInstance;
     fixture.detectChanges();
     expect(component.isValidLogin).toBe(false);
   }));
 
   it('should show the LoginForm', async(()=> {
-    var fixture = TestBed.createComponent(LoginComponent);
+    let fixture = TestBed.createComponent(LoginComponent);
 
     fixture.detectChanges();
-    var compiled = fixture.debugElement.nativeElement;
+    let compiled = fixture.debugElement.nativeElement;
     expect(compiled.textContent).toContain('Nodebeats Login');
-    var component = fixture.debugElement.componentInstance;
+    let component = fixture.debugElement.componentInstance;
     expect(component.loginForm).toBeDefined();
     expect(component.tfaEnabled).toBe(false);
   }));
 
   it('should show the required message when trying to login with empty username /password field', async(()=> {
-    var fixture = TestBed.createComponent(LoginComponent);
+    let fixture = TestBed.createComponent(LoginComponent);
 
     fixture.detectChanges();
-    var compiled = fixture.debugElement.nativeElement;
+    let compiled = fixture.debugElement.nativeElement;
     const button = fixture.debugElement.query(By.css('button')).nativeElement;
     button.click();
     // compiled.query(By.css('button')).click();
     fixture.detectChanges();
-    expect(compiled.querySelector('.error-msg').textContent).toContain('*');
+    expect(fixture.debugElement.query(By.css('mat-error')).nativeElement.textContent).toContain('User Name is required');
   }));
+
   it('should show the invalid credential message when trying to login with wrong credential', async(() => {
 
-    var fixture = TestBed.createComponent(LoginComponent);
+    let fixture = TestBed.createComponent(LoginComponent);
     fixture.detectChanges();
-    var compiled = fixture.debugElement.nativeElement;
-    var component = fixture.debugElement.componentInstance;
+    let compiled = fixture.debugElement.nativeElement;
+    let component = fixture.debugElement.componentInstance;
     component.loginForm.controls.username.patchValue("wrongUserName");
     component.loginForm.controls.password.patchValue("wrongPassword");
     const button = fixture.debugElement.query(By.css('button')).nativeElement;
@@ -216,10 +214,10 @@ describe('Login with the TFA Enabled ', ()=> {
   }));
   it('should show the TFA TOKEN entry filed when credential verified', async(()=> {
 
-    var fixture = TestBed.createComponent(LoginComponent);
+    let fixture = TestBed.createComponent(LoginComponent);
     fixture.detectChanges();
-    var compiled = fixture.debugElement.nativeElement;
-    var component = fixture.debugElement.componentInstance;
+    let compiled = fixture.debugElement.nativeElement;
+    let component = fixture.debugElement.componentInstance;
     component.loginForm.controls.username.patchValue("rightUserName");
     component.loginForm.controls.password.patchValue("rightPassword");
     const button = fixture.debugElement.query(By.css('button')).nativeElement;
@@ -232,32 +230,32 @@ describe('Login with the TFA Enabled ', ()=> {
     expect(compiled.textContent).toContain("Nodebeats 2FA Login");
   }));
   it('should show the required message when submit with empty TFA TOKEN entry filed', async(() => {
-    var fixture = TestBed.createComponent(LoginComponent);
+    let fixture = TestBed.createComponent(LoginComponent);
     fixture.detectChanges();
-    var compiled = fixture.debugElement.nativeElement;
-    var component = fixture.debugElement.componentInstance;
+    let compiled = fixture.debugElement.nativeElement;
+    let component = fixture.debugElement.componentInstance;
     component.tfaEnabled = true;
     fixture.detectChanges();
     expect(compiled.textContent).toContain("Nodebeats 2FA Login");
-    expect(compiled.queryAll(By.css('button'))[1]).not.toBeNull();
-    const button = fixture.debugElement.queryAll(By.css('button'));
-    button[1].nativeElement.click();
+    expect(fixture.debugElement.query(By.css('button')).nativeElement).not.toBeNull();
+    const button = fixture.debugElement.query(By.css('button')).nativeElement;
+    button.click();
     // compiled.queryAll(By.css('button'))[1].click();
     fixture.detectChanges();
     expect(component.tfaForm.valid).toBe(false);
-    expect(compiled.querySelector('.error-msg').textContent).toContain('*');
+    // expect(compiled.querySelector('.error-msg').textContent).toContain('*');
   }));
   it('should show the error message when submit with wrong TFA TOKEN entry filed', async(() => {
-    var fixture = TestBed.createComponent(LoginComponent);
+    let fixture = TestBed.createComponent(LoginComponent);
 
     fixture.detectChanges();
-    var compiled = fixture.debugElement.nativeElement;
-    var component = fixture.debugElement.componentInstance;
+    let compiled = fixture.debugElement.nativeElement;
+    let component = fixture.debugElement.componentInstance;
     component.tfaEnabled = true;
     fixture.detectChanges();
     component.tfaForm.controls.token.patchValue("123456"); //wrong token
-    const button = fixture.debugElement.queryAll(By.css('button'));
-    button[1].nativeElement.click();
+    const button = fixture.debugElement.query(By.css('button')).nativeElement;
+    button.click();
     // compiled.queryAll(By.css('button'))[1].click();
     fixture.detectChanges();
     expect(component.tfaForm.valid).toBe(true);
@@ -289,9 +287,9 @@ describe("Verify Already Login", () => {
   }));
 
   it('should verify the already Valid Login', async(()=> {
-    var fixture = TestBed.createComponent(LoginComponent);
+    let fixture = TestBed.createComponent(LoginComponent);
     fixture.detectChanges();
-    var component = fixture.debugElement.componentInstance;
+    let component = fixture.debugElement.componentInstance;
     Config.getAuthToken = createSpy('getAuthToken() spy').and.returnValue("token");
     component.ngOnInit();
     //    fixture.detectChanges();

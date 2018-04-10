@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import {Component, AfterViewInit, OnInit, Input, OnChanges, OnDestroy} from '@angular/core';
+import {Component, AfterViewInit, OnInit, Input, OnChanges, OnDestroy, Inject} from '@angular/core';
 import * as moment from 'moment';
 import {DashboardResponseModel} from './dashboard.model';
 import {DashboardService} from './dashboard.service';
@@ -136,11 +136,12 @@ export class UserCount implements OnChanges {
   returningUserCount:number = 0;
   @Input() viewId:string;
 
-  constructor(private objService:DashboardService) {
+  constructor(@Inject(DashboardService)private objService:DashboardService) {
   }
 
   ngOnChanges() {
-    this.getTotalUsers();
+    if (this.viewId)
+      this.getTotalUsers();
   }
 
   getTotalUsers() {

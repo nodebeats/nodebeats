@@ -100,8 +100,6 @@ export class LoginComponent implements OnInit {
       if (!res.isToken) {
         this.objResponse = res;
         this.slide = "expand";
-
-
       }
     }
   }

@@ -46,7 +46,6 @@ export class ForgotPasswordComponent {
     });
   }
 
-
   onSubmit() {
     this.isSubmitted = true;
     if (this.forgotPasswordForm.valid) {
@@ -55,7 +54,6 @@ export class ForgotPasswordComponent {
           error => this.handleError(error));
     }
   }
-
 
   handleSuccessResponse(res: any) {
     this.objResponse = res.message;
@@ -69,7 +67,6 @@ export class ForgotPasswordComponent {
     this.alertClass = "alert-danger";
     this.isValidUser = false;
     this.slide = "expand";
-
   }
 
 }

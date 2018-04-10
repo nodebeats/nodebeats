@@ -67,10 +67,7 @@
                             <h1 class="text-center">Nodebeats Login</h1>
                             <mat-form-field class="full-width">
                                 <input [formControl]="username" matInput placeholder="User Name">
-                                <mat-error *ngIf="!username.valid && (username.dirty||isSubmitted)">
-                                    User Name is
-                                    <strong>required</strong>
-                                </mat-error>
+                                <mat-error *ngIf="!username.valid && (username.dirty||isSubmitted)">User Name is <strong>required</strong></mat-error>
                             </mat-form-field>
                             <mat-form-field class="full-width">
                                 <input [formControl]="password" type="{{passwordType}}" matInput placeholder="Password">
