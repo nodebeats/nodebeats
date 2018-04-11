@@ -5717,6 +5717,10 @@ netmask@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/netmask/-/netmask-1.0.6.tgz#20297e89d86f6f6400f250d9f4f6b4c1945fcd35"
 
+ng2-breadcrumbs@^0.1.281:
+  version "0.1.281"
+  resolved "https://registry.yarnpkg.com/ng2-breadcrumbs/-/ng2-breadcrumbs-0.1.281.tgz#38a66c6280fb060c1a73243b7b33f7cd9f3cc1a6"
+
 nice-try@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.4.tgz#d93962f6c52f2c1558c0fbda6d512819f1efe1c4"

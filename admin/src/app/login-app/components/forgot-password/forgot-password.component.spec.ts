@@ -17,7 +17,6 @@ class MockService extends ForgotPasswordService{
     }
 
     forgotPassword(objModel: ForgotPasswordModel): Observable<any> {
-        console.log("====================================+> ", objModel);
         return Observable.of(
             {
                 message: 'Please check your email',
@@ -63,6 +62,6 @@ describe('Forgot Password Component', () => {
         let button = fixture.debugElement.query(By.css('button')).nativeElement;
         button.click();
         fixture.detectChanges();
-        expect(component.objResponse).toBe('Please check your email')
+        expect(component.objResponse).toBe('Please check your email');
     }));
 })

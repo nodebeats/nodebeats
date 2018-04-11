@@ -29,6 +29,29 @@
         <mat-header-cell *matHeaderCellDef>Designation</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.designation}} </mat-cell>
       </ng-container>
+      <ng-container matColumnDef="Order">
+        <mat-header-cell *matHeaderCellDef>Order</mat-header-cell>
+        <mat-cell *matCellDef="let element let i=index">
+          <span *ngIf="totalItems==1"></span>
+          <span *ngIf="totalItems>1 && preIndex+(i+1)==1">
+            <a href="javascript:void(null)" class="fa fa-caret-down order-sort red-hover"
+            (click)="moveDown(element._id,element.hierarchyOrder)"
+            title="Move Down"></a>
+          </span>
+          <span *ngIf="preIndex+(i+1)>1 && (preIndex+(i+1))<totalItems">
+            <a href="javascript:void(null)" class="fa fa-caret-up order-sort"
+              (click)="moveUp(element._id,element.hierarchyOrder)"
+            title="Move Up"></a>
+            <a href="javascript:void(null)" class="fa fa-caret-down order-sort red-hover"
+              (click)="moveDown(element._id,element.hierarchyOrder)" title="Move Down"></a>
+          </span>
+          <span *ngIf="i>0 && (preIndex+(i+1))==totalItems">
+            <a href="javascript:void(null)" class="fa fa-caret-up order-sort"
+              (click)="moveUp(element._id,element.hierarchyOrder)"
+              title="Move Up"></a>
+          </span>
+        </mat-cell>
+      </ng-container>
       <ng-container matColumnDef="Active">
         <mat-header-cell class="text-center" *matHeaderCellDef>Active</mat-header-cell>
         <mat-cell class="text-center" *matCellDef="let element">

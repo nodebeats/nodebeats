@@ -34,6 +34,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 /*Prime Module*/
 // import { PasswordModule } from 'primeng/primeng';
 
@@ -52,10 +53,12 @@ import { HttpClientModule } from '@angular/common/http';
     DocumentUploader, 
     FormControlMessages,
     Alert, 
-    TinyEditor
+    TinyEditor,
+    BreadcrumbComponent
     // ACCORDION_PROVIDERS
   ],
   exports: [
+    BreadcrumbComponent,
     FadeInDirective, 
     ProcessingDirective,
     ImageUploader, 

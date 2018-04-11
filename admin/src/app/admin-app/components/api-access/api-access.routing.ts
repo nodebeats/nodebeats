@@ -6,12 +6,12 @@ import { ApiAccessHomeComponent } from './api-access-home.component';
 
 
 export const ApiAccessRoute: Routes = [
-  {path:'', component: ApiAccessHomeComponent,
-  children: [
-    {path: '', component: ApiAccessComponent},
-    {path: 'editor', component: ApiAccessEditorComponent},
-    {path: 'editor/:id', component: ApiAccessEditorComponent},
-  ]}
+  // {path:'', component: ApiAccessHomeComponent, data: {breadcrumb: 'ApiAccess Home'},
+  // children: [
+    {path: '', component: ApiAccessComponent, data: {breadcrumb: 'ApiAccess List'}},
+    {path: 'editor', component: ApiAccessEditorComponent, data: {breadcrumb: 'ApiAccess Editor'}},
+    {path: 'editor/:id', component: ApiAccessEditorComponent, data: {breadcrumb: 'ApiAccess Editor'}},
+  // ]}
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiAccessService} from "./api-access.service";
 import {ApiAccessModel} from "./api-access.model";
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import Swal from 'sweetalert2';
 
@@ -15,6 +15,7 @@ export class ApiAccessComponent implements OnInit {
   objListResponse:ApiAccessModel[];
   accessId:string;  
   dataSource: any;
+  breadcrumbs: any;
   displayedColumns = ['SN','Api Route', 'Role', 'Active', 'Actions'];
   // /* Pagination */
   perPage:number = 10;
@@ -25,11 +26,11 @@ export class ApiAccessComponent implements OnInit {
   bindSort:boolean = false;
   // /* End Pagination */
 
+  constructor(private _objService:ApiAccessService, private router:Router) {
+  }
+  
   ngOnInit() {
     this.getApiAccessList();
-  }
-
-  constructor(private _objService:ApiAccessService, private router:Router) {
   }
 
   getApiAccessList() {

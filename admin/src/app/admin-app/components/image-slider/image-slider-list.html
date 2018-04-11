@@ -12,12 +12,10 @@
   <h1 class="nb-heading-one mr-auto">Image Slider</h1>
 </div>
 <!-- /.row -->
-
 <div class="pb-4">
   <button mat-raised-button color="primary" (click)="addImage()">
     <i class="fa fa-plus-circle"></i> Add Image</button>
 </div>
-
 <mat-card class="nb-dashboard-table">
     <mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="SN">

@@ -6,7 +6,6 @@ import {ApiAccessHomeComponent} from './api-access-home.component';
 import {SharedModule} from '../../../shared/shared.module';
 import {ApiAccessRouting} from './api-access.routing';
 
-
 @NgModule({
     imports: [SharedModule.forRoot(), ApiAccessRouting],
     declarations: [ApiAccessHomeComponent, ApiAccessEditorComponent, ApiAccessComponent],

@@ -4,7 +4,7 @@ import {EmailServiceComponent} from './email-service.component';
 
 
 export const EmailServiceRoute: Routes = [
-  {path:'', component: EmailServiceComponent}
+  {path:'', component: EmailServiceComponent, data: {breadcrumb: 'Email Service Setting'}}
   
 ];
 

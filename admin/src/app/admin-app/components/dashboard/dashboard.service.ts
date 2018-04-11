@@ -33,7 +33,6 @@ export class DashboardService {
     }
 
     queryGoogleRealtimeApi(params:any):Observable<any> {
-        debugger;
         return this._http.get(this.realTimeApiRoute + params)
             .map(res=>res.json())
             .catch(err=>this.handleError(err));

@@ -1,8 +1,8 @@
 import {Component, AfterViewInit, OnInit} from '@angular/core';
 import {TeamManagementModel} from "./team-managment.model";
 import {TeamManagementService} from "./team-managment.service";
-import{Config} from "../../../shared/configs/general.config";
-import{ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
+import {Config} from "../../../shared/configs/general.config";
+import {ImageCanvasSizeEnum} from "../../../shared/configs/enum.config";
 import {ValidationService} from "../../../shared/services/validation.service";
 import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import {Location} from '@angular/common';
@@ -94,7 +94,6 @@ export class TeamManagementEditorComponent implements OnInit,AfterViewInit {
     this.drawImageToCanvas(path);
   }
 
-
   saveTeamMember() {
     this.isSubmitted = true;
     if (this.teamMgmtForm.valid) {
@@ -112,21 +111,16 @@ export class TeamManagementEditorComponent implements OnInit,AfterViewInit {
   }
 
   resStatusMessage(objSave: any) {
-    this.location.back();
-    // this.showListEvent.emit(false); // is Form Canceled
-   Swal("Success !", objSave.message, "success")
-
+    this.triggerCancelForm();
+    Swal("Success !", objSave.message, "success");
   }
 
   triggerCancelForm() {
     this.location.back();
-    // let isCanceled = true;
-    // this.showListEvent.emit(isCanceled);
   }
 
   errorMessage(objResponse: any) {
    Swal("Alert !", objResponse.message, "info");
-
   }
 
   /*Image handler */

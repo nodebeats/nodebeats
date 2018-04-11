@@ -4,9 +4,9 @@ import { EmailTemplateListComponent } from "./email-template-list.component";
 import { EmailTemplateEditorComponent } from "./email-template-editor.component";
 import { EmailTemplateComponent } from './email-template.component';
 export const EmailTemplateRoutes: Routes = [
-  { path: '', component: EmailTemplateListComponent },
-  { path: 'email-template-editor', component: EmailTemplateEditorComponent },
-  { path: 'email-template-editor/:id', component: EmailTemplateEditorComponent }
+  { path: '', component: EmailTemplateListComponent, data: {breadcrumb: 'Email Template List'}},
+  { path: 'email-template-editor', component: EmailTemplateEditorComponent, data: {breadcrumb: 'Email Template Editor'} },
+  { path: 'email-template-editor/:id', component: EmailTemplateEditorComponent, data: {breadcrumb: 'Email Template Editor'} }
 ];
 
 @NgModule({

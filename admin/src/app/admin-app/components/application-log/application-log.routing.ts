@@ -3,7 +3,7 @@ import {ApplicationLogComponent} from "./application-log-list.component";
 import {Routes, RouterModule, Router} from "@angular/router";
 
 export const ApplicationLogRoute: Routes=[
-    {path:'', component:ApplicationLogComponent}
+    {path:'', component:ApplicationLogComponent, data: {breadcrumb: 'Error Log List'}}
 ]
 
 @NgModule({

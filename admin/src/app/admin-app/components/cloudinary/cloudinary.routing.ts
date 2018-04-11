@@ -4,8 +4,9 @@ import {CloudinarySettingComponent} from './cloudinary.component';
 
 
 export const CloudinaryRoute: Routes = [
-  {path:'', component: CloudinarySettingComponent}
-  
+  {path:'', component: CloudinarySettingComponent, data: {
+    breadcrumb: 'Cloudinary Setting',
+  }}
 ];
 
 @NgModule({

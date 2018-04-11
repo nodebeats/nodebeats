@@ -5,7 +5,7 @@ import { ApiAccessService } from "./api-access.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { RoleService } from "../role-management/role.service";
 import { Config } from "../../../shared/configs/general.config";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, NavigationEnd, NavigationStart } from "@angular/router";
 
 @Component({
   selector: "api-access-editor",

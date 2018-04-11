@@ -7,16 +7,16 @@ import { ImageGalleryComponent} from './image-gallery.component';
 import { Routes,RouterModule } from '@angular/router';
 
 export const ImageGalleryRoute: Routes = [
-    {path:'', component: ImageGalleryComponent,
-    children: [
+    // {path:'', component: ImageGalleryComponent,
+    // children: [
       {path: '', redirectTo: 'album', pathMatch: 'full'},
-      {path: 'album', component: ImageAlbumListComponent},
-      {path: 'album/editor', component: ImageAlbumEditorComponent},      
-      {path: 'album/editor/:albumId', component: ImageAlbumEditorComponent},
-      {path: 'album/gallery/:albumId',component: ImageListComponent},
-      {path: 'album/gallery/:albumId/editor', component: ImageGalleryImageEditorComponent},
-      {path: 'album/gallery/:albumId/editor/:imageId', component:ImageGalleryImageEditorComponent}
-    ]}
+      {path: 'album', component: ImageAlbumListComponent, data: {breadcrumb: 'Image Album List'}},
+      {path: 'album/editor', component: ImageAlbumEditorComponent, data: {breadcrumb: 'Image Album Editor'}},      
+      {path: 'album/editor/:albumId', component: ImageAlbumEditorComponent, data: {breadcrumb: 'Image Album Editor'}},
+      {path: 'album/gallery/:albumId',component: ImageListComponent, data: {breadcrumb: 'Image Gallery List'}},
+      {path: 'album/gallery/:albumId/editor', component: ImageGalleryImageEditorComponent, data: {breadcrumb: 'Image Gallery Editor'}},
+      {path: 'album/gallery/:albumId/editor/:imageId', component:ImageGalleryImageEditorComponent, data: {breadcrumb: 'Image Gallery Editor'}}
+    // ]}
   ];
 
 @NgModule({

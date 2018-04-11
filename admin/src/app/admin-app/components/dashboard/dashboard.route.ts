@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
 export const DashboardRoute: Routes = [
-    {path:'', component: DashboardComponent}
+    {path:'', component: DashboardComponent, data: {breadcrumb: 'Graphs'}}
 ]
 
 @NgModule({

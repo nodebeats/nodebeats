@@ -19,6 +19,7 @@ import { Component } from '@angular/core';
 export class ApiAccessHomeComponent {
     title: string = "Api Access Management";
 
-    constructor() {}
+    constructor() {
 
+    }
 }

@@ -3,7 +3,7 @@ import {GoogleAnalyticsComponent} from './google-analytics.component';
 import {Routes, RouterModule} from '@angular/router';
 
 export const GoogleAnalyticsRoute: Routes = [
-    {path:'', component:GoogleAnalyticsComponent}
+    {path:'', component:GoogleAnalyticsComponent, data: { breadcrumb: 'Google Analytics Setting'}}
 ]
 
 @NgModule({

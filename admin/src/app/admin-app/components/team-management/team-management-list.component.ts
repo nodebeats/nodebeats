@@ -15,13 +15,14 @@ export class TeamManagementComponent implements OnInit {
     error: any;
     showForm: boolean = false;
     memberId: string;
-    displayedColumns = ['SN', 'Member Name', 'Designation', 'Active', 'Actions'];
+    displayedColumns = ['SN', 'Member Name', 'Designation', 'Order', 'Active', 'Actions'];
     dataSource: any;
     /* Pagination */
     pageSizeOptions = [5, 10, 25, 50, 100];
     perPage: number = 10;
     currentPage: number = 1;
     totalItems: number = 1;
+    preIndex: number = 0;
     /* End Pagination */
     ngOnInit() {
         this.getTeamMemberList();
@@ -40,6 +41,7 @@ export class TeamManagementComponent implements OnInit {
 
     bindList(objRes: TeamManagementResponse) {
         this.objListResponse = objRes;
+        this.preIndex = (this.perPage * (this.currentPage - 1));
         this.dataSource = new MatTableDataSource(this.objListResponse.dataList);
         this.totalItems = objRes.totalItems;
     }
@@ -69,7 +71,6 @@ export class TeamManagementComponent implements OnInit {
                 this._objService.deleteTeamMember(objDel)
                     .subscribe(res => {
                         this.getTeamMemberList();
-
                        Swal("Deleted!", res.message, "success");
                     },
                         error => {
@@ -77,11 +78,10 @@ export class TeamManagementComponent implements OnInit {
                         });
                     }
             });
-
     }
 
     successStatusMessage(res: any) {
-      Swal("Success !", res.message, "success")
+      Swal("Success !", res.message, "success");
     }
 
     errorMessage(objResponse: any) {

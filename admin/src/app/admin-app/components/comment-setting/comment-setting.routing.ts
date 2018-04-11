@@ -4,8 +4,7 @@ import {CommentSettingComponent} from './comment-setting.component';
 
 
 export const CommentRoute: Routes = [
-  {path:'', component: CommentSettingComponent}
-  
+  {path:'', component: CommentSettingComponent, data: {breadcrumb: 'Comment Setting'}}
 ];
 
 @NgModule({
