@@ -26,7 +26,7 @@ export class ApplicationLogComponent implements OnInit {
   currentPage:number = 1;
   totalItems:number = 1;
   bindSort:boolean = false;
-  preIndex:number = 1;
+  preIndex:number = 0;
   /* End Pagination */
   startDate: FormControl = new FormControl('');
   endDate: FormControl = new FormControl('');
@@ -54,6 +54,7 @@ export class ApplicationLogComponent implements OnInit {
 
   bindList(objRes: ApplicationLogResponse) {
     this.objResponse = objRes;
+    this.preIndex = (this.perPage * (this.currentPage - 1));
     this.dataSource = new MatTableDataSource(this.objResponse.dataList);        
     this.totalItems = objRes.totalItems;
   }

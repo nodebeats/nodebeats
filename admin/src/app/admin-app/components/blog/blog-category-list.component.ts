@@ -22,6 +22,7 @@ export class BlogCategoryListComponent implements OnInit {
   perPage: number = 10;
   currentPage: number = 1;
   totalItems: number = 1;
+  preIndex: number = 0;
 
   ngOnInit() {
     this.getBlogCategoryList();
@@ -46,6 +47,7 @@ export class BlogCategoryListComponent implements OnInit {
     this.objListResponse = objRes;
     this.totalItems = objRes.totalItems;
     this.dataSource = new MatTableDataSource(this.objListResponse.dataList);
+    this.preIndex = (this.perPage * (this.currentPage - 1));
   }
 
   edit(id: string) {

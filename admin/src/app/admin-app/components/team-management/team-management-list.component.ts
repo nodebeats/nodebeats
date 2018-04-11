@@ -24,6 +24,7 @@ export class TeamManagementComponent implements OnInit {
     totalItems: number = 1;
     preIndex: number = 0;
     /* End Pagination */
+    preIndex : number = 0;
     ngOnInit() {
         this.getTeamMemberList();
     }
@@ -44,6 +45,7 @@ export class TeamManagementComponent implements OnInit {
         this.preIndex = (this.perPage * (this.currentPage - 1));
         this.dataSource = new MatTableDataSource(this.objListResponse.dataList);
         this.totalItems = objRes.totalItems;
+        this.preIndex = (this.perPage * (this.currentPage - 1));
     }
 
     edit(memberId: string) {

@@ -3,6 +3,13 @@
   margin-top: -70px;
   z-index: 100;
   &.minimize{
+    .list-group{
+      .nb-dashboard-item{
+        i{
+          margin-right: 20px;
+        }
+      }
+    }
     .logo{
       width: 70px;
       .min{
@@ -106,13 +113,15 @@
         border-width: 0 1px 1px 0;
         position: absolute;
         top: 50%;
-        right: 20px;
-        transform: rotate(45deg) translateY(-50%);
+        right: 12px;
+        margin-top: -8px;
+        transform: rotate(45deg);
         transition: all 150ms ease-out;
       }
       &.collapsed{
         &:after{
-          transform: rotate(-45deg) translateY(-50%);
+          margin-top: -4px;
+          transform: rotate(-45deg);
         }
       }
     }
@@ -123,7 +132,7 @@
   }
   i{
     transition: all 150ms ease-out;
-    margin: 0 10px;
+    margin-right: 10px;
     font-size: 18px;
     width: 26px;
   }

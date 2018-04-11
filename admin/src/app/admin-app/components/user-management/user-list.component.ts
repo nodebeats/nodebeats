@@ -25,6 +25,7 @@ export class UserListComponent implements OnInit {
     perPage:number = 10;
     currentPage:number = 1;
     totalItems:number = 1;
+    preIndex:number = 0;
     /* End Pagination */
 
 
@@ -56,6 +57,7 @@ export class UserListComponent implements OnInit {
         this.objResponse = objRes;
         this.dataSource = new MatTableDataSource(this.objResponse.dataList);           
         this.totalItems = objRes.totalItems;
+        this.preIndex = (this.perPage * (this.currentPage - 1));
     }
 
     addUser() {

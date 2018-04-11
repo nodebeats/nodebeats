@@ -25,6 +25,7 @@ export class ImageAlbumListComponent implements OnInit {
   currentPage: number = 1;
   totalItems: number = 1;
   // /* End Pagination */
+  preIndex: number = 0;
 
   ngOnInit() {
     this.getAlbumList();
@@ -49,6 +50,7 @@ export class ImageAlbumListComponent implements OnInit {
     this.objListResponse = objRes;
     this.dataSource = new MatTableDataSource(this.objListResponse.dataList);
     this.totalItems = objRes.totalItems;
+    this.preIndex = (this.perPage * (this.currentPage - 1));
   }
 
   addImageAlbum() {

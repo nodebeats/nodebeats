@@ -14,16 +14,46 @@ import {Config} from "../configs/general.config";
 import {FormControl} from "@angular/forms";
 @Component({
   selector: 'image-uploader',
-  template: `<canvas #previewCanvas></canvas>
-                    <a *ngIf="imageName && isValidImage && allowDelete" href="javascript:void(0)" (click)="onDeleteFile()"><i
-                            class="fa fa-trash  red-hover"
-                            aria-hidden="true"></i></a>
-                    <div class="clearfix"></div>
-                    <input type="file" class="inputfile" id="file" #inputFile (change)="onFileSelect($event)">
-                    <label for="file"><i class="fa fa-upload" aria-hidden="true"> {{imageName?imageName:"Choose an Image..."}}</i></label>
+  template: `<div class="mb-3"><canvas #previewCanvas></canvas></div>
+                    <a class="custom-file-btn delete-file" *ngIf="imageName && isValidImage && allowDelete" href="javascript:void(0)" (click)="onDeleteFile()">
+                    <i class="fa fa-trash"aria-hidden="true"></i> Remove Current Image</a>
+                    <div class="custom-file-wrap">
+                      <input type="file" class="custom-file-input" id="file" #inputFile (change)="onFileSelect($event)">
+                      <label class="custom-file-btn" for="file"><i class="fa fa-upload" aria-hidden="true"></i> {{imageName?imageName:"Choose an Image..."}}</label>
+                    </div>
                     <div class="error-msg" *ngIf="!isValidImage">*Supported Extensions : {{allowedExtMessage}} and max size : {{allowedSize}} MB</div>               
                   <control-messages [isSubmitted]="isSubmitted"
-                         [control]="imageFormControl"></control-messages>`
+                         [control]="imageFormControl"></control-messages>`,
+      styles: [`
+      .custom-file-wrap{
+        position: relative;
+        overflow: hidden;
+      }
+      .custom-file-input{
+        visibility: hidden;
+        position: absolute;
+        top: -999px;
+        left: -999px;
+      }
+      .custom-file-btn{
+        border: 2px solid #222;
+        color: #222;
+        background-color: #fff;
+        padding: 4px 20px;
+        border-radius: 2px;
+        font-size: 16px;
+        font-weight: 400;
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: top;
+      }
+      .custom-file-btn.delete-file{
+        border: 2px solid #f44336;
+        color: #f44336;
+        margin-bottom: 3px;
+      }
+        `]
+
 
 })
 export class ImageUploader implements AfterViewInit,OnChanges {

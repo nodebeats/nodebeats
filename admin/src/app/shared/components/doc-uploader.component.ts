@@ -15,15 +15,45 @@ import {FormControlMessages} from "./control-valdation-message.component";
 
 @Component({
   selector: 'doc-uploader',
-  template: ` <label class="lbl-file-name" *ngIf="fileName">{{fileName}}</label>
-                    <a *ngIf="fileName && isValidFile" href="javascript:void(0)" (click)="onDeleteFile()">
-                    <i class="fa fa-trash" aria-hidden="true"></i></a>
-                    <div class="clearfix"></div>
-                    <input type="file" class="inputfile" id="file" #inputFile (change)="onFileSelect($event)">
-                    <label for="file"><i class="fa fa-upload" aria-hidden="true"> {{fileName?fileName:"Choose a File..."}}</i></label>
-                     <div class="error-msg" *ngIf="!isValidFile ">*Supported Extension : {{allowedExtMessage}} and max size : {{allowedSize}} MB</div>
-                    <control-messages [isSubmitted]="isSubmitted"
-                     [control]="docFormControl"></control-messages>`
+template: ` <a class="custom-file-btn delete-file" *ngIf="fileName && isValidFile" href="javascript:void(0)" (click)="onDeleteFile()">
+            <i class="fa fa-trash" aria-hidden="true"></i> Remove Current File</a>
+            <div class="custom-file-wrap">
+              <input type="file" class="custom-file-input" id="file" #inputFile (change)="onFileSelect($event)">
+              <label class="custom-file-btn" for="file"><i class="fa fa-upload" aria-hidden="true"> {{fileName?fileName:"Choose a File..."}}</i></label>
+            </div>
+            <div class="error-msg" *ngIf="!isValidFile ">*Supported Extension : {{allowedExtMessage}} and max size : {{allowedSize}} MB</div>
+            <control-messages [isSubmitted]="isSubmitted" [control]="docFormControl"></control-messages>`,
+  styles: [`
+      .custom-file-wrap{
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        vertical-align: top;
+      }
+      .custom-file-input{
+        visibility: hidden;
+        position: absolute;
+        top: -999px;
+        left: -999px;
+      }
+      .custom-file-btn{
+        border: 2px solid #222;
+        color: #222;
+        background-color: #fff;
+        padding: 4px 20px;
+        border-radius: 2px;
+        font-size: 16px;
+        font-weight: 400;
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: top;
+      }
+      .custom-file-btn.delete-file{
+        border: 2px solid #f44336;
+        color: #f44336;
+        margin-bottom: 3px;
+      }
+        `]
 
 })
 export class DocumentUploader implements OnInit,OnChanges {

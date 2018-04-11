@@ -15,7 +15,6 @@
       <mat-header-cell class="symbol-no" *matHeaderCellDef> SN </mat-header-cell>
       <mat-cell class="symbol-no" *matCellDef="let element let i=index"> {{i+1}} </mat-cell>
     </ng-container>
-
     <ng-container matColumnDef="News Title">
       <mat-header-cell *matHeaderCellDef> News Title </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.newsTitle}} </mat-cell>
@@ -25,7 +24,6 @@
       <mat-header-cell *matHeaderCellDef>News Author</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.newsAuthor}} </mat-cell>
     </ng-container>
-
     <ng-container matColumnDef="Active">
       <mat-header-cell class="text-center" *matHeaderCellDef>Active</mat-header-cell>
       <mat-cell class="text-center" *matCellDef="let element" [ngSwitch]="element.active">
@@ -33,10 +31,9 @@
         <i *ngSwitchCase="false" class="fa red fa-times" aria-hidden="true"></i>
       </mat-cell>
     </ng-container>
-
     <ng-container matColumnDef="Actions">
-      <mat-header-cell class="text-center" *matHeaderCellDef>Actions</mat-header-cell>
-      <mat-cell class="text-center" *matCellDef="let element">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell class="nb-icon-cell" *matCellDef="let element">
         <button mat-mini-fab class="material-icon-sm" color="primary" (click)="edit(element._id)">
           <i class="far fa-edit"></i>
         </button>

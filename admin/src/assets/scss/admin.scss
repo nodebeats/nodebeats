@@ -102,11 +102,22 @@ h1.nb-heading-one {
     padding: 0;
   }
   &.btn-green {
-    background-color: #3eb34d;
+    background-color: #009688;
   }
   &.btn-yellow{
-    background-color: #fcdc28;
+    background-color: #d58512;
   }
+  &.btn-info{
+    background-color: #5bc0de;
+  }
+  &.btn-orange{
+    background-color: #ef6C00;
+  }
+}
+.nb-label-md{
+  font-size: 16px;
+  font-weight: 700px;
+  margin-bottom: 15px;
 }
 
 .mat-cell.nb-icon-cell,

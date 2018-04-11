@@ -23,6 +23,7 @@ export class ContactListComponent implements OnInit {
   currentPage:number = 1;
   totalItems:number = 1;
   /* End Pagination */
+  preIndex: number = 0;
 
   ngOnInit() {
     this.getContactList();
@@ -45,6 +46,7 @@ export class ContactListComponent implements OnInit {
     this.objResponse = objRes;
     this.dataSource = new MatTableDataSource(this.objResponse.dataList);        
     this.totalItems = objRes.totalItems;
+    this.preIndex = (this.perPage * (this.currentPage - 1));
   }
 
   changeDateFormat(data:string) {
