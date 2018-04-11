@@ -11,7 +11,7 @@
     <h1 class="nb-heading-one mr-auto">User Profile</h1>
   </div>
   <!-- /.row -->
-  <nav mat-tab-nav-bar>
+  <nav mat-tab-nav-bar class="mb-4">
     <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" [routerLinkActiveOptions]="{exact: true}" routerLinkActive
       #rla="routerLinkActive" [active]="rla.isActive">
       {{link.label}}

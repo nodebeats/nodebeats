@@ -12,11 +12,9 @@
 </div>
 <!-- /.row -->
 <mat-card class="material-card-sm mt-3">
-  <div class="col-lg-12">
-    <alert [(displayed)]="objAlert.show" [type]="objAlert.type" [closeButton]="objAlert.closeButton">
-      <strong>{{objAlert.title}}!</strong> {{objAlert.message}}
-    </alert>
-  </div>
+  <alert [(displayed)]="objAlert.show" [type]="objAlert.type" [closeButton]="objAlert.closeButton">
+    <strong>{{objAlert.title}}!</strong> {{objAlert.message}}
+  </alert>
   <form role="form" novalidate [formGroup]="orgInfoForm" (ngSubmit)="saveOrgInfo()">
     <div class="mb-3">
       <mat-form-field class="material-input-full">

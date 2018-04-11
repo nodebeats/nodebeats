@@ -10,44 +10,10 @@
   </nav>
   <h1 class="nb-heading-one mr-auto">Token Management</h1>
 </div>
-
-<!-- /.row -->
 <div class="pb-4">
     <button mat-raised-button color="warn" (click)="deleteAllLog()">
       <i class="fa fa-trash"></i> Clear logs</button>
   </div>
-<!-- <table class="tablesorter table table-bordered table-hover table-striped">
-        <thead class="thead-inverse">
-        <tr #colCount>
-          <th>SN</th>
-          <th>User ID</th>
-          <th>IP Address</th>
-          <th>Expires On</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody *ngIf="objResponse?.length>0">
-        <tr *ngFor="let obj of objResponse let i=index">
-          <td>{{preIndex+(i+1)}}</td>
-          <td>{{obj.userId}}</td>
-          <td>{{obj.ipAddress}}</td>
-          <td>{{changeDateFormat(obj.expiresOn)}}</td>
-          <td class="action">
-            <a class="fa fa-eye" (click)="showDetail(i)" data-target="#tokenModal" data-toggle="modal" title="View"
-               href="javascript:void(0)"></a>
-
-            <a *ngIf="obj.authorizationToken!=currentToken" class="fa fa-trash red-hover" title="delete"
-               (click)="deleteLogById(obj._id)"
-               href="javascript:void(0)"></a>
-          </td>
-        </tr>
-        </tbody>
-        <tbody *ngIf="objResponse?.length==0">
-        <tr>
-          <td [attr.colspan]="colCount.children.length">No Record Found</td>
-        </tr>
-        </tbody>
-      </table> -->
 <mat-card class="nb-dashboard-table">
   <div class="table-responsive">
     <mat-table #table [dataSource]="dataSource">
@@ -70,8 +36,8 @@
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="Actions">
-        <mat-header-cell class="text-center" *matHeaderCellDef>Actions</mat-header-cell>
-        <mat-cell class="nb-icon-cell" class="text-center" *matCellDef="let element let i=index">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell class="nb-icon-cell"*matCellDef="let element let i=index">
           <button mat-mini-fab class="material-icon-sm" color="primary" (click)="showDetail(i)" data-target="#tokenModal" data-toggle="modal">
             <i class="fa fa-eye"></i>
           </button>

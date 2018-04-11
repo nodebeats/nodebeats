@@ -20,7 +20,7 @@
     <mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="SN">
         <mat-header-cell class="symbol-no" *matHeaderCellDef>SN</mat-header-cell>
-        <mat-cell class="symbol-no" *matCellDef="let element let i=index"> {{i+1}} </mat-cell>
+        <mat-cell class="symbol-no" *matCellDef="let element let i=index"> {{preIndex+(i+1)}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="Partner Name">
         <mat-header-cell *matHeaderCellDef> Partner Name </mat-header-cell>

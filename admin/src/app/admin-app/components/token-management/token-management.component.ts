@@ -26,7 +26,7 @@ export class TokenManagementComponent implements OnInit {
   currentPage: number = 1;
   totalPage: number = 1;
   first: number = 0;
-  preIndex: number = 1;
+  preIndex: number = 0;
   totalItem: number = 0;
   /* End Pagination */
   currentToken: string = Config.getAuthToken();
@@ -60,6 +60,7 @@ export class TokenManagementComponent implements OnInit {
     this.objResponse = objRes;
     this.dataSource = new MatTableDataSource(this.objResponse);          
     this.totalItem = objRes.length;
+    this.preIndex = (this.perPage * (this.currentPage - 1));
   }
 
   showDetail(logIndex: string) {

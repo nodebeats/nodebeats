@@ -1,13 +1,4 @@
-<div class="d-flex flex-row-reverse">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb nb-breadcrumb">
-            <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">User Editor</li>
-        </ol>
-    </nav>
-    <h1 class="nb-heading-one mr-auto">User Editor</h1>
-</div>
-<mat-card class="material-card-sm mt-3">
+<mat-card class="material-card-sm">
   <form role="form" novalidate [formGroup]="userForm" (ngSubmit)="saveUser()">
     <div class="mb-3">
       <mat-form-field class="material-input-full">

@@ -22,7 +22,7 @@ export class EmailTemplateListComponent implements OnInit {
   currentPage:number = 1;
   totalItems:number = 1;
   bindSort:boolean = false;
-  preIndex:number = 1;
+  preIndex:number = 0;
   /* End Pagination */
 
   ngOnInit() {
@@ -48,6 +48,7 @@ export class EmailTemplateListComponent implements OnInit {
     this.objResponse = objRes;
     this.dataSource = new MatTableDataSource(this.objResponse.dataList);        
     this.totalItems = objRes.totalItems;
+    this.preIndex = (this.perPage * (this.currentPage - 1));
   }
 
   addTemplate() {
