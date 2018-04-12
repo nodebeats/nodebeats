@@ -60,6 +60,10 @@
                         </g>
                     </svg>
                 </div>
+                <div *ngIf="showTokenMsg">
+                    <div class="alert alert-danger" *ngIf="tokenResponse && !tokenResponse.status">{{tokenResponse.message}}</div>
+                    <div class="alert alert-success" *ngIf="tokenResponse && tokenResponse.status">{{tokenResponse.message}}</div>                    
+                </div>
                 <div class="card-body" *ngIf="!isValidLogin">
                     <div *ngIf="!tfaEnabled">
                         <div [@slideMsg]="slide" class="alert alert-danger" role="alert" *ngIf="objResponse?.message">{{objResponse.message}}</div>
