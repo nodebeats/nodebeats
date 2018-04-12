@@ -73,17 +73,17 @@ export class EmailServiceComponent implements OnInit {
     this.emailServiceId = objEmail._id;
     this.emailServiceForm.setValue({
       serviceProviderType: objEmail.serviceProviderType,
-      host: objEmail.host,
-      port: objEmail.port,
-      authUserName: objEmail.authUserName,
-      authPassword: objEmail.authPassword,
-      pool: objEmail.pool,
-      api_Key: objEmail.api_Key,
-      api_Secret: objEmail.api_Secret,
-      api_User: objEmail.api_User,
-      domain: objEmail.domain,
+      host: objEmail.host ? objEmail.host : '',
+      port: objEmail.port ? objEmail.port : '',
+      authUserName: objEmail.authUserName ? objEmail.authUserName : '',
+      authPassword: objEmail.authPassword ? objEmail.authPassword : '',
+      pool: objEmail.pool ? objEmail.pool : '',
+      api_Key: objEmail.api_Key ? objEmail.api_Key : '',
+      api_Secret: objEmail.api_Secret ? objEmail.api_Secret : '',
+      api_User: objEmail.api_User ? objEmail.api_User : '',
+      domain: objEmail.domain ? objEmail.domain : '',
       rateLimit: objEmail.rateLimit,
-      secure: objEmail.secure
+      secure: objEmail.secure ? objEmail.secure : ''
     });
   }
 
