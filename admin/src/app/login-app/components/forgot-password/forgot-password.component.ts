@@ -56,6 +56,8 @@ export class ForgotPasswordComponent {
   }
 
   handleSuccessResponse(res: any) {
+    // this.forgotPasswordForm.reset();
+    // this.isSubmitted = false;
     this.objResponse = res.message;
     this.alertClass = "alert-success";
     this.slide = "expand";
