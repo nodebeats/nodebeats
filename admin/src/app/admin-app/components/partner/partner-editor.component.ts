@@ -101,7 +101,7 @@ export class PartnerEditorComponent implements OnInit,AfterViewInit {
 
   resStatusMessage(objSave: any) {
     Swal("Success !", objSave.message, "success")
-    this.location.back();
+    this.triggerCancelForm();
   }
 
   triggerCancelForm() {

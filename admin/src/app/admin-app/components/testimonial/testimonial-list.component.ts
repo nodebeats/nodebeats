@@ -51,11 +51,11 @@ export class TestimonialComponent implements OnInit {
   }
 
   edit(testimonialId: string) {
-    this.router.navigate(["/testimonial/editor", testimonialId]);
+    this.router.navigate(["/admin/testimonial/editor", testimonialId]);
   }
 
   addTestimonial() {
-    this.router.navigate(["/testimonial/editor"]);
+    this.router.navigate(["/admin/testimonial/editor"]);
   }
 
   delete(id: string) {

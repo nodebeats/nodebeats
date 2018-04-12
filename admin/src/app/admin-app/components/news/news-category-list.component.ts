@@ -38,11 +38,11 @@ export class NewsCategoryListComponent implements OnInit {
     }
 
     edit(id:string) {
-        this.router.navigate(['/news/category/editor',id]);
+        this.router.navigate(['/admin/news/category/editor',id]);
     }
 
     addCategory() {
-        this.router.navigate(['/news/category/editor']);
+        this.router.navigate(['/admin/news/category/editor']);
     }
 
     delete(id:string) {

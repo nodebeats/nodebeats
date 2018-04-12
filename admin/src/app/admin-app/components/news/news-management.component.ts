@@ -5,7 +5,7 @@ import{Component}from'@angular/core';
     templateUrl: './news-management.html'
 })
 export class NewsManagementComponent {
-    navLinks: any[] = [{label:'News', path: '/news'}, {label: 'NewsCategory', path: '/news/category'}];
+    navLinks: any[] = [{label:'News', path: '/admin/news'}, {label: 'NewsCategory', path: '/admin/news/category'}];
 
     constructor() {
     }

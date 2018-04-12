@@ -40,11 +40,11 @@ export class ImageSliderComponent implements OnInit {
   }
 
   edit(id:string) {
-    this.router.navigate(['/imageslider/editor',id]);
+    this.router.navigate(['/admin/imageslider/editor',id]);
   }
 
   addImage() {
-    this.router.navigate(['/imageslider/editor']);
+    this.router.navigate(['/admin/imageslider/editor']);
   }
 
   delete(id:string) {

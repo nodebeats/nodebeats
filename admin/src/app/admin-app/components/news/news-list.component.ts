@@ -66,15 +66,15 @@ export class NewsListComponent implements OnInit {
     }
 
     addNews() {
-        this.router.navigate(['/news/editor']);
+        this.router.navigate(['/admin/news/editor']);
     }
 
     edit(id:string) {
-        this.router.navigate(['/news/editor',id]);
+        this.router.navigate(['/admin/news/editor',id]);
     }
 
     showImageList(newsId:string) {
-        this.router.navigate(['/news/image',newsId]);
+        this.router.navigate(['/admin/news/image',newsId]);
     }
 
     delete(id:string) {

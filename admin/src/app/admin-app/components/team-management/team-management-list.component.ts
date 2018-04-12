@@ -48,11 +48,11 @@ export class TeamManagementComponent implements OnInit {
     }
 
     edit(memberId: string) {
-        this.router.navigate(['/team/editor', memberId]);
+        this.router.navigate(['/admin/team/editor', memberId]);
     }
 
     addTeamMember() {
-        this.router.navigate(['/team/editor']);
+        this.router.navigate(['/admin/team/editor']);
     }
 
     delete(id: string) {

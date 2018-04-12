@@ -50,11 +50,11 @@ export class NewsImageListComponent implements OnInit {
   }
 
   edit(newsImageId: string) {
-    this.router.navigate(['/news/image/'+ this.newsId +'/editor',newsImageId]);
+    this.router.navigate(['/admin/news/image/'+ this.newsId +'/editor',newsImageId]);
   }
 
   addImage() {
-    this.router.navigate(['/news/image/'+ this.newsId + '/editor']);
+    this.router.navigate(['/admin/news/image/'+ this.newsId + '/editor']);
   }
 
   delete(id: string) {

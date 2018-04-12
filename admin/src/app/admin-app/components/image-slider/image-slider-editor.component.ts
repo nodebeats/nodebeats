@@ -103,7 +103,7 @@ export class ImageSliderEditorComponent implements OnInit,AfterViewInit {
   }
 
   triggerCancelForm() {
-    this.router.navigate(['/imageslider']);
+    this.router.navigate(['/admin/imageslider']);
   }
 
   errorMessage(objResponse: any) {

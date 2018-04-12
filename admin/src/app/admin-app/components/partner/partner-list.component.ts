@@ -47,11 +47,11 @@ export class PartnerComponent implements OnInit {
     }
 
     edit(id:string) {
-        this.router.navigate(['/partner/editor',id]);
+        this.router.navigate(['/admin/partner/editor',id]);
     }
 
     addPartner() {
-        this.router.navigate(['/partner/editor']);
+        this.router.navigate(['/admin/partner/editor']);
     }
 
     delete(id:string) {
