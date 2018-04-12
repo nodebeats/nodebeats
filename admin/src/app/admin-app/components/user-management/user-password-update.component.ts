@@ -66,7 +66,7 @@ export class UserPasswordUpdateComponent {
   }
 
   triggerCancelForm() {
-      this.router.navigate(['/user-management']);
+      this.router.navigate(['/admin/user-management']);
   }
 
 

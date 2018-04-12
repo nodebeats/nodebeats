@@ -4,82 +4,82 @@ export var menuItem = [
     icon: "",
     route: "",
     menuItem: [{
-      route: "/user-management",
+      route: "/admin/user-management",
       title: "User",
       icon: "fas fa-user"
     },
       {
-        route: "/role",
+        route: "/admin/role",
         title: "Role",
         icon: "fas fa-shield-alt"
       },
       {
-        route: "/access",
+        route: "/admin/access",
         title: "Api Access",
         icon: "fas fa-user"
       },
       {
-        route: "/blog",
+        route: "/admin/blog",
         title: "Blog",
         icon: "fas fa-address-book"
       },
       {
-        route: "/contact",
+        route: "/admin/contact",
         title: "Contact List",
         icon: "fas fa-list-alt"
       },
       {
-        route: "/email-template",
+        route: "/admin/email-template",
         title: "Email Template",
         icon: "fas fa-envelope"
       },
       {
-        route: "/event",
+        route: "/admin/event",
         title: "Event Management",
         icon: "fas fa-calendar-alt"
       },
       {
-        route: "/errorlog",
+        route: "/admin/errorlog",
         title: "Error Log",
         icon: "fab fa-stack-overflow"
       },
       {
-        route: "/html",
+        route: "/admin/html",
         title: "Html Content",
         icon: "fab fa-html5"
       },
       {
-        route: "/imagegallery",
+        route: "/admin/imagegallery",
         title: "Image Gallery",
         icon: "fas fa-images"
       },
       {
-        route: "/imageslider",
+        route: "/admin/imageslider",
         title: "Image Slider",
         icon: "fas fa-play"
       },
       {
-        route: "/news",
+        route: "/admin/news",
         title: "News",
         icon: "fas fa-newspaper"
       },
       {
-        route: "/partner",
+        route: "/admin/partner",
         title: "Partners",
         icon: "fas fa-link"
       },
       {
-        route: "/team",
+        route: "/admin/team",
         title: "Team Management",
         icon: "fas fa-users"
       },
       {
-        route: "/testimonial",
+        route: "/admin/testimonial",
         title: "Testimonial",
         icon: "fas fa-comment"
       },
       {
-        route: "/token",
+        route: "/admin/token",
         title: "Token",
         icon: "fas fa-ticket-alt"
       }]
@@ -89,33 +89,33 @@ export var menuItem = [
     route: "",
     icon: "fas fa-wrench",
     menuItem: [{
-      route: "/cloudinary",
+      route: "/admin/cloudinary",
       title: "Cloudinary",
       icon: "fas fa-cloud"
     },
       {
-        route: "/comment",
+        route: "/admin/comment",
         title: "Comments",
         icon: "fas fa-comment-alt"
       },
       {
-        route: "/email-service",
+        route: "/admin/email-service",
         title: "Email Service",
         icon: "fas fa-cogs"
       },
       {
-        route: "/analytics",
+        route: "/admin/analytics",
         title: "Google Analytics",
         icon: "fas fa-chart-bar"
       },
 
       {
-        route: "/googlemap",
+        route: "/admin/googlemap",
         title: "Google Map",
         icon: "fas fa-map-signs"
       },
       {
-        route: "/organization",
+        route: "/admin/organization",
         title: "Org. Information",
         icon: "fas fa-building"
       }

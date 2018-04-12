@@ -18,7 +18,7 @@ export class UserManagementComponent implements OnInit {
     
     constructor(private activatedRoute: ActivatedRoute, private userService: UserService) {
         activatedRoute.params.subscribe(param => this.userId = param['userId']);
-        this.navLinks = [{label:'Security', path: '/user-management/manage/'+this.userId+'/security'}, {label: 'Password', path: '/user-management/manage/'+this.userId+'/password'}];
+        this.navLinks = [{label:'Security', path: '/admin/user-management/manage/'+this.userId+'/security'}, {label: 'Password', path: '/admin/user-management/manage/'+this.userId+'/password'}];
     }
 
     ngOnInit() {

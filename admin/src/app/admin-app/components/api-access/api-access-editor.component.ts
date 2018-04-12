@@ -101,8 +101,8 @@ export class ApiAccessEditorComponent implements OnInit {
   }
 
   resStatusMessage(res: any) {
-    Swal("Success !", res.message, "success");
     this.triggerCancelForm();
+    Swal("Success !", res.message, "success");
   }
 
   errorMessage(objResponse: any) {
@@ -110,6 +110,6 @@ export class ApiAccessEditorComponent implements OnInit {
   }
 
   triggerCancelForm() {
-    this.router.navigate(['/access']);
+    this.router.navigate(['/admin/access']);
   }
 }

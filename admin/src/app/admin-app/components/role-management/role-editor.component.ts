@@ -72,7 +72,7 @@ export class RoleEditorComponent implements OnInit {
     }
 
     resStatusMessage(res:any) {
-        this.router.navigate(['/role']);
+        this.triggerCancelForm();
         Swal("Success !", res.message, "success")
     }
 
@@ -81,7 +81,7 @@ export class RoleEditorComponent implements OnInit {
     }
 
     triggerCancelForm() {
-        this.router.navigate(['/role']);
+        this.router.navigate(['/admin/role']);
     }
 }
 

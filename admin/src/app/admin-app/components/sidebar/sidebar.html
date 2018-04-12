@@ -1,12 +1,12 @@
 <nav class="nb-sidebar-block" [class.minimize]="containerSlide">
-    <a href="/dashboard" class="logo">
+    <a routerLink="/admin/dashboard" class="logo">
         <span class="max">NodeBeats</span>
         <span class=min>NB</span>
     </a>
     <span class="opener" (click)="toggleContainer()">open</span>
     <ul class="list-group" id="nb-sidebar-list">
         <li matTooltip="Dashboard" matTooltipPosition="right" class="list-group-item" >
-            <a routerLinkActive="active" routerLink="/dashboard" class="nb-dashboard-item">
+            <a routerLinkActive="active" routerLink="/admin/dashboard" class="nb-dashboard-item">
                 <i class="fas fa-tachometer-alt"></i>
                 <span class="min">Dashboard</span>
             </a>

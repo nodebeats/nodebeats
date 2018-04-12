@@ -61,19 +61,19 @@ export class UserListComponent implements OnInit {
     }
 
     addUser() {
-        this.router.navigate(['/user-management/editor']);
+        this.router.navigate(['/admin/user-management/editor']);
     }
 
     manage(userId: number) {
-        this.router.navigate(['/user-management/manage', userId]);
+        this.router.navigate(['/admin/user-management/manage', userId]);
     }
 
     showUserDetail(userId:string) {
-        this.router.navigate(['/user-management/detail', userId]);
+        this.router.navigate(['/admin/user-management/detail', userId]);
     }
 
     editUser(userId:string) {
-        this.router.navigate(['/user-management/editor', userId]);
+        this.router.navigate(['/admin/user-management/editor', userId]);
     }
 
     pageChanged(event) {

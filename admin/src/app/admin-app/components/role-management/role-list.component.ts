@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RoleService} from "./role.service";
 import {RoleModel} from "./role.model";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import Swal from 'sweetalert2';
 
@@ -41,11 +41,11 @@ export class RoleComponent implements OnInit {
 
 
   edit(roleId:string) {
-    this.router.navigate(['/role/editor', roleId]);
+    this.router.navigate(['/admin/role/editor', roleId]);
   }
 
   addRole() {
-    this.router.navigate(['/role/editor']);
+    this.router.navigate(['/admin/role/editor']);
   }
 
   delete(id:string) {

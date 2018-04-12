@@ -50,11 +50,11 @@ export class ApiAccessComponent implements OnInit {
   }
 
   edit(id:string) {
-    this.router.navigate(['/access/editor', id]);
+    this.router.navigate(['/admin/access/editor', id]);
   }
 
   addApiAccess() {
-    this.router.navigate(['/access/editor']);
+    this.router.navigate(['/admin/access/editor']);
   }
 
   delete(id:string) {

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   userId: string;
   formImage: string = Config.LoginImage;
   slide: string = "collapse";
-  adminRoute: string = "/dashboard";
+  adminRoute: string = "/admin/dashboard";
   passwordShow: boolean = false;
   viewEye: string = 'fa-eye';
   passwordType: string = 'password';
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
           this.isValidLogin = isValid;
           // let redirectRoute = Config.getAdminRoute();
           let redirectRoute = this.loginService.redirectUrl;
-          this.adminRoute = redirectRoute ? redirectRoute : "/dashboard";
+          this.adminRoute = redirectRoute ? redirectRoute : "/admin/dashboard";
         },
         error => this.handleError(error)
       );
@@ -104,7 +104,7 @@ export class LoginComponent implements OnInit {
 
   forwardAfterSuccess(token: string, userInfo: UserModel, tokenExpiryDate:string) {
     Config.setLoggedInToken(token, userInfo, tokenExpiryDate);
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/admin/dashboard']);
   }
 
   onVerifyTfa() {

@@ -85,7 +85,7 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   triggerCancelForm() {
-    this.router.navigate(['/user-management']);
+    this.router.navigate(['/admin/user-management']);
   }
 
   /*Image handler */

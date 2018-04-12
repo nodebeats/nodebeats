@@ -7,7 +7,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
                     <h1>404</h1>
                     <h2>ooops, something went wrong</h2>
                     <div class="more_w3ls">
-                        <a  href="/admin" title="Go To Dashboard">Go To Dashboard</a>
+                        <a routerLink="/admin" title="Go To Dashboard">Go To Dashboard</a>
                     </div>
                 
                 </div>`,

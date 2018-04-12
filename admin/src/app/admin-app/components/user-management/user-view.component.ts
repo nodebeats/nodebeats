@@ -45,11 +45,11 @@ export class UserViewComponent implements OnInit {
   }
 
   triggerCancelView() {
-    this.router.navigate(['/user-management']);
+    this.router.navigate(['/admin/user-management']);
   }
 
   triggerEdit() {
-    this.router.navigate(['/user-management/editor', this.userId]);
+    this.router.navigate(['/admin/user-management/editor', this.userId]);
   }
 
 

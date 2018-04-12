@@ -43,9 +43,7 @@ export class UserSecurityUpdateComponent {
     updateSecurity() {
         this.isSubmitted = true;
         this.objUserSecurity._id = this.userId;
-        console.log("outside valid", this.objUserSecurity);
         if (this.userSecurityForm.valid) {
-        console.log("inside valid", this.objUserSecurity);            
             this._objUserService.updateSecurityQuestion(this.objUserSecurity)
                 .subscribe(res => this.successStatusMessage(res),
                     error => this.errorMessage);
@@ -62,7 +60,7 @@ export class UserSecurityUpdateComponent {
     }
 
     triggerCancelForm() {
-      this.router.navigate(['/user-management']);
+      this.router.navigate(['/admin/user-management']);
     }
 }
 
