@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
   passwordShow: boolean = false;
   viewEye: string = 'fa-eye';
   passwordType: string = 'password';
+  showTokenMsg: boolean = false;
+  tokenResponse: any;
 
   constructor(private form: FormBuilder, private loginService: LoginService, private router: Router) {
     this.username = new FormControl('', Validators.required);
@@ -53,6 +55,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.verificationResponse !== undefined){
+      this.showTokenMsg = true;
+      const verificationResponse = JSON.parse(localStorage.getItem('verificationResponse'));
+      this.tokenResponse = verificationResponse;
+    }
     if (Config.getAuthToken()) {
       this.isValidLogin = true;
       // this.checkValidLogin();
@@ -92,6 +99,7 @@ export class LoginComponent implements OnInit {
       }
       else {
         this.forwardAfterSuccess(res.token, res.userInfo, res.tokenExpiryDate);
+        localStorage.removeItem('verificationResponse');
       }
     }
     else {

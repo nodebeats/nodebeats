@@ -24,7 +24,7 @@ export class VerifyUserComponent implements OnInit{
     }
 
     bindStatus(res: any) {
-        localStorage.setItem("Verification Response", res);
+        localStorage.setItem("verificationResponse", JSON.stringify(res));
         this.router.navigate(['/login']);
     }
 }
