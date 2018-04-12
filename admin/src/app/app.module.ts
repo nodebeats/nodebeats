@@ -15,6 +15,7 @@ import {ForgotPasswordComponent} from "./login-app/components/forgot-password/fo
 import {PageNotFoundComponent} from "./shared/components/page-not-found/page-not-found";
 import {AppRoutingModule} from "./app.route";
 import {loginAppRoutingModule} from "./login-app/login-app.route";
+import { VerifyUserComponent } from './login-app/components/verifyUser.component';
 @NgModule({
   imports: [BrowserModule,
     BrowserAnimationsModule,
@@ -26,7 +27,9 @@ import {loginAppRoutingModule} from "./login-app/login-app.route";
     LoginAppComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    PageNotFoundComponent],
+    PageNotFoundComponent,
+    VerifyUserComponent
+  ],
   bootstrap: [AppComponent]
 })
 

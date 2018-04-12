@@ -8,11 +8,14 @@ import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/do';
 import {API_URL} from '../../../shared/configs/env.config';
 import{Config}from '../../../shared/configs/general.config';
+
 @Injectable()
+
 export class LoginService {
   private _loginUrl: string = API_URL + 'login';  // URL to web api
   private _checkLoginUrl: string = API_URL + "authenticate"; // URL to web api
   private _tfaVerificationApi: string = API_URL + "two-factor-auth-validate";
+  private _verifyApi: string = API_URL + 'confirm/user';
   loggedIn: boolean = false;
   // store the URL so we can redirect after logging in
   redirectUrl: string;
@@ -60,6 +63,12 @@ export class LoginService {
       });
     // .catch(this.handleError);
   };
+
+  verifyUser(token: string): Observable<any> {
+    return this.http.get(this._verifyApi + '/' + token)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
 
   logout() {
     Config.clearToken();

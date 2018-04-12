@@ -39,13 +39,6 @@ export class LoginComponent implements OnInit {
   viewEye: string = 'fa-eye';
   passwordType: string = 'password';
 
-  ngOnInit() {
-    if (Config.getAuthToken()) {
-      this.isValidLogin = true;
-      // this.checkValidLogin();
-    }
-  }
-
   constructor(private form: FormBuilder, private loginService: LoginService, private router: Router) {
     this.username = new FormControl('', Validators.required);
     this.password = new FormControl('', Validators.required);
@@ -54,11 +47,16 @@ export class LoginComponent implements OnInit {
       username: this.username,
       password: this.password
     });
-
     this.tfaForm = form.group({
       token: this.token
     });
+  }
 
+  ngOnInit() {
+    if (Config.getAuthToken()) {
+      this.isValidLogin = true;
+      // this.checkValidLogin();
+    }
   }
 
   checkValidLogin() {

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Output, Input, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "./user.service";
 import {UserSettingModel, UserModel} from "./user.model";
 import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
@@ -19,6 +19,8 @@ export class UserSettingComponent implements OnInit {
   isSubmitted:boolean = false;
   qrCodePath:string = "M0 0 L0 0 L0 0 Z";
   tfaChecked:boolean = false;
+
+  @ViewChild('tfaEnable') tfaEnable;
 
   constructor(private location: Location, private _objUserService:UserService, private _formBuilder:FormBuilder) {
     let userInfo: UserModel = JSON.parse(Config.getUserInfoToken());
@@ -99,6 +101,7 @@ export class UserSettingComponent implements OnInit {
                 });
           } else {
             this.tfaChecked = true;
+            this.tfaEnable.checked = true;
             Swal("Cancelled", "Your imaginary file is safe :)", "error");
           }
         });

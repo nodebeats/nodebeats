@@ -18,7 +18,6 @@ export const UserProfileRoute: Routes = [
         {path: 'setting', component: UserSettingComponent, data: {breadcrumb: 'User Profile Setting'}}
     ]
   }
-   
 ];
 
 @NgModule({
