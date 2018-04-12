@@ -146,7 +146,7 @@ export class EventEditorComponent implements OnInit,AfterViewInit {
   }
 
   triggerCancelForm() {
-    this.router.navigate(['/event']);
+    this.router.navigate(['/admin/event']);
   }
 
   errorMessage(objResponse: any) {

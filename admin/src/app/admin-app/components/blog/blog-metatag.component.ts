@@ -72,7 +72,7 @@ export class BlogMetaTagEditorComponent implements OnInit {
     }
 
     resStatusMessage(res:any){ 
-        this.router.navigate(['/blog']);    
+        this.triggerCancelForm();    
         Swal("Success !", res.message, "success")
     }
 
@@ -81,7 +81,7 @@ export class BlogMetaTagEditorComponent implements OnInit {
     }
 
     triggerCancelForm() {
-        this.router.navigate(['/blog']);
+        this.router.navigate(['/admin/blog']);
     }
 }
 

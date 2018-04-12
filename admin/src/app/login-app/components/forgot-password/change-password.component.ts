@@ -11,17 +11,24 @@ import { ValidationService } from '../../../shared/services/validation.service';
 })
 
 export class ChangePasswordComponent implements OnInit{
-    passwordType: string = 'password';
-    confirmPasswordType: string = 'password';
     verifyToken: string;
-
+    allowChange: boolean = false;
     changePasswordForm: FormGroup;
+    message: string = '';
+    passwordType: string = 'password';
+    viewPassEye: string = 'fa-eye';
+    passShow: boolean = false;
 
+    viewConfirmPassEye: string = 'fa-eye';
+    confirmPasswordType: string = 'password';
+    confirmPassShow: boolean = false;
+    
     constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private forgotPasswordService: ForgotPasswordService) {
         activatedRoute.params.subscribe(param => this.verifyToken = param['token']);
     }
     
     ngOnInit() {
+        this.checkPasswordChangeStatus();
         this.changePasswordForm = this.fb.group({
             "password": ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
             "confirmPassword": ['', Validators.required]
@@ -32,8 +39,51 @@ export class ChangePasswordComponent implements OnInit{
     );
     }
 
+    checkPasswordChangeStatus() {
+        this.forgotPasswordService.checkChangePasswordStatus(this.verifyToken)
+            .subscribe(res => this.bindStatus(res));
+    }
+
+    bindStatus(res: any) {
+        this.allowChange = res.status;
+        this.message = res.message ? res.message : '';
+    }
+
     onSubmit() {
-        this.forgotPasswordService.changePassword(this.changePasswordForm.value, this.verifyToken)
-            .subscribe(res => console.log(res.json()))
+        this.forgotPasswordService.saveNewPassword(this.changePasswordForm.value, this.verifyToken)
+            .subscribe(res => this.showResMessage(res),
+            error => this.showErrorMessage(error))
+    }
+
+    showResMessage(res: any) {
+        console.log(res);
+    }
+
+    showErrorMessage(error: any) {
+        console.log(error);
+    }
+
+    showPass(){
+        this.passShow= !this.passShow;
+        if(this.passShow) {
+          this.passwordType = 'text';
+          this.viewPassEye = 'fa-eye-slash';
+        }
+        else{
+          this.passwordType = 'password';
+          this.viewPassEye = 'fa-eye';
+        }
+    }
+
+    showConfirmPass() {
+        this.confirmPassShow= !this.confirmPassShow;
+        if(this.confirmPassShow) {
+          this.confirmPasswordType = 'text';
+          this.viewConfirmPassEye = 'fa-eye-slash';
+        }
+        else{
+          this.confirmPasswordType = 'password';
+          this.viewConfirmPassEye = 'fa-eye';
+        }
     }
 }

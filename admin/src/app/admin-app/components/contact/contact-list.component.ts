@@ -87,7 +87,7 @@ export class ContactListComponent implements OnInit {
   }
 
   showDetail(id:string) {
-    this.router.navigate(['/contact/detail', id]);
+    this.router.navigate(['/admin/contact/detail', id]);
   }
 
   pageChanged(event) {

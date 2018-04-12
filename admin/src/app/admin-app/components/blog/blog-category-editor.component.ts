@@ -55,7 +55,7 @@ export class BlogCategoryEditorComponent implements OnInit {
 
     resStatusMessage(res:any) {
         Swal("Success !", res.message, "success");
-        this.router.navigate(['/blog/category']);
+        this.triggerCancelForm();
     }
 
     errorMessage(objResponse:any) {
@@ -63,7 +63,7 @@ export class BlogCategoryEditorComponent implements OnInit {
     }
 
     triggerCancelForm() {
-        this.router.navigate(['/blog/category']);
+        this.router.navigate(['/admin/blog/category']);
     }
 }
 

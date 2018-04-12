@@ -71,7 +71,7 @@ export class ImageAlbumEditorComponent implements OnInit {
   }
 
   triggerCancelForm() {
-    this.router.navigate(['/imagegallery/album']);
+    this.router.navigate(['/admin/imagegallery/album']);
   }
 }
 

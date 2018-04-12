@@ -74,7 +74,7 @@ export class HtmlContentEditorComponent implements OnInit {
     }
 
     triggerCancelForm() {
-        this.router.navigate(['/html']);
+        this.router.navigate(['/admin/html']);
     }
 
     errorMessage(objResponse:any) {

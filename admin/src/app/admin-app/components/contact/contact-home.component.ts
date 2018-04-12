@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
     <div class="d-flex flex-row-reverse">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb nb-breadcrumb">
-                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+                <li class="breadcrumb-item"><a [routerLink]="['/admin/dashboard']">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Contact List</li>
             </ol>
         </nav>

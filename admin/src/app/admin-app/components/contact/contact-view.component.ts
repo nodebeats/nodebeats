@@ -34,8 +34,8 @@ export class ContactViewComponent implements OnInit {
     this.objContact = objContact;
   }
 
-  triggerCancelView(event?: Event) {
-    this.router.navigate(['/contact']);
+  triggerCancelView() {
+    this.router.navigate(['/admin/contact']);
   }
 }
 

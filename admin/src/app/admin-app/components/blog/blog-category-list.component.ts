@@ -51,11 +51,11 @@ export class BlogCategoryListComponent implements OnInit {
   }
 
   edit(id: string) {
-    this.router.navigate(["/blog/category/editor", id]);
+    this.router.navigate(["/admin/blog/category/editor", id]);
   }
 
   addCategory() {
-    this.router.navigate(["/blog/category/editor"]);
+    this.router.navigate(["/admin/blog/category/editor"]);
   }
 
   delete(id: string) {

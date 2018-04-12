@@ -52,11 +52,11 @@ export class HtmlContentComponent implements OnInit {
     }
 
     edit(id: string) {
-        this.router.navigate(['/html/editor',id]);
+        this.router.navigate(['/admin/html/editor',id]);
     }
 
     addHtml() {
-        this.router.navigate(['/html/editor']);
+        this.router.navigate(['/admin/html/editor']);
     }
 
     delete(id: string) {

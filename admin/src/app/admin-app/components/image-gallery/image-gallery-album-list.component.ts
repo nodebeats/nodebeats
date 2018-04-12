@@ -54,15 +54,15 @@ export class ImageAlbumListComponent implements OnInit {
   }
 
   addImageAlbum() {
-    this.router.navigate(["/imagegallery/album/editor"]);
+    this.router.navigate(["/admin/imagegallery/album/editor"]);
   }
 
   edit(id: string) {
-    this.router.navigate(["/imagegallery/album/editor", id]);
+    this.router.navigate(["/admin/imagegallery/album/editor", id]);
   }
 
   showImageList(albumId: string) {
-    this.router.navigate(["/imagegallery/album/gallery", albumId]);
+    this.router.navigate(["/admin/imagegallery/album/gallery", albumId]);
   }
 
   delete(id: string) {

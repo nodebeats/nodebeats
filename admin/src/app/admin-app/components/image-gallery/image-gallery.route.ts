@@ -7,8 +7,8 @@ import { ImageGalleryComponent} from './image-gallery.component';
 import { Routes,RouterModule } from '@angular/router';
 
 export const ImageGalleryRoute: Routes = [
-    // {path:'', component: ImageGalleryComponent,
-    // children: [
+    {path:'', component: ImageGalleryComponent, data: {breadcrumb: 'Image Gallery'},
+    children: [
       {path: '', redirectTo: 'album', pathMatch: 'full'},
       {path: 'album', component: ImageAlbumListComponent, data: {breadcrumb: 'Image Album List'}},
       {path: 'album/editor', component: ImageAlbumEditorComponent, data: {breadcrumb: 'Image Album Editor'}},      
@@ -16,7 +16,7 @@ export const ImageGalleryRoute: Routes = [
       {path: 'album/gallery/:albumId',component: ImageListComponent, data: {breadcrumb: 'Image Gallery List'}},
       {path: 'album/gallery/:albumId/editor', component: ImageGalleryImageEditorComponent, data: {breadcrumb: 'Image Gallery Editor'}},
       {path: 'album/gallery/:albumId/editor/:imageId', component:ImageGalleryImageEditorComponent, data: {breadcrumb: 'Image Gallery Editor'}}
-    // ]}
+    ]}
   ];
 
 @NgModule({

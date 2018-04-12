@@ -125,7 +125,7 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
   }
 
   resStatusMessage(objSave:any) {
-    this.router.navigate(['/blog']);
+    this.triggerCancelForm();
     Swal("Success !", objSave.message, "success");
   }
 
@@ -135,7 +135,7 @@ export class BlogEditorComponent implements AfterViewInit,OnInit {
   }
 
   triggerCancelForm() {
-    this.router.navigate(['/blog']);
+    this.router.navigate(['/admin/blog']);
   }
 
   errorMessage(objResponse:any) {

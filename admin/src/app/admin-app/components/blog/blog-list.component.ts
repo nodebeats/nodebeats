@@ -66,19 +66,19 @@ export class BlogListComponent implements OnInit {
   }
 
   addBlog() {
-    this.router.navigate(['/blog/editor']);
+    this.router.navigate(['/admin/blog/editor']);
   }
 
   edit(id:string) {
-    this.router.navigate(['/blog/editor', id]);
+    this.router.navigate(['/admin/blog/editor', id]);
   }
 
   showDocList(blogId:string) {
-    this.router.navigate(['/blog/documents', blogId]);
+    this.router.navigate(['/admin/blog/documents', blogId]);
   }
 
   showMetaForm(blogId:string) {
-    this.router.navigate(['/blog/metatag', blogId]);
+    this.router.navigate(['/admin/blog/metatag', blogId]);
   }
 
   delete(id:string) {

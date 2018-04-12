@@ -43,11 +43,11 @@ export class BlogDocListComponent implements OnInit {
   }
 
   edit(id:string) {
-    this.router.navigate(['/blog/documents/'+ this.blogId + '/editor', id]);
+    this.router.navigate(['/admin/blog/documents/'+ this.blogId + '/editor', id]);
   }
 
   addDoc() {
-    this.router.navigate(['/blog/documents/'+ this.blogId + '/editor']);    
+    this.router.navigate(['/admin/blog/documents/'+ this.blogId + '/editor']);    
   }
 
   delete(id:string) {
@@ -74,7 +74,7 @@ export class BlogDocListComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['/blog']);
+    this.router.navigate(['/admin/blog']);
   }
 }
 

@@ -11,7 +11,7 @@ import {API_URL} from '../../../shared/configs/env.config';
 export class ForgotPasswordService {
     private _forgotUrl:string = API_URL + 'change-password/verify';  // URL to web api
     private _changePassUrl: string = API_URL + 'password-change/confirm/';
-
+    private _savePassUrl: string = API_URL + 'change-password/confirm/'
     constructor(private http:Http) {
     }
 
@@ -22,9 +22,15 @@ export class ForgotPasswordService {
             .catch(this.handleError);
     }
 
-    changePassword(objBody: any, token: string): Observable<any> {
-        let body=JSON.stringify(objBody);
-        return this.http.post(this._changePassUrl + token, body)
+    checkChangePasswordStatus(token: string): Observable<any> {
+        return this.http.get(this._changePassUrl + token)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
+    saveNewPassword(objBody: any, token: string) {
+        let body = JSON.stringify(objBody);
+        return this.http.patch(this._savePassUrl + token, body)
             .map(res => res.json())
             .catch(this.handleError);
     }

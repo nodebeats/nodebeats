@@ -9,7 +9,7 @@ import {Component} from '@angular/core';
 })
 
 export class BlogManagementComponent {
-  navLinks: any[] = [{label:'Blog', path: '/blog'}, {label: 'Blog Category', path: '/blog/category'}];  
+  navLinks: any[] = [{label:'Blog', path: '/admin/blog'}, {label: 'Blog Category', path: '/admin/blog/category'}];  
 
   constructor() {
   }

@@ -68,12 +68,12 @@ export class BlogDocEditorComponent implements OnInit {
   }
 
   resStatusMessage(objSave: any) {
-    this.router.navigate(['/blog/documents', this.blogId]);
+    this.triggerCancelForm();
     Swal("Success !", objSave.message, "success");
   }
 
   triggerCancelForm() {
-    this.router.navigate(['/blog/documents', this.blogId]);
+    this.router.navigate(['/admin/blog/documents', this.blogId]);
   }
 
   errorMessage(objResponse: any) {

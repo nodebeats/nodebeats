@@ -59,11 +59,11 @@ export class ImageListComponent implements OnInit {
   }
 
   edit(imageId: string) {
-    this.router.navigate(['/imagegallery/album/gallery/' + this.albumId + '/editor', imageId]);
+    this.router.navigate(['/admin/imagegallery/album/gallery/' + this.albumId + '/editor', imageId]);
   }
 
   addImage() {
-    this.router.navigate(['/imagegallery/album/gallery/' + this.albumId + '/editor']);
+    this.router.navigate(['/admin/imagegallery/album/gallery/' + this.albumId + '/editor']);
   }
 
   delete(imageId: string) {
@@ -91,7 +91,7 @@ export class ImageListComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['/imagegallery/album']); // cancelled true
+    this.router.navigate(['/admin/imagegallery/album']); // cancelled true
   }
 
   changeCoverImage(e) {

@@ -152,6 +152,7 @@ export class LoginComponent implements OnInit {
     this.loginService.logout();
     this.isValidLogin = false;
   }
+  
   showPass(){
     this.passwordShow= !this.passwordShow;
     if(this.passwordShow) {
