@@ -10,20 +10,26 @@ import { BreadCrumb } from './breadcrumb';
 })
 export class BreadcrumbComponent implements OnInit {
     prevUrl: any;
-    breadcrumbs$ = this.router.events
-        .filter(event => event instanceof NavigationEnd)
-        .distinctUntilChanged()
-        .map(event => this.buildBreadCrumb(this.activatedRoute.root.firstChild.firstChild.firstChild.firstChild));
+    breadcrumbs$: any;
+    // = this.router.events
+    //     .distinctUntilChanged()
+    //     .map(event => this.buildBreadCrumb(this.activatedRoute.root.firstChild.firstChild.firstChild.firstChild));
     constructor(private activatedRoute: ActivatedRoute,
                 private router: Router) {
     }
 
     ngOnInit() {
+        this.breadcrumbs$ = this.buildBreadCrumb(this.activatedRoute.root);        
+        this.router.events
+            .subscribe(res => {
+                this.breadcrumbs$ = this.buildBreadCrumb(this.activatedRoute.root);
+            })
     }
 
     buildBreadCrumb(route: ActivatedRoute, url: string = '/',
                     breadcrumbs: Array<BreadCrumb> = []): Array<BreadCrumb> {
-        const label = route.routeConfig ? route.routeConfig.data[ 'breadcrumb' ] : 'Home';
+                        debugger;
+        const label = route.routeConfig ? route.routeConfig.data[ 'breadcrumb' ] : 'Dashboard';
         const path = route.routeConfig ? route.routeConfig.path : '';
         let nextUrl: string;
         if(path != ''){
@@ -42,7 +48,10 @@ export class BreadcrumbComponent implements OnInit {
             }
         }
         else{
-            nextUrl = this.prevUrl;
+            if(label == 'Dashboard')
+                nextUrl = '/';
+            else
+                nextUrl = this.prevUrl;
         }
         const breadcrumb = {
             label: label,
