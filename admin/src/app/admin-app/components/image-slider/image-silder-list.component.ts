@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import {Component, ElementRef, OnInit, Output, Input, EventEmitter} from '@angular/core';
 import {ImageSliderService} from "./image-slider.service";
-import{ImageSliderModel} from "./image-slider.model";
+import {ImageSliderModel} from "./image-slider.model";
 import {ImageSliderEditorComponent}from "./image-slider-editor.component";
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
@@ -35,6 +35,7 @@ export class ImageSliderComponent implements OnInit {
 
   bindList(objRes:ImageSliderModel[]) {
     this.objListResponse = objRes;
+    // this.preIndex = (this.perPage * (this.currentPage - 1));    
     this.dataSource = new MatTableDataSource(this.objListResponse);    
   }
 

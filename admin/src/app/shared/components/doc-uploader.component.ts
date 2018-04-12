@@ -16,7 +16,7 @@ import {FormControlMessages} from "./control-valdation-message.component";
 @Component({
   selector: 'doc-uploader',
 template: ` <a class="custom-file-btn delete-file" *ngIf="fileName && isValidFile" href="javascript:void(0)" (click)="onDeleteFile()">
-            <i class="fa fa-trash" aria-hidden="true"></i> Remove Current File</a>
+            <i class="fa fa-trash" aria-hidden="true"></i> Remove</a>
             <div class="custom-file-wrap">
               <input type="file" class="custom-file-input" id="file" #inputFile (change)="onFileSelect($event)">
               <label class="custom-file-btn" for="file"><i class="fa fa-upload" aria-hidden="true"> {{fileName?fileName:"Choose a File..."}}</i></label>

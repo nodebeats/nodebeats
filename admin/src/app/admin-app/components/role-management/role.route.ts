@@ -5,11 +5,11 @@ import { Routes,RouterModule } from '@angular/router';
 import { RoleHomeComponent } from './role-home.component';
 
 export const RoleRoute: Routes = [
-  {path:'', component: RoleHomeComponent,
+  {path:'', component: RoleHomeComponent, data: {breadcrumb: 'Role Management'},
   children: [
-    {path: '', component: RoleComponent},
-    {path: 'editor', component: RoleEditorComponent},
-    {path: 'editor/:roleId', component: RoleEditorComponent},
+    {path: '', component: RoleComponent, data: {breadcrumb: 'Role List'}},
+    {path: 'editor', component: RoleEditorComponent, data: {breadcrumb: 'Role Editor'}},
+    {path: 'editor/:roleId', component: RoleEditorComponent, data: {breadcrumb: 'Role Editor'}},
   ]}
 ];
 

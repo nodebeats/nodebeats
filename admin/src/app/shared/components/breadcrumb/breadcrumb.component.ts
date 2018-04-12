@@ -9,11 +9,11 @@ import { BreadCrumb } from './breadcrumb';
     encapsulation: ViewEncapsulation.None
 })
 export class BreadcrumbComponent implements OnInit {
+    prevUrl: any;
     breadcrumbs$ = this.router.events
         .filter(event => event instanceof NavigationEnd)
         .distinctUntilChanged()
         .map(event => this.buildBreadCrumb(this.activatedRoute.root.firstChild.firstChild.firstChild.firstChild));
-    // Build your breadcrumb starting with the root route of your current activated route
     constructor(private activatedRoute: ActivatedRoute,
                 private router: Router) {
     }
@@ -21,22 +21,36 @@ export class BreadcrumbComponent implements OnInit {
     ngOnInit() {
     }
 
-    buildBreadCrumb(route: ActivatedRoute, url: string = '',
+    buildBreadCrumb(route: ActivatedRoute, url: string = '/',
                     breadcrumbs: Array<BreadCrumb> = []): Array<BreadCrumb> {
-        // If no routeConfig is avalailable we are on the root path
         const label = route.routeConfig ? route.routeConfig.data[ 'breadcrumb' ] : 'Home';
         const path = route.routeConfig ? route.routeConfig.path : '';
-        // In the routeConfig the complete path is not available,
-        // so we rebuild it each time
-        const nextUrl = `/${url}${path}`;
+        let nextUrl: string;
+        if(path != ''){
+            if(path.indexOf(':')> -1){
+                let keys = Object.keys(route.params["_value"]);
+                let newUrl = path;
+                for(let i in keys){
+                    newUrl = newUrl.replace(':'+keys[i], route.params["value"][keys[i]]);
+                }
+                nextUrl = `${url}${newUrl}/`;
+                this.prevUrl = nextUrl;
+            }
+            else{
+                nextUrl = `${url}${path}/`;
+                this.prevUrl = nextUrl;
+            }
+        }
+        else{
+            nextUrl = this.prevUrl;
+        }
         const breadcrumb = {
             label: label,
             url: nextUrl
         };
+        console.log(breadcrumb)
         const newBreadcrumbs = [ ...breadcrumbs, breadcrumb ];
         if (route.firstChild) {
-            // If we are not on our current path yet,
-            // there will be more children to look after, to build our breadcumb
             return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
         }
         return newBreadcrumbs;

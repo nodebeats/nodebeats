@@ -9,13 +9,13 @@ import { UserSettingComponent } from '../user-management/user-setting.component'
 
 
 export const UserProfileRoute: Routes = [
-  {path:'', component: UserProfileManagementComponent,
+  {path:'', component: UserProfileManagementComponent, data: {breadcrumb: 'User Profile Management'},
     children: [
-        {path: '', component: UserProfileComponent},
-        {path: 'edit/:userId', component: UserEditComponent},
-        {path: 'security', component: UserSecurityUpdateComponent},
-        {path: 'password', component: UserPasswordUpdateComponent},
-        {path: 'setting', component: UserSettingComponent}
+        {path: '', component: UserProfileComponent, data: {breadcrumb: 'User Profile Component'}},
+        {path: 'edit/:userId', component: UserEditComponent, data: {breadcrumb: 'User Profile Editor'}},
+        {path: 'security', component: UserSecurityUpdateComponent, data: {breadcrumb: 'Security'}},
+        {path: 'password', component: UserPasswordUpdateComponent, data: {breadcrumb: 'Password'}},
+        {path: 'setting', component: UserSettingComponent, data: {breadcrumb: 'User Profile Setting'}}
     ]
   }
    

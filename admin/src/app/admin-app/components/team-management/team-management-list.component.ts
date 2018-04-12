@@ -24,7 +24,7 @@ export class TeamManagementComponent implements OnInit {
     totalItems: number = 1;
     preIndex: number = 0;
     /* End Pagination */
-    preIndex : number = 0;
+    
     ngOnInit() {
         this.getTeamMemberList();
     }
@@ -38,7 +38,6 @@ export class TeamManagementComponent implements OnInit {
             .subscribe(objRes => this.bindList(objRes),
                 error => this.errorMessage(error));
     }
-
 
     bindList(objRes: TeamManagementResponse) {
         this.objListResponse = objRes;
