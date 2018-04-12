@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import {Component, ElementRef, OnInit, Output, Input, EventEmitter, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, Output, Input, EventEmitter, ViewChild, ViewChildren} from '@angular/core';
 import {ImageGalleryService} from "./image-gallery.service";
 import {ImageGalleryModel, ImageGalleryResponse} from "./image-gallery.model";
 import{ImageGalleryImageEditorComponent} from "./image-gallery-image-editor.component";
@@ -31,7 +31,8 @@ export class ImageListComponent implements OnInit {
   preIndex: number = 0;
   // /* End Pagination */
 
-
+  @ViewChildren('coverImage') coverImageElement;
+  
   constructor(private router:Router, private activatedRoute: ActivatedRoute, private _objService: ImageGalleryService, private eleRef: ElementRef) {
     activatedRoute.params.subscribe(param => this.albumId=param['albumId']);
   }
@@ -105,7 +106,6 @@ export class ImageListComponent implements OnInit {
       })
       .then((isConfirm)=> {
         if (isConfirm.value) {
-          let prevCoverImageId = this.prevCoverImage ? this.prevCoverImage.nativeElement.value : "";
           let objImage: ImageGalleryModel = new ImageGalleryModel();
           objImage._id = imageId;
           objImage.coverImage = true;
@@ -118,9 +118,10 @@ export class ImageListComponent implements OnInit {
                 Swal("Alert!", error.message, "info");
               });
         } else {
-          let prevCoverImageId = "";
-          if (this.prevCoverImage.nativeElement.value)
-            jQuery('input[name=rdbCoverImage][value=' + this.prevCoverImage.nativeElement.value + ']').prop('checked', true);
+          this.coverImageElement.filter((element: any) => {
+            if(element.value === imageId)
+              element.checked = false;
+          });
         }
       });
 

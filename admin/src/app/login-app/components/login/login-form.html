@@ -90,7 +90,7 @@
                     </div>
                     <form class="generic-form" role="form" novalidate [formGroup]="tfaForm" (ngSubmit)="onVerifyTfa()">
                         <mat-form-field class="full-width">
-                            <input [formControl]="username" matInput placeholder="Enter the token from your authenticator app">
+                            <input [formControl]="token" matInput placeholder="Enter the token from your authenticator app">
                             <mat-error *ngIf="!token.valid &&( token.dirty ||isSubmitted)">
                                 Token from your authenticator app is
                                 <strong>required</strong>
@@ -105,7 +105,7 @@
                     <div class="text-center">
                         <h4>You are already logged In</h4>
                         <p>Please Go to
-                            <a href="/">Home</a>
+                            <a routerLink="/">Home</a>
                         </p>
                         <p>
                             <b>OR</b>

@@ -13,7 +13,7 @@ export class BreadcrumbComponent implements OnInit {
     breadcrumbs$ = this.router.events
         .filter(event => event instanceof NavigationEnd)
         .distinctUntilChanged()
-        .map(event => this.buildBreadCrumb(this.activatedRoute.root.firstChild.firstChild.firstChild.firstChild));
+        .map(event => this.buildBreadCrumb(this.activatedRoute.root));
     constructor(private activatedRoute: ActivatedRoute,
                 private router: Router) {
     }
@@ -23,7 +23,7 @@ export class BreadcrumbComponent implements OnInit {
 
     buildBreadCrumb(route: ActivatedRoute, url: string = '/',
                     breadcrumbs: Array<BreadCrumb> = []): Array<BreadCrumb> {
-        const label = route.routeConfig ? route.routeConfig.data[ 'breadcrumb' ] : 'Home';
+        const label = route.routeConfig ? route.routeConfig.data ? route.routeConfig.data[ 'breadcrumb' ] :'Dashboard' : 'Home';
         const path = route.routeConfig ? route.routeConfig.path : '';
         let nextUrl: string;
         if(path != ''){
@@ -42,7 +42,10 @@ export class BreadcrumbComponent implements OnInit {
             }
         }
         else{
-            nextUrl = this.prevUrl;
+            if(this.prevUrl)
+                nextUrl = this.prevUrl;
+            else
+                nextUrl = '/';
         }
         const breadcrumb = {
             label: label,

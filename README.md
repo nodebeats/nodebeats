@@ -9,7 +9,6 @@ Check out the [**Nodebeats Getting Started Guide**](http://www.nodebeats.com/get
 
 ## About
 **Nodebeats** provides following features:
-* Docker configurations to run the application in containers
 * Two factor authentication
 * Token based authentication
 * Role based authorization
@@ -20,7 +19,6 @@ Check out the [**Nodebeats Getting Started Guide**](http://www.nodebeats.com/get
 * Commenting system using Disqus
 * Responsive html template integration
 * And many more features that you will love to have around.
-
 
 
 ## **Usage**

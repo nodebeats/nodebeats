@@ -16,7 +16,7 @@ import {FormControl} from "@angular/forms";
   selector: 'image-uploader',
   template: `<div class="mb-3"><canvas #previewCanvas></canvas></div>
                     <a class="custom-file-btn delete-file" *ngIf="imageName && isValidImage && allowDelete" href="javascript:void(0)" (click)="onDeleteFile()">
-                    <i class="fa fa-trash"aria-hidden="true"></i> Remove Current Image</a>
+                    <i class="fa fa-trash"aria-hidden="true"></i> Remove</a>
                     <div class="custom-file-wrap">
                       <input type="file" class="custom-file-input" id="file" #inputFile (change)="onFileSelect($event)">
                       <label class="custom-file-btn" for="file"><i class="fa fa-upload" aria-hidden="true"></i> {{imageName?imageName:"Choose an Image..."}}</label>

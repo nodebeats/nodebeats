@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import {NewsService} from "./news.service";
 import {NewsImageModel, NewsImageResponse} from "./news.model";
 import {ActivatedRoute,Router} from '@angular/router';
@@ -19,6 +19,8 @@ export class NewsImageListComponent implements OnInit {
   imageId: string;
   displayedColumns = ['SN','Image Title','Active','Cover Image', 'Actions'];
   dataSource:any;
+
+  @ViewChildren('coverImage') coverImageElement;
 
   constructor(private location:Location,private router:Router,private activatedRoute:ActivatedRoute,private _objService: NewsService) {
     activatedRoute.params.subscribe(param=> this.newsId= param['id']);
@@ -86,7 +88,6 @@ export class NewsImageListComponent implements OnInit {
   }
 
   changeCoverImage(args) {
-    console.log(args)
     let newsImageId = args.value;
     Swal({
           title: "Are you sure?",
@@ -98,7 +99,6 @@ export class NewsImageListComponent implements OnInit {
         })
         .then((isConfirm)=> {
           if (isConfirm.value) {
-            // let prevCoverImageId = this.prevCoverImage ? this.prevCoverImage.nativeElement.value : "";
             let objNewsImage: NewsImageModel = new NewsImageModel();
             objNewsImage._id = newsImageId;
             objNewsImage.coverImage = true;
@@ -111,10 +111,10 @@ export class NewsImageListComponent implements OnInit {
                   Swal("Alert!", error.message, "info");
                 })
           } else   {
-            this.previousCoverImageId = "";
-            // let radio_button = document.getElementById('radio'+newsImageId);
-            // console.log(radio_button)
-            args.source._checked = false;
+            this.coverImageElement.filter((element: any) => {
+              if(element.value === newsImageId)
+                element.checked = false;
+            });
           }
         });
   }
