@@ -45,7 +45,6 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule
-    // DropdownModule 
    ],
     declarations: [FadeInDirective, 
       ProcessingDirective,
@@ -55,7 +54,6 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     Alert, 
     TinyEditor,
     BreadcrumbComponent
-    // ACCORDION_PROVIDERS
   ],
   exports: [
     BreadcrumbComponent,

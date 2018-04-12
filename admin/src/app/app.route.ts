@@ -7,10 +7,14 @@ import {AuthGuardService} from "./login-app/auth.guard.service";
 
 const mainRoute: Routes = [
   {
-    path: '',
+    path: 'admin',
     canActivate: [AuthGuardService],
     loadChildren: 'app/admin-app/admin-app.module#AdminAppModule',
     canLoad: [AuthGuardService]
+  },
+  {
+    path: '',
+    loadChildren: 'app/home-app/home-app.module#HomeAppModule',
   },
   {path: '**', component: PageNotFoundComponent}
 ];

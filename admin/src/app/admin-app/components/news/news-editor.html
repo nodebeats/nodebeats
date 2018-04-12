@@ -30,7 +30,8 @@
     </div>
     <div class="mb-3">
       <label>News Description</label>
-      <tiny-editor module="news" [value]="objNews.newsDescription" [editorFormControl]="editorFormControl" (valueChange)="editorValueChange($event)"></tiny-editor>
+      <tiny-editor [isSubmitted]="isSubmitted" module="news" [editorFormControl]="editorFormControl" [value]="objNews.newsDescription"
+       (valueChange)="editorValueChange($event)"></tiny-editor>
     </div>
     <div class="mb-3">
       <mat-form-field class="material-input-full">

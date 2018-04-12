@@ -81,9 +81,11 @@ export class NewsEditorComponent implements AfterViewInit,OnInit {
   }
 
   bindDetail(objRes: NewsModel) {
+    this.objNews.newsDescription = objRes.newsDescription;
     this.imageExtension = objRes.image[0].imageProperties.imageExtension?objRes.image[0].imageProperties.imageExtension: '';
     this.imagePath = objRes.image[0].imageProperties.imagePath?objRes.image[0].imageProperties.imagePath: '';
-    objRes.newsDate = this.changeDateFormat(objRes.newsDate);
+    // objRes.newsDate = this.changeDateFormat(objRes.newsDate);
+    // this.objNews = objRes;
     this.newsForm.patchValue({
       newsTitle: objRes.newsTitle,
       newsSummary: objRes.newsSummary,

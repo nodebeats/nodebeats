@@ -9,7 +9,8 @@ import 'rxjs/add/operator/do';
 import {API_URL} from '../../../shared/configs/env.config';
 @Injectable()
 export class ForgotPasswordService {
-    private _forgotUrl:string = API_URL + '/change-password/verify';  // URL to web api
+    private _forgotUrl:string = API_URL + 'change-password/verify';  // URL to web api
+    private _changePassUrl: string = API_URL + 'password-change/confirm/';
 
     constructor(private http:Http) {
     }
@@ -21,9 +22,14 @@ export class ForgotPasswordService {
             .catch(this.handleError);
     }
 
+    changePassword(objBody: any, token: string): Observable<any> {
+        let body=JSON.stringify(objBody);
+        return this.http.post(this._changePassUrl + token, body)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
     private handleError(error) {
-        // in a real world app, we may send the error to some remote logging infrastructure
-        // instead of just logging it to the console
         console.error(error);
         return Observable.throw(error.json() || 'Server error');
     }
