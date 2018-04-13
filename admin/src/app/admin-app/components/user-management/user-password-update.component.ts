@@ -102,7 +102,7 @@ export class UserPasswordUpdateComponent {
     else this.router.navigate(["/admin/profile/password"]);
   }
 
-  showPass() {
+  showPass() {  //password view
     this.passShow = !this.passShow;
     if (this.passShow) {
       this.passwordType = "text";
