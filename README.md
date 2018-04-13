@@ -30,98 +30,51 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
 ## **Installation**
 * Install Node.js  if not already installed
 
-    * Recommended Node version: >= v5.10.1, latest version is always better
+    * Recommended Node version: >= v6.10, but latest version is always better 
 
+* Install express, gulp, angular-cli and globally in your local development machine
 
-* Install Docker and Docker compose if not already installed **(Currently nodebeats docker configuration doesn't support windows)**
+    * **npm install express gulp angular-cli -g**
 
-    You will have to install these separately. To know more about docker installation process, please follow the following link : [**https://docs.docker.com/engine/installation/**](https://docs.docker.com/engine/installation/) and choose appropriate Operating System platform.
-    
-    To install docker-compose,  please follow the following link [**https://docs.docker.com/compose/install/**](https://docs.docker.com/compose/install/) and select the appropriate Operating System.
-
-    * Recommended Docker version: >= v1.12.5, latest version is always better
-    * Docker-compose version: >= v1.9.0, **Try to install version greater than 1.10**
-    
-    
 * Clone the project repository
 
     * **git clone https://github.com/nodebeats/nodebeats.git**
-    * **cd nodebeats**
 
+* Go to the cloned project's root directory and install all the dependencies required for Node.js
 
-* Install express, gulp, webpack, angular-cli and webpack dev server globally in your local development machine
+    * **cd nodebeats - to direct into the cloned project's root directory**
+    * **npm install or yarn if installed - for installing the dependencies**
 
-    * **npm install express gulp webpack webpack-dev-server angular-cli -g**
+* After the root directory dependencies installation, go to admin directory from the root directory and install all the dependencies required for Angular
 
+    * **cd admin - to direct into the admin directory**
+    * **npm install or yarn if installed - for installing the dependencies**
 
-* Go to the cloned project's root directory and run the following commands to get nodebeats up and running:
+## **Running Application in Development Environment**
 
-    * **docker-compose build**
-    
-            To create docker images from the docker configuration files. This will create four different docker images namely nodebeats-node-dev, nodebeats-node-dev-admin, nodebeats-mongo-dev and nodebeats-redis-dev. 
-            This might take some time to create docker images depending upon the availability of core docker images of node, mongo and redis.
-            
-    * **docker images**
-        
-            To check for docker images. This command will list all the docker images in your system.
-             
-    * **docker ps**
-        
-            To check for active docker containers. This command will list only the active docker containers from your system.
-                                     
-    * **docker ps -a**
-        
-            To check for all the docker containers. This command will list all the docker containers from your system.
-                                 
-    * **docker-compose up**
-        
-            To build and start docker containers from previously created docker images. 
-            This will start the nodebeats application. In the first run, this command will also restore the default databbase for the nodebeats 
-            and start the backend server  and admin server and initializes the mongodb and redis server.
-                             
-    * **docker-compose down**
-        
-            To stop and remove docker containers from your system. If you no longer need the containers, then you can run this command to remove those containers. Otherwise it will eat up the harddisk space.
-                        
-    * **docker volume rm $(docker volume ls -qf dangling=true)**
-        
-            To  remove unwanted volumes associated with unused/deleted docker containers  from your system. 
-                               
-    * **docker rmi $(docker images -f "dangling=true" -q)**
-        
-            To  remove dangling images from your system.
-                                          
-    * **docker inspect <containerID/containerName>**
-        
-            To inspect the running docker containers.            
-                                                  
-    * **docker logs <containerID/containerName>**
-        
-            To see the logs inside of docker containers
-            
-            
-    To know more about docker commands, please go through the docker documentation.
+* **After the successful installation of all the required dependencies, run 'npm start' in both the root and admin directories where the dependencies were installed.**
 
 ## **Running Application in Production Environment**
 
-* **You need to tweak some docker configuration settings to make nodebeats run on production environment. Please go through the docker documentation to apply best practices for production environment.**
+* **To run the application in production environment, first the angular application should be built into static files so that those files could be served from the server.**
 
 
 * **To generate dist files needed to run the application in production environment**
     * To generate deployment package of the admin app for production type, run the following commands:   
         * **cd admin**
         * **npm run build**
-              
+
 ## **Note**
 
-* Browse [**http://localhost:3000**](http://localhost:3000/) if you are in local machine.
+* Browse [**http://localhost:4200**](http://localhost:4200/) if you are in development environment and
+Browse [**http://localhost:3000**](http://localhost:3000/) if you are in production environment.
 
-* To login while in the development environment, navigate to [**http://localhost:4200/login**](http://localhost:4200/login/) and if you are in **production environment**, to login, navigate to [**http://localhost:3000/admin/login**](http://localhost:3000/admin/login/)    and use following application default credentials to access dashboard menu.
+* To login while in the **development environment**, navigate to [**http://localhost:4200/login**](http://localhost:4200/login/) and if you are in **production environment**, to login, navigate to [**http://localhost:3000/login**](http://localhost:3000/login/)    and use following application default credentials to access dashboard menu.
 
 ```
     username: superadmin
 
-    passwor: superadmin@123
+    passwor: adminsuper@123
 ```
 
 ## Test
@@ -161,9 +114,9 @@ So, to run test, first we will have to modify couple of things to make test succ
 
      ```
         cloudinarySettingConfig = {
-            cloudinaryCloudName: "nodebeats",
-            cloudinaryApiKey: "124895ewewd177286781",
-            cloudinaryApiSecret: "HKRL0Ovd46r7iRoxBxAq194niAZBvM"
+            cloudinaryCloudName: "nodebeats-v3",
+            cloudinaryApiKey: "442867842747479",
+            cloudinaryApiSecret: "5eNEbBUJ2My3B9rkwznD7OMi2XM"
         };
      ```
 * The last thing you need to do is modify **email.service.configure.integration.test.js**  file inside of **test/integrationtests/** and replace the existing mail service configuration data with valid data.
@@ -212,7 +165,7 @@ So to get involved, following are the ways that will connect us:
 * Chat with us at [**gitter.im**](https://gitter.im/nodebeats/nodebeats)
 * Follow  [**@Nodebeats**](https://twitter.com/nodebeats) for news and announcements
 * Regarding existing product features and new features, do give us your feedbacks and suggestions at   [**ProductPains**](https://productpains.com/user/nodebeats)
-* Ask any technical question regarding Nodebeats at [**Stackoverflow**](http://stackoverflow.com/questions/tagged/nodebeats) and tagged them **nodebeats**
+* Ask any technical question regarding Nodebeats at [**Stackoverflow**](http://stackoverflow.com/questions/tagged/nodebeats) and tag them **nodebeats**
 * Report the issues at our github repo's [**issue**](https://github.com/nodebeats/nodebeats/issues/) tracker page
 * We have a [**Mailing List**](https://groups.google.com/forum/#!forum/nodebeats). Feel free to join and ask questions.
 
@@ -224,6 +177,13 @@ So do send us your feedbacks and suggestions. You can also email us at **help@no
 
 [**Sandeep Ranjitkar**](https://np.linkedin.com/in/sandeepranjit)
 
+## Contributors
+
+[**Pradeep KC**](https://www.linkedin.com/in/pradypkc/)
+
+[**Abhishek Shrestha**](https://www.linkedin.com/in/avsek-shrestha/)
+
+[**Sanjeev Khapangi Magar**](https://www.linkedin.com/in/sanjeev-magar-623ba7112/)
 
 ## Contributing
 
@@ -261,9 +221,9 @@ As We all know [Wordpress](https://wordpress.com/), one of the most popular Cont
 
 ## Note
 
-With this new release version, we have introduced docker with nodebeats so that installation process is quick and easy and uniform across different platforms.
+With this new release version, we have introduced the latest version of all the dependencies like Angular 5 to name one so that the application will be up-to-date along with the technology.
 
-In the next release, We plan to introduce install setup wizard where you can input some necessary configuration settings. We also plan to deploy the Nodebeats docker image in [dockerhub](https://hub.docker.com/).
+In the next release, We plan to introduce server side rendering for improving the accessibility of the application.
 
 
 ## License
