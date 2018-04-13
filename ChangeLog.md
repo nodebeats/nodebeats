@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0 - Major Release Version] - 2018-04-13
+
+### New Implementation
+- Reactive forms implemented
+- SCSS integrated
+- Angular Material view
+
+### Upgraded
+#### Upgraded to
+- Angular 5
+- Font-Awesome 5
+- Bootstrap 4
+- TinyMCE 4 
+
+### Changed
+- Updated the packages to their latest compatible version.
+- All the unnecesssary packages removed.
+- Added **angular-material** UI components.
+- Code re-factorization as per the packages' version.
 
 ## [2.0 - Major Release Version] - 2017-03-31
 
