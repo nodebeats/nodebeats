@@ -63,6 +63,9 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
     * To generate deployment package of the admin app for production type, run the following commands:   
         * **cd admin**
         * **npm run build**
+    
+    * After the successful build, go to the project's root directory and run the application using the command below:
+        * **NODE_ENV=production npm start or NODE_ENV=production node server.js**
 
 ## **Note**
 
