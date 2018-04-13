@@ -12,7 +12,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Angular Material view
 
 ### Upgraded
-#### Upgraded to
 - Angular 5
 - Font-Awesome 5
 - Bootstrap 4
