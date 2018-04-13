@@ -210,7 +210,7 @@ We will be adding new features regularly, improve the codebase continually and a
 
 ## Project Maturity
 
-Nodebeats is around 10 months old from the start of project inception date. You can use nodebeats cms to create and deploy web applications in the production server.
+Nodebeats is more than 1 year old from the start of project inception date. You can use nodebeats cms to create and deploy web applications in the production server.
 
 
 ## Inspiration
