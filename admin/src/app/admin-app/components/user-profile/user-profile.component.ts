@@ -49,7 +49,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     onShowEdit() {
-        this.router.navigate(['/profile/edit', this.userId]);
+        this.router.navigate(['/admin/profile/edit', this.userId]);
     }
 
 }

@@ -21,7 +21,7 @@ export class UserSecurityUpdateComponent {
     questionlist:string[] = QUESTION_LIST;
 
     constructor(private router: Router, private _objUserService:UserService, private _formBuilder:FormBuilder) {
-        if(router.routerState.snapshot.url.split('/').length>3){
+        if(router.routerState.snapshot.url.split('/').length>4){
             this.userId = router.routerState.snapshot.url.split('/')[4];
             this.showCancel = true;
         }else{
@@ -60,7 +60,10 @@ export class UserSecurityUpdateComponent {
     }
 
     triggerCancelForm() {
-      this.router.navigate(['/admin/user-management']);
+        if(this.showCancel)
+            this.router.navigate(['/admin/user-management']);
+        else
+            this.router.navigate(['/admin/profile/security']);
     }
 }
 

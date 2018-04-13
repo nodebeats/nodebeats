@@ -8,7 +8,7 @@ import{Component, OnInit}from'@angular/core';
     templateUrl: './user-management.html'
 })
 export class UserProfileManagementComponent implements OnInit {
-    navLinks: any[] = [{label:'Profile', path: '/profile'}, {label: 'Security', path: '/profile/security'}, {label: 'Password', path: '/profile/password'}, {label: 'Setting', path: '/profile/setting'}];
+    navLinks: any[] = [{label:'Profile', path: '/admin/profile'}, {label: 'Security', path: '/admin/profile/security'}, {label: 'Password', path: '/admin/profile/password'}, {label: 'Setting', path: '/admin/profile/setting'}];
 
     constructor() {
         

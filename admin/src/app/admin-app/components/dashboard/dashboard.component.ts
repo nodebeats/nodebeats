@@ -345,7 +345,7 @@ export class DashboardComponent implements OnInit,OnDestroy {
   }
 
   errorMessage(objResponse:any) {
-    Swal("Alert !", objResponse.stack, "info");
+    Swal("Alert !", objResponse.message, "info");
   }
 
   authenticateAnalyticsApi(res:DashboardResponseModel) {
