@@ -1,5 +1,5 @@
 # Nodebeats
-![Nodebeats homepage](https://raw.githubusercontent.com/nodebeats/nodebeats/master/homepage_m0guov.jpg)
+![Nodebeats homepage](http://res.cloudinary.com/nodebeatstest/image/upload/v1523617322/nb2-v2.png)
 
 ###### Nodebeats is an Open source Content Management System built using MEAN framework developed by [**Bitsbeat IT Solution**](https://www.bitsbeat.com/).
 
@@ -117,9 +117,9 @@ So, to run test, first we will have to modify couple of things to make test succ
 
      ```
         cloudinarySettingConfig = {
-            cloudinaryCloudName: "nodebeats-v3",
-            cloudinaryApiKey: "442867842747479",
-            cloudinaryApiSecret: "5eNEbBUJ2My3B9rkwznD7OMi2XM"
+            cloudinaryCloudName: "nodebeatstest",
+            cloudinaryApiKey: "455468798113233",
+            cloudinaryApiSecret: "mrYsTL9i0fRiosjLhKbIlRA2nw0"
         };
      ```
 * The last thing you need to do is modify **email.service.configure.integration.test.js**  file inside of **test/integrationtests/** and replace the existing mail service configuration data with valid data.
