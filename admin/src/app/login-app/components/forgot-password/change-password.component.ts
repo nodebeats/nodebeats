@@ -15,6 +15,8 @@ export class ChangePasswordComponent implements OnInit{
     allowChange: boolean = false;
     changePasswordForm: FormGroup;
     message: string = '';
+    alertClass: string = 'alert-danger';
+
     passwordType: string = 'password';
     viewPassEye: string = 'fa-eye';
     passShow: boolean = false;
@@ -51,16 +53,20 @@ export class ChangePasswordComponent implements OnInit{
 
     onSubmit() {
         this.forgotPasswordService.saveNewPassword(this.changePasswordForm.value, this.verifyToken)
-            .subscribe(res => this.showResMessage(res),
-            error => this.showErrorMessage(error))
+            .subscribe(res => this.successResMessage(res),
+            error => this.errorResMessage(error))
     }
 
-    showResMessage(res: any) {
-        console.log(res);
+    successResMessage(res: any) {
+        this.allowChange = false;
+        this.alertClass = "alert-success";
+        this.message = res.message;
     }
 
-    showErrorMessage(error: any) {
-        console.log(error);
+    errorResMessage(error: any) {
+        this.allowChange = true;
+        this.alertClass = "alert-danger";
+        this.message = error.message;
     }
 
     showPass(){
