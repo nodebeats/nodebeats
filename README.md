@@ -1,5 +1,5 @@
 # Nodebeats
-![Nodebeats homepage](http://res.cloudinary.com/nodebeatstest/image/upload/v1523617322/nb2-v2.png)
+![Nodebeats homepage](http://res.cloudinary.com/nodebeats-v3/image/upload/v1523617702/nb2-v2.png)
 
 ###### Nodebeats is an Open source Content Management System built using MEAN framework developed by [**Bitsbeat IT Solution**](https://www.bitsbeat.com/).
 
