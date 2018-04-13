@@ -7,6 +7,5 @@ npm-debug.log
 /atlassian-ide-plugin.xml
 /logs/*
 .vscode
-/public
 yarn-error.log
 /admin/yarn-error.log
