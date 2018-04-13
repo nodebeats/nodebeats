@@ -102,6 +102,4 @@ export class EventService {
         console.log(error.json());
         return Observable.throw(error.json() || 'server error');
     }
-
-
 }

@@ -59,7 +59,7 @@ export class EventComponent implements OnInit {
   }
 
   edit(id: string) {
-    this.router.navigate(["/event/editor", id]);
+    this.router.navigate(["/admin/event/editor", id]);
   }
 
   changeDateFormat(data: string) {
@@ -74,7 +74,7 @@ export class EventComponent implements OnInit {
   }
 
   addEvent() {
-    this.router.navigate(["/event/editor"]);
+    this.router.navigate(["/admin/event/editor"]);
   }
 
   delete(id: string) {

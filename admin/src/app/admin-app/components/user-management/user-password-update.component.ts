@@ -22,7 +22,7 @@ export class UserPasswordUpdateComponent {
 
   constructor(private _objUserService: UserService, private router: Router, private _formBuilder: FormBuilder, private loginService: LoginService) {
     if(router.routerState.snapshot.url.split('/').length>3){
-      this.userId = router.routerState.snapshot.url.split('/')[3];
+      this.userId = router.routerState.snapshot.url.split('/')[4];
       this.showCancel = true;
     }else{
       let userInfo: UserModel = JSON.parse(Config.getUserInfoToken());

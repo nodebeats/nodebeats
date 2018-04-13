@@ -53,7 +53,7 @@
 
     <div class="mb-3">
       <mat-form-field class="material-input-full">
-        <textarea matInput placeholder="Testimonial Content" formControlName="testimonialContent"></textarea>
+        <textarea matInput placeholder="Testimonial Content" matTextareaAutosize matAutosizeMinRows='2' matAutosizeMaxRows='5' formControlName="testimonialContent"></textarea>
         <mat-error>
           <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['testimonialContent']"></control-messages>
         </mat-error>

@@ -16,14 +16,14 @@
 <div class="d-flex mb-3">
   <div class="mr-3">
         <mat-form-field>
-            <input matInput [matDatepicker]="picker" [min]="today" placeholder="Select Start Date" [formControl]="startDate">
+            <input matInput [matDatepicker]="picker" placeholder="Select Start Date" [formControl]="startDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
     </div>
   <div class="mr-3">
     <mat-form-field>
-        <input matInput [matDatepicker]="picker2" [min]="today" placeholder="Select End Date" [formControl]="endDate">
+        <input matInput [matDatepicker]="picker2" placeholder="Select End Date" [formControl]="endDate">
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
@@ -80,7 +80,7 @@
       </mat-paginator>
 </mat-card>
 <div class="modal fade" id="errorModal">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Error Stack</h5>
