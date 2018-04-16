@@ -13,7 +13,7 @@
         <div class="mb-3">
             <mat-form-field class="material-input-full">
                 <mat-select placeholder="Select Roles" formControlName="roleName" multiple>
-                    <mat-option *ngFor="let role of objRoleList" value="{{role.value}}">{{role.value}}</mat-option>
+                    <mat-option *ngFor="let role of objRoleList" [value]="role">{{role}}</mat-option>
                 </mat-select>
                 <mat-error>
                     <control-messages [isSubmitted]="isSubmitted" [control]="apiAccessForm.controls['roleName']"></control-messages>

@@ -31,7 +31,6 @@ export class ApiAccessEditorComponent implements OnInit {
       roleName: ["", Validators.required],
       active: [""]
     });
-    this.objRoleList = [];
   }
 
   ngOnInit() {
@@ -44,8 +43,8 @@ export class ApiAccessEditorComponent implements OnInit {
         let roles = [];
         if (objResList.length > 0) {
           roles = objResList.map(function(objRole) {
-            return { label: objRole.roleName, value: objRole.roleName };
-            //return objRole.roleName;
+            // return { label: objRole.roleName, value: objRole.roleName };
+            return objRole.roleName;
           });
           this.objRoleList = roles;
           this.objSelectedRole = ["superadmin"];
@@ -66,6 +65,7 @@ export class ApiAccessEditorComponent implements OnInit {
   }
 
   bindApiAccess(objApi: ApiAccessModel) {
+    console.log(objApi)
     this.objSelectedRole = objApi.roleName.split(",");
     this.apiAccessForm.setValue({
       routeApi: objApi.routeApi,
@@ -79,8 +79,9 @@ export class ApiAccessEditorComponent implements OnInit {
     if (this.apiAccessForm.valid) {
       let selectedRole: string = "";
       if (this.apiAccessForm.controls["roleName"].value) {
-        selectedRole = this.apiAccessForm.controls["roleName"].value.join(", ");
+        selectedRole = this.apiAccessForm.controls["roleName"].value.join(",");
         this.apiAccessForm.value.roleName = selectedRole;
+        console.log(this.apiAccessForm.value);
       }
       if (!this.accessId) {
         this._objService
