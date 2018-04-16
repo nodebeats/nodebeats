@@ -15,7 +15,7 @@ export class Config {
     /*
      cloudinary is declared in manual typings and script in included in head tag
      */
-    static Cloudinary = cloudinary.Cloudinary.new({cloud_name: "nodebeats-v3-test"}); //change cloud_name for default cloudinary setting
+    static Cloudinary = cloudinary.Cloudinary.new({cloud_name: "nodebeat-v3-test"}); //change cloud_name for default cloudinary setting
     static DefaultAvatar = HOST_URL + "/assets/img/defaults/default_avatar.png";
     static DefaultImage = HOST_URL + "/assets/img/defaults/default_img.png";
     static DefaultWideImage = HOST_URL + "/assets/img/defaults/default_wide_img.png";

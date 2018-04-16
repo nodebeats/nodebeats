@@ -32,7 +32,7 @@ For api documentation, Check out the  [**API Documentation**](http://www.nodebea
 
     * Recommended Node version: >= v6.10, but latest version is always better 
 
-* Install express, gulp, angular-cli and globally in your local development machine
+* Install express, gulp, angular-cli and globally in your local development machine (not mandatory but recommended)
 
     * **npm install express gulp angular-cli -g**
 
@@ -77,12 +77,12 @@ Browse [**http://localhost:3000**](http://localhost:3000/) if you are in product
 ```
     username: superadmin
 
-    passwor: adminsuper@123
+    password: testpassword123
 ```
 
 ## Test
 
-We have written integration tests for much of the functionality for this application. We haven't written any unit tests for this release, but we are planning to write unit tests for much of the functionality in the next release phase. Your contribution in writing unit tests for this application will be hugely appreciated and welcomed.
+We have written integration tests for much of the functionality in this application. We haven't completed writing unit tests, but we are planning to write unit tests for much of the functionality in the next release phase. Your contribution in writing unit tests for this application will be hugely appreciated and welcomed.
 
 So, to run test, first we will have to modify couple of things to make test successfull. So, let's get started:
 
@@ -213,7 +213,7 @@ We will be adding new features regularly, improve the codebase continually and a
 
 ## Project Maturity
 
-Nodebeats is more than 1 year old from the start of project inception date. You can use nodebeats cms to create and deploy web applications in the production server.
+Nodebeats is more than 2 years old from the start of project inception date. You can use nodebeats cms to create and deploy web applications in the production server.
 
 
 ## Inspiration
