@@ -21,12 +21,6 @@ Check out the [**Nodebeats Getting Started Guide**](http://www.nodebeats.com/get
 * And many more features that you will love to have around.
 
 
-## **Usage**
-
-For detailed usage documentation, Check out the [**Nodebeats Getting Started Guide**](http://www.nodebeats.com/getting-started) to start using Nodebeats
-
-For api documentation, Check out the  [**API Documentation**](http://www.nodebeats.com/docs/api/)
-
 ## **Installation**
 * Install Node.js  if not already installed
 
