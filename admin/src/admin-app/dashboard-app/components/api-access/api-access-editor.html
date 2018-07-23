@@ -1,0 +1,34 @@
+<mat-card class="material-card-sm">
+    <form role="form" novalidate [formGroup]="apiAccessForm" (ngSubmit)="saveApiAccess()">
+        
+        <div class="mb-3">
+            <mat-form-field class="material-input-full">
+                <input matInput placeholder="Enter Api Route. eg: /api/news" formControlName="routeApi">
+                <mat-error>
+                    <control-messages [isSubmitted]="isSubmitted" [control]="apiAccessForm.controls['routeApi']"></control-messages>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        
+        <div class="mb-3">
+            <mat-form-field class="material-input-full">
+                <mat-select placeholder="Select Roles" formControlName="roleName" multiple>
+                    <mat-option *ngFor="let role of objRoleList" [value]="role">{{role}}</mat-option>
+                </mat-select>
+                <mat-error>
+                    <control-messages [isSubmitted]="isSubmitted" [control]="apiAccessForm.controls['roleName']"></control-messages>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="mb-3">
+            <mat-checkbox formControlName="active">
+                Active
+            </mat-checkbox>
+        </div>
+        <div class="mb-3">
+            <button mat-raised-button color="primary" type="submit">Save</button>
+            <button mat-raised-button color="warn" type="button" (click)="triggerCancelForm()">Cancel</button>
+        </div>
+    </form>
+</mat-card>
+

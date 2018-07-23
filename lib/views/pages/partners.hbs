@@ -1,0 +1,39 @@
+{{#pagetitle 'page'}}
+    <title>Trusted Partners | {{data.commonData.organizationInfoData.orgName}}</title>
+{{/pagetitle}}
+
+{{#pagetitle 'pagestylesheets'}}
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/owl.theme.css">
+{{/pagetitle}}
+
+
+{{>shared/global-header headerTitle=activePageMenu}}
+
+<section id="partners">
+
+    <div class="container">
+        <div class="row">
+            <div class="row header_partner">
+                <h1>Our Most Trusted Supporting partners</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" data-wow-delay="0.2s">
+                {{#if data.partnerData.length}}
+                    {{>partners/partner className="owl-carousel owl-theme" partners=data.partnerData}}
+                {{else}}
+                    {{>partners/partner className="" partners=data.partnerData}}
+                {{/if}}
+
+            </div>
+        </div>
+    </div>
+    <hr class="divider"/>
+    <div class="clarifix"></div>
+</section>
+
+{{#pagetitle 'pagescripts'}}
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="js/partner.js"></script>
+{{/pagetitle}}

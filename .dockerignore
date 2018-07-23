@@ -1,0 +1,14 @@
+.git
+.gitignore
+node_modules
+npm-debug.log
+.idea
+admin/node_modules
+admin/npm-debug.log
+ChangeLog.md
+code_of_conduct.md
+CONTRIBUTING.md
+LICENSE
+README.md
+cluster.js
+contributors.txt

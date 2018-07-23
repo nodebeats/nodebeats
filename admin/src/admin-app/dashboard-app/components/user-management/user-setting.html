@@ -1,0 +1,30 @@
+<mat-card class="material-card-sm mt-3">
+  <div class="mb-3">
+    <label>Enable Two Factor Authentication</label>
+    <mat-slide-toggle #tfaEnable (change)="toggleEnable($event.checked)" [checked]="tfaEnabled"></mat-slide-toggle>
+</div>
+  <div class="mb-3">
+    <form role="form" fadeInDirective *ngIf="tfaEnable.checked && !tfaEnabled" novalidate [formGroup]="userSettingForm" (ngSubmit)="verifyTotpToken()">
+      <div class="p-3">
+        <label>Scan with any authenticator App</label>
+        <svg height="210" width="400">
+          <path [attr.d]="qrCodePath" style="transform:scale(3.5)"></path>
+        </svg>
+
+      </div>
+      <div class="mb-3">
+        <mat-form-field class="material-input-full">
+          <input matInput type="text" placeholder="Token from authenticator App" [formControl]="userSettingForm.controls['token']">
+          <mat-error>
+            <control-messages [isSubmitted]="isSubmitted" [control]="userSettingForm.controls['token']"></control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-3">
+            <button type="submit" mat-raised-button color="primary">
+              Save</button>
+          </div>
+    </form>
+  </div>
+
+</mat-card>

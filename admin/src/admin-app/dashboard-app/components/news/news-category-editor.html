@@ -1,0 +1,31 @@
+<mat-card class="material-card-sm mt-3">
+  <form role="form" novalidate [formGroup]="newsCategoryForm" (ngSubmit)="saveNewsCategory()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="News Category Name" formControlName="categoryName">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="newsCategoryForm.controls['categoryName']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <textarea matInput placeholder="News Category Description" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"
+          formControlName="categoryDescription"></textarea>
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="newsCategoryForm.controls.categoryDescription"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-checkbox formControlName="active">
+        Active
+      </mat-checkbox>
+    </div>
+    <div class="mb-3">
+      <button mat-raised-button color="primary" type="submit">
+        <i class="fas fa-save"></i> Save</button>
+      <button mat-raised-button color="warn" type="button" (click)="triggerCancelForm()">Cancel</button>
+    </div>
+  </form>
+</mat-card>

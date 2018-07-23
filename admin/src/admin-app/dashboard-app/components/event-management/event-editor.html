@@ -1,0 +1,116 @@
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Event Management</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">Event Management</h1>
+</div>
+<mat-card class="material-card">
+  <form role="form" novalidate [formGroup]="eventForm" (ngSubmit)="saveEvent()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput tabindex="1" type="text" name="eventTitle" placeholder="Event Title" formControlName="eventTitle">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="eventForm.controls['eventTitle']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <textarea matInput tabindex="2" name="eventTitle" placeholder="Event Description" rows="5" formControlName="eventDescription"></textarea>
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="eventForm.controls['eventDescription']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput tabindex="3" type="text" placeholder="Venue" formControlName="venue">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="eventForm.controls['venue']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="d-flex">
+      <div class="mb-3 pr-2">
+        <mat-form-field class="material-input-full">
+          <input matInput [matDatepicker]="picker" [min]="today" placeholder="Event Start date" formControlName="startDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>
+            <control-messages [isSubmitted]="isSubmitted" [control]="eventForm.controls['startDate']"></control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-3 pr-2 ">
+        <mat-form-field class="material-input-xs">
+          <input matInput type="text" placeholder="HH" formControlName="startHour">
+          <mat-error>
+            <control-messages [isSubmitted]="isSubmitted" [control]="eventForm.controls['startHour']"></control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-3 pr-2">
+        <mat-form-field class="material-input-xs">
+          <input matInput type="text" placeholder="MM" formControlName="startMinute">
+          <mat-error>
+            <control-messages [isSubmitted]="isSubmitted" [control]="eventForm.controls['startMinute']"></control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="mb-3 pr-2">
+        <mat-form-field class="material-input-full">
+          <input matInput [matDatepicker]="picker2" [min]="today" placeholder="Event End date" formControlName="endDate">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+          <mat-error>
+            <control-messages [isSubmitted]="isSubmitted" [control]="eventForm.controls['endDate']"></control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-3 pr-2">
+        <mat-form-field class="material-input-xs">
+          <input matInput type="text" placeholder="HH" formControlName="endHour">
+          <mat-error>
+            <control-messages [isSubmitted]="isSubmitted" [control]="eventForm.controls['endHour']"></control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-3 pr-2">
+        <mat-form-field class="material-input-xs">
+          <input matInput type="text" placeholder="MM" formControlName="endMinute">
+          <mat-error>
+            <control-messages [isSubmitted]="isSubmitted" [control]="eventForm.controls['endMinute']"></control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput tabindex="4" name="venueAddress" placeholder="Venue Address" rows="5" formControlName="venueAddress">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="eventForm.controls['venueAddress']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <image-uploader tabindex="7" [canvasSize]="canvasSize" [imageFormControl]="imageFormControl" (deleteImageEvent)="deleteImage($event)"
+        [imageName]="fileName" [drawImagePath]="drawImagePath" [isSubmitted]="isSubmitted" allowDelete="true" (fileSelectedEvent)="changeFile($event)"></image-uploader>
+    </div>
+    <div class="mb-3">
+      <mat-checkbox formControlName="active">
+        Active
+      </mat-checkbox>
+    </div>
+    <div class="mb-3">
+      <button type="submit" mat-raised-button color="primary">Save</button>
+      <button type="button" (click)="triggerCancelForm()" mat-raised-button color="warn">Cancel</button>
+    </div>
+  </form>
+</mat-card>

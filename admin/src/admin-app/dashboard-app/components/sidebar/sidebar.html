@@ -1,0 +1,39 @@
+<nav class="nb-sidebar-block" [class.minimize]="containerSlide">
+    <a routerLink="/dashboard" class="logo">
+        <span class="max">NodeBeats</span>
+        <span class=min>NB</span>
+    </a>
+    <span class="opener" (click)="toggleContainer()">open</span>
+    <ul class="list-group" id="nb-sidebar-list">
+        <li matTooltip="Dashboard" matTooltipPosition="right" class="list-group-item" >
+            <a routerLinkActive="active" routerLink="/dashboard" class="nb-dashboard-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span class="min">Dashboard</span>
+            </a>
+        </li>
+        <ng-template ngFor let-parentMenu let-i=index [ngForOf]="sidebarRoute">
+            <li *ngIf="parentMenu.headerTitle" class="list-group-item">
+                <a class="nb-dashboard-item accordion" data-toggle="collapse" href="#collapse{{i}}">
+                    <i class="{{parentMenu.icon}}"></i>
+                    <span class="min">{{parentMenu.headerTitle}}</span>
+                </a>
+                <ul class="collapse accordion-list" data-parent="#nb-sidebar-list" id="collapse{{i}}">
+                    <li matTooltip="{{menu.title}}" matTooltipPosition="right" *ngFor="let menu of parentMenu.menuItem" class="list-group-item">
+                        <a routerLinkActive="active" [routerLink]="menu.route" class="nb-dashboard-item">
+                            <i class="{{menu.icon}}"></i>
+                            <span class="min">{{menu.title}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <ng-template [ngIf]="!parentMenu.headerTitle">
+                <li matTooltip="{{menu.title}}" matTooltipPosition="right" *ngFor="let menu of parentMenu.menuItem" class="list-group-item">
+                    <a routerLinkActive="active" [routerLink]="menu.route" class="nb-dashboard-item">
+                        <i class="{{menu.icon}}"></i>
+                        <span class="min">{{menu.title}}</span>
+                    </a>
+                </li>
+            </ng-template>
+        </ng-template>
+    </ul>
+</nav>

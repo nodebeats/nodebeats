@@ -1,0 +1,48 @@
+<!-- Page Heading -->
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Comment Settings</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">Comment Settings</h1>
+</div>
+
+<!-- /.row -->
+<mat-card class="material-card-sm">
+  <alert [(displayed)]="objAlert.show" [type]="objAlert.type" [closeButton]="objAlert.closeButton">
+    <strong>{{objAlert.title}}!</strong> {{objAlert.message}}
+  </alert>
+  <form role="form" novalidate [formGroup]="commentSettingForm" (ngSubmit)="saveCommentSetting()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Enter Disqus Username" formControlName="disqusUsername">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="commentSettingForm.controls['disqusUsername']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Enter Disqus URL" formControlName="disqusURL">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="commentSettingForm.controls['disqusURL']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Enter Disqus Api Key" formControlName="disqusApiKey">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="commentSettingForm.controls['disqusApiKey']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </div>
+  </form>
+</mat-card>

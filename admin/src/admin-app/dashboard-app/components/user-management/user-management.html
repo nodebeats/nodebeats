@@ -1,0 +1,43 @@
+<!-- Page Heading -->
+
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">User Management</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">User Management</h1>
+</div>
+
+<!-- /.row -->
+
+<mat-card class="material-card" *ngIf="objUser">
+    <div class="mb-3">
+        <label class="form-control-label"> Name :</label>
+        <label class="form-control-label">{{objUser.firstName}} {{objUser.middleName}} {{objUser.lastName}}
+        </label>
+     
+    </div>
+    <div class="mb-3">
+        <label class="form-control-label">Email :</label>
+        <label class="form-control-label"> {{objUser.email}}</label>
+      
+    </div>
+    <div class="mb-3">
+        <label class="form-control-label">Role :</label>
+        <label class="form-control-label">{{objUser.userRole}}</label>
+      
+    </div>
+</mat-card>
+
+<nav mat-tab-nav-bar *ngIf="navLinks">
+    <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" [routerLinkActiveOptions]="{exact: true}" routerLinkActive
+      #rla="routerLinkActive" [active]="rla.isActive">
+      {{link.label}}
+    </a>
+  </nav>
+  
+  <router-outlet></router-outlet>

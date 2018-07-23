@@ -1,0 +1,13 @@
+<div class="categories widget">
+    <h3 class="widget-head">Blog Category</h3>
+
+    <ul>
+        <li>
+            {{#if categoryObj}}
+                <a href="{{hostUrl}}/filter/category/blogs/{{categoryObj.urlSlogCategory}}">{{categoryObj.categoryName}}</a> <span class="badge">{{count}}</span>
+            {{else}}
+                {{>shared/no-data-found}}
+            {{/if}}
+        </li>
+    </ul>
+</div>

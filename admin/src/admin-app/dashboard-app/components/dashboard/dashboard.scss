@@ -1,0 +1,50 @@
+.nb-home {
+  small {
+    font-size: 12px;
+  }
+}
+.media {
+  background-color: #fff;
+  box-shadow: 0px 0px 8px #e1e1e1;
+  position: relative;
+  .media-link{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  i {
+    font-size: 40px;
+    padding: 20px;
+    color: #fff;
+  }
+  .grn {
+    background-color: #38a348;
+  }
+  .rd {
+    background-color: #c02f1f;
+  }
+  .orange {
+    background-color: #d3870d;
+  }
+  .blue {
+    background-color: #0f84c4;
+  }
+  h5 {
+    font-size: 12px;
+    color: #4c4c4c;
+  }
+  span {
+    font-weight: bold;
+  }
+}
+.chart-card{
+  box-shadow: 0px 0px 8px #e1e1e1;
+  padding: 15px;
+  margin-bottom: 30px;
+  min-height: 300px;
+  h3{
+    font-size: 18px;
+  }
+}

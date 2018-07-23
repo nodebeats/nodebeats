@@ -1,0 +1,35 @@
+<mat-card class="material-card-sm mt-3">
+<form role="form" novalidate [formGroup]="userSecurityForm" (ngSubmit)="updateSecurity()">
+
+  <div class="mb-3">
+
+    <mat-form-field style="width:100%">
+      <mat-select placeholder="Security Question" [(ngModel)]="objUserSecurity.securityQuestion" [formControl]="userSecurityForm.controls['securityQuestion']">
+        <mat-option *ngFor="let question of questionlist" [value]="question">
+          {{question}}
+        </mat-option>
+      </mat-select>
+      <mat-error>
+        <control-messages [isSubmitted]="isSubmitted" [control]="userSecurityForm.controls['securityQuestion']"></control-messages>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+  <div class="mb-3">
+    <mat-form-field class="material-input-full">
+      <input matInput type="text" [(ngModel)]="objUserSecurity.securityAnswer" placeholder="Enter Security Answer" [formControl]="userSecurityForm.controls['securityAnswer']">
+      <mat-error>
+        <control-messages [isSubmitted]="isSubmitted" [control]="userSecurityForm.controls['securityAnswer']"></control-messages>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+    <button type="submit" mat-raised-button color="primary">
+      Save</button>
+    <button type="button" (click)="triggerCancelForm()" mat-raised-button color="warn" *ngIf="showCancel">Cancel
+    </button>
+  </div>
+</form>
+</mat-card>

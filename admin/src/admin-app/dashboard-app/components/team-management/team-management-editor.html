@@ -1,0 +1,102 @@
+<!-- Page Heading -->
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Team Management Editor</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">Team Management Editor</h1>
+</div>
+<!-- /.row -->
+<mat-card class="material-card-sm">
+  <form role="form" novalidate [formGroup]="teamMgmtForm" (ngSubmit)="saveTeamMember()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Full Name" formControlName="teamMemberName">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="teamMgmtForm.controls['teamMemberName']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Designation" formControlName="designation">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="teamMgmtForm.controls['designation']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="teamMgmtForm.controls['email']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Address" formControlName="address">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="teamMgmtForm.controls['address']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Description" formControlName="description">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="teamMgmtForm.controls['description']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Facebook" formControlName="facebookURL">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="teamMgmtForm.controls['facebookURL']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Twitter" formControlName="twitterURL">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="teamMgmtForm.controls['twitterURL']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Google Plus" formControlName="googlePlusURL">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="teamMgmtForm.controls['googlePlusURL']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="LinkedIn" formControlName="linkedInURL">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="teamMgmtForm.controls['linkedInURL']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize" [imageFormControl]="imageFormControl" (deleteImageEvent)="deleteImage($event)"
+        [imageName]="fileName" [drawImagePath]="drawImagePath" [isSubmitted]="isSubmitted" allowDelete="true" (fileSelectedEvent)="changeFile($event)"></image-uploader>
+    </div>
+    <div class="mb-3">
+      <mat-checkbox formControlName="active">
+        Active
+      </mat-checkbox>
+    </div>
+    <div class="mb-3">
+      <button mat-raised-button color="primary" type="submit">Save</button>
+      <button mat-raised-button color="warn" type="button" (click)="triggerCancelForm()">Cancel</button>
+    </div>
+  </form>
+</mat-card>

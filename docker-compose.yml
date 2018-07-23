@@ -1,0 +1,83 @@
+version:  "2"
+
+services:
+  nodebeats-nginx:
+    container_name: nodebeats-nginx
+    image: nodebeats-nginx
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: .docker/nginx.production.dockerfile
+    depends_on:
+      - nodebeats-node
+    links:
+      - nodebeats-node:nodebeats-node
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./public:/var/www/public
+      - ./admin:/var/www/admin
+      - ./var/www/letsencrypt:/var/www/letsencrypt
+      - ./etc/letsencrypt:/etc/letsencrypt
+      - ./var/lib/letsencrypt:/var/lib/letsencrypt
+    working_dir: /var/www/
+    env_file:
+      - ./.docker/env/app.env
+    networks:
+      - nodebeats-network
+      
+  nodebeats-node:
+    container_name: nodebeats-node
+    image: nodebeats-node
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: .docker/node-nodebeats.production.dockerfile
+    depends_on:
+      - nodebeats-redis
+      - nodebeats-mongo
+    volumes:
+      - .:/var/www/nodebeats
+      - /var/www/nodebeats/node_modules
+    working_dir: /var/www/nodebeats
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./.docker/env/app.env
+    networks:
+      - nodebeats-network
+
+  nodebeats-mongo:
+    container_name: nodebeats-mongo
+    image: nodebeats-mongo
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: .docker/mongo.production.dockerfile
+    volumes:
+      - /data/db
+    ports:
+      - "27017"
+    env_file:
+      - ./.docker/env/mongo.env
+    networks:
+      - nodebeats-network
+
+  nodebeats-redis:
+    container_name: nodebeats-redis
+    image: nodebeats-redis
+    restart: always
+    build:
+      context: .
+      dockerfile: .docker/redis.production.dockerfile
+    volumes:
+      - /data/cache
+    ports:
+      - "6379"
+    networks:
+      - nodebeats-network
+
+networks:
+  nodebeats-network:
+    driver: bridge

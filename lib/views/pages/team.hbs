@@ -1,0 +1,20 @@
+{{#pagetitle 'page'}}
+    <title>Team Members | {{data.commonData.organizationInfoData.orgName}}</title>
+{{/pagetitle}}
+
+{{>shared/global-header headerTitle=activePageMenu}}
+
+<section id="team">
+    <div class="container">
+        <div class="row header_team">
+            <h1>Our Team</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12" data-wow-delay="0.2s">
+                {{>team-members/team-member teams=data.teamMemberData}}
+            </div>
+        </div>
+    </div>
+    <hr class="divider"/>
+    <div class="clarifix"></div>
+</section>

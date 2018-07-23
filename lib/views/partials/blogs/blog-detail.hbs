@@ -1,0 +1,21 @@
+<div class="col-md-8">
+    <div class="post-img">
+        <img class="img-responsive" alt=""
+             src="{{cloudinaryUrl blogDetailObj.bannerImage option='{"width":"960"}'}}">
+    </div>
+    <div class="post-content">
+        <p>
+            {{{blogDetailObj.blogDescription}}}
+        </p>
+    </div>
+    <div class="clarifix"></div>
+    <div id="disqus_thread"></div>
+</div>
+<div class="col-md-4">
+    <div class="sidebar">
+        {{>blogs/blog-article-category categoryObj=categoryObj hostUrl=hostUrl count=categoryRelatedBlogCount}}
+        {{>blogs/blog-article-tags tags=blogDetailObj.tags hostUrl=hostUrl}}
+    </div>
+</div>
+
+

@@ -1,0 +1,172 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "nodebeats-v3"
+  },
+  "apps": [
+    {
+      "name": "client",
+      "root": "src",
+      "outDir": "dist/browser",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "assets/client/scss/main.scss"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/popper.js/dist/umd/popper.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/cloudinary-jquery/cloudinary-jquery.js",
+        "assets/client/js/jquery.main.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    },
+    {
+      "name": "admin",
+      "root": "src",
+      "outDir": "dist-admin",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "admin-index.html",
+      "main": "main.admin.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.admin.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+        "assets/admin/scss/bundle.scss",
+        "../node_modules/sweetalert2/dist/sweetalert2.min.css"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/popper.js/dist/umd/popper.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "assets/inlineScripts.js",
+        "assets/plugins/tinymce/tinymce.min.js",
+        "assets/plugins/tinymce/themes/modern/theme.min.js",
+        "assets/plugins/tinymce/plugins/media/plugin.min.js",
+        "assets/plugins/tinymce/plugins/link/plugin.min.js",
+        "assets/plugins/tinymce/plugins/paste/plugin.min.js",
+        "assets/plugins/tinymce/plugins/table/plugin.min.js",
+        "assets/plugins/tinymce/plugins/advlist/plugin.min.js",
+        "assets/plugins/tinymce/plugins/autolink/plugin.min.js",
+        "assets/plugins/tinymce/plugins/lists/plugin.min.js",
+        "assets/plugins/tinymce/plugins/image/plugin.min.js",
+        "assets/plugins/tinymce/plugins/charmap/plugin.min.js",
+        "assets/plugins/tinymce/plugins/preview/plugin.min.js",
+        "assets/plugins/tinymce/plugins/searchreplace/plugin.min.js",
+        "assets/plugins/tinymce/plugins/code/plugin.min.js",
+        "assets/plugins/tinymce/plugins/fullscreen/plugin.min.js",        
+        "assets/plugins/tinymce/plugins/contextmenu/plugin.min.js",
+        "../node_modules/cloudinary-jquery/cloudinary-jquery.js",
+        "../node_modules/sweetalert2/dist/sweetalert2.all.min.js",
+        "../node_modules/chart.js/dist/Chart.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    },
+    {
+      "name": "client-server",
+      "platform": "server",
+      "root": "src",
+      "outDir": "dist/server",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.server.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.server.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/popper.js/dist/umd/popper.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/cloudinary-jquery/cloudinary-jquery.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "scss",
+    "component": {
+      "spec": false,
+      "inlineStyle": true,
+      "inlineTemplate": true
+    },
+    "directive": {
+      "spec": false
+    },
+    "class": {
+      "spec": false
+    },
+    "guard": {
+      "spec": false
+    },
+    "module": {
+      "spec": false
+    },
+    "pipe": {
+      "spec": false
+    },
+    "service": {
+      "spec": false
+    }
+  }
+}

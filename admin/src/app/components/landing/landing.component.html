@@ -1,0 +1,269 @@
+<div id="header">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">My Company</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nb-navbar" aria-controls="nb-navbar" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nb-navbar">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link smoothscroll" data-link="bannerBlock" href="#bannerBlock">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/test">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link smoothscroll" href="#">CONTACT</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<div class="banner">
+  <video autoplay loop="true" cover="assets/client/images/banner.jpg">
+    <source type="video/mp4" src="assets/client/images/banner.mp4">
+    <source type="video/webm" src="assets/client/images/banner.webm">
+    <source type="video/ogg" src="assets/client/images/banner.ogv">
+  </video>
+  <div class="content">
+    <div class="container">
+      <div class="owl-carousel owl-carousel">
+        <div class="owl-item">
+          <h1>WELCOME TO MY COMPANY</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit!</p>
+          <div class="home_btn">
+            <a href="#" class="btn btn-primary btn-yellow">Know Me</a>
+          </div>
+        </div>
+        <div class="owl-item">
+          <h1>WELCOME TO MY COMPANY</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit!</p>
+          <div class="home_btn">
+            <a href="#" class="btn btn-primary btn-yellow">Know Me</a>
+          </div>
+        </div>
+        <div class="owl-item">
+          <h1>WELCOME TO MY COMPANY</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit!</p>
+          <div class="home_btn">
+            <a href="#" class="btn btn-primary btn-yellow">Know Me</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<main id="main">
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="row  align-items-center">
+        <div class="col-md-6 order-md-last">
+          <div class="image-holder">
+            <img src="assets/client/images/about.jpg" class="img-fluid" alt="image description">
+          </div>
+        </div>
+        <div class="col-md-6 order-md-first">
+          <div class="text-holder">
+            <h2 class="title-heading">About My Company</h2>
+            <p *ngIf="blogTagsList?.length>0">
+                <span *ngFor="let blog of blogTagsList">{{blog.tag}}, </span>
+            </p>
+            <p *ngIf="blogDetail" [innerHTML]="blogDetail.blogDescription">
+              
+            </p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="counter-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="counter-item">
+            <h2 class="statistic-counter">309</h2>
+            <i class="lnr lnr-home"></i>
+            <h5>GITHUB STARS</h5>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="counter-item">
+            <h2 class="statistic-counter">309</h2>
+            <i class="lnr lnr-home"></i>
+            <h5>GITHUB STARS</h5>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="counter-item">
+            <h2 class="statistic-counter">309</h2>
+            <i class="lnr lnr-home"></i>
+            <h5>GITHUB STARS</h5>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="counter-item">
+            <h2 class="statistic-counter">309</h2>
+            <i class="lnr lnr-home"></i>
+            <h5>GITHUB STARS</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section id="info" class="info-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-sm-3">
+          <div class="info-title">
+            <h2>Our Untold INFO</h2>
+            <p class="m-0">RE-IMAGINING THE WAY</p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="info-box">
+            <h3>From The Part of Beginning</h3>
+            <p class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere minima aspernatur ut eius. Mollitia laudantium
+              aperiam adipisci eaque veritatis, sit quidem ut est nam, tenetur ad assumenda! Quidem, quis unde!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-4">
+          <div class="contact-about">
+            <h3 class="title-heading">My Company</h3>
+            <p>Cras fermentum odio eu feugiat. Justo eget magna fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet
+              proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+            <div class="social-links">
+              <a href="#" class="twitter">
+                <span class="lnr lnr-home"></span>
+              </a>
+              <a href="#" class="facebook">
+                <span class="lnr lnr-home"></span>
+              </a>
+              <a href="#" class="instagram">
+                <span class="lnr lnr-home"></span>
+              </a>
+              <a href="#" class="youtube">
+                <span class="lnr lnr-home"></span>
+              </a>
+              <a href="#" class="linkedin">
+                <span class="lnr lnr-home"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+          <ul class="info">
+            <li>
+              <span class="lnr lnr-map-marker"></span>
+              <p>A108 Adam Street
+                <br>New York, NY 535022</p>
+            </li>
+            <li>
+              <span class="lnr lnr-envelope"></span>
+              <p>
+                <a href="mailto:info@example.com">info@example.com</a>
+              </p>
+            </li>
+            <li>
+              <span class="lnr lnr-phone"></span>
+              <p>+1 5589 55488 55</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-lg-5 col-md-8">
+          <h3 class="title-heading">LEAVE MESSAGE</h3>
+          <form action="#" id="contactForm" class="form-styled">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" id="txtName" class="form-control" name="fullName" placeholder="Full Name" required="">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="email" id="txtEmail" class="form-control" name="email" placeholder="Email" required="">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" id="txtContactNumber" class="form-control" name="contactNumber" placeholder="Contact Number">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" id="txtOrganizationName" class="form-control" name="organizationName" placeholder="Organization Name">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <select id="ddlInformationSource" name="informationSource" class="form-control" required="">
+                <option value="">Information Source</option>
+                <option value="google">Google</option>
+                <option value="friends">Friends</option>
+                <option value="blogs">Blogs</option>
+                <option value="socialSites">Social Sites</option>
+                <option value="github">Github</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <textarea id="txaMessage" class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+            </div>
+            <div class="form-group">
+              <input id="btnContact" type="submit" value="Contact Us" class="btn btn-primary btn-orange">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <p class="m-0">&copy; 2018 My Company. All rights Reserved.</p>
+      </div>
+      <div class="col-sm-6">
+        <ul class="list-inline m-0 text-right">
+          <li class="list-inline-item">
+            <a href="#">Home</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">About</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">Services</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">Team</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

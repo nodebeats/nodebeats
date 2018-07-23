@@ -1,0 +1,53 @@
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Partner Editor</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">Partner Editor</h1>
+</div>
+
+<mat-card class="material-card-sm">
+  <form role="form" novalidate [formGroup]="partnerForm" (ngSubmit)="savePartner()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Enter Partner Image Title" formControlName="partnerName">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="partnerForm.controls['partnerName']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Enter Image Alternate Text" formControlName="imageAltText">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="partnerForm.controls['imageAltText']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Enter Hyperlink" formControlName="linkURL">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="partnerForm.controls['linkURL']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize" [imageFormControl]="imageFormControl" (deleteImageEvent)="deleteImage($event)"
+        allowDelete="true" [imageName]="fileName" [drawImagePath]="drawImagePath" (fileSelectedEvent)="changeFile($event)"></image-uploader>
+    </div>
+    <div class="mb-3">
+      <mat-checkbox formControlName="active">
+        Active
+      </mat-checkbox>
+    </div>
+    <div class="mb-3">
+      <button mat-raised-button color="primary" type="submit">Save</button>
+      <button mat-raised-button color="warn" type="button" (click)="triggerCancelForm()">Cancel</button>
+    </div>
+  </form>
+</mat-card>

@@ -1,0 +1,113 @@
+<!-- Page Heading -->
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Testimonial Editor</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">Testimonial Editor</h1>
+</div>
+<!-- /.row -->
+
+<mat-card class="material-card-sm">
+  <form role="form" novalidate [formGroup]="testimonialForm" (ngSubmit)="saveTestimonial()">
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Person Name" formControlName="personName">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['personName']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Organization Name" formControlName="organization">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['organization']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Designation" formControlName="designation">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['designation']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['email']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <textarea matInput placeholder="Testimonial Content" matTextareaAutosize matAutosizeMinRows='2' matAutosizeMaxRows='5' formControlName="testimonialContent"></textarea>
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['testimonialContent']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Facebook URL" formControlName="facebookURL">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['facebookURL']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Twitter URL" formControlName="twitterURL">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['twitterURL']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Google Plus URL" formControlName="gPlusURL">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['gPlusURL']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="LinkedIn URL" formControlName="linkedInURL">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="testimonialForm.controls['linkedInURL']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize" [imageFormControl]="imageFormControl" (deleteImageEvent)="deleteImage($event)"
+        [imageName]="fileName" [drawImagePath]="drawImagePath" allowDelete="true" (fileSelectedEvent)="changeFile($event)"></image-uploader>
+
+    </div>
+    <div class="mb-3">
+      <mat-checkbox formControlName="active">
+        Active
+      </mat-checkbox>
+    </div>
+    <div class="mb-3">
+      <button mat-raised-button color="primary" type="submit">Save</button>
+      <button mat-raised-button color="warn" type="button" (click)="triggerCancelForm()">Cancel</button>
+    </div>
+  </form>

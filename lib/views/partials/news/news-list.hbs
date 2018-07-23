@@ -1,0 +1,31 @@
+<article class="wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">
+
+    {{#checkAndBindList lstNews}}
+        <div class="blog-post-image">
+            <a href="{{hostUrl}}/news-detail/{{dateFormatter addedOn '/'}}/{{urlSlog}}">
+                {{#checkAndBindList image}}
+                    <img class="img-responsive"
+                         src="{{cloudinaryUrl imageName option='{"width":"940", "height":"300", "crop":"crop"}'}}"
+                         alt="{{imageAltText}}"/>
+                {{/checkAndBindList}}
+            </a>
+        </div>
+        <div class="blog-content">
+            <h2 class="blogpost-title">
+                <a href="{{hostUrl}}/news-detail/{{dateFormatter addedOn '/'}}/{{urlSlog}}">{{newsTitle}}</a>
+            </h2>
+            <div class="blog-meta">
+                <span>{{dateFormatter addedOn '-'}}</span>
+                <span>by <a href="">{{newsAuthor}}</a></span>
+                <span>Page Views:  <a href="">{{pageViews}}</a></span>
+            </div>
+            <p>
+                {{{newsSummary}}}
+            </p>
+            <a href="{{hostUrl}}/news-detail/{{dateFormatter addedOn  '/'}}/{{urlSlog}}" class="btn btn-dafault btn-details">Continue
+                Reading</a>
+        </div>
+    {{else}}
+        {{>shared/no-data-found}}
+    {{/checkAndBindList}}
+</article>

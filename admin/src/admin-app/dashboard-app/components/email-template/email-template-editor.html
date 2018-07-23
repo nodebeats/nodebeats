@@ -1,0 +1,61 @@
+<!-- Page Heading -->
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Email Template</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">Email Template</h1>
+</div>
+
+<!-- /.row -->
+<mat-card class="material-card">
+  <form role="form" novalidate [formGroup]="templateForm" (ngSubmit)="saveTemplate()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Template Name" formControlName="templateName">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="templateForm.controls['templateName']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput formControlName="emailSubject" placeholder="Email Subject">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="templateForm.controls['emailSubject']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Email From" formControlName="emailFrom">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="templateForm.controls['emailFrom']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <label>Email Body</label>
+      <tiny-editor module="email-template" [isSubmitted]="isSubmitted" [editorFormControl]="editorFormControl" [value]="objEmailTemp.templateBody"
+        (valueChange)="editorValueChange($event)"></tiny-editor>
+    </div>
+    <div class="mb-3">
+      <mat-checkbox formControlName="active">
+        Active
+      </mat-checkbox>
+    </div>
+    <div class="mb-3">
+      <mat-checkbox formControlName="attachmentAvailabilityStatus">
+        Allow Attachement
+      </mat-checkbox>
+    </div>
+    <div class="mb-3">
+      <button mat-raised-button type="submit" color="primary">Save</button>
+      <button mat-raised-button type="button" color="warn" (click)="triggerCancelForm()">Cancel</button>
+    </div>
+  </form>
+</mat-card>

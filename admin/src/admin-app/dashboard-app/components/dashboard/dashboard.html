@@ -1,0 +1,43 @@
+<div class="nb-home">
+  <h1 class="">Dashboard
+    <small>Statistics Overview</small>
+  </h1>
+  <div class="row">
+    <div class="col-lg-6">
+      <user-count [viewId]="viewId"></user-count>
+    </div>
+    <div class="col-lg-3">
+      <div class="media">
+        <i class="fas fa-street-view orange"></i>
+        <div class="media-body p-2">
+          <h5>Active Users</h5>
+          <span class="count"><animate-counter [valueToCount]="activeUserCount"></animate-counter></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <page-view [viewId]="viewId"></page-view>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="chart-card">
+      <h3>Weekly Total Visit</h3>
+      <week-chart [viewId]="viewId"></week-chart>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="chart-card">
+          <h3>Browser Based Visit</h3>
+          <browser-chart [viewId]="viewId"></browser-chart>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="chart-card">
+          <h3>Country Based Visit</h3>
+          <country-chart [viewId]="viewId"></country-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

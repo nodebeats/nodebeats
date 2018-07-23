@@ -1,0 +1,64 @@
+<div class="map-area">
+    <h2 class="subtitle  wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".3s">Find Us</h2>
+    <div class="map">
+        <div id="contact-map" style="width:100%;height:400px"></div>
+    </div>
+</div>
+{{#pagetitle 'pagescripts'}}
+    {{#if googleMap}}
+        <script type="text/javascript"
+                src="//maps.googleapis.com/maps/api/js?libraries=places&key={{googleMap.googleMapsApiKey}}"></script>
+        <!-- Google maps api -->
+        <script type="text/javascript">
+            var geocoder = new google.maps.Geocoder();
+            var address = "{{orgInfo.streetAddress}} {{orgInfo.addressLine}} {{orgInfo.city}},{{orgInfo.region}} {{orgInfo.state}}, {{orgInfo.country}} - {{orgInfo.postalCode}}/{{orgInfo.zipAddress}}"; //Add your address here, all on one line.
+            var latitude = {{googleMap.latitude}};
+            var longitude ={{googleMap.longitude}};
+            var isDraggable = document.documentElement.clientWidth > 480 ? true : false;
+            function initGoogleMap() {
+                var styles = [
+                    {
+                        stylers: [
+                            {saturation: 0}
+                        ]
+                    }
+                ];
+                var options =
+                {
+                    mapTypeControlOptions: {
+                        mapTypeIds: ['Styled']
+                    },
+                    center: new google.maps.LatLng(latitude, longitude),
+                    zoom: {{googleMap.zoom}},
+                    scrollwheel: {{googleMap.scrollWheel}},
+                    navigationControl:  {{googleMap.showMarker}},
+                    mapTypeControl: false,
+                    zoomControl: true,
+                    disableDefaultUI: true,
+                    draggable: isDraggable,
+                    mapTypeId: 'Styled'
+
+                };
+                var div = document.getElementById('contact-map');
+                var map = new google.maps.Map(div, options);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    draggable: false,
+                    animation: google.maps.Animation.DROP,
+                    position: new google.maps.LatLng(latitude, longitude)
+                });
+                var styledMapType = new google.maps.StyledMapType(styles, {name: 'Styled'});
+                map.mapTypes.set('Styled', styledMapType);
+
+                infowindow = new google.maps.InfoWindow({
+                    content: '<strong>{{googleMap.markerTitle}}</strong><br>{{googleMap.placeName}}<br>'
+                });
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+                infowindow.open(map, marker);
+            }
+            google.maps.event.addDomListener(window, 'load', initGoogleMap);
+        </script>
+    {{/if}}
+{{/pagetitle}}

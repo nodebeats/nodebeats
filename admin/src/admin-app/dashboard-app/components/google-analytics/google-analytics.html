@@ -1,0 +1,62 @@
+<!-- Page Heading -->
+<div class="d-flex flex-row-reverse">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb nb-breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Google Analytics Settings</li>
+            </ol>
+        </nav>
+        <h1 class="nb-heading-one mr-auto">Google Analytics Settings</h1>
+</div>
+<!-- /.row -->
+<mat-card class="material-card-sm">
+        <alert [(displayed)]="objAlert.show" [type]="objAlert.type" [closeButton]="objAlert.closeButton">
+            <strong>{{objAlert.title}}!</strong> {{objAlert.message}}
+        </alert>
+
+        <form role="form" novalidate [formGroup]="analyticsForm" (ngSubmit)="saveAnalytics()">
+                <div class="mb-3">
+                        <mat-form-field class="material-input-full">
+                            <input matInput placeholder="Tracking ID" [(ngModel)]="objAnalytics.trackingId" formControlName="trackingId">
+                            <mat-error>
+                                <control-messages [isSubmitted]="isSubmitted" [control]="analyticsForm.controls['trackingId']"></control-messages>
+                            </mat-error>
+                        </mat-form-field>
+                </div>
+
+                <div class="mb-3">
+                        <mat-form-field class="material-input-full">
+                            <input matInput placeholder="View ID" [(ngModel)]="objAnalytics.analyticsViewID" formControlName="viewId">
+                            <mat-error>
+                                    <control-messages [isSubmitted]="isSubmitted" [control]="analyticsForm.controls['viewId']"></control-messages>
+                            </mat-error>
+                        </mat-form-field>
+                </div>
+
+                <div class="mb-3">
+                        <mat-form-field class="material-input-full">
+                            <input matInput placeholder="Polling Interval (minutes)" [(ngModel)]="objAnalytics.pollingInterval" formControlName="pollingInterval">
+                            <mat-error>
+                                    <control-messages [isSubmitted]="isSubmitted" [control]="analyticsForm.controls['pollingInterval']"></control-messages>
+                            </mat-error>
+                        </mat-form-field>
+                </div>
+            
+                <div class="form-group">
+                    <div>Service Account Key (JSON)</div>
+                    <doc-uploader [isSubmitted]="isSubmitted"
+                                  [allowedExt]="allowedExt"
+                                  [allowedSize]="allowedSize"
+                                  [docFormControl]="docFormControl"
+                                  (deleteFileEvent)="onDeleteFile($event)"
+                                  [fileName]="fileName"
+                                  (fileSelectedEvent)="onFileSelect($event)"></doc-uploader>
+
+                </div>
+            
+                <div class="mb-3">
+                        <button mat-raised-button color="primary" type="submit">Save</button>
+                </div>
+        </form>
+</mat-card>
+

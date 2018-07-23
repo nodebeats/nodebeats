@@ -1,0 +1,111 @@
+<mat-card class="material-card-sm">
+  <form role="form" novalidate [formGroup]="userForm" (ngSubmit)="saveUser()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+          <input matInput placeholder="First Name" formControlName="firstName">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="userForm.controls['firstName']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput formControlName="middleName" placeholder="Middle Name">
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput required placeholder="Last Name" formControlName="lastName">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="userForm.controls['lastName']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput type="email" required placeholder="Email" formControlName="email">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="userForm.controls['email']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div *ngIf="!userId" class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput type="password" id="inputPassword" name="password" placeholder="Password"
+          formControlName="password">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="userForm.controls['password']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div *ngIf="!userId" class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput type="password" placeholder="Re-enter Password" formControlName="confirmPassword">
+        <mat-error>
+          <control-messages [control]="userForm.controls['confirmPassword']"></control-messages>
+        </mat-error>
+        <div class="error-msg" *ngIf="userForm.hasError('mismatchedPasswords')&& userForm.controls['confirmPassword'].dirty">
+          Passwords do not match.
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Phone Number" formControlName="phoneNumber"
+        [class.error]="userForm.controls['phoneNumber'].touched && userForm.controls['phoneNumber'].invalid || isSubmitted && userForm.controls['phoneNumber'].invalid">
+        <mat-error>
+            <control-messages [isSubmitted]="isSubmitted" [control]="userForm.controls['phoneNumber']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Mobile Number" formControlName="mobileNumber"
+        [class.error]="userForm.controls['mobileNumber'].touched && userForm.controls['mobileNumber'].invalid || isSubmitted && userForm.controls['mobileNumber'].invalid">
+        <mat-error>
+                <control-messages [isSubmitted]="isSubmitted" [control]="userForm.controls['mobileNumber']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div *ngIf="!userId" class="mb-3">
+      <mat-form-field style="width:100%">
+        <mat-select placeholder="Security Question" formControlName="securityQuestion">
+          <mat-option *ngFor="let question of questionlist" [value]="question">
+            {{question}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="userForm.controls['securityQuestion']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div *ngIf="!userId" class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Security Answer" required formControlName="securityAnswer">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="userForm.controls['securityAnswer']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field>
+        <mat-select placeholder="Select Role" formControlName="userRole">
+          <mat-option *ngFor="let obj of objRoleList" [value]="obj.roleName">
+            {{obj.roleName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <image-uploader [canvasSize]="canvasSize" [imageFormControl]="imageFormControl" (deleteImageEvent)="deleteImage()" [imageName]="fileName"
+        [drawImagePath]="drawImagePath" [isSubmitted]="isSubmitted" (fileSelectedEvent)="changeFile($event)" allowDelete="true"></image-uploader>
+    </div>
+        <div class="mb-3">
+      <button type="submit" mat-raised-button color="primary">
+        Save</button>
+      <button type="button" (click)="triggerCancelForm()" mat-raised-button color="warn">
+        Cancel
+      </button>
+    </div>
+  </form>
+</mat-card>

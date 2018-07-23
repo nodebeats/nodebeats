@@ -1,0 +1,47 @@
+<!-- Page Heading -->
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Cloudinary</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">Cloudinary</h1>
+</div>
+<!-- /.row -->
+<mat-card class="material-card-sm">
+  <alert [(displayed)]="objAlert.show" [type]="objAlert.type" [closeButton]="objAlert.closeButton">
+    <strong>{{objAlert.title}}!</strong> {{objAlert.message}}
+  </alert>
+  <form role="form" novalidate [formGroup]="cloudinaryForm" (ngSubmit)="saveCloudinarySetting()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Enter Cloud name" formControlName="cloudinaryCloudName">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="cloudinaryForm.controls['cloudinaryCloudName']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Enter Api Key" formControlName="cloudinaryApiKey">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="cloudinaryForm.controls['cloudinaryApiKey']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Enter Api Secret" formControlName="cloudinaryApiSecret">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="cloudinaryForm.controls['cloudinaryApiSecret']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </div>
+  </form>
+</mat-card>

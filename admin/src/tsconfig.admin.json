@@ -1,0 +1,36 @@
+{
+  "extends": "../tsconfig.json",  
+  "compilerOptions": {
+    "baseUrl": "./",
+    "target": "es5",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "files": [
+    "typings.d.ts",
+    "polyfills.ts",
+    "main.admin.ts",
+    "admin-app/admin-app.module.ts",
+    "admin-app/dashboard-app/dashboard-app.module.ts"
+  ],
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ],
+  "angularCompilerOptions": {
+    "genDir": "aot",
+    "skipMetadataEmit": true
+  }
+}

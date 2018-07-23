@@ -1,0 +1,165 @@
+<!-- Page Heading -->
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Organization Information</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">Organization Information</h1>
+</div>
+<!-- /.row -->
+<mat-card class="material-card-sm mt-3">
+  <alert [(displayed)]="objAlert.show" [type]="objAlert.type" [closeButton]="objAlert.closeButton">
+    <strong>{{objAlert.title}}!</strong> {{objAlert.message}}
+  </alert>
+  <form role="form" novalidate [formGroup]="orgInfoForm" (ngSubmit)="saveOrgInfo()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Organization Name" formControlName="orgName">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="orgInfoForm.controls['orgName']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <mat-select placeholder="Country" formControlName="country">
+          <mat-option *ngFor="let obj of objCountyList" [value]="obj.name">
+            {{obj.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="orgInfoForm.controls['country']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Region" formControlName="region">
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="State" formControlName="state">
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="City" formControlName="city">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="orgInfoForm.controls['city']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Street Address" formControlName="streetAddress">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="orgInfoForm.controls['streetAddress']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Address Line" formControlName="addressLine">
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Zip Address" formControlName="zipAddress">
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Postal Code" formControlName="postalCode">
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Organization Email" formControlName="organizationEmail">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="orgInfoForm.controls['organizationEmail']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Fax Number" formControlName="faxNumber">
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Phone Number" formControlName="phoneNumber">
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Mobile Number" formControlName="mobileNumber">
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Facebook Page URL" formControlName="facebookURL">
+      </mat-form-field>
+      <mat-error>
+        <control-messages [control]="orgInfoForm.controls['facebookURL']"></control-messages>
+      </mat-error>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Twitter URL" formControlName="twitterURL">
+      </mat-form-field>
+      <mat-error>
+        <control-messages [control]="orgInfoForm.controls['twitterURL']"></control-messages>
+      </mat-error>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Google Plus URL" formControlName="googlePlusURL">
+      </mat-form-field>
+      <mat-error>
+        <control-messages [control]="orgInfoForm.controls['googlePlusURL']"></control-messages>
+      </mat-error>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="LinkedIn Page URL" formControlName="linkedInURL">
+      </mat-form-field>
+      <mat-error>
+        <control-messages [control]="orgInfoForm.controls['linkedInURL']"></control-messages>
+      </mat-error>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Youtube URL" formControlName="youtubeURL">
+      </mat-form-field>
+      <mat-error>
+        <control-messages [control]="orgInfoForm.controls['youtubeURL']"></control-messages>
+      </mat-error>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Instagram URL" formControlName="instagramURL">
+      </mat-form-field>
+      <mat-error>
+        <control-messages [control]="orgInfoForm.controls['instagramURL']"></control-messages>
+      </mat-error>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Organization's Slogan" formControlName="slogan">
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize" [imageFormControl]="imageFormControl" allowDelete="true"
+        (deleteImageEvent)="deleteImage($event)" [imageName]="fileName" [drawImagePath]="drawImagePath" (fileSelectedEvent)="changeFile($event)"></image-uploader>
+    </div>
+    <div class="mb-3">
+      <button mat-raised-button color="primary" type="submit" processing>
+        <i class="fas fa-save"></i> Save</button>
+    </div>
+  </form>
+</mat-card>

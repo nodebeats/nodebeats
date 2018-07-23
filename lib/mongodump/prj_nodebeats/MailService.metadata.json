@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"prj_nodebeats.MailService"},{"v":2,"unique":true,"key":{"authUserName":1},"name":"authUserName_1","ns":"prj_nodebeats.MailService","background":true}]}

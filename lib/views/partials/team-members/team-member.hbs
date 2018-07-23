@@ -1,0 +1,34 @@
+{{#checkAndBindList teams}}
+    <div class="col-md-3">
+        <div class="team-member wow fadeInLeft" data-wow-duration="500ms" data-wow-delay=".9s">
+            <div class="team-img">
+                <img src="{{cloudinaryUrl imageName
+                                          option='{"width":"358","height":"238","crop":"thumb","gravity":"face"}'}}"
+                     class="team-pic" alt="{{teamMemberName}}">
+            </div>
+            <h3 class="team_name">{{teamMemberName}}</h3>
+            <p class="team_designation">{{designation}}</p>
+            <p class="team_text">{{description}}</p>
+            <p class="social-icons">
+                {{#if facebookURL}}
+                    <a target="_blank" href="{{facebookURL}}"><i
+                        class="ion-social-facebook-outline"></i></a>
+                {{/if}}
+                {{#if twitterURL}}
+                    <a target="_blank" href="{{twitterURL}}"><i
+                        class="ion-social-twitter-outline"></i></a>
+                {{/if}}
+                {{#if linkedInURL}}
+                    <a target="_blank" href="{{linkedInURL}}"><i
+                        class="ion-social-linkedin-outline"></i></a>
+                {{/if}}
+                {{#if googlePlusURL}}
+                    <a target="_blank" href="{{googlePlusURL}}"><i
+                        class="ion-social-googleplus-outline"></i></a>
+                {{/if}}
+            </p>
+        </div>
+    </div>
+{{else}}
+    {{>shared/no-data-found}}
+{{/checkAndBindList}}

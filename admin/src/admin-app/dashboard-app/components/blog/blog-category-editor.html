@@ -1,0 +1,31 @@
+<mat-card class="material-card-sm">
+  <form role="form" novalidate [formGroup]="blogCategoryForm" (ngSubmit)="saveBlogCategory()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Blog Category Name" [(ngModel)]="objBlogCat.categoryName" [formControl]="blogCategoryForm.controls.categoryName">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="blogCategoryForm.controls.categoryName"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <textarea matInput placeholder="Blog Category Description" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"
+          [(ngModel)]="objBlogCat.categoryDescription" formControlName="categoryDescription"></textarea>
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="blogCategoryForm.controls.categoryDescription"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-checkbox [checked]="objBlogCat.active" formControlName="active" [(ngModel)]="objBlogCat.active">
+        Active
+      </mat-checkbox>
+    </div>
+    <div class="mb-3">
+      <button mat-raised-button color="primary" type="submit">
+        <i class="fas fa-save"></i> Save</button>
+      <button mat-raised-button color="warn" type="button" (click)="triggerCancelForm()">Cancel</button>
+    </div>
+  </form>
+</mat-card>

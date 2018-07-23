@@ -1,0 +1,129 @@
+<!-- Page Heading -->
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Email Service Settings</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">Email Service Settings</h1>
+</div>
+<!-- /.row -->
+<mat-card class="material-card-sm">
+  <alert [(displayed)]="objAlert.show" [type]="objAlert.type" [closeButton]="objAlert.closeButton">
+    <strong>{{objAlert.title}}!</strong> {{objAlert.message}}
+  </alert>
+
+  <form role="form" novalidate [formGroup]="emailServiceForm" (ngSubmit)="saveEmailService()">
+    <div class="mb-3">
+      <mat-form-field class="full-width">
+        <mat-select class="full-width" placeholder="Service Provider Type" formControlName="serviceProviderType">
+          <mat-option value="">Select Service Provider Type</mat-option>
+          <mat-option *ngFor="let provider of emailServiceProvider" [value]="provider">
+            {{provider}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="emailServiceForm.controls['serviceProviderType']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Host" formControlName="host">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="emailServiceForm.controls['host']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Port" formControlName="port">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="emailServiceForm.controls['port']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-checkbox formControlName="secure">
+        Secure
+      </mat-checkbox>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="UserName" formControlName="authUserName">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="emailServiceForm.controls['authUserName']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Password" formControlName="authPassword">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="emailServiceForm.controls['authPassword']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-checkbox formControlName="pool">
+        Pool
+      </mat-checkbox>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Api Key" formControlName="api_Key">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="emailServiceForm.controls['api_Key']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="API Secret" formControlName="api_Secret">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="emailServiceForm.controls['api_Secret']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="API User" formControlName="api_User">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="emailServiceForm.controls['api_User']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Domain" formControlName="domain">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="emailServiceForm.controls['domain']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="rate limit" formControlName="rateLimit">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="emailServiceForm.controls['rateLimit']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </div>
+  </form>
+</mat-card>

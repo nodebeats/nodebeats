@@ -1,0 +1,41 @@
+{{#checkAndBindList testimonials}}
+    <div class="col-md-6">
+        <div class="one slide">
+            <blockquote>
+                <span class="leftq quotes">&ldquo;</span>
+                {{testimonialContent}}
+                <span class="rightq quotes">&bdquo; </span>
+            </blockquote>
+            <img class="img-responsive " src="{{cloudinaryUrl imageName option='{"width":"170", "height":"130", "crop":"thumb", "gravity":"face"}'}}" alt="{{personName}}">
+            <h2>{{personName}}</h2>
+            <h6>{{designation}} at {{organization}}</h6>
+            <p class="social-icons">
+                {{#if facebookURL}}
+                    <a target="_blank" href="{{facebookURL}}"><i
+                            class="ion-social-facebook-outline"></i></a>
+                {{/if}}
+                {{#if twitterURL}}
+                    <a target="_blank" href="{{twitterURL}}"><i
+                            class="ion-social-twitter-outline"></i></a>
+                {{/if}}
+                {{#if gPlusURL}}
+                    <a target="_blank" href="{{gPlusURL}}"><i
+                            class="ion-social-linkedin-outline"></i></a>
+                {{/if}}
+                {{#if linkedInURL}}
+                    <a target="_blank" href="{{linkedInURL}}"><i
+                            class="ion-social-googleplus-outline"></i></a>
+                {{/if}}
+            </p>
+        </div>
+    </div>
+{{else}}
+    {{>shared/no-data-found}}
+{{/checkAndBindList}}
+
+
+
+
+
+
+

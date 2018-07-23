@@ -1,0 +1,50 @@
+<div class="d-flex flex-row-reverse">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb nb-breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">User Details</li>
+        </ol>
+    </nav>
+    <h1 class="nb-heading-one mr-auto">User Details</h1>
+    </div>
+<div class="view-wrapper">
+    <div class="col-lg-4">
+        <div class="form-group row">
+            <img [src]="imageSrc" width="150" height="170"/>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="form-group row">
+            <label class="col-sm-4 form-control-label">First Name</label>
+            <label class="form-control-static">{{objUser.firstName}}</label>
+        </div>
+        <div class="form-group row" *ngIf="objUser.middleName">
+            <label class="col-sm-4 form-control-label">Middle Name</label>
+            <label class="form-control-static">{{objUser.middleName}}</label>
+        </div>
+        <div class="form-group row" *ngIf="objUser.lastName">
+            <label class="col-sm-4 form-control-label">Last Name</label>
+            <label class="form-control-static">{{objUser.lastName}}</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 form-control-label">Email</label>
+            <label class="form-control-static">{{objUser.email}}</label>
+        </div>
+        <div *ngIf="objUser.phoneNumber" class="form-group row">
+            <label class="col-sm-4 form-control-label">Phone Number</label>
+            <label class="form-control-static">{{objUser.phoneNumber}}</label>
+        </div>
+        <div class="form-group row" *ngIf="objUser.mobileNumber">
+            <label class="col-sm-4 form-control-label">Mobile Number</label>
+            <label class="form-control-static">{{objUser.mobileNumber}}</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 form-control-label">User Role</label>
+            <label class="form-control-static">{{objUser.userRole}}</label>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <button type="button" (click)="triggerEdit()" class="btn btn-primary">Edit</button>
+    <button type="button" (click)="triggerCancelView()" class="btn  btn-danger">Cancel</button>
+
+</div>

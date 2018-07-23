@@ -1,0 +1,16 @@
+
+{{#pagetitle 'page'}}
+    <title>{{data.eventDetailData.eventTitle}}</title>
+{{/pagetitle}}
+
+{{>shared/global-header headerTitle=data.eventDetailData.eventTitle}}
+
+{{{eventDetailData}}}
+{{eventDetailData}}
+<section class="single-post">
+    <div class="container">
+        <div class="row">
+            {{>events/event-detail eventObj=data.eventDetailData}}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,65 @@
+{{#pagetitle 'page'}}
+    <title>{{data.commonData.organizationInfoData.orgName}} | {{data.commonData.organizationInfoData.slogan}}</title>
+{{/pagetitle}}
+
+{{#pagetitle 'pagestylesheets'}}
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/owl.theme.css">
+{{/pagetitle}}
+
+<section id="image-content-slider">
+    <div class="col-md-12">
+        {{#checkData data.imageSliderData}}
+            {{>image-slider/image-slider lstSliderImages=data.imageSliderData className="owl-carousel owl-theme"}}
+        {{else}}
+            <h2>Image Slider</h2>
+            {{>shared/no-data-found}}
+        {{/checkData}}
+    </div>
+    <div class="clarifix"></div>
+</section>
+
+
+<section id="article-counts">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h2>Latest News</h2>
+            {{>news/news-list hostUrl=data.commonData.staticDataObj.hostUrl lstNews=data.newsData}}
+        </div>
+        <div class="col-md-6">
+            <h2>Latest Blogs</h2>
+            {{>blogs/blog-list hostUrl=data.commonData.staticDataObj.hostUrl blogs=data.blogData}}
+        </div>
+    </div>
+    <div class="clarifix"></div>
+</section>
+
+<section id="contact-link">
+    <div class="col-md-12">
+        <div class="row">
+            {{>html-module-content/contact-link contactLinkData=data.contactLinkHtmlData}}
+        </div>
+    </div>
+    <div class="clarifix"></div>
+</section>
+
+<section id="our-clients">
+    <h2>Our Clients</h2>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="row">
+                {{#checkData data.partnerData}}
+                    {{>partners/partner className="owl-carousel owl-theme" partners=data.partnerData}}
+                {{else}}
+                    {{>partners/partner className="" partners=data.partnerData}}
+                {{/checkData}}
+            </div>
+        </div>
+    </div>
+    <div class="clarifix"></div>
+</section>
+
+{{#pagetitle 'pagescripts'}}
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="js/index-page-script.js"></script>
+{{/pagetitle}}

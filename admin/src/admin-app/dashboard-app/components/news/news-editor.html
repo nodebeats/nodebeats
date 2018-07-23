@@ -1,0 +1,70 @@
+<mat-card class="mt-3">
+  <form role="form" novalidate [formGroup]="newsForm" (ngSubmit)="saveNews()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <mat-select placeholder="Select Category" formControlName="categoryID">
+          <mat-option *ngFor="let obj of objCatList" [value]="obj._id">
+            {{obj.categoryName}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="newsForm.controls['categoryID']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="News Title" formControlName="newsTitle">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="newsForm.controls['newsTitle']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <textarea matInput placeholder="News Summary" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" formControlName="newsSummary"></textarea>
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="newsForm.controls['newsSummary']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <label>News Description</label>
+      <tiny-editor [isSubmitted]="isSubmitted" module="news" [editorFormControl]="editorFormControl" [value]="objNews.newsDescription"
+       (valueChange)="editorValueChange($event)"></tiny-editor>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="News Author" formControlName="newsAuthor">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="newsForm.controls['newsAuthor']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="d-flex">
+      <div class="mb-3 pr-2">
+        <mat-form-field class="material-input-full">
+          <input matInput [matDatepicker]="picker" [min]="today" placeholder="Publish Date" formControlName="newsDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>
+            <control-messages [isSubmitted]="isSubmitted" [control]="newsForm.controls['newsDate']"></control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="mb-3">
+      <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize" [imageFormControl]="imageFormControl" (deleteImageEvent)="deleteImage($event)"
+        [imageName]="fileName" [drawImagePath]="drawImagePath" allowDelete="true" (fileSelectedEvent)="changeFile($event)"></image-uploader>
+    </div>
+    <div class="mb-3">
+      <mat-checkbox formControlName="active">
+        Active
+      </mat-checkbox>
+    </div>
+    <div class="mb-3">
+        <button mat-raised-button color="primary" type="submit"><i class="fas fa-save"></i> Save</button>
+        <button mat-raised-button color="warn" type="button" (click)="triggerCancelForm()">Cancel</button>
+    </div>
+  </form>
+</mat-card>

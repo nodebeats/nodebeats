@@ -1,0 +1,40 @@
+<mat-card class="material-card-sm">
+  <form role="form" novalidate [formGroup]="blogMetaForm" (ngSubmit)="saveBlogMetaTag()">
+    <div class="mb-3">
+      <rl-tag-input [(ngModel)]="objBlogMeta.metaKeyword" placeholder="Enter Meta Keyworkd" formControlName="metaKeyword" [autoCompleteData]="autoCompleteData"
+        delimiterCode="188">
+      </rl-tag-input>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Title Tag" [(ngModel)]="objBlogMeta.titleTag" formControlName="titleTag">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="blogMetaForm.controls['titleTag']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <textarea matInput placeholder="Meta Description" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" [(ngModel)]="objBlogMeta.metaDescription"
+          formControlName="metaDescription"></textarea>
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="blogMetaForm.controls.metaDescription"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Meta Author" [(ngModel)]="objBlogMeta.metaAuthor" formControlName="metaAuthor">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="blogMetaForm.controls.metaAuthor"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <button mat-raised-button color="primary" type="submit" processing>
+        <i class="fas fa-save"></i> Save</button>
+      <button mat-raised-button color="warn" type="button" (click)="triggerCancelForm()">
+        <i class="fa fa-times"></i> Cancel</button>
+    </div>
+  </form>
+</mat-card>

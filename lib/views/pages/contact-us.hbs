@@ -1,0 +1,22 @@
+{{#pagetitle 'page'}}
+    <title>Contact Us | {{data.commonData.organizationInfoData.orgName}}</title>
+{{/pagetitle}}
+
+{{>shared/global-header headerTitle=activePageMenu}}
+
+<section id="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {{>organization-info/organization-map-location orgInfo=data.commonData.organizationInfoData googleMap=data.googleMapData}}
+            </div>
+            <div class="col-md-6">
+                {{>contact-us/contact-form}}
+            </div>
+        </div>
+        <div class="row address-details">
+            {{>organization-info/organization-info orgInfo=data.commonData.organizationInfoData}}
+        </div>
+    </div>
+</section>
+

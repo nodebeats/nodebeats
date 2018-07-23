@@ -1,0 +1,22 @@
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Blog Management</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">Blog Management</h1>
+</div>
+<nav mat-tab-nav-bar class="mb-4">
+  <a mat-tab-link
+     *ngFor="let link of navLinks"
+     [routerLink]="link.path"
+     [routerLinkActiveOptions]="{exact: true}"
+     routerLinkActive #rla="routerLinkActive"
+     [active]="rla.isActive">
+    {{link.label}}
+  </a>
+</nav>
+<router-outlet></router-outlet>

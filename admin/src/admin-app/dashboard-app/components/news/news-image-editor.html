@@ -1,0 +1,34 @@
+<mat-card class="material-card-sm mt-3">
+  <form role="form" novalidate [formGroup]="newsImageForm" (ngSubmit)="saveNewsImage()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Image Title" formControlName="imageTitle">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="newsImageForm.controls['imageTitle']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput placeholder="Image Alternate Text" formControlName="imageAltText">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="newsImageForm.controls['imageAltText']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-3">
+      <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize" [imageFormControl]="imageFormControl" (deleteImageEvent)="deleteImage($event)"
+        [imageName]="fileName" [drawImagePath]="drawImagePath" [isSubmitted]="isSubmitted" allowDelete="true" (fileSelectedEvent)="changeFile($event)"></image-uploader>
+    </div>
+    <div class="mb-3">
+      <mat-checkbox formControlName="active">
+        Active
+      </mat-checkbox>
+    </div>
+    <div class="mb-3">
+      <button mat-raised-button color="primary" type="submit">Save</button>
+      <button mat-raised-button color="warn" type="button" (click)="triggerCancelForm()">Cancel</button>
+    </div>
+  </form>
+</mat-card>

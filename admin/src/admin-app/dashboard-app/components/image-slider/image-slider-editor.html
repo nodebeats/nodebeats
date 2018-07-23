@@ -1,0 +1,58 @@
+<!-- Page Heading -->
+<div class="d-flex flex-row-reverse">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb nb-breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Image Slider Editor</li>
+    </ol>
+  </nav>
+  <h1 class="nb-heading-one mr-auto">Image Slider Editor</h1>
+</div>
+<!-- /.row -->
+<mat-card class="material-card">
+  <form role="form" novalidate [formGroup]="imageSliderForm" (ngSubmit)="saveImageSlider()">
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput type="text" name="imageTitle" placeholder="Image Title" formControlName="imageTitle">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="imageSliderForm.controls['imageTitle']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <input matInput type="text" name="imageAltText" placeholder="Alternate text" formControlName="imageAltText">
+        <mat-error>
+          <control-messages [isSubmitted]="isSubmitted" [control]="imageSliderForm.controls['imageAltText']"></control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <textarea matInput formControlName="imagePrimaryContent" rows="5" placeholder="Primary Content">
+        </textarea>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="material-input-full">
+        <textarea matInput class="form-control" formControlName="imageSecondaryContent" rows="5" placeholder="Enter Secondary Content">
+        </textarea>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <image-uploader [isSubmitted]="isSubmitted" [canvasSize]="canvasSize" [imageFormControl]="imageFormControl" (deleteImageEvent)="deleteImage($event)"
+        allowDelete="true" [imageName]="fileName" [drawImagePath]="drawImagePath" (fileSelectedEvent)="changeFile($event)"></image-uploader>
+    </div>
+    <div class="mb-3">
+      <mat-checkbox formControlName="active">
+        Active
+      </mat-checkbox>
+    </div>
+    <div class="mb-3">
+      <button type="submit" mat-raised-button color="primary">Save</button>
+      <button type="button" (click)="triggerCancelForm()" mat-raised-button color="warn">Cancel</button>
+    </div>
+  </form>
+</mat-card>

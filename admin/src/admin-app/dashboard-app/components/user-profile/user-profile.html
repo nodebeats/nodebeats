@@ -1,0 +1,43 @@
+<div class="view-wrapper" *ngIf="objUser">
+    <h2 class="page-header">My Profile</h2>
+    <mat-card class="material-card-sm mt-3">
+        <div class="mb-3">
+            <img [src]="imageSrc" width="150" height="170"/>
+        </div>
+        <div class="row">
+            <label class="nb-label-md col-6">First Name</label>
+            <label class="nb-label-md col-6">{{objUser.firstName}}</label>
+        </div>
+        <div class="row" *ngIf="objUser.middleName">
+            <label class="nb-label-md col-6">Middle Name</label>
+            <label class="nb-label-md col-6">{{objUser.middleName}}</label>
+        </div>
+        <div class="row" *ngIf="objUser.lastName">
+            <label class="nb-label-md col-6">Last Name</label>
+            <label class="nb-label-md col-6">{{objUser.lastName}}</label>
+        </div>
+        <div class="row">
+            <label class="nb-label-md col-6">Email</label>
+            <label class="nb-label-md col-6">{{objUser.email}}</label>
+
+        </div>
+        <div *ngIf="objUser.phoneNumber" class="row">
+            <label class="nb-label-md col-6">Phone Number</label>
+            <label class="nb-label-md col-6">{{objUser.phoneNumber}}</label>
+        </div>
+        <div class="row" *ngIf="objUser.mobileNumber">
+            <label class="nb-label-md col-6">Mobile Number</label>
+            <label class="nb-label-md col-6">{{objUser.mobileNumber}}</label>
+        </div>
+        <div class="row">
+            <label class="nb-label-md col-6">Security Question</label>
+            <label class="nb-label-md col-6">{{objUser.securityQuestion}}</label>
+        </div>
+
+        <div class="row">
+            <label class="nb-label-md col-6">User Role</label>
+            <label class="nb-label-md col-6">{{objUser.userRole}}</label>
+        </div>
+        <button mat-raised-button color="primary" (click)="onShowEdit()" ><i class="far fa-edit"></i> Edit</button>
+    </mat-card>
+</div>
